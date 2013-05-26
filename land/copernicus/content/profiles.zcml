@@ -1,0 +1,17 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="eea">
+
+  <five:registerPackage package="." initialize=".initialize" />
+
+  <genericsetup:registerProfile
+      name="default"
+      title="Land Copernicus Content-Types"
+      directory="profiles/default"
+      description="Extension profile for Land Copernicus Content-Types"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+</configure>
