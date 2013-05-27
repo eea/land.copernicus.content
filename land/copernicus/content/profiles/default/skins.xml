@@ -1,0 +1,8 @@
+<object name="portal_skins">
+  <object name="land_content_templates"
+    meta_type="Filesystem Directory View"
+    directory="land.copernicus.content:skins/land_content_templates"/>
+  <skin-path name="Land Content" based-on="Sunburst Theme">
+    <layer name="land_content_templates" insert-after="custom"/>
+  </skin-path>
+</object>

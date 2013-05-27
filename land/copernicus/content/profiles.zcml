@@ -2,16 +2,23 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:five="http://namespaces.zope.org/five"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
     i18n_domain="eea">
 
   <five:registerPackage package="." initialize=".initialize" />
 
   <genericsetup:registerProfile
-      name="default"
-      title="Land Copernicus Content-Types"
-      directory="profiles/default"
-      description="Extension profile for Land Copernicus Content-Types"
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      />
+    name="default"
+    title="Land Copernicus Content-Types"
+    directory="profiles/default"
+    description="Extension profile for Land Copernicus Content-Types"
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    />
+
+  <cmf:registerDirectory
+    name="skins"
+    directory="skins"
+    recursive="True"
+    />
 
 </configure>

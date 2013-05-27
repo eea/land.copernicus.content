@@ -4,5 +4,8 @@
 
   <includeDependencies package="." />
   <include file="profiles.zcml" />
+  <include file="permissions.zcml" />
+
+  <include package=".browser" />
 
 </configure>
