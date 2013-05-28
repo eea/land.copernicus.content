@@ -5,7 +5,7 @@
  <property name="title" i18n:translate="">Land item</property>
  <property name="description"
      i18n:translate="">Time series of one product of one scale</property>
- <property name="icon_expr">string:${portal_url}/++resource++land.copernicus.content.images/land.png</property>
+ <property name="icon_expr"></property>
  <property name="content_meta_type">LandItem</property>
  <property name="product">land.copernicus.content</property>
  <property name="factory">addLandItem</property>
