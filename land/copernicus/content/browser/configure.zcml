@@ -7,4 +7,11 @@
     name="land.copernicus.content.images"
     directory="./images" />
 
+  <browser:page
+    name="migrate_image_scales"
+    class=".migration.FixImageScales"
+    permission="cmf.ManagePortal"
+    for="*"
+    />
+
 </configure>
