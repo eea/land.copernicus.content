@@ -63,13 +63,31 @@ class LandItemExtender(object):
     implements(ISchemaExtender)
 
     fields = [
+        TextField("text",
+                  schemata="default",
+                  widget=atapi.RichWidget(
+                      label=_("Metadata"),
+                      description=_("Metadata for this item"))
+                  ),
         StringField("embed",
                     schemata="default",
                     widget = atapi.TextAreaWidget(
-                         label=_("Webservice"),
+                         label=_("Map View"),
                          description=_("Paste here the code provided "
                                        "by your webservice (iframe, jscode)"))
                      ),
+        TextField("webservices",
+                  schemata="default",
+                  widget=atapi.RichWidget(
+                      label=_("Web Map Services"),
+                      description=_("Web Map Services available for this data"))
+                  ),
+        TextField("download",
+                  schemata="default",
+                  widget=atapi.RichWidget(
+                      label=_("Download"),
+                      description=_("Download information"))
+                  ),
     ]
 
     def __init__(self, context):
