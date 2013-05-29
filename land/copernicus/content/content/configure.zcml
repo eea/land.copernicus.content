@@ -6,4 +6,8 @@
     for="land.copernicus.content.content.interfaces.ILandContent"
     factory=".subtypes.Extender" />
 
+  <adapter name="land.copernicus.content.itemfields"
+    for="land.copernicus.content.content.interfaces.ILandItem"
+    factory=".subtypes.LandItemExtender" />
+
 </configure>

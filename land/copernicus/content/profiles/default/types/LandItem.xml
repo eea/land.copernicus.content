@@ -18,9 +18,9 @@
   <element value="Document"/>
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">atct_album_view</property>
+ <property name="default_view">landitem_view</property>
  <property name="view_methods">
-  <element value="atct_album_view"/>
+  <element value="landitem_view"/>
  </property>
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="edit" to="atct_edit"/>
