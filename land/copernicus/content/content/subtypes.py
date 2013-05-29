@@ -1,0 +1,79 @@
+""" Schema extender
+"""
+from zope.interface import implements
+from Products.Archetypes import atapi
+from archetypes.schemaextender.field import ExtensionField
+from archetypes.schemaextender.interfaces import ISchemaExtender
+from land.copernicus.content.config import EEAMessageFactory as _
+
+class BooleanField(ExtensionField, atapi.BooleanField):
+    """ Boolean field."""
+
+class StringField(ExtensionField, atapi.StringField):
+    """ String field """
+
+class TextField(ExtensionField, atapi.TextField):
+    """ Text field """
+
+class ImageField(ExtensionField, atapi.ImageField):
+    """ Image field """
+
+class Extender(object):
+    """ Extender
+    """
+    implements(ISchemaExtender)
+
+    fields = [
+        BooleanField("frozen",
+                     schemata="default",
+                     widget = atapi.BooleanWidget(
+                         label=_("Freze this item"),
+                         description=_(
+                             "Freeze this item and make it unclickable"))
+                     ),
+        ImageField("image",
+                   schemata="default",
+                   widget=atapi.ImageWidget(
+                       label=_("Thumbnail"),
+                       description=_("Image for thumbnail"))
+                   ),
+        StringField("url",
+                    schemata="default",
+                    widget=atapi.StringWidget(
+                        label=_("More details URL"),
+                        description=_("Provide an external link, if any"))
+                    ),
+        TextField("text",
+                  schemata="default",
+                  widget=atapi.RichWidget(
+                      label=_("Rich text"),
+                      description=_("Detailed body for this item"))
+                  ),
+    ]
+
+    def __init__(self, context):
+        self.context = context
+
+    def getFields(self):
+        return self.fields
+
+class LandItemExtender(object):
+    """ Extender for LandItem
+    """
+    implements(ISchemaExtender)
+
+    fields = [
+        StringField("embed",
+                    schemata="default",
+                    widget = atapi.TextAreaWidget(
+                         label=_("Webservice"),
+                         description=_("Paste here the code provided "
+                                       "by your webservice (iframe, jscode)"))
+                     ),
+    ]
+
+    def __init__(self, context):
+        self.context = context
+
+    def getFields(self):
+        return self.fields

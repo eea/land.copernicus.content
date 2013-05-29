@@ -1,0 +1,9 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  i18n_domain="eea">
+
+  <adapter name="land.copernicus.content.fields"
+    for="land.copernicus.content.content.interfaces.ILandContent"
+    factory=".subtypes.Extender" />
+
+</configure>

@@ -7,5 +7,6 @@
   <include file="permissions.zcml" />
 
   <include package=".browser" />
+  <include package=".content" />
 
 </configure>

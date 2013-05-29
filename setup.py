@@ -24,6 +24,7 @@ setup(name='land.copernicus.content',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'archetypes.schemaextender',
           # -*- Extra requirements: -*-
       ],
       entry_points="""
