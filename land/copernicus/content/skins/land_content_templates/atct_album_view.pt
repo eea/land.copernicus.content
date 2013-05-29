@@ -103,9 +103,18 @@
 
 </metal:main_macro>
 
-<div metal:use-macro="context/kss_generic_macros/macros/generic_description_view">
-    Generic KSS Description. Is rendered with class="documentDescription".
+<div tal:define="
+    field python:here.getField('text') if getattr(here, 'getField', None) else None;
+    txt python:field.getAccessor(here)() if field else ''">
+  <tal:entry replace="structure txt" tal:condition="txt" />
+  <tal:desc condition="python:not txt">
+    <div metal:use-macro="context/kss_generic_macros/macros/generic_description_view">
+      Generic KSS Description. Is rendered with class="documentDescription".
+    </div>
+  </tal:desc>
+
 </div>
+
 <div class="external-link" tal:define="
     field python:here.getField('url') if getattr(here, 'getField', None) else None;
     link python:field.getAccessor(here)() if field else '';"

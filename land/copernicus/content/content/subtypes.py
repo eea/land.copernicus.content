@@ -46,6 +46,10 @@ class Extender(object):
                     ),
         TextField("text",
                   schemata="default",
+                  primary=True,
+                  allowable_content_types=('text/html',),
+                  default_content_type='text/html',
+                  default_output_type='text/html',
                   widget=atapi.RichWidget(
                       label=_("Rich text"),
                       description=_("Detailed body for this item"))
@@ -66,6 +70,10 @@ class LandItemExtender(object):
     fields = [
         TextField("text",
                   schemata="default",
+                  primary=True,
+                  allowable_content_types=('text/html',),
+                  default_content_type='text/html',
+                  default_output_type='text/html',
                   widget=atapi.RichWidget(
                       label=_("Metadata"),
                       description=_("Metadata for this item"))
@@ -79,12 +87,20 @@ class LandItemExtender(object):
                      ),
         TextField("webservices",
                   schemata="default",
+                  primary=False,
+                  allowable_content_types=('text/html',),
+                  default_content_type='text/html',
+                  default_output_type='text/html',
                   widget=atapi.RichWidget(
                       label=_("Web Map Services"),
                       description=_("Web Map Services available for this data"))
                   ),
         TextField("download",
                   schemata="default",
+                  primary=False,
+                  allowable_content_types=('text/html',),
+                  default_content_type='text/html',
+                  default_output_type='text/html',
                   widget=atapi.RichWidget(
                       label=_("Download"),
                       description=_("Download information"))
