@@ -33,6 +33,7 @@ class Extender(object):
                      ),
         ImageField("image",
                    schemata="default",
+                   sizes=None,
                    widget=atapi.ImageWidget(
                        label=_("Thumbnail"),
                        description=_("Image for thumbnail"))
