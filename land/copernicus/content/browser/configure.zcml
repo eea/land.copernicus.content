@@ -14,4 +14,9 @@
     for="*"
     />
 
+  <browser:resource
+    name="frozenEntrynoclick.js"
+    file="frozenEntrynoclick.js"
+    />
+
 </configure>
