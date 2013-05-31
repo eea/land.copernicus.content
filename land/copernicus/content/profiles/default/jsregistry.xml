@@ -8,6 +8,6 @@
 
 <javascript authenticated="False" cacheable="True" compression="safe"
     conditionalcomment="" cookable="True" enabled="True"
-    id="++resource++markFrozen.js" inline="False"/>
+    expression="" id="++resource++markFrozen.js" inline="False"/>
 
 </object>
