@@ -28,7 +28,7 @@
                     "
         tal:attributes="class python:oddrow and 'portletItem even' or 'portletItem odd'">
         <tal:block tal:condition="has_link" tal:define="href python:links[0].getRemoteUrl;">
-            <a href="#"  tal:condition="python: href.starts_with(portal_url)"
+            <a href="#"  tal:condition="python: href.startswith(portal_url)"
                tal:attributes="href python:links[0].getRemoteUrl;
                                class python:'tile contenttype-' + normalizeString(obj.portal_type);
                                title obj/Description;">
@@ -42,7 +42,7 @@
                     Date
                 </span>
             </a>
-            <a href="#"  tal:condition="python: not href.starts_with(portal_url)"
+            <a href="#"  tal:condition="python: not href.startswith(portal_url)"
                tal:attributes="href python:links[0].getRemoteUrl;
                                class python:'tile contenttype-' + normalizeString(obj.portal_type);
                                title obj/Description;
