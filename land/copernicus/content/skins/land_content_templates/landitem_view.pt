@@ -11,17 +11,6 @@
 <metal:main_macro define-macro="content-core">
   <dl class="enableFormTabbing">
 
-    <!-- Metadata -->
-    <tal:metadata define="
-        field python:here.getField('text') if getattr(here, 'getField', None) else None;
-        html python:field.getAccessor(here)() if field else ''" tal:condition="html">
-      <dt id="fieldsetlegend-metadata" i18n:translate="">Metadata</dt>
-      <dd id="fieldset-metadata">
-        <div class="metadata-field">
-          <tal:service replace="structure html" />
-        </div>
-      </dd>
-    </tal:metadata>
 
     <!-- Map View -->
     <tal:mapview define="
@@ -34,6 +23,18 @@
         </div>
       </dd>
     </tal:mapview>
+
+    <!-- Metadata -->
+    <tal:metadata define="
+        field python:here.getField('text') if getattr(here, 'getField', None) else None;
+        html python:field.getAccessor(here)() if field else ''" tal:condition="html">
+      <dt id="fieldsetlegend-metadata" i18n:translate="">Metadata</dt>
+      <dd id="fieldset-metadata">
+        <div class="metadata-field">
+          <tal:service replace="structure html" />
+        </div>
+      </dd>
+    </tal:metadata>
 
     <!-- Web services -->
     <tal:webservices define="
