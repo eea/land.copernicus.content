@@ -25,8 +25,10 @@
                     folder python:obj.getObject(); 
                     links python:folder.getFolderContents(contentFilter={'portal_type':'Link'}); 
                     has_link python:bool(links); 
+                    frozen python: not bool(len(folder.getFolderContents()));
+                    frozen_style python: frozen and ' frozenEntry' or '';
                     "
-        tal:attributes="class python:oddrow and 'portletItem even' or 'portletItem odd'">
+        tal:attributes="class python:(oddrow and 'portletItem even' or 'portletItem odd') + frozen_style">
         <tal:block tal:condition="has_link">
             <tal:block tal:define="href python:links[0].getRemoteUrl; portal_url context/portal_url;">
                 <a href="#"  tal:condition="python: href.startswith(portal_url)"
