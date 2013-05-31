@@ -27,37 +27,38 @@
                     has_link python:bool(links); 
                     "
         tal:attributes="class python:oddrow and 'portletItem even' or 'portletItem odd'">
-        <tal:block tal:condition="has_link" tal:define="href python:links[0].getRemoteUrl;">
-            <a href="#"  tal:condition="python: href.startswith(portal_url)"
-               tal:attributes="href python:links[0].getRemoteUrl;
-                               class python:'tile contenttype-' + normalizeString(obj.portal_type);
-                               title obj/Description;">
-                <img tal:replace="structure item_icon/html_tag" />
-                <span tal:replace="obj/pretty_title_or_id">
-                 Title
-                </span>
-                <span class="portletItemDetails"
-                      tal:condition="view/data/show_dates"
-                      tal:content="python:toLocalizedTime(obj.Date)">
-                    Date
-                </span>
-            </a>
-            <a href="#"  tal:condition="python: not href.startswith(portal_url)"
-               tal:attributes="href python:links[0].getRemoteUrl;
-                               class python:'tile contenttype-' + normalizeString(obj.portal_type);
-                               title obj/Description;
-                               rel string:external">
-                <img tal:replace="structure item_icon/html_tag" />
-                <span tal:replace="obj/pretty_title_or_id">
-                 Title
-                </span>
-                <span class="portletItemDetails"
-                      tal:condition="view/data/show_dates"
-                      tal:content="python:toLocalizedTime(obj.Date)">
-                    Date
-                </span>
-            </a>
-
+        <tal:block tal:condition="has_link">
+            <tal:block tal:define="href python:links[0].getRemoteUrl; portal_url context/portal_url;">
+                <a href="#"  tal:condition="python: href.startswith(portal_url)"
+                   tal:attributes="href python:links[0].getRemoteUrl;
+                                   class python:'tile contenttype-' + normalizeString(obj.portal_type);
+                                   title obj/Description;">
+                    <img tal:replace="structure item_icon/html_tag" />
+                    <span tal:replace="obj/pretty_title_or_id">
+                     Title
+                    </span>
+                    <span class="portletItemDetails"
+                          tal:condition="view/data/show_dates"
+                          tal:content="python:toLocalizedTime(obj.Date)">
+                        Date
+                    </span>
+                </a>
+                <a href="#"  tal:condition="python: not href.startswith(portal_url)"
+                   tal:attributes="href python:links[0].getRemoteUrl;
+                                   class python:'tile contenttype-' + normalizeString(obj.portal_type);
+                                   title obj/Description;
+                                   rel string:external">
+                    <img tal:replace="structure item_icon/html_tag" />
+                    <span tal:replace="obj/pretty_title_or_id">
+                     Title
+                    </span>
+                    <span class="portletItemDetails"
+                          tal:condition="view/data/show_dates"
+                          tal:content="python:toLocalizedTime(obj.Date)">
+                        Date
+                    </span>
+                </a>
+            </tal:block>
         </tal:block>
         <a href="#"  tal:condition="not:has_link"
            tal:attributes="href itemUrl;
