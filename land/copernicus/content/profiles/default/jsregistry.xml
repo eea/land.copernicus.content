@@ -6,4 +6,8 @@
     expression="python: here.restrictedTraverse('@@plone_portal_state').anonymous()"
     id="++resource++frozenEntrynoclick.js" inline="False"/>
 
+<javascript authenticated="False" cacheable="True" compression="safe"
+    conditionalcomment="" cookable="True" enabled="True"
+    id="++resource++markFrozen.js" inline="False"/>
+
 </object>
