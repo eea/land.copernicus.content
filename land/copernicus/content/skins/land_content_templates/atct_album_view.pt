@@ -85,7 +85,6 @@
        i18n:domain="atcontenttypes"
        i18n:translate="text_no_albums_uploaded"
        tal:condition="python:not (albums or images)">
-        No albums or photos uploaded yet.
     </p>
 
     <div tal:condition="python:albums or images"
