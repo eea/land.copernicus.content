@@ -105,6 +105,13 @@ class LandItemExtender(object):
                       label=_("Download"),
                       description=_("Download information"))
                   ),
+        ImageField("legend",
+                   schemata="default",
+                   sizes=None,
+                   widget=atapi.ImageWidget(
+                       label=_("Legend"),
+                       description=_("Image for Legend"))
+                   ),
     ]
 
     def __init__(self, context):

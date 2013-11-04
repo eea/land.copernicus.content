@@ -1,6 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
       lang="en-US"
-      metal:use-macro="here/main_template/macros/master"
+      metal:use-macro="context/main_template/macros/master"
       i18n:domain="plone">
 
 <body>
@@ -14,8 +14,8 @@
 
     <!-- Map View -->
     <tal:mapview define="
-        field python:here.getField('embed') if getattr(here, 'getField', None) else None;
-        html python:field.getAccessor(here)() if field else ''" tal:condition="html">
+        field python:context.getField('embed') if getattr(context, 'getField', None) else None;
+        html python:field.getAccessor(context)() if field else ''" tal:condition="html">
       <dt id="fieldsetlegend-mapview" i18n:translate="">Map View</dt>
       <dd id="fieldset-mapview">
         <div class="mapview-field">
@@ -26,8 +26,8 @@
 
     <!-- Metadata -->
     <tal:metadata define="
-        field python:here.getField('text') if getattr(here, 'getField', None) else None;
-        html python:field.getAccessor(here)() if field else ''" tal:condition="html">
+        field python:context.getField('text') if getattr(context, 'getField', None) else None;
+        html python:field.getAccessor(context)() if field else ''" tal:condition="html">
       <dt id="fieldsetlegend-metadata" i18n:translate="">Metadata</dt>
       <dd id="fieldset-metadata">
         <div class="metadata-field">
@@ -38,8 +38,8 @@
 
     <!-- Web services -->
     <tal:webservices define="
-        field python:here.getField('webservices') if getattr(here, 'getField', None) else None;
-        html python:field.getAccessor(here)() if field else ''" tal:condition="html">
+        field python:context.getField('webservices') if getattr(context, 'getField', None) else None;
+        html python:field.getAccessor(context)() if field else ''" tal:condition="html">
       <dt id="fieldsetlegend-webservices" i18n:translate="">Web Map Services</dt>
       <dd id="fieldset-webservices">
         <div class="webservices-field">
@@ -50,8 +50,8 @@
 
     <!-- Download -->
     <tal:download define="
-        field python:here.getField('download') if getattr(here, 'getField', None) else None;
-        html python:field.getAccessor(here)() if field else ''" tal:condition="html">
+        field python:context.getField('download') if getattr(context, 'getField', None) else None;
+        html python:field.getAccessor(context)() if field else ''" tal:condition="html">
       <dt id="fieldsetlegend-download" i18n:translate="">Download</dt>
       <dd id="fieldset-download">
         <div class="download-field">
@@ -59,6 +59,18 @@
         </div>
       </dd>
     </tal:download>
+
+    <!-- Legend -->
+    <tal:legend define="
+        field python:context.getField('legend') if getattr(context, 'getField', None) else None;
+        html python:field.getAccessor(context)() if field else ''" tal:condition="html">
+      <dt id="fieldsetlegend-legend" i18n:translate="">Legend</dt>
+      <dd id="fieldset-legend">
+        <div class="legend-field">
+          <tal:service replace="structure html" />
+        </div>
+      </dd>
+    </tal:legend>
 
   </dl>
 
