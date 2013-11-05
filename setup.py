@@ -1,12 +1,9 @@
 from setuptools import setup, find_packages
 import os
 
-def read(*pathnames):
-    return open(os.path.join(os.path.dirname(__file__), *pathnames)).read()
-
 name = 'land.copernicus.content'
 path = name.split('.') + ['version.txt']
-version = open(join(*path)).read().strip()
+version = open(os.path.join(*path)).read().strip()
 
 setup(name=name,
       version=version,
