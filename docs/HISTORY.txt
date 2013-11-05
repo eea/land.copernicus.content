@@ -1,11 +1,12 @@
 Changelog
 =========
 
-1.1-dev - (unreleased)
-----------------------
+1.1 - (2013-11-05)
+------------------
 * Feature: Added legend field to the LandItem content type
   [tiberiu #16962]
 
 1.0  - (initial release)
 ------------------------
 * Initial release
+
