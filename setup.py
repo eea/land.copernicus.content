@@ -1,9 +1,14 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.0'
+def read(*pathnames):
+    return open(os.path.join(os.path.dirname(__file__), *pathnames)).read()
 
-setup(name='land.copernicus.content',
+name = 'land.copernicus.content'
+path = name.split('.') + ['version.txt']
+version = open(join(*path)).read().strip()
+
+setup(name=name,
       version=version,
       description="Custom Content-Types for Land Copernicus",
       long_description=open("README.txt").read() + "\n" +
