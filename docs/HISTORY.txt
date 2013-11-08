@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.3-dev - (unreleased)
-----------------------
+1.3 - (2013-11-08)
+------------------
 * Bug fix: reconfigure iframe width to make the wider
   [tiberich #17266]
 * Bug fix: only set width/height if embeding an iframe
