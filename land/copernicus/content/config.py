@@ -6,5 +6,5 @@ EEAMessageFactory = MessageFactory('eea')
 PACKAGE        = 'land.copernicus.content'
 ADD_PERMISSION = "land.copernicus.content: Add presentation"
 
-IFRAME_WIDTH   = "879"
+IFRAME_WIDTH   = "920"
 IFRAME_HEIGHT  = "450"

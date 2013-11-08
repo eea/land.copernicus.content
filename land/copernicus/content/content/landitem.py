@@ -27,6 +27,7 @@ class LandItem(ATFolder):
             return ""
 
         iframe = fragment_fromstring(value)
-        iframe.set('width', IFRAME_WIDTH)
-        iframe.set('height', IFRAME_HEIGHT)
+        if iframe.tag == "iframe":
+            iframe.set('width', IFRAME_WIDTH)
+            iframe.set('height', IFRAME_HEIGHT)
         return tostring(iframe)
