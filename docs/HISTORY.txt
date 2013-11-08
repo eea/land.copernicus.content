@@ -1,6 +1,9 @@
 Changelog
 =========
 
+1.3-dev - (unreleased)
+----------------------
+
 1.2 - (2013-11-08)
 ------------------
 * Bug fix: make the displayed embeded maps larger
