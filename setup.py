@@ -27,9 +27,6 @@ setup(name=name,
       install_requires=[
           'setuptools',
           'archetypes.schemaextender',
-          # -*- Extra requirements: -*-
+          'lxml',
       ],
-      entry_points="""
-      # -*- Entry points: -*-
-      """,
       )

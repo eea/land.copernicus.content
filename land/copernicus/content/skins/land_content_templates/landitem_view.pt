@@ -11,14 +11,11 @@
 <metal:main_macro define-macro="content-core">
   <dl class="enableFormTabbing">
 
-
     <!-- Map View -->
-    <tal:mapview define="
-        field python:context.getField('embed') if getattr(context, 'getField', None) else None;
-        html python:field.getAccessor(context)() if field else ''" tal:condition="html">
+    <tal:mapview define="html context/embed_iframe">
       <dt id="fieldsetlegend-mapview" i18n:translate="">Map View</dt>
-      <dd id="fieldset-mapview">
-        <div class="mapview-field">
+      <dd id="fieldset-mapview" style="margin:0px; padding-top:0px !important">
+        <div class="mapview-field" style="border:1px solid #BFD630; border-top:0px;">
           <tal:service replace="structure html" />
         </div>
       </dd>
