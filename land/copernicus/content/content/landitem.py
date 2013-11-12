@@ -30,4 +30,18 @@ class LandItem(ATFolder):
         if iframe.tag == "iframe":
             iframe.set('width', IFRAME_WIDTH)
             iframe.set('height', IFRAME_HEIGHT)
+            iframe.set('onload', "javascript:show_iframe();")
+
         return tostring(iframe)
+
+    def has_iframe(self):
+        field = self.getField('embed')
+        value = field.getAccessor(self)()
+        if not value:
+            return False
+
+        iframe = fragment_fromstring(value)
+        if iframe.tag == "iframe":
+            return True
+
+        return False
