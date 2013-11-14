@@ -3,6 +3,9 @@ Changelog
 
 1.5-dev - (unreleased)
 ----------------------
+* Bug fix: don't hardcode width, instead set the class=widen 
+  to the embeded iframes
+  [tiberich #17266]
 
 1.4 - (2013-11-12)
 ------------------
