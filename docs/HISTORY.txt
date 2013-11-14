@@ -1,6 +1,9 @@
 Changelog
 =========
 
+1.6-dev - (unreleased)
+----------------------
+
 1.5 - (2013-11-14)
 ------------------
 * Bug fix: don't hardcode width, instead set the class=widen 
