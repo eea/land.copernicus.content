@@ -1,0 +1,100 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master">
+
+    <metal:block fill-slot="style_slot">
+        <style type="text/css">
+            #table-listing {
+                overflow: auto;
+                font-size: 85%;
+            }
+            #table-listing h3 {
+                font-size: 110%;
+            }
+            #table-listing p {
+                height: inherit !important;
+            }
+            #table-listing ul {
+                margin: 0;
+            }
+        </style>
+    </metal:block>
+    <metal:block fill-slot="content-title">
+        <h1 class="documentFirstHeading" i18n:translate="">Copernicus LandItems overview</h1>
+    </metal:block>
+    <metal:block fill-slot="content-description">
+        <div class="documentDescription"></div>
+    </metal:block>
+    <metal:block fill-slot="content-core">
+        <div id="table-listing">
+        <form id="item-limit" name="item-limit" method="get">
+            <label for "limit" i18n:translate="">Items per page:</label>
+            <select name="limit">
+                <option value="10"
+                 tal:attributes="selected python:'selected' and view.limit == '10'">
+                    10
+                </option>
+                <option value="25"
+                 tal:attributes="selected python:'selected' and view.limit == '25'">
+                    25
+                </option>
+                <option value="50"
+                 tal:attributes="selected python:'selected' and view.limit == '50'">
+                 50
+                </option>
+                <option value="100"
+                 tal:attributes="selected python:'selected' and view.limit == '100'">
+                 100
+                </option>
+            </select>
+            <input type="submit" value="Submit" i18n:attributes="value" />
+        </form>
+        <table id="landListing" class="listing">
+            <thead>
+            <tr>
+                <th i18n:translate="">LandItem</th>
+                <th i18n:translate="">Frozen</th>
+                <th i18n:translate="">Legend</th>
+                <th i18n:translate="">Description/Metadata</th>
+                <th i18n:translate="">Webservices</th>
+                <th i18n:translate="">Download info</th>
+                <th i18n:translate="">URL</th>
+                <th i18n:translate="">Embedded</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tal:listing define="batch view/contents">
+            <tal:landitems tal:define="landitems batch"
+                            tal:repeat="landitem landitems">
+                <tr>
+                    <td>
+                        <a tal:attributes="href string:${landitem/absolute_url}"
+                         tal:content="landitem/Title" />
+                    </td>
+                    <td tal:content="python:landitem['frozen'] and 'Yes' or 'No'"
+                     i18n:translate="">No</td>
+                    <td>
+                        <tal:block tal:condition="python: landitem['legend']">
+                            <a tal:attributes="href string:${landitem/absolute_url}/legend">Yes</a>
+                        </tal:block>
+                        <tal:block tal:condition="not: python:landitem['legend']">No</tal:block>
+                    </td>
+                    <td tal:content="structure python:landitem['text'] or 'Not set'"/>
+                    <td tal:content="structure python:landitem['webservices'] or 'Not set'"/>
+                    <td tal:content="structure python:landitem['download'] or 'Not set'"/>
+                    <td tal:content="structure python:landitem['url'] or 'Not set'"/>
+                    <td tal:define="embedded python:landitem['embed']"
+                        tal:content="python: 'iframe' in embedded and 'Iframe'
+                                            or 'img' in embedded and 'Image'
+                                            or 'Not set'" />
+                </tr>
+            </tal:landitems>
+            <div metal:use-macro="here/batch_macros/macros/navigation" />
+            </tal:listing>
+            </tbody>
+        </table>
+        <div>
+    </metal:block>
+</html>

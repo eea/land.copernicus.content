@@ -14,6 +14,14 @@
     for="*"
     />
 
+  <browser:page
+    name="overview"
+    class=".views.LandItemsOverview"
+    permission="cmf.ManagePortal"
+    for="Products.CMFCore.interfaces.ISiteRoot"
+    template="templates/overview.pt"
+    />
+
   <browser:resource
     name="frozenEntrynoclick.js"
     file="frozenEntrynoclick.js"
