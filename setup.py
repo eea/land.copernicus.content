@@ -28,5 +28,6 @@ setup(name=name,
           'setuptools',
           'archetypes.schemaextender',
           'lxml',
+          'plone.app.registry',
       ],
       )

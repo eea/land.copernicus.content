@@ -4,6 +4,7 @@
   i18n_domain="eea">
 
   <include package="z3c.jbot" file="meta.zcml" />
+  <include package="plone.app.registry" />
 
   <includeDependencies package="." />
   <include file="profiles.zcml" />
@@ -11,6 +12,7 @@
 
   <include package=".browser" />
   <include package=".content" />
+  <include package=".upgrades" />
 
   <browser:jbot
       directory="browser/template-overrides/"
