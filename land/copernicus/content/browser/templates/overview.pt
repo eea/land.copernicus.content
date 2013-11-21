@@ -30,7 +30,7 @@
     <metal:block fill-slot="content-core">
         <div id="table-listing">
         <form id="item-limit" name="item-limit" method="get">
-            <label for "limit" i18n:translate="">Items per page:</label>
+            <label for="limit" i18n:translate="">Items per page:</label>
             <select name="limit">
                 <option value="10"
                  tal:attributes="selected python:'selected' and view.limit == '10'">
