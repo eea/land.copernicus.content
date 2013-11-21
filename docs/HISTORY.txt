@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.6-dev - (unreleased)
-----------------------
+1.6 - (2013-11-21)
+------------------
 * Feature: added configlet for @@overview page
   [robaaoli #17440]
 * Feature: added landitems administrative @@overview page
