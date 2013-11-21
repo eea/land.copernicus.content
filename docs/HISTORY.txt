@@ -1,6 +1,9 @@
 Changelog
 =========
 
+1.7-dev - (unreleased)
+----------------------
+
 1.6 - (2013-11-21)
 ------------------
 * Feature: added configlet for @@overview page
