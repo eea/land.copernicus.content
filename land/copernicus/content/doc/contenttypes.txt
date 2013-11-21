@@ -1,0 +1,97 @@
+Overview
+========
+There are two content types defined in this package: LandSection and LandItem.
+Both content types inherit from ATFolder, however, LandSection can only contain 
+other LandSections or LandItems and LandItems can contain only Images, Documents
+or Links.
+
+    >>> self.loginAsPortalOwner()
+
+Adding LandSections
+~~~~~~~~~~~~~~~~~~~
+LandSections are implicitly addable, we're going to add one on the portal root:
+
+    >>> id = portal.invokeFactory('LandSection', 'landsection')
+    >>> landsection = portal[id]
+    >>> landsection.setTitle('Example LandSection')
+    >>> landsection.setDescription('This is an example LandSection CT')
+    >>> landsection.Title()
+    'Example LandSection'
+    >>> landsection.Description()
+    'This is an example LandSection CT'
+
+Check meta-type:
+
+    >>> landsection.meta_type
+    'LandSection'
+
+
+Adding LandItems
+~~~~~~~~~~~~~~~~
+LandItems are also implicitly addable. It's the portal's manager duty to make
+the appropriate LandSection/LandItem hierarchy. LandItems can contain other
+Images, Links and Documents.
+
+    >>> id = landsection.invokeFactory('LandItem', 'landitem')
+    >>> landitem = landsection[id]
+    >>> landitem.setTitle('Example LandItem')
+    >>> landitem.setDescription('This is an example LandItem CT')
+    >>> landitem.Title()
+    'Example LandItem'
+    >>> landitem.Description()
+    'This is an example LandItem CT'
+
+We're going to create a sample image FileUpload:
+
+    >>> samplepng = self.loadfile('tests/data/sample.png', ctype='image/png')
+    >>> from ZPublisher.HTTPRequest import FileUpload
+    >>> isinstance(samplepng, FileUpload)
+    True
+
+Now we are going to edit our newly created LandItem's properties. We're also
+going to add sample images:
+    
+    >>> form = {
+    ... 'frozen': '1',
+    ... 'image_file': samplepng,
+    ... 'url': 'http://www.copernicus.eu/',
+    ... 'text': 'This is sample metadata',
+    ... 'embed': "<iframe src='http://land.copernicus.eu/'></iframe>",
+    ... 'webservices': "<a href='http://www.copernicus.eu'>Copernicus</a>",
+    ... 'download': 'Dummy download informations',
+    ... 'legend_file': samplepng
+    ... }
+    >>> landitem.processForm(values=form)
+
+Check saved files:
+
+    >>> thumb = landitem.getField('image').getAccessor(landitem)()
+    >>> legend = landitem.getField('legend').getAccessor(landitem)()
+    >>> int(thumb.get_size())
+    237260
+    >>> int(legend.get_size())
+    237260
+
+Let's verify the other saved properties:
+    
+    >>> landitem.getField('frozen').getAccessor(landitem)()
+    True
+    >>> landitem.getField('url').getAccessor(landitem)()
+    'http://www.copernicus.eu/'
+    >>> landitem.getField('text').getAccessor(landitem)()
+    '<p>This is sample metadata</p>'
+    >>> landitem.getField('embed').getAccessor(landitem)()
+    "<iframe src='http://land.copernicus.eu/'></iframe>"
+    >>> landitem.getField('webservices').getAccessor(landitem)()
+    "<a href='http://www.copernicus.eu'>Copernicus</a>"
+    >>> landitem.getField('download').getAccessor(landitem)()
+    '<p>Dummy download informations</p>'
+
+Let's test if our landitem has an iframe embedded:
+    >>> landitem.has_iframe()
+    True
+
+The embed_iframe() method will add class="widen" and a height property to our 
+embedded iframe:
+    >>> landitem.embed_iframe()
+    '<iframe src="http://land.copernicus.eu/" height="450" class="widen" onload="javascript:show_iframe();"></iframe>'

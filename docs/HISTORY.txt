@@ -3,6 +3,8 @@ Changelog
 
 1.7-dev - (unreleased)
 ----------------------
+* Feature: added doctests for our content types and our overview page
+  [olimpiurob #17345]
 
 1.6 - (2013-11-21)
 ------------------

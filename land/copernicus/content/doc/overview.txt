@@ -1,0 +1,37 @@
+====================
+LandItemsOverview Admin View
+====================
+
+We have an admin overview page at portal_url/@@overview. We can use a
+testbrowser for our overview:
+
+    >>> import urllib
+    >>> import pprint
+    >>> from Testing.testbrowser import Browser
+    >>> from Products.PloneTestCase import PloneTestCase
+
+    >>> self.loginAsPortalOwner()
+    >>> browser = Browser()
+    >>> browser.handleErrors = False
+    >>> self.portal.error_log._ignored_exceptions = ()
+
+Add portal_owner credentials in our browser's header:
+
+    >>> browser.addHeader('Authorization',
+    ...                   'Basic %s:%s' % (PloneTestCase.portal_owner,
+    ...                                    PloneTestCase.default_password))
+
+Let's create a test LandItem:
+
+    >>> id = portal.invokeFactory('LandItem', 'landitem')
+    >>> landitem = portal[id]
+    >>> landitem.setTitle('Example LandItem')
+    >>> landitem.setDescription('This is an example LandItem CT')
+
+Open the @@overview page in our testbrowser and test for our test LandItem:
+
+    >>> browser.open(portal.absolute_url() + '/@@overview')
+    >>> 'landListing' in browser.contents
+    True
+    >>> 'Example LandItem' in browser.contents
+    True
