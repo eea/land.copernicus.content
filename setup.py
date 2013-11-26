@@ -29,5 +29,6 @@ setup(name=name,
           'archetypes.schemaextender',
           'lxml',
           'plone.app.registry',
+          'z3c.jbot',
       ],
       )
