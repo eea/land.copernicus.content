@@ -1,6 +1,9 @@
 Changelog
 =========
 
+1.8-dev - (unreleased)
+----------------------
+
 1.7 - (2013-12-09)
 ------------------
 * Bug fix: fixed embedding parsing errors when the embed code contains
