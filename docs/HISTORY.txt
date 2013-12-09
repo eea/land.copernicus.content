@@ -3,6 +3,9 @@ Changelog
 
 1.7-dev - (unreleased)
 ----------------------
+* Bug fix: fixed embedding parsing errors when the embed code contains
+  multiple sibblings.
+  [olimpiurob #17693]
 * Feature: added doctests for our content types and our overview page
   [olimpiurob #17345]
 

@@ -5,7 +5,7 @@ from Products.ATContentTypes.content.folder import ATFolder
 from land.copernicus.content.config import IFRAME_WIDTH, IFRAME_HEIGHT
 from land.copernicus.content.content import schema
 from land.copernicus.content.content.interfaces import ILandItem
-from lxml.html import fragment_fromstring, tostring
+from lxml.html import fragments_fromstring, tostring
 from zope.interface import implements
 
 
@@ -26,14 +26,18 @@ class LandItem(ATFolder):
         if not value:
             return ""
 
-        iframe = fragment_fromstring(value)
-        if iframe.tag == "iframe":
-            #iframe.set('width', IFRAME_WIDTH)
-            iframe.set('height', IFRAME_HEIGHT)
-            iframe.set('class', 'widen')
-            iframe.set('onload', "javascript:show_iframe();")
+        html = ''
+        html_elements = fragments_fromstring(value)
 
-        return tostring(iframe)
+        for tag in html_elements:
+            if tag.tag == 'iframe':
+                #tag.set('width', IFRAME_WIDTH)
+                tag.set('height', IFRAME_HEIGHT)
+                tag.set('class', 'widen')
+                tag.set('onload', "javascript:show_iframe();")
+            html += tostring(tag)
+
+        return html
 
     def has_iframe(self):
         field = self.getField('embed')
@@ -41,8 +45,11 @@ class LandItem(ATFolder):
         if not value:
             return False
 
-        iframe = fragment_fromstring(value)
-        if iframe.tag == "iframe":
+        html_elements = fragments_fromstring(value)
+        iframes = [iframe for iframe in html_elements
+                    if iframe.tag == 'iframe']
+
+        if iframes:
             return True
 
         return False
