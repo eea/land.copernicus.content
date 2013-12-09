@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.7-dev - (unreleased)
-----------------------
+1.7 - (2013-12-09)
+------------------
 * Bug fix: fixed embedding parsing errors when the embed code contains
   multiple sibblings.
   [olimpiurob #17693]
