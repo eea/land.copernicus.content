@@ -119,3 +119,24 @@ class LandItemExtender(object):
 
     def getFields(self):
         return self.fields
+
+class ATBlobExtender(object):
+    """ Extender for ATBlobExtender
+    """
+    implements(ISchemaExtender)
+
+    fields = [
+        ImageField("image",
+                   schemata="default",
+                   sizes=None,
+                   widget=atapi.ImageWidget(
+                       label=_("cover"),
+                       description=_("Cover for Publication"))
+                   ),
+    ]
+
+    def __init__(self, context):
+        self.context = context
+
+    def getFields(self):
+        return self.fields

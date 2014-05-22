@@ -10,4 +10,17 @@
     for="land.copernicus.content.content.interfaces.ILandItem"
     factory=".subtypes.LandItemExtender" />
 
+  <adapter name="land.copernicus.content.atblob"
+    for="plone.app.blob.interfaces.IATBlob"
+    factory=".subtypes.ATBlobExtender" />
+    
+   <subscriber
+    for="Products.ATContentTypes.interface.IATFile zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+    handler=".add.handler"
+   />
+
+   <subscriber
+    for="Products.ATContentTypes.interface.IATFile zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+    handler=".edit.handler"
+   />
 </configure>
