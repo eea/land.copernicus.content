@@ -3,6 +3,8 @@ Changelog
 
 1.9-dev - (unreleased)
 ----------------------
+* Bug fix: Added Wand in setup.py as a dependency
+  [olimpiurob]
 
 1.8 - (2014-05-26)
 ------------------

@@ -30,5 +30,6 @@ setup(name=name,
           'lxml',
           'plone.app.registry',
           'z3c.jbot',
+          'Wand'
       ],
       )
