@@ -4,6 +4,8 @@ Changelog
 
 2.0-dev - (unreleased)
 ----------------------
+* Bug fix: Updated Manifest file
+  [olimpiurob]
 
 1.9 - (2014-09-16)
 ------------------
