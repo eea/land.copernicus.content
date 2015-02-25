@@ -4,6 +4,9 @@ Changelog
 
 2.0-dev - (unreleased)
 ----------------------
+* Change: remove Map view, metadata, web services, download and legend tab from
+  land items
+  [tiberich #23184]
 * Bug fix: Updated Manifest file
   [olimpiurob]
 

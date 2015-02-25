@@ -218,54 +218,6 @@ background-color:#FFFFFF;
       </dd>
     </tal:mapview>
 
-    <!-- Metadata -->
-    <tal:metadata define="
-        field python:context.getField('text') if getattr(context, 'getField', None) else None;
-        html python:field.getAccessor(context)() if field else ''" tal:condition="html">
-      <dt id="fieldsetlegend-metadata" i18n:translate="">Metadata</dt>
-      <dd id="fieldset-metadata">
-        <div class="metadata-field">
-          <tal:service replace="structure html" />
-        </div>
-      </dd>
-    </tal:metadata>
-
-    <!-- Web services -->
-    <tal:webservices define="
-        field python:context.getField('webservices') if getattr(context, 'getField', None) else None;
-        html python:field.getAccessor(context)() if field else ''" tal:condition="html">
-      <dt id="fieldsetlegend-webservices" i18n:translate="">Web Map Services</dt>
-      <dd id="fieldset-webservices">
-        <div class="webservices-field">
-          <tal:service replace="structure html" />
-        </div>
-      </dd>
-    </tal:webservices>
-
-    <!-- Download -->
-    <tal:download define="
-        field python:context.getField('download') if getattr(context, 'getField', None) else None;
-        html python:field.getAccessor(context)() if field else ''" tal:condition="html">
-      <dt id="fieldsetlegend-download" i18n:translate="">Download</dt>
-      <dd id="fieldset-download">
-        <div class="download-field">
-          <tal:service replace="structure html" />
-        </div>
-      </dd>
-    </tal:download>
-
-    <!-- Legend -->
-    <tal:legend define="
-        field python:context.getField('legend') if getattr(context, 'getField', None) else None;
-        html python:field.getAccessor(context)() if field else ''" tal:condition="html">
-      <dt id="fieldsetlegend-legend" i18n:translate="">Legend</dt>
-      <dd id="fieldset-legend">
-        <div class="legend-field">
-          <tal:service replace="structure html" />
-        </div>
-      </dd>
-    </tal:legend>
-
   </dl>
 
 </metal:main_macro>
