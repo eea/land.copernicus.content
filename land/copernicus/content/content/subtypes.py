@@ -4,6 +4,7 @@ from zope.interface import implements
 from Products.Archetypes import atapi
 from archetypes.schemaextender.field import ExtensionField
 from archetypes.schemaextender.interfaces import ISchemaExtender
+from archetypes.schemaextender.interfaces import ISchemaModifier
 from land.copernicus.content.config import EEAMessageFactory as _
 
 class BooleanField(ExtensionField, atapi.BooleanField):
@@ -120,23 +121,16 @@ class LandItemExtender(object):
     def getFields(self):
         return self.fields
 
-class ATBlobExtender(object):
-    """ Extender for ATBlobExtender
+class ATBlobModifier(object):
+    """ SchemaModifier for ATBlob
     """
-    implements(ISchemaExtender)
+    implements(ISchemaModifier)
 
-    fields = [
-        ImageField("image",
-                   schemata="default",
-                   sizes=None,
-                   widget=atapi.ImageWidget(
+    def fiddle(self, schema):
+        schema['image'].widget = atapi.ImageWidget(
                        label=_("cover"),
                        description=_("Cover for Publication"))
-                   ),
-    ]
 
     def __init__(self, context):
         self.context = context
 
-    def getFields(self):
-        return self.fields

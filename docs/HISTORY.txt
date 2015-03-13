@@ -3,6 +3,9 @@ Changelog
 
 2.1-dev - (unreleased)
 ----------------------
+* Bug fix: use a ISchemaModifier instead of ISchemaExtender to change label for
+  the ATBlob content type
+  [tiberich #23775]
 
 2.0 - (2015-02-25)
 ----------------------
