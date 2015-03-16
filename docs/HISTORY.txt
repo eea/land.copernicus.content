@@ -1,6 +1,9 @@
 Changelog
 =========
 
+2.2.dev0 - (unreleased)
+-----------------------
+
 2.1 - (2015-03-16)
 ------------------
 * Bug fix: use a ISchemaModifier instead of ISchemaExtender to change label for
