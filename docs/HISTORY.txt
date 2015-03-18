@@ -1,8 +1,8 @@
 Changelog
 =========
 
-2.2.dev0 - (unreleased)
------------------------
+2.2 - (2015-03-18)
+------------------
 * Bug fix: IATBlob can be implemented by Files, not just Images. Avoid error
   when fiddling schema
   [tiberich #24102]
