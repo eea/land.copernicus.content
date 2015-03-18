@@ -127,7 +127,11 @@ class ATBlobModifier(object):
     implements(ISchemaModifier)
 
     def fiddle(self, schema):
-        schema['image'].widget = atapi.ImageWidget(
+        try:
+            field = schema.getField('image')
+        except AttributeError:
+            return
+        field.widget = atapi.ImageWidget(
                        label=_("cover"),
                        description=_("Cover for Publication"))
 
