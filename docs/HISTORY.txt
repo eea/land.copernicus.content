@@ -1,6 +1,9 @@
 Changelog
 =========
 
+2.3dev0 - (unreleased)
+----------------------
+
 2.2 - (2015-03-18)
 ------------------
 * Bug fix: IATBlob can be implemented by Files, not just Images. Avoid error
