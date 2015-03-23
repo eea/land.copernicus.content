@@ -3,6 +3,9 @@ Changelog
 
 2.3dev0 - (unreleased)
 ----------------------
+* Bug fix: Fixed issue with ATBlobModifier which caused errors when saving/adding
+  files
+  [olimpiurob refs #24157]
 
 2.2 - (2015-03-18)
 ------------------

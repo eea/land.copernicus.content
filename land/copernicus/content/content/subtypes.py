@@ -121,20 +121,21 @@ class LandItemExtender(object):
     def getFields(self):
         return self.fields
 
+
 class ATBlobModifier(object):
     """ SchemaModifier for ATBlob
     """
     implements(ISchemaModifier)
 
     def fiddle(self, schema):
-        try:
-            field = schema.getField('image')
-        except AttributeError:
-            return
-        field.widget = atapi.ImageWidget(
-                       label=_("cover"),
-                       description=_("Cover for Publication"))
+        if not schema.get('image'):
+            schema['image'] = ImageField("image",
+                                         schemata="default",
+                                         sizes=None,
+                                         widget=atapi.ImageWidget(
+                                           label=_("cover"),
+                                           description=_("Cover for Publication"))
+                                         )
 
     def __init__(self, context):
         self.context = context
-
