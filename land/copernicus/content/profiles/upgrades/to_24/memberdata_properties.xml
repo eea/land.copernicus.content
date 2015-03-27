@@ -2,4 +2,11 @@
 <object name="portal_memberdata" meta_type="Plone Memberdata Tool">
  <property name="thematic_domain" type="string"></property>
  <property name="institutional_domain" type="string"></property>
+ <property name="reason" type="string"></property>
+ <property name="job_title" type="string"></property>
+ <property name="postal_address" type="string"></property>
+ <property name="telephone" type="string"></property>
+ <property name="mobile" type="string"></property>
+ <property name="fax" type="string"></property>
+ <property name="organisation" type="string"></property>
 </object>
