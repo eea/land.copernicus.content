@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <object name="portal_workflow">
+ <object name="copernicus_publication_workflow" meta_type="Workflow"/>
  <bindings>
   <type type_id="LandSection">
    <bound-workflow workflow_id="folder_workflow"/>

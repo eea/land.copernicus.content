@@ -5,6 +5,17 @@
   i18n_domain="eea">
 
   <genericsetup:upgradeSteps
+      source="1.6"
+      destination="2.4"
+      profile="land.copernicus.content:default">
+
+    <genericsetup:upgradeDepends
+        title="Add copernicus workflow and user properties"
+        import_profile="land.copernicus.content:upgrade_24"
+        />
+
+  </genericsetup:upgradeSteps>
+  <genericsetup:upgradeSteps
       source="*"
       destination="1.6"
       profile="land.copernicus.content:default">

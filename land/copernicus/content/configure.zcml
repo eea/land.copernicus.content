@@ -9,6 +9,7 @@
   <includeDependencies package="." />
   <include file="profiles.zcml" />
   <include file="permissions.zcml" />
+  <include file="overrides.zcml" />
 
   <include package=".browser" />
   <include package=".content" />

@@ -21,4 +21,11 @@
     recursive="True"
     />
 
+<genericsetup:registerProfile
+    name="upgrade_24"
+    title="Upgrade profile for Land Copernicus Content-Types 2.4"
+    directory="profiles/upgrades/to_24"
+    description="This profile contains configuration changes for 2.4"
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    />
 </configure>
