@@ -1,5 +1,11 @@
+from zope.component import getUtility
 from plone.app.users.userdataschema import IUserDataSchema
 from plone.app.users.userdataschema import IUserDataSchemaProvider
+from plone.app.users.browser.register import RegistrationForm
+from plone.app.users.browser.personalpreferences import UserDataPanel
+from plone.app.users.browser.register import CantChoosePasswordWidget
+from Products.CMFCore.interfaces import ISiteRoot
+from plone.app.controlpanel.widgets import MultiCheckBoxVocabularyWidget
 from zope import schema
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.interface import implements
@@ -38,6 +44,48 @@ def validate_phone(value):
     if phone_re.match(value):
         return True
     return False
+
+
+class CopernicusRegistrationForm(RegistrationForm):
+
+    @property
+    def form_fields(self):
+        if not self.showForm:
+            # We do not want to spend time calculating fields that
+            # will never get displayed.
+            return []
+        portal = getUtility(ISiteRoot)
+        defaultFields = super(RegistrationForm, self).form_fields
+        # Can the user actually set his/her own password?
+        if portal.getProperty('validate_email', True):
+            # No? Remove the password fields.
+            defaultFields = defaultFields.omit('password', 'password_ctl')
+            # Show a message indicating that a password reset link
+            # will be mailed to the user.
+            defaultFields['mail_me'].custom_widget = CantChoosePasswordWidget
+        else:
+            # The portal is not interested in validating emails, and
+            # the user is not interested in getting an email with a
+            # link to set his password if he can set this password in
+            # the current form already.
+            defaultFields = defaultFields.omit('mail_me')
+
+        thematic_domain = defaultFields['thematic_domain']
+        institutional_domain = defaultFields['institutional_domain']
+        thematic_domain.custom_widget = MultiCheckBoxVocabularyWidget
+        institutional_domain.custom_widget = MultiCheckBoxVocabularyWidget
+
+        return defaultFields
+
+
+class CustomizedUserDataPanel(UserDataPanel):
+    def __init__(self, context, request):
+        super(CustomizedUserDataPanel, self).__init__(context, request)
+        self.form_fields = self.form_fields.omit('disclaimer')
+        thematic_domain = self.form_fields['thematic_domain']
+        institutional_domain = self.form_fields['institutional_domain']
+        thematic_domain.custom_widget = MultiCheckBoxVocabularyWidget
+        institutional_domain.custom_widget = MultiCheckBoxVocabularyWidget
 
 
 class UserDataSchemaProvider(object):

@@ -15,8 +15,22 @@
   <include package=".content" />
   <include package=".upgrades" />
 
+  <browser:page
+    name="register"
+    for="Products.CMFPlone.Portal.PloneSite"
+    class=".userdataschema.CopernicusRegistrationForm"
+    permission="cmf.AddPortalMember"
+    />
+
+  <browser:page
+    for="Products.CMFPlone.Portal.PloneSite"
+    name="personal-information"
+    class=".userdataschema.CustomizedUserDataPanel"
+    permission="cmf.SetOwnProperties"
+    />
+
   <browser:jbot
-      directory="browser/template-overrides/"
-      />
+    directory="browser/template-overrides/"
+    />
 
 </configure>
