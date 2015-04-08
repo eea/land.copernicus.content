@@ -20,21 +20,3 @@ class LandProduct(ATFolder):
     schema = schema.PRODUCT_SCHEMA
 
 
-class LandProductSchemaExtender(object):
-    implements(IOrderableSchemaExtender)
-
-    def __init__(self, context):
-        self.context = context
-
-    def getFields(self):
-        return []
-
-    def getOrder(self, fields):
-        print self.context, "getOrder"
-        fields = fields.copy()
-        creators = fields['creators']
-        if 'rights' in creators:
-            i = creators.index('rights')
-            del creators[i]
-            fields['default'].append('rights')
-        return fields

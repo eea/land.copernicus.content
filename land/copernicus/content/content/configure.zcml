@@ -14,9 +14,9 @@
         for="plone.app.blob.interfaces.IATBlob"
         factory=".subtypes.ATBlobModifier" />
 
-    <adapter name="land.copernicus.content.landproduct"
-        for="land.copernicus.content.content.interfaces.ILandProduct"
-        factory=".landproduct.LandProductSchemaExtender" />
+    <!-- <adapter name="land.copernicus.content.landproduct" -->
+    <!--     for="land.copernicus.content.content.interfaces.ILandProduct" -->
+    <!--     factory=".landproduct.LandProductSchemaExtender" /> -->
 
     <subscriber
         for="Products.ATContentTypes.interface.IATFile zope.lifecycleevent.interfaces.IObjectModifiedEvent"

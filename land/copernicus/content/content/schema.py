@@ -42,6 +42,7 @@ PRODUCT_SCHEMA = Schema((
         multiValued=1,
         default=[],
         vocabulary=NamedVocabulary(COUNTRIES_DICTIONARY_ID),
+        schemata='metadata',
         widget=MultiSelectionWidget(
             macro="countries_widget",
             helper_js=("countries_widget.js",),
@@ -58,7 +59,7 @@ PRODUCT_SCHEMA = Schema((
     LinesField(
         name='temporalCoverage',
         languageIndependent=True,
-        schemata='categorization',
+        schemata='metadata',
         required=False,
         multiValued=1,
         widget=TemporalMultiSelectionWidget(
@@ -75,7 +76,7 @@ PRODUCT_SCHEMA = Schema((
         )
     ),
     TextField(
-        name='geographic_accuracy',
+        name='geographicAccuracy',
         allowable_content_types=('text/plain', 'text/structured', 'text/html',
                                  'application/msword',),
         widget=RichWidget(
@@ -86,22 +87,26 @@ PRODUCT_SCHEMA = Schema((
             ),
         default_content_type="text/html",
         searchable=True,
-        schemata="default",
+        schemata="metadata",
         default_output_type="text/x-html-safe",
     ),
-    StringField(
-            name='related_external_indicator',
-            widget=StringField._properties['widget'](
-                label="Related external indicator",
-                description="Related external indicator",
-                label_msgid='indicators_label_related_external_indicator',
-                i18n_domain='indicators',
-                ),
-            required=False,
-            schemata="default",
+    TextField(
+        name='coordinateReferenceSystem',
+        allowable_content_types=('text/plain', 'text/structured', 'text/html',
+                                 'application/msword',),
+        widget=RichWidget(
+            label="Coordinate reference system",
+            description="",
+            label_msgid='eea_label_more_updates_on',
+            i18n_domain='eea',
+            ),
+        default_content_type="text/html",
+        searchable=True,
+        schemata="metadata",
+        default_output_type="text/x-html-safe",
     ),
     TextField(
-        name='data_sources',
+        name='dataSources',
         allowable_content_types=('text/plain', 'text/structured', 'text/html',
                                  'application/msword',),
         widget=RichWidget(
@@ -111,7 +116,7 @@ PRODUCT_SCHEMA = Schema((
         ),
         default_content_type="text/html",
         searchable=True,
-        schemata="default",
+        schemata="metadata",
         default_output_type="text/x-html-safe",
     ),
     TextField(
@@ -125,11 +130,11 @@ PRODUCT_SCHEMA = Schema((
         ),
         default_content_type="text/html",
         searchable=True,
-        schemata="default",
+        schemata="metadata",
         default_output_type="text/x-html-safe",
     ),
     TextField(
-        name='data_custodians',
+        name='dataCustodians',
         allowable_content_types=('text/plain', 'text/structured', 'text/html',
                                  'application/msword',),
         widget=RichWidget(
@@ -139,7 +144,7 @@ PRODUCT_SCHEMA = Schema((
         ),
         default_content_type="text/html",
         searchable=True,
-        schemata="default",
+        schemata="metadata",
         default_output_type="text/x-html-safe",
     ),
 
@@ -147,6 +152,22 @@ PRODUCT_SCHEMA = Schema((
 
 PRODUCT_SCHEMA = ATFolder.schema.copy() + PRODUCT_SCHEMA
 
+def finalize_product_schema(schema):
+
+    for field in ['subject', 'rights']:
+        schema.changeSchemataForField(field, 'metadata')
+
+    # creators = ['creators']
+    # if 'rights' in creators:
+    #     i = creators.index('rights')
+    #     del creators[i]
+    #     fields['metadata'] = ['temporalCoverage', 'geographicCoverage',
+    #                             'geographicAccuracy', 'Subject', 'rights',
+    #                             'coordinateReferenceSystem', 'dataSources', 'owners',
+    #                             'dataCustodians']
+    # return fields
+
+finalize_product_schema(PRODUCT_SCHEMA)
 
 # These will be the entries to be filled out for the products:
 # - Temporal coverage,
