@@ -152,32 +152,22 @@ PRODUCT_SCHEMA = Schema((
 
 PRODUCT_SCHEMA = ATFolder.schema.copy() + PRODUCT_SCHEMA
 
+
 def finalize_product_schema(schema):
 
-    for field in ['subject', 'rights']:
+    default_fields = ['id', 'title', 'description']
+    meta_fields = ['subject', 'temporalCoverage', 'geographicCoverage',
+                   'geographicAccuracy', 'subject', 'rights',
+                   'coordinateReferenceSystem', 'dataSources', 'owners',
+                   'dataCustodians']
+
+    for field in meta_fields:
         schema.changeSchemataForField(field, 'metadata')
 
-    # creators = ['creators']
-    # if 'rights' in creators:
-    #     i = creators.index('rights')
-    #     del creators[i]
-    #     fields['metadata'] = ['temporalCoverage', 'geographicCoverage',
-    #                             'geographicAccuracy', 'Subject', 'rights',
-    #                             'coordinateReferenceSystem', 'dataSources', 'owners',
-    #                             'dataCustodians']
-    # return fields
+    fields = default_fields + meta_fields
+    for name in schema._names:
+        if name not in fields:
+            fields.append(name)
+    schema._names = fields
 
 finalize_product_schema(PRODUCT_SCHEMA)
-
-# These will be the entries to be filled out for the products:
-# - Temporal coverage,
-# - Latest upload
-# - Geographic coverage
-# - Geographic accuracy
-# - Tags
-# - Rights (mostly: full, open and free access in line with the Copernicus delegated regulation (EU) No 1159/2013 of 12 July 2013, supplementing Regulation (EU) No 911/2010 of the European Parliament and licensing conditions for GMES users and defining criteria for restricting access to GMES dedicated data and GMES service information)
-# - Coordinate Reference System (always EPSG:3035 (ETRS89, LAEA) in our case)
-# - Data sources
-# - Owners (mostly European Union, EC DG Enterprise and Industry)
-# - Data custodians (mostly: EEA)
-#schema extender for rights
