@@ -13,3 +13,7 @@ class ILandSection(ILandContent):
 class ILandItem(ILandContent):
     """ Bottom items
     """
+
+class ILandProduct(Interface):
+    """ LandProducts are similar to a Dataset from eea.dataservice
+    """

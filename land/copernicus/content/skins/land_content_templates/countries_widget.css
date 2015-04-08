@@ -1,0 +1,23 @@
+.countries-widget-select {
+  padding: 2px;
+  float: left;
+  margin-right: 1em;
+}
+
+.countries-widget-select option {
+  padding: 1px 8px 1px 8px;
+}
+
+.dataservice_btn {
+    cursor: pointer;
+    color: green;
+}
+
+option:disabled, input:disabled {
+    background: beige;
+    color: #DDD !important;
+}
+
+#dynamic_geotags_span {
+    font-weight: normal;
+}

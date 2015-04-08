@@ -9,7 +9,7 @@
 
   <genericsetup:registerProfile
     name="default"
-    title="Land Copernicus Content-Types"
+    title="land.copernicus.content: Land Copernicus Content-Types Package"
     directory="profiles/default"
     description="Extension profile for Land Copernicus Content-Types"
     provides="Products.GenericSetup.interfaces.EXTENSION"
@@ -28,4 +28,12 @@
     description="This profile contains configuration changes for 2.4"
     provides="Products.GenericSetup.interfaces.EXTENSION"
     />
+
+  <genericsetup:importStep
+    name="land.copernicus.content-install-vocabularies"
+    title="land.copernicus.content Vocabularies"
+    description="Install Vocabularies for land.copernicus.content"
+    handler="land.copernicus.content.setuphandlers.installVocabularies"
+    />
+
 </configure>
