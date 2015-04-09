@@ -3,6 +3,8 @@
   xmlns:browser="http://namespaces.zope.org/browser"
   i18n_domain="eea">
 
+  <include file="backports.zcml" />
+
   <browser:resourceDirectory
     name="land.copernicus.content.images"
     directory="./images" />
@@ -22,6 +24,15 @@
     template="templates/overview.pt"
     />
 
+  <browser:page
+    name="product-inline-view"
+    class=".views.LandProductInlineView"
+    permission="zope2.View"
+    for="*"
+    template="templates/product-inline-view.pt"
+    />
+
+
   <browser:resource
     name="frozenEntrynoclick.js"
     file="frozenEntrynoclick.js"
@@ -31,35 +42,6 @@
     name="markFrozen.js"
     file="markFrozen.js"
     />
-
-  <browser:page
-      name="getCountryGroups"
-      class=".dataservice_backports.GetCountryGroups"
-      for="*"
-      permission="zope2.View"
-      />
-
-  <browser:page
-      name="getCountries"
-      class=".dataservice_backports.GetCountries"
-      for="*"
-      permission="zope2.View"
-      />
-
-
-  <browser:page
-      name="getCountriesByGroup"
-      class=".dataservice_backports.GetCountriesByGroup"
-      for="*"
-      permission="zope2.View"
-      />
-
-  <browser:page
-      name="getCountryGroupsData"
-      class=".dataservice_backports.GetCountryGroupsData"
-      for="*"
-      permission="zope2.View"
-      />
 
 </configure>
 

@@ -237,12 +237,12 @@
 
   <!-- Download -->
   <tal:download define="
-    field python:context.getField('download') if getattr(context, 'getField', None) else None;
-    html python:field.getAccessor(context)() if field else ''" tal:condition="html">
+    field python:context.getField('relatedItems') if getattr(context, 'getField', None) else None;
+    related python:field.getAccessor(context)() if field else ''" tal:condition="related">
     <dt id="fieldsetlegend-download" i18n:translate="">Download</dt>
     <dd id="fieldset-download">
-      <div class="download-field">
-        <tal:service replace="structure html" />
+      <div class="download-field" tal:repeat="product related">
+        <tal:service replace="structure product/@@product-inline-view" />
       </div>
     </dd>
   </tal:download>

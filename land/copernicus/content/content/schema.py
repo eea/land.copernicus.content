@@ -2,6 +2,7 @@
 """
 
 from Products.ATContentTypes.content.folder import ATFolder
+from Products.ATContentTypes.content.link import ATLink
 from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
 from Products.Archetypes import atapi
 from Products.Archetypes.atapi import StringField
@@ -18,6 +19,7 @@ SCHEMA = atapi.Schema(())
 
 SECTION_SCHEMA = ATFolder.schema.copy() + SCHEMA.copy()
 ITEM_SCHEMA = ATFolder.schema.copy() + SCHEMA.copy()
+LANDFILE_SCHEMA = ATLink.schema.copy() + SCHEMA.copy()
 
 
 class TemporalMultiSelectionWidget(MultiSelectionWidget):
@@ -90,20 +92,10 @@ PRODUCT_SCHEMA = Schema((
         schemata="metadata",
         default_output_type="text/x-html-safe",
     ),
-    TextField(
+    StringField(
         name='coordinateReferenceSystem',
-        allowable_content_types=('text/plain', 'text/structured', 'text/html',
-                                 'application/msword',),
-        widget=RichWidget(
-            label="Coordinate reference system",
-            description="",
-            label_msgid='eea_label_more_updates_on',
-            i18n_domain='eea',
-            ),
-        default_content_type="text/html",
         searchable=True,
         schemata="metadata",
-        default_output_type="text/x-html-safe",
     ),
     TextField(
         name='dataSources',

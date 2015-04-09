@@ -1,0 +1,35 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  i18n_domain="eea">
+
+
+  <browser:page
+      name="getCountryGroups"
+      class=".dataservice_backports.GetCountryGroups"
+      for="*"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="getCountries"
+      class=".dataservice_backports.GetCountries"
+      for="*"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="getCountriesByGroup"
+      class=".dataservice_backports.GetCountriesByGroup"
+      for="*"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="getCountryGroupsData"
+      class=".dataservice_backports.GetCountryGroupsData"
+      for="*"
+      permission="zope2.View"
+      />
+
+</configure>

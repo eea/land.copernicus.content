@@ -23,3 +23,14 @@ class LandItemsOverview(BrowserView):
         batch = Batch(results, int(self.limit), int(start), orphan=0)
 
         return batch
+
+
+class LandProductInlineView(BrowserView):
+    """ Inline view for products
+    #TODO: hide plone.belowcontentbody.relateditems viewlet
+    """
+
+    def __call__(self):
+        if not getattr(self.context, 'meta_type', '') == "LandProduct":
+            return ""
+        return self.index()
