@@ -1,27 +1,47 @@
-<div tal:content="context/Title" />
-<div tal:content="context/Description" />
+<div>
+  <dl>
+
+
+
+
+    <div tal:content="context/Title" ></div>
+    <div tal:content="context/Description" ></div>
 
 <!-- Temporal coverage: -->
-<tal:temporalCoverage metal:use-macro="context/temporal_macros/macros/temporal-coverage-data" />
+<tal:temporalCoverage metal:use-macro="context/temporal_macros/macros/temporal-coverage-data" ></tal:temporalCoverage>
 
-<div tal:content="context/getGeographicCoverage" />
+<!-- Geographic coverage -->
+  <tal:block 
+    define="field python:context.getField('geographicCoverage');
+    value python:field.getAccessor(context)()"
+    condition="value">
+    <dt style="clear: left">
+      <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
+      <span i18n:translate="">Geographic coverage:</span>
+    </dt>
+    <dd >
+      <tal:repeat repeat="code value">
+        <span tal:content="python: context.getLocationForCode(code)" />
+      </tal:repeat>
+    </dd>
+  </tal:block>
 
 <!-- Geographic accuracy -->
-<tal:block 
-  define="field python:context.getField('geographicAccuracy');
-          value python:field.getAccessor(context)()"
-  condition="value">
-  <dt style="clear: left">
-    <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
-    <span i18n:translate="">Geographic accuracy:</span>
-  </dt>
-  <dd tal:content="structure value">Geographic accuracy</dd>
-</tal:block>
+  <tal:block 
+    define="field python:context.getField('geographicAccuracy');
+    value python:field.getAccessor(context)()"
+    condition="value">
+    <dt style="clear: left">
+      <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
+      <span i18n:translate="">Geographic accuracy:</span>
+    </dt>
+    <dd tal:content="structure value">Geographic accuracy</dd>
+  </tal:block>
 
 <!-- Coordinate Reference System -->
 <tal:block 
   define="field python:context.getField('coordinateReferenceSystem');
-          value python:field.getAccessor(context)()"
+  value python:field.getAccessor(context)()"
   condition="value">
   <dt style="clear: left">
     <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
@@ -33,7 +53,7 @@
 <!-- Data sources -->
 <tal:block 
   define="field python:context.getField('dataSources');
-          value python:field.getAccessor(context)()"
+  value python:field.getAccessor(context)()"
   condition="value">
   <dt style="clear: left">
     <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
@@ -45,7 +65,7 @@
 <!-- owners -->
 <tal:block 
   define="field python:context.getField('owners');
-          value python:field.getAccessor(context)()"
+  value python:field.getAccessor(context)()"
   condition="value">
   <dt style="clear: left">
     <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
@@ -57,7 +77,7 @@
 <!-- owners -->
 <tal:block 
   define="field python:context.getField('dataCustodians');
-          value python:field.getAccessor(context)()"
+  value python:field.getAccessor(context)()"
   condition="value">
   <dt style="clear: left">
     <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
@@ -71,7 +91,7 @@
 <!-- owners -->
 <tal:block 
   define="field python:context.getField('rights');
-          value python:field.getAccessor(context)()"
+  value python:field.getAccessor(context)()"
   condition="value">
   <dt style="clear: left">
     <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
@@ -79,3 +99,6 @@
   </dt>
   <dd tal:content="structure value">Rights</dd>
 </tal:block>
+
+</dl>
+</div>

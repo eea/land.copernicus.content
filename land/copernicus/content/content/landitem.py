@@ -53,3 +53,8 @@ class LandItem(ATFolder):
             return True
 
         return False
+
+    def getLocationForCode(self, code):
+        """ return location name for code
+        """
+        tool = getToolByName(self)

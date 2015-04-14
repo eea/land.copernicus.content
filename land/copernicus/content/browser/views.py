@@ -31,6 +31,13 @@ class LandProductInlineView(BrowserView):
     """
 
     def __call__(self):
-        if not getattr(self.context, 'meta_type', '') == "LandProduct":
+        if not getattr(self.context, 'meta_type', '') == "LandItem":
             return ""
         return self.index()
+
+
+class GoPDB(BrowserView):
+    def __call__(self):
+
+        import pdb; pdb.set_trace()
+        return "done"

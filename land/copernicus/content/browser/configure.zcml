@@ -32,6 +32,13 @@
     template="templates/product-inline-view.pt"
     />
 
+<browser:page
+    name="tpdb"
+    class=".views.GoPDB"
+    permission="zope2.View"
+    for="*"
+    />
+
 
   <browser:resource
     name="frozenEntrynoclick.js"

@@ -15,13 +15,6 @@ from eea.forms.browser.app.temporal_coverage import grouped_coverage
 from land.copernicus.content.content.vocabulary import COUNTRIES_DICTIONARY_ID
 
 
-SCHEMA = atapi.Schema(())
-
-SECTION_SCHEMA = ATFolder.schema.copy() + SCHEMA.copy()
-ITEM_SCHEMA = ATFolder.schema.copy() + SCHEMA.copy()
-LANDFILE_SCHEMA = ATLink.schema.copy() + SCHEMA.copy()
-
-
 class TemporalMultiSelectionWidget(MultiSelectionWidget):
     """ derivative of MultiSelectionWidget in order to
         add a new formatting function
@@ -142,8 +135,6 @@ PRODUCT_SCHEMA = Schema((
 
 ))
 
-PRODUCT_SCHEMA = ATFolder.schema.copy() + PRODUCT_SCHEMA
-
 
 def finalize_product_schema(schema):
 
@@ -162,4 +153,10 @@ def finalize_product_schema(schema):
             fields.append(name)
     schema._names = fields
 
-finalize_product_schema(PRODUCT_SCHEMA)
+SCHEMA = atapi.Schema(())
+
+SECTION_SCHEMA = ATFolder.schema.copy() + SCHEMA.copy()
+ITEM_SCHEMA = ATFolder.schema.copy() + SCHEMA.copy() + PRODUCT_SCHEMA
+LANDFILE_SCHEMA = ATLink.schema.copy() + SCHEMA.copy()
+
+finalize_product_schema(ITEM_SCHEMA)
