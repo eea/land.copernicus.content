@@ -174,6 +174,102 @@
     }
   }
 
+
+  /* datatable styles */
+  @import url("http://cdn.datatables.net/1.10.6/css/jquery.dataTables.min.css");
+
+  #datatable-container{
+    margin-top: -26px;
+    border: 2px solid #BFD630;
+    background-color: #BFD630;
+  }
+
+  #data-table-download{
+    border-collapse: collapse;
+    background-color: white;
+  }
+
+  #data-table-download thead>tr>th{
+    background-color:#BFD630;
+  }
+
+  #data-table-download td, th{
+    padding: 15px !important;
+  }
+
+  #data-table-download .border-none{
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    border-top: none !important;
+  }
+
+  #data-table-download .border-bottom-only{
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important; 
+    border-bottom: 1px solid #CCC !important;
+  }
+
+  #data-table-download tbody>tr:hover{
+    background-color:#F4EFB8;
+  }
+
+  .label-type{
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+  }
+
+  .label-type-vector{
+    background-color: #FDA42C !important;
+  }
+
+  .label-type-raster{
+    background-color: #D21359 !important;
+  }
+
+  .download-button {
+    background-color: #50AEEC;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: none;
+  }
+
+  #data-table-download_info{
+    padding-left: 15px;
+  }
+
+  #data-table-download_length{
+    float: left;
+    padding-left: 15px;
+    padding-top: 15px;
+  }
+
+  #data-table-download_filter{
+    float: right;
+    padding-top: 15px;
+    padding-right: 15px;
+  }
+
+  #data-table-download_paginate{
+    padding-left: 15px;
+    padding-bottom: 15px; 
+  }
+
+  #data-table-download_paginate a{
+    padding-right: 5px;
+  }
 </style>
 
 <dl class="enableFormTabbing">
@@ -217,6 +313,7 @@
     <dd id="fieldset-metadata">
       <div class="metadata-field">
         <tal:service replace="structure html" />
+        <tal:service replace="structure context/@@product-inline-view" />
       </div>
     </dd>
   </tal:metadata>
@@ -239,7 +336,51 @@
   <tal:download>
     <dt id="fieldsetlegend-download" i18n:translate="">Download</dt>
     <dd id="fieldset-download">
-      <tal:service replace="structure context/@@product-inline-view" />
+      <div id="datatable-container">
+        <table id="data-table-download" width="100%">
+          <thead>
+            <tr role="row">
+              <th class="border-none">Code</th>
+              <th class="border-none">Name</th>
+              <th class="border-none">Type</th>
+              <th class="border-none">Download</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr role="row" tal:repeat="item python: context.contentValues()">
+              <td class="border-bottom-only">111</td>
+              <td class="border-bottom-only" tal:content="item/Title"></td>
+              <td class="border-bottom-only">
+                <span class="label-type label-type-raster">Raster</span>
+                <span class="label-type label-type-vector">Vector</span>
+              </td>
+              <td class="border-bottom-only">
+                <span class="info-size">70.14 MB</span>
+                <button class="download-button"><b>Download</b></button>
+              </td>
+            </tr>          
+          </tbody>
+        </table>
+      </div>
+
+      <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
+
+      <script>
+        $(document).ready(function(){
+          $('#data-table-download').DataTable();
+          $('.download-button').hide();
+          $('#data-table-download > tbody > tr').on("mouseenter", function () {
+            $(this).find('button.download-button').show();
+            $(this).find('span.info-size').hide();
+          });
+
+          $('#data-table-download > tbody > tr').on("mouseleave", function () {
+            $(this).find('button.download-button').hide();
+            $(this).find('span.info-size').show();
+          });          
+        });
+      </script>
     </dd>
   </tal:download>
 
