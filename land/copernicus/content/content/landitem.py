@@ -1,6 +1,7 @@
 """ Land content-types
 """
 
+from Products.CMFCore.utils import getToolByName
 from Products.ATContentTypes.content.folder import ATFolder
 from land.copernicus.content.config import IFRAME_WIDTH, IFRAME_HEIGHT
 from land.copernicus.content.content import schema
@@ -54,7 +55,10 @@ class LandItem(ATFolder):
 
         return False
 
-    def getLocationForCode(self, code):
-        """ return location name for code
+    def get_countries_coverage(self):
+        """ return countries for the geographical coverage
         """
-        tool = getToolByName(self)
+        tool = getToolByName(self, 'portal_languages')
+        countries = dict(tool.listAvailableCountries())
+        return [countries.get(t, t)
+                for t in self.getGeographicCoverage()]

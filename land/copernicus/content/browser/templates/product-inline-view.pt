@@ -1,12 +1,6 @@
 <div>
   <dl>
 
-
-
-
-    <div tal:content="context/Title" ></div>
-    <div tal:content="context/Description" ></div>
-
 <!-- Temporal coverage: -->
 <tal:temporalCoverage metal:use-macro="context/temporal_macros/macros/temporal-coverage-data" ></tal:temporalCoverage>
 
@@ -20,9 +14,7 @@
       <span i18n:translate="">Geographic coverage:</span>
     </dt>
     <dd >
-      <tal:repeat repeat="code value">
-        <span tal:content="python: context.getLocationForCode(code)" />
-      </tal:repeat>
+        <span tal:content="python: u', '.join(context.get_countries_coverage())" />
     </dd>
   </tal:block>
 
