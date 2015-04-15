@@ -179,14 +179,16 @@
   @import url("http://cdn.datatables.net/1.10.6/css/jquery.dataTables.min.css");
 
   #datatable-container{
-    margin-top: -26px;
-    border: 2px solid #BFD630;
-    background-color: #BFD630;
+    margin-top:-26px;
+    border:2px solid #BFD630;
+    background-color:#BFD630;
   }
 
   #data-table-download{
-    border-collapse: collapse;
-    background-color: white;
+    border-collapse:collapse;
+    background-color:white;
+    table-layout:fixed;
+    width:200px;
   }
 
   #data-table-download thead>tr>th{
@@ -194,21 +196,23 @@
   }
 
   #data-table-download td, th{
-    padding: 15px !important;
+    padding:15px !important;
+    overflow:hidden;
+    width:100px;
   }
 
   #data-table-download .border-none{
-    border-left: none !important;
-    border-right: none !important;
-    border-bottom: none !important;
-    border-top: none !important;
+    border-left:none !important;
+    border-right:none !important;
+    border-bottom:none !important;
+    border-top:none !important;
   }
 
   #data-table-download .border-bottom-only{
-    border-left: none !important;
-    border-right: none !important;
-    border-top: none !important; 
-    border-bottom: 1px solid #CCC !important;
+    border-left:none !important;
+    border-right:none !important;
+    border-top:none !important; 
+    border-bottom:1px solid #CCC !important;
   }
 
   #data-table-download tbody>tr:hover{
@@ -216,59 +220,66 @@
   }
 
   .label-type{
-    display: inline;
-    padding: .2em .6em .3em;
-    font-size: 75%;
-    font-weight: bold;
-    line-height: 1;
-    color: #fff;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: .25em;
+    display:inline;
+    padding:.2em .6em .3em;
+    font-size:75%;
+    font-weight:bold;
+    line-height:1;
+    color:#fff;
+    text-align:center;
+    white-space:nowrap;
+    vertical-align:baseline;
+    border-radius:.25em;
   }
 
   .label-type-vector{
-    background-color: #FDA42C !important;
+    background-color:#FDA42C !important;
   }
 
   .label-type-raster{
-    background-color: #D21359 !important;
+    background-color:#D21359 !important;
   }
 
   .download-button {
-    background-color: #50AEEC;
-    color: white;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 15px;
-    padding-right: 15px;
-    border: none;
+    margin-left:-15px;
+    margin-top:-3px;
+    margin-bottom:-3px;
+    background-color:#50AEEC;
+    color:white;
+    padding-top:5px;
+    padding-bottom:5px;
+    padding-left:15px;
+    padding-right:15px;
+    border:none;
   }
 
   #data-table-download_info{
-    padding-left: 15px;
+    padding-top:3px;
+    padding-left:15px;
+    float:left;
   }
 
   #data-table-download_length{
-    float: left;
-    padding-left: 15px;
-    padding-top: 15px;
+    float:left;
+    padding-left:15px;
+    padding-top:15px;
   }
 
   #data-table-download_filter{
-    float: right;
-    padding-top: 15px;
-    padding-right: 15px;
+    float:right;
+    padding-top:15px;
+    padding-right:15px;
   }
 
   #data-table-download_paginate{
-    padding-left: 15px;
-    padding-bottom: 15px; 
+    padding-top:3px;
+    padding-right:15px;
+    padding-bottom:15px;
+    float:right;
   }
 
   #data-table-download_paginate a{
-    padding-right: 5px;
+    padding-right:5px;
   }
 </style>
 
@@ -340,7 +351,6 @@
         <table id="data-table-download" width="100%">
           <thead>
             <tr role="row">
-              <th class="border-none">Code</th>
               <th class="border-none">Name</th>
               <th class="border-none">Type</th>
               <th class="border-none">Download</th>
@@ -349,11 +359,15 @@
 
           <tbody>
             <tr role="row" tal:repeat="item python: context.contentValues()">
-              <td class="border-bottom-only">111</td>
               <td class="border-bottom-only" tal:content="item/Title"></td>
-              <td class="border-bottom-only">
-                <span class="label-type label-type-raster">Raster</span>
-                <span class="label-type label-type-vector">Vector</span>
+              <td class="border-bottom-only"
+                  tal:define="land_file_subject python: item.getField('subject').getAccessor(item)()">
+                <tal:condition condition="python: len(land_file_subject) > 0">
+                  <span tal:condition="python: land_file_subject[0] == 'Raster'"
+                        class="label-type label-type-raster">Raster</span>
+                  <span tal:condition="python: land_file_subject[0] == 'Vector'"
+                        class="label-type label-type-vector">Vector</span>
+                </tal:condition>
               </td>
               <td class="border-bottom-only">
                 <span class="info-size">70.14 MB</span>
