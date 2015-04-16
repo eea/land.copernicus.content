@@ -400,6 +400,15 @@
     </dd>
   </tal:download>
 
+  <!-- Download Old - temporary download -->
+  <tal:download>
+    <dt id="fieldsetlegend-download-old" i18n:translate="">Download (old)</dt>
+    <dd id="fieldset-download-old"
+        tal:define="download_info python: context.getField('download').getAccessor(context)()">
+      <div tal:replace="structure download_info"></div>
+    </dd>
+  </tal:download>
+
   <tal:disabled condition="nothing">
     <!-- Legend -->
     <tal:legend define="

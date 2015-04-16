@@ -1,10 +1,11 @@
 """ land.copernicus.content schema
 """
-
+from DateTime import DateTime
 from Products.ATContentTypes.content.folder import ATFolder
 from Products.ATContentTypes.content.link import ATLink
 from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
 from Products.Archetypes import atapi
+from Products.Archetypes.atapi import CalendarWidget, DateTimeField
 from Products.Archetypes.atapi import StringField
 from Products.Archetypes.atapi import LinesField
 from Products.Archetypes.atapi import MultiSelectionWidget
@@ -44,8 +45,12 @@ PRODUCT_SCHEMA = Schema((
             helper_css=("countries_widget.css",),
             size=15,
             label="Geographical coverage",
-            description=("The geographical extent of the content of "
-                         "the data resource."),
+            description=(
+                "Type in here the exact geographic names/places "
+                "that are covered by the data. Add Countries names only if "
+                "the data displayed is really about the entire country. "
+                "Example of locations/places are lakes, rivers, cities, "
+                "marine areas, glaciers, bioregions like alpine region etc."),
             label_msgid='dataservice_label_geographic',
             description_msgid='dataservice_help_geographic',
             i18n_domain='eea',
@@ -62,9 +67,10 @@ PRODUCT_SCHEMA = Schema((
             helper_js=("temporal_widget.js",),
             size=15,
             label="Temporal coverage",
-            description=("The temporal scope of the content of the data "
-                            "resource. Temporal coverage will typically "
-                            "include a set of years or time ranges."),
+            description=(
+                "The temporal scope of the content of the data "
+                "resource. Temporal coverage will typically "
+                "include a set of years or time ranges."),
             label_msgid='dataservice_label_coverage',
             description_msgid='dataservice_help_coverage',
             i18n_domain='eea',
@@ -132,7 +138,26 @@ PRODUCT_SCHEMA = Schema((
         schemata="metadata",
         default_output_type="text/x-html-safe",
     ),
-
+    DateTimeField(
+        name='lastUpload',
+        languageIndependent=True,
+        required=True,
+        default=DateTime(),
+        schemata="metadata",
+        imports="from DateTime import DateTime",
+        widget=CalendarWidget(
+            show_hm=False,
+            label="Last upload",
+            description=("Date when the data resource was last uploaded in "
+                         "EEA data service. If not manually provided it will "
+                         "coincide with publishing date. It can later be used "
+                         "when a dataset is re-uploaded due to corrections "
+                         "and when a whole new version is not necessary."),
+            label_msgid='dataservice_label_last_upload',
+            description_msgid='dataservice_help_last_upload',
+            i18n_domain='eea',
+        ),
+    ),
 ))
 
 
