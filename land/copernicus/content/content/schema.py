@@ -10,6 +10,7 @@ from Products.Archetypes.atapi import StringField
 from Products.Archetypes.atapi import LinesField
 from Products.Archetypes.atapi import MultiSelectionWidget
 from Products.Archetypes.atapi import Schema
+from Products.Archetypes.atapi import StringWidget
 from Products.Archetypes.atapi import TextField
 from Products.Archetypes.atapi import RichWidget
 from eea.forms.browser.app.temporal_coverage import grouped_coverage
@@ -93,6 +94,12 @@ PRODUCT_SCHEMA = Schema((
     ),
     StringField(
         name='coordinateReferenceSystem',
+        widget=StringWidget(
+            label="Coordinate Reference System",
+            description="Coordinate Reference System",
+            i18n_domain='eea',
+        ),
+        default="EPSG:3035 (ETRS89, LAEA)",
         searchable=True,
         schemata="metadata",
     ),
@@ -102,7 +109,11 @@ PRODUCT_SCHEMA = Schema((
                                  'application/msword',),
         widget=RichWidget(
             label="Data sources",
-            description=("Where does the data come from?"),
+            description=(
+                "A reference to a resource from which the present "
+                "resource is derived. Details such exact body "
+                "or department, date of delivery, original database, "
+                "table or GIS layer, scientific literature ..."),
             i18n_domain='eea',
         ),
         default_content_type="text/html",
@@ -116,7 +127,10 @@ PRODUCT_SCHEMA = Schema((
                                  'application/msword',),
         widget=RichWidget(
             label="Owners",
-            description=("Who owns the data?"),
+            description=(
+                "An entity or set of entities that owns the "
+                "resource. The owner is responsible for the "
+                "reliability of the resource."),
             i18n_domain='eea',
         ),
         default_content_type="text/html",
@@ -147,7 +161,7 @@ PRODUCT_SCHEMA = Schema((
         imports="from DateTime import DateTime",
         widget=CalendarWidget(
             show_hm=False,
-            label="Last upload",
+            label="Lastest upload",
             description=("Date when the data resource was last uploaded in "
                          "EEA data service. If not manually provided it will "
                          "coincide with publishing date. It can later be used "
