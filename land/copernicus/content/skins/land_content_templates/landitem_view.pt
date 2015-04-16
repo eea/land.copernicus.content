@@ -245,7 +245,8 @@
     margin-top:-3px;
     margin-bottom:-3px;
     background-color:#50AEEC;
-    color:white;
+    color:white !important;
+    text-decoration:none !important;
     padding-top:5px;
     padding-bottom:5px;
     padding-left:15px;
@@ -371,7 +372,8 @@
               </td>
               <td class="border-bottom-only">
                 <span class="info-size">70.14 MB</span>
-                <button class="download-button"><b>Download</b></button>
+                <a tal:attributes="href python: item.getField('remoteUrl').getAccessor(item)()"
+                   href="" class="download-button"><b>Download</b></a>
               </td>
             </tr>          
           </tbody>
@@ -385,12 +387,12 @@
           $('#data-table-download').DataTable();
           $('.download-button').hide();
           $('#data-table-download > tbody > tr').on("mouseenter", function () {
-            $(this).find('button.download-button').show();
+            $(this).find('a.download-button').show();
             $(this).find('span.info-size').hide();
           });
 
           $('#data-table-download > tbody > tr').on("mouseleave", function () {
-            $(this).find('button.download-button').hide();
+            $(this).find('a.download-button').hide();
             $(this).find('span.info-size').show();
           });          
         });
