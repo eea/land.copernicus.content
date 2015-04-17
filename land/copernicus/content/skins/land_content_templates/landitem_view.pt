@@ -15,6 +15,8 @@
     }
   </script>
   <style>
+  @import url("./eea-tooltips.css");
+
   .loading_message {
     height:450px; 
     width:900px;
@@ -176,8 +178,6 @@
 
 
   /* datatable styles */
-  @import url("http://cdn.datatables.net/1.10.6/css/jquery.dataTables.min.css");
-
   #datatable-container{
     margin-top:-26px;
     border:2px solid #BFD630;
@@ -381,6 +381,8 @@
       </div>
 
       <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
+
+      <script type="text/javascript" language="javascript" src="eea-tooltips.js"></script>
 
       <script>
         $(document).ready(function(){
