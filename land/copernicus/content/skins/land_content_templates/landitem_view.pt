@@ -189,6 +189,7 @@
     background-color:white;
     table-layout:fixed;
     width:200px;
+    margin-bottom: 0px !important;
   }
 
   #data-table-download thead>tr>th{
@@ -282,6 +283,8 @@
   #data-table-download_paginate a{
     padding-right:5px;
   }
+
+
 </style>
 
 <dl class="enableFormTabbing">
