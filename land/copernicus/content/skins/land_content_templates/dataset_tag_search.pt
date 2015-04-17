@@ -16,6 +16,12 @@
                 results python:context.portal_catalog.searchResults(portal_type='LandItem', Subject={'query':[search_tag]})">
 <metal:main_macro define-macro="content-core">
 
+<style>
+  #viewlet-below-content-title {
+    display:none;
+  }
+</style>
+
   <div class="photoAlbum" tal:repeat="result_item results">
     <div tal:define="image python:result_item.getObject();"
         tal:attributes="class python:'photoAlbumEntry photoAlbumFolder'">
