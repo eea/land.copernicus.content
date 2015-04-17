@@ -52,7 +52,9 @@
     <span i18n:translate="">Tags:</span>
   </dt>
   <dd>
-    <a tal:repeat="link value" href="" tal:content="link"></a>
+    <a tal:repeat="tag value" href="" tal:content="tag"
+       tal:attributes="href string: ${context/@@plone_context_state/object_url}/dataset_tag_search?tag=${tag}">
+    </a>
   </dd>
 </tal:block>
 

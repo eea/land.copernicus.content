@@ -7,16 +7,32 @@
       i18n:domain="plone">
 <body>
 
-<metal:content-core fill-slot="content-core">
-    <h1>Search tags</h1>
-    <ul
-      tal:define="results python: context.portal_catalog.searchResults(portal_type='LandItem', Subject={'query':['prmul']})">
-      <li tal:repeat="result results">
-        <h3>
-          <a href="" tal:attributes="href python: result.getURL()" tal:content="result/Title"></a>
-        </h3>
-      </li>
-    </ul>
+<metal:title fill-slot="content-title">
+  <h1 i18n:translate="">Search results</h1>
+</metal:title>
+
+<metal:content-core fill-slot="content-core"
+    tal:define="search_tag python:request.form.get('tag', '');
+                results python:context.portal_catalog.searchResults(portal_type='LandItem', Subject={'query':[search_tag]})">
+<metal:main_macro define-macro="content-core">
+
+  <div class="photoAlbum" tal:repeat="result_item results">
+    <div tal:define="image python:result_item.getObject();"
+        tal:attributes="class python:'photoAlbumEntry photoAlbumFolder'">
+      <a tal:attributes="href string:${image/absolute_url}/view;
+                         title image/Description">
+        <span class="photoAlbumEntryWrapper">
+          <img src="" alt="" tal:replace="structure python:image.tag(scale='thumb', title=image.Description(), alt='')" />
+        </span>
+        <span class="photoAlbumEntryTitle" tal:content="image/pretty_title_or_id">
+          Title
+        </span>
+      </a>
+    </div>
+  </div>
+
+</metal:main_macro>
 </metal:content-core>
+
 </body>
 </html>
