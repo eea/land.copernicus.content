@@ -284,6 +284,7 @@
     padding-right:5px;
   }
 
+
   /* Metadata tab styles */
   #detailed-metadata-title{
     padding-top: 25px;
@@ -301,24 +302,28 @@
   .detailed-metadata-container dl{
     float:left;
     width:100%;
-    margin-bottom: 0px !important;
+    margin-bottom:0px !important;
   }
 
   .detailed-metadata-container dt{
     float:left;
-    width:30%;
+    width:24%;
     text-align:right;
   }
 
   .detailed-metadata-container dd{
     float:left;
-    width:65%;
-    padding-top: 0px !important;
-    padding-left: 15px;
+    width:72%;
+    padding-top:0px !important;
+    padding-left:15px;
+  }
+
+  .detailed-metadata-container dd p{
+    margin-bottom:0.5em !important;
   }
 
   #temporal_dynamic {
-    display: none;
+    display:none;
   }
 
   .label-tag{
@@ -338,7 +343,7 @@
 
   .label-tag:hover{
     background-color:#4D4D4D !important;
-    color: white !important;
+    color:white !important;
   }
 </style>
 
