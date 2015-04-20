@@ -428,14 +428,12 @@
               <td class="border-top-only"
                   tal:define="land_file_subject python: item.getField('subject').getAccessor(item)()">
                 <tal:condition condition="python: len(land_file_subject) > 0">
-                  <span tal:condition="python: land_file_subject[0] == 'Raster'"
-                        class="label-type label-type-raster">Raster</span>
-                  <span tal:condition="python: land_file_subject[0] == 'Vector'"
-                        class="label-type label-type-vector">Vector</span>
+                  <span tal:condition="python: land_file_subject[0].lower() == 'raster'" class="label-type label-type-raster">Raster</span>
+                  <span tal:condition="python: land_file_subject[0].lower() == 'vector'" class="label-type label-type-vector">Vector</span>
                 </tal:condition>
               </td>
               <td class="border-top-only">
-                <span class="info-size">70.14 MB</span>
+                <span class="info-size" tal:content="item/getFileSize">70.14 MB</span>
                 <a tal:attributes="href python: item.getField('remoteUrl').getAccessor(item)()"
                    href="" class="download-button"><b>Download</b></a>
               </td>
@@ -445,7 +443,6 @@
       </div>
 
       <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
-
       <script type="text/javascript" language="javascript" src="eea-tooltips.js"></script>
 
       <script>

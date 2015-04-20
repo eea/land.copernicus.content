@@ -28,4 +28,9 @@
         handler=".edit.handler"
         />
 
+    <adapter 
+        name="land.copernicus.content.landfile"
+        for="land.copernicus.content.content.interfaces.ILandFile"
+        factory=".landfile.SchemaExtender" />
+
 </configure>

@@ -5,14 +5,16 @@ from Products.ATContentTypes.content.folder import ATFolder
 from Products.ATContentTypes.content.link import ATLink
 from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
 from Products.Archetypes import atapi
-from Products.Archetypes.atapi import CalendarWidget, DateTimeField
-from Products.Archetypes.atapi import StringField
+from Products.Archetypes.atapi import CalendarWidget
+from Products.Archetypes.atapi import DateTimeField
 from Products.Archetypes.atapi import LinesField
+from Products.Archetypes.atapi import LinesWidget
 from Products.Archetypes.atapi import MultiSelectionWidget
+from Products.Archetypes.atapi import RichWidget
 from Products.Archetypes.atapi import Schema
+from Products.Archetypes.atapi import StringField
 from Products.Archetypes.atapi import StringWidget
 from Products.Archetypes.atapi import TextField
-from Products.Archetypes.atapi import RichWidget
 from eea.forms.browser.app.temporal_coverage import grouped_coverage
 from land.copernicus.content.content.vocabulary import COUNTRIES_DICTIONARY_ID
 
@@ -172,6 +174,20 @@ PRODUCT_SCHEMA = Schema((
             i18n_domain='eea',
         ),
     ),
+    LinesField(
+        name='fileCategories',
+        languageIndependent=True,
+        required=True,
+        multiValued=1,
+        default=[],
+        schemata='metadata',
+        widget=LinesWidget(
+            size=15,
+            label="Categories for Download Files",
+            description=("One category per line."),
+            i18n_domain='eea',
+        )
+    ),
 ))
 
 
@@ -196,6 +212,20 @@ SCHEMA = atapi.Schema(())
 
 SECTION_SCHEMA = ATFolder.schema.copy() + SCHEMA.copy()
 ITEM_SCHEMA = ATFolder.schema.copy() + SCHEMA.copy() + PRODUCT_SCHEMA
-LANDFILE_SCHEMA = ATLink.schema.copy() + SCHEMA.copy()
+
+LANDFILE_SCHEMA = ATLink.schema.copy() + atapi.Schema((
+    StringField(
+        name='fileSize',
+        widget=StringWidget(
+            label="Download file size",
+            description="Download file size. It will be automatically extracted",
+            i18n_domain='eea',
+        ),
+        default="",
+        searchable=False,
+        schemata="default",
+    ),
+))
+
 
 finalize_product_schema(ITEM_SCHEMA)
