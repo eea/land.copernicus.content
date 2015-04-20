@@ -1,46 +1,48 @@
-<div>
+<h3 id="detailed-metadata-title" i18n:translate="">Detailed metadata</h3>
+
+<div class="detailed-metadata-container">
   <dl>
 
 <!-- Temporal coverage: -->
 <tal:temporalCoverage metal:use-macro="context/temporal_macros/macros/temporal-coverage-data" ></tal:temporalCoverage>
 
 <!-- Latest upload -->
-  <tal:block 
-    define="field python:context.getField('lastUpload');
-    value python:field.getAccessor(context)()"
-    condition="value">
-    <dt style="clear: left">
-      <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
-      <span i18n:translate="">Latest upload:</span>
-    </dt>
-    <dd tal:content="python: context.toLocalizedTime(value, long_format=0)">Last upload</dd>
-  </tal:block>
+<tal:block 
+  define="field python:context.getField('lastUpload');
+  value python:field.getAccessor(context)()"
+  condition="value">
+  <dt style="clear: left">
+    <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
+    <span i18n:translate="">Latest upload:</span>
+  </dt>
+  <dd tal:content="python: context.toLocalizedTime(value, long_format=0)">Last upload</dd>
+</tal:block>
 
 <!-- Geographic coverage -->
-  <tal:block 
-    define="field python:context.getField('geographicCoverage');
-    value python:field.getAccessor(context)()"
-    condition="value">
-    <dt style="clear: left">
-      <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
-      <span i18n:translate="">Geographic coverage:</span>
-    </dt>
-    <dd >
-        <span tal:content="python: u', '.join(context.get_countries_coverage())" />
-    </dd>
-  </tal:block>
+<tal:block 
+  define="field python:context.getField('geographicCoverage');
+  value python:field.getAccessor(context)()"
+  condition="value">
+  <dt style="clear: left">
+    <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
+    <span i18n:translate="">Geographic coverage:</span>
+  </dt>
+  <dd >
+      <span tal:content="python: u', '.join(context.get_countries_coverage())" />
+  </dd>
+</tal:block>
 
 <!-- Geographic accuracy -->
-  <tal:block 
-    define="field python:context.getField('geographicAccuracy');
-    value python:field.getAccessor(context)()"
-    condition="value">
-    <dt style="clear: left">
-      <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
-      <span i18n:translate="">Geographic accuracy:</span>
-    </dt>
-    <dd tal:content="structure value">Geographic accuracy</dd>
-  </tal:block>
+<tal:block 
+  define="field python:context.getField('geographicAccuracy');
+  value python:field.getAccessor(context)()"
+  condition="value">
+  <dt style="clear: left">
+    <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
+    <span i18n:translate="">Geographic accuracy:</span>
+  </dt>
+  <dd tal:content="structure value">Geographic accuracy</dd>
+</tal:block>
 
 <!-- Tags -->
 <tal:block 
@@ -53,6 +55,7 @@
   </dt>
   <dd>
     <a tal:repeat="tag value" href="" tal:content="tag"
+       class="label-tag"
        tal:attributes="href string: ${context/@@plone_context_state/object_url}/dataset_tag_search?tag=${tag}">
     </a>
   </dd>

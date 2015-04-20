@@ -177,7 +177,7 @@
   }
 
 
-  /* datatable styles */
+  /* Download tab: datatable styles */
   #datatable-container{
     margin-top:-26px;
     border:2px solid #BFD630;
@@ -284,7 +284,61 @@
     padding-right:5px;
   }
 
+  /* Metadata tab styles */
+  #detailed-metadata-title{
+    padding-top: 25px;
+  }
 
+  .detailed-metadata-container{
+    border:1px solid #CCC;
+    padding-top:15px;
+    padding-left:15px;
+    padding-right:15px;
+    padding-bottom:0px;
+    overflow: hidden;
+  }
+
+  .detailed-metadata-container dl{
+    float:left;
+    width:100%;
+    margin-bottom: 0px !important;
+  }
+
+  .detailed-metadata-container dt{
+    float:left;
+    width:30%;
+    text-align:right;
+  }
+
+  .detailed-metadata-container dd{
+    float:left;
+    width:65%;
+    padding-top: 0px !important;
+    padding-left: 15px;
+  }
+
+  #temporal_dynamic {
+    display: none;
+  }
+
+  .label-tag{
+    display:inline;
+    padding:.2em .6em .3em;
+    font-size:75%;
+    font-weight:bold;
+    line-height:1;
+    text-align:center;
+    text-decoration:none !important;
+    white-space:nowrap;
+    vertical-align:baseline;
+    border-radius:.25em;
+    background-color:#989898 !important;
+    color: white !important;
+  }
+
+  .label-tag:hover{
+    background-color:#4D4D4D !important;
+  }
 </style>
 
 <dl class="enableFormTabbing">
