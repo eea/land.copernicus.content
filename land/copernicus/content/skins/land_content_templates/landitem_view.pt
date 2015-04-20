@@ -413,31 +413,37 @@
     <dt id="fieldsetlegend-download" i18n:translate="">Download</dt>
     <dd id="fieldset-download">
       <div id="datatable-container">
-        <table id="data-table-download" width="100%">
+        <table id="data-table-download" width="100%" tal:define="catfields python:context.getField('fileCategories').getAccessor(context)()">
           <thead>
             <tr role="row">
               <th class="border-none">Name</th>
-              <th class="border-none">Type</th>
+              <th class="border-none" tal:repeat="cat catfields"><span tal:replace="cat">Type</span></th>
               <th class="border-none">Download</th>
             </tr>
           </thead>
 
-          <tbody>
+          <tbody >
             <tr role="row" tal:repeat="item python: context.contentValues()">
+              <tal:def tal:define="fileCategories python: item.getField('fileCategories').getAccessor(item)() or [{}];
+                             fileCategories python: fileCategories[0];
+                             ">
               <td class="border-top-only" tal:content="item/Title"></td>
-              <td class="border-top-only"
-                  tal:define="land_file_subject python: item.getField('subject').getAccessor(item)()">
-                <tal:condition condition="python: len(land_file_subject) > 0">
-                  <span tal:condition="python: land_file_subject[0].lower() == 'raster'" class="label-type label-type-raster">Raster</span>
-                  <span tal:condition="python: land_file_subject[0].lower() == 'vector'" class="label-type label-type-vector">Vector</span>
-                </tal:condition>
+
+              <td class="border-top-only" tal:repeat="catName catfields">
+                <span tal:replace="python:fileCategories.get(catName)">Value</span>
+                <!-- <tal:condition condition="python: len(land_file_subject) > 0"> -->
+                <!--   <span tal:condition="python: land_file_subject[0].lower() == 'raster'" class="label&#45;type label&#45;type&#45;raster">Raster</span> -->
+                <!--   <span tal:condition="python: land_file_subject[0].lower() == 'vector'" class="label&#45;type label&#45;type&#45;vector">Vector</span> -->
+                <!-- </tal:condition> -->
               </td>
+
               <td class="border-top-only">
                 <span class="info-size" tal:content="item/getFileSize">70.14 MB</span>
                 <a tal:attributes="href python: item.getField('remoteUrl').getAccessor(item)()"
                    href="" class="download-button"><b>Download</b></a>
               </td>
-            </tr>          
+            </tal:def>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -457,7 +463,7 @@
           $('#data-table-download > tbody > tr').on("mouseleave", function () {
             $(this).find('a.download-button').hide();
             $(this).find('span.info-size').show();
-          });          
+          });
         });
       </script>
     </dd>

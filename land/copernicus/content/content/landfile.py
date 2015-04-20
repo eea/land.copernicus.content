@@ -33,8 +33,7 @@ class SchemaExtender(object):
         self.context = context
 
     def getFields(self):
-        print "returning fields"
-        columns = ('asta', 'este')
+        columns = self.context.getFileCategories() or []
         field = ExtendedDataGridField('fileCategories',
                 searchable = True,
                 columns=columns,
@@ -46,6 +45,4 @@ class SchemaExtender(object):
                 #     # },
                 #     ),
             )
-
-        #import pdb; pdb.set_trace()
         return [field]
