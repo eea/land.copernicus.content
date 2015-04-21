@@ -2,7 +2,8 @@
 """
 
 from Products.ATContentTypes.content.link import ATLink
-from Products.DataGridField import DataGridField    #, DataGridWidget
+from Products.DataGridField import DataGridField
+from Products.DataGridField import DataGridWidget
 from archetypes.schemaextender.field import ExtensionField
 from archetypes.schemaextender.interfaces import ISchemaExtender
 from land.copernicus.content.content import schema
@@ -34,15 +35,20 @@ class SchemaExtender(object):
 
     def getFields(self):
         columns = self.context.getFileCategories() or []
-        field = ExtendedDataGridField('fileCategories',
-                searchable = True,
-                columns=columns,
-                # widget = DataGridWidget(
-                #     # columns={
-                #     #     'column1' : Column("Toholampi city rox"),
-                #     #     'column2' : Column("My friendly name"),
-                #     #     'select_sample' : SelectColumn("Friendly name", vocabulary="getSampleVocabulary")
-                #     # },
-                #     ),
-            )
+        default_values = [{'name':col, 'value':u''} for col in columns]
+        field = ExtendedDataGridField(
+            'fileCategories',
+            searchable = True,
+            columns=('name', 'value'),
+            default=default_values,
+            allow_empty_rows=True,
+            allow_delete=False,
+            allow_insert=False,
+            allow_reorder=False,
+            widget = DataGridWidget(
+                label="Categorization of this file",
+                description="Enter, for each category, its value"
+                #columns=column_defs,
+            ),
+        )
         return [field]
