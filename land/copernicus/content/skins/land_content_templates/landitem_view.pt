@@ -394,20 +394,6 @@
     </dd>
   </tal:metadata>
 
-  <tal:disabled condition="nothing">
-    <!-- Web services -->
-    <tal:webservices define="
-      field python:context.getField('webservices') if getattr(context, 'getField', None) else None;
-      html python:field.getAccessor(context)() if field else ''" tal:condition="html">
-      <dt id="fieldsetlegend-webservices" i18n:translate="">Web Map Services</dt>
-      <dd id="fieldset-webservices">
-        <div class="webservices-field">
-          <tal:service replace="structure html" />
-        </div>
-      </dd>
-    </tal:webservices>
-  </tal:disabled>
-
   <!-- Download -->
   <tal:download>
     <dt id="fieldsetlegend-download" i18n:translate="">Download</dt>
@@ -423,10 +409,11 @@
           </thead>
 
           <tbody >
-            <tr role="row" tal:repeat="item python: context.listFolderContents(contentFilter={'portal_type' : 'LandFile'})">
-              <tal:def tal:define="fileCategories python: item.getField('fileCategories').getAccessor(item)() or [{}];
-                             fileCategories python: fileCategories[0];
-                             ">
+            <tr role="row" tal:repeat="item_brain python: context.getFolderContents(contentFilter={'portal_type' : 'LandFile'})">
+              <tal:def tal:define="item python:item_brain.getObject();
+                  fileCategories python: item.getField('fileCategories').getAccessor(item)() or [{}];
+                  fileCategories python: fileCategories[0];
+                  ">
               <td class="border-top-only" tal:content="item/Title"></td>
 
               <td class="border-top-only" tal:repeat="catName catfields">
@@ -477,20 +464,6 @@
       <div tal:replace="structure download_info"></div>
     </dd>
   </tal:download>
-
-  <tal:disabled condition="nothing">
-    <!-- Legend -->
-    <tal:legend define="
-      field python:context.getField('legend') if getattr(context, 'getField', None) else None;
-      html python:field.getAccessor(context)() if field else ''" tal:condition="html">
-      <dt id="fieldsetlegend-legend" i18n:translate="">Legend</dt>
-      <dd id="fieldset-legend">
-        <div class="legend-field">
-          <tal:service replace="structure html" />
-        </div>
-      </dd>
-    </tal:legend>
-  </tal:disabled>
 
 </dl>
 
