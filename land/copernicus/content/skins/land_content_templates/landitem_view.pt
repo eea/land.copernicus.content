@@ -15,6 +15,7 @@
     }
   </script>
   <style>
+  @import url("http://cdn.datatables.net/1.10.6/css/jquery.dataTables.min.css");
   @import url("./eea-tooltips.css");
 
   .loading_message {
