@@ -423,7 +423,7 @@
           </thead>
 
           <tbody >
-            <tr role="row" tal:repeat="item python: context.contentValues()">
+            <tr role="row" tal:repeat="item python: context.listFolderContents(contentFilter={'portal_type' : 'LandFile'})">
               <tal:def tal:define="fileCategories python: item.getField('fileCategories').getAccessor(item)() or [{}];
                              fileCategories python: fileCategories[0];
                              ">
