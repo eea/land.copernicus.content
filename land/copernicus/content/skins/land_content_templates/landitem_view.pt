@@ -282,10 +282,6 @@
     float:right;
   }
 
-  #data-table-download_paginate a{
-    padding-right:5px;
-  }
-
 
   /* Metadata tab styles */
   #detailed-metadata-title{
