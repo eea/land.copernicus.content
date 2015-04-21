@@ -412,7 +412,7 @@
             <tr role="row" tal:repeat="item_brain python: context.getFolderContents(contentFilter={'portal_type' : 'LandFile'})">
               <tal:def tal:define="item python:item_brain.getObject();
                   fileCategories python: item.getField('fileCategories').getAccessor(item)() or [{}];
-                  fileCategories python: fileCategories[0];
+                  fileCategories python: {d.get('name', ''): d.get('value', '') for d in fileCategories};
                   ">
               <td class="border-top-only" tal:content="item/Title"></td>
 
