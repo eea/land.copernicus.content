@@ -120,5 +120,17 @@
   </dt>
   <dd tal:content="structure value">Data custodians</dd>
 </tal:block>
+
+<!-- Access and Use Constraints -->
+<tal:block
+  define="field python:context.getField('accessAndUseConstraints');
+  value python:field.getAccessor(context)()"
+  condition="value">
+  <dt style="clear: left">
+    <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
+    <span i18n:translate="">Access and Use Constraints:</span>
+  </dt>
+  <dd tal:content="structure value">Access and Use Constraints</dd>
+</tal:block>
 </dl>
 </div>
