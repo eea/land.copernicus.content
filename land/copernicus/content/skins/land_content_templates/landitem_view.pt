@@ -221,10 +221,10 @@
     background-color:#F4EFB8;
   }
 
-  .label-type{
+  span.vector, span.raster{
     display:inline;
-    padding:.2em .6em .3em;
-    font-size:75%;
+    padding:.3em .6em .3em;
+    font-size:80%;
     font-weight:bold;
     line-height:1;
     color:#fff;
@@ -234,15 +234,15 @@
     border-radius:.25em;
   }
 
-  .label-type-vector{
+  span.vector{
     background-color:#FDA42C !important;
   }
 
-  .label-type-raster{
+  span.raster{
     background-color:#D21359 !important;
   }
 
-  .download-button {
+  .download-button{
     margin-left:-15px;
     margin-top:-3px;
     margin-bottom:-3px;
@@ -417,14 +417,12 @@
                   ">
               <td class="border-top-only" tal:content="item/Title"></td>
 
-              <td class="border-top-only" tal:repeat="catName catfields">
-                <span tal:replace="python:fileCategories.get(catName)">Value</span>
-                <!-- <tal:condition condition="python: len(land_file_subject) > 0"> -->
-                <!--   <span tal:condition="python: land_file_subject[0].lower() == 'raster'" class="label&#45;type label&#45;type&#45;raster">Raster</span> -->
-                <!--   <span tal:condition="python: land_file_subject[0].lower() == 'vector'" class="label&#45;type label&#45;type&#45;vector">Vector</span> -->
-                <!-- </tal:condition> -->
-              </td>
-
+              <tal:repeat repeat="catName catfields">
+                <td tal:define="value python:fileCategories.get(catName, '')" class="border-top-only">
+                  <span tal:content="python:value"
+                        tal:attributes="class python:value.lower().replace(' ', '-')">Value</span>
+                </td>
+              </tal:repeat>
               <td class="border-top-only">
                 <span class="info-size" tal:content="item/getFileSize">70.14 MB</span>
                 <a tal:attributes="href python: item.getField('remoteUrl').getAccessor(item)()"
