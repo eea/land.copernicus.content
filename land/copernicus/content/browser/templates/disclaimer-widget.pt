@@ -1,2 +1,28 @@
 <div tal:content="structure view/val" />
-<label>I accept the <a href="">Terms of Use</a></label>
+<label>I accept the <a id="terms-of-use-link" href="">Terms of Use</a></label>
+
+<div style="display: none;" id="terms-of-use-modal" title="Terms of Use">
+  <p>
+    <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+    Please read these before accept.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias consequatur quo consectetur praesentium repellendus corporis accusamus minus commodi, nam! Sit porro corrupti fugit debitis non, numquam quo necessitatibus accusantium. <b>So you must accept these terms of use.</b>
+  </p>
+</div>
+
+<script>
+  $(function() {
+  	$( "#terms-of-use-link" ).on("click", function(evt){
+  	  evt.preventDefault();
+	  $( "#terms-of-use-modal" ).dialog({
+	    modal: true,
+	    buttons: {
+	      Ok: function() {
+	        $( this ).dialog( "close" );
+	      }
+	    }
+	  });
+  	});
+  });
+</script>
