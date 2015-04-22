@@ -1,0 +1,2 @@
+<div tal:content="structure view/val" />
+<label>I accept the <a href="">Terms of Use</a></label>

@@ -9,6 +9,8 @@ from plone.app.controlpanel.widgets import MultiCheckBoxVocabularyWidget
 from zope import schema
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.interface import implements
+from zope.browserpage import ViewPageTemplateFile
+from zope.formlib.boolwidgets import CheckBoxWidget
 from land.copernicus.content.config import EEAMessageFactory as _
 import re
 
@@ -46,6 +48,17 @@ def validate_phone(value):
     return False
 
 
+class DisclaimerWidget(CheckBoxWidget):
+    """ Widget for accept terms of use in user registration """
+
+    template = ViewPageTemplateFile('browser/templates/disclaimer-widget.pt')
+
+    def __call__(self):
+        val = super(DisclaimerWidget, self).__call__()
+        self.val = val
+        return self.template()
+
+
 class CopernicusRegistrationForm(RegistrationForm):
 
     @property
@@ -63,6 +76,7 @@ class CopernicusRegistrationForm(RegistrationForm):
             # Show a message indicating that a password reset link
             # will be mailed to the user.
             defaultFields['mail_me'].custom_widget = CantChoosePasswordWidget
+            defaultFields['disclaimer'].custom_widget = DisclaimerWidget
         else:
             # The portal is not interested in validating emails, and
             # the user is not interested in getting an email with a
@@ -81,7 +95,7 @@ class CopernicusRegistrationForm(RegistrationForm):
 class CustomizedUserDataPanel(UserDataPanel):
     def __init__(self, context, request):
         super(CustomizedUserDataPanel, self).__init__(context, request)
-        self.form_fields = self.form_fields.omit('disclaimer')
+        # self.form_fields = self.form_fields.omit('disclaimer')
         thematic_domain = self.form_fields['thematic_domain']
         institutional_domain = self.form_fields['institutional_domain']
         thematic_domain.custom_widget = MultiCheckBoxVocabularyWidget
