@@ -41,3 +41,9 @@ class GoPDB(BrowserView):
 
         import pdb; pdb.set_trace()
         return "done"
+
+
+class RedirectDownloadUrl(BrowserView):
+    """ Redirect to download url for a LandItem """
+    def __call__(self):
+        return self.request.response.redirect(self.context.remoteUrl)

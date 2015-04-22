@@ -32,13 +32,19 @@
     template="templates/product-inline-view.pt"
     />
 
-<browser:page
+  <browser:page
+    name="redirect-download-url"
+    class=".views.RedirectDownloadUrl"
+    permission="cmf.SetOwnPassword"
+    for="land.copernicus.content.content.landfile.LandFile"
+    />
+
+  <browser:page
     name="tpdb"
     class=".views.GoPDB"
     permission="zope2.View"
     for="*"
     />
-
 
   <browser:resource
     name="frozenEntrynoclick.js"

@@ -421,7 +421,7 @@
               </tal:repeat>
               <td class="border-top-only">
                 <span class="info-size" tal:content="item/getFileSize">70.14 MB</span>
-                <a tal:attributes="href python: item.getField('remoteUrl').getAccessor(item)()"
+                <a tal:attributes="href python: item.absolute_url() + '/@@redirect-download-url'"
                    href="" class="download-button"><b>Download</b></a>
               </td>
             </tal:def>
