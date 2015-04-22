@@ -169,6 +169,20 @@ PRODUCT_SCHEMA = Schema((
         schemata="metadata",
         default_output_type="text/x-html-safe",
     ),
+    TextField(
+        name='descriptionDetailedMetadata',
+        allowable_content_types=('text/plain', 'text/structured', 'text/html',
+                                 'application/msword',),
+        widget=RichWidget(
+            label="Description",
+            description=("Description for Detailed metadata"),
+            i18n_domain='eea',
+        ),
+        default_content_type="text/html",
+        searchable=True,
+        schemata="metadata",
+        default_output_type="text/x-html-safe",
+    ),
     DateTimeField(
         name='lastUpload',
         languageIndependent=True,

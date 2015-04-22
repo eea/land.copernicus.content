@@ -132,5 +132,17 @@
   </dt>
   <dd tal:content="structure value">Access and Use Constraints</dd>
 </tal:block>
+
+<!-- Description for detailed metadata -->
+<tal:block
+  define="field python:context.getField('descriptionDetailedMetadata');
+  value python:field.getAccessor(context)()"
+  condition="value">
+  <dt style="clear: left">
+    <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
+    <span i18n:translate="">Description:</span>
+  </dt>
+  <dd tal:content="structure value">Description</dd>
+</tal:block>
 </dl>
 </div>
