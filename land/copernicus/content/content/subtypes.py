@@ -7,17 +7,22 @@ from archetypes.schemaextender.interfaces import ISchemaExtender
 from archetypes.schemaextender.interfaces import ISchemaModifier
 from land.copernicus.content.config import EEAMessageFactory as _
 
+
 class BooleanField(ExtensionField, atapi.BooleanField):
     """ Boolean field."""
+
 
 class StringField(ExtensionField, atapi.StringField):
     """ String field """
 
+
 class TextField(ExtensionField, atapi.TextField):
     """ Text field """
 
+
 class ImageField(ExtensionField, atapi.ImageField):
     """ Image field """
+
 
 class Extender(object):
     """ Extender
@@ -27,7 +32,7 @@ class Extender(object):
     fields = [
         BooleanField("frozen",
                      schemata="default",
-                     widget = atapi.BooleanWidget(
+                     widget=atapi.BooleanWidget(
                          label=_("Freze this item"),
                          description=_(
                              "Freeze this item and make it unclickable"))
@@ -63,6 +68,7 @@ class Extender(object):
     def getFields(self):
         return self.fields
 
+
 class LandItemExtender(object):
     """ Extender for LandItem
     """
@@ -81,11 +87,11 @@ class LandItemExtender(object):
                   ),
         StringField("embed",
                     schemata="default",
-                    widget = atapi.TextAreaWidget(
+                    widget=atapi.TextAreaWidget(
                          label=_("Map View"),
                          description=_("Paste here the code provided "
                                        "by your webservice (iframe, jscode)"))
-                     ),
+                    ),
         TextField("webservices",
                   schemata="default",
                   primary=False,
@@ -94,7 +100,8 @@ class LandItemExtender(object):
                   default_output_type='text/html',
                   widget=atapi.RichWidget(
                       label=_("Web Map Services"),
-                      description=_("Web Map Services available for this data"))
+                      description=_(
+                        "Web Map Services available for this data"))
                   ),
         TextField("download",
                   schemata="default",
@@ -134,7 +141,8 @@ class ATBlobModifier(object):
                                          sizes=None,
                                          widget=atapi.ImageWidget(
                                            label=_("cover"),
-                                           description=_("Cover for Publication"))
+                                           description=_(
+                                            "Cover for Publication"))
                                          )
 
     def __init__(self, context):

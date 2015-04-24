@@ -22,6 +22,7 @@ class LandFile(ATLink):
     archetype_name = 'LandFile'
     schema = schema.LANDFILE_SCHEMA
 
+
 class ExtendedDataGridField(ExtensionField, DataGridField):
     """ Extended datagridfield
     """
@@ -35,20 +36,20 @@ class SchemaExtender(object):
 
     def getFields(self):
         columns = self.context.getFileCategories() or []
-        default_values = [{'name':col, 'value':u''} for col in columns]
+        default_values = [{'name': col, 'value': u''} for col in columns]
         field = ExtendedDataGridField(
             'fileCategories',
-            searchable = True,
+            searchable=True,
             columns=('name', 'value'),
             default=default_values,
             allow_empty_rows=True,
             allow_delete=False,
             allow_insert=False,
             allow_reorder=False,
-            widget = DataGridWidget(
+            widget=DataGridWidget(
                 label="Categorization of this file",
                 description="Enter, for each category, its value"
-                #columns=column_defs,
+                # columns=column_defs,
             ),
         )
         return [field]

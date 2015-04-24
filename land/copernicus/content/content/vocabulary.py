@@ -2,10 +2,11 @@ COUNTRIES_DICTIONARY_ID = 'countries_dictionary'
 COUNTRIES_DICTIONARY_ID = 'european_countries'
 
 EFTA4 = {('ch', 'ch'): {},
-        ('is', 'is'): {},
-        ('li', 'li'): {},
-        ('no', 'no'): {},
-}
+         ('is', 'is'): {},
+         ('li', 'li'): {},
+         ('no', 'no'): {},
+         }
+
 EU15 = {('at', 'at'): {},
         ('be', 'be'): {},
         ('de', 'de'): {},
@@ -21,7 +22,8 @@ EU15 = {('at', 'at'): {},
         ('nl', 'nl'): {},
         ('pt', 'pt'): {},
         ('se', 'se'): {},
-}
+        }
+
 EU25 = {('at', 'at'): {},
         ('be', 'be'): {},
         ('cy', 'cy'): {},
@@ -47,7 +49,8 @@ EU25 = {('at', 'at'): {},
         ('se', 'se'): {},
         ('si', 'si'): {},
         ('sk', 'sk'): {},
-}
+        }
+
 EU27 = {('at', 'at'): {},
         ('be', 'be'): {},
         ('bg', 'bg'): {},
@@ -75,7 +78,7 @@ EU27 = {('at', 'at'): {},
         ('se', 'se'): {},
         ('si', 'si'): {},
         ('sk', 'sk'): {},
-}
+        }
 
 
 def getCountriesDictionary():
@@ -83,7 +86,7 @@ def getCountriesDictionary():
     """
     res = {}
 
-    #european countries
+    # european countries
     data = getCountries()
     for key in data.keys():
         res[(key.lower(), data[key])] = {}
@@ -99,60 +102,60 @@ def getCountriesDictionary():
 def getCountries():
     """ European countries """
     # In case we need all countries:
-    #from Products.PloneLanguageTool.availablelanguages import getCountries
-    #return getCountries()
+    # from Products.PloneLanguageTool.availablelanguages import getCountries
+    # return getCountries()
 
     return {
-        'ad':'ad',
-        'al':'al',
-        'am':'am',
-        'at':'at',
-        'az':'az',
-        'ba':'ba',
-        'be':'be',
-        'bg':'bg',
-        'by':'by',
-        'ch':'ch',
-        #'cs':'cs', #Serbia and Montenegro, not used
-        'cy':'cy',
-        'cz':'cz',
-        'de':'de',
-        'dk':'dk',
-        'ee':'ee',
-        'es':'es',
-        'fi':'fi',
-        #'fo':'fo', #Faroe Islands, not used
-        'fr':'fr',
-        'gb':'gb',
-        'ge':'ge',
-        'gr':'gr',
-        'hr':'hr',
-        'hu':'hu',
-        'ie':'ie',
-        #'il':'il', #Israel, not used
-        'is':'is',
-        'it':'it',
-        'kz':'kz',
-        'li':'li',
-        'lt':'lt',
-        'lu':'lu',
-        'lv':'lv',
-        'mc':'mc',
-        'md':'md',
-        'me':'me',
-        'mk':'mk',
-        'mt':'mt',
-        'nl':'nl',
-        'no':'no',
-        'pl':'pl',
-        'pt':'pt',
-        'ro':'ro',
-        'rs':'rs',
-        'ru':'ru',
-        'se':'se',
-        'si':'si',
-        'sk':'sk',
-        'sm':'sm',
-        'tr':'tr',
-        'ua':'ua',
+        'ad': 'ad',
+        'al': 'al',
+        'am': 'am',
+        'at': 'at',
+        'az': 'az',
+        'ba': 'ba',
+        'be': 'be',
+        'bg': 'bg',
+        'by': 'by',
+        'ch': 'ch',
+        # 'cs':'cs', #Serbia and Montenegro, not used
+        'cy': 'cy',
+        'cz': 'cz',
+        'de': 'de',
+        'dk': 'dk',
+        'ee': 'ee',
+        'es': 'es',
+        'fi': 'fi',
+        # 'fo':'fo', #Faroe Islands, not used
+        'fr': 'fr',
+        'gb': 'gb',
+        'ge': 'ge',
+        'gr': 'gr',
+        'hr': 'hr',
+        'hu': 'hu',
+        'ie': 'ie',
+        # 'il':'il', #Israel, not used
+        'is': 'is',
+        'it': 'it',
+        'kz': 'kz',
+        'li': 'li',
+        'lt': 'lt',
+        'lu': 'lu',
+        'lv': 'lv',
+        'mc': 'mc',
+        'md': 'md',
+        'me': 'me',
+        'mk': 'mk',
+        'mt': 'mt',
+        'nl': 'nl',
+        'no': 'no',
+        'pl': 'pl',
+        'pt': 'pt',
+        'ro': 'ro',
+        'rs': 'rs',
+        'ru': 'ru',
+        'se': 'se',
+        'si': 'si',
+        'sk': 'sk',
+        'sm': 'sm',
+        'tr': 'tr',
+        'ua': 'ua',
         }

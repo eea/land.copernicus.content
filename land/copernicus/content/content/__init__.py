@@ -6,6 +6,7 @@ from land.copernicus.content.content import landfile
 from land.copernicus.content.content import landitem
 from land.copernicus.content.content import landsection
 
+
 def register():
     """ Register custom content-types
     """

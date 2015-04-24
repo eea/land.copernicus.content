@@ -3,6 +3,7 @@ from string import ascii_uppercase, digits
 from random import choice
 import os
 
+
 class PDFTransformer(object):
     """
     The main purpose of the class is to transform a pdf file into multiple
