@@ -185,6 +185,18 @@
     background-color:#BFD630;
   }
 
+  #datatable-container table.dataTable thead .sorting_asc {
+    background: url("http://cdn.datatables.net/1.10.0/images/sort_asc.png") no-repeat center left !important; /* Fix move sort icon to left */
+  }
+
+  #datatable-container table.dataTable thead .sorting_desc {
+    background: url("http://cdn.datatables.net/1.10.0/images/sort_desc.png") no-repeat center left !important; /* Fix move sort icon to left */
+  }
+
+  #datatable-container table.dataTable thead .sorting {
+    background: url("http://cdn.datatables.net/1.10.0/images/sort_both.png") no-repeat center left !important; /* Fix move sort icon to left */
+  }
+
   #data-table-download{
     border-collapse:collapse;
     background-color:white;
@@ -195,6 +207,7 @@
 
   #data-table-download thead>tr>th{
     background-color:#EEE;
+    padding-left: 16px !important;
   }
 
   #data-table-download td, th{
