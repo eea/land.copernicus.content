@@ -140,6 +140,6 @@
   define="field python:context.getField('accessAndUseConstraints');
   value python:field.getAccessor(context)()"
   condition="value">
-  <h3 i18n:translate="">Access and Use Constraints:</h3>
+  <h3 id="access-and-use-title" i18n:translate="">Access and Use Constraints</h3>
   <div tal:content="structure value">Access and Use Constraints</div>
 </tal:block>

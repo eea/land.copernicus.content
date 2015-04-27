@@ -284,7 +284,7 @@
 
 
   /* Metadata tab styles */
-  #detailed-metadata-title{
+  #detailed-metadata-title, #access-and-use-title{
     padding-top: 25px;
   }
 
