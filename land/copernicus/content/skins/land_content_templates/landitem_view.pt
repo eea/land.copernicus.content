@@ -356,6 +356,10 @@
     background-color:#4D4D4D !important;
     color:white !important;
   }
+
+  #category{
+    display:none; /* Fix Remove "Filed under" section */
+  }
 </style>
 
 <dl class="enableFormTabbing">
