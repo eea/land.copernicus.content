@@ -419,26 +419,29 @@
           </thead>
 
           <tbody >
-            <tr role="row" tal:repeat="item_brain python: context.getFolderContents(contentFilter={'portal_type' : 'LandFile'})">
-              <tal:def tal:define="item python:item_brain.getObject();
-                  fileCategories python: item.getField('fileCategories').getAccessor(item)() or [{}];
-                  fileCategories python: {d.get('name', ''): d.get('value', '') for d in fileCategories};
-                  ">
-              <td class="border-top-only" tal:content="item/Title"></td>
+            <tal:repeat repeat="item_brain python: context.getFolderContents(contentFilter={'portal_type' : 'LandFile'})">
+              <tr tal:condition="python:item_brain.review_state == 'published'">
+                <tal:def tal:define="item python:item_brain.getObject();
+                    fileCategories python: item.getField('fileCategories').getAccessor(item)() or [{}];
+                    fileCategories python: {d.get('name', ''): d.get('value', '') for d in fileCategories};
+                    ">
 
-              <tal:repeat repeat="catName catfields">
-                <td tal:define="value python:fileCategories.get(catName, '')" class="border-top-only">
-                  <span tal:content="python:value"
-                        tal:attributes="class python:value.lower().replace(' ', '-')">Value</span>
-                </td>
-              </tal:repeat>
-              <td class="border-top-only">
-                <span class="info-size" tal:content="item/getFileSize">70.14 MB</span>
-                <a tal:attributes="href python: item.absolute_url() + '/@@redirect-download-url'"
-                   href="" class="download-button"><b>Download</b></a>
-              </td>
-            </tal:def>
-            </tr>
+                  <td class="border-top-only" tal:content="item/Title"></td>
+
+                  <tal:repeat repeat="catName catfields">
+                    <td tal:define="value python:fileCategories.get(catName, '')" class="border-top-only">
+                      <span tal:content="python:value"
+                            tal:attributes="class python:value.lower().replace(' ', '-')">Value</span>
+                    </td>
+                  </tal:repeat>
+                  <td class="border-top-only">
+                    <span class="info-size" tal:content="item/getFileSize">70.14 MB</span>
+                    <a tal:attributes="href python: item.absolute_url() + '/@@redirect-download-url'"
+                       href="" class="download-button"><b>Download</b></a>
+                  </td>
+                </tal:def>
+              </tr>
+            </tal:repeat>
           </tbody>
         </table>
       </div>
