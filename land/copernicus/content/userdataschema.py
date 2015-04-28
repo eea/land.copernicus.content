@@ -31,12 +31,16 @@ thematic_domain_options = SimpleVocabulary([
 institutional_domain_options = SimpleVocabulary([
     SimpleTerm(value='Commercial', title=_(u'Commercial')),
     SimpleTerm(value='Public Authority', title=_(u'Public Authority')),
-    SimpleTerm(value='Citizen', title=_(u'Citizen'))
+    SimpleTerm(value='Citizen', title=_(u'Citizen')),
+    SimpleTerm(value='Education', title=_(u'Education')),
+    SimpleTerm(value='Research and development',
+               title=_(u'Research and development')),
+    SimpleTerm(value='NGO', title=_(u'NGO'))
     ])
 
 
 def validateAccept(value):
-    if not value == True:
+    if value is not True:
         return False
     return True
 
@@ -182,9 +186,9 @@ class IEnhancedUserDataSchema(IUserDataSchema):
         description=_(u'help_disclaimer',
                       default=u"Tick this box to indicate that you have found,"
                       " read and accepted the terms of use for this site. "
-                      "Your email will not be further distributed to third parties. "
-                      "The registration is only used for reporting purposes to "
-                      "the EP and Council."),
+                      "Your email will not be further distributed to third "
+                      "parties. The registration is only used for reporting "
+                      "purposes to the EP and Council."),
         required=True,
         constraint=validateAccept,
         )
