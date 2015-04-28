@@ -450,7 +450,8 @@
         </table>
       </div>
 
-      <div tal:condition="python:context.isValidatedDataset is not True"
+      <div tal:define="isValidateDataset python:context.getField('isValidatedDataset').getAccessor(context)()"
+          tal:condition="python:isValidateDataset is not True"
           style="background-color: red; padding-left: 15px; padding-right: 15px; color: white; font-weight: bold;">
         <p>This dataset is not validated. You may not distribute this dataset.</p>
       </div>
