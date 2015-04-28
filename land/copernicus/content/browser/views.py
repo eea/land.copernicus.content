@@ -53,7 +53,8 @@ class RedirectDownloadUrl(BrowserView):
                 (self.context, self.request), name=u'plone_portal_state')
             root_url = portal_state.portal_url()
             land_item_url = self.context.aq_parent.absolute_url()
-            login_url = root_url + "/login" + "?came_from=" + land_item_url
+            login_url = root_url + "/login" + "?came_from=" + land_item_url + \
+                "?fieldsetlegend-download=1"
             return self.request.response.redirect(login_url)
         else:
             return self.request.response.redirect(self.context.remoteUrl)

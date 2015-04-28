@@ -455,6 +455,7 @@
 
       <script>
         $(document).ready(function(){
+          // Datatable behavior
           $('#data-table-download').DataTable();
           $('.download-button').hide();
           $('#data-table-download > tbody > tr').on("mouseenter", function () {
@@ -466,6 +467,24 @@
             $(this).find('a.download-button').hide();
             $(this).find('span.info-size').show();
           });
+
+
+          // FIX open Download tab after login
+          function getUrlParameter(sParam) {
+              var sPageURL = window.location.search.substring(1);
+              var sURLVariables = sPageURL.split('&');
+              for (var i = 0; i < sURLVariables.length; i++) {
+                  var sParameterName = sURLVariables[i].split('=');
+                  if (sParameterName[0] == sParam) {
+                      return sParameterName[1];
+                  }
+              }
+          }
+          var download_tab_param = getUrlParameter('fieldsetlegend-download');
+          if (download_tab_param == 1) {
+            $("#fieldsetlegend-download").click();
+          }
+
         });
       </script>
     </dd>
