@@ -1,7 +1,7 @@
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.PloneBatch import Batch
 from Products.Five.browser import BrowserView
-from plone import api
+from zope.component.hooks import getSite
 from zope.component import getMultiAdapter
 
 
@@ -48,7 +48,11 @@ class GoPDB(BrowserView):
 class RedirectDownloadUrl(BrowserView):
     """ Redirect to download url for a LandItem if logged in """
     def __call__(self):
-        if api.user.is_anonymous():
+        is_anonymous = \
+            bool(getToolByName(
+                getSite(), 'portal_membership').isAnonymousUser())
+
+        if is_anonymous:
             portal_state = getMultiAdapter(
                 (self.context, self.request), name=u'plone_portal_state')
             root_url = portal_state.portal_url()
