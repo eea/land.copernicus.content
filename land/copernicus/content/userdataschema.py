@@ -19,13 +19,14 @@ thematic_domain_options = SimpleVocabulary([
     SimpleTerm(value='Agriculture', title=_(u'Agriculture')),
     SimpleTerm(value='Demography', title=_(u'Demography')),
     SimpleTerm(value='Energy', title=_(u'Energy')),
-    SimpleTerm(value='Education', title=_(u'Education')),
     SimpleTerm(value='Forestry', title=_(u'Forestry')),
     SimpleTerm(value='Health', title=_(u'Health')),
-    SimpleTerm(value='Physical Planning', title=_(u'Physical Planning')),
+    SimpleTerm(value='Spacial Planning', title=_(u'Spacial Planning')),
     SimpleTerm(value='Research', title=_(u'Research')),
     SimpleTerm(value='Tourism', title=_(u'Tourism')),
-    SimpleTerm(value='Transport', title=_(u'Transport'))
+    SimpleTerm(value='Transport', title=_(u'Transport')),
+    SimpleTerm(value='Atmosphere', title=_(u'Atmosphere')),
+    SimpleTerm(value='Climate Change', title=_(u'Climate Change'))
     ])
 
 institutional_domain_options = SimpleVocabulary([
