@@ -450,6 +450,11 @@
         </table>
       </div>
 
+      <div tal:condition="python:context.isValidatedDataset is not True"
+          style="background-color: red; padding-left: 15px; padding-right: 15px; color: white; font-weight: bold;">
+        <p>This dataset is not validated. You may not distribute this dataset.</p>
+      </div>
+
       <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
       <script type="text/javascript" language="javascript" src="eea-tooltips.js"></script>
 

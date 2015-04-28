@@ -5,6 +5,8 @@ from Products.ATContentTypes.content.folder import ATFolder
 from Products.ATContentTypes.content.link import ATLink
 from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
 from Products.Archetypes import atapi
+from Products.Archetypes.atapi import BooleanField
+from Products.Archetypes.atapi import BooleanWidget
 from Products.Archetypes.atapi import CalendarWidget
 from Products.Archetypes.atapi import DateTimeField
 from Products.Archetypes.atapi import LinesField
@@ -34,6 +36,14 @@ class TemporalMultiSelectionWidget(MultiSelectionWidget):
 
 
 PRODUCT_SCHEMA = Schema((
+    BooleanField(
+        name='isValidatedDataset',
+        schemata="default",
+        widget=BooleanWidget(
+            label=("Is Validated Dataset"),
+            description=("Check this only if dataset is validated.")
+            ),
+    ),
     LinesField(
         name='geographicCoverage',
         languageIndependent=True,
