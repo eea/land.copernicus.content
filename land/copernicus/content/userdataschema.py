@@ -142,7 +142,7 @@ class IEnhancedUserDataSchema(IUserDataSchema):
 
     institutional_domain = schema.List(
         title=_(u'label_institutional_domain',
-                default=u'Institutional domain of usage of the data'),
+                default=u'Institutional domain'),
         value_type=schema.Choice(vocabulary=institutional_domain_options))
 
     reason = schema.TextLine(
