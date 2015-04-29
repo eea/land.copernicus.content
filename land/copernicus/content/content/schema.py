@@ -216,7 +216,7 @@ PRODUCT_SCHEMA = Schema((
     LinesField(
         name='fileCategories',
         languageIndependent=True,
-        required=True,
+        required=False,
         multiValued=1,
         default=[],
         schemata='metadata',
