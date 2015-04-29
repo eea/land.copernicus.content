@@ -73,7 +73,7 @@ PRODUCT_SCHEMA = Schema((
     LinesField(
         name='geographicCoverage',
         languageIndependent=True,
-        required=True,
+        required=False,
         multiValued=1,
         default=[],
         vocabulary=NamedVocabulary(COUNTRIES_DICTIONARY_ID),
@@ -222,7 +222,7 @@ PRODUCT_SCHEMA = Schema((
     DateTimeField(
         name='lastUpload',
         languageIndependent=True,
-        required=True,
+        required=False,
         default=DateTime(),
         schemata="metadata",
         imports="from DateTime import DateTime",
