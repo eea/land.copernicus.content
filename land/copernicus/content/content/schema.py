@@ -19,6 +19,32 @@ from Products.Archetypes.atapi import StringWidget
 from Products.Archetypes.atapi import TextField
 from eea.forms.browser.app.temporal_coverage import grouped_coverage
 from land.copernicus.content.content.vocabulary import COUNTRIES_DICTIONARY_ID
+from AccessControl import ClassSecurityInfo
+
+
+class TemporalLinesField(LinesField):
+    """ derivative of linesfield for extending schemas """
+
+    security = ClassSecurityInfo()
+
+    security.declarePrivate('set')
+
+    def set(self, instance, value, **kwargs):
+        """ Expands year range input into a list of all elements
+        """
+        expanded_range = []
+
+        for elem in value:
+            if "-" in elem and elem != "-1":
+                start, end = elem.split("-")
+                expanded_range.extend(range(int(start), int(end) + 1))
+            else:
+                expanded_range.append(int(elem))
+
+        save_value = [str(x) for x in set(expanded_range)]
+
+        superclass = super(TemporalLinesField, self)
+        superclass.set(instance, save_value, **kwargs)
 
 
 class TemporalMultiSelectionWidget(MultiSelectionWidget):
@@ -69,7 +95,7 @@ PRODUCT_SCHEMA = Schema((
             i18n_domain='eea',
         )
     ),
-    LinesField(
+    TemporalLinesField(
         name='temporalCoverage',
         languageIndependent=True,
         schemata='metadata',
