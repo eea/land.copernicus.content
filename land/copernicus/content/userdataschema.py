@@ -14,20 +14,32 @@ from zope.formlib.boolwidgets import CheckBoxWidget
 from land.copernicus.content.config import EEAMessageFactory as _
 import re
 
-thematic_domain_options = SimpleVocabulary([
+professional_thematic_domain_options = SimpleVocabulary([
     # Keep alphabetical order here.
     SimpleTerm(value='Agriculture', title=_(u'Agriculture')),
+    SimpleTerm(value='Architectural and Landscape Design',
+               title=_(u'Architectural and Landscape Design')),
     SimpleTerm(value='Atmosphere', title=_(u'Atmosphere')),
     SimpleTerm(value='Climate Change', title=_(u'Climate Change')),
     SimpleTerm(value='Demography', title=_(u'Demography')),
-    SimpleTerm(value='Energy', title=_(u'Energy')),
-    SimpleTerm(value='Environment', title=_(u'Environment')),
+    SimpleTerm(value='Ecology and Environment',
+               title=_(u'Ecology and Environment')),
+    SimpleTerm(value='Emergency Management', title=_(u'Emergency Management')),
+    SimpleTerm(value='Energy, Utilities and Industrial Infrastructure',
+               title=_(u'Energy, Utilities and Industrial Infrastructure')),
     SimpleTerm(value='Forestry', title=_(u'Forestry')),
     SimpleTerm(value='Health', title=_(u'Health')),
-    SimpleTerm(value='Research', title=_(u'Research')),
-    SimpleTerm(value='Spacial Planning', title=_(u'Spacial Planning')),
-    SimpleTerm(value='Tourism', title=_(u'Tourism')),
-    SimpleTerm(value='Transport', title=_(u'Transport'))
+    SimpleTerm(value='Hydrography', title=_(u'Hydrography')),
+    SimpleTerm(value='Mapping', title=_(u'Mapping')),
+    SimpleTerm(value='Security', title=_(u'Security')),
+    SimpleTerm(value='Snow and Ice', title=_(u'Snow and Ice')),
+    SimpleTerm(value='Soils and Geology', title=_(u'Soils and Geology')),
+    SimpleTerm(value='Tourism and Recreation',
+               title=_(u'Tourism and Recreation')),
+    SimpleTerm(value='Transport and Routing',
+               title=_(u'Transport and Routing')),
+    SimpleTerm(value='Urban and Spatial Planning',
+               title=_(u'Urban and Spatial Planning')),
     ])
 
 institutional_domain_options = SimpleVocabulary([
@@ -124,8 +136,9 @@ class IEnhancedUserDataSchema(IUserDataSchema):
     """
     thematic_domain = schema.List(
         title=_(u'label_thematic_domain',
-                default=u'Thematic domain of usage of the data'),
-        value_type=schema.Choice(vocabulary=thematic_domain_options))
+                default=u'Professional thematic domain'),
+        value_type=schema.Choice(
+            vocabulary=professional_thematic_domain_options))
 
     institutional_domain = schema.List(
         title=_(u'label_institutional_domain',
