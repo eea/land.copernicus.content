@@ -17,7 +17,6 @@
   tal:condition="python:has_metadata_details"
 ><!-- Some repetition, but tooltips are working too. -->
 
-  <p tal:content="python:has_metadata_details"></p>
   <h3 id="detailed-metadata-title" i18n:translate="">Detailed metadata</h3>
 
   <div class="detailed-metadata-container">
