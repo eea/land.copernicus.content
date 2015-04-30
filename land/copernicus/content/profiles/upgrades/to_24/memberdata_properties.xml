@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <object name="portal_memberdata" meta_type="Plone Memberdata Tool">
+ <property name="first_name" type="string"></property>
+ <property name="last_name" type="string"></property>
  <property name="thematic_domain" type="string"></property>
  <property name="institutional_domain" type="string"></property>
  <property name="reason" type="string"></property>

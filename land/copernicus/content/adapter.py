@@ -4,6 +4,24 @@ from plone.app.users.browser.personalpreferences import UserDataPanelAdapter
 class EnhancedUserDataPanelAdapter(UserDataPanelAdapter):
     """
     """
+    def get_first_name(self):
+        first_name = self.context.getProperty('first_name', '')
+        return first_name
+
+    def set_first_name(self, value):
+        first_name = value
+        return self.context.setMemberProperties({'first_name': first_name})
+    first_name = property(get_first_name, set_first_name)
+
+    def get_last_name(self):
+        last_name = self.context.getProperty('last_name', '')
+        return last_name
+
+    def set_last_name(self, value):
+        last_name = value
+        return self.context.setMemberProperties({'last_name': last_name})
+    last_name = property(get_last_name, set_last_name)
+
     def get_thematic_domain(self):
         value = []
         thematic_domains = self.context.getProperty('thematic_domain', '')
@@ -13,20 +31,24 @@ class EnhancedUserDataPanelAdapter(UserDataPanelAdapter):
 
     def set_thematic_domain(self, value):
         thematic_domains = ','.join(value)
-        return self.context.setMemberProperties({'thematic_domain': thematic_domains})
+        return self.context.setMemberProperties(
+            {'thematic_domain': thematic_domains})
     thematic_domain = property(get_thematic_domain, set_thematic_domain)
 
     def get_institutional_domain(self):
         value = []
-        institutional_domains = self.context.getProperty('institutional_domain', '')
+        institutional_domains = self.context.getProperty(
+            'institutional_domain', '')
         if institutional_domains:
             value = institutional_domains.split(',')
         return value
 
     def set_institutional_domain(self, value):
         institutional_domains = ','.join(value)
-        return self.context.setMemberProperties({'institutional_domain': institutional_domains})
-    institutional_domain = property(get_institutional_domain, set_institutional_domain)
+        return self.context.setMemberProperties(
+            {'institutional_domain': institutional_domains})
+    institutional_domain = property(
+        get_institutional_domain, set_institutional_domain)
 
     def get_reason(self):
         return self.context.getProperty('reason', '')

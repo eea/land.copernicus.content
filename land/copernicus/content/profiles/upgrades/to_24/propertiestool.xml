@@ -4,6 +4,8 @@
   <!-- Fields that will be added to the form after installation of the product
   -->
   <property name="user_registration_fields" type="lines" purge="False">
+   <element value="first_name" />
+   <element value="last_name" />
    <element value="thematic_domain" />
    <element value="institutional_domain" />
    <element value="disclaimer" />

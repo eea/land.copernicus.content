@@ -11,6 +11,7 @@ from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.interface import implements
 from zope.browserpage import ViewPageTemplateFile
 from zope.formlib.boolwidgets import CheckBoxWidget
+from zope.formlib.widget import SimpleInputWidget
 from land.copernicus.content.config import EEAMessageFactory as _
 import re
 
@@ -103,6 +104,7 @@ class CopernicusRegistrationForm(RegistrationForm):
             # the current form already.
             defaultFields = defaultFields.omit('mail_me')
 
+        defaultFields = defaultFields.omit('fullname')
         thematic_domain = defaultFields['thematic_domain']
         institutional_domain = defaultFields['institutional_domain']
         thematic_domain.custom_widget = MultiCheckBoxVocabularyWidget
@@ -115,10 +117,14 @@ class CustomizedUserDataPanel(UserDataPanel):
     def __init__(self, context, request):
         super(CustomizedUserDataPanel, self).__init__(context, request)
         # self.form_fields = self.form_fields.omit('disclaimer')
+        first_name = self.form_fields['first_name']
+        last_name = self.form_fields['last_name']
         thematic_domain = self.form_fields['thematic_domain']
         institutional_domain = self.form_fields['institutional_domain']
         thematic_domain.custom_widget = MultiCheckBoxVocabularyWidget
         institutional_domain.custom_widget = MultiCheckBoxVocabularyWidget
+        first_name.custom_widget = SimpleInputWidget
+        last_name.custom_widget = SimpleInputWidget
 
 
 class UserDataSchemaProvider(object):
@@ -134,6 +140,20 @@ class IEnhancedUserDataSchema(IUserDataSchema):
     """ Use all the fields from the default user data schema, and add various
     extra fields.
     """
+    first_name = schema.TextLine(
+        title=_(u'label_first_name', default=u'First Name'),
+        description=_(u'help_first_name',
+                      default=u'Enter your first name.'),
+        required=True,
+        )
+
+    last_name = schema.TextLine(
+        title=_(u'label_last_name', default=u'Last Name'),
+        description=_(u'help_last_name',
+                      default=u'Enter your last name.'),
+        required=True,
+        )
+
     thematic_domain = schema.List(
         title=_(u'label_thematic_domain',
                 default=u'Professional thematic domain'),

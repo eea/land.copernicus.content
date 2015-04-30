@@ -33,4 +33,9 @@
     directory="browser/template-overrides/"
     />
 
+  <subscriber
+    for="Products.PluggableAuthService.interfaces.events.IPrincipalCreatedEvent"
+    handler="land.copernicus.content.globalhandlers.autofillFullname"
+    />
+
 </configure>
