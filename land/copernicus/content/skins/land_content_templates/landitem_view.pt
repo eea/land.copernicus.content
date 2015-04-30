@@ -409,8 +409,8 @@
   </tal:metadata>
 
   <!-- Download -->
-  <tal:download>
-    <dt id="fieldsetlegend-download" i18n:translate="">Download</dt>
+  <tal:download tal:condition="python:getattr(context, 'show_new_download', None) is True">
+    <dt id="fieldsetlegend-download" i18n:translate="">New Download</dt>
     <dd id="fieldset-download">
       <div id="datatable-container">
         <table id="data-table-download" width="100%" tal:define="catfields python:context.getField('fileCategories').getAccessor(context)()">
@@ -498,7 +498,7 @@
 
   <!-- Download Old - temporary download -->
   <tal:download>
-    <dt id="fieldsetlegend-download-old" i18n:translate="">Download (old)</dt>
+    <dt id="fieldsetlegend-download-old" i18n:translate="">Download</dt>
     <dd id="fieldset-download-old"
         tal:define="download_info python: context.getField('download').getAccessor(context)()">
       <div tal:replace="structure download_info"></div>
