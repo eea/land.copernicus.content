@@ -34,7 +34,8 @@
     />
 
   <subscriber
-    for="Products.PluggableAuthService.interfaces.events.IPrincipalCreatedEvent"
+    for="Products.PluggableAuthService.interfaces.authservice.IPropertiedUser
+         Products.PluggableAuthService.interfaces.events.IPrincipalCreatedEvent"
     handler="land.copernicus.content.globalhandlers.autofillFullname"
     />
 
