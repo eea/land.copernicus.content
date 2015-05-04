@@ -15,6 +15,7 @@
     }
   </script>
   <style>
+  @import url("http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
   @import url("http://cdn.datatables.net/1.10.6/css/jquery.dataTables.min.css");
   @import url("./eea-tooltips.css");
 
@@ -181,8 +182,6 @@
   /* Download tab: datatable styles */
   #datatable-container{
     margin-top:-26px;
-    border:2px solid #BFD630;
-    background-color:#BFD630;
   }
 
   #datatable-container table.dataTable thead .sorting_asc {
@@ -206,7 +205,6 @@
   }
 
   #data-table-download thead>tr>th{
-    background-color:#EEE;
     padding-left: 16px !important;
   }
 
@@ -216,22 +214,22 @@
     width:100px;
   }
 
-  #data-table-download .border-none{
-    border-left:none !important;
-    border-right:none !important;
-    border-bottom:none !important;
-    border-top:none !important;
+  #data-table-download .border-bottom-only{
+    border-left:none;
+    border-right:none;
+    border-top:none;
+    border-bottom:1px solid black;
   }
 
   #data-table-download .border-top-only{
-    border-left:none !important;
-    border-right:none !important;
-    border-bottom:none !important;
-    border-top:1px solid #CCC !important;
+    border-left:none;
+    border-right:none;
+    border-bottom:none;
+    border-top:1px solid #CCC;
   }
 
   #data-table-download tbody>tr:hover{
-    background-color:#F4EFB8;
+    background-color:#DFF2FF;
   }
 
   span.vector, span.raster{
@@ -249,24 +247,29 @@
 
   span.vector{
     background-color:#FDA42C !important;
+    text-shadow: 0px 1px 1px #8A591A;
   }
 
   span.raster{
     background-color:#D21359 !important;
+    text-shadow: 0px 1px 1px #6E0B2F;
   }
 
   .download-button{
-    margin-left:-15px;
     margin-top:-3px;
     margin-bottom:-3px;
-    background-color:#50AEEC;
+    background-color:#0A70B2;
     color:white !important;
     text-decoration:none !important;
     padding-top:5px;
     padding-bottom:5px;
-    padding-left:15px;
-    padding-right:15px;
+    padding-left:5px;
+    padding-right:5px;
     border:none;
+  }
+
+  .download-button:hover{
+    color:#fff !important; /* [TODO] Fix color problem here */
   }
 
   #data-table-download_info{
@@ -360,6 +363,60 @@
   #category{
     display:none; /* Fix Remove "Filed under" section */
   }
+
+  .download-gray-icon{
+    color:#CCC;
+  }
+
+  .text-centered{
+    text-align:center;
+  }
+
+  #data-table-download_info{
+    display:none;
+  }
+
+  #disclaimer-download-container{
+    margin-top:15px;
+    padding-left:25%;
+    padding-right:25%;
+  }
+
+  #checkbox-accept-non-validated{
+    float:left;
+    width:7%;
+    margin-top:3px;
+  }
+
+  #text-accept-non-validated{
+    float:right;
+    width:93%;
+    margin-bottom:10px;
+  }
+
+  #button-download-selected, #button-download-all{
+    background-color:#F2F2F2;
+    width:48%;
+    padding-top:5px;
+    padding-bottom:5px;
+    border:1px solid #D8D8D8;
+    font-weight:bold;
+    color:#595959;
+  }
+
+  #button-download-selected:hover, #button-download-all:hover{
+    background-color:#0870AF;
+    border:1px solid #0063A8;
+    color:#fff;
+  }
+
+  #button-download-selected{
+    float:left;
+  }
+
+  #button-download-all{
+    float:right;
+  }
 </style>
 
 <dl class="enableFormTabbing">
@@ -416,9 +473,12 @@
         <table id="data-table-download" width="100%" tal:define="catfields python:context.getField('fileCategories').getAccessor(context)()">
           <thead>
             <tr role="row">
-              <th class="border-none">Name</th>
-              <th class="border-none" tal:repeat="cat catfields"><span tal:replace="cat">Type</span></th>
-              <th class="border-none">Download</th>
+              <th class="border-bottom-only">Name</th>
+              <th class="border-bottom-only" tal:repeat="cat catfields">
+                <span tal:replace="cat">Type</span>
+              </th>
+              <th class="border-bottom-only">Size</th>
+              <th class="border-bottom-only text-centered no-sort">Download</th>
             </tr>
           </thead>
 
@@ -440,8 +500,11 @@
                   </tal:repeat>
                   <td class="border-top-only">
                     <span class="info-size" tal:content="item/getFileSize">70.14 MB</span>
+                  </td>
+                  <td class="border-top-only text-centered no-sorting-icons">
+                    <span class="download-gray-icon"><i class="fa fa-download"></i></span>
                     <a tal:attributes="href python: item.absolute_url() + '/@@redirect-download-url'"
-                       href="" class="download-button"><b>Download</b></a>
+                       href="" class="download-button"><i class="fa fa-download"></i></a>
                   </td>
                 </tal:def>
               </tr>
@@ -450,10 +513,15 @@
         </table>
       </div>
 
-      <div tal:define="isValidateDataset python:context.getField('isValidatedDataset').getAccessor(context)()"
-          tal:condition="python:isValidateDataset is not True"
-          style="background-color: red; padding-left: 15px; padding-right: 15px; color: white; font-weight: bold;">
-        <p>This dataset is not validated. You may not distribute this dataset.</p>
+      <div id="disclaimer-download-container"
+        tal:define="isValidateDataset python:context.getField('isValidatedDataset').getAccessor(context)()"
+        tal:condition="python:isValidateDataset is not True">
+        <form id="discalimer-download-form" action="">
+          <input id="checkbox-accept-non-validated" type="checkbox" name="accept-non-validated" value="accept-non-validated" />
+          <span id="text-accept-non-validated">I am aware that I am downloading non-validated data and I accept to not distribute the information contained in these files or the files themselves any further.</span>
+          <button id="button-download-selected">Download selected items (1)</button>
+          <button id="button-download-all">Download all</button>
+        </form>
       </div>
 
       <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
@@ -462,18 +530,31 @@
       <script>
         $(document).ready(function(){
           // Datatable behavior
-          $('#data-table-download').DataTable();
+          $('#data-table-download').dataTable({
+            // disable sorting for Download column
+            "columnDefs": [{
+              "targets": 'no-sort',
+              "orderable": false,
+            }],
+            paging: false // disable pagination
+          });
+
+          // tr on hover
           $('.download-button').hide();
           $('#data-table-download > tbody > tr').on("mouseenter", function () {
             $(this).find('a.download-button').show();
-            $(this).find('span.info-size').hide();
+            $(this).find('.download-gray-icon').hide();
           });
 
           $('#data-table-download > tbody > tr').on("mouseleave", function () {
             $(this).find('a.download-button').hide();
-            $(this).find('span.info-size').show();
+            $(this).find('.download-gray-icon').show();
           });
 
+          // on checked or unchecked
+          $("#checkbox-accept-non-validated").change(function(){
+            alert("Value Changed."); /*[TODO] Continue here.*/
+          });
 
           // FIX open Download tab after login
           function getUrlParameter(sParam) {
