@@ -571,6 +571,28 @@
             $("#number-checked").text(get_number_checked_items());
           }
 
+          function download_all(){
+            var download_buttons = $('.download-button');
+            for(var i = 0; i < download_buttons.length; i++) {
+              var button = download_buttons[i];
+              $(button).attr("target", "_blank");
+              button.click();
+              $(button).removeAttr("target");
+            }
+          }
+
+          function download_selected(){
+            var download_buttons = $('.checkbox-select-item:checked')
+                                   .closest('tr').find('.download-button');
+
+            for(var i = 0; i < download_buttons.length; i++) {
+              var button = download_buttons[i];
+              $(button).attr("target", "_blank");
+              button.click();
+              $(button).removeAttr("target");
+            }
+          }
+
           function open_download_tab(){ // Opens download tab after login
             function getUrlParameter(sParam){
                 var sPageURL = window.location.search.substring(1);
@@ -635,6 +657,17 @@
               uncheck_all_items();
             }
             refresh_counter();
+          });
+
+          // DOWNLOAD
+          $('#button-download-selected').on("click", function(evt){
+            evt.preventDefault();
+            download_selected();
+          });
+
+          $('#button-download-all').on("click", function(evt){
+            evt.preventDefault();
+            download_all();
           });
 
         });
