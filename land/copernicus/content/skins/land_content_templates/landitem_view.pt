@@ -424,6 +424,19 @@
   #button-download-all{
     float:right;
   }
+
+  .not-validated-tag{
+    position:relative;
+    bottom:2px;
+    display:inline;
+    background-color:#323232;
+    color:white;
+    padding-left:7px;
+    padding-right:7px;
+    padding-top:1px;
+    padding-bottom:1px;
+    border-radius:3px;
+  }
 </style>
 
 <dl class="enableFormTabbing">
@@ -527,11 +540,12 @@
       </div>
 
       <div id="disclaimer-download-container"
-        tal:define="isValidateDataset python:context.getField('isValidatedDataset').getAccessor(context)()"
-        tal:condition="python:isValidateDataset is not True">
-        <form id="discalimer-download-form" action="">
-          <input id="checkbox-accept-non-validated" type="checkbox" name="accept-non-validated" value="accept-non-validated" />
-          <span id="text-accept-non-validated">I am aware that I am downloading non-validated data and I accept to not distribute the information contained in these files or the files themselves any further.</span>
+        tal:define="isValidateDataset python:context.getField('isValidatedDataset').getAccessor(context)()">
+        <form id="disclaimer-download-form" action="">
+          <tal:condition condition="python:isValidateDataset is not True">
+            <input id="checkbox-accept-non-validated" type="checkbox" name="accept-non-validated" value="accept-non-validated" />
+            <span id="text-accept-non-validated">I am aware that I am downloading non-validated data and I accept to not distribute the information contained in these files or the files themselves any further.</span>
+          </tal:condition>
           <button id="button-download-selected">Download selected items
             (<span id="number-checked">0</span>)
           </button>
@@ -544,6 +558,14 @@
 
       <script>
         $(document).ready(function(){
+          function is_validated_dataset(){
+            return $("#checkbox-accept-non-validated").length === 0;
+          }
+
+          function add_not_validated_tag(){
+            $("#parent-fieldname-title").css("display", "inline");
+            $("#parent-fieldname-title").after("<span class='not-validated-tag'>Not validated.</span>");
+          }
           function disable_download_buttons(){
             $("#button-download-selected").attr("disabled", "disabled");
             $("#button-download-all").attr("disabled", "disabled");
@@ -614,14 +636,17 @@
 
           // INIT
           open_download_tab();
-          disable_download_buttons();
+          if (!is_validated_dataset()){
+            disable_download_buttons();
+            add_not_validated_tag();
+          }
 
           $('#data-table-download').dataTable({
             "order": [[ 1, "asc" ]],
-            "columnDefs": [{
-              "targets": 'no-sort',
-              "orderable": false,
-            }],
+            "columnDefs": [
+              { "targets": 'no-sort', "orderable": false },
+              { "width": "20px", "targets": 0 }
+            ],
             paging: false
           });
 
