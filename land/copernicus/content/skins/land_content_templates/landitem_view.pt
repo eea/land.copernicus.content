@@ -396,18 +396,25 @@
 
   #button-download-selected, #button-download-all{
     background-color:#F2F2F2;
-    width:48%;
+    width:49%;
     padding-top:5px;
     padding-bottom:5px;
     border:1px solid #D8D8D8;
     font-weight:bold;
     color:#595959;
+    border-radius:3px;
   }
 
   #button-download-selected:hover, #button-download-all:hover{
     background-color:#0870AF;
     border:1px solid #0063A8;
     color:#fff;
+  }
+
+  #button-download-selected:disabled, #button-download-all:disabled{
+    background-color:#F2F2F2;
+    border-color:#D8D8D8;
+    color:#BBB !important;
   }
 
   #button-download-selected{
@@ -473,6 +480,9 @@
         <table id="data-table-download" width="100%" tal:define="catfields python:context.getField('fileCategories').getAccessor(context)()">
           <thead>
             <tr role="row">
+              <th class="border-bottom-only no-sort">
+                <input class="checkbox-select-all" type="checkbox" value="select-item" />
+              </th>
               <th class="border-bottom-only">Name</th>
               <th class="border-bottom-only" tal:repeat="cat catfields">
                 <span tal:replace="cat">Type</span>
@@ -489,6 +499,9 @@
                     fileCategories python: item.getField('fileCategories').getAccessor(item)() or [{}];
                     fileCategories python: {d.get('name', ''): d.get('value', '') for d in fileCategories};
                     ">
+                  <td class="border-top-only">
+                    <input class="checkbox-select-item" type="checkbox" value="select-item" />
+                  </td>
 
                   <td class="border-top-only" tal:content="item/Title"></td>
 
@@ -519,7 +532,9 @@
         <form id="discalimer-download-form" action="">
           <input id="checkbox-accept-non-validated" type="checkbox" name="accept-non-validated" value="accept-non-validated" />
           <span id="text-accept-non-validated">I am aware that I am downloading non-validated data and I accept to not distribute the information contained in these files or the files themselves any further.</span>
-          <button id="button-download-selected">Download selected items (1)</button>
+          <button id="button-download-selected">Download selected items
+            (<span id="number-checked">0</span>)
+          </button>
           <button id="button-download-all">Download all</button>
         </form>
       </div>
@@ -529,48 +544,98 @@
 
       <script>
         $(document).ready(function(){
-          // Datatable behavior
+          function disable_download_buttons(){
+            $("#button-download-selected").attr("disabled", "disabled");
+            $("#button-download-all").attr("disabled", "disabled");
+          }
+
+          function enable_download_buttons(){
+            $("#button-download-selected").removeAttr("disabled");
+            $("#button-download-all").removeAttr("disabled");
+          }
+
+          function get_number_checked_items(){
+            var number_checked = $('.checkbox-select-item:checked').size();
+            return number_checked;
+          }
+
+          function check_all_items(){
+            $('.checkbox-select-item').attr('checked', true);
+          }
+
+          function uncheck_all_items(){
+            $('.checkbox-select-item').attr('checked', false);
+          }
+
+          function refresh_counter(){
+            $("#number-checked").text(get_number_checked_items());
+          }
+
+          function open_download_tab(){ // Opens download tab after login
+            function getUrlParameter(sParam){
+                var sPageURL = window.location.search.substring(1);
+                var sURLVariables = sPageURL.split('&');
+                for (var i = 0; i < sURLVariables.length; i++){
+                    var sParameterName = sURLVariables[i].split('=');
+                    if (sParameterName[0] == sParam){
+                        return sParameterName[1];
+                    }
+                }
+            }
+            var download_tab_param = getUrlParameter('fieldsetlegend-download');
+            if (download_tab_param == 1){
+              $("#fieldsetlegend-download").click();
+            }
+          }
+
+          // INIT
+          open_download_tab();
+          disable_download_buttons();
+
           $('#data-table-download').dataTable({
-            // disable sorting for Download column
+            "order": [[ 1, "asc" ]],
             "columnDefs": [{
               "targets": 'no-sort',
               "orderable": false,
             }],
-            paging: false // disable pagination
+            paging: false
           });
 
-          // tr on hover
+          // tr hover
           $('.download-button').hide();
-          $('#data-table-download > tbody > tr').on("mouseenter", function () {
+          $('#data-table-download > tbody > tr').on("mouseenter", function(){
             $(this).find('a.download-button').show();
             $(this).find('.download-gray-icon').hide();
           });
 
-          $('#data-table-download > tbody > tr').on("mouseleave", function () {
+          $('#data-table-download > tbody > tr').on("mouseleave", function(){
             $(this).find('a.download-button').hide();
             $(this).find('.download-gray-icon').show();
           });
 
-          // on checked or unchecked
+          // accept (un)checked
           $("#checkbox-accept-non-validated").change(function(){
-            alert("Value Changed."); /*[TODO] Continue here.*/
+            if(this.checked) {
+              enable_download_buttons();
+            } else {
+              disable_download_buttons();
+            }
           });
 
-          // FIX open Download tab after login
-          function getUrlParameter(sParam) {
-              var sPageURL = window.location.search.substring(1);
-              var sURLVariables = sPageURL.split('&');
-              for (var i = 0; i < sURLVariables.length; i++) {
-                  var sParameterName = sURLVariables[i].split('=');
-                  if (sParameterName[0] == sParam) {
-                      return sParameterName[1];
-                  }
-              }
-          }
-          var download_tab_param = getUrlParameter('fieldsetlegend-download');
-          if (download_tab_param == 1) {
-            $("#fieldsetlegend-download").click();
-          }
+          // item (un)checked
+          $(".checkbox-select-item").change(function(){
+            refresh_counter();
+          });
+
+          // (un)select all items
+          $(".checkbox-select-all").change(function(){
+            if(this.checked) {
+              check_all_items();
+            } else {
+              uncheck_all_items();
+            }
+            refresh_counter();
+          });
 
         });
       </script>
