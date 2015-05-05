@@ -411,7 +411,7 @@
     color:#fff;
   }
 
-  #button-download-selected:disabled, #button-download-all:disabled{
+  #button-download-selected:disabled, #button-download-all:disabled, .download-button.disabled{
     background-color:#F2F2F2;
     border-color:#D8D8D8;
     color:#BBB !important;
@@ -547,11 +547,13 @@
           function disable_download_buttons(){
             $("#button-download-selected").attr("disabled", "disabled");
             $("#button-download-all").attr("disabled", "disabled");
+            $(".download-button").addClass("disabled");
           }
 
           function enable_download_buttons(){
             $("#button-download-selected").removeAttr("disabled");
             $("#button-download-all").removeAttr("disabled");
+            $(".download-button").removeClass("disabled");
           }
 
           function get_number_checked_items(){
@@ -573,7 +575,7 @@
 
           function download_all(){
             var download_buttons = $('.download-button');
-            for(var i = 0; i < download_buttons.length; i++) {
+            for(var i = 0; i < download_buttons.length; i++){
               var button = download_buttons[i];
               $(button).attr("target", "_blank");
               button.click();
@@ -585,7 +587,7 @@
             var download_buttons = $('.checkbox-select-item:checked')
                                    .closest('tr').find('.download-button');
 
-            for(var i = 0; i < download_buttons.length; i++) {
+            for(var i = 0; i < download_buttons.length; i++){
               var button = download_buttons[i];
               $(button).attr("target", "_blank");
               button.click();
@@ -670,6 +672,11 @@
             download_all();
           });
 
+          $('.download-button').on("click", function(evt){
+            if($(this).hasClass("disabled")){
+              evt.preventDefault();
+            }
+          });
         });
       </script>
     </dd>
