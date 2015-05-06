@@ -4,12 +4,6 @@
 <div style="display: none;" id="terms-of-use-modal" title="Terms of Use"
      tal:define="terms_of_use_doc python:view.context.context.portal_catalog.searchResults(Title='Terms of Use')">
   <div>
-    <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
-    <b tal:condition="python:terms_of_use_doc"
-       tal:content="python:terms_of_use_doc[0].getObject().Description()">Summary of "Terms of Use" document
-    </b>
-  </div>
-  <div>
     <div tal:condition="python:terms_of_use_doc"
           tal:content="structure python:terms_of_use_doc[0].getObject().getText()">
           Text terms of use form document with title "Terms of Use"
