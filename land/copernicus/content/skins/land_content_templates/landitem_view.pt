@@ -411,10 +411,14 @@
     color:#fff;
   }
 
-  #button-download-selected:disabled, #button-download-all:disabled, .download-button.disabled{
+  #button-download-selected:disabled, #button-download-all:disabled{
     background-color:#F2F2F2;
     border-color:#D8D8D8;
     color:#BBB !important;
+  }
+
+  .download-button.disabled{
+    background-color:#BBB;
   }
 
   #button-download-selected{
@@ -576,6 +580,9 @@
             $("#button-download-selected").removeAttr("disabled");
             $("#button-download-all").removeAttr("disabled");
             $(".download-button").removeClass("disabled");
+            $(".download-button i").hover(function() {
+              $(this).css("color","white"); /* Fix double !important in hover color */
+            });
           }
 
           function get_number_checked_items(){
@@ -639,6 +646,8 @@
           if (!is_validated_dataset()){
             disable_download_buttons();
             add_not_validated_tag();
+          } else {
+            enable_download_buttons();
           }
 
           $('#data-table-download').dataTable({
