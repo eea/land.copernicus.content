@@ -441,6 +441,10 @@
     padding-bottom:1px;
     border-radius:3px;
   }
+
+  .download-button i{
+    color: white !important;
+  }
 </style>
 
 <dl class="enableFormTabbing">
@@ -580,9 +584,6 @@
             $("#button-download-selected").removeAttr("disabled");
             $("#button-download-all").removeAttr("disabled");
             $(".download-button").removeClass("disabled");
-            $(".download-button i").hover(function() {
-              $(this).css("color","white"); /* Fix double !important in hover color */
-            });
           }
 
           function get_number_checked_items(){
