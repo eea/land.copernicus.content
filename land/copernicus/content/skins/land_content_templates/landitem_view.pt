@@ -353,10 +353,19 @@
     border-radius:.25em;
     background-color:#989898 !important;
     color: white !important;
+    margin-right:5px;
   }
 
   .label-tag:hover{
     background-color:#4D4D4D !important;
+    color:white !important;
+  }
+
+  .label-white-color{
+    color:white !important;
+  }
+
+  .label-white-color:hover{
     color:white !important;
   }
 
