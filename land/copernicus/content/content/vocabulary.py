@@ -80,6 +80,47 @@ EU27 = {('at', 'at'): {},
         ('sk', 'sk'): {},
         }
 
+EEA39 = {('al', 'al'): {},
+         ('at', 'at'): {},
+         ('be', 'be'): {},
+         ('ba', 'ba'): {},
+         ('bg', 'bg'): {},
+         ('hr', 'hr'): {},
+         ('cy', 'cy'): {},
+         ('cz', 'cz'): {},
+         ('dk', 'dk'): {},
+         ('ee', 'ee'): {},
+         ('xk', 'xk'): {},
+         ('fi', 'fi'): {},
+         ('fr', 'fr'): {},
+         ('de', 'de'): {},
+         ('gr', 'gr'): {},
+         ('hu', 'hu'): {},
+         ('is', 'is'): {},
+         ('ie', 'ie'): {},
+         ('it', 'it'): {},
+         ('lv', 'lv'): {},
+         ('li', 'li'): {},
+         ('lt', 'lt'): {},
+         ('lu', 'lu'): {},
+         ('mk', 'mk'): {},
+         ('mt', 'mt'): {},
+         ('me', 'me'): {},
+         ('nl', 'nl'): {},
+         ('no', 'no'): {},
+         ('pl', 'pl'): {},
+         ('pt', 'pt'): {},
+         ('ro', 'ro'): {},
+         ('rs', 'rs'): {},
+         ('sk', 'sk'): {},
+         ('si', 'si'): {},
+         ('es', 'es'): {},
+         ('se', 'se'): {},
+         ('ch', 'ch'): {},
+         ('tr', 'tr'): {},
+         ('gb', 'gb'): {},
+         }
+
 
 def getCountriesDictionary():
     """ Countries
@@ -96,6 +137,7 @@ def getCountriesDictionary():
     res[('eu15', 'EU15')] = EU15
     res[('eu25', 'EU25')] = EU25
     res[('eu27', 'EU27')] = EU27
+    res[('eea39', 'EEA39')] = EEA39
     return res
 
 
@@ -158,4 +200,5 @@ def getCountries():
         'sm': 'sm',
         'tr': 'tr',
         'ua': 'ua',
+        'xk': 'xk',  # Kosovo https://countrycode.org/kosovo
         }

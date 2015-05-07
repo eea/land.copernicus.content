@@ -8,6 +8,7 @@ import logging
 
 logger = logging.getLogger('land.copernicus.content: setuphandlers')
 
+
 def installVocabularies(context):
     """ Creates/imports the atvm vocabs.
     """
@@ -36,4 +37,3 @@ def installVocabularies(context):
             vocab.reindexObject()
     else:
         logger.warn('eea.dataservice countries vocabulary already exist.')
-
