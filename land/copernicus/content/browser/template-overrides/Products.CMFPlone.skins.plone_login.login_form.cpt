@@ -122,7 +122,7 @@
                     <input type="hidden" name="pwd_empty" id="pwd_empty" value="0" />
 
                     <!-- custom start-->
-                    <p>Members of the EIONET network can use their EIONET account or choose to create a new one</p>
+                    <p>Members of the EIONET network can use their EIONET account or choose to create a new one.</p>
                     <!-- custom end -->
 
                     <div class="field"
