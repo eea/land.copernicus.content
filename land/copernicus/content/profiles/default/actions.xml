@@ -103,7 +103,7 @@
    <property name="title" i18n:translate="">Log out</property>
    <property name="description" i18n:translate=""></property>
    <property
-      name="url_expr">string:${globals_view/navigationRootUrl}/logout?came_from=${context/absolute_url}</property>
+      name="url_expr">string:${globals_view/navigationRootUrl}/logout?next=${context/absolute_url}</property>
    <property name="link_target"></property>
    <property name="icon_expr"></property>
    <property name="available_expr">python:member is not None</property>
