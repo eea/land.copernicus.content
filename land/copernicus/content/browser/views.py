@@ -53,12 +53,15 @@ class RedirectDownloadUrl(BrowserView):
                 getSite(), 'portal_membership').isAnonymousUser())
 
         if is_anonymous:
+            auto_selected = self.request.form.get('selected', None)
             portal_state = getMultiAdapter(
                 (self.context, self.request), name=u'plone_portal_state')
             root_url = portal_state.portal_url()
             land_item_url = self.context.aq_parent.absolute_url()
             login_url = root_url + "/login" + "?came_from=" + land_item_url + \
-                "?fieldsetlegend-download=1"
+                "?fieldsetlegend-download=true"
+            if auto_selected:
+                login_url += "-selected-" + auto_selected
             return self.request.response.redirect(login_url)
         else:
             return self.request.response.redirect(self.context.remoteUrl)

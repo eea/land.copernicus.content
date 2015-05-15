@@ -612,7 +612,24 @@
             $("#number-checked").text(get_number_checked_items());
           }
 
+          function save_selected_items_in_url(){
+            // For after login. Download tab is opened and these items will be checked automatically.
+            var selected = "?selected=";
+            $('.checkbox-select-item').each(function(i){
+              if($(this).attr("checked")){
+                selected += i + '-'
+              }
+            });
+
+            $('.download-button').each(function(){
+              var old_href = $(this).attr("href");
+              $(this).attr("href", old_href + selected);
+            });
+
+          }
+
           function download_all(){
+            save_selected_items_in_url();
             var download_buttons = $('.download-button');
             for(var i = 0; i < download_buttons.length; i++){
               var button = download_buttons[i];
@@ -623,6 +640,7 @@
           }
 
           function download_selected(){
+            save_selected_items_in_url();
             var download_buttons = $('.checkbox-select-item:checked')
                                    .closest('tr').find('.download-button');
 
@@ -646,8 +664,17 @@
                 }
             }
             var download_tab_param = getUrlParameter('fieldsetlegend-download');
-            if (download_tab_param == 1){
+            if (download_tab_param != undefined){
+              var auto_selected = download_tab_param.split("-").filter(function(c){return !isNaN(c)&&(c != '');});
               $("#fieldsetlegend-download").click();
+
+              // Here we auto check the selected items we saved in url
+              // Example: fieldsetlegend-download=true-selected-0-1 => autoselected first 2 checkboxes
+              $('.checkbox-select-item').each(function(i){
+                if(i in auto_selected){
+                  $(this).attr("checked", true);
+                }
+              });
             }
           }
 
