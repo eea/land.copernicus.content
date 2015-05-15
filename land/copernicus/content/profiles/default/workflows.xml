@@ -8,5 +8,8 @@
   <type type_id="LandItem">
    <bound-workflow workflow_id="folder_workflow"/>
   </type>
+  <type type_id="LandFile">
+   <bound-workflow workflow_id="folder_workflow"/>
+  </type>  
  </bindings>
 </object>

@@ -3,5 +3,6 @@
   <factorytypes>
     <type portal_type="LandSection"/>
     <type portal_type="LandItem"/>
+    <type portal_type="LandFile"/>
   </factorytypes>
 </object>
