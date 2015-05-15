@@ -671,7 +671,7 @@
               // Here we auto check the selected items we saved in url
               // Example: fieldsetlegend-download=true-selected-0-1 => autoselected first 2 checkboxes
               $('.checkbox-select-item').each(function(i){
-                if(i in auto_selected){
+                if($.inArray(i.toString(), auto_selected ) != -1){
                   $(this).attr("checked", true);
                 }
               });
