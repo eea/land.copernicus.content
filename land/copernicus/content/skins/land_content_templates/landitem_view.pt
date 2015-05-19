@@ -680,6 +680,8 @@
 
           // INIT
           open_download_tab();
+          refresh_counter();
+
           if (!is_validated_dataset()){
             disable_download_buttons();
             add_not_validated_tag();
