@@ -652,8 +652,33 @@
             }
           }
 
-          function open_download_tab(){ // Opens download tab after login
-            function getUrlParameter(sParam){
+          function auto_accept_not_validated(){
+            $("#checkbox-accept-non-validated").attr("checked", true);
+            enable_download_buttons();
+          }
+
+          function auto_select_checkboxes(checkboxes_indexes_array){
+            $('.checkbox-select-item').each(function(i){
+              if($.inArray(i.toString(), checkboxes_indexes_array) != -1){
+                $(this).attr("checked", true);
+              }
+            });
+          }
+
+          function download_auto_selected(download_tab_param){
+          // Example in URL: fieldsetlegend-download=true-selected-0-1 => autoselected first 2 checkboxes
+            var auto_selected_checkboxes_indexes = download_tab_param.split("-").filter(function(c){return !isNaN(c)&&(c != '');});
+            auto_select_checkboxes(auto_selected_checkboxes_indexes);
+            refresh_counter();
+            auto_accept_not_validated();
+            download_selected();
+          }
+
+          function after_possible_login(){
+          // Check parameter in url for after login case.
+          // Auto open download tab and download auto selected if any.
+
+            function get_url_parameter(sParam){
                 var sPageURL = window.location.search.substring(1);
                 var sURLVariables = sPageURL.split('&');
                 for (var i = 0; i < sURLVariables.length; i++){
@@ -663,31 +688,23 @@
                     }
                 }
             }
-            var download_tab_param = getUrlParameter('fieldsetlegend-download');
-            if (download_tab_param != undefined){
-              var auto_selected = download_tab_param.split("-").filter(function(c){return !isNaN(c)&&(c != '');});
-              $("#fieldsetlegend-download").click();
 
-              // Here we auto check the selected items we saved in url
-              // Example: fieldsetlegend-download=true-selected-0-1 => autoselected first 2 checkboxes
-              $('.checkbox-select-item').each(function(i){
-                if($.inArray(i.toString(), auto_selected ) != -1){
-                  $(this).attr("checked", true);
-                }
-              });
+            var download_tab_param = get_url_parameter('fieldsetlegend-download');
+            if (download_tab_param != undefined){
+              $("#fieldsetlegend-download").click();
+              download_auto_selected(download_tab_param);
             }
           }
 
           // INIT
-          open_download_tab();
-          refresh_counter();
-
           if (!is_validated_dataset()){
             disable_download_buttons();
             add_not_validated_tag();
           } else {
             enable_download_buttons();
           }
+
+          after_possible_login();
 
           $('#data-table-download').dataTable({
             "order": [[ 1, "asc" ]],
