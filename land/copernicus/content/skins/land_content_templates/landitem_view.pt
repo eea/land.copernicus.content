@@ -665,6 +665,11 @@
             });
           }
 
+          function display_portal_message(message_text, message_type){
+            $('<dl class="portalMessage ' + message_type + '"><dt>Error</dt><dd>' +
+              message_text + '</dd></dl>').insertBefore('.documentFirstHeading');
+          }
+
           function display_errors_if_any(download_tab_param){
           // Example: ?fieldsetlegend-download=true-error-not-found-LandFile3
           // -> "LandFile3 cannot be downloaded. Broken link."
@@ -674,7 +679,8 @@
               if (land_file_title.length == 0) {
                 land_file_title = "This land file"
               }
-              alert(land_file_title + " cannot be downloaded. Link is broken.");
+
+              display_portal_message(decodeURI(land_file_title) + " cannot be downloaded. Link is broken.", "error");
             }
           }
 
