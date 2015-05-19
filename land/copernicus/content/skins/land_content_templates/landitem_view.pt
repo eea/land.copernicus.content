@@ -665,6 +665,19 @@
             });
           }
 
+          function display_errors_if_any(download_tab_param){
+          // Example: ?fieldsetlegend-download=true-error-not-found-LandFile3
+          // -> "LandFile3 cannot be downloaded. Broken link."
+            var error_missing_file = "true-error-not-found-";
+            if (download_tab_param.indexOf(error_missing_file) >= 0) {
+              var land_file_title = download_tab_param.substring(error_missing_file.length, download_tab_param.length);
+              if (land_file_title.length == 0) {
+                land_file_title = "This land file"
+              }
+              alert(land_file_title + " cannot be downloaded. Link is broken.");
+            }
+          }
+
           function download_auto_selected(download_tab_param){
           // Example in URL: fieldsetlegend-download=true-selected-0-1 => autoselected first 2 checkboxes
             var auto_selected_checkboxes_indexes = download_tab_param.split("-").filter(function(c){return !isNaN(c)&&(c != '');});
@@ -674,9 +687,9 @@
             download_selected();
           }
 
-          function after_possible_login(){
-          // Check parameter in url for after login case.
-          // Auto open download tab and download auto selected if any.
+          function interpret_url_params_if_any(){
+          // Check parameter in url for after login case or error missing land file
+          // Auto open download tab and download if any auto selected.
 
             function get_url_parameter(sParam){
                 var sPageURL = window.location.search.substring(1);
@@ -693,6 +706,7 @@
             if (download_tab_param != undefined){
               $("#fieldsetlegend-download").click();
               download_auto_selected(download_tab_param);
+              display_errors_if_any(download_tab_param);
             }
           }
 
@@ -704,7 +718,7 @@
             enable_download_buttons();
           }
 
-          after_possible_login();
+          interpret_url_params_if_any();  // set by RedirectDownloadUrl class
 
           $('#data-table-download').dataTable({
             "order": [[ 1, "asc" ]],
