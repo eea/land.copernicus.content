@@ -1,0 +1,17 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  xmlns:zcml="http://namespaces.zope.org/zcml"
+  i18n_domain="eea">
+
+  <configure zcml:condition="installed tlspu.cookiepolicy">
+    <browser:viewlet
+      name="tlspu.cookiepolicy"
+      manager="plone.app.layout.viewlets.interfaces.IBelowContent"
+      class="tlspu.cookiepolicy.browser.viewlets.CookiePolicyViewlet"
+      layer="tlspu.cookiepolicy.interfaces.ICookiePolicyLayer"
+      permission="zope.Public"
+      />
+  </configure>
+
+</configure>

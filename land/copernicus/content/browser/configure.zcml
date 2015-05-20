@@ -5,6 +5,8 @@
 
   <include file="backports.zcml" />
 
+  <include file="cookiepolicy.zcml" />
+
   <browser:resourceDirectory
     name="land.copernicus.content.images"
     directory="./images" />
@@ -57,4 +59,3 @@
     />
 
 </configure>
-
