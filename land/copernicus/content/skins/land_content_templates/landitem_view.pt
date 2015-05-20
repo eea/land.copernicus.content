@@ -305,6 +305,7 @@
   }
 
   .detailed-metadata-container{
+    margin-top: 15px;
     border:1px solid #CCC;
     padding-top:15px;
     padding-left:15px;
