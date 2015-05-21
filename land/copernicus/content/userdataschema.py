@@ -118,6 +118,10 @@ class CustomizedUserDataPanel(UserDataPanel):
     def __init__(self, context, request):
         super(CustomizedUserDataPanel, self).__init__(context, request)
 
+        self.form_fields = self.form_fields.omit('email')
+        self.form_fields = self.form_fields.omit('first_name')
+        self.form_fields = self.form_fields.omit('last_name')
+
         self.form_fields = self.form_fields.omit('description')
         self.form_fields = self.form_fields.omit('disclaimer')
         self.form_fields = self.form_fields.omit('fax')
@@ -132,12 +136,6 @@ class CustomizedUserDataPanel(UserDataPanel):
         self.form_fields = self.form_fields.omit('organisation')
         self.form_fields = self.form_fields.omit('reason')
         self.form_fields = self.form_fields.omit('telephone')
-
-        first_name = self.form_fields['first_name']
-        first_name.custom_widget = SimpleInputWidget
-
-        last_name = self.form_fields['last_name']
-        last_name.custom_widget = SimpleInputWidget
 
         thematic_domain = self.form_fields['thematic_domain']
         thematic_domain.custom_widget = MultiCheckBoxVocabularyWidget
