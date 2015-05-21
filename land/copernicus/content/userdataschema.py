@@ -14,6 +14,7 @@ from zope.formlib.boolwidgets import CheckBoxWidget
 from zope.formlib.widget import SimpleInputWidget
 from land.copernicus.content.config import EEAMessageFactory as _
 import re
+from Products.CMFCore.utils import getToolByName
 
 professional_thematic_domain_options = SimpleVocabulary([
     # Keep alphabetical order here.
@@ -116,15 +117,33 @@ class CopernicusRegistrationForm(RegistrationForm):
 class CustomizedUserDataPanel(UserDataPanel):
     def __init__(self, context, request):
         super(CustomizedUserDataPanel, self).__init__(context, request)
-        # self.form_fields = self.form_fields.omit('disclaimer')
+
+        self.form_fields = self.form_fields.omit('description')
+        self.form_fields = self.form_fields.omit('disclaimer')
+        self.form_fields = self.form_fields.omit('fax')
+        self.form_fields = self.form_fields.omit('fullname')
+        self.form_fields = self.form_fields.omit('home_page')
+        self.form_fields = self.form_fields.omit('job_title')
+        self.form_fields = self.form_fields.omit('location')
+        self.form_fields = self.form_fields.omit('mobile')
+        self.form_fields = self.form_fields.omit('postal_address')
+        self.form_fields = self.form_fields.omit('portrait')
+        self.form_fields = self.form_fields.omit('pdelete')
+        self.form_fields = self.form_fields.omit('organisation')
+        self.form_fields = self.form_fields.omit('reason')
+        self.form_fields = self.form_fields.omit('telephone')
+
         first_name = self.form_fields['first_name']
-        last_name = self.form_fields['last_name']
-        thematic_domain = self.form_fields['thematic_domain']
-        institutional_domain = self.form_fields['institutional_domain']
-        thematic_domain.custom_widget = MultiCheckBoxVocabularyWidget
-        institutional_domain.custom_widget = MultiCheckBoxVocabularyWidget
         first_name.custom_widget = SimpleInputWidget
+
+        last_name = self.form_fields['last_name']
         last_name.custom_widget = SimpleInputWidget
+
+        thematic_domain = self.form_fields['thematic_domain']
+        thematic_domain.custom_widget = MultiCheckBoxVocabularyWidget
+
+        institutional_domain = self.form_fields['institutional_domain']
+        institutional_domain.custom_widget = MultiCheckBoxVocabularyWidget
 
 
 class UserDataSchemaProvider(object):
