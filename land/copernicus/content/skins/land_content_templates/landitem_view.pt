@@ -683,6 +683,13 @@
 
               display_portal_message(decodeURI(land_file_title) + " cannot be downloaded. Link is broken.", "error");
             }
+
+          // Example: ?fieldsetlegend-download=true-error-profile-not-complete
+          // -> "You can't download files until you update your profile with missing thematic and institutional domain info."
+            var error_missing_file = "true-error-profile-not-complete";
+            if (download_tab_param.indexOf(error_missing_file) >= 0) {
+              display_portal_message("You can't download files until you update your profile with missing thematic and institutional domain info.", "error");
+            }
           }
 
           function download_auto_selected(download_tab_param){

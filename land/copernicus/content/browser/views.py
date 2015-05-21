@@ -77,14 +77,28 @@ class RedirectDownloadUrl(BrowserView):
 
         return login_url
 
+    def url_open_download_tab(self):
+        """ Sets url param used to open download tab """
+        url_tab = self.context.aq_parent.absolute_url() + \
+            '?fieldsetlegend-download=true'
+        return url_tab
+
     def url_missing_file(self):
         """ Returns the url for case: file missing, page not found """
 
-        land_item_url = self.context.aq_parent.absolute_url()
-        open_download_tab_param = '?fieldsetlegend-download=true'
         land_file_title = self.context.title
         error_param = '-error-not-found-' + land_file_title
-        error_url = land_item_url + open_download_tab_param + error_param
+        error_url = self.url_open_download_tab() + error_param
+
+        return error_url
+
+    def url_profile_error(self):
+        """ Returns the url for case: profile is not complete
+            missing thematic_domain or institutional_domain fields
+        """
+
+        error_param = '-error-profile-not-complete'
+        error_url = self.url_open_download_tab() + error_param
 
         return error_url
 
@@ -93,11 +107,24 @@ class RedirectDownloadUrl(BrowserView):
             bool(getToolByName(
                 getSite(), 'portal_membership').isAnonymousUser())
 
+        if not is_anonymous:
+            profile_is_complete = True
+            membership = getToolByName(self.context, 'portal_membership')
+            authenticated_user = membership.getAuthenticatedMember()
+            t_d = authenticated_user.getProperty('thematic_domain', '')
+            i_d = authenticated_user.getProperty('institutional_domain', '')
+            if t_d == '' or i_d == '':
+                profile_is_complete = False
+
         if is_anonymous:
             return self.request.response.redirect(self.url_login_with_params())
         else:
             remoteUrl = self.context.remoteUrl
             if remoteUrl_exists(remoteUrl):
-                return self.request.response.redirect(remoteUrl)
+                if profile_is_complete:
+                    return self.request.response.redirect(remoteUrl)
+                else:
+                    return self.request.response.redirect(
+                        self.url_profile_error())
             else:
                 return self.request.response.redirect(self.url_missing_file())
