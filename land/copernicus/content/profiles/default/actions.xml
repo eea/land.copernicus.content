@@ -112,18 +112,5 @@
    </property>
    <property name="visible">True</property>
   </object>
-  <object name="terms-of-use" meta_type="CMF Action" i18n:domain="plone">
-   <property name="title" i18n:translate="">Terms of Use</property>
-   <property name="description" i18n:translate=""></property>
-   <property
-      name="url_expr">string:${globals_view/navigationRootUrl}/terms-of-use</property>
-   <property name="link_target"></property>
-   <property name="icon_expr"></property>
-   <property name="available_expr"></property>
-   <property name="permissions">
-    <element value="View"/>
-   </property>
-   <property name="visible">True</property>
-  </object>
  </object>
 </object>
