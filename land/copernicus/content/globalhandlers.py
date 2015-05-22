@@ -13,3 +13,11 @@ def autofillFullname(principal, event):
         auto_fullname = first_name + " " + last_name
         properties = principal._propertysheets.get('mutable_properties')
         properties.setProperty(principal, 'fullname', auto_fullname)
+
+
+def forceUpdateProfile(principal, event):
+    """ Redirect to edit profile if user has not completed info about
+        thematic and institutional domains
+    """
+    # import pdb; pdb.set_trace( )
+    # [TODO] WIP here.

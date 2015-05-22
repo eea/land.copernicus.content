@@ -39,4 +39,10 @@
     handler="land.copernicus.content.globalhandlers.autofillFullname"
     />
 
+  <subscriber
+    for="*
+         Products.PluggableAuthService.interfaces.events.IUserLoggedInEvent"
+    handler="land.copernicus.content.globalhandlers.forceUpdateProfile"
+  />
+
 </configure>
