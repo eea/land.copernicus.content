@@ -42,6 +42,14 @@
     />
 
   <browser:page
+    name="download-land-file"
+    class=".views.DownloadLandFileView"
+    permission="zope2.View"
+    for="land.copernicus.content.content.landitem.LandItem"
+    template="templates/download-land-file.pt"
+    />
+
+  <browser:page
     name="tpdb"
     class=".views.GoPDB"
     permission="zope2.View"

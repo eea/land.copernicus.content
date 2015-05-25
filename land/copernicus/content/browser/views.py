@@ -102,6 +102,16 @@ class RedirectDownloadUrl(BrowserView):
 
         return error_url
 
+    def url_download(self):
+        """ Returns the page url used to set google analytics custom vars
+            before redirecting to land file remoteUrl
+        """
+        land_item_url = self.context.aq_parent.absolute_url()
+        url_download = land_item_url + '/@@download-land-file?remoteUrl=' + \
+            self.context.remoteUrl
+
+        return url_download
+
     def __call__(self):
         is_anonymous = \
             bool(getToolByName(
@@ -122,9 +132,18 @@ class RedirectDownloadUrl(BrowserView):
             remoteUrl = self.context.remoteUrl
             if remoteUrl_exists(remoteUrl):
                 if profile_is_complete:
-                    return self.request.response.redirect(remoteUrl)
+                    return self.request.response.redirect(self.url_download())
                 else:
                     return self.request.response.redirect(
                         self.url_profile_error())
             else:
                 return self.request.response.redirect(self.url_missing_file())
+
+
+class DownloadLandFileView(BrowserView):
+    """ Set Google Analytics custom params and redirect to remoteUrl
+    """
+    def __call__(self):
+        remoteUrl = self.request.form.get('remoteUrl', None)
+        if remoteUrl is not None:
+            return self.request.response.redirect(remoteUrl)
