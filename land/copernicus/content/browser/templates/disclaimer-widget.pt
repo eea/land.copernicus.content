@@ -44,6 +44,7 @@
     function init_pages(){
       $("#terms-source-container p").first().appendTo($("#terms-page1-container"));
       $("#terms-source-container p").first().appendTo($("#terms-page1-container"));
+      $("#terms-source-container p").first().appendTo($("#terms-page1-container"));
       $("#terms-source-container").appendTo($("#terms-page2-container"));
     }
 
