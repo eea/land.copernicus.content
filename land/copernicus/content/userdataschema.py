@@ -11,10 +11,8 @@ from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.interface import implements
 from zope.browserpage import ViewPageTemplateFile
 from zope.formlib.boolwidgets import CheckBoxWidget
-from zope.formlib.widget import SimpleInputWidget
 from land.copernicus.content.config import EEAMessageFactory as _
 import re
-from Products.CMFCore.utils import getToolByName
 
 professional_thematic_domain_options = SimpleVocabulary([
     # Keep alphabetical order here.
@@ -129,6 +127,16 @@ class CustomizedUserDataPanel(UserDataPanel):
 
         institutional_domain = self.form_fields['institutional_domain']
         institutional_domain.custom_widget = MultiCheckBoxVocabularyWidget
+
+    def validate(self, action, data):
+        # We omit email field in form, so we must prevent error:
+        # Module plone.app.users.browser.personalpreferences, line 262,
+        # in validate
+        # Module zope.formlib.form, line 207, in getitem
+        # KeyError: 'email'
+        errors = super(UserDataPanel, self).validate(action, data)
+
+        return errors
 
 
 class UserDataSchemaProvider(object):
