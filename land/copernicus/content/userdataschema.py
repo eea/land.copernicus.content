@@ -118,24 +118,11 @@ class CustomizedUserDataPanel(UserDataPanel):
     def __init__(self, context, request):
         super(CustomizedUserDataPanel, self).__init__(context, request)
 
-        self.form_fields = self.form_fields.omit('email')
-        self.form_fields = self.form_fields.omit('first_name')
-        self.form_fields = self.form_fields.omit('last_name')
-
-        self.form_fields = self.form_fields.omit('description')
-        self.form_fields = self.form_fields.omit('disclaimer')
-        self.form_fields = self.form_fields.omit('fax')
-        self.form_fields = self.form_fields.omit('fullname')
-        self.form_fields = self.form_fields.omit('home_page')
-        self.form_fields = self.form_fields.omit('job_title')
-        self.form_fields = self.form_fields.omit('location')
-        self.form_fields = self.form_fields.omit('mobile')
-        self.form_fields = self.form_fields.omit('postal_address')
-        self.form_fields = self.form_fields.omit('portrait')
-        self.form_fields = self.form_fields.omit('pdelete')
-        self.form_fields = self.form_fields.omit('organisation')
-        self.form_fields = self.form_fields.omit('reason')
-        self.form_fields = self.form_fields.omit('telephone')
+        self.form_fields = self.form_fields.omit(
+            'email', 'first_name', 'last_name', 'description', 'disclaimer',
+            'fax', 'fullname', 'home_page', 'job_title', 'location', 'mobile',
+            'postal_address', 'portrait', 'pdelete', 'organisation',
+            'reason', 'telephone')
 
         thematic_domain = self.form_fields['thematic_domain']
         thematic_domain.custom_widget = MultiCheckBoxVocabularyWidget
