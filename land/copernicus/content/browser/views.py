@@ -1,6 +1,7 @@
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.PloneBatch import Batch
 from Products.Five.browser import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 import urllib2
 from zope.component.hooks import getSite
 from zope.component import getMultiAdapter
@@ -143,7 +144,26 @@ class RedirectDownloadUrl(BrowserView):
 class DownloadLandFileView(BrowserView):
     """ Set Google Analytics custom params and redirect to remoteUrl
     """
+    index = ViewPageTemplateFile("templates/download-land-file.pt")
+
+    def render(self):
+        return self.index()
+
     def __call__(self):
+        return self.render()
+
+    @property
+    def values(self):
+        membership = getToolByName(self.context, 'portal_membership')
+        authenticated_user = membership.getAuthenticatedMember()
+        institutional_domain = authenticated_user.getProperty(
+            'institutional_domain')
+        professional_thematic_domain = authenticated_user.getProperty(
+            'thematic_domain')
+        return {'institutional_domain': institutional_domain,
+                'professional_thematic_domain': professional_thematic_domain}
+
+    def start_download(self):
         remoteUrl = self.request.form.get('remoteUrl', None)
         if remoteUrl is not None:
             return self.request.response.redirect(remoteUrl)

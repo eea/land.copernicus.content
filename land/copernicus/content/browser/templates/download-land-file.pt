@@ -10,20 +10,35 @@
 <metal:content-core fill-slot="content-core">
 <metal:main_macro define-macro="content-core">
   <p i18n:translate="">Download will start soon. Please wait.</p>
-  <script>
-  	var _gaq = _gaq || []
-  	_gaq.push(['_setCustomVar',
-            1,             // slot [1..5] (required)
-            'UserCountry', // Custom var name (required)
-            'TestRomania', // Custom var value (required)
-            2              // Custom var scope: 1 (visitor-level), 2 (session-level), or 3 (page-level) (optional, default: 3)
-         ]);
+  <div tal:define="professional_thematic_domain python:view.values.get('professional_thematic_domain', '');
+                   institutional_domain python:view.values.get('institutional_domain')">
 
-  	_gaq.push(['_setCustomVar', 2, 'UserProfessionalThematicDomain', 'TestPThematicDomain', 3]);
-  	_gaq.push(['_setCustomVar', 3, 'UserInstitutionalDomain', 'TestInstitutionalDomain', 3]);
-  	_gaq.push(['_setCustomVar', 4, 'UserSlot4Var', 'TestValueSlot4', 3]);
-  	_gaq.push(['_setCustomVar', 5, 'UserSlot5Var', 'TestValueSlot5', 3]);
-  </script>
+    <!-- Only for tests. [TODO] Remove: -->
+    <p tal:content="professional_thematic_domain"></p>
+    <p tal:content="institutional_domain"></p>
+    <!-- -->
+
+    <script tal:content="string:var p_t_d='${professional_thematic_domain}';"></script>
+    <script tal:content="string:var i_d='${institutional_domain}';"></script>
+
+    <script>
+      $(document).ready(function(){
+        var _gaq = _gaq || []
+        _gaq.push(['_setCustomVar',
+                1,             // slot [1..5] (required)
+                'UserCountry', // Custom var name (required)
+                'TestRomania', // Custom var value (required)
+                2              // Custom var scope: 1 (visitor-level), 2 (session-level), or 3 (page-level) (optional, default: 3)
+             ]);
+
+        _gaq.push(['_setCustomVar', 2, 'professional_thematic_domain', p_t_d, 3]);
+        _gaq.push(['_setCustomVar', 3, 'institutional_domain', i_d, 3]);
+      });
+    </script>
+
+    <!-- This is final redirect: -->
+    <p tal:content="python:view.start_download()"></p>
+  </div>
 </metal:main_macro>
 </metal:content-core>
 </body>
