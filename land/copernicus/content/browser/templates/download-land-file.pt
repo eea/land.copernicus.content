@@ -11,8 +11,10 @@
 <metal:main_macro define-macro="content-core">
   <p i18n:translate="">Download will start soon. Please wait.</p>
   <div tal:define="professional_thematic_domain python:view.values.get('professional_thematic_domain', '');
-                   institutional_domain python:view.values.get('institutional_domain')">
+                   institutional_domain python:view.values.get('institutional_domain');
+                   land_item_title python:context.title">
 
+    <script tal:content="string:var l_i_t='${land_item_title}';"></script>
     <script tal:content="string:var p_t_d='${professional_thematic_domain}';"></script>
     <script tal:content="string:var i_d='${institutional_domain}';"></script>
 
@@ -26,6 +28,7 @@
         _gaq.push(['_trackEvent',
           'Land Files', // Category of activity
           'Download', // Action
+          l_i_t, // Label
         ]);
       });
     </script>
