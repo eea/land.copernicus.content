@@ -21,8 +21,9 @@
         var _gaq = _gaq || [];
 
         // *slot [1..5], *name, *value, scope: 1 (visitor-level), 2 (session-level), 3 (page-level) (optional, default: 3)
-        _gaq.push(['_setCustomVar', 1, 'professional_thematic_domain', p_t_d, 3]);
-        _gaq.push(['_setCustomVar', 2, 'institutional_domain', i_d, 3]);
+        // First slot is already used for User Type in collective.googleanalytics
+        _gaq.push(['_setCustomVar', 2, 'professional_thematic_domain', p_t_d, 3]);
+        _gaq.push(['_setCustomVar', 3, 'institutional_domain', i_d, 3]);
 
         _gaq.push(['_trackEvent',
           'Land Files', // Category of activity
