@@ -18,8 +18,6 @@
 
     <script>
       $(document).ready(function(){
-        var _gaq = _gaq || [];
-
         // *slot [1..5], *name, *value, scope: 1 (visitor-level), 2 (session-level), 3 (page-level) (optional, default: 3)
         // First slot is already used for User Type in collective.googleanalytics
         _gaq.push(['_setCustomVar', 2, 'professional_thematic_domain', p_t_d, 2]);
