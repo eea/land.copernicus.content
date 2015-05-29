@@ -12,29 +12,30 @@
   <p i18n:translate="">Download will start soon. Please wait.</p>
   <div tal:define="professional_thematic_domain python:view.values.get('professional_thematic_domain', '');
                    institutional_domain python:view.values.get('institutional_domain');
+                   start_download_url python:view.values.get('start_download_url');
                    land_item_title python:context.title">
 
-    <script tal:content="string:var l_i_t='${land_item_title}';"></script>
-    <script tal:content="string:var p_t_d='${professional_thematic_domain}';"></script>
-    <script tal:content="string:var i_d='${institutional_domain}';"></script>
+    <script tal:content="string:var land_item_title='${land_item_title}';"></script>
+    <script tal:content="string:var professional_thematic_domain='${professional_thematic_domain}';"></script>
+    <script tal:content="string:var institutional_domain='${institutional_domain}';"></script>
+    <script tal:content="string:var start_download_url='${start_download_url}';"></script>
 
     <script>
       $(document).ready(function(){
         // *slot [1..5], *name, *value, scope: 1 (visitor-level), 2 (session-level), 3 (page-level) (optional, default: 3)
         // First slot is already used for User Type in collective.googleanalytics
-        _gaq.push(['_setCustomVar', 2, 'professional_thematic_domain', p_t_d, 2]);
-        _gaq.push(['_setCustomVar', 3, 'institutional_domain', i_d, 2]);
+        _gaq.push(['_setCustomVar', 2, 'professional_thematic_domain', professional_thematic_domain, 2]);
+        _gaq.push(['_setCustomVar', 3, 'institutional_domain', institutional_domain, 2]);
 
         _gaq.push(['_trackEvent',
           'Land Files', // Category of activity
           'Download', // Action
-          l_i_t, // Label
+          land_item_title, // Label
         ]);
+
+        window.location.replace(start_download_url);
       });
     </script>
-
-    <!-- This is final redirect: -->
-    <p tal:content="python:view.start_download()"></p>
   </div>
 </metal:main_macro>
 </metal:content-core>

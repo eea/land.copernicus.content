@@ -160,10 +160,8 @@ class DownloadLandFileView(BrowserView):
             'institutional_domain')
         professional_thematic_domain = authenticated_user.getProperty(
             'thematic_domain')
-        return {'institutional_domain': institutional_domain,
-                'professional_thematic_domain': professional_thematic_domain}
-
-    def start_download(self):
         remoteUrl = self.request.form.get('remoteUrl', None)
-        if remoteUrl is not None:
-            return self.request.response.redirect(remoteUrl)
+
+        return {'institutional_domain': institutional_domain,
+                'professional_thematic_domain': professional_thematic_domain,
+                'start_download_url': remoteUrl}
