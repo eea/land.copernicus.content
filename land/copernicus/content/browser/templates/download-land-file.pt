@@ -22,16 +22,18 @@
 
     <script>
       $(document).ready(function(){
-        // *slot [1..5], *name, *value, scope: 1 (visitor-level), 2 (session-level), 3 (page-level) (optional, default: 3)
-        // First slot is already used for User Type in collective.googleanalytics
-        _gaq.push(['_setCustomVar', 2, 'professional_thematic_domain', professional_thematic_domain, 2]);
-        _gaq.push(['_setCustomVar', 3, 'institutional_domain', institutional_domain, 2]);
+        // Custom dimensions
+        ga('set', 'dimension1', professional_thematic_domain);
+        ga('set', 'dimension2', institutional_domain);
 
-        _gaq.push(['_trackEvent',
-          'Land Files', // Category of activity
-          'Download', // Action
-          land_item_title, // Label
-        ]);
+        // Track event
+        ga('send', {
+          'hitType': 'event',                 // Required.
+          'eventCategory': 'page',            // Required.
+          'eventAction': 'landfile_download', // Required.
+          'eventLabel': land_item_title,
+          'eventValue': 1
+        });
 
         window.location.replace(start_download_url);
       });
