@@ -10,4 +10,14 @@
     conditionalcomment="" cookable="True" enabled="True"
     expression="" id="++resource++markFrozen.js" inline="False"/>
 
+<javascript authenticated="False" bundle="default" cacheable="True"
+    compression="safe" conditionalcomment="" cookable="True" enabled="True"
+    expression="python: ((not here.restrictedTraverse('@@plone_portal_state').anonymous()) and 'edit' in request.ACTUAL_URL.split('/')[-1]) or 'forum' in request.ACTUAL_URL"
+    id="++resource++eea.tinymce.plugins.js" inline="False"/>
+
+<javascript authenticated="False" bundle="default" cacheable="True"
+    compression="safe" conditionalcomment="" cookable="True" enabled="True"
+    expression="python: ((not here.restrictedTraverse('@@plone_portal_state').anonymous()) and 'edit' in request.ACTUAL_URL.split('/')[-1]) or 'forum' in request.ACTUAL_URL"
+    id="eeatinymceutils.js" inline="False"/>
+
 </object>
