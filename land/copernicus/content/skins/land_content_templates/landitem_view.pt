@@ -457,7 +457,11 @@
   }
 </style>
 
-<dl class="enableFormTabbing">
+<dl class="enableFormTabbing"
+    tal:define="membership python:context.portal_membership;
+                user python:membership.getAuthenticatedMember();
+                roles python:user.getRoles();
+                user_is_admin python:'Site Administrator' in roles;">
 
   <!-- Map View -->
   <tal:mapview define="html context/embed_iframe">
@@ -503,10 +507,10 @@
     </dd>
   </tal:metadata>
 
-  <!-- Download -->
-  <tal:download tal:condition="python:getattr(context, 'show_new_download', None) is True"
+  <!-- New Download -->
+  <tal:download tal:condition="python:(getattr(context, 'show_new_download', None) is True) or user_is_admin"
                 tal:define="portal_url python:context.portal_url()">
-    <dt id="fieldsetlegend-download" i18n:translate="">New Download</dt>
+    <dt id="fieldsetlegend-download" i18n:translate="">Download</dt>
     <dd id="fieldset-download">
       <div id="datatable-container">
         <table id="data-table-download" width="100%" tal:define="catfields python:context.getField('fileCategories').getAccessor(context)()">
@@ -800,8 +804,8 @@
     </dd>
   </tal:download>
 
-  <!-- Download Old - temporary download -->
-  <tal:download>
+  <!-- Old Download - temporary download -->
+  <tal:download tal:condition="python:(getattr(context, 'show_new_download', None) is False) or user_is_admin">
     <dt id="fieldsetlegend-download-old" i18n:translate="">Download</dt>
     <dd id="fieldset-download-old"
         tal:define="download_info python: context.getField('download').getAccessor(context)()">
