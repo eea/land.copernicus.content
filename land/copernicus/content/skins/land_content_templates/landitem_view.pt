@@ -549,7 +549,9 @@
                   <td class="border-top-only text-centered no-sorting-icons">
                     <span class="download-gray-icon"><i class="fa fa-download"></i></span>
                     <a tal:attributes="href python: item.absolute_url() + '/@@redirect-download-url'"
-                       href="" class="download-button"><i class="fa fa-download"></i></a>
+                       href="" class="download-button" target="_blank">
+                       <i class="fa fa-download"></i>
+                    </a>
                   </td>
                 </tal:def>
               </tr>
@@ -635,9 +637,7 @@
             var download_buttons = $('.download-button');
             for(var i = 0; i < download_buttons.length; i++){
               var button = download_buttons[i];
-              $(button).attr("target", "_blank");
               button.click();
-              $(button).removeAttr("target");
             }
           }
 
@@ -648,9 +648,7 @@
 
             for(var i = 0; i < download_buttons.length; i++){
               var button = download_buttons[i];
-              $(button).attr("target", "_blank");
               button.click();
-              $(button).removeAttr("target");
             }
           }
 
