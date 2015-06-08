@@ -2,7 +2,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.PloneBatch import Batch
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-import urllib2
+import subprocess
 from zope.component.hooks import getSite
 from zope.component import getMultiAdapter
 
@@ -47,15 +47,11 @@ class GoPDB(BrowserView):
         return "done"
 
 
-def remoteUrl_exists(remoteUrl):
+def remoteUrl_exists(location):
     try:
-        urllib2.urlopen(remoteUrl)
+        res = subprocess.check_call(['/usr/bin/curl', '-I', '-f', location])
         return True
-    except urllib2.HTTPError, e:
-        print(e.code)
-        return False
-    except urllib2.URLError, e:
-        print(e.args)
+    except subprocess.CalledProcessError:
         return False
 
 
