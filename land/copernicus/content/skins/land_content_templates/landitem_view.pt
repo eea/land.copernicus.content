@@ -525,6 +525,7 @@
               </th>
               <th class="border-bottom-only">Size</th>
               <th class="border-bottom-only text-centered no-sort">Download</th>
+              <th class="border-bottom-only search-tags-hidden-column">Search tags</th>
             </tr>
           </thead>
 
@@ -557,6 +558,7 @@
                        <i class="fa fa-download"></i>
                     </a>
                   </td>
+                  <td tal:content="python:item.Description()"></td>
                 </tal:def>
               </tr>
             </tal:repeat>
@@ -741,8 +743,19 @@
           $('#data-table-download').dataTable({
             "order": [[ 1, "asc" ]],
             "columnDefs": [
-              { "targets": 'no-sort', "orderable": false },
-              { "width": "20px", "targets": 0 }
+              {
+                "targets": 'no-sort',
+                "orderable": false
+              },
+              {
+                "targets": 0,
+                "width": "20px"
+              },
+              {
+                "targets": 'search-tags-hidden-column',
+                "visible": false,
+                "searchable": true
+              }
             ],
             paging: false
           });
