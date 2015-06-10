@@ -2,6 +2,7 @@ from zope.component.hooks import getSite
 from Products.CMFCore.utils import getToolByName
 from zope.globalrequest import getRequest
 from Products.statusmessages.interfaces import IStatusMessage
+import requests
 
 
 def autofillFullname(principal, event):
@@ -44,3 +45,28 @@ def forceUpdateProfile(principal, event):
 
             edit_profile_url = site.portal_url() + '/@@personal-information'
             request.RESPONSE.redirect(edit_profile_url)
+
+
+def nice_sizeof(num, suffix='B'):
+    for unit in ['', 'K', 'M', 'G', 'T']:
+        if abs(num) < 1024.0:
+            return "%3.1f %s%s" % (num, unit, suffix)
+        num /= 1024.0
+    return "%.1f %s%s" % (num, 'Yi', suffix)
+
+
+def saveAutoExtractedFileSize(landfile, event):
+    """ Auto extract file size for created landfile based on its remoteUrl
+        info and save it in landfile.fileSize
+    """
+    try:
+        response = requests.head(landfile.remoteUrl)
+        if response.status_code != 200:
+            file_size = "N/A"
+        else:
+            file_size = int(response.headers.get('content-length', 0))
+            file_size = nice_sizeof(file_size)
+    except:
+        file_size = "N/A"  # Not Applicable, Not Available, No Answer
+
+    landfile.setFileSize(file_size)

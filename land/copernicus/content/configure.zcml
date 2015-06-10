@@ -45,4 +45,14 @@
     handler="land.copernicus.content.globalhandlers.forceUpdateProfile"
   />
 
+  <subscriber
+    for="land.copernicus.content.content.interfaces.ILandFile
+         Products.Archetypes.interfaces.IObjectInitializedEvent"
+    handler="land.copernicus.content.globalhandlers.saveAutoExtractedFileSize" />
+
+  <subscriber
+    for="land.copernicus.content.content.interfaces.ILandFile
+         Products.Archetypes.interfaces.IObjectEditedEvent"
+    handler="land.copernicus.content.globalhandlers.saveAutoExtractedFileSize" />
+
 </configure>

@@ -283,7 +283,7 @@ LANDFILE_SCHEMA = ATLink.schema.copy() + atapi.Schema((
         name='fileSize',
         widget=StringWidget(
             label="Download file size",
-            description="Download file size. It will be automatically extracted",
+            description="Let this field empty. It is automatically extracted.",
             i18n_domain='eea',
         ),
         default="",
