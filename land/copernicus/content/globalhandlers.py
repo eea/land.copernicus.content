@@ -2,7 +2,7 @@ from zope.component.hooks import getSite
 from Products.CMFCore.utils import getToolByName
 from zope.globalrequest import getRequest
 from Products.statusmessages.interfaces import IStatusMessage
-import requests
+import subprocess
 
 
 def autofillFullname(principal, event):
@@ -60,12 +60,18 @@ def saveAutoExtractedFileSize(landfile, event):
         info and save it in landfile.fileSize
     """
     try:
-        response = requests.head(landfile.remoteUrl)
-        if response.status_code != 200:
-            file_size = "N/A"
-        else:
-            file_size = int(response.headers.get('content-length', 0))
+        url = landfile.remoteUrl
+        cmd = "curl -sI " + url
+        args = cmd.split()
+        process = subprocess.Popen(args, shell=False, stdout=subprocess.PIPE,
+                                   stderr=subprocess.PIPE)
+        stdout, stderr = process.communicate()
+        if "200 OK" in stdout:
+            content_length_info = stdout.split("\r\n")[1]
+            file_size = int(content_length_info.split(":")[1])
             file_size = nice_sizeof(file_size)
+        else:
+            file_size = "N/A"
     except:
         file_size = "N/A"  # Not Applicable, Not Available, No Answer
 
