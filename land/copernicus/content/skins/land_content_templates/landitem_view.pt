@@ -182,6 +182,8 @@
   /* Download tab: datatable styles */
   #datatable-container{
     margin-top:-26px;
+    max-height: 500px;
+    overflow-y: auto;
   }
 
   #datatable-container table.dataTable thead .sorting_asc {
@@ -194,11 +196,6 @@
 
   #datatable-container table.dataTable thead .sorting {
     background: url("http://cdn.datatables.net/1.10.0/images/sort_both.png") no-repeat center left !important; /* Fix move sort icon to left */
-  }
-
-  #datatable-container .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-      background: white;
-      border-color: #ddd;
   }
 
   #data-table-download{
@@ -762,7 +759,7 @@
                 "searchable": true
               }
             ],
-            paging: true
+            paging: false
           });
 
           // tr hover
