@@ -196,6 +196,11 @@
     background: url("http://cdn.datatables.net/1.10.0/images/sort_both.png") no-repeat center left !important; /* Fix move sort icon to left */
   }
 
+  #datatable-container .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+      background: white;
+      border-color: #ddd;
+  }
+
   #data-table-download{
     border-collapse:collapse;
     background-color:white;
@@ -757,7 +762,7 @@
                 "searchable": true
               }
             ],
-            paging: false
+            paging: true
           });
 
           // tr hover
