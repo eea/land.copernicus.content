@@ -16,6 +16,7 @@
   </script>
   <style>
   @import url("http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
+  @import url("http://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css");
   @import url("./eea-tooltips.css");
 
   .loading_message {
@@ -181,20 +182,27 @@
   /* Download tab: datatable styles */
   #datatable-container{
     margin-top:-26px;
-    max-height: 500px;
-    overflow-y: auto;
+    overflow-y:visible;
   }
 
-  #datatable-container table.dataTable thead .sorting_asc {
-    background: url("http://cdn.datatables.net/1.10.0/images/sort_asc.png") no-repeat center left !important; /* Fix move sort icon to left */
+  .dataTables_scrollHeadInner, .dataTable{
+    width:100% !important;
   }
 
-  #datatable-container table.dataTable thead .sorting_desc {
-    background: url("http://cdn.datatables.net/1.10.0/images/sort_desc.png") no-repeat center left !important; /* Fix move sort icon to left */
+  .dataTables_scrollBody #data-table-download thead{
+    display:none;
   }
 
-  #datatable-container table.dataTable thead .sorting {
-    background: url("http://cdn.datatables.net/1.10.0/images/sort_both.png") no-repeat center left !important; /* Fix move sort icon to left */
+  #datatable-container table.dataTable thead .sorting_asc{
+    background:url("http://cdn.datatables.net/1.10.0/images/sort_asc.png") no-repeat center left !important; /* Fix move sort icon to left */
+  }
+
+  #datatable-container table.dataTable thead .sorting_desc{
+    background:url("http://cdn.datatables.net/1.10.0/images/sort_desc.png") no-repeat center left !important; /* Fix move sort icon to left */
+  }
+
+  #datatable-container table.dataTable thead .sorting{
+    background:url("http://cdn.datatables.net/1.10.0/images/sort_both.png") no-repeat center left !important; /* Fix move sort icon to left */
   }
 
   #data-table-download{
@@ -205,17 +213,22 @@
     margin-bottom: 0px !important;
   }
 
-  #data-table-download thead>tr>th{
+  #data-table-download thead>tr>th,
+  .dataTables_scrollHeadInner .dataTable thead>tr>th{
     padding-left: 16px !important;
   }
 
   #data-table-download td, th{
     padding:15px !important;
     overflow:hidden;
-    width:100px;
   }
 
-  #data-table-download .border-bottom-only{
+  #data-table-download tbody tr td:first-child{
+    width: 20px;
+  }
+
+  #data-table-download .border-bottom-only,
+  #datatable-container table th{
     border-left:none;
     border-right:none;
     border-top:none;
@@ -805,7 +818,9 @@
                 "type": 'file-size'
               }
             ],
-            paging: false
+            "scrollY": "500px",
+            "scrollCollapse": true,
+            "paging": false
           });
 
           // tr hover
