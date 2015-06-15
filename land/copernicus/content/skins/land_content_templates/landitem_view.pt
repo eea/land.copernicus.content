@@ -16,7 +16,6 @@
   </script>
   <style>
   @import url("http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
-  @import url("http://cdn.datatables.net/1.10.6/css/jquery.dataTables.min.css");
   @import url("./eea-tooltips.css");
 
   .loading_message {
@@ -525,7 +524,7 @@
               <th class="border-bottom-only" tal:repeat="cat catfields">
                 <span tal:replace="cat">Type</span>
               </th>
-              <th class="border-bottom-only">Size</th>
+              <th class="border-bottom-only file-size-column">Size</th>
               <th class="border-bottom-only text-centered no-sort">Download</th>
               <th class="border-bottom-only search-tags-hidden-column">Search tags</th>
             </tr>
@@ -550,8 +549,8 @@
                             tal:attributes="class python:value.lower().replace(' ', '-')">Value</span>
                     </td>
                   </tal:repeat>
-                  <td class="border-top-only">
-                    <span class="info-size" tal:content="item/getFileSize">70.14 MB</span>
+                  <td class="border-top-only" tal:content="item/getFileSize">
+                    70.14 MB
                   </td>
                   <td class="border-top-only text-centered no-sorting-icons">
                     <span class="download-gray-icon"><i class="fa fa-download"></i></span>
@@ -582,10 +581,53 @@
         </form>
       </div>
 
-      <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
+      <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
       <script type="text/javascript" language="javascript" src="eea-tooltips.js"></script>
 
       <script>
+
+            /**
+           * IMPORTANT: Don't use version on CDN for this plugin.
+           * This code used here was FIXED to work for NaN values like "N/A".
+           *
+           * When dealing with computer file sizes, it is common to append a post fix
+           * such as B, KB, MB or GB to a string in order to easily denote the order of
+           * magnitude of the file size. This plug-in allows sorting to take these
+           * indicates of size into account.
+           *
+           * A counterpart type detection plug-in is also available.
+           *
+           *  @name File size
+           *  @summary Sort abbreviated file sizes correctly (8MB, 4KB, etc)
+           *  @author Allan Jardine - datatables.net
+           *
+           *  @example
+           *    $('#example').DataTable( {
+           *       columnDefs: [
+           *         { type: 'file-size', targets: 0 }
+           *       ]
+           *    } );
+           *
+           */
+
+          jQuery.fn.dataTable.ext.type.order['file-size-pre'] = function (data) {
+            var units = data.replace(/[\d\.]/g, '').toLowerCase();
+            var multiplier = 1;
+
+            if (units === 'kb') {
+              multiplier = 1000;
+            } else if (units === 'mb') {
+                multiplier = 1000000;
+            } else if (units === 'gb') {
+              multiplier = 1000000000;
+            }
+            if (isNaN(parseFloat(data)) == true) {
+              return multiplier; // was "N/A", empty or some string.
+            } else {
+              return parseFloat(data) * multiplier;
+            }
+          };
+
         $(document).ready(function(){
           function is_validated_dataset(){
             return $("#checkbox-accept-non-validated").length === 0;
@@ -757,6 +799,10 @@
                 "targets": 'search-tags-hidden-column',
                 "visible": false,
                 "searchable": true
+              },
+              {
+                "targets": 'file-size-column',
+                "type": 'file-size'
               }
             ],
             paging: false
