@@ -161,3 +161,15 @@ class DownloadLandFileView(BrowserView):
         return {'institutional_domain': institutional_domain,
                 'professional_thematic_domain': professional_thematic_domain,
                 'start_download_url': remoteUrl}
+
+
+class EAGLEContactFormView(BrowserView):
+    """ EAGLE Contact Page
+    """
+    index = ViewPageTemplateFile("templates/eagle-contact.pt")
+
+    def render(self):
+        return self.index()
+
+    def __call__(self):
+        return self.render()

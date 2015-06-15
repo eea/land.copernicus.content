@@ -50,6 +50,14 @@
     />
 
   <browser:page
+    name="eagle-contact"
+    class=".views.EAGLEContactFormView"
+    permission="zope2.View"
+    for="Products.CMFPlone.Portal.PloneSite"
+    template="templates/eagle-contact.pt"
+    />
+
+  <browser:page
     name="tpdb"
     class=".views.GoPDB"
     permission="zope2.View"
