@@ -173,3 +173,59 @@ class EAGLEContactFormView(BrowserView):
 
     def __call__(self):
         return self.render()
+
+    @property
+    def values(self):
+        errors = []
+
+        return {'errors': errors}
+
+    def validate_form(self):
+        errors = []
+
+        form = self.request.form
+        if bool(form) is not False:
+            sender_from_address = form.get('sender_from_address', None)
+            subject = form.get('subject', None)
+            message = form.get('message', None)
+
+            from Products.CMFPlone import PloneMessageFactory as _
+            reg_tool = self.context.portal_registration
+            if not sender_from_address:
+                error = (
+                    'sender_from_address',
+                    _(u'Please submit an email address.'),
+                    'sender_from_address_required')
+                errors.append(error)
+            else:
+                if reg_tool.isValidEmail(sender_from_address):
+                    pass
+                else:
+                    error = (
+                        'sender_from_address',
+                        _(u'You entered an invalid email address.'),
+                        'invalid_email')
+                    errors.append(error)
+
+            if not (subject and subject.strip()):
+                error = (
+                    'subject',
+                    _(u'Please enter a subject.'),
+                    'subject_required')
+                errors.append(error)
+
+            if not (message and message.strip()):
+                error = (
+                    'message', _(u'Please enter a message'),
+                    'message_required')
+                errors.append(error)
+
+            if len(errors) > 0:
+                self.context.plone_utils.addPortalMessage(
+                    _(u'Please correct the indicated errors.'), 'error')
+                is_validated = False
+            else:
+                is_validated = True
+            if not is_validated:
+                self.request.form['errors'] = errors
+                self.request.RESPONSE.redirect(self.request.URL)
