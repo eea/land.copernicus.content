@@ -61,12 +61,17 @@ def saveAutoExtractedFileSize(landfile, event):
     """
     try:
         url = landfile.remoteUrl
-        cmd = "curl -sI " + url
+        cmd = "curl -sIL " + url
         args = cmd.split()
         process = subprocess.Popen(args, shell=False, stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE)
         stdout, stderr = process.communicate()
-        if "200 OK" in stdout:
+        if "302 Moved" in stdout:
+            part = stdout.split("Content-Length: ")[-1]
+            file_size = int(
+                [token for token in part.split() if token.isdigit()][0])
+            file_size = nice_sizeof(file_size)
+        elif "200 OK" in stdout:
             content_length_info = stdout.split("\r\n")[1]
             file_size = int(content_length_info.split(":")[1])
             file_size = nice_sizeof(file_size)
