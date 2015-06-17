@@ -30,10 +30,15 @@
                     "
         tal:attributes="class python:(oddrow and 'portletItem even' or 'portletItem odd') + frozen_style">
         <tal:block tal:condition="has_link">
-            <tal:block tal:define="href python:links[0].getRemoteUrl; portal_url context/portal_url;">
+            <tal:block tal:define="href python:links[0].getRemoteUrl; portal_url context/portal_url;
+                      eagle_folder python:'/eagle';
+                      is_eagle_link python:eagle_folder in href;
+                      is_eagle_parent_link python:href.endswith(eagle_folder);
+                      eagle_class python:' eagle-link' if is_eagle_link else ' not-eagle-link';
+                      eagle_class python:' eagle-parent-link' if is_eagle_parent_link else eagle_class">
                 <a href="#"  tal:condition="python: href.startswith(portal_url)"
                    tal:attributes="href python:links[0].getRemoteUrl;
-                                   class python:'tile contenttype-' + normalizeString(obj.portal_type);
+                                   class python:'tile contenttype-' + normalizeString(obj.portal_type) + eagle_class;
                                    title obj/Description;">
                     <img tal:replace="structure item_icon/html_tag" />
                     <span tal:replace="obj/pretty_title_or_id">
@@ -47,7 +52,7 @@
                 </a>
                 <a href="#"  tal:condition="python: not href.startswith(portal_url)"
                    tal:attributes="href python:links[0].getRemoteUrl;
-                                   class python:'tile contenttype-' + normalizeString(obj.portal_type);
+                                   class python:'tile contenttype-' + normalizeString(obj.portal_type)  + eagle_class;
                                    title obj/Description;
                                    rel string:external">
                     <img tal:replace="structure item_icon/html_tag" />
@@ -91,3 +96,14 @@
     </dd>
 
 </dl>
+
+<script>
+  $(document).ready(function(){
+    var $eagle_links = $(".eagle-link");
+    $eagle_links.parent().hide();
+    $('.eagle-parent-link').on('click', function(evt){
+      evt.preventDefault();
+      $eagle_links.parent().toggle();
+    })
+  });
+</script>
