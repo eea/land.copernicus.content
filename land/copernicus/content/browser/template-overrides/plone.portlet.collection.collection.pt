@@ -64,6 +64,7 @@
                           tal:content="python:toLocalizedTime(obj.Date)">
                         Date
                     </span>
+                    <span tal:condition="is_eagle_parent_link" class="arrowDownAlternative">▼</span>
                 </a>
             </tal:block>
         </tal:block>
