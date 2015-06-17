@@ -101,10 +101,16 @@
 <script>
   $(document).ready(function(){
     var $eagle_links = $(".eagle-link");
+    var $eagle_parent_link = $('.eagle-parent-link');
+
     $eagle_links.parent().hide();
-    $('.eagle-parent-link').on('click', function(evt){
+    $eagle_parent_link.on('click', function(evt){
       evt.preventDefault();
       $eagle_links.parent().toggle();
+
+      $eagle_parent_link.removeClass("active");
+      $eagle_parent_link.removeClass(":active");
+      $eagle_parent_link.blur();
     })
   });
 </script>
