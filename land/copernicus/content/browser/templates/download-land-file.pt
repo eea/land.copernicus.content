@@ -35,7 +35,8 @@
           'eventValue': 1
         });
 
-        window.location.replace(start_download_url);
+        var newTab = window.open(start_download_url, "_blank");
+        window.top.close();
       });
     </script>
   </div>
