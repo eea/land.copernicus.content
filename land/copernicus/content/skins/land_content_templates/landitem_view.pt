@@ -533,7 +533,7 @@
               <th class="border-bottom-only no-sort">
                 <input class="checkbox-select-all" type="checkbox" value="select-item" />
               </th>
-              <th class="border-bottom-only">Name</th>
+              <th class="border-bottom-only special-chars-sort">Name</th>
               <th class="border-bottom-only" tal:repeat="cat catfields">
                 <span tal:replace="cat">Type</span>
               </th>
@@ -639,6 +639,14 @@
             } else {
               return parseFloat(data) * multiplier;
             }
+          };
+
+          // This fixes sort alphabetically for special characters
+          jQuery.fn.dataTableExt.oSort['special-chars-sort-asc']  = function(a,b) {
+            return a.localeCompare(b);
+          };
+          jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
+            return b.localeCompare(a);
           };
 
         $(document).ready(function(){
@@ -816,6 +824,10 @@
               {
                 "targets": 'file-size-column',
                 "type": 'file-size'
+              },
+              {
+                "targets": 'special-chars-sort',
+                "type": 'special-chars-sort'
               }
             ],
             "scrollY": "500px",
