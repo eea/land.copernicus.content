@@ -1,6 +1,7 @@
 <configure
   xmlns="http://namespaces.zope.org/zope"
   xmlns:browser="http://namespaces.zope.org/browser"
+  xmlns:zcml="http://namespaces.zope.org/zcml"
   i18n_domain="eea">
 
   <include file="backports.zcml" />
@@ -66,94 +67,95 @@
     file="markFrozen.js"
     />
 
-  <interface interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+  <configure zcml:condition="installed Products.PloneHelpCenter">
+    <interface interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
 
-  <class class="Products.PloneHelpCenter.types.Definition.HelpCenterDefinition">
-    <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
-  </class>
+    <class class="Products.PloneHelpCenter.types.Definition.HelpCenterDefinition">
+      <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+    </class>
 
-  <class class="Products.PloneHelpCenter.types.ErrorReference.HelpCenterErrorReference">
-    <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
-  </class>
+    <class class="Products.PloneHelpCenter.types.ErrorReference.HelpCenterErrorReference">
+      <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+    </class>
 
-  <class class="Products.PloneHelpCenter.types.FAQ.HelpCenterFAQ">
-    <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
-  </class>
+    <class class="Products.PloneHelpCenter.types.FAQ.HelpCenterFAQ">
+      <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+    </class>
 
-  <class class="Products.PloneHelpCenter.types.FAQFolder.HelpCenterFAQFolder">
-    <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
-  </class>
+    <class class="Products.PloneHelpCenter.types.FAQFolder.HelpCenterFAQFolder">
+      <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+    </class>
 
-  <class class="Products.PloneHelpCenter.types.Glossary.HelpCenterGlossary">
-    <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
-  </class>
+    <class class="Products.PloneHelpCenter.types.Glossary.HelpCenterGlossary">
+      <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+    </class>
 
-  <class class="Products.PloneHelpCenter.types.HelpCenter.HelpCenter">
-    <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
-  </class>
+    <class class="Products.PloneHelpCenter.types.HelpCenter.HelpCenter">
+      <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+    </class>
 
-  <class class="Products.PloneHelpCenter.types.HowTo.HelpCenterHowTo">
-    <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
-  </class>
+    <class class="Products.PloneHelpCenter.types.HowTo.HelpCenterHowTo">
+      <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+    </class>
 
-  <class class="Products.PloneHelpCenter.types.HowToFolder.HelpCenterHowToFolder">
-    <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
-  </class>
+    <class class="Products.PloneHelpCenter.types.HowToFolder.HelpCenterHowToFolder">
+      <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+    </class>
 
-  <class class="Products.PloneHelpCenter.types.InstructionalVideo.HelpCenterInstructionalVideo">
-    <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
-  </class>
+    <class class="Products.PloneHelpCenter.types.InstructionalVideo.HelpCenterInstructionalVideo">
+      <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+    </class>
 
-  <class class="Products.PloneHelpCenter.types.InstructionalVideoFolder.HelpCenterInstructionalVideoFolder">
-    <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
-  </class>
+    <class class="Products.PloneHelpCenter.types.InstructionalVideoFolder.HelpCenterInstructionalVideoFolder">
+      <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+    </class>
 
-  <class class="Products.PloneHelpCenter.types.KnowledgeBase.HelpCenterKnowledgeBase">
-    <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
-  </class>
+    <class class="Products.PloneHelpCenter.types.KnowledgeBase.HelpCenterKnowledgeBase">
+      <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+    </class>
 
-  <class class="Products.PloneHelpCenter.types.LeafPage.HelpCenterLeafPage">
-    <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
-  </class>
+    <class class="Products.PloneHelpCenter.types.LeafPage.HelpCenterLeafPage">
+      <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+    </class>
 
-  <class class="Products.PloneHelpCenter.types.Link.HelpCenterLink">
-    <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
-  </class>
+    <class class="Products.PloneHelpCenter.types.Link.HelpCenterLink">
+      <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+    </class>
 
-  <class class="Products.PloneHelpCenter.types.LinkFolder.HelpCenterLinkFolder">
-    <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
-  </class>
+    <class class="Products.PloneHelpCenter.types.LinkFolder.HelpCenterLinkFolder">
+      <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+    </class>
 
-  <class class="Products.PloneHelpCenter.types.LinkFolder.HelpCenterLinkFolder">
-    <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
-  </class>
+    <class class="Products.PloneHelpCenter.types.LinkFolder.HelpCenterLinkFolder">
+      <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+    </class>
 
-  <class class="Products.PloneHelpCenter.types.ReferenceManual.HelpCenterReferenceManual">
-    <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
-  </class>
+    <class class="Products.PloneHelpCenter.types.ReferenceManual.HelpCenterReferenceManual">
+      <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+    </class>
 
-  <class class="Products.PloneHelpCenter.types.ReferenceManualFolder.HelpCenterReferenceManualFolder">
-    <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
-  </class>
+    <class class="Products.PloneHelpCenter.types.ReferenceManualFolder.HelpCenterReferenceManualFolder">
+      <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+    </class>
 
-  <class class="Products.PloneHelpCenter.types.ReferenceManualPage.HelpCenterReferenceManualPage">
-    <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
-  </class>
+    <class class="Products.PloneHelpCenter.types.ReferenceManualPage.HelpCenterReferenceManualPage">
+      <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+    </class>
 
-  <class class="Products.PloneHelpCenter.types.ReferenceManualSection.HelpCenterReferenceManualSection">
-    <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
-  </class>
+    <class class="Products.PloneHelpCenter.types.ReferenceManualSection.HelpCenterReferenceManualSection">
+      <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+    </class>
 
-  <class class="Products.PloneHelpCenter.types.Tutorial.HelpCenterTutorial">
-    <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
-  </class>
+    <class class="Products.PloneHelpCenter.types.Tutorial.HelpCenterTutorial">
+      <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+    </class>
 
-  <class class="Products.PloneHelpCenter.types.TutorialFolder.HelpCenterTutorialFolder">
-    <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
-  </class>
+    <class class="Products.PloneHelpCenter.types.TutorialFolder.HelpCenterTutorialFolder">
+      <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+    </class>
 
-  <class class="Products.PloneHelpCenter.types.TutorialPage.HelpCenterTutorialPage">
-    <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
-  </class>
-
+    <class class="Products.PloneHelpCenter.types.TutorialPage.HelpCenterTutorialPage">
+      <implements interface="Products.CMFPlone.interfaces.INonStructuralFolder" />
+    </class>
+  </configure>
 </configure>
