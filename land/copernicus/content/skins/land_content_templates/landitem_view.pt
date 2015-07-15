@@ -650,6 +650,12 @@
           };
 
         $(document).ready(function(){
+          function init_items_order(){
+            $('.checkbox-select-item').each(function(i){
+              this.setAttribute("item_order", i);
+            });
+          }
+
           function user_seems_to_be_anonymous(){
             /* Used only to prevent opening multiple unnecessary login tabs. */
             return $("#personaltools-login").length === 1;
@@ -697,7 +703,7 @@
             var selected = "?selected=";
             $('.checkbox-select-item').each(function(i){
               if($(this).attr("checked")){
-                selected += i + '-'
+                selected += this.getAttribute("item_order") + '-'
               }
             });
 
@@ -751,7 +757,8 @@
 
           function auto_select_checkboxes(checkboxes_indexes_array){
             $('.checkbox-select-item').each(function(i){
-              if($.inArray(i.toString(), checkboxes_indexes_array) != -1){
+              var item_order = this.getAttribute("item_order");
+              if($.inArray(item_order.toString(), checkboxes_indexes_array) != -1){
                 $(this).attr("checked", true);
               }
             });
@@ -823,6 +830,8 @@
           } else {
             enable_download_buttons();
           }
+
+          init_items_order();
 
           interpret_url_params_if_any();  // set by RedirectDownloadUrl class
 
