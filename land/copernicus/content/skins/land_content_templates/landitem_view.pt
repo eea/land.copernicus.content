@@ -650,6 +650,11 @@
           };
 
         $(document).ready(function(){
+          function user_seems_to_be_anonymous(){
+            /* Used only to prevent opening multiple unnecessary login tabs. */
+            return $("#personaltools-login").length === 1;
+          }
+
           function is_validated_dataset(){
             return $("#checkbox-accept-non-validated").length === 0;
           }
@@ -705,21 +710,37 @@
 
           function download_all(){
             save_selected_items_in_url();
+            var anon = user_seems_to_be_anonymous();
             var download_buttons = $('.download-button');
             for(var i = 0; i < download_buttons.length; i++){
               var button = download_buttons[i];
-              button.click();
+              if(anon){
+                /* A single login tab is neccessary. */
+                button.removeAttribute("target");
+                button.click();
+                break;
+              } else {
+                button.click();
+              }
             }
           }
 
           function download_selected(){
             save_selected_items_in_url();
+            var anon = user_seems_to_be_anonymous();
             var download_buttons = $('.checkbox-select-item:checked')
                                    .closest('tr').find('.download-button');
 
             for(var i = 0; i < download_buttons.length; i++){
               var button = download_buttons[i];
-              button.click();
+              if(anon){
+                /* A single login tab is neccessary. */
+                button.removeAttribute("target");
+                button.click();
+                break;
+              } else {
+                button.click();
+              }
             }
           }
 
@@ -885,6 +906,12 @@
           $('.download-button').on("click", function(evt){
             if($(this).hasClass("disabled")){
               evt.preventDefault();
+            } else {
+              var anon = user_seems_to_be_anonymous();
+              if(anon){
+                /* A single login tab is neccessary. */
+                this.removeAttribute("target");
+              }
             }
           });
         });
