@@ -823,6 +823,14 @@
             }
           }
 
+          function fix_table_height(){
+            var number_of_items = $('.checkbox-select-item').length;
+            if(number_of_items < 10){
+              var table_height = number_of_items * 50 + 10;
+              $('.dataTables_scrollBody').css('height', table_height);
+            }
+          }
+
           // INIT
           if (!is_validated_dataset()){
             disable_download_buttons();
@@ -864,6 +872,8 @@
             "scrollCollapse": true,
             "paging": false
           });
+
+          fix_table_height();
 
           // tr hover
           $('.download-button').hide();
