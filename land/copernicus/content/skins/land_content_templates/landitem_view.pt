@@ -526,6 +526,14 @@
                 tal:define="portal_url python:context.portal_url()">
     <dt id="fieldsetlegend-download" i18n:translate="">Download</dt>
     <dd id="fieldset-download">
+
+      <!-- if no landfile in datatable this will be visible -->
+      <div id="extra-info">
+        <span tal:define="extra_info python: context.getField('download').getAccessor(context)()"
+             tal:replace="structure extra_info">
+        </span>
+      </div>
+
       <div id="datatable-container">
         <table id="data-table-download" width="100%" tal:define="catfields python:context.getField('fileCategories').getAccessor(context)()">
           <thead>
@@ -823,15 +831,30 @@
             }
           }
 
-          function fix_table_height(){
+          function replace_missing_or_fix_short(){
             var number_of_items = $('.checkbox-select-item').length;
+
             if(number_of_items < 10){
-              var table_height = number_of_items * 50 + 10;
-              $('.dataTables_scrollBody').css('height', table_height);
+              if(number_of_items == 0){
+
+                /* Replace with extra info */
+                $("#datatable-container").hide();
+                $("#disclaimer-download-container").hide();
+                $("#extra-info").show();
+
+              } else {
+
+                /* Fix table height */
+                var table_height = number_of_items * 50 + 10;
+                $('.dataTables_scrollBody').css('height', table_height);
+
+              }
             }
           }
 
           // INIT
+          $("#extra-info").hide();
+
           if (!is_validated_dataset()){
             disable_download_buttons();
             add_not_validated_tag();
@@ -873,7 +896,7 @@
             "paging": false
           });
 
-          fix_table_height();
+          replace_missing_or_fix_short();
 
           // tr hover
           $('.download-button').hide();
@@ -939,7 +962,7 @@
   </tal:download>
 
   <!-- Old Download - temporary download -->
-  <tal:download tal:condition="python:(getattr(context, 'show_new_download', None) is False) or user_is_admin">
+  <tal:download tal:condition="python:(getattr(context, 'show_new_download', None) is False)">
     <dt id="fieldsetlegend-download-old" i18n:translate="">Download</dt>
     <dd id="fieldset-download-old"
         tal:define="download_info python: context.getField('download').getAccessor(context)()">
