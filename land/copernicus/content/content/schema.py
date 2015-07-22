@@ -70,6 +70,19 @@ PRODUCT_SCHEMA = Schema((
             description=("Check this only if dataset is validated.")
             ),
     ),
+    StringField(
+        name='notValidatedCustomText',
+        widget=StringWidget(
+            label="Custom text for not validated",
+            description=(
+                "If this dataset is not validated you can set a "
+                "custom label text here."),
+            i18n_domain='eea',
+        ),
+        default="",
+        searchable=False,
+        schemata="default",
+    ),
     LinesField(
         name='geographicCoverage',
         languageIndependent=True,

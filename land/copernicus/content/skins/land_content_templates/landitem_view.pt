@@ -471,6 +471,13 @@
   }
 </style>
 
+<!-- custom label text for not validated datasets -->
+<span id="not-validated-custom-text">
+  <span tal:define="not_validated_custom python: context.getField('notValidatedCustomText').getAccessor(context)()"
+        tal:replace="structure not_validated_custom">
+  </span>
+</span>
+
 <dl class="enableFormTabbing"
     tal:define="membership python:context.portal_membership;
                 user python:membership.getAuthenticatedMember();
@@ -675,7 +682,12 @@
 
           function add_not_validated_tag(){
             $("#parent-fieldname-title").css("display", "inline");
-            $("#parent-fieldname-title").after("<span class='not-validated-tag'>Not validated.</span>");
+            var not_validated_text = $("#not-validated-custom-text").text();
+            $("#not-validated-custom-text").hide();
+            if(not_validated_text.length < 5){
+              not_validated_text = "Not validated.";
+            }
+            $("#parent-fieldname-title").after("<span class='not-validated-tag'>" + not_validated_text + "</span>");
           }
           function disable_download_buttons(){
             $("#button-download-selected").attr("disabled", "disabled");
@@ -860,6 +872,7 @@
             add_not_validated_tag();
           } else {
             enable_download_buttons();
+            $("#not-validated-custom-text").hide();
           }
 
           init_items_order();
