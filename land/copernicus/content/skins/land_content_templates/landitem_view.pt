@@ -566,7 +566,7 @@
                     fileCategories python: {d.get('name', ''): d.get('value', '') for d in fileCategories};
                     ">
                   <td class="border-top-only">
-                    <input class="checkbox-select-item" type="checkbox" value="select-item" />
+                    <input tal:attributes="item_id python:item.getId()" class="checkbox-select-item" type="checkbox" value="select-item" />
                   </td>
 
                   <td class="border-top-only" tal:content="item/Title"></td>
@@ -665,11 +665,6 @@
           };
 
         $(document).ready(function(){
-          function init_items_order(){
-            $('.checkbox-select-item').each(function(i){
-              this.setAttribute("item_order", i);
-            });
-          }
 
           function user_seems_to_be_anonymous(){
             /* Used only to prevent opening multiple unnecessary login tabs. */
@@ -723,7 +718,7 @@
             var selected = "?selected=";
             $('.checkbox-select-item').each(function(i){
               if($(this).attr("checked")){
-                selected += this.getAttribute("item_order") + '-'
+                selected += '@' + this.getAttribute("item_id");
               }
             });
 
@@ -777,8 +772,8 @@
 
           function auto_select_checkboxes(checkboxes_indexes_array){
             $('.checkbox-select-item').each(function(i){
-              var item_order = this.getAttribute("item_order");
-              if($.inArray(item_order.toString(), checkboxes_indexes_array) != -1){
+              var item_id = this.getAttribute("item_id");
+              if($.inArray(item_id.toString(), checkboxes_indexes_array) != -1){
                 $(this).attr("checked", true);
               }
             });
@@ -812,8 +807,9 @@
           }
 
           function download_auto_selected(download_tab_param){
-          // Example in URL: fieldsetlegend-download=true-selected-0-1 => autoselected first 2 checkboxes
-            var auto_selected_checkboxes_indexes = download_tab_param.split("-").filter(function(c){return !isNaN(c)&&(c != '');});
+          // Example in URL: fieldsetlegend-download=true-selected-@clc_2006@landitem_new => autoselected by id
+          // "clc_2006" and "landitem_new" land items
+            var auto_selected_checkboxes_indexes = download_tab_param.split("@");
             auto_select_checkboxes(auto_selected_checkboxes_indexes);
             refresh_counter();
             auto_accept_not_validated();
@@ -874,8 +870,6 @@
             enable_download_buttons();
             $("#not-validated-custom-text").hide();
           }
-
-          init_items_order();
 
           interpret_url_params_if_any();  // set by RedirectDownloadUrl class
 
