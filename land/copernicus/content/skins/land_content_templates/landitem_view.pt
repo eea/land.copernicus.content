@@ -642,11 +642,11 @@
             var units = data.replace(/[\d\.]/g, '').toLowerCase();
             var multiplier = 1;
 
-            if (units === 'kb') {
+            if (units === ' kb') {
               multiplier = 1000;
-            } else if (units === 'mb') {
+            } else if (units === ' mb') {
                 multiplier = 1000000;
-            } else if (units === 'gb') {
+            } else if (units === ' gb') {
               multiplier = 1000000000;
             }
             if (isNaN(parseFloat(data)) == true) {
