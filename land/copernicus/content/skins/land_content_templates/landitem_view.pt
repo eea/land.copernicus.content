@@ -535,9 +535,7 @@
     <dd id="fieldset-download"
         tal:define="download_info python: context.getField('download').getAccessor(context)()">
 
-      <div tal:condition="python:download_info"
-           style="border: 1px solid #ccc; background: #f1f1f1; padding: 10px; border-radius: 10px; margin-top:-10px; margin-bottom: 25px;"
-           id="download-info">
+      <div tal:condition="python:download_info" id="download-info">
         <span tal:replace="structure download_info"></span>
       </div>
 
