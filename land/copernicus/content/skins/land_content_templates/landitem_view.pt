@@ -532,12 +532,13 @@
   <tal:download tal:condition="python:(getattr(context, 'show_new_download', None) is True) or user_is_admin"
                 tal:define="portal_url python:context.portal_url()">
     <dt id="fieldsetlegend-download" i18n:translate="">Download</dt>
-    <dd id="fieldset-download">
+    <dd id="fieldset-download"
+        tal:define="download_info python: context.getField('download').getAccessor(context)()">
 
-      <div id="extra-info">
-        <span tal:define="extra_info python: context.getField('download').getAccessor(context)()"
-             tal:replace="structure extra_info">
-        </span>
+      <div tal:condition="python:download_info"
+           style="border: 1px solid #ccc; background: #f1f1f1; padding: 10px; border-radius: 10px; margin-top:-10px; margin-bottom: 25px;"
+           id="download-info">
+        <span tal:replace="structure download_info"></span>
       </div>
 
       <div id="datatable-container">
@@ -843,17 +844,13 @@
 
             if(number_of_items < 10){
               if(number_of_items == 0){
-
-                /* Replace with extra info */
                 $("#datatable-container").hide();
                 $("#disclaimer-download-container").hide();
-
               } else {
 
                 /* Fix table height */
                 var table_height = number_of_items * 50 + 10;
                 $('.dataTables_scrollBody').css('height', table_height);
-
               }
             }
           }
