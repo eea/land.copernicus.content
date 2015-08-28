@@ -534,7 +534,6 @@
     <dt id="fieldsetlegend-download" i18n:translate="">Download</dt>
     <dd id="fieldset-download">
 
-      <!-- if no landfile in datatable this will be visible -->
       <div id="extra-info">
         <span tal:define="extra_info python: context.getField('download').getAccessor(context)()"
              tal:replace="structure extra_info">
@@ -848,7 +847,6 @@
                 /* Replace with extra info */
                 $("#datatable-container").hide();
                 $("#disclaimer-download-container").hide();
-                $("#extra-info").show();
 
               } else {
 
@@ -861,8 +859,6 @@
           }
 
           // INIT
-          $("#extra-info").hide();
-
           if (!is_validated_dataset()){
             disable_download_buttons();
             add_not_validated_tag();
