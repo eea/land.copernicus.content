@@ -678,7 +678,7 @@
             var not_validated_text = $("#not-validated-custom-text").text();
             $("#not-validated-custom-text").hide();
             if(not_validated_text.length < 5){
-              not_validated_text = "Not validated.";
+              not_validated_text = "Not yet validated.";
             }
             $("#parent-fieldname-title").after("<span class='not-validated-tag'>" + not_validated_text + "</span>");
           }
