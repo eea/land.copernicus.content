@@ -1,0 +1,12 @@
+<div tal:define="contact_form_url python:context.absolute_url() + '/contact-form'">
+  <script tal:content="string:var page_url='${contact_form_url}';"></script>
+
+  <script>
+    window.location.replace(page_url);
+  </script>
+
+  <p>
+    If you are not redirected click here: 
+    <a tal:attributes="href contact_form_url" href="">Contact form</a>
+  </p>
+</div>
