@@ -9,7 +9,7 @@ setup(name=name,
       version=version,
       description="Custom Content-Types for Land Copernicus",
       long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+      open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[
@@ -30,6 +30,7 @@ setup(name=name,
           'lxml',
           'plone.app.registry',
           'z3c.jbot',
-          'Wand'
+          'Wand',
+          'Products.DataGridField'
       ],
       )
