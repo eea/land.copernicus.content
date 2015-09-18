@@ -3,7 +3,7 @@ Changelog
 
 2.4.dev0 - (unreleased)
 -----------------------
-* Bug fix: [Jenkins] Added Products.DataGridField to install requires.
+* Bug fix: [Jenkins] Updated install requires.
   [GhitaB refs #28876]
 
 * Feature: Changed widget for thematic_domain and institutional_domain to 

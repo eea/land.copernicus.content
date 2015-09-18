@@ -31,6 +31,9 @@ setup(name=name,
           'plone.app.registry',
           'z3c.jbot',
           'Wand',
-          'Products.DataGridField'
+          'Products.DataGridField',
+          'eea.forms',
+          'Products.ATVocabularyManager',
+          'eea.cache',
       ],
       )
