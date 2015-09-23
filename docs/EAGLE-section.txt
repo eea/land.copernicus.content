@@ -48,11 +48,11 @@ http://land.copernicus.eu/
     Settings: Exclude from navidation (Checked)
     State: Private [TODO] Make it public when ready.
 
-  http://land.copernicus.eu/eagle-contact/quickedit
-    [TODO] Need categories?
+  http://land.copernicus.eu/eagle-contact/folder_contents
+    Add new Captcha field: Prevent spam
+    Add new Selection field: Category
 
   http://land.copernicus.eu/eagle-contact/mailer/edit
-    [TODO] Settings
     Recipient's full name
     Recipient's e-mail address
 
