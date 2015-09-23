@@ -49,7 +49,6 @@ http://land.copernicus.eu/
     State: Private [TODO] Make it public when ready.
 
   http://land.copernicus.eu/eagle-contact/quickedit
-    [TODO] Add Captcha Field
     [TODO] Need categories?
 
   http://land.copernicus.eu/eagle-contact/mailer/edit
