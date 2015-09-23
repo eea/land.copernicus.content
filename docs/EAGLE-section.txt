@@ -5,6 +5,7 @@ EAGLE Section permissions: http://land.copernicus.eu/eagle/@@sharing
 EAGLE Team: http://land.copernicus.eu/@@usergroup-groupmembership?groupname=EAGLE-Team
 EAGLE Contact: http://land.copernicus.eu/eagle-contact/
 General Information: http://land.copernicus.eu/eagle/general-information
+Forum: http://land.copernicus.eu/eagle/forum
 
 
 CHANGELOG
@@ -55,3 +56,10 @@ General Information (Page)
   http://land.copernicus.eu/eagle/general-information
   State: Private [TODO] Make it public when ready.
   [TODO] Add Meetings and Events info
+
+Forum
+-----
+  http://land.copernicus.eu/eagle
+    Add new Message Board
+      Title: Forum
+      [TODO] Add categories, sections, topics. Settings.
