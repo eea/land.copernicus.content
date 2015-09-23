@@ -1,13 +1,26 @@
 DOCS
-----
-EAGLE Section is a folder: http://land.copernicus.eu/eagle/
+====
+EAGLE Section folder: http://land.copernicus.eu/eagle/
+EAGLE Team group: http://land.copernicus.eu/@@usergroup-groupmembership?groupname=EAGLE-Team
 
 
 CHANGELOG
----------
+=========
+
+EAGLE Section (Folder)
+----------------------
 http://land.copernicus.eu/
   Add new folder:
     Title: EAGLE
     Description: EAGLE Working Group
     Settings: Exclude from navidation (Checked)
     State: Private [TODO] Make it public when ready.
+
+EAGLE Team (Group)
+------------------
+http://land.copernicus.eu/@@usergroup-groupprefs
+  Add new group:
+    Name: EAGLE-Team
+    Title: EAGLE Team
+    Description: This group has access rights to the EAGLE folder and it's components.
+    [TODO] Add members: http://land.copernicus.eu/@@usergroup-groupmembership?groupname=EAGLE-Team
