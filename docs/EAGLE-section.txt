@@ -4,6 +4,7 @@ EAGLE Section: http://land.copernicus.eu/eagle/
 EAGLE Section permissions: http://land.copernicus.eu/eagle/@@sharing
 EAGLE Team: http://land.copernicus.eu/@@usergroup-groupmembership?groupname=EAGLE-Team
 EAGLE Contact: http://land.copernicus.eu/eagle-contact/
+General Information: http://land.copernicus.eu/eagle/general-information
 
 
 CHANGELOG
@@ -48,3 +49,9 @@ http://land.copernicus.eu/
     [TODO] Settings
     Recipient's full name
     Recipient's e-mail address
+
+General Information (Page)
+--------------------------
+  http://land.copernicus.eu/eagle/general-information
+  State: Private [TODO] Make it public when ready.
+  [TODO] Add Meetings and Events info
