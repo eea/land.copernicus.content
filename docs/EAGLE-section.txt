@@ -1,7 +1,9 @@
 DOCS
 ====
-EAGLE Section folder: http://land.copernicus.eu/eagle/
-EAGLE Team group: http://land.copernicus.eu/@@usergroup-groupmembership?groupname=EAGLE-Team
+EAGLE Section: http://land.copernicus.eu/eagle/
+EAGLE Section permissions: http://land.copernicus.eu/eagle/@@sharing
+EAGLE Team: http://land.copernicus.eu/@@usergroup-groupmembership?groupname=EAGLE-Team
+EAGLE Contact: http://land.copernicus.eu/eagle-contact/
 
 
 CHANGELOG
@@ -15,6 +17,11 @@ http://land.copernicus.eu/
     Description: EAGLE Working Group
     Settings: Exclude from navidation (Checked)
     State: Private [TODO] Make it public when ready.
+
+  http://land.copernicus.eu/eagle/@@sharing
+    For: EAGLE Team, check: Can add, edit, review, view
+    (unchecked) Inherit permissions from higher levels
+    [TODO] Special settings for some users as on demo?
 
 EAGLE Team (Group)
 ------------------
