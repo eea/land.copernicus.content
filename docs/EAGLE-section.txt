@@ -107,3 +107,17 @@ EAGLE Methodology Documentation (Reference Manual)
     Add new Reference Manual
       Title: EAGLE Methodology Documentation
       [TODO] Add sections and leaf pages
+
+eea.pdf themes for PloneHelpCenter
+----------------------------------
+  http://localhost:8081/copernicus/portal_setup/manage_importSteps
+  Profile: EEA PDF - for PloneHelpCenter
+    Import: PDF Settings PDF Themes
+  Settings: http://land.copernicus.eu/portal_pdf
+    Deleted unused Page and Book themes.
+
+  http://land.copernicus.eu/@@manage-viewlets
+    Hide: eea.socialmedia - we want only Download pdf link, not share buttons.
+
+  http://land.copernicus.eu/portal_actions/document_actions/download_pdf/manage_propertiesForm
+    Renamed "Download as PDF" to "Download visible section as PDF"
