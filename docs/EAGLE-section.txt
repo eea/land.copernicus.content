@@ -5,7 +5,12 @@ EAGLE Section permissions: http://land.copernicus.eu/eagle/@@sharing
 EAGLE Team: http://land.copernicus.eu/@@usergroup-groupmembership?groupname=EAGLE-Team
 EAGLE Contact: http://land.copernicus.eu/eagle-contact/
 General Information: http://land.copernicus.eu/eagle/general-information
+Publications: http://land.copernicus.eu/eagle/publications
+Contracts: http://land.copernicus.eu/eagle/contracts
+Meeting: http://land.copernicus.eu/eagle/meeting
 Forum: http://land.copernicus.eu/eagle/forum
+Files: http://land.copernicus.eu/eagle/files/
+Documentation & Tools: http://land.copernicus.eu/eagle/documentation-and-tools
 
 
 CHANGELOG
@@ -63,3 +68,26 @@ Forum (Message Board) - Products.PloneBoard 3.6
     Add new Message Board
       Title: Forum
       [TODO] Add categories, sections, topics. Settings.
+
+Publications (Page)
+-------------------
+  http://land.copernicus.eu/eagle/publications
+
+Contracts (Page)
+----------------
+  http://land.copernicus.eu/eagle/contracts
+
+Meeting (Folder)
+----------------
+  http://land.copernicus.eu/eagle/meeting
+  [TODO] Move files
+
+Files (Folder)
+--------------
+  http://land.copernicus.eu/eagle/files/
+  [TODO] Move files
+
+Documentation & Tools (Page)
+----------------------------
+  http://land.copernicus.eu/eagle/documentation-and-tools
+  [TODO] Fix links
