@@ -1,1 +1,13 @@
-TODO: Add documentation about EAGLE Section.
+DOCS
+----
+EAGLE Section is a folder: http://land.copernicus.eu/eagle/
+
+
+CHANGELOG
+---------
+http://land.copernicus.eu/
+  Add new folder:
+    Title: EAGLE
+    Description: EAGLE Working Group
+    Settings: Exclude from navidation (Checked)
+    State: Private [TODO] Make it public when ready.
