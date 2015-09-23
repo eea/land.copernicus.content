@@ -30,7 +30,6 @@ http://land.copernicus.eu/
   http://land.copernicus.eu/eagle/@@sharing
     For: EAGLE Team, check: Can add, edit, review, view
     (unchecked) Inherit permissions from higher levels
-    [TODO] Special settings for some users as on demo?
 
 EAGLE Team (Group)
 ------------------
