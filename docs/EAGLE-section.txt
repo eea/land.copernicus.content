@@ -24,3 +24,20 @@ http://land.copernicus.eu/@@usergroup-groupprefs
     Title: EAGLE Team
     Description: This group has access rights to the EAGLE folder and it's components.
     [TODO] Add members: http://land.copernicus.eu/@@usergroup-groupmembership?groupname=EAGLE-Team
+
+EAGLE Contact (Form Folder)
+---------------------------
+http://land.copernicus.eu/
+  Add new Form Folder
+    Title: EAGLE Contact
+    Settings: Exclude from navidation (Checked)
+    State: Private [TODO] Make it public when ready.
+
+  http://land.copernicus.eu/eagle-contact/quickedit
+    [TODO] Add Captcha Field
+    [TODO] Need categories?
+
+  http://land.copernicus.eu/eagle-contact/mailer/edit
+    [TODO] Settings
+    Recipient's full name
+    Recipient's e-mail address
