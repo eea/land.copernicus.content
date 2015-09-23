@@ -12,6 +12,7 @@ Forum: http://land.copernicus.eu/eagle/forum
 Files: http://land.copernicus.eu/eagle/files/
 Documentation & Tools: http://land.copernicus.eu/eagle/documentation-and-tools
 Documentation (EAGLE Help Center): http://land.copernicus.eu/eagle/eagle-methodology-documentation
+EAGLE Methodology Documentation (Reference manual): http://land.copernicus.eu/eagle/eagle-methodology-documentation/manual/eagle-methodology-documentation/
 
 
 CHANGELOG
@@ -99,3 +100,10 @@ Documentation (Help Center) - Products.PloneHelpCenter 4.0
     Add new Help Center
       http://land.copernicus.eu/eagle/eagle-methodology-documentation
       Settings: Allow comments
+
+EAGLE Methodology Documentation (Reference Manual)
+--------------------------------------------------
+  http://land.copernicus.eu/eagle/eagle-methodology-documentation/manual/folder_contents
+    Add new Reference Manual
+      Title: EAGLE Methodology Documentation
+      [TODO] Add sections and leaf pages
