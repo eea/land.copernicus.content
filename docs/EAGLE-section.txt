@@ -39,7 +39,7 @@ http://land.copernicus.eu/@@usergroup-groupprefs
     Name: EAGLE-Team
     Title: EAGLE Team
     Description: This group has access rights to the EAGLE folder and it's components.
-    [TODO] Add members: http://land.copernicus.eu/@@usergroup-groupmembership?groupname=EAGLE-Team
+    Add members: http://land.copernicus.eu/@@usergroup-groupmembership?groupname=EAGLE-Team
 
 EAGLE Contact (Form Folder)
 ---------------------------
