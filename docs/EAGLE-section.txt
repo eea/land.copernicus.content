@@ -11,6 +11,7 @@ Meeting: http://land.copernicus.eu/eagle/meeting
 Forum: http://land.copernicus.eu/eagle/forum
 Files: http://land.copernicus.eu/eagle/files/
 Documentation & Tools: http://land.copernicus.eu/eagle/documentation-and-tools
+Documentation (EAGLE Help Center): http://land.copernicus.eu/eagle/eagle-methodology-documentation
 
 
 CHANGELOG
@@ -91,3 +92,10 @@ Documentation & Tools (Page)
 ----------------------------
   http://land.copernicus.eu/eagle/documentation-and-tools
   [TODO] Fix links
+
+Documentation (Help Center) - Products.PloneHelpCenter 4.0
+---------------------------
+  http://land.copernicus.eu/eagle
+    Add new Help Center
+      http://land.copernicus.eu/eagle/eagle-methodology-documentation
+      Settings: Allow comments
