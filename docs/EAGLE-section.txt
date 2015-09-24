@@ -25,7 +25,6 @@ http://land.copernicus.eu/
     Title: EAGLE
     Description: EAGLE Working Group
     Settings: Exclude from navidation (Checked)
-    State: Private [TODO] Make it public when ready.
 
   http://land.copernicus.eu/eagle/@@sharing
     For: EAGLE Team, check: Can add, edit, review, view
@@ -46,7 +45,6 @@ http://land.copernicus.eu/
   Add new Form Folder
     Title: EAGLE Contact
     Settings: Exclude from navidation (Checked)
-    State: Private [TODO] Make it public when ready.
 
   http://land.copernicus.eu/eagle-contact/folder_contents
     Add new Captcha field: Prevent spam
@@ -59,15 +57,12 @@ http://land.copernicus.eu/
 General Information (Page)
 --------------------------
   http://land.copernicus.eu/eagle/general-information
-  State: Private [TODO] Make it public when ready.
-  [TODO] Add Meetings and Events info
 
 Forum (Message Board) - Products.PloneBoard 3.6
 ---------------------
   http://land.copernicus.eu/eagle
     Add new Message Board
       Title: Forum
-      [TODO] Add categories, sections, topics. Settings.
 
 Publications (Page)
 -------------------
@@ -80,17 +75,14 @@ Contracts (Page)
 Meeting (Folder)
 ----------------
   http://land.copernicus.eu/eagle/meeting
-  [TODO] Move files
 
 Files (Folder)
 --------------
   http://land.copernicus.eu/eagle/files/
-  [TODO] Move files
 
 Documentation & Tools (Page)
 ----------------------------
   http://land.copernicus.eu/eagle/documentation-and-tools
-  [TODO] Fix links
 
 Documentation (Help Center) - Products.PloneHelpCenter 4.0
 ---------------------------
@@ -104,7 +96,6 @@ EAGLE Methodology Documentation (Reference Manual)
   http://land.copernicus.eu/eagle/eagle-methodology-documentation/manual/folder_contents
     Add new Reference Manual
       Title: EAGLE Methodology Documentation
-      [TODO] Add sections and leaf pages
 
 eea.pdf themes for PloneHelpCenter
 ----------------------------------
