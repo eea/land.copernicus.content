@@ -670,10 +670,12 @@
           }
 
           function is_validated_dataset(){
+            /* Returns true if validated dataset */
             return $("#checkbox-accept-non-validated").length === 0;
           }
 
           function add_not_validated_tag(){
+            /* Add a custom or default text for not validated dataset after title */
             $("#parent-fieldname-title").css("display", "inline");
             var not_validated_text = $("#not-validated-custom-text").text();
             $("#not-validated-custom-text").hide();
@@ -682,37 +684,44 @@
             }
             $("#parent-fieldname-title").after("<span class='not-validated-tag'>" + not_validated_text + "</span>");
           }
+
           function disable_download_buttons(){
+            /* Disable download, download selected and download all buttons */
             $("#button-download-selected").attr("disabled", "disabled");
             $("#button-download-all").attr("disabled", "disabled");
             $(".download-button").addClass("disabled");
           }
 
           function enable_download_buttons(){
+            /* Enable download, download selected and download all buttons */
             $("#button-download-selected").removeAttr("disabled");
             $("#button-download-all").removeAttr("disabled");
             $(".download-button").removeClass("disabled");
           }
 
           function get_number_checked_items(){
+            /* Count checked files for download */
             var number_checked = $('.checkbox-select-item:checked').size();
             return number_checked;
           }
 
           function check_all_items(){
+            /* Prepare download all */
             $('.checkbox-select-item').attr('checked', true);
           }
 
           function uncheck_all_items(){
+            /* Reset selected files for download */
             $('.checkbox-select-item').attr('checked', false);
           }
 
           function refresh_counter(){
+            /* Refresh counter in download selected button */
             $("#number-checked").text(get_number_checked_items());
           }
 
           function save_selected_items_in_url(){
-            // For after login. Download tab is opened and these items will be checked automatically.
+            /* For after login. Download tab is opened and these items will be checked automatically. */
             var selected = "?selected=";
             $('.checkbox-select-item').each(function(i){
               if($(this).attr("checked")){
@@ -728,6 +737,7 @@
           }
 
           function download_all(){
+            /* Start download all files */
             save_selected_items_in_url();
             var anon = user_seems_to_be_anonymous();
             var download_buttons = $('.download-button');
@@ -745,6 +755,7 @@
           }
 
           function download_selected(){
+            /* Start download selected files */
             save_selected_items_in_url();
             var anon = user_seems_to_be_anonymous();
             var download_buttons = $('.checkbox-select-item:checked')
@@ -764,11 +775,13 @@
           }
 
           function auto_accept_not_validated(){
+            /* User already checked it before login */
             $("#checkbox-accept-non-validated").attr("checked", true);
             enable_download_buttons();
           }
 
           function auto_select_checkboxes(checkboxes_indexes_array){
+            /* Prepare auto download after login */
             $('.checkbox-select-item').each(function(i){
               var item_id = this.getAttribute("item_id");
               if($.inArray(item_id.toString(), checkboxes_indexes_array) != -1){
@@ -778,6 +791,7 @@
           }
 
           function display_portal_message(message_text, message_type){
+            /* Display message at the top */
             $('<dl class="portalMessage ' + message_type + '"><dt>Error</dt><dd>' +
               message_text + '</dd></dl>').insertBefore('.documentFirstHeading');
           }
@@ -838,6 +852,7 @@
           }
 
           function replace_missing_or_fix_short(){
+            /* Hide empty datatable or fix its height for less content. */
             var number_of_items = $('.checkbox-select-item').length;
 
             if(number_of_items < 10){
