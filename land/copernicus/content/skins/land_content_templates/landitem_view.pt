@@ -25,7 +25,8 @@
     line-height:450px;
     position:absolute;
   }
-  #squaresWaveG{
+
+  #squaresWaveG {
     position:absolute;
     top:250px;
     left:330px;
@@ -33,7 +34,7 @@
     height:29px;
   z-index:1000;}
 
-  .squaresWaveG{
+  .squaresWaveG {
     position:absolute;
     top:0;
     background-color:#C0D630;
@@ -61,7 +62,7 @@
     animation-direction:linear;
   }
 
-  #squaresWaveG_1{
+  #squaresWaveG_1 {
     left:0;
     -moz-animation-delay:0.52s;
     -webkit-animation-delay:0.52s;
@@ -70,7 +71,7 @@
     animation-delay:0.52s;
   }
 
-  #squaresWaveG_2{
+  #squaresWaveG_2 {
     left:30px;
     -moz-animation-delay:0.65s;
     -webkit-animation-delay:0.65s;
@@ -79,7 +80,7 @@
     animation-delay:0.65s;
   }
 
-  #squaresWaveG_3{
+  #squaresWaveG_3 {
     left:60px;
     -moz-animation-delay:0.78s;
     -webkit-animation-delay:0.78s;
@@ -88,7 +89,7 @@
     animation-delay:0.78s;
   }
 
-  #squaresWaveG_4{
+  #squaresWaveG_4 {
     left:90px;
     -moz-animation-delay:0.91s;
     -webkit-animation-delay:0.91s;
@@ -97,7 +98,7 @@
     animation-delay:0.91s;
   }
 
-  #squaresWaveG_5{
+  #squaresWaveG_5 {
     left:120px;
     -moz-animation-delay:1.04s;
     -webkit-animation-delay:1.04s;
@@ -106,7 +107,7 @@
     animation-delay:1.04s;
   }
 
-  #squaresWaveG_6{
+  #squaresWaveG_6 {
     left:150px;
     -moz-animation-delay:1.17s;
     -webkit-animation-delay:1.17s;
@@ -115,7 +116,7 @@
     animation-delay:1.17s;
   }
 
-  #squaresWaveG_7{
+  #squaresWaveG_7 {
     left:180px;
     -moz-animation-delay:1.3s;
     -webkit-animation-delay:1.3s;
@@ -124,7 +125,7 @@
     animation-delay:1.3s;
   }
 
-  #squaresWaveG_8{
+  #squaresWaveG_8 {
     left:210px;
     -moz-animation-delay:1.43s;
     -webkit-animation-delay:1.43s;
@@ -133,7 +134,7 @@
     animation-delay:1.43s;
   }
 
-  @-moz-keyframes bounce_squaresWaveG{
+  @-moz-keyframes bounce_squaresWaveG {
     0%{
       background-color:#C0D630;
     }
@@ -142,7 +143,7 @@
     }
   }
 
-  @-webkit-keyframes bounce_squaresWaveG{
+  @-webkit-keyframes bounce_squaresWaveG {
     0%{
       background-color:#C0D630;
     }
@@ -151,7 +152,7 @@
     }
   }
 
-  @-ms-keyframes bounce_squaresWaveG{
+  @-ms-keyframes bounce_squaresWaveG {
     0%{
       background-color:#C0D630;
     }
@@ -160,7 +161,7 @@
     }
   }
 
-  @-o-keyframes bounce_squaresWaveG{
+  @-o-keyframes bounce_squaresWaveG {
     0%{
       background-color:#C0D630;
     }
@@ -169,7 +170,7 @@
     }
   }
 
-  @keyframes bounce_squaresWaveG{
+  @keyframes bounce_squaresWaveG {
     0%{
       background-color:#C0D630;
     }
@@ -180,24 +181,24 @@
 
 
   /* Download tab: datatable styles */
-  #datatable-container{
+  #datatable-container {
     margin-top:-26px;
     overflow-y:visible;
   }
 
-  .dataTables_scrollHeadInner, .dataTable{
+  .dataTables_scrollHeadInner, .dataTable {
     width:100% !important;
   }
 
-  .dataTables_scrollBody #data-table-download thead{
+  .dataTables_scrollBody #data-table-download thead {
     display:none;
   }
 
-  #datatable-container table.dataTable thead .sorting_asc{
+  #datatable-container table.dataTable thead .sorting_asc {
     background:url("http://cdn.datatables.net/1.10.0/images/sort_asc.png") no-repeat center left !important; /* Fix move sort icon to left */
   }
 
-  #datatable-container table.dataTable thead .sorting_desc{
+  #datatable-container table.dataTable thead .sorting_desc {
     background:url("http://cdn.datatables.net/1.10.0/images/sort_desc.png") no-repeat center left !important; /* Fix move sort icon to left */
   }
 
@@ -205,7 +206,7 @@
     background:url("http://cdn.datatables.net/1.10.0/images/sort_both.png") no-repeat center left !important; /* Fix move sort icon to left */
   }
 
-  #data-table-download{
+  #data-table-download {
     border-collapse:collapse;
     background-color:white;
     table-layout:fixed;
@@ -214,39 +215,39 @@
   }
 
   #data-table-download thead>tr>th,
-  .dataTables_scrollHeadInner .dataTable thead>tr>th{
+  .dataTables_scrollHeadInner .dataTable thead>tr>th {
     padding-left: 16px !important;
   }
 
-  #data-table-download td, th{
+  #data-table-download td, th {
     padding:15px !important;
     overflow:hidden;
   }
 
-  #data-table-download tbody tr td:first-child{
+  #data-table-download tbody tr td:first-child {
     width: 20px;
   }
 
   #data-table-download .border-bottom-only,
-  #datatable-container table th{
+  #datatable-container table th {
     border-left:none;
     border-right:none;
     border-top:none;
     border-bottom:1px solid black;
   }
 
-  #data-table-download .border-top-only{
+  #data-table-download .border-top-only {
     border-left:none;
     border-right:none;
     border-bottom:none;
     border-top:1px solid #CCC;
   }
 
-  #data-table-download tbody>tr:hover{
+  #data-table-download tbody>tr:hover {
     background-color:#DFF2FF;
   }
 
-  span.vector, span.raster{
+  span.vector, span.raster {
     display:inline;
     padding:.3em .6em .3em;
     font-size:80%;
@@ -259,17 +260,17 @@
     border-radius:.25em;
   }
 
-  span.vector{
+  span.vector {
     background-color:#FDA42C !important;
     text-shadow: 0px 1px 1px #8A591A;
   }
 
-  span.raster{
+  span.raster {
     background-color:#D21359 !important;
     text-shadow: 0px 1px 1px #6E0B2F;
   }
 
-  .download-button{
+  .download-button {
     margin-top:-3px;
     margin-bottom:-3px;
     background-color:#0A70B2;
@@ -282,30 +283,30 @@
     border:none;
   }
 
-  .download-button:hover{
+  .download-button:hover {
     color:#fff !important; /* [TODO] Fix color problem here */
   }
 
-  #data-table-download_info{
+  #data-table-download_info {
     padding-top:3px;
     padding-left:15px;
     float:left;
   }
 
-  #data-table-download_length{
+  #data-table-download_length {
     float:left;
     padding-left:15px;
     padding-top:15px;
     padding-bottom:15px;
   }
 
-  #data-table-download_filter{
+  #data-table-download_filter {
     float:right;
     padding-top:15px;
     padding-right:15px;
   }
 
-  #data-table-download_paginate{
+  #data-table-download_paginate {
     padding-top:3px;
     padding-right:15px;
     padding-bottom:15px;
@@ -314,11 +315,11 @@
 
 
   /* Metadata tab styles */
-  #detailed-metadata-title, #access-and-use-title{
+  #detailed-metadata-title, #access-and-use-title {
     padding-top: 25px;
   }
 
-  .detailed-metadata-container{
+  .detailed-metadata-container {
     margin-top: 15px;
     border:1px solid #CCC;
     padding-top:15px;
@@ -328,26 +329,26 @@
     overflow: hidden;
   }
 
-  .detailed-metadata-container dl{
+  .detailed-metadata-container dl {
     float:left;
     width:100%;
     margin-bottom:0px !important;
   }
 
-  .detailed-metadata-container dt{
+  .detailed-metadata-container dt {
     float:left;
     width:24%;
     text-align:right;
   }
 
-  .detailed-metadata-container dd{
+  .detailed-metadata-container dd {
     float:left;
     width:72%;
     padding-top:0px !important;
     padding-left:15px;
   }
 
-  .detailed-metadata-container dd p{
+  .detailed-metadata-container dd p {
     margin-bottom:0.5em !important;
   }
 
@@ -355,7 +356,7 @@
     display:none;
   }
 
-  .label-tag{
+  .label-tag {
     display:inline;
     padding:.2em .6em .3em;
     font-size:75%;
@@ -371,54 +372,54 @@
     margin-right:5px;
   }
 
-  .label-tag:hover{
+  .label-tag:hover {
     background-color:#4D4D4D !important;
     color:white !important;
   }
 
-  .label-white-color{
+  .label-white-color {
     color:white !important;
   }
 
-  .label-white-color:hover{
+  .label-white-color:hover {
     color:white !important;
   }
 
-  #category{
+  #category {
     display:none; /* Fix Remove "Filed under" section */
   }
 
-  .download-gray-icon{
+  .download-gray-icon {
     color:#CCC;
   }
 
-  .text-centered{
+  .text-centered {
     text-align:center;
   }
 
-  #data-table-download_info{
+  #data-table-download_info {
     display:none;
   }
 
-  #disclaimer-download-container{
+  #disclaimer-download-container {
     margin-top:15px;
     padding-left:25%;
     padding-right:25%;
   }
 
-  #checkbox-accept-non-validated{
+  #checkbox-accept-non-validated {
     float:left;
     width:7%;
     margin-top:3px;
   }
 
-  #text-accept-non-validated{
+  #text-accept-non-validated {
     float:right;
     width:93%;
     margin-bottom:10px;
   }
 
-  #button-download-selected, #button-download-all{
+  #button-download-selected, #button-download-all {
     background-color:#F2F2F2;
     width:49%;
     padding-top:5px;
@@ -429,31 +430,31 @@
     border-radius:3px;
   }
 
-  #button-download-selected:hover, #button-download-all:hover{
+  #button-download-selected:hover, #button-download-all:hover {
     background-color:#0870AF;
     border:1px solid #0063A8;
     color:#fff;
   }
 
-  #button-download-selected:disabled, #button-download-all:disabled{
+  #button-download-selected:disabled, #button-download-all:disabled {
     background-color:#F2F2F2;
     border-color:#D8D8D8;
     color:#BBB !important;
   }
 
-  .download-button.disabled{
+  .download-button.disabled {
     background-color:#BBB;
   }
 
-  #button-download-selected{
+  #button-download-selected {
     float:left;
   }
 
-  #button-download-all{
+  #button-download-all {
     float:right;
   }
 
-  .not-validated-tag{
+  .not-validated-tag {
     position:relative;
     bottom:2px;
     display:inline;
@@ -466,7 +467,7 @@
     border-radius:3px;
   }
 
-  .download-button i{
+  .download-button i {
     color: white !important;
   }
 </style>
@@ -662,86 +663,86 @@
             return b.localeCompare(a);
           };
 
-        $(document).ready(function(){
+        $(document).ready(function() {
 
-          function user_seems_to_be_anonymous(){
+          function user_seems_to_be_anonymous() {
             /* Used only to prevent opening multiple unnecessary login tabs. */
             return $("#personaltools-login").length === 1;
           }
 
-          function is_validated_dataset(){
+          function is_validated_dataset() {
             /* Returns true if validated dataset */
             return $("#checkbox-accept-non-validated").length === 0;
           }
 
-          function add_not_validated_tag(){
+          function add_not_validated_tag() {
             /* Add a custom or default text for not validated dataset after title */
             $("#parent-fieldname-title").css("display", "inline");
             var not_validated_text = $("#not-validated-custom-text").text();
             $("#not-validated-custom-text").hide();
-            if(not_validated_text.length < 5){
+            if(not_validated_text.length < 5) {
               not_validated_text = "Not yet validated.";
             }
             $("#parent-fieldname-title").after("<span class='not-validated-tag'>" + not_validated_text + "</span>");
           }
 
-          function disable_download_buttons(){
+          function disable_download_buttons() {
             /* Disable download, download selected and download all buttons */
             $("#button-download-selected").attr("disabled", "disabled");
             $("#button-download-all").attr("disabled", "disabled");
             $(".download-button").addClass("disabled");
           }
 
-          function enable_download_buttons(){
+          function enable_download_buttons() {
             /* Enable download, download selected and download all buttons */
             $("#button-download-selected").removeAttr("disabled");
             $("#button-download-all").removeAttr("disabled");
             $(".download-button").removeClass("disabled");
           }
 
-          function get_number_checked_items(){
+          function get_number_checked_items() {
             /* Count checked files for download */
             var number_checked = $('.checkbox-select-item:checked').size();
             return number_checked;
           }
 
-          function check_all_items(){
+          function check_all_items() {
             /* Prepare download all */
             $('.checkbox-select-item').attr('checked', true);
           }
 
-          function uncheck_all_items(){
+          function uncheck_all_items() {
             /* Reset selected files for download */
             $('.checkbox-select-item').attr('checked', false);
           }
 
-          function refresh_counter(){
+          function refresh_counter() {
             /* Refresh counter in download selected button */
             $("#number-checked").text(get_number_checked_items());
           }
 
-          function save_selected_items_in_url(){
+          function save_selected_items_in_url() {
             /* For after login. Download tab is opened and these items will be checked automatically. */
             var selected = "?selected=";
-            $('.checkbox-select-item').each(function(i){
-              if($(this).attr("checked")){
+            $('.checkbox-select-item').each(function(i) {
+              if($(this).attr("checked")) {
                 selected += '@' + this.getAttribute("item_id");
               }
             });
 
-            $('.download-button').each(function(){
+            $('.download-button').each(function() {
               var old_href = $(this).attr("href");
               $(this).attr("href", old_href + selected);
             });
 
           }
 
-          function download_all(){
+          function download_all() {
             /* Start download all files */
             save_selected_items_in_url();
             var anon = user_seems_to_be_anonymous();
             var download_buttons = $('.download-button');
-            for(var i = 0; i < download_buttons.length; i++){
+            for(var i = 0; i < download_buttons.length; i++) {
               var button = download_buttons[i];
               if(anon){
                 /* A single login tab is neccessary. */
@@ -761,9 +762,9 @@
             var download_buttons = $('.checkbox-select-item:checked')
                                    .closest('tr').find('.download-button');
 
-            for(var i = 0; i < download_buttons.length; i++){
+            for(var i = 0; i < download_buttons.length; i++) {
               var button = download_buttons[i];
-              if(anon){
+              if(anon) {
                 /* A single login tab is neccessary. */
                 button.removeAttribute("target");
                 button.click();
@@ -774,29 +775,29 @@
             }
           }
 
-          function auto_accept_not_validated(){
+          function auto_accept_not_validated() {
             /* User already checked it before login */
             $("#checkbox-accept-non-validated").attr("checked", true);
             enable_download_buttons();
           }
 
-          function auto_select_checkboxes(checkboxes_indexes_array){
+          function auto_select_checkboxes(checkboxes_indexes_array) {
             /* Prepare auto download after login */
-            $('.checkbox-select-item').each(function(i){
+            $('.checkbox-select-item').each(function(i) {
               var item_id = this.getAttribute("item_id");
-              if($.inArray(item_id.toString(), checkboxes_indexes_array) != -1){
+              if($.inArray(item_id.toString(), checkboxes_indexes_array) != -1) {
                 $(this).attr("checked", true);
               }
             });
           }
 
-          function display_portal_message(message_text, message_type){
+          function display_portal_message(message_text, message_type) {
             /* Display message at the top */
             $('<dl class="portalMessage ' + message_type + '"><dt>Error</dt><dd>' +
               message_text + '</dd></dl>').insertBefore('.documentFirstHeading');
           }
 
-          function display_errors_if_any(download_tab_param){
+          function display_errors_if_any(download_tab_param) {
           // Example: ?fieldsetlegend-download=true-error-not-found-LandFile3
           // -> "LandFile3 cannot be downloaded. Broken link."
             var error_missing_file = "true-error-not-found-";
@@ -818,7 +819,7 @@
             }
           }
 
-          function download_auto_selected(download_tab_param){
+          function download_auto_selected(download_tab_param) {
           // Example in URL: fieldsetlegend-download=true-selected-@clc_2006@landitem_new => autoselected by id
           // "clc_2006" and "landitem_new" land items
             var auto_selected_checkboxes_indexes = download_tab_param.split("@");
@@ -828,35 +829,35 @@
             download_selected();
           }
 
-          function interpret_url_params_if_any(){
+          function interpret_url_params_if_any() {
           // Check parameter in url for after login case or error missing land file
           // Auto open download tab and download if any auto selected.
 
-            function get_url_parameter(sParam){
+            function get_url_parameter(sParam) {
                 var sPageURL = window.location.search.substring(1);
                 var sURLVariables = sPageURL.split('&');
-                for (var i = 0; i < sURLVariables.length; i++){
+                for (var i = 0; i < sURLVariables.length; i++) {
                     var sParameterName = sURLVariables[i].split('=');
-                    if (sParameterName[0] == sParam){
+                    if (sParameterName[0] == sParam) {
                         return sParameterName[1];
                     }
                 }
             }
 
             var download_tab_param = get_url_parameter('fieldsetlegend-download');
-            if (download_tab_param != undefined){
+            if (download_tab_param != undefined) {
               $("#fieldsetlegend-download").click();
               download_auto_selected(download_tab_param);
               display_errors_if_any(download_tab_param);
             }
           }
 
-          function replace_missing_or_fix_short(){
+          function replace_missing_or_fix_short() {
             /* Hide empty datatable or fix its height for less content. */
             var number_of_items = $('.checkbox-select-item').length;
 
-            if(number_of_items < 10){
-              if(number_of_items == 0){
+            if(number_of_items < 10) {
+              if(number_of_items == 0) {
                 $("#datatable-container").hide();
                 $("#disclaimer-download-container").hide();
               } else {
@@ -868,8 +869,12 @@
             }
           }
 
+          function fix_badges_for_both_raster_vector() {
+
+          }
+
           // INIT
-          if (!is_validated_dataset()){
+          if (!is_validated_dataset()) {
             disable_download_buttons();
             add_not_validated_tag();
           } else {
@@ -910,21 +915,22 @@
           });
 
           replace_missing_or_fix_short();
+          fix_badges_for_both_raster_vector();
 
           // tr hover
           $('.download-button').hide();
-          $('#data-table-download > tbody > tr').on("mouseenter", function(){
+          $('#data-table-download > tbody > tr').on("mouseenter", function() {
             $(this).find('a.download-button').show();
             $(this).find('.download-gray-icon').hide();
           });
 
-          $('#data-table-download > tbody > tr').on("mouseleave", function(){
+          $('#data-table-download > tbody > tr').on("mouseleave", function() {
             $(this).find('a.download-button').hide();
             $(this).find('.download-gray-icon').show();
           });
 
           // accept (un)checked
-          $("#checkbox-accept-non-validated").change(function(){
+          $("#checkbox-accept-non-validated").change(function() {
             if(this.checked) {
               enable_download_buttons();
             } else {
@@ -933,12 +939,12 @@
           });
 
           // item (un)checked
-          $(".checkbox-select-item").change(function(){
+          $(".checkbox-select-item").change(function() {
             refresh_counter();
           });
 
           // (un)select all items
-          $(".checkbox-select-all").change(function(){
+          $(".checkbox-select-all").change(function() {
             if(this.checked) {
               check_all_items();
             } else {
@@ -948,22 +954,22 @@
           });
 
           // DOWNLOAD
-          $('#button-download-selected').on("click", function(evt){
+          $('#button-download-selected').on("click", function(evt) {
             evt.preventDefault();
             download_selected();
           });
 
-          $('#button-download-all').on("click", function(evt){
+          $('#button-download-all').on("click", function(evt) {
             evt.preventDefault();
             download_all();
           });
 
-          $('.download-button').on("click", function(evt){
-            if($(this).hasClass("disabled")){
+          $('.download-button').on("click", function(evt) {
+            if($(this).hasClass("disabled")) {
               evt.preventDefault();
             } else {
               var anon = user_seems_to_be_anonymous();
-              if(anon){
+              if(anon) {
                 /* A single login tab is neccessary. */
                 this.removeAttribute("target");
               }
@@ -974,21 +980,8 @@
     </dd>
   </tal:download>
 
-  <!-- Old Download - temporary download -->
-  <tal:download tal:condition="python:(getattr(context, 'show_new_download', None) is False)">
-    <dt id="fieldsetlegend-download-old" i18n:translate="">Download</dt>
-    <dd id="fieldset-download-old"
-        tal:define="download_info python: context.getField('download').getAccessor(context)()">
-      <div tal:replace="structure download_info"></div>
-    </dd>
-  </tal:download>
-
 </dl>
-
 </metal:main_macro>
-
 </metal:content-core>
-
 </body>
-
 </html>
