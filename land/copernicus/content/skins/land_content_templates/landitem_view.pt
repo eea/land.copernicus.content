@@ -870,7 +870,10 @@
           }
 
           function fix_badges_for_both_raster_vector() {
-
+            /* If a file in datatable has both types raster and vector we fix badge design here. */
+            $('span.vector-raster, span.raster-vector').each(function() {
+              $(this).html("<span class='raster'>Raster</span> <span class='vector'>Vector</span>");
+            });
           }
 
           // INIT
