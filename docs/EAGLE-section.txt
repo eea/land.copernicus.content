@@ -14,7 +14,7 @@ Documentation & Tools: http://land.copernicus.eu/eagle/documentation-and-tools
 Documentation (EAGLE Help Center): http://land.copernicus.eu/eagle/eagle-methodology-documentation
 EAGLE Methodology Documentation (Reference manual): http://land.copernicus.eu/eagle/eagle-methodology-documentation/manual/eagle-methodology-documentation/
 User corner menu: http://land.copernicus.eu/user-corner/
-
+EAGLE Manager role is assigned to EAGLE Team group.
 
 CHANGELOG
 =========
@@ -135,3 +135,12 @@ http://land.copernicus.eu/user-corner/user-corner/edit
 
 Links containing "eagle" are automatically indented as suboptions for EAGLE option.
 http://land.copernicus.eu/user-corner/folder_contents - drag and drop to fix options order.
+
+EAGLE Manager role
+------------------
+http://land.copernicus.eu/manage_access
+Add role: EAGLE Manager
+http://land.copernicus.eu/manage_defined_roles
+  Check all Ploneboard related permissions for EAGLE Manager
+  Save changes
+In Users and Groups search "EAGLE Team" and check EAGLE Manager role.
