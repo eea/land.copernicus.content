@@ -13,6 +13,7 @@ Files: http://land.copernicus.eu/eagle/files/
 Documentation & Tools: http://land.copernicus.eu/eagle/documentation-and-tools
 Documentation (EAGLE Help Center): http://land.copernicus.eu/eagle/eagle-methodology-documentation
 EAGLE Methodology Documentation (Reference manual): http://land.copernicus.eu/eagle/eagle-methodology-documentation/manual/eagle-methodology-documentation/
+User corner menu: http://land.copernicus.eu/user-corner/
 
 
 CHANGELOG
@@ -110,3 +111,27 @@ eea.pdf themes for PloneHelpCenter
 
   http://land.copernicus.eu/portal_actions/document_actions/download_pdf/manage_propertiesForm
     Renamed "Download as PDF" to "Download visible section as PDF"
+
+User corner settings
+--------------------
+http://land.copernicus.eu/user-corner/user-corner/edit
+  Sort... Order in Folder
+    If option is not here:
+    http://land.copernicus.eu/prefs_install_products_form
+      Extension profile for Land Copernicus Content-Types
+        Deactivate, Activate
+
+  Add link
+  --------
+  http://land.copernicus.eu/user-corner/
+    Add New - Folder: TITLE. Publish
+      Add New - Link: TITLE, URL: example: /news. Publish
+          TITLE:
+          Welcome
+          General information
+          Documentation & Tools
+          Forum
+          Contact form
+
+Links containing "eagle" are automatically indented as suboptions for EAGLE option.
+http://land.copernicus.eu/user-corner/folder_contents - drag and drop to fix options order.
