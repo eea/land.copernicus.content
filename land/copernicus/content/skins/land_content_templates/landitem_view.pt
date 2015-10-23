@@ -876,9 +876,19 @@
             });
           }
 
+          function init_disabled_buttons_behaviour() {
+            /* If a disabled download button is disabled focus checkbox to accept not validated */
+            $(".download-button.disabled").on("click", function() {
+              $("#checkbox-accept-non-validated").focus();
+              $('#text-accept-non-validated').animate({backgroundColor: '#FDA42C'}, 'slow');
+              $('#text-accept-non-validated').animate({backgroundColor: '#fff'}, 'slow');
+            });
+          }
+
           // INIT
           if (!is_validated_dataset()) {
             disable_download_buttons();
+            init_disabled_buttons_behaviour();
             add_not_validated_tag();
           } else {
             enable_download_buttons();
