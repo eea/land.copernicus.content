@@ -69,10 +69,7 @@
         } else {
           // For Safari we use invisible iframe to download the file.
           // Auto close new tab not possible
-          // [TODO] WIP here. To be tested on demo.
-          debugger;
           $("#download-iframe").attr("src", start_download_url);
-          setTimeout(close.bind(window), 5000);
         }
       });
     </script>
