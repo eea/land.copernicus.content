@@ -737,6 +737,14 @@
 
           }
 
+          function button_click(button) {
+            /* Used instead of button.click() to solve Safari problem:
+               TypeError: 'undefined' is not a function (evaluating 'button.click()') */
+            var click_event = document.createEvent("MouseEvents");
+            click_event.initEvent("click", true /* bubble */, true /* cancelable */);
+            button.dispatchEvent(click_event);
+          }
+
           function download_all() {
             /* Start download all files */
             save_selected_items_in_url();
@@ -747,10 +755,10 @@
               if(anon){
                 /* A single login tab is neccessary. */
                 button.removeAttribute("target");
-                button.click();
+                button_click(button);
                 break;
               } else {
-                button.click();
+                button_click(button);
               }
             }
           }
@@ -767,10 +775,10 @@
               if(anon) {
                 /* A single login tab is neccessary. */
                 button.removeAttribute("target");
-                button.click();
+                button_click(button);
                 break;
               } else {
-                button.click();
+                button_click(button);
               }
             }
           }
