@@ -36,6 +36,14 @@ class SchemaExtender(object):
 
     def getFields(self):
         columns = self.context.getFileCategories() or []
+
+        # file_categories = columns
+        # saved_file_categories = self.context.fileCategories
+        # if len(saved_file_categories) < len(file_categories):
+        #     # [TODO] fix add default value for new file categories
+        #     import pdb; pdb.set_trace( )
+        #     # WIP here.
+
         default_values = [{'name': col, 'value': u''} for col in columns]
         field = ExtendedDataGridField(
             'fileCategories',
