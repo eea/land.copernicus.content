@@ -34,15 +34,45 @@ class SchemaExtender(object):
     def __init__(self, context):
         self.context = context
 
+    def category_exists(self, category_name):
+        """ Check if a given category name exists in file categories
+        """
+        for category in self.context.fileCategories:
+            if category.get('name', '') == category_name:
+                return True
+        return False
+
+    def add_file_category(self, category_name, category_value=u""):
+        """ Save new category in file categories tuple
+        """
+        old_file_categories = self.context.fileCategories
+        new_file_category = {
+            'name': category_name,
+            'value': category_value
+        }
+
+        list_categories = []
+        for category in old_file_categories:
+            list_categories.append(category)
+
+        list_categories.append(new_file_category)
+        self.context.fileCategories = tuple(list_categories)
+
     def getFields(self):
         columns = self.context.getFileCategories() or []
 
-        # file_categories = columns
-        # saved_file_categories = self.context.fileCategories
-        # if len(saved_file_categories) < len(file_categories):
-        #     # [TODO] fix add default value for new file categories
-        #     import pdb; pdb.set_trace( )
-        #     # WIP here.
+        # When a landfile is created it has file categories defined in context.
+        # If a new category is added this is not added by default in landfile
+        # item. On landfile edit we fix this problem. So user can save values
+        # for old categories and new ones, too.
+
+        file_categories = columns
+        saved_file_categories = self.context.fileCategories
+
+        if len(saved_file_categories) < len(file_categories):
+            for category_name in file_categories:
+                if self.category_exists(category_name) is False:
+                    self.add_file_category(category_name=category_name)
 
         default_values = [{'name': col, 'value': u''} for col in columns]
         field = ExtendedDataGridField(
