@@ -994,6 +994,8 @@
                 /* A single login tab is neccessary. */
                 this.removeAttribute("target");
               }
+              $(this).parent().parent().find('.checkbox-select-item').attr("checked", 1);
+              save_selected_items_in_url();
             }
           });
         });
