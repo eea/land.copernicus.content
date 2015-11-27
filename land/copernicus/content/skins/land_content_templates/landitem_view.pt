@@ -225,7 +225,7 @@
   }
 
   #data-table-download tbody tr td:first-child {
-    width: 25px;
+    width: 35px;
   }
 
   #data-table-download .border-bottom-only,
