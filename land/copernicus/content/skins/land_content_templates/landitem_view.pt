@@ -725,7 +725,7 @@
             /* For after login. Download tab is opened and these items will be checked automatically. */
             var selected = "?selected=";
             $('.checkbox-select-item').each(function(i) {
-              if($(this).attr("checked")) {
+              if(this.checked) {
                 selected += '@' + this.getAttribute("item_id");
               }
             });
@@ -734,7 +734,6 @@
               var old_href = $(this).attr("href");
               $(this).attr("href", old_href + selected);
             });
-
           }
 
           function button_click(button) {
@@ -747,6 +746,7 @@
 
           function download_all() {
             /* Start download all files */
+            check_all_items();
             save_selected_items_in_url();
             var anon = user_seems_to_be_anonymous();
             var download_buttons = $('.download-button');

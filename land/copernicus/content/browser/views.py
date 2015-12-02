@@ -70,7 +70,11 @@ class RedirectDownloadUrl(BrowserView):
             "?fieldsetlegend-download=True"
 
         if auto_selected:
-            login_url += "-selected-" + auto_selected
+            # [TODO] Investigate why we have here
+            # multiple "?selected=@file_id1@file_id2..."
+            auto_selected_unique_list = auto_selected.split("?")[0]
+
+            login_url += "-selected-" + auto_selected_unique_list
 
         return login_url
 
