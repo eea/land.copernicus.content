@@ -737,8 +737,18 @@
           }
 
           function button_click(button) {
-            /* Used instead of button.click() to solve Safari problem:
-               TypeError: 'undefined' is not a function (evaluating 'button.click()') */
+            /* Open button href in a new tab */
+            if(button.click) {
+              button.click();
+            } else {
+              /* Used instead of button.click() to solve Safari problem:
+              TypeError: 'undefined' is not a function (evaluating 'button.click()') */
+              window.open($(button).attr("href"), '_blank');
+            }
+          }
+
+          function redirect_click(button) {
+            /* Redirect to button href. Works on Safari, too. */
             var click_event = document.createEvent("MouseEvents");
             click_event.initEvent("click", true /* bubble */, true /* cancelable */);
             button.dispatchEvent(click_event);
@@ -755,7 +765,7 @@
               if(anon){
                 /* A single login tab is neccessary. */
                 button.removeAttribute("target");
-                button_click(button);
+                redirect_click(button);
                 break;
               } else {
                 button_click(button);
@@ -775,7 +785,7 @@
               if(anon) {
                 /* A single login tab is neccessary. */
                 button.removeAttribute("target");
-                button_click(button);
+                redirect_click(button);
                 break;
               } else {
                 button_click(button);
