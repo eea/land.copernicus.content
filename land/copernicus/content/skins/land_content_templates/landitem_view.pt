@@ -708,12 +708,12 @@
 
           function check_all_items() {
             /* Prepare download all */
-            $('.checkbox-select-item').attr('checked', true);
+            $('.checkbox-select-item').prop('checked', true);
           }
 
           function uncheck_all_items() {
             /* Reset selected files for download */
-            $('.checkbox-select-item').attr('checked', false);
+            $('.checkbox-select-item').prop('checked', false);
           }
 
           function refresh_counter() {
@@ -795,7 +795,7 @@
 
           function auto_accept_not_validated() {
             /* User already checked it before login */
-            $("#checkbox-accept-non-validated").attr("checked", true);
+            $("#checkbox-accept-non-validated").prop("checked", true);
             enable_download_buttons();
           }
 
@@ -804,7 +804,7 @@
             $('.checkbox-select-item').each(function(i) {
               var item_id = this.getAttribute("item_id");
               if($.inArray(item_id.toString(), checkboxes_indexes_array) != -1) {
-                $(this).attr("checked", true);
+                $(this).prop("checked", true);
               }
             });
           }
@@ -895,7 +895,7 @@
           }
 
           function init_disabled_buttons_behaviour() {
-            /* If a disabled download button is disabled focus checkbox to accept not validated */
+            /* If a disabled download button is clicked focus checkbox to accept not validated */
             $(".download-button.disabled").on("click", function() {
               $("#checkbox-accept-non-validated").focus();
               $('#text-accept-non-validated').animate({backgroundColor: '#FDA42C'}, 'slow');
@@ -1004,7 +1004,8 @@
                 /* A single login tab is neccessary. */
                 this.removeAttribute("target");
               }
-              $(this).parent().parent().find('.checkbox-select-item').attr("checked", 1);
+              uncheck_all_items();
+              $(this).parent().parent().find('.checkbox-select-item').prop("checked", true);
               save_selected_items_in_url();
             }
           });
