@@ -684,6 +684,9 @@
               not_validated_text = "Not yet validated.";
             }
             $("#parent-fieldname-title").after("<span class='not-validated-tag'>" + not_validated_text + "</span>");
+
+            // Fix print button position problem
+            $(".printButton").css({"position": "relative", "top": "29px"});
           }
 
           function disable_download_buttons() {
