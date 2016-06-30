@@ -519,7 +519,7 @@
   <!-- Metadata -->
   <tal:metadata define="
     field python:context.getField('text') if getattr(context, 'getField', None) else None;
-    html python:field.getAccessor(context)() if field else ''" tal:condition="html">
+    html python:field.getAccessor(context)() if field else ''">
     <dt id="fieldsetlegend-metadata" i18n:translate="">Metadata</dt>
     <dd id="fieldset-metadata">
       <div class="metadata-field">
