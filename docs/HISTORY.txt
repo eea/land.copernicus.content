@@ -3,6 +3,25 @@ Changelog
 
 2.4.dev0 - (unreleased)
 -----------------------
+* Features and fixes:
+  - Login, logout, Download land files tab beahviour, Terms of Use
+      Download, Metadata tabs, added Access and Use Constraints fields,
+      Added Terms of Use pop-up, Detalied Metadata, fix Show only published land files,
+      Added isValidatedDataset field to schema, Splitted fullname in first_name and last_name,
+      Implement Download tab behaviour, Login page updates, error for broken land file url,
+      custom text label for not validated datasets
+      other fixes
+
+      [GhitaB refs #24611, #24186, #24843, #24844, #24611, #24188, #25147, #25146, #25173, #25178,
+       #25198, #25175, #25232, #25255, #25251, #25229, #25387, #25462, #25677, #25690, #25690,
+       #25690, #25742, #26562, #26314, #25732, #26950, #27390, #27389, #27445, #27447, #27558,
+       #28075, #28080, #28272, #29190, etc.]
+
+  - Eagle section
+      User menu links, EAGLE contact form, Plone Help Center used for EAGLE manual, Forum
+      [GhitaB refs #25735, #25727, #26806, #26950, #27826, #27898, etc.]
+
+
 * Bug fix: [Jenkins] Updated install requires.
   [GhitaB refs #28876]
 
