@@ -1,8 +1,12 @@
 Changelog
 =========
 
-2.4.dev0 - (unreleased)
+2.5.dev0 - (unreleased)
 -----------------------
+  WIP Redesign
+
+2.4 - (2016-08-08)
+------------------
 * Features and fixes:
   - Login, logout, Download land files tab beahviour, Terms of Use
       Download, Metadata tabs, added Access and Use Constraints fields,
@@ -20,7 +24,6 @@ Changelog
   - Eagle section
       User menu links, EAGLE contact form, Plone Help Center used for EAGLE manual, Forum
       [GhitaB refs #25735, #25727, #26806, #26950, #27826, #27898, etc.]
-
 
 * Bug fix: [Jenkins] Updated install requires.
   [GhitaB refs #28876]
