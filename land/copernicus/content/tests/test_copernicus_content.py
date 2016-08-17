@@ -25,4 +25,4 @@ def test_suite():
         test_class=base.BaseCopernicusContentTestCase,
         optionflags=OPTION_FLAGS)
 
-    return unittest.TestSuite([contenttypes,overview])
+    return unittest.TestSuite([contenttypes, overview])

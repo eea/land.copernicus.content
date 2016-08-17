@@ -88,9 +88,9 @@ class LandItemExtender(object):
         StringField("embed",
                     schemata="default",
                     widget=atapi.TextAreaWidget(
-                         label=_("Map View"),
-                         description=_("Paste here the code provided "
-                                       "by your webservice (iframe, jscode)"))
+                        label=_("Map View"),
+                        description=_("Paste here the code provided "
+                                      "by your webservice (iframe, jscode)"))
                     ),
         TextField("webservices",
                   schemata="default",
@@ -101,7 +101,7 @@ class LandItemExtender(object):
                   widget=atapi.RichWidget(
                       label=_("Web Map Services"),
                       description=_(
-                        "Web Map Services available for this data"))
+                          "Web Map Services available for this data"))
                   ),
         TextField("download",
                   schemata="default",
@@ -140,9 +140,9 @@ class ATBlobModifier(object):
                                          schemata="default",
                                          sizes=None,
                                          widget=atapi.ImageWidget(
-                                           label=_("cover"),
-                                           description=_(
-                                            "Cover for Publication"))
+                                             label=_("cover"),
+                                             description=_(
+                                                 "Cover for Publication"))
                                          )
 
     def __init__(self, context):

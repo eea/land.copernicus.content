@@ -12,9 +12,7 @@ setup(name=name,
       open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
-      classifiers=[
-        "Programming Language :: Python",
-        ],
+      classifiers=["Programming Language :: Python", ],
       keywords='land copernicus eea content-types plone zope',
       author='European Environment Agency',
       author_email="webadmin@eea.europa.eu",

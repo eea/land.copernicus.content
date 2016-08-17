@@ -2,6 +2,7 @@ import logging
 
 logger = logging.getLogger('land.copernicus.content')
 
+
 class FixImageScales(object):
     """fix image scales for the image field
     """
@@ -23,4 +24,3 @@ class FixImageScales(object):
                 logger.info("Converted scales for %s", obj.absolute_url())
 
         logger.info("Finished converting scales")
-        

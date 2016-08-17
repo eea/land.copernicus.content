@@ -3,11 +3,12 @@ from Products.CMFCore.utils import getToolByName
 from eea.cache import cache as eeacache
 from land.copernicus.content.content.vocabulary import COUNTRIES_DICTIONARY_ID
 from plone.i18n.locales.interfaces import ICountryAvailability
-from zope.component import getUtility   #queryMultiAdapter, queryAdapter,
+from zope.component import getUtility  # queryMultiAdapter, queryAdapter,
 import operator
 import json
 
 MEMCACHED_CACHE_SECONDS_KEY = 86400
+
 
 @eeacache(lambda *args: MEMCACHED_CACHE_SECONDS_KEY)
 def _country_terms(context):
@@ -112,4 +113,3 @@ class GetCountriesByGroup(object):
                     res.append(terms[key][1][c_key][0])
                 break
         return res
-

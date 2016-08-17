@@ -19,7 +19,7 @@ def installVocabularies(context):
     site = context.getSite()
     atvm = getToolByName(site, ATVOCABULARYTOOL)
 
-    # Creat countries vocabulary
+    # Create countries vocabulary
     if COUNTRIES_DICTIONARY_ID not in atvm.contentIds():
         hierarchicalVocab = {}
         hierarchicalVocab[(COUNTRIES_DICTIONARY_ID, 'European Countries')] = {}
