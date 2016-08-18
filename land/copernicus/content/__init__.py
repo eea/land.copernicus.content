@@ -2,7 +2,7 @@
 """
 from Products.CMFCore import utils
 from Products.Archetypes import atapi
-from land.copernicus.content.config import PACKAGE, ADD_PERMISSION
+from land.copernicus.content.config import PACKAGE_NAME, ADD_PERMISSION
 from land.copernicus.content import content
 
 
@@ -13,11 +13,11 @@ def initialize(context):
 
     # Initialize portal content
     content_types, constructors, ftis = atapi.process_types(
-        atapi.listTypes(PACKAGE),
-        PACKAGE)
+        atapi.listTypes(PACKAGE_NAME),
+        PACKAGE_NAME)
 
     utils.ContentInit(
-        PACKAGE,
+        PACKAGE_NAME,
         content_types=content_types,
         permission=ADD_PERMISSION,
         extra_constructors=constructors, fti=ftis).initialize(context)
