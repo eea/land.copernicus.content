@@ -1,37 +1,26 @@
-from land.copernicus.content.config import PACKAGE_AUTHOR
-from land.copernicus.content.config import PACKAGE_AUTHOR_EMAIL
-from land.copernicus.content.config import PACKAGE_CLASSIFIERS
-from land.copernicus.content.config import PACKAGE_DESCRIPTION
-from land.copernicus.content.config import PACKAGE_DOCS_FOLDER
-from land.copernicus.content.config import PACKAGE_HISTORY_FILE
-from land.copernicus.content.config import PACKAGE_KEYWORDS
-from land.copernicus.content.config import PACKAGE_NAME
-from land.copernicus.content.config import PACKAGE_NAMESPACE_PACKAGES
-from land.copernicus.content.config import PACKAGE_README_FILE
-from land.copernicus.content.config import PACKAGE_URL
-from land.copernicus.content.config import PACKAGE_VERSION_FILE
 from setuptools import setup, find_packages
 import os
 
-path = PACKAGE_NAME.split('.') + [PACKAGE_VERSION_FILE]
+name = 'land.copernicus.content'
+path = name.split('.') + ['version.txt']
 version = open(os.path.join(*path)).read().strip()
 
 setup(
-    name=PACKAGE_NAME,
+    name=name,
     version=version,
-    description=PACKAGE_DESCRIPTION,
-    long_description=open(PACKAGE_README_FILE).read() + "\n" +
-    open(os.path.join(PACKAGE_DOCS_FOLDER, PACKAGE_HISTORY_FILE)).read(),
+    description="Custom Content-Types for Land Copernicus",
+    long_description=open("README.txt").read() + "\n" +
+    open(os.path.join("docs", "HISTORY.txt")).read(),
     # Get more strings from
     # http://pypi.python.org/pypi?:action=list_classifiers
-    classifiers=PACKAGE_CLASSIFIERS,
-    keywords=PACKAGE_KEYWORDS,
-    author=PACKAGE_AUTHOR,
-    author_email=PACKAGE_AUTHOR_EMAIL,
-    url=PACKAGE_URL,
+    classifiers=["Programming Language :: Python", ],
+    keywords='land copernicus eea content-types plone zope',
+    author='European Environment Agency',
+    author_email="webadmin@eea.europa.eu",
+    url='http://github.com/eea/land.copernicus.content',
     license='GPL',
     packages=find_packages(exclude=['ez_setup']),
-    namespace_packages=PACKAGE_NAMESPACE_PACKAGES,
+    namespace_packages=['land', 'land.copernicus'],
     include_package_data=True,
     zip_safe=False,
     install_requires=[
