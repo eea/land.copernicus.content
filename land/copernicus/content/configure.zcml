@@ -36,14 +36,12 @@
   <subscriber
     for="Products.PluggableAuthService.interfaces.authservice.IPropertiedUser
          Products.PluggableAuthService.interfaces.events.IPrincipalCreatedEvent"
-    handler="land.copernicus.content.globalhandlers.autofillFullname"
-    />
+    handler="land.copernicus.content.globalhandlers.autofillFullname" />
 
   <subscriber
     for="*
          Products.PluggableAuthService.interfaces.events.IUserLoggedInEvent"
-    handler="land.copernicus.content.globalhandlers.forceUpdateProfile"
-  />
+    handler="land.copernicus.content.globalhandlers.forceUpdateProfile" />
 
   <subscriber
     for="land.copernicus.content.content.interfaces.ILandFile
