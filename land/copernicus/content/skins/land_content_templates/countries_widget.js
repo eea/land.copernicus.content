@@ -1,22 +1,20 @@
-
 function syncCountries() {
   var detect = false;
   var res = [];
   var selectedCountries = jQuery('#geographicCoverage').val();
   selectedCountries = selectedCountries ? selectedCountries: [];
 
-  jQuery.each(groupsData, function(group_id, group_value){
+  jQuery.each(groupsData, function(group_id, group_value) {
     detect = false;
     jQuery.each(group_value, function(i, val) {
       if (jQuery.inArray(val, selectedCountries) != -1) {
         detect = true;
-      }
-      else {
+      } else {
         detect = false;
         return false;
       }
     });
-    if (detect === true){
+    if (detect === true) {
       res.push(group_id);
     }
   });
@@ -63,7 +61,7 @@ function setWidgetSync() {
   jQuery('#geographicCoverage_groups').change(function () {
     syncGroups();
   });
-  jQuery.getJSON('@@getCountryGroupsData', {}, function(data){
+  jQuery.getJSON('@@getCountryGroupsData', {}, function(data) {
     oldGroups = [];
     groupsData = data;
     syncCountries();
@@ -75,39 +73,39 @@ function setWidgetSync() {
 // add Dynamic Geographic checkbox on geotags widget in Data and EEAFigure edit form
 // TODO: #9423 move this code in a geotags related file
 function setDynamicGeotags() {
-    jQuery("<p>" +
-           "<label id='dynamic_geotags_span'>" +
-           "<input type='checkbox' id='dynamic_geotags' />" +
-           "&nbsp;Dynamic Geographic Coverage" +
-           "</label></p>")
-        .insertAfter('#location_help');
-    jQuery('<span class="formHelp" id="dynamic_geotags_help">' +
-            'Warning: Saving the document with this option will remove any previously set geographic coverage tags</span>')
-        .insertAfter("#dynamic_geotags_span");
-    var location_edit = jQuery("#location-edit"),
-        dynamic_geotags = jQuery("#dynamic_geotags");
-    dynamic_geotags.click(function() {
-        if(jQuery(this).is(":checked")) {
-            location_edit.attr('disabled', true);
-        }
-        else {
-            location_edit.attr('disabled', false);
-        }
-    });
+  jQuery("<p>" +
+         "<label id='dynamic_geotags_span'>" +
+         "<input type='checkbox' id='dynamic_geotags' />" +
+         "&nbsp;Dynamic Geographic Coverage" +
+         "</label></p>")
+      .insertAfter('#location_help');
+  jQuery('<span class="formHelp" id="dynamic_geotags_help">' +
+          'Warning: Saving the document with this option will remove any previously set geographic coverage tags</span>')
+      .insertAfter("#dynamic_geotags_span");
+  var location_edit = jQuery("#location-edit"),
+      dynamic_geotags = jQuery("#dynamic_geotags");
+  dynamic_geotags.click(function() {
+    if(jQuery(this).is(":checked")) {
+      location_edit.attr('disabled', true);
+    } else {
+      location_edit.attr('disabled', false);
+    }
+  });
 
-    jQuery("input[value='Save']").click(function() {
-        if(dynamic_geotags.is(':checked')) {
-            jQuery('#location-geopreview').prev().text(
-                '{"type": "FeatureCollection", "features": [{"geometry":' +
-                    '{"type": "Point", "coordinates": [0, 0]}, "type": "Feature",' +
-                '"bbox": [], "properties": {"description": "", "tags": "area",' +
-                    '"country": null, "center": [0, 0], "other": {"name": "Dynamic",' +
-                        '"geonameId": 6295630, "toponymName": "Dynamic",' +
-                '"fclName": "parks,area, ...", "fcode": "AREA", "lat": 0, "lng": 0,' +
-                '"fcl": "L", "fcodeName": "area"}, "title": "Dynamic", "name": "6295630"}}]}');
-        }
-    });
+  jQuery("input[value='Save']").click(function() {
+    if(dynamic_geotags.is(':checked')) {
+      jQuery('#location-geopreview').prev().text(
+        '{"type": "FeatureCollection", "features": [{"geometry":' +
+        '{"type": "Point", "coordinates": [0, 0]}, "type": "Feature",' +
+        '"bbox": [], "properties": {"description": "", "tags": "area",' +
+        '"country": null, "center": [0, 0], "other": {"name": "Dynamic",' +
+        '"geonameId": 6295630, "toponymName": "Dynamic",' +
+        '"fclName": "parks,area, ...", "fcode": "AREA", "lat": 0, "lng": 0,' +
+        '"fcl": "L", "fcodeName": "area"}, "title": "Dynamic", "name": "6295630"}}]}');
+    }
+  });
 }
+
 jQuery(document).ready(function() {
   setWidgetSync();
   setDynamicGeotags();

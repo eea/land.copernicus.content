@@ -1,101 +1,100 @@
-  /* Inflexible tooltips */
-  .eea-tooltip-markup-top,
-  .eea-tooltip-markup-bottom,
-  .eea-tooltip-markup-left,
-  .eea-tooltip-markup-right {
-      display: none;
-      font-size: 12px;
-      height: 70px;
-      width: 160px;
-      padding: 25px;
-      color: white;
-      text-align: left;
-      text-decoration: none;
-  }
-  .eea-tooltip-markup-top {
-      background: transparent url(/++resource++tools/green_arrow_top.png);
-  }
-  .eea-tooltip-markup-bottom {
-      background: transparent url(/++resource++tools/green_arrow_bottom.png);
-      margin-top: 15px;
-  }
-  .eea-tooltip-markup-left {
-      background: transparent url(/++resource++tools/green_arrow_left.png);
-      padding-right: 45px;
-  }
-  .eea-tooltip-markup-right {
-      background: transparent url(/++resource++tools/green_arrow_right.png);
-      padding-left: 45px;
-  }
+/* Inflexible tooltips */
+.eea-tooltip-markup-top,
+.eea-tooltip-markup-bottom,
+.eea-tooltip-markup-left,
+.eea-tooltip-markup-right {
+  display: none;
+  font-size: 12px;
+  height: 70px;
+  width: 160px;
+  padding: 25px;
+  color: white;
+  text-align: left;
+  text-decoration: none;
+}
+.eea-tooltip-markup-top {
+  background: transparent url(/++resource++tools/green_arrow_top.png);
+}
+.eea-tooltip-markup-bottom {
+  background: transparent url(/++resource++tools/green_arrow_bottom.png);
+  margin-top: 15px;
+}
+.eea-tooltip-markup-left {
+  background: transparent url(/++resource++tools/green_arrow_left.png);
+  padding-right: 45px;
+}
+.eea-tooltip-markup-right {
+  background: transparent url(/++resource++tools/green_arrow_right.png);
+  padding-left: 45px;
+}
 
-  /* Flexible tooltips */
+/* Flexible tooltips */
+.eea-tooltip-markup {
+  display: none;
+  z-index: 100;
+}
 
-  .eea-tooltip-markup {
-      display: none;
-      z-index: 100;
-  }
+.eea-tooltip-markup .tooltip-box-br {
+  background: transparent url(/++resource++tools/x-green-bottom-right.png) no-repeat right bottom;
+  position:relative;
+  max-height:1000px;
+  min-height:50px;
+  min-width:100px;
+  width:250px;
+  padding-bottom:3px;
+}
 
-  .eea-tooltip-markup .tooltip-box-br {
-      background: transparent url(/++resource++tools/x-green-bottom-right.png) no-repeat right bottom;
-      position:relative;
-      max-height:1000px;
-      min-height:50px;
-      min-width:100px;
-      width:250px;
-      padding-bottom:3px;
-  }
+.eea-tooltip-markup .tooltip-box-tl {
+  background: transparent url(/++resource++tools/x-green-top-left.png) no-repeat left top;
+  position:relative;
+  left:-30px;
+  top:-20px;
+  margin-right:-19px;
+  max-height:1000px;
+  min-height:50px;
+  min-width:100px;
+  width: 269px;
+}
 
-  .eea-tooltip-markup .tooltip-box-tl {
-      background: transparent url(/++resource++tools/x-green-top-left.png) no-repeat left top;
-      position:relative;
-      left:-30px;
-      top:-20px;
-      margin-right:-19px;
-      max-height:1000px;
-      min-height:50px;
-      min-width:100px;
-      width: 269px;
-  }
+.eea-tooltip-markup .tooltip-box-rcontent {
+  background: transparent url(/++resource++tools/x-green-arrow-left.png) no-repeat left center;
+  position: relative;
+  top: 11px;
+  padding:2em 1em 2em 3em;
+  text-align:justify;
+  font-size: 12px;
+  color:#ffffff;
+}
 
-  .eea-tooltip-markup .tooltip-box-rcontent {
-      background: transparent url(/++resource++tools/x-green-arrow-left.png) no-repeat left center;
-      position: relative;
-      top: 11px;
-      padding:2em 1em 2em 3em;
-      text-align:justify;
-      font-size: 12px;
-      color:#ffffff;
-  }
+.eea-tooltip-markup .tooltip-box-lcontent {
+  background: transparent url(/++resource++tools/x-green-arrow-right.png) no-repeat right center;
+  position: relative;
+  top: 11px;
+  right: -31px;
+  padding:2em 3.5em 2em 1em;
+  text-align:justify;
+  font-size: 12px;
+  color:#ffffff;
+}
 
-  .eea-tooltip-markup .tooltip-box-lcontent {
-      background: transparent url(/++resource++tools/x-green-arrow-right.png) no-repeat right center;
-      position: relative;
-      top: 11px;
-      right: -31px;
-      padding:2em 3.5em 2em 1em;
-      text-align:justify;
-      font-size: 12px;
-      color:#ffffff;
-  }
+.eea-tooltip-markup .tooltip-box-bcontent {
+  background: transparent url(/++resource++tools/x-green-arrow-top.png) no-repeat center top;
+  color:#FFFFFF;
+  font-size:12px;
+  left:10px;
+  padding:2.5em 1.5em 1em 2.5em;
+  position:relative;
+  text-align:justify;
+  top:-2px;
+}
 
-  .eea-tooltip-markup .tooltip-box-bcontent {
-      background: transparent url(/++resource++tools/x-green-arrow-top.png) no-repeat center top;
-      color:#FFFFFF;
-      font-size:12px;
-      left:10px;
-      padding:2.5em 1.5em 1em 2.5em;
-      position:relative;
-      text-align:justify;
-      top:-2px;
-  }
-
-  .eea-tooltip-markup .tooltip-box-tcontent {
-      background: transparent url(/++resource++tools/x-green-arrow-bottom.png) no-repeat center bottom;
-      bottom:-22px;
-      color:#FFFFFF;
-      font-size:12px;
-      left:10px;
-      padding:0.5em 1.5em 2.5em 2.5em;
-      position:relative;
-      text-align:justify;
-  }
+.eea-tooltip-markup .tooltip-box-tcontent {
+  background: transparent url(/++resource++tools/x-green-arrow-bottom.png) no-repeat center bottom;
+  bottom:-22px;
+  color:#FFFFFF;
+  font-size:12px;
+  left:10px;
+  padding:0.5em 1.5em 2.5em 2.5em;
+  position:relative;
+  text-align:justify;
+}

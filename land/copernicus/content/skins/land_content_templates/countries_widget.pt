@@ -7,7 +7,6 @@
   <body>
 
     <!-- Selection Widgets -->
-
     <metal:view_macro define-macro="view"
                       tal:define="vocab python:field.Vocabulary(here);
                       value python:accessor();
@@ -18,26 +17,26 @@
       <metal:use use-macro="field_macro | here/widgets/field/macros/edit">
 
         <tal:ifLabel metal:fill-slot="widget_body_label_prefix">
-            <label class="formQuestion"
-                   tal:attributes="for python:fieldName">
-                <span tal:replace="python:widget.Label(here)"
-                      i18n:translate="" />
-                <span class="required"
-                      tal:condition="field/required"
-                      title="Required"
-                      i18n:attributes="title title_required;"
-                      style="color: #f00;">
-                  &#x25a0;
-                </span>
-            </label>
-            <div class="formHelp"
-                 tal:define="description python:widget.Description(here)"
-                 tal:content="structure description"
-                 tal:attributes="id string:${fieldName}_help"
-                 i18n:translate="">
-              Help
-            </div>
-          </tal:ifLabel>
+          <label class="formQuestion"
+                  tal:attributes="for python:fieldName">
+            <span tal:replace="python:widget.Label(here)"
+                  i18n:translate="" />
+            <span class="required"
+                  tal:condition="field/required"
+                  title="Required"
+                  i18n:attributes="title title_required;"
+                  style="color: #f00;">
+              &#x25a0;
+            </span>
+          </label>
+          <div class="formHelp"
+               tal:define="description python:widget.Description(here)"
+               tal:content="structure description"
+               tal:attributes="id string:${fieldName}_help"
+               i18n:translate="">
+            Help
+          </div>
+        </tal:ifLabel>
 
         <metal:fill fill-slot="widget_body"
                     tal:define="vocab python:field.Vocabulary(here);
@@ -51,17 +50,16 @@
           <span tal:repeat="item vocab" tal:omit-tag=""
                 tal:condition="python:format=='checkbox'">
             <tal:block>
-                <div class="ArchetypesMultiSelectionValue" id=""
-                        tal:attributes="id string:archetypes-value-${fieldName}_${repeat/item/number}">
-              <input
-               tal:attributes="type string:checkbox;
-               name string:$fieldName:list;
-               id string:${fieldName}_${repeat/item/number};
-               checked python:test(here.unicodeTestIn(item, value), 'checked', None);
-               value nocall:item;"/>
-          <label tal:content="python:vocab.getValue(item)"
-                 i18n:translate=""
-                 tal:attributes="for string:${fieldName}_${repeat/item/number}" />
+              <div class="ArchetypesMultiSelectionValue" id=""
+                   tal:attributes="id string:archetypes-value-${fieldName}_${repeat/item/number}">
+                <input tal:attributes="type string:checkbox;
+                                       name string:$fieldName:list;
+                                       id string:${fieldName}_${repeat/item/number};
+                                       checked python:test(here.unicodeTestIn(item, value), 'checked', None);
+                                       value nocall:item;" />
+                <label tal:content="python:vocab.getValue(item)"
+                       i18n:translate=""
+                       tal:attributes="for string:${fieldName}_${repeat/item/number}" />
               </div>
             </tal:block>
           </span>
@@ -69,6 +67,7 @@
           <p>
             <input type='checkbox' id="geographical_btn"  /> <span i18n:translate="">Dynamic Geographic Coverage</span>
           </p>
+
           <!-- Country groups -->
           <select multiple="multiple"
                   tal:condition="python:format=='select'"
@@ -79,12 +78,12 @@
                   class="countries-widget-select">
 
 
-              <option tal:repeat="item python:groups.items()"
-                      selected=""
-                      tal:attributes="value python:item[0];
-                      selected python:test(here.unicodeTestIn(item[0], value), 'selected', None);"
-                      tal:content="python:item[1]"
-                      i18n:translate="" />
+            <option tal:repeat="item python:groups.items()"
+                    selected=""
+                    tal:attributes="value python:item[0];
+                    selected python:test(here.unicodeTestIn(item[0], value), 'selected', None);"
+                    tal:content="python:item[1]"
+                    i18n:translate="" />
           </select>
 
           <!-- Countries -->
@@ -96,19 +95,20 @@
                   tal:define="coutries here/@@getCountries"
                   class="countries-widget-select">
 
-                  <option id="dynamic_geographical" i18n:translate=""
-                            tal:attributes="value string:Dynamic;
-                            selected python:test('Dynamic' in value, 'selected', None);"
-                            i18n:attributes="value">Dynamic</option>
+            <option id="dynamic_geographical" i18n:translate=""
+                    tal:attributes="value string:Dynamic;
+                    selected python:test('Dynamic' in value, 'selected', None);"
+                    i18n:attributes="value">Dynamic</option>
 
-              <option tal:repeat="item coutries"
-                      selected=""
-                      tal:attributes="value python:item[0];
-                                      selected python:test(here.unicodeTestIn(item[0], value), 'selected', None);"
-                      tal:content="python:item[1]"
-                      style="float: left"
-                      i18n:translate="" />
+            <option tal:repeat="item coutries"
+                    selected=""
+                    tal:attributes="value python:item[0];
+                                    selected python:test(here.unicodeTestIn(item[0], value), 'selected', None);"
+                    tal:content="python:item[1]"
+                    style="float: left"
+                    i18n:translate="" />
           </select>
+
           <span id="geo_coverage_info"></span>
           <div class="visualClear">&nbsp;</div>
 
@@ -132,4 +132,3 @@
 
   </body>
 </html>
-

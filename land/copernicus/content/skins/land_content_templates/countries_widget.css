@@ -9,15 +9,16 @@
 }
 
 .dataservice_btn {
-    cursor: pointer;
-    color: green;
+  cursor: pointer;
+  color: green;
 }
 
-option:disabled, input:disabled {
-    background: beige;
-    color: #DDD !important;
+option:disabled,
+input:disabled {
+  background: beige;
+  color: #DDD !important;
 }
 
 #dynamic_geotags_span {
-    font-weight: normal;
+  font-weight: normal;
 }

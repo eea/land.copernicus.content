@@ -14,30 +14,30 @@
 <metal:content-core fill-slot="content-core"
     tal:define="search_tag python:request.form.get('tag', '');
                 results python:context.portal_catalog.searchResults(portal_type='LandItem', Subject={'query':[search_tag]})">
-<metal:main_macro define-macro="content-core">
+  <metal:main_macro define-macro="content-core">
 
-<style>
-  #viewlet-below-content-title {
-    display:none;
-  }
-</style>
+    <style>
+      #viewlet-below-content-title {
+        display:none;
+      }
+    </style>
 
-  <div class="photoAlbum" tal:repeat="result_item results">
-    <div tal:define="image python:result_item.getObject();"
-        tal:attributes="class python:'photoAlbumEntry photoAlbumFolder'">
-      <a tal:attributes="href string:${image/absolute_url}/view;
-                         title image/Description">
-        <span class="photoAlbumEntryWrapper">
-          <img src="" alt="" tal:replace="structure python:image.tag(scale='thumb', title=image.Description(), alt='')" />
-        </span>
-        <span class="photoAlbumEntryTitle" tal:content="image/pretty_title_or_id">
-          Title
-        </span>
-      </a>
+    <div class="photoAlbum" tal:repeat="result_item results">
+      <div tal:define="image python:result_item.getObject();"
+           tal:attributes="class python:'photoAlbumEntry photoAlbumFolder'">
+        <a tal:attributes="href string:${image/absolute_url}/view;
+                           title image/Description">
+          <span class="photoAlbumEntryWrapper">
+            <img src="" alt="" tal:replace="structure python:image.tag(scale='thumb', title=image.Description(), alt='')" />
+          </span>
+          <span class="photoAlbumEntryTitle" tal:content="image/pretty_title_or_id">
+            Title
+          </span>
+        </a>
+      </div>
     </div>
-  </div>
 
-</metal:main_macro>
+  </metal:main_macro>
 </metal:content-core>
 
 </body>
