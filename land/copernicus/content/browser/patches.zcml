@@ -2,10 +2,10 @@
            xmlns:monkey="http://namespaces.plone.org/monkey"
            xmlns:zcml="http://namespaces.zope.org/zcml"
            i18n_domain="eea">
-  
+
   <include package="collective.monkeypatcher" />
     <include package="collective.monkeypatcher" file="meta.zcml" />
- 
+
     <monkey:patch description="Fix to enable comments for PloneHelpCenter types"
                   class="plone.app.discussion.browser.conversation.ConversationView"
                   original="enabled"

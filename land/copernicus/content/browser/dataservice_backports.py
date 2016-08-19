@@ -3,7 +3,7 @@ from Products.CMFCore.utils import getToolByName
 from eea.cache import cache as eeacache
 from land.copernicus.content.content.vocabulary import COUNTRIES_DICTIONARY_ID
 from plone.i18n.locales.interfaces import ICountryAvailability
-from zope.component import getUtility  # queryMultiAdapter, queryAdapter,
+from zope.component import getUtility
 import operator
 import json
 

@@ -4,7 +4,7 @@ logger = logging.getLogger('land.copernicus.content')
 
 
 class FixImageScales(object):
-    """fix image scales for the image field
+    """ Fix image scales for the image field
     """
 
     def __init__(self, context, request):
