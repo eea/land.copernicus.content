@@ -7,7 +7,7 @@ def fileHandler(obj):
     """
 
     if obj.getContentType() != 'application/pdf':
-        """Can get cover only for pdf file
+        """ Can get cover only for pdf file
         """
         return
 

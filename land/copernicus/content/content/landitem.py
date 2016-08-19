@@ -3,7 +3,6 @@
 
 from Products.CMFCore.utils import getToolByName
 from Products.ATContentTypes.content.folder import ATFolder
-# from land.copernicus.content.config import IFRAME_WIDTH
 from land.copernicus.content.config import IFRAME_HEIGHT
 from land.copernicus.content.content import schema
 from land.copernicus.content.content.interfaces import ILandItem
@@ -33,7 +32,6 @@ class LandItem(ATFolder):
 
         for tag in html_elements:
             if tag.tag == 'iframe':
-                # tag.set('width', IFRAME_WIDTH)
                 tag.set('height', IFRAME_HEIGHT)
                 tag.set('class', 'widen')
                 tag.set('onload', "javascript:show_iframe();")

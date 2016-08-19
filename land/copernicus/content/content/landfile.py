@@ -87,7 +87,6 @@ class SchemaExtender(object):
             widget=DataGridWidget(
                 label="Categorization of this file",
                 description="Enter, for each category, its value"
-                # columns=column_defs,
             ),
         )
         return [field]

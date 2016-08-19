@@ -7,8 +7,8 @@ import os
 class PDFTransformer(object):
     """
     The main purpose of the class is to transform a pdf file into multiple
-    png files. The number of the png files is equal with pdf pages.(so one page
-    for a png file)
+    png files. The number of the png files is equal with pdf pages.
+    (so one page for a png file)
     """
     @staticmethod
     def id_generator(size=6, chars=ascii_uppercase + digits):

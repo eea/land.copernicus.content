@@ -1,36 +1,32 @@
-<configure
-    xmlns="http://namespaces.zope.org/zope"
-    i18n_domain="eea">
+<configure xmlns="http://namespaces.zope.org/zope"
+           i18n_domain="eea">
 
-    <adapter name="land.copernicus.content.fields"
-        for="land.copernicus.content.content.interfaces.ILandContent"
-        factory=".subtypes.Extender" />
+  <adapter
+    name="land.copernicus.content.fields"
+    for="land.copernicus.content.content.interfaces.ILandContent"
+    factory=".subtypes.Extender" />
 
-    <adapter name="land.copernicus.content.itemfields"
-        for="land.copernicus.content.content.interfaces.ILandItem"
-        factory=".subtypes.LandItemExtender" />
+  <adapter
+    name="land.copernicus.content.itemfields"
+    for="land.copernicus.content.content.interfaces.ILandItem"
+    factory=".subtypes.LandItemExtender" />
 
-    <adapter name="land.copernicus.content.atblob"
-        for="plone.app.blob.interfaces.IATBlob"
-        factory=".subtypes.ATBlobModifier" />
+  <adapter
+    name="land.copernicus.content.atblob"
+    for="plone.app.blob.interfaces.IATBlob"
+    factory=".subtypes.ATBlobModifier" />
 
-    <!-- <adapter name="land.copernicus.content.landproduct" -->
-    <!--     for="land.copernicus.content.content.interfaces.ILandProduct" -->
-    <!--     factory=".landproduct.LandProductSchemaExtender" /> -->
+  <subscriber
+    for="Products.ATContentTypes.interface.IATFile zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+    handler=".add.handler" />
 
-    <subscriber
-        for="Products.ATContentTypes.interface.IATFile zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-        handler=".add.handler"
-        />
+  <subscriber
+    for="Products.ATContentTypes.interface.IATFile zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+    handler=".edit.handler" />
 
-    <subscriber
-        for="Products.ATContentTypes.interface.IATFile zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-        handler=".edit.handler"
-        />
-
-    <adapter 
-        name="land.copernicus.content.landfile"
-        for="land.copernicus.content.content.interfaces.ILandFile"
-        factory=".landfile.SchemaExtender" />
+  <adapter
+    name="land.copernicus.content.landfile"
+    for="land.copernicus.content.content.interfaces.ILandFile"
+    factory=".landfile.SchemaExtender" />
 
 </configure>
