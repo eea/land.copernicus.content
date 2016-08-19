@@ -4,30 +4,29 @@
       i18n:domain="plone">
 
 <body>
+  <metal:description fill-slot="content-description" />
 
-<metal:description fill-slot="content-description" />
+  <metal:content-core fill-slot="content-core">
+    <metal:main_macro define-macro="content-core">
+      <p i18n:translate="">Download will start soon. Please wait.</p>
+      <div tal:define="professional_thematic_domain python:view.values.get('professional_thematic_domain', '');
+                       institutional_domain python:view.values.get('institutional_domain');
+                       start_download_url python:view.values.get('start_download_url');
+                       land_item_title python:context.title">
 
-<metal:content-core fill-slot="content-core">
-<metal:main_macro define-macro="content-core">
-  <p i18n:translate="">Download will start soon. Please wait.</p>
-  <div tal:define="professional_thematic_domain python:view.values.get('professional_thematic_domain', '');
-                   institutional_domain python:view.values.get('institutional_domain');
-                   start_download_url python:view.values.get('start_download_url');
-                   land_item_title python:context.title">
+        <script tal:content="string:var land_item_title='${land_item_title}';"></script>
+        <script tal:content="string:var professional_thematic_domain='${professional_thematic_domain}';"></script>
+        <script tal:content="string:var institutional_domain='${institutional_domain}';"></script>
+        <script tal:content="string:var start_download_url='${start_download_url}';"></script>
 
-    <script tal:content="string:var land_item_title='${land_item_title}';"></script>
-    <script tal:content="string:var professional_thematic_domain='${professional_thematic_domain}';"></script>
-    <script tal:content="string:var institutional_domain='${institutional_domain}';"></script>
-    <script tal:content="string:var start_download_url='${start_download_url}';"></script>
+        <script src="./download-land-file.js"></script>
+      </div>
 
-    <script src="./download-land-file.js"></script>
-  </div>
+      <!-- used for safari -->
+      <iframe id="download-iframe" src="" frameborder="0" style="display:none"></iframe>
+      <!-- used for safari -->
 
-  <!-- used for safari -->
-  <iframe id="download-iframe" src="" frameborder="0" style="display:none"></iframe>
-  <!-- used for safari -->
-
-</metal:main_macro>
-</metal:content-core>
+    </metal:main_macro>
+  </metal:content-core>
 </body>
 </html>
