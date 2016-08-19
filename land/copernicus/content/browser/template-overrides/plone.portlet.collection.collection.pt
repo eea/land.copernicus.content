@@ -1,3 +1,4 @@
+<!-- Add custom behaviour of EAGLE links in User corner section. -->
 <dl class="portlet portletCollection"
     i18n:domain="plone"
     tal:define="collection_url view/collection_url;
@@ -99,12 +100,12 @@
 </dl>
 
 <script>
-  $(document).ready(function(){
+  $(document).ready(function() {
     var $eagle_links = $(".eagle-link");
     var $eagle_parent_link = $('.eagle-parent-link');
 
     $eagle_links.parent().hide();
-    $eagle_parent_link.on('click', function(evt){
+    $eagle_parent_link.on('click', function(evt) {
       evt.preventDefault();
       $eagle_links.parent().toggle();
 

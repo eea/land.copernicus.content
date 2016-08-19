@@ -8,132 +8,129 @@
     Call this with 'section' defined
   -->
 <metal:block define-macro="section_toc">
-    <ol tal:condition="toc | nothing">
-        <li tal:repeat="tocElement toc">
-            <tal:item define="item tocElement/item">
-                <a href="" tal:attributes="href item/getURL">
-                <span tal:content="item/Title" tal:attributes="class string:state-${item/review_state}"/></a>
-                    <tal:block define="toc tocElement/children">
-                        <metal:recursion use-macro="here/referencemanual_macros/macros/section_toc"/>
-                    </tal:block>
-            </tal:item>
-        </li>
-    </ol>
+  <ol tal:condition="toc | nothing">
+    <li tal:repeat="tocElement toc">
+      <tal:item define="item tocElement/item">
+        <a href="" tal:attributes="href item/getURL">
+          <span tal:content="item/Title" tal:attributes="class string:state-${item/review_state}"/>
+        </a>
+        <tal:block define="toc tocElement/children">
+          <metal:recursion use-macro="here/referencemanual_macros/macros/section_toc"/>
+        </tal:block>
+      </tal:item>
+    </li>
+  </ol>
 </metal:block>
 
 <!-- Listing of all pages in a section
 
-    Call this with toc (top level list, as returned by getTOC()) defined
+     Call this with toc (top level list, as returned by getTOC()) defined
   -->
 <metal:block define-macro="section_collation">
-    <tal:section repeat="section toc">
-        <div tal:define="item      section/item;
-                            itemObj   item/getObject;
-                            itemUrl   itemObj/absolute_url;
-                            body      itemObj/getText | nothing;
-                            numbering section/numbering;
-                            itemDepth section/depth;
-                            children  section/children;
-                            addImagePaths nocall:context/addImagePaths | nothing;
-                            "
-            tal:attributes="class string:referenceManualCollation depth-${itemDepth}">
+  <tal:section repeat="section toc">
+    <div tal:define="item      section/item;
+                     itemObj   item/getObject;
+                     itemUrl   itemObj/absolute_url;
+                     body      itemObj/getText | nothing;
+                     numbering section/numbering;
+                     itemDepth section/depth;
+                     children  section/children;
+                     addImagePaths nocall:context/addImagePaths | nothing;"
+         tal:attributes="class string:referenceManualCollation depth-${itemDepth}">
 
-            <h1>
-                <!-- ORIGINAL: <span tal:replace="numbering">1.</span> -->
-                <span tal:replace="item/Title">Section Title</span>
-            </h1>
+      <h1>
+        <!-- ORIGINAL: <span tal:replace="numbering">1.</span> -->
+        <span tal:replace="item/Title">Section Title</span>
+      </h1>
 
-            <p class="documentDescription" tal:content="item/Description">
-                description
-            </p>
+      <p class="documentDescription" tal:content="item/Description">
+        description
+      </p>
 
-            <div tal:condition="nocall:body">
-                <tal:block condition="nocall:addImagePaths">
-                    <div tal:replace="structure python:addImagePaths(body, itemUrl)" />
-                </tal:block>
-                <tal:block condition="not: nocall:addImagePaths">
-                    <div tal:replace="structure body" />
-                </tal:block>
-            </div>
+      <div tal:condition="nocall:body">
+        <tal:block condition="nocall:addImagePaths">
+          <div tal:replace="structure python:addImagePaths(body, itemUrl)" />
+        </tal:block>
+        <tal:block condition="not: nocall:addImagePaths">
+          <div tal:replace="structure body" />
+        </tal:block>
+      </div>
 
-            <tal:subsections define="toc children"
-                             condition="nocall:children">
-                <metal:recursion use-macro="here/referencemanual_macros/macros/section_collation"/>
-            </tal:subsections>
+      <tal:subsections define="toc children"
+                       condition="nocall:children">
+        <metal:recursion use-macro="here/referencemanual_macros/macros/section_collation" />
+      </tal:subsections>
 
-        </div>
-    </tal:section>
+    </div>
+  </tal:section>
 </metal:block>
 
 <!-- The navigation bar
 
-    Call this with tocInfo (as returned by getTOCInfo()) defined
+     Call this with tocInfo (as returned by getTOCInfo()) defined
   -->
 <div metal:define-macro="navigation_bar"
-    class="listingBar"
-    tal:define="nextIdx tocInfo/nextIdx;
-                prevIdx tocInfo/prevIdx;
-                tocList tocInfo/tocList"
-    tal:condition="python: nextIdx or prevIdx"
-    i18n:domain="plonehelpcenter">
+     class="listingBar"
+     tal:define="nextIdx tocInfo/nextIdx;
+                 prevIdx tocInfo/prevIdx;
+                 tocList tocInfo/tocList"
+     tal:condition="python: nextIdx or prevIdx"
+     i18n:domain="plonehelpcenter">
 
-    <tal:next condition="nextIdx">
-        <a class="next"
-           tal:define="next python:tocList[nextIdx]['item']"
-           tal:attributes="href next/getURL"
-           href="">
-            <span i18n:translate="phc_next">
-               Next:
-            </span>
-            <span tal:replace="next/Title" />
-            &#9658;
-       </a>
-    </tal:next>
+  <tal:next condition="nextIdx">
+    <a class="next"
+       tal:define="next python:tocList[nextIdx]['item']"
+       tal:attributes="href next/getURL"
+       href="">
+      <span i18n:translate="phc_next">
+        Next:
+      </span>
+      <span tal:replace="next/Title" />
+      &#9658;
+    </a>
+  </tal:next>
 
-    <tal:prev condition="prevIdx">
-        <a class="previous"
-           tal:define="prev python:tocList[prevIdx]['item']"
-           tal:attributes="href prev/getURL"
-           href="">
-            &#9668;
-            <span i18n:translate="phc_previous">
-               Previous:
-            </span>
-            <span tal:replace="prev/Title" />
-       </a>
-    </tal:prev> 
+  <tal:prev condition="prevIdx">
+    <a class="previous"
+       tal:define="prev python:tocList[prevIdx]['item']"
+       tal:attributes="href prev/getURL"
+       href="">
+      &#9668;
+      <span i18n:translate="phc_previous">
+        Previous:
+      </span>
+      <span tal:replace="prev/Title" />
+    </a>
+  </tal:prev>
 </div>
 
 <!-- The "jump to" drop-down box
 
-    Call this with tocList (as returned in tocInfo returned by getTOCInfo())
-    defined.
+     Call this with tocList (as returned in tocInfo returned by getTOCInfo())
+     defined.
   -->
 <div metal:define-macro="jump_box"
-    class="jumpBox"
-    i18n:domain="plonehelpcenter">
+     class="jumpBox"
+     i18n:domain="plonehelpcenter">
 
-    <form method="get" action="#"
-          tal:attributes="action context/absolute_url">
-        <label for="destination" class="hiddenStructure">Jump to: </label>
-        <select name=":action"
-                onchange="window.location.href=this.options[this.selectedIndex].value">
-        <option value="referencemanual-all-pages"
-            title="Useful for printing, presentation mode etc.">
-          All content on one page
-        </option>
-            <option tal:repeat="tocItem tocList"
-                    tal:attributes="value tocItem/item/getURL;
-                                    selected python:tocItem['currentItem'] and 'selected' or nothing">
-                <span tal:replace="tocItem/numbering"/>
-                <span tal:replace="tocItem/item/Title"/>
-            </option>
-        </select>
-        <noscript>
-            <input class="standalone"
-                   type="submit"
-                   value="Go"
-                   i18n:attributes="value" />
-        </noscript>
-    </form>
+  <form method="get" action="#"
+        tal:attributes="action context/absolute_url">
+    <label for="destination" class="hiddenStructure">Jump to: </label>
+    <select name=":action"
+            onchange="window.location.href=this.options[this.selectedIndex].value">
+      <option value="referencemanual-all-pages"
+              title="Useful for printing, presentation mode etc.">
+        All content on one page
+      </option>
+      <option tal:repeat="tocItem tocList"
+              tal:attributes="value tocItem/item/getURL;
+                              selected python:tocItem['currentItem'] and 'selected' or nothing">
+        <span tal:replace="tocItem/numbering" />
+        <span tal:replace="tocItem/item/Title" />
+      </option>
+    </select>
+    <noscript>
+      <input class="standalone" type="submit" value="Go" i18n:attributes="value" />
+    </noscript>
+  </form>
 </div>
