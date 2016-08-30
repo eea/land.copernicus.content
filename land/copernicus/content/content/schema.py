@@ -297,6 +297,17 @@ PRODUCT_SCHEMA = Schema((
         schemata="metadata",
         default_output_type="text/x-html-safe",
     ),
+    StringField(
+        name='dataResourceType',
+        widget=StringWidget(
+            label="Data identification / Resource type",
+            description="Scope to which metadata applies.",
+            i18n_domain='eea',
+        ),
+        default="Dataset",
+        searchable=True,
+        schemata="metadata",
+    ),
 ))
 
 
@@ -307,7 +318,7 @@ def finalize_product_schema(schema):
         'subject', 'temporalCoverage', 'geographicCoverage',
         'geographicAccuracy', 'subject', 'rights', 'coordinateReferenceSystem',
         'dataSources', 'owners', 'dataCustodians', 'dataResourceTitle',
-        'dataResourceAbstract']
+        'dataResourceAbstract', 'dataResourceType']
 
     for field in meta_fields:
         schema.changeSchemataForField(field, 'metadata')
