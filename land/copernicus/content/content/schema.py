@@ -319,6 +319,17 @@ PRODUCT_SCHEMA = Schema((
         searchable=True,
         schemata="metadata",
     ),
+    StringField(
+        name='classificationTopicCategory',
+        widget=StringWidget(
+            label="Classification of spatial data / Topic Category",
+            description="Main theme(s) of the dataset",
+            i18n_domain='eea',
+        ),
+        default="",
+        searchable=True,
+        schemata="metadata",
+    ),
 ))
 
 
@@ -329,7 +340,8 @@ def finalize_product_schema(schema):
         'subject', 'temporalCoverage', 'geographicCoverage',
         'geographicAccuracy', 'subject', 'rights', 'coordinateReferenceSystem',
         'dataSources', 'owners', 'dataCustodians', 'dataResourceTitle',
-        'dataResourceAbstract', 'dataResourceType', 'dataResourceLocator']
+        'dataResourceAbstract', 'dataResourceType', 'dataResourceLocator',
+        'classificationTopicCategory']
 
     for field in meta_fields:
         schema.changeSchemataForField(field, 'metadata')
