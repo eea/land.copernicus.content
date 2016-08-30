@@ -105,16 +105,21 @@
         <dd tal:content="structure value">Topic Category</dd>
       </tal:block>
 
-      <!-- Keyword -->
+      <!-- Keyword (old Tags)-->
       <tal:block
-        define="field python:context.getField('dataCustodians');
+        define="field python:context.getField('subject');
         value python:field.getAccessor(context)()"
         condition="value">
         <dt style="clear: left">
           <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
           <span i18n:translate="">Keyword:</span>
         </dt>
-        <dd tal:content="structure value">Keyword</dd>
+        <dd>
+          <a tal:repeat="tag value" href="" class="label-tag"
+             tal:attributes="href string: ${context/@@plone_context_state/object_url}/dataset_tag_search?tag=${tag}">
+             <span class="label-white-color" tal:content="tag"></span>
+          </a>
+        </dd>
       </tal:block>
     </dl>
 
