@@ -308,6 +308,17 @@ PRODUCT_SCHEMA = Schema((
         searchable=True,
         schemata="metadata",
     ),
+    StringField(
+        name='dataResourceLocator',
+        widget=StringWidget(
+            label="Data identification / Resource Locator",
+            description="URL address to locate the data",
+            i18n_domain='eea',
+        ),
+        default="",
+        searchable=True,
+        schemata="metadata",
+    ),
 ))
 
 
@@ -318,7 +329,7 @@ def finalize_product_schema(schema):
         'subject', 'temporalCoverage', 'geographicCoverage',
         'geographicAccuracy', 'subject', 'rights', 'coordinateReferenceSystem',
         'dataSources', 'owners', 'dataCustodians', 'dataResourceTitle',
-        'dataResourceAbstract', 'dataResourceType']
+        'dataResourceAbstract', 'dataResourceType', 'dataResourceLocator']
 
     for field in meta_fields:
         schema.changeSchemataForField(field, 'metadata')

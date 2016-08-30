@@ -74,14 +74,18 @@
 
         <!-- Resource Locator -->
         <tal:block
-          define="field python:context.getField('dataCustodians');
+          define="field python:context.getField('dataResourceLocator');
           value python:field.getAccessor(context)()"
           condition="value">
           <dt style="clear: left">
             <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
             <span i18n:translate="">Resource Locator:</span>
           </dt>
-          <dd tal:content="structure value">Resource Locator</dd>
+          <dd>
+            <a tal:content="structure value" tal:attributes="href value">
+              Resource Locator
+            </a>
+          </dd>
         </tal:block>
 
 
