@@ -266,6 +266,19 @@ PRODUCT_SCHEMA = Schema((
             i18n_domain='eea',
         )
     ),
+
+    # TODO WIP New fields for metadata tab here
+    StringField(
+        name='dataResourceTitle',
+        widget=StringWidget(
+            label="Data identification / Resource title",
+            description="Name by which the cited resource is known",
+            i18n_domain='eea',
+        ),
+        default="",
+        searchable=True,
+        schemata="metadata",
+    ),
 ))
 
 
@@ -275,7 +288,7 @@ def finalize_product_schema(schema):
     meta_fields = ['subject', 'temporalCoverage', 'geographicCoverage',
                    'geographicAccuracy', 'subject', 'rights',
                    'coordinateReferenceSystem', 'dataSources', 'owners',
-                   'dataCustodians']
+                   'dataCustodians', 'dataResourceTitle']
 
     for field in meta_fields:
         schema.changeSchemataForField(field, 'metadata')

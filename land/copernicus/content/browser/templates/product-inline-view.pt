@@ -38,7 +38,7 @@
       <h4 class="section-title">Data identification</h4>
         <!-- Resource title -->
         <tal:block
-          define="field python:context.getField('dataCustodians');
+          define="field python:context.getField('dataResourceTitle');
           value python:field.getAccessor(context)()"
           condition="value">
           <dt style="clear: left">
