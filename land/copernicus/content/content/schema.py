@@ -68,7 +68,7 @@ PRODUCT_SCHEMA = Schema((
         widget=BooleanWidget(
             label=("Is Validated Dataset"),
             description=("Check this only if dataset is validated.")
-            ),
+        ),
     ),
     StringField(
         name='notValidatedCustomText',
@@ -137,7 +137,7 @@ PRODUCT_SCHEMA = Schema((
             description=("Information about how accurate is data."),
             label_msgid='eea_label_more_updates_on',
             i18n_domain='eea',
-            ),
+        ),
         default_content_type="text/html",
         searchable=True,
         schemata="metadata",
