@@ -279,16 +279,35 @@ PRODUCT_SCHEMA = Schema((
         searchable=True,
         schemata="metadata",
     ),
+    TextField(
+        name='dataResourceAbstract',
+        allowable_content_types=('text/plain', 'text/structured', 'text/html',
+                                 'application/msword',),
+        widget=RichWidget(
+            label="Data identification / Resource abstract",
+            description=(
+                "Brief narrative summary of the content of the "
+                "resource(s) with coverage, main attributes, data sources, "
+                "important of the work, etc."),
+            label_msgid='eea_data_resource_abstract',
+            i18n_domain='eea',
+        ),
+        default_content_type="text/html",
+        searchable=True,
+        schemata="metadata",
+        default_output_type="text/x-html-safe",
+    ),
 ))
 
 
 def finalize_product_schema(schema):
 
     default_fields = ['id', 'title', 'description']
-    meta_fields = ['subject', 'temporalCoverage', 'geographicCoverage',
-                   'geographicAccuracy', 'subject', 'rights',
-                   'coordinateReferenceSystem', 'dataSources', 'owners',
-                   'dataCustodians', 'dataResourceTitle']
+    meta_fields = [
+        'subject', 'temporalCoverage', 'geographicCoverage',
+        'geographicAccuracy', 'subject', 'rights', 'coordinateReferenceSystem',
+        'dataSources', 'owners', 'dataCustodians', 'dataResourceTitle',
+        'dataResourceAbstract']
 
     for field in meta_fields:
         schema.changeSchemataForField(field, 'metadata')

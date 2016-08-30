@@ -50,7 +50,7 @@
 
         <!-- Resource abstract -->
         <tal:block
-          define="field python:context.getField('dataCustodians');
+          define="field python:context.getField('dataResourceAbstract');
           value python:field.getAccessor(context)()"
           condition="value">
           <dt style="clear: left">
