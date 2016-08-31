@@ -1,9 +1,9 @@
 """ land.copernicus.content schema
 """
+from AccessControl import ClassSecurityInfo
 from DateTime import DateTime
-from Products.ATContentTypes.content.folder import ATFolder
-from Products.ATContentTypes.content.link import ATLink
-from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
+from eea.forms.browser.app.temporal_coverage import grouped_coverage
+from land.copernicus.content.content.vocabulary import COUNTRIES_DICTIONARY_ID
 from Products.Archetypes import atapi
 from Products.Archetypes.atapi import BooleanField
 from Products.Archetypes.atapi import BooleanWidget
@@ -14,12 +14,19 @@ from Products.Archetypes.atapi import LinesWidget
 from Products.Archetypes.atapi import MultiSelectionWidget
 from Products.Archetypes.atapi import RichWidget
 from Products.Archetypes.atapi import Schema
+from Products.Archetypes.atapi import SelectionWidget
 from Products.Archetypes.atapi import StringField
 from Products.Archetypes.atapi import StringWidget
 from Products.Archetypes.atapi import TextField
-from eea.forms.browser.app.temporal_coverage import grouped_coverage
-from land.copernicus.content.content.vocabulary import COUNTRIES_DICTIONARY_ID
-from AccessControl import ClassSecurityInfo
+from Products.ATContentTypes.content.folder import ATFolder
+from Products.ATContentTypes.content.link import ATLink
+from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
+
+CONFORMITY_DEGREE_VOCAB = [
+    (u'false', u'false'),
+    (u'true', u'true'),
+    (u'null', u'null'),
+]
 
 
 class TemporalLinesField(LinesField):
@@ -372,6 +379,21 @@ PRODUCT_SCHEMA = Schema((
         schemata="metadata",
         default_output_type="text/x-html-safe",
     ),
+    StringField(
+        name='conformityDegree',
+        vocabulary=CONFORMITY_DEGREE_VOCAB,
+        widget=SelectionWidget(
+            label="Conformity / Degree",
+            description=(
+                "The degree of conformant  with cited specification "
+                "(true - if conformant, false - if not conformant, "
+                "or null - if not evaluated)"),
+            i18n_domain='eea',
+        ),
+        default="",
+        searchable=False,
+        schemata="default",
+    ),
 ))
 
 
@@ -384,7 +406,8 @@ def finalize_product_schema(schema):
         'dataSources', 'owners', 'dataCustodians', 'dataResourceTitle',
         'dataResourceAbstract', 'dataResourceType', 'dataResourceLocator',
         'classificationTopicCategory', 'qualityLineage',
-        'qualitySpatialResolution', 'conformitySpecification']
+        'qualitySpatialResolution', 'conformitySpecification',
+        'conformityDegree']
 
     for field in meta_fields:
         schema.changeSchemataForField(field, 'metadata')
