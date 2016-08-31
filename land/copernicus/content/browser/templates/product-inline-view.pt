@@ -127,7 +127,7 @@
     <dl>
       <!-- Geographic Bounding Box -->
       <tal:block
-        define="field python:context.getField('dataCustodians');
+        define="field python:context.getField('geographicBoundingBox');
         value python:field.getAccessor(context)()"
         condition="value">
         <dt style="clear: left">

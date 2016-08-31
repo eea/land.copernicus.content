@@ -423,6 +423,22 @@ PRODUCT_SCHEMA = Schema((
         schemata="metadata",
         default_output_type="text/x-html-safe",
     ),
+    TextField(
+        name='geographicBoundingBox',
+        allowable_content_types=('text/plain', 'text/structured', 'text/html',
+                                 'application/msword',),
+        widget=RichWidget(
+            label="Geographic reference / Geographic Bounding Box",
+            description=("Coordinates of the four (West, East, North, South) "
+                         "foremost corners of the dataset"),
+            label_msgid='eea_geographic_bounding_box',
+            i18n_domain='eea',
+        ),
+        default_content_type="text/html",
+        searchable=True,
+        schemata="metadata",
+        default_output_type="text/x-html-safe",
+    ),
 ))
 
 
