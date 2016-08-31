@@ -254,7 +254,7 @@
 
       <!-- Limitation of public access -->
       <tal:block
-        define="field python:context.getField('dataCustodians');
+        define="field python:context.getField('accessAndUseLimitationPublic');
         value python:field.getAccessor(context)()"
         condition="value">
         <dt style="clear: left">

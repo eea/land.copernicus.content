@@ -210,7 +210,7 @@ PRODUCT_SCHEMA = Schema((
         widget=RichWidget(
             label="Constraints related to access and use "
             "/ Conditions applying to access and use",
-            description=(" Restriction on the access and use of a "
+            description=("Restriction on the access and use of a "
                          "resource or metadata"),
             i18n_domain='eea',
         ),
@@ -395,6 +395,21 @@ PRODUCT_SCHEMA = Schema((
         searchable=False,
         schemata="default",
     ),
+    TextField(
+        name='accessAndUseLimitationPublic',
+        allowable_content_types=('text/plain', 'text/structured', 'text/html',
+                                 'application/msword',),
+        widget=RichWidget(
+            label="Constraints related to access and use / "
+            "Limitation of public access",
+            description=("Limitation and other reason for public access"),
+            i18n_domain='eea',
+        ),
+        default_content_type="text/html",
+        searchable=True,
+        schemata="metadata",
+        default_output_type="text/x-html-safe",
+    ),
 ))
 
 
@@ -408,7 +423,7 @@ def finalize_product_schema(schema):
         'dataResourceAbstract', 'dataResourceType', 'dataResourceLocator',
         'classificationTopicCategory', 'qualityLineage',
         'qualitySpatialResolution', 'conformitySpecification',
-        'conformityDegree']
+        'conformityDegree', 'accessAndUseLimitationPublic']
 
     for field in meta_fields:
         schema.changeSchemataForField(field, 'metadata')
