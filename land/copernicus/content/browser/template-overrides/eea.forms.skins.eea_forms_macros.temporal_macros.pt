@@ -1,0 +1,30 @@
+<!-- Override to change "Temporal coverage" text with "Temporal extent" -->
+<tal:temporalCoverage metal:define-macro="temporal-coverage">
+  <tal:render tal:define="value context/@@formatTempCoverage" tal:condition="value">
+    <div class="temporal-coverage">
+
+      <span id="temporal_dynamic" i18n:translate="">Dynamic</span>
+      <h3 class="temporal-coverage-title notoc" i18n:translate="" metal:define-slot="temporal-coverage-title">
+        Temporal extent
+      </h3>
+      <p class="temporal-coverage-content" tal:content="value" id="tempCoverage" metal:define-slot="temporal-coverage-body"></p>
+
+    </div>
+  </tal:render>
+</tal:temporalCoverage>
+
+
+<tal:block metal:define-macro="temporal-coverage-data">
+  <tal:parent metal:use-macro="context/temporal_macros/macros/temporal-coverage">
+
+    <dt metal:fill-slot="temporal-coverage-title"
+        tal:define="field python:context.getField('temporalCoverage')">
+      <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
+      <span i18n:translate="">Temporal extent:</span>
+    </dt>
+
+    <dd metal:fill-slot="temporal-coverage-body"
+        tal:content="context/@@formatTempCoverage" id="tempCoverage">Body</dd>
+
+  </tal:parent>
+</tal:block>

@@ -97,12 +97,7 @@ PRODUCT_SCHEMA = Schema((
             helper_css=("countries_widget.css",),
             size=15,
             label="Geographical coverage",
-            description=(
-                "Type in here the exact geographic names/places "
-                "that are covered by the data. Add Countries names only if "
-                "the data displayed is really about the entire country. "
-                "Example of locations/places are lakes, rivers, cities, "
-                "marine areas, glaciers, bioregions like alpine region etc."),
+            description=("Countries that are covered by the resource"),
             label_msgid='dataservice_label_geographic',
             description_msgid='dataservice_help_geographic',
             i18n_domain='eea',
@@ -118,11 +113,9 @@ PRODUCT_SCHEMA = Schema((
             macro="temporal_widget",
             helper_js=("temporal_widget.js",),
             size=15,
-            label="Temporal coverage",
+            label="Temporal Extent",
             description=(
-                "The temporal scope of the content of the data "
-                "resource. Temporal coverage will typically "
-                "include a set of years or time ranges."),
+                "The time period covered by the content of the resource"),
             label_msgid='dataservice_label_coverage',
             description_msgid='dataservice_help_coverage',
             i18n_domain='eea',
@@ -147,7 +140,7 @@ PRODUCT_SCHEMA = Schema((
         name='coordinateReferenceSystem',
         widget=StringWidget(
             label="Coordinate Reference System",
-            description="Coordinate Reference System",
+            description="CRS of the resource",
             i18n_domain='eea',
         ),
         default="EPSG:3035 (ETRS89, LAEA)",

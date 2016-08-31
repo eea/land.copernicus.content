@@ -139,7 +139,7 @@
 
       <!-- Coordinate Reference System -->
       <tal:block
-        define="field python:context.getField('dataCustodians');
+        define="field python:context.getField('coordinateReferenceSystem');
         value python:field.getAccessor(context)()"
         condition="value">
         <dt style="clear: left">
@@ -150,31 +150,26 @@
       </tal:block>
 
       <!-- Coverage -->
+      <!-- Coverage -->
       <tal:block
-        define="field python:context.getField('dataCustodians');
+        define="field python:context.getField('geographicCoverage');
         value python:field.getAccessor(context)()"
         condition="value">
         <dt style="clear: left">
           <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
           <span i18n:translate="">Coverage:</span>
         </dt>
-        <dd tal:content="structure value">Coverage</dd>
+        <dd >
+            <span tal:content="python: u', '.join(context.get_countries_coverage())" />
+        </dd>
       </tal:block>
+
     </dl>
 
     <h4 class="section-title">Temporal reference</h4>
     <dl>
       <!-- Temporal Extent -->
-      <tal:block
-        define="field python:context.getField('dataCustodians');
-        value python:field.getAccessor(context)()"
-        condition="value">
-        <dt style="clear: left">
-          <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
-          <span i18n:translate="">Temporal Extent:</span>
-        </dt>
-        <dd tal:content="structure value">Temporal Extent</dd>
-      </tal:block>
+      <tal:temporalCoverage metal:use-macro="context/temporal_macros/macros/temporal-coverage-data" ></tal:temporalCoverage>
 
       <!-- Date of publication -->
       <tal:block
