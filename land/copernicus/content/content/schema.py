@@ -354,7 +354,24 @@ PRODUCT_SCHEMA = Schema((
         schemata="metadata",
         default_output_type="text/x-html-safe",
     ),
-
+    TextField(
+        name='conformitySpecification',
+        allowable_content_types=('text/plain', 'text/structured', 'text/html',
+                                 'application/msword',),
+        widget=RichWidget(
+            label="Conformity / Specification",
+            description=(
+                "A citation of the implementing rules adopted under "
+                "Article 7(1) of Directive 2007/2/EC or other specification "
+                "to which a particular resource conforms"),
+            label_msgid='eea_conformity_specification',
+            i18n_domain='eea',
+        ),
+        default_content_type="text/html",
+        searchable=True,
+        schemata="metadata",
+        default_output_type="text/x-html-safe",
+    ),
 ))
 
 
@@ -366,7 +383,8 @@ def finalize_product_schema(schema):
         'geographicAccuracy', 'subject', 'rights', 'coordinateReferenceSystem',
         'dataSources', 'owners', 'dataCustodians', 'dataResourceTitle',
         'dataResourceAbstract', 'dataResourceType', 'dataResourceLocator',
-        'classificationTopicCategory', 'qualityLineage']
+        'classificationTopicCategory', 'qualityLineage',
+        'qualitySpatialResolution', 'conformitySpecification']
 
     for field in meta_fields:
         schema.changeSchemataForField(field, 'metadata')

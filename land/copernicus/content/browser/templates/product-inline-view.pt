@@ -215,7 +215,7 @@
     <dl>
       <!-- Specification -->
       <tal:block
-        define="field python:context.getField('dataCustodians');
+        define="field python:context.getField('conformitySpecification');
         value python:field.getAccessor(context)()"
         condition="value">
         <dt style="clear: left">
