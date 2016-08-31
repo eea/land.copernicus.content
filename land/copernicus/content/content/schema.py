@@ -128,7 +128,7 @@ PRODUCT_SCHEMA = Schema((
         widget=RichWidget(
             label="Geographic Accuracy",
             description=("Information about how accurate is data."),
-            label_msgid='eea_label_more_updates_on',
+            label_msgid='eea_geographic_accuracy',
             i18n_domain='eea',
         ),
         default_content_type="text/html",
@@ -319,6 +319,23 @@ PRODUCT_SCHEMA = Schema((
         searchable=True,
         schemata="metadata",
     ),
+    TextField(
+        name='qualityLineage',
+        allowable_content_types=('text/plain', 'text/structured', 'text/html',
+                                 'application/msword',),
+        widget=RichWidget(
+            label="Quality and validity / Lineage",
+            description=(
+                "General explanation of the data produce knowledge's about "
+                "the lineage of a dataset"),
+            label_msgid='eea_quality_lineage',
+            i18n_domain='eea',
+        ),
+        default_content_type="text/html",
+        searchable=True,
+        schemata="metadata",
+        default_output_type="text/x-html-safe",
+    ),
 ))
 
 
@@ -330,7 +347,7 @@ def finalize_product_schema(schema):
         'geographicAccuracy', 'subject', 'rights', 'coordinateReferenceSystem',
         'dataSources', 'owners', 'dataCustodians', 'dataResourceTitle',
         'dataResourceAbstract', 'dataResourceType', 'dataResourceLocator',
-        'classificationTopicCategory']
+        'classificationTopicCategory', 'qualityLineage']
 
     for field in meta_fields:
         schema.changeSchemataForField(field, 'metadata')
