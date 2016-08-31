@@ -173,14 +173,14 @@
 
       <!-- Date of publication -->
       <tal:block
-        define="field python:context.getField('dataCustodians');
+        define="field python:context.getField('lastUpload');
         value python:field.getAccessor(context)()"
         condition="value">
         <dt style="clear: left">
           <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
           <span i18n:translate="">Date of publication:</span>
         </dt>
-        <dd tal:content="structure value">Date of publication</dd>
+        <dd tal:content="python: context.toLocalizedTime(value, long_format=0)">Date of publication:</dd>
       </tal:block>
     </dl>
 

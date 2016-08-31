@@ -234,12 +234,8 @@ PRODUCT_SCHEMA = Schema((
         imports="from DateTime import DateTime",
         widget=CalendarWidget(
             show_hm=False,
-            label="Lastest upload",
-            description=("Date when the data resource was last uploaded in "
-                         "EEA data service. If not manually provided it will "
-                         "coincide with publishing date. It can later be used "
-                         "when a dataset is re-uploaded due to corrections "
-                         "and when a whole new version is not necessary."),
+            label="Date of publication",
+            description=("The date of the resource when available"),
             label_msgid='dataservice_label_last_upload',
             description_msgid='dataservice_help_last_upload',
             i18n_domain='eea',
