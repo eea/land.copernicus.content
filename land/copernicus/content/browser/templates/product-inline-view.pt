@@ -100,9 +100,9 @@
         condition="value">
         <dt style="clear: left">
           <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
-          <span i18n:translate="">Topic Category:</span>
+          <span i18n:translate="">Topic of category:</span>
         </dt>
-        <dd tal:content="structure value">Topic Category</dd>
+        <dd tal:content="structure value">Topic of category</dd>
       </tal:block>
 
       <!-- Keyword (old Tags)-->
@@ -137,19 +137,6 @@
         <dd tal:content="structure value">Geographic Bounding Box</dd>
       </tal:block>
 
-      <!-- Coordinate Reference System -->
-      <tal:block
-        define="field python:context.getField('coordinateReferenceSystem');
-        value python:field.getAccessor(context)()"
-        condition="value">
-        <dt style="clear: left">
-          <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
-          <span i18n:translate="">Coordinate Reference System:</span>
-        </dt>
-        <dd tal:content="structure value">Coordinate Reference System</dd>
-      </tal:block>
-
-      <!-- Coverage -->
       <!-- Coverage -->
       <tal:block
         define="field python:context.getField('geographicCoverage');
@@ -164,6 +151,17 @@
         </dd>
       </tal:block>
 
+      <!-- Coordinate Reference System -->
+      <tal:block
+        define="field python:context.getField('coordinateReferenceSystem');
+        value python:field.getAccessor(context)()"
+        condition="value">
+        <dt style="clear: left">
+          <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
+          <span i18n:translate="">Coordinate Reference System:</span>
+        </dt>
+        <dd tal:content="structure value">Coordinate Reference System</dd>
+      </tal:block>
     </dl>
 
     <h4 class="section-title">Temporal reference</h4>

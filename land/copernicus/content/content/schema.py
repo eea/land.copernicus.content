@@ -23,9 +23,9 @@ from Products.ATContentTypes.content.link import ATLink
 from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
 
 CONFORMITY_DEGREE_VOCAB = [
-    (u'false', u'false'),
-    (u'true', u'true'),
-    (u'null', u'null'),
+    (u'False', u'False'),
+    (u'True', u'True'),
+    (u'Null', u'Null'),
 ]
 
 
