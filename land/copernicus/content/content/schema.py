@@ -409,6 +409,20 @@ PRODUCT_SCHEMA = Schema((
         schemata="metadata",
         default_output_type="text/x-html-safe",
     ),
+    TextField(
+        name='responsiblePartyRole',
+        allowable_content_types=('text/plain', 'text/structured', 'text/html',
+                                 'application/msword',),
+        widget=RichWidget(
+            label="Responsible organisation / Responsible party role",
+            description=("Function performed by the party"),
+            i18n_domain='eea',
+        ),
+        default_content_type="text/html",
+        searchable=True,
+        schemata="metadata",
+        default_output_type="text/x-html-safe",
+    ),
 ))
 
 
@@ -422,7 +436,8 @@ def finalize_product_schema(schema):
         'dataResourceAbstract', 'dataResourceType', 'dataResourceLocator',
         'classificationTopicCategory', 'qualityLineage',
         'qualitySpatialResolution', 'conformitySpecification',
-        'conformityDegree', 'accessAndUseLimitationPublic']
+        'conformityDegree', 'accessAndUseLimitationPublic',
+        'responsiblePartyRole']
 
     for field in meta_fields:
         schema.changeSchemataForField(field, 'metadata')
