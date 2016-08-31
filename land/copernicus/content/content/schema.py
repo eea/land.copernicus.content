@@ -208,9 +208,10 @@ PRODUCT_SCHEMA = Schema((
         allowable_content_types=('text/plain', 'text/structured', 'text/html',
                                  'application/msword',),
         widget=RichWidget(
-            label="Access and Use Constraints",
-            description=("Details about special restrictions, disclaimers, "
-                         "terms and conditions, or limitations"),
+            label="Constraints related to access and use "
+            "/ Conditions applying to access and use",
+            description=(" Restriction on the access and use of a "
+                         "resource or metadata"),
             i18n_domain='eea',
         ),
         default_content_type="text/html",
