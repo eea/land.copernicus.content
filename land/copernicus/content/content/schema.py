@@ -336,6 +336,25 @@ PRODUCT_SCHEMA = Schema((
         schemata="metadata",
         default_output_type="text/x-html-safe",
     ),
+    TextField(
+        name='qualitySpatialResolution',
+        allowable_content_types=('text/plain', 'text/structured', 'text/html',
+                                 'application/msword',),
+        widget=RichWidget(
+            label="Quality and validity / Spatial resolution",
+            description=(
+                "Either 1. Equivalent scales (for maps or map derived "
+                "products), or 2. GSD (for gridded data and imagery-derived "
+                "products)"),
+            label_msgid='eea_quality_spatial_resolution',
+            i18n_domain='eea',
+        ),
+        default_content_type="text/html",
+        searchable=True,
+        schemata="metadata",
+        default_output_type="text/x-html-safe",
+    ),
+
 ))
 
 
