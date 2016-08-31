@@ -177,11 +177,10 @@ PRODUCT_SCHEMA = Schema((
         allowable_content_types=('text/plain', 'text/structured', 'text/html',
                                  'application/msword',),
         widget=RichWidget(
-            label="Owners",
+            label="Responsible organisation / Responsible party",
             description=(
-                "An entity or set of entities that owns the "
-                "resource. The owner is responsible for the "
-                "reliability of the resource."),
+                "Organisation associated with the resource. Organisation "
+                "name, contact information (email)."),
             i18n_domain='eea',
         ),
         default_content_type="text/html",

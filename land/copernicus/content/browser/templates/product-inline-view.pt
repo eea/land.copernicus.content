@@ -269,7 +269,7 @@
     <dl>
       <!-- Responsible party -->
       <tal:block
-        define="field python:context.getField('dataCustodians');
+        define="field python:context.getField('owners');
         value python:field.getAccessor(context)()"
         condition="value">
         <dt style="clear: left">
