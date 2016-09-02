@@ -429,6 +429,7 @@
   </div><!-- Old metadata -->
 </span>
 
+<!-- TODO: Remove with Old metadata when done -->
 <!-- Access and Use Constraints -->
 <tal:block
   define="field python:context.getField('accessAndUseConstraints');
