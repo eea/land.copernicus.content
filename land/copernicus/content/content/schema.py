@@ -318,7 +318,7 @@ PRODUCT_SCHEMA = Schema((
     StringField(
         name='classificationTopicCategory',
         widget=StringWidget(
-            label="Classification of spatial data / Topic Category",
+            label="Classification of spatial data / Topic of category",
             description="Main theme(s) of the dataset",
             i18n_domain='eea',
         ),

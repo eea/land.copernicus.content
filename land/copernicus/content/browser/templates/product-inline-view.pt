@@ -93,7 +93,7 @@
 
     <h4 class="section-title">Classification of spatial data</h4>
     <dl>
-      <!-- Topic Category -->
+      <!-- Topic of category -->
       <tal:block
         define="field python:context.getField('classificationTopicCategory');
         value python:field.getAccessor(context)()"
