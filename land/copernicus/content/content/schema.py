@@ -350,9 +350,9 @@ PRODUCT_SCHEMA = Schema((
         widget=RichWidget(
             label="Quality and validity / Spatial resolution",
             description=(
-                "Either 1. Equivalent scales (for maps or map derived "
-                "products), or 2. GSD (for gridded data and imagery-derived "
-                "products)"),
+                "A set of zero to many resolution distances (typically for "
+                "gridded data and imagery-derived products) or equivalent "
+                "scales (typically for maps or map-derived products)"),
             label_msgid='eea_quality_spatial_resolution',
             i18n_domain='eea',
         ),
