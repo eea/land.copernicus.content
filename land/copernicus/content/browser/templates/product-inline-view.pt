@@ -23,8 +23,8 @@
 }
 
 .detailed-metadata-container .section-title {
-  border-bottom: solid 1px #EEEEEE;
-  color: #BBBBBB;
+  border-bottom: solid 1px #CCCCCC;
+  color: #333333;
   font-size: 14px;
   margin-bottom: 5px;
   text-align: left;
