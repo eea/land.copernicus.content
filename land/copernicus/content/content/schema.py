@@ -28,6 +28,27 @@ CONFORMITY_DEGREE_VOCAB = [
     (u'Null', u'Null'),
 ]
 
+TOPIC_CATEGORY_VOCAB = [
+    (u'Farming', u'Farming'),
+    (u'Biota', u'Biota'),
+    (u'Boundaries', u'Boundaries'),
+    (u'Climatology/Meteorology/Atmosphere',
+        u'Climatology/Meteorology/Atmosphere'),
+    (u'Economy', u'Economy'),
+    (u'Environment', u'Environment'),
+    (u'Geoscientific Information', u'Geoscientific Information'),
+    (u'Health', u'Health'),
+    (u'Imagery/Base Maps/Earth Cover', u'Imagery/Base Maps/Earth Cover'),
+    (u'Intelligence', u'Intelligence'),
+    (u'Inland Water', u'Inland Water'),
+    (u'Location', u'Location'),
+    (u'Oceans', u'Oceans'),
+    (u'Planning/Cadastre', u'Planning/Cadastre'),
+    (u'Society', u'Society'),
+    (u'Transportation', u'Transportation'),
+    (u'Utilities/Communication', u'Utilities/Communication')
+]
+
 
 class TemporalLinesField(LinesField):
     """ derivative of linesfield for extending schemas """
@@ -315,16 +336,21 @@ PRODUCT_SCHEMA = Schema((
         searchable=True,
         schemata="metadata",
     ),
-    StringField(
+    LinesField(
         name='classificationTopicCategory',
-        widget=StringWidget(
+        languageIndependent=True,
+        required=False,
+        multiValued=1,
+        default=[],
+        vocabulary=TOPIC_CATEGORY_VOCAB,
+        schemata='metadata',
+        widget=MultiSelectionWidget(
             label="Classification of spatial data / Topic of category",
-            description="Main theme(s) of the dataset",
+            description=("Main theme(s) of the dataset"),
+            label_msgid='topic_of_category',
+            description_msgid='dataservice_help_geographic',
             i18n_domain='eea',
-        ),
-        default="",
-        searchable=True,
-        schemata="metadata",
+        )
     ),
     TextField(
         name='qualityLineage',
