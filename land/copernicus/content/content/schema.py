@@ -284,7 +284,6 @@ PRODUCT_SCHEMA = Schema((
         )
     ),
 
-    # TODO WIP New fields for metadata tab here
     StringField(
         name='dataResourceTitle',
         widget=StringWidget(
@@ -348,7 +347,7 @@ PRODUCT_SCHEMA = Schema((
             label="Classification of spatial data / Topic of category",
             description=("Main theme(s) of the dataset"),
             label_msgid='topic_of_category',
-            description_msgid='dataservice_help_geographic',
+            description_msgid='description_topic_of_category',
             i18n_domain='eea',
         )
     ),
