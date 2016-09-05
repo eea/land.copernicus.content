@@ -102,7 +102,9 @@
           <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
           <span i18n:translate="">Topic of category:</span>
         </dt>
-        <dd tal:content="structure value">Topic of category</dd>
+        <dd>
+          <span tal:content="python: u', '.join(value)" />
+        </dd>
       </tal:block>
 
       <!-- Keyword (old Tags)-->
@@ -147,7 +149,7 @@
           <span i18n:translate="">Coverage:</span>
         </dt>
         <dd >
-            <span tal:content="python: u', '.join(context.get_countries_coverage())" />
+          <span tal:content="python: u', '.join(context.get_countries_coverage())" />
         </dd>
       </tal:block>
 
