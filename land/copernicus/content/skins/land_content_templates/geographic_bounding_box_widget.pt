@@ -1,0 +1,105 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="plone">
+  <head><title></title></head>
+  <body>
+
+    <!-- String Widgets -->
+    <metal:view_macro define-macro="view"
+            tal:define="kssClassesView context/@@kss_field_decorator_view;
+                        getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;">
+        <span metal:define-macro="string-field-view"
+            tal:define="kss_class python:getKssClasses(fieldName,
+                              templateId='widgets/string', macro='string-field-view');
+                              uid context/UID|nothing"
+            tal:attributes="class kss_class;
+                            id string:parent-fieldname-$fieldName-$uid">
+            <span metal:define-slot="inside"
+                  tal:replace="accessor">string</span>
+        </span>
+    </metal:view_macro>
+
+    <metal:define define-macro="edit">
+      <metal:use use-macro="field_macro | context/widgets/field/macros/edit">
+        <label for="geographic_bounding_box">Change note</label>
+        <div class="formHelp" id="geographic_bounding_box_help">
+            Enter a comment that describes the changes you made.
+        </div>
+
+        <metal metal:fill-slot="widget_body">
+          West:
+          <input type="text"
+                 name="geographic_bounding_box_west"
+                 class="blurrable firstToFocus"
+                 id="geographic_bounding_box_west"
+                 value=""
+                 size="30"
+                 tal:attributes="name fieldName;
+                                 id fieldName;
+                                 value python:value[0];
+                                 size widget/size;
+                                 placeholder widget/placeholder|nothing;
+                                 maxlength widget/maxlength;"
+                 />
+          <br />
+
+          East:
+          <input type="text"
+                 name="geographic_bounding_box_east"
+                 class="blurrable firstToFocus"
+                 id="geographic_bounding_box_east"
+                 value=""
+                 size="30"
+                 tal:attributes="name fieldName;
+                                 id fieldName;
+                                 value python:value[1];
+                                 size widget/size;
+                                 placeholder widget/placeholder|nothing;
+                                 maxlength widget/maxlength;"
+                 />
+          <br />
+
+          North:
+          <input type="text"
+                 name="geographic_bounding_box_north"
+                 class="blurrable firstToFocus"
+                 id="geographic_bounding_box_north"
+                 value=""
+                 size="30"
+                 tal:attributes="name fieldName;
+                                 id fieldName;
+                                 value python:value[2];
+                                 size widget/size;
+                                 placeholder widget/placeholder|nothing;
+                                 maxlength widget/maxlength;"
+                 />
+          <br />
+
+          South:
+          <input type="text"
+                 name="geographic_bounding_box_south"
+                 class="blurrable firstToFocus"
+                 id="geographic_bounding_box_south"
+                 value=""
+                 size="30"
+                 tal:attributes="name fieldName;
+                                 id fieldName;
+                                 value python:value[3];
+                                 size widget/size;
+                                 placeholder widget/placeholder|nothing;
+                                 maxlength widget/maxlength;"
+                 />
+        </metal>
+      </metal:use>
+    </metal:define>
+
+    <div metal:define-macro="search">
+      <div metal:use-macro="context/widgets/string/macros/edit">
+      </div>
+    </div>
+
+  </body>
+
+</html>

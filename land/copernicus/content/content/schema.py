@@ -21,6 +21,12 @@ from Products.Archetypes.atapi import TextField
 from Products.ATContentTypes.content.folder import ATFolder
 from Products.ATContentTypes.content.link import ATLink
 from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
+from land.copernicus.content.widgets.geographic_bounding_box import (
+    GeographicBoundingBoxWidget
+)
+from land.copernicus.content.fields.geographic_bounding_box import (
+    GeographicBoundingBoxField
+)
 
 CONFORMITY_DEGREE_VOCAB = [
     (u'False', u'False'),
@@ -449,21 +455,36 @@ PRODUCT_SCHEMA = Schema((
         schemata="metadata",
         default_output_type="text/x-html-safe",
     ),
-    TextField(
+    # TextField(
+    #     name='geographicBoundingBox',
+    #     allowable_content_types=('text/plain', 'text/structured', 'text/html',
+    #                              'application/msword',),
+    #     widget=RichWidget(
+    #         label="Geographic reference / Geographic Bounding Box",
+    #         description=("Coordinates of the four (West, East, North, South) "
+    #                      "foremost corners of the dataset"),
+    #         label_msgid='eea_geographic_bounding_box',
+    #         i18n_domain='eea',
+    #     ),
+    #     default_content_type="text/html",
+    #     searchable=True,
+    #     schemata="metadata",
+    #     default_output_type="text/x-html-safe",
+    # ),
+    GeographicBoundingBoxField(
         name='geographicBoundingBox',
-        allowable_content_types=('text/plain', 'text/structured', 'text/html',
-                                 'application/msword',),
-        widget=RichWidget(
+        languageIndependent=True,
+        required=False,
+        multiValued=1,
+        default=[],
+        schemata='metadata',
+        widget=GeographicBoundingBoxWidget(
             label="Geographic reference / Geographic Bounding Box",
             description=("Coordinates of the four (West, East, North, South) "
                          "foremost corners of the dataset"),
             label_msgid='eea_geographic_bounding_box',
             i18n_domain='eea',
-        ),
-        default_content_type="text/html",
-        searchable=True,
-        schemata="metadata",
-        default_output_type="text/x-html-safe",
+        )
     ),
 ))
 

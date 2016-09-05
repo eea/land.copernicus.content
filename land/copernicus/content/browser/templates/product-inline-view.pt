@@ -130,13 +130,19 @@
       <!-- Geographic Bounding Box -->
       <tal:block
         define="field python:context.getField('geographicBoundingBox');
-        value python:field.getAccessor(context)()"
-        condition="value">
+        value python:field.getAccessor(context)()">
+        <!-- condition="value"> -->
         <dt style="clear: left">
           <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
           <span i18n:translate="">Geographic Bounding Box:</span>
         </dt>
-        <dd tal:content="structure value">Geographic Bounding Box</dd>
+        <!-- <dd tal:content="structure value">Geographic Bounding Box</dd> -->
+        <dd>
+          <p>West = <span tal:content="structure python:value[0]"></span></p>
+          <p>East = <span tal:content="structure python:value[1]"></span></p>
+          <p>North = <span tal:content="structure python:value[2]"></span></p>
+          <p>South = <span tal:content="structure python:value[3]"></span></p>
+        </dd>
       </tal:block>
 
       <!-- Coverage -->
