@@ -344,6 +344,7 @@ PRODUCT_SCHEMA = Schema((
         vocabulary=TOPIC_CATEGORY_VOCAB,
         schemata='metadata',
         widget=MultiSelectionWidget(
+            size=17,
             label="Classification of spatial data / Topic of category",
             description=("Main theme(s) of the dataset"),
             label_msgid='topic_of_category',
