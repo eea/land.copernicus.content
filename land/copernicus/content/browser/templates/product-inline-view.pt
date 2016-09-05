@@ -132,9 +132,8 @@
                          value python:field.getAccessor(context)()" condition="python:len(value)>3">
         <dt style="clear: left">
           <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
-          <span i18n:translate="">Geographic Bounding Box:</span>
+          <span i18n:translate="">Bounding Box:</span>
         </dt>
-        <!-- <dd tal:content="structure value">Geographic Bounding Box</dd> -->
         <dd>
           <p>West = <span tal:content="structure python:value[0] if len(value)>3 else None"></span></p>
           <p>East = <span tal:content="structure python:value[1] if len(value)>3 else None"></span></p>

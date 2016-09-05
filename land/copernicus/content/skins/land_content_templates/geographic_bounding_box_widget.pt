@@ -23,12 +23,13 @@
 
     <metal:define define-macro="edit">
       <metal:use use-macro="field_macro | context/widgets/field/macros/edit">
-        <label for="geographic_bounding_box">Change note</label>
-        <div class="formHelp" id="geographic_bounding_box_help">
-            Enter a comment that describes the changes you made.
-        </div>
 
         <metal metal:fill-slot="widget_body">
+          <label for="geographic_bounding_box">Geographic reference / Bounding Box</label>
+          <div class="formHelp" id="geographic_bounding_box_help">
+              Coordinates of the four (West, East, North, South) foremost corners of the dataset
+          </div>
+
           West:
           <input type="text"
                  name="geographic_bounding_box_west"
