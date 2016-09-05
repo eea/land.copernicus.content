@@ -21,11 +21,38 @@ from Products.Archetypes.atapi import TextField
 from Products.ATContentTypes.content.folder import ATFolder
 from Products.ATContentTypes.content.link import ATLink
 from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
+from land.copernicus.content.widgets.geographic_bounding_box import (
+    GeographicBoundingBoxWidget
+)
+from land.copernicus.content.fields.geographic_bounding_box import (
+    GeographicBoundingBoxField
+)
 
 CONFORMITY_DEGREE_VOCAB = [
     (u'False', u'False'),
     (u'True', u'True'),
     (u'Null', u'Null'),
+]
+
+TOPIC_CATEGORY_VOCAB = [
+    (u'Farming', u'Farming'),
+    (u'Biota', u'Biota'),
+    (u'Boundaries', u'Boundaries'),
+    (u'Climatology/Meteorology/Atmosphere',
+        u'Climatology/Meteorology/Atmosphere'),
+    (u'Economy', u'Economy'),
+    (u'Environment', u'Environment'),
+    (u'Geoscientific Information', u'Geoscientific Information'),
+    (u'Health', u'Health'),
+    (u'Imagery/Base Maps/Earth Cover', u'Imagery/Base Maps/Earth Cover'),
+    (u'Intelligence', u'Intelligence'),
+    (u'Inland Water', u'Inland Water'),
+    (u'Location', u'Location'),
+    (u'Oceans', u'Oceans'),
+    (u'Planning/Cadastre', u'Planning/Cadastre'),
+    (u'Society', u'Society'),
+    (u'Transportation', u'Transportation'),
+    (u'Utilities/Communication', u'Utilities/Communication')
 ]
 
 
@@ -263,7 +290,6 @@ PRODUCT_SCHEMA = Schema((
         )
     ),
 
-    # TODO WIP New fields for metadata tab here
     StringField(
         name='dataResourceTitle',
         widget=StringWidget(
@@ -315,16 +341,22 @@ PRODUCT_SCHEMA = Schema((
         searchable=True,
         schemata="metadata",
     ),
-    StringField(
+    LinesField(
         name='classificationTopicCategory',
-        widget=StringWidget(
-            label="Classification of spatial data / Topic Category",
-            description="Main theme(s) of the dataset",
+        languageIndependent=True,
+        required=False,
+        multiValued=1,
+        default=[],
+        vocabulary=TOPIC_CATEGORY_VOCAB,
+        schemata='metadata',
+        widget=MultiSelectionWidget(
+            size=17,
+            label="Classification of spatial data / Topic of category",
+            description=("Main theme(s) of the dataset"),
+            label_msgid='topic_of_category',
+            description_msgid='description_topic_of_category',
             i18n_domain='eea',
-        ),
-        default="",
-        searchable=True,
-        schemata="metadata",
+        )
     ),
     TextField(
         name='qualityLineage',
@@ -350,9 +382,9 @@ PRODUCT_SCHEMA = Schema((
         widget=RichWidget(
             label="Quality and validity / Spatial resolution",
             description=(
-                "Either 1. Equivalent scales (for maps or map derived "
-                "products), or 2. GSD (for gridded data and imagery-derived "
-                "products)"),
+                "A set of zero to many resolution distances (typically for "
+                "gridded data and imagery-derived products) or equivalent "
+                "scales (typically for maps or map-derived products)"),
             label_msgid='eea_quality_spatial_resolution',
             i18n_domain='eea',
         ),
@@ -423,21 +455,36 @@ PRODUCT_SCHEMA = Schema((
         schemata="metadata",
         default_output_type="text/x-html-safe",
     ),
-    TextField(
+    # TextField(
+    #     name='geographicBoundingBox',
+    #     allowable_content_types=('text/plain', 'text/structured', 'text/html',
+    #                              'application/msword',),
+    #     widget=RichWidget(
+    #         label="Geographic reference / Geographic Bounding Box",
+    #         description=("Coordinates of the four (West, East, North, South) "
+    #                      "foremost corners of the dataset"),
+    #         label_msgid='eea_geographic_bounding_box',
+    #         i18n_domain='eea',
+    #     ),
+    #     default_content_type="text/html",
+    #     searchable=True,
+    #     schemata="metadata",
+    #     default_output_type="text/x-html-safe",
+    # ),
+    GeographicBoundingBoxField(
         name='geographicBoundingBox',
-        allowable_content_types=('text/plain', 'text/structured', 'text/html',
-                                 'application/msword',),
-        widget=RichWidget(
+        languageIndependent=True,
+        required=False,
+        multiValued=1,
+        default=[],
+        schemata='metadata',
+        widget=GeographicBoundingBoxWidget(
             label="Geographic reference / Geographic Bounding Box",
             description=("Coordinates of the four (West, East, North, South) "
                          "foremost corners of the dataset"),
             label_msgid='eea_geographic_bounding_box',
             i18n_domain='eea',
-        ),
-        default_content_type="text/html",
-        searchable=True,
-        schemata="metadata",
-        default_output_type="text/x-html-safe",
+        )
     ),
 ))
 
