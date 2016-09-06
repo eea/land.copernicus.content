@@ -25,7 +25,7 @@
       <metal:use use-macro="field_macro | context/widgets/field/macros/edit">
 
         <metal metal:fill-slot="widget_body">
-          <label for="geographic_bounding_box">Geographic reference / Bounding Box</label>
+          <label for="geographic_bounding_box">Bounding Box</label>
           <div class="formHelp" id="geographic_bounding_box_help">
             Coordinates of the four (West, East, North, South) foremost corners of the dataset
           </div>

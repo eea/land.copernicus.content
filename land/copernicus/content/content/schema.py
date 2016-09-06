@@ -208,7 +208,7 @@ PRODUCT_SCHEMA = Schema((
     StringField(
         name='dataResourceTitle',
         widget=StringWidget(
-            label="Data identification / Resource title",
+            label="Resource title",
             description="Name by which the cited resource is known",
             i18n_domain='eea',
         ),
@@ -221,7 +221,7 @@ PRODUCT_SCHEMA = Schema((
         allowable_content_types=('text/plain', 'text/structured', 'text/html',
                                  'application/msword',),
         widget=RichWidget(
-            label="Data identification / Resource abstract",
+            label="Resource abstract",
             description=(
                 "Brief narrative summary of the content of the "
                 "resource(s) with coverage, main attributes, data sources, "
@@ -237,7 +237,7 @@ PRODUCT_SCHEMA = Schema((
     StringField(
         name='dataResourceType',
         widget=StringWidget(
-            label="Data identification / Resource type",
+            label="Resource type",
             description="Scope to which metadata applies.",
             i18n_domain='eea',
         ),
@@ -248,7 +248,7 @@ PRODUCT_SCHEMA = Schema((
     StringField(
         name='dataResourceLocator',
         widget=StringWidget(
-            label="Data identification / Resource Locator",
+            label="Resource Locator",
             description="URL address to locate the data",
             i18n_domain='eea',
         ),
@@ -275,7 +275,7 @@ PRODUCT_SCHEMA = Schema((
         schemata='metadata',
         widget=MultiSelectionWidget(
             size=17,
-            label="Classification of spatial data / Topic of category",
+            label="Topic of category",
             description=("Main theme(s) of the dataset"),
             label_msgid='topic_of_category',
             description_msgid='description_topic_of_category',
@@ -300,7 +300,9 @@ PRODUCT_SCHEMA = Schema((
         default=[],
         schemata='metadata',
         widget=GeographicBoundingBoxWidget(
-            label="Geographic reference / Bounding Box",
+            # Keep updated label and description in
+            # geographic_bounding_box_widget.pt too.
+            label="Bounding Box",
             description=("Coordinates of the four (West, East, North, South) "
                          "foremost corners of the dataset"),
             label_msgid='eea_geographic_bounding_box',
@@ -395,7 +397,7 @@ PRODUCT_SCHEMA = Schema((
         allowable_content_types=('text/plain', 'text/structured', 'text/html',
                                  'application/msword',),
         widget=RichWidget(
-            label="Quality and validity / Lineage",
+            label="Lineage",
             description=(
                 "General explanation of the data produce knowledge's about "
                 "the lineage of a dataset"),
@@ -412,7 +414,7 @@ PRODUCT_SCHEMA = Schema((
         allowable_content_types=('text/plain', 'text/structured', 'text/html',
                                  'application/msword',),
         widget=RichWidget(
-            label="Quality and validity / Spatial resolution",
+            label="Spatial resolution",
             description=(
                 "A set of zero to many resolution distances (typically for "
                 "gridded data and imagery-derived products) or equivalent "
@@ -439,7 +441,7 @@ PRODUCT_SCHEMA = Schema((
         allowable_content_types=('text/plain', 'text/structured', 'text/html',
                                  'application/msword',),
         widget=RichWidget(
-            label="Conformity / Specification",
+            label="Specification",
             description=(
                 "A citation of the implementing rules adopted under "
                 "Article 7(1) of Directive 2007/2/EC or other specification "
@@ -456,7 +458,7 @@ PRODUCT_SCHEMA = Schema((
         name='conformityDegree',
         vocabulary=CONFORMITY_DEGREE_VOCAB,
         widget=SelectionWidget(
-            label="Conformity / Degree",
+            label="Degree",
             description=(
                 "The degree of conformant  with cited specification "
                 "(true - if conformant, false - if not conformant, "
@@ -481,8 +483,7 @@ PRODUCT_SCHEMA = Schema((
         allowable_content_types=('text/plain', 'text/structured', 'text/html',
                                  'application/msword',),
         widget=RichWidget(
-            label="Constraints related to access and use "
-            "/ Conditions applying to access and use",
+            label="Conditions applying to access and use",
             description=("Restriction on the access and use of a "
                          "resource or metadata"),
             i18n_domain='eea',
@@ -497,8 +498,7 @@ PRODUCT_SCHEMA = Schema((
         allowable_content_types=('text/plain', 'text/structured', 'text/html',
                                  'application/msword',),
         widget=RichWidget(
-            label="Constraints related to access and use / "
-            "Limitation of public access",
+            label="Limitation of public access",
             description=("Limitation and other reason for public access"),
             i18n_domain='eea',
         ),
@@ -521,7 +521,7 @@ PRODUCT_SCHEMA = Schema((
         allowable_content_types=('text/plain', 'text/structured', 'text/html',
                                  'application/msword',),
         widget=RichWidget(
-            label="Responsible organisation / Responsible party",
+            label="Responsible party",
             description=(
                 "Organisation associated with the resource. Organisation "
                 "name, contact information (email)."),
@@ -537,7 +537,7 @@ PRODUCT_SCHEMA = Schema((
         allowable_content_types=('text/plain', 'text/structured', 'text/html',
                                  'application/msword',),
         widget=RichWidget(
-            label="Responsible organisation / Responsible party role",
+            label="Responsible party role",
             description=("Function performed by the party"),
             i18n_domain='eea',
         ),
