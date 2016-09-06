@@ -459,6 +459,7 @@ PRODUCT_SCHEMA = Schema((
         name='geographicBoundingBox',
         languageIndependent=True,
         required=False,
+        validators=('isGeographicBoundingBoxValid',),
         multiValued=1,
         default=[],
         schemata='metadata',
