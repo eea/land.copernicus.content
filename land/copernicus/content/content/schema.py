@@ -98,6 +98,7 @@ class TemporalMultiSelectionWidget(MultiSelectionWidget):
 
 
 PRODUCT_SCHEMA = Schema((
+    # DEFAULT =================================================================
     BooleanField(
         name='isValidatedDataset',
         schemata="default",
@@ -119,44 +120,7 @@ PRODUCT_SCHEMA = Schema((
         searchable=False,
         schemata="default",
     ),
-    LinesField(
-        name='geographicCoverage',
-        languageIndependent=True,
-        required=False,
-        multiValued=1,
-        default=[],
-        vocabulary=NamedVocabulary(COUNTRIES_DICTIONARY_ID),
-        schemata='metadata',
-        widget=MultiSelectionWidget(
-            macro="countries_widget",
-            helper_js=("countries_widget.js",),
-            helper_css=("countries_widget.css",),
-            size=15,
-            label="Geographical coverage",
-            description=("Countries that are covered by the resource"),
-            label_msgid='dataservice_label_geographic',
-            description_msgid='dataservice_help_geographic',
-            i18n_domain='eea',
-        )
-    ),
-    TemporalLinesField(
-        name='temporalCoverage',
-        languageIndependent=True,
-        schemata='metadata',
-        required=False,
-        multiValued=1,
-        widget=TemporalMultiSelectionWidget(
-            macro="temporal_widget",
-            helper_js=("temporal_widget.js",),
-            size=15,
-            label="Temporal Extent",
-            description=(
-                "The time period covered by the content of the resource"),
-            label_msgid='dataservice_label_coverage',
-            description_msgid='dataservice_help_coverage',
-            i18n_domain='eea',
-        )
-    ),
+    # METADATA ================================================================
     TextField(
         name='geographicAccuracy',
         allowable_content_types=('text/plain', 'text/structured', 'text/html',
@@ -172,17 +136,6 @@ PRODUCT_SCHEMA = Schema((
         schemata="metadata",
         default_output_type="text/x-html-safe",
     ),
-    StringField(
-        name='coordinateReferenceSystem',
-        widget=StringWidget(
-            label="Coordinate Reference System",
-            description="CRS of the resource",
-            i18n_domain='eea',
-        ),
-        default="EPSG:3035 (ETRS89, LAEA)",
-        searchable=True,
-        schemata="metadata",
-    ),
     TextField(
         name='dataSources',
         allowable_content_types=('text/plain', 'text/structured', 'text/html',
@@ -194,22 +147,6 @@ PRODUCT_SCHEMA = Schema((
                 "resource is derived. Details such exact body "
                 "or department, date of delivery, original database, "
                 "table or GIS layer, scientific literature ..."),
-            i18n_domain='eea',
-        ),
-        default_content_type="text/html",
-        searchable=True,
-        schemata="metadata",
-        default_output_type="text/x-html-safe",
-    ),
-    TextField(
-        name='owners',
-        allowable_content_types=('text/plain', 'text/structured', 'text/html',
-                                 'application/msword',),
-        widget=RichWidget(
-            label="Responsible organisation / Responsible party",
-            description=(
-                "Organisation associated with the resource. Organisation "
-                "name, contact information (email)."),
             i18n_domain='eea',
         ),
         default_content_type="text/html",
@@ -232,22 +169,6 @@ PRODUCT_SCHEMA = Schema((
         default_output_type="text/x-html-safe",
     ),
     TextField(
-        name='accessAndUseConstraints',
-        allowable_content_types=('text/plain', 'text/structured', 'text/html',
-                                 'application/msword',),
-        widget=RichWidget(
-            label="Constraints related to access and use "
-            "/ Conditions applying to access and use",
-            description=("Restriction on the access and use of a "
-                         "resource or metadata"),
-            i18n_domain='eea',
-        ),
-        default_content_type="text/html",
-        searchable=True,
-        schemata="metadata",
-        default_output_type="text/x-html-safe",
-    ),
-    TextField(
         name='descriptionDetailedMetadata',
         allowable_content_types=('text/plain', 'text/structured', 'text/html',
                                  'application/msword',),
@@ -260,22 +181,6 @@ PRODUCT_SCHEMA = Schema((
         searchable=True,
         schemata="metadata",
         default_output_type="text/x-html-safe",
-    ),
-    DateTimeField(
-        name='lastUpload',
-        languageIndependent=True,
-        required=False,
-        default=DateTime(),
-        schemata="metadata",
-        imports="from DateTime import DateTime",
-        widget=CalendarWidget(
-            show_hm=False,
-            label="Date of publication",
-            description=("The date of the resource when available"),
-            label_msgid='dataservice_label_last_upload',
-            description_msgid='dataservice_help_last_upload',
-            i18n_domain='eea',
-        ),
     ),
     LinesField(
         name='fileCategories',
@@ -291,7 +196,15 @@ PRODUCT_SCHEMA = Schema((
             i18n_domain='eea',
         )
     ),
-
+    StringField(
+        name='sectionTitleData',  # ===========================================
+        schemata='metadata',
+        widget=LabelWidget(
+            label=('DATA IDENTIFICATION'),
+            i18n_domain="eea",
+            visible={'edit': 'visible', 'view': 'invisible'}
+        )
+    ),
     StringField(
         name='dataResourceTitle',
         widget=StringWidget(
@@ -343,6 +256,15 @@ PRODUCT_SCHEMA = Schema((
         searchable=True,
         schemata="metadata",
     ),
+    StringField(
+        name='sectionTitleClassification',  # =================================
+        schemata='metadata',
+        widget=LabelWidget(
+            label=('CLASSIFICATION OF SPATIAL DATA'),
+            i18n_domain="eea",
+            visible={'edit': 'visible', 'view': 'invisible'}
+        )
+    ),
     LinesField(
         name='classificationTopicCategory',
         languageIndependent=True,
@@ -358,6 +280,114 @@ PRODUCT_SCHEMA = Schema((
             label_msgid='topic_of_category',
             description_msgid='description_topic_of_category',
             i18n_domain='eea',
+        )
+    ),
+    StringField(
+        name='sectionTitleGeographic',  # =====================================
+        schemata='metadata',
+        widget=LabelWidget(
+            label=('GEOGRAPHIC REFERENCE'),
+            i18n_domain="eea",
+            visible={'edit': 'visible', 'view': 'invisible'}
+        )
+    ),
+    GeographicBoundingBoxField(
+        name='geographicBoundingBox',
+        languageIndependent=True,
+        required=False,
+        validators=('isGeographicBoundingBoxValid',),
+        multiValued=1,
+        default=[],
+        schemata='metadata',
+        widget=GeographicBoundingBoxWidget(
+            label="Geographic reference / Bounding Box",
+            description=("Coordinates of the four (West, East, North, South) "
+                         "foremost corners of the dataset"),
+            label_msgid='eea_geographic_bounding_box',
+            i18n_domain='eea',
+        )
+    ),
+    LinesField(
+        name='geographicCoverage',
+        languageIndependent=True,
+        required=False,
+        multiValued=1,
+        default=[],
+        vocabulary=NamedVocabulary(COUNTRIES_DICTIONARY_ID),
+        schemata='metadata',
+        widget=MultiSelectionWidget(
+            macro="countries_widget",
+            helper_js=("countries_widget.js",),
+            helper_css=("countries_widget.css",),
+            size=15,
+            label="Geographical coverage",
+            description=("Countries that are covered by the resource"),
+            label_msgid='dataservice_label_geographic',
+            description_msgid='dataservice_help_geographic',
+            i18n_domain='eea',
+        )
+    ),
+    StringField(
+        name='coordinateReferenceSystem',
+        widget=StringWidget(
+            label="Coordinate Reference System",
+            description="CRS of the resource",
+            i18n_domain='eea',
+        ),
+        default="EPSG:3035 (ETRS89, LAEA)",
+        searchable=True,
+        schemata="metadata",
+    ),
+    StringField(
+        name='sectionTitleTemporal',  # =======================================
+        schemata='metadata',
+        widget=LabelWidget(
+            label=('TEMPORAL REFERENCE'),
+            i18n_domain="eea",
+            visible={'edit': 'visible', 'view': 'invisible'}
+        )
+    ),
+    TemporalLinesField(
+        name='temporalCoverage',
+        languageIndependent=True,
+        schemata='metadata',
+        required=False,
+        multiValued=1,
+        widget=TemporalMultiSelectionWidget(
+            macro="temporal_widget",
+            helper_js=("temporal_widget.js",),
+            size=15,
+            label="Temporal Extent",
+            description=(
+                "The time period covered by the content of the resource"),
+            label_msgid='dataservice_label_coverage',
+            description_msgid='dataservice_help_coverage',
+            i18n_domain='eea',
+        )
+    ),
+    DateTimeField(
+        name='lastUpload',
+        languageIndependent=True,
+        required=False,
+        default=DateTime(),
+        schemata="metadata",
+        imports="from DateTime import DateTime",
+        widget=CalendarWidget(
+            show_hm=False,
+            label="Date of publication",
+            description=("The date of the resource when available"),
+            label_msgid='dataservice_label_last_upload',
+            description_msgid='dataservice_help_last_upload',
+            i18n_domain='eea',
+        ),
+    ),
+    StringField(
+        name='sectionTitleQuality',  # ========================================
+        schemata='metadata',
+        widget=LabelWidget(
+            label=('QUALITY AND VALIDITY'),
+            i18n_domain="eea",
+            visible={'edit': 'visible', 'view': 'invisible'}
         )
     ),
     TextField(
@@ -395,6 +425,15 @@ PRODUCT_SCHEMA = Schema((
         schemata="metadata",
         default_output_type="text/x-html-safe",
     ),
+    StringField(
+        name='sectionTitleConformity',  # =====================================
+        schemata='metadata',
+        widget=LabelWidget(
+            label=('CONFORMITY'),
+            i18n_domain="eea",
+            visible={'edit': 'visible', 'view': 'invisible'}
+        )
+    ),
     TextField(
         name='conformitySpecification',
         allowable_content_types=('text/plain', 'text/structured', 'text/html',
@@ -428,6 +467,31 @@ PRODUCT_SCHEMA = Schema((
         searchable=False,
         schemata="default",
     ),
+    StringField(
+        name='sectionTitleAccess',  # =========================================
+        schemata='metadata',
+        widget=LabelWidget(
+            label=('CONSTRAINTS RELATED TO ACCESS AND USE'),
+            i18n_domain="eea",
+            visible={'edit': 'visible', 'view': 'invisible'}
+        )
+    ),
+    TextField(
+        name='accessAndUseConstraints',
+        allowable_content_types=('text/plain', 'text/structured', 'text/html',
+                                 'application/msword',),
+        widget=RichWidget(
+            label="Constraints related to access and use "
+            "/ Conditions applying to access and use",
+            description=("Restriction on the access and use of a "
+                         "resource or metadata"),
+            i18n_domain='eea',
+        ),
+        default_content_type="text/html",
+        searchable=True,
+        schemata="metadata",
+        default_output_type="text/x-html-safe",
+    ),
     TextField(
         name='accessAndUseLimitationPublic',
         allowable_content_types=('text/plain', 'text/structured', 'text/html',
@@ -436,6 +500,31 @@ PRODUCT_SCHEMA = Schema((
             label="Constraints related to access and use / "
             "Limitation of public access",
             description=("Limitation and other reason for public access"),
+            i18n_domain='eea',
+        ),
+        default_content_type="text/html",
+        searchable=True,
+        schemata="metadata",
+        default_output_type="text/x-html-safe",
+    ),
+    StringField(
+        name='sectionTitleResponsible',  # ====================================
+        schemata='metadata',
+        widget=LabelWidget(
+            label=('RESPONSIBLE ORGANISATION'),
+            i18n_domain="eea",
+            visible={'edit': 'visible', 'view': 'invisible'}
+        )
+    ),
+    TextField(
+        name='owners',
+        allowable_content_types=('text/plain', 'text/structured', 'text/html',
+                                 'application/msword',),
+        widget=RichWidget(
+            label="Responsible organisation / Responsible party",
+            description=(
+                "Organisation associated with the resource. Organisation "
+                "name, contact information (email)."),
             i18n_domain='eea',
         ),
         default_content_type="text/html",
@@ -457,100 +546,18 @@ PRODUCT_SCHEMA = Schema((
         schemata="metadata",
         default_output_type="text/x-html-safe",
     ),
-    GeographicBoundingBoxField(
-        name='geographicBoundingBox',
-        languageIndependent=True,
-        required=False,
-        validators=('isGeographicBoundingBoxValid',),
-        multiValued=1,
-        default=[],
-        schemata='metadata',
-        widget=GeographicBoundingBoxWidget(
-            label="Geographic reference / Bounding Box",
-            description=("Coordinates of the four (West, East, North, South) "
-                         "foremost corners of the dataset"),
-            label_msgid='eea_geographic_bounding_box',
-            i18n_domain='eea',
-        )
-    ),
-    StringField(
-        name='sectionTitleData',
-        schemata='metadata',
-        widget=LabelWidget(
-            label=('DATA IDENTIFICATION'),
-            i18n_domain="eea",
-            visible={'edit': 'visible', 'view': 'invisible'}
-        )
-    ),
-    StringField(
-        name='sectionTitleClassification',
-        schemata='metadata',
-        widget=LabelWidget(
-            label=('CLASSIFICATION OF SPATIAL DATA'),
-            i18n_domain="eea",
-            visible={'edit': 'visible', 'view': 'invisible'}
-        )
-    ),
-    StringField(
-        name='sectionTitleGeographic',
-        schemata='metadata',
-        widget=LabelWidget(
-            label=('GEOGRAPHIC REFERENCE'),
-            i18n_domain="eea",
-            visible={'edit': 'visible', 'view': 'invisible'}
-        )
-    ),
-    StringField(
-        name='sectionTitleTemporal',
-        schemata='metadata',
-        widget=LabelWidget(
-            label=('TEMPORAL REFERENCE'),
-            i18n_domain="eea",
-            visible={'edit': 'visible', 'view': 'invisible'}
-        )
-    ),
-    StringField(
-        name='sectionTitleQuality',
-        schemata='metadata',
-        widget=LabelWidget(
-            label=('QUALITY AND VALIDITY'),
-            i18n_domain="eea",
-            visible={'edit': 'visible', 'view': 'invisible'}
-        )
-    ),
-    StringField(
-        name='sectionTitleConformity',
-        schemata='metadata',
-        widget=LabelWidget(
-            label=('CONFORMITY'),
-            i18n_domain="eea",
-            visible={'edit': 'visible', 'view': 'invisible'}
-        )
-    ),
-    StringField(
-        name='sectionTitleAccess',
-        schemata='metadata',
-        widget=LabelWidget(
-            label=('CONSTRAINTS RELATED TO ACCESS AND USE'),
-            i18n_domain="eea",
-            visible={'edit': 'visible', 'view': 'invisible'}
-        )
-    ),
-    StringField(
-        name='sectionTitleResponsible',
-        schemata='metadata',
-        widget=LabelWidget(
-            label=('RESPONSIBLE ORGANISATION'),
-            i18n_domain="eea",
-            visible={'edit': 'visible', 'view': 'invisible'}
-        )
-    ),
 ))
 
 
 # -----------------------------------------------------------------------------
 # Metadata tab                                    Edit form
 # -----------------------------------------------------------------------------
+#                                                 geographicAccuracy
+#                                                 dataSources
+#                 deprecated fields? >            dataCustodians
+#                                                 descriptionDetailedMetadata
+#                                                 fileCategories
+
 # DATA IDENTIFICATION                             sectionTitleData
 #   Resource title                                dataResourceTitle
 #   Resource abstract                             dataResourceAbstract
@@ -592,14 +599,47 @@ def finalize_product_schema(schema):
 
     default_fields = ['id', 'title', 'description']
     meta_fields = [
-        'subject', 'temporalCoverage', 'geographicCoverage',
-        'geographicAccuracy', 'subject', 'rights', 'coordinateReferenceSystem',
-        'dataSources', 'owners', 'dataCustodians', 'dataResourceTitle',
-        'dataResourceAbstract', 'dataResourceType', 'dataResourceLocator',
-        'classificationTopicCategory', 'qualityLineage',
-        'qualitySpatialResolution', 'conformitySpecification',
-        'conformityDegree', 'accessAndUseLimitationPublic',
-        'responsiblePartyRole']
+        'geographicAccuracy',
+        'dataSources',
+        'dataCustodians',
+        'descriptionDetailedMetadata',
+        'fileCategories',
+
+        'sectionTitleData',
+        'dataResourceTitle',
+        'dataResourceAbstract',
+        'dataResourceType',
+        'dataResourceLocator',
+
+        'sectionTitleClassification',
+        'classificationTopicCategory',
+        'subject',
+
+        'sectionTitleGeographic',
+        'geographicBoundingBox',
+        'geographicCoverage',
+        'coordinateReferenceSystem',
+
+        'sectionTitleTemporal',
+        'temporalCoverage',
+        'lastUpload',
+
+        'sectionTitleQuality',
+        'qualityLineage',
+        'qualitySpatialResolution',
+
+        'sectionTitleConformity',
+        'conformitySpecification',
+        'conformityDegree',
+
+        'sectionTitleAccess',
+        'accessAndUseConstraints',
+        'accessAndUseLimitationPublic',
+
+        'sectionTitleResponsible',
+        'owners',
+        'responsiblePartyRole',
+    ]
 
     for field in meta_fields:
         schema.changeSchemataForField(field, 'metadata')
