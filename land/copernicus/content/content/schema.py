@@ -27,6 +27,8 @@ from land.copernicus.content.widgets.geographic_bounding_box import (
 from land.copernicus.content.fields.geographic_bounding_box import (
     GeographicBoundingBoxField
 )
+from Products.Archetypes.public import LabelWidget
+
 
 CONFORMITY_DEGREE_VOCAB = [
     (u'False', u'False'),
@@ -471,7 +473,119 @@ PRODUCT_SCHEMA = Schema((
             i18n_domain='eea',
         )
     ),
+    StringField(
+        name='sectionTitleData',
+        schemata='metadata',
+        widget=LabelWidget(
+            label=('DATA IDENTIFICATION'),
+            i18n_domain="eea",
+            visible={'edit': 'visible', 'view': 'invisible'}
+        )
+    ),
+    StringField(
+        name='sectionTitleClassification',
+        schemata='metadata',
+        widget=LabelWidget(
+            label=('CLASSIFICATION OF SPATIAL DATA'),
+            i18n_domain="eea",
+            visible={'edit': 'visible', 'view': 'invisible'}
+        )
+    ),
+    StringField(
+        name='sectionTitleGeographic',
+        schemata='metadata',
+        widget=LabelWidget(
+            label=('GEOGRAPHIC REFERENCE'),
+            i18n_domain="eea",
+            visible={'edit': 'visible', 'view': 'invisible'}
+        )
+    ),
+    StringField(
+        name='sectionTitleTemporal',
+        schemata='metadata',
+        widget=LabelWidget(
+            label=('TEMPORAL REFERENCE'),
+            i18n_domain="eea",
+            visible={'edit': 'visible', 'view': 'invisible'}
+        )
+    ),
+    StringField(
+        name='sectionTitleQuality',
+        schemata='metadata',
+        widget=LabelWidget(
+            label=('QUALITY AND VALIDITY'),
+            i18n_domain="eea",
+            visible={'edit': 'visible', 'view': 'invisible'}
+        )
+    ),
+    StringField(
+        name='sectionTitleConformity',
+        schemata='metadata',
+        widget=LabelWidget(
+            label=('CONFORMITY'),
+            i18n_domain="eea",
+            visible={'edit': 'visible', 'view': 'invisible'}
+        )
+    ),
+    StringField(
+        name='sectionTitleAccess',
+        schemata='metadata',
+        widget=LabelWidget(
+            label=('CONSTRAINTS RELATED TO ACCESS AND USE'),
+            i18n_domain="eea",
+            visible={'edit': 'visible', 'view': 'invisible'}
+        )
+    ),
+    StringField(
+        name='sectionTitleResponsible',
+        schemata='metadata',
+        widget=LabelWidget(
+            label=('RESPONSIBLE ORGANISATION'),
+            i18n_domain="eea",
+            visible={'edit': 'visible', 'view': 'invisible'}
+        )
+    ),
 ))
+
+
+# -----------------------------------------------------------------------------
+# Metadata tab                                    Edit form
+# -----------------------------------------------------------------------------
+# DATA IDENTIFICATION                             sectionTitleData
+#   Resource title                                dataResourceTitle
+#   Resource abstract                             dataResourceAbstract
+#   Resource type                                 dataResourceType
+#   Resource Locator                              dataResourceLocator
+
+# CLASSIFICATION OF SPATIAL DATA                  sectionTitleClassification
+#   Topic of category                             classificationTopicCategory
+#   Keyword                                       subject
+
+# GEOGRAPHIC REFERENCE                            sectionTitleGeographic
+#   Bounding Box                                  geographicBoundingBox
+#   Coverage                                      geographicCoverage
+#   Coordinate Reference System                   coordinateReferenceSystem
+
+# TEMPORAL REFERENCE                              sectionTitleTemporal
+#   Temporal extent                               temporalCoverage
+#   Date of publication                           lastUpload
+
+# QUALITY AND VALIDITY                            sectionTitleQuality
+#   Lineage                                       qualityLineage
+#   Spatial resolution                            qualitySpatialResolution
+
+# CONFORMITY                                      sectionTitleConformity
+#   Specification                                 conformitySpecification
+#   Degree                                        conformityDegree
+
+# CONSTRAINTS RELATED TO ACCESS AND USE           sectionTitleAccess
+#   Conditions applying to access and use         accessAndUseConstraints
+#   Limitation of public access                   accessAndUseLimitationPublic
+
+# RESPONSIBLE ORGANISATION                        sectionTitleResponsible
+#   Responsible party                             owners
+#   Responsible party role                        responsiblePartyRole
+# -----------------------------------------------------------------------------
 
 
 def finalize_product_schema(schema):
