@@ -25,7 +25,26 @@
       <metal:use use-macro="field_macro | context/widgets/field/macros/edit">
 
         <metal metal:fill-slot="widget_body">
-          <label for="geographic_bounding_box">Geographic reference / Bounding Box</label>
+
+<style>
+/*
+TODO: Move it in land.copernicus.theme
+(REDESIGN related)
+
+Section Titles style
+*/
+.field.ArchetypesLabelWidget {
+  font-size: 16px;
+  margin-top: 40px;
+  position: relative;
+}
+
+.field.ArchetypesLabelWidget:nth-of-type(1) {
+  margin-top: 0px !important;
+}
+</style>
+
+          <label for="geographic_bounding_box">Bounding Box</label>
           <div class="formHelp" id="geographic_bounding_box_help">
             Coordinates of the four (West, East, North, South) foremost corners of the dataset
           </div>
