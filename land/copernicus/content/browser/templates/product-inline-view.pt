@@ -12,10 +12,37 @@
   accessAUC_value python:context.getField('accessAndUseConstraints').getAccessor(context)();
 
   has_metadata_details python:geographicAccuracy_value or tags_value or rights_value or coordinateRS_value or dataSources_value or owners_value or dataCustodians_value or descriptionDM_value or accessAUC_value;
+
+  membership python:context.portal_membership;
+  user python:membership.getAuthenticatedMember();
+  roles python:user.getRoles();
+  user_is_admin python:'Site Administrator' in roles;
+  metadata_tab_visibility python:(getattr(context, 'metadata_tab_old_new_or_both', 'new'));
+  meta_old python:metadata_tab_visibility == 'old';
+  meta_both python:metadata_tab_visibility == 'both';
+  meta_new python:metadata_tab_visibility == 'new';
+  meta_new python:True if ((meta_old or meta_new or meta_both) is False) else meta_new;
+
+  show_old_meta python:False if (meta_new) else True;
+  show_new_meta python:True if ((meta_both and user_is_admin) or meta_new) else False;
   "
 
   tal:condition="python:has_metadata_details"
 ><!-- Some repetition, but tooltips are working too. -->
+
+<!--
+metadata_tab_old_new_or_both is a string property editable in /manage_propertiesForm
+Possible values: old, new, both
+Any other value or missing property means: new
+=================================================================================================
+                                        admin          anonymous           < User type
+                                      OLD   NEW       OLD    NEW           < Metadata tab type
+metadata_tab_old_new_or_both value
+          >                  old      YES   NO        YES    NO
+                             both     YES   YES       YES    NO            < tabs visibility
+                             new      NO    YES       NO     YES
+=================================================================================================
+ -->
 
 <style>
 .detailed-metadata-container dl {
@@ -32,10 +59,10 @@
   margin-left: -2px;
   text-transform: uppercase;
 }
-
 </style>
+
   <!-- New metadata -->
-  <div class="detailed-metadata-container">
+  <div class="detailed-metadata-container" tal:condition="show_new_meta">
     <h4 class="section-title">Data identification</h4>
     <dl>
       <!-- Resource title -->
@@ -298,8 +325,8 @@
 
   <!-- Old metadata -->
   <br />
-  <h3>Old metadata (will be removed):</h3>
-  <div class="detailed-metadata-container">
+  <h3 tal:condition="python:user_is_admin and meta_both">Old metadata (will be removed):</h3>
+  <div class="detailed-metadata-container" tal:condition="show_old_meta">
     <dl>
       <!-- Temporal coverage: -->
       <tal:temporalCoverage metal:use-macro="context/temporal_macros/macros/temporal-coverage-data" ></tal:temporalCoverage>
@@ -432,14 +459,15 @@
       </tal:block>
     </dl>
   </div><!-- Old metadata -->
-</span>
 
 <!-- TODO: Remove with Old metadata when done -->
 <!-- Access and Use Constraints -->
 <tal:block
   define="field python:context.getField('accessAndUseConstraints');
   value python:field.getAccessor(context)()"
-  condition="value">
+  condition="python:value and show_old_meta">
   <h3 id="access-and-use-title" i18n:translate="">Access and Use Constraints</h3>
   <div tal:content="structure value">Access and Use Constraints</div>
 </tal:block>
+
+</span>
