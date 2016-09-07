@@ -121,81 +121,6 @@ PRODUCT_SCHEMA = Schema((
         schemata="default",
     ),
     # METADATA ================================================================
-    TextField(
-        name='geographicAccuracy',
-        allowable_content_types=('text/plain', 'text/structured', 'text/html',
-                                 'application/msword',),
-        widget=RichWidget(
-            label="Geographic Accuracy",
-            description=("Information about how accurate is data."),
-            label_msgid='eea_geographic_accuracy',
-            i18n_domain='eea',
-        ),
-        default_content_type="text/html",
-        searchable=True,
-        schemata="metadata",
-        default_output_type="text/x-html-safe",
-    ),
-    TextField(
-        name='dataSources',
-        allowable_content_types=('text/plain', 'text/structured', 'text/html',
-                                 'application/msword',),
-        widget=RichWidget(
-            label="Data sources",
-            description=(
-                "A reference to a resource from which the present "
-                "resource is derived. Details such exact body "
-                "or department, date of delivery, original database, "
-                "table or GIS layer, scientific literature ..."),
-            i18n_domain='eea',
-        ),
-        default_content_type="text/html",
-        searchable=True,
-        schemata="metadata",
-        default_output_type="text/x-html-safe",
-    ),
-    TextField(
-        name='dataCustodians',
-        allowable_content_types=('text/plain', 'text/structured', 'text/html',
-                                 'application/msword',),
-        widget=RichWidget(
-            label="Data Custodians",
-            description=("Who keeps the data up to date?"),
-            i18n_domain='eea',
-        ),
-        default_content_type="text/html",
-        searchable=True,
-        schemata="metadata",
-        default_output_type="text/x-html-safe",
-    ),
-    TextField(
-        name='descriptionDetailedMetadata',
-        allowable_content_types=('text/plain', 'text/structured', 'text/html',
-                                 'application/msword',),
-        widget=RichWidget(
-            label="Description",
-            description=("Description for Detailed metadata"),
-            i18n_domain='eea',
-        ),
-        default_content_type="text/html",
-        searchable=True,
-        schemata="metadata",
-        default_output_type="text/x-html-safe",
-    ),
-    LinesField(
-        name='fileCategories',
-        languageIndependent=True,
-        required=False,
-        multiValued=1,
-        default=[],
-        schemata='metadata',
-        widget=LinesWidget(
-            size=15,
-            label="Categories for Download Files",
-            description=("One category per line."),
-            i18n_domain='eea',
-        )
-    ),
     StringField(
         name='sectionTitleData',  # ===========================================
         schemata='metadata',
@@ -546,18 +471,96 @@ PRODUCT_SCHEMA = Schema((
         schemata="metadata",
         default_output_type="text/x-html-safe",
     ),
+    StringField(
+        name='sectionTitleOther',  # ==========================================
+        schemata='metadata',
+        widget=LabelWidget(
+            label=('OTHER FIELDS'),
+            i18n_domain="eea",
+            visible={'edit': 'visible', 'view': 'invisible'}
+        )
+    ),
+    TextField(
+        name='geographicAccuracy',
+        allowable_content_types=('text/plain', 'text/structured', 'text/html',
+                                 'application/msword',),
+        widget=RichWidget(
+            label="Geographic Accuracy",
+            description=("Information about how accurate is data."),
+            label_msgid='eea_geographic_accuracy',
+            i18n_domain='eea',
+        ),
+        default_content_type="text/html",
+        searchable=True,
+        schemata="metadata",
+        default_output_type="text/x-html-safe",
+    ),
+    TextField(
+        name='dataSources',
+        allowable_content_types=('text/plain', 'text/structured', 'text/html',
+                                 'application/msword',),
+        widget=RichWidget(
+            label="Data sources",
+            description=(
+                "A reference to a resource from which the present "
+                "resource is derived. Details such exact body "
+                "or department, date of delivery, original database, "
+                "table or GIS layer, scientific literature ..."),
+            i18n_domain='eea',
+        ),
+        default_content_type="text/html",
+        searchable=True,
+        schemata="metadata",
+        default_output_type="text/x-html-safe",
+    ),
+    TextField(
+        name='dataCustodians',
+        allowable_content_types=('text/plain', 'text/structured', 'text/html',
+                                 'application/msword',),
+        widget=RichWidget(
+            label="Data Custodians",
+            description=("Who keeps the data up to date?"),
+            i18n_domain='eea',
+        ),
+        default_content_type="text/html",
+        searchable=True,
+        schemata="metadata",
+        default_output_type="text/x-html-safe",
+    ),
+    TextField(
+        name='descriptionDetailedMetadata',
+        allowable_content_types=('text/plain', 'text/structured', 'text/html',
+                                 'application/msword',),
+        widget=RichWidget(
+            label="Description",
+            description=("Description for Detailed metadata"),
+            i18n_domain='eea',
+        ),
+        default_content_type="text/html",
+        searchable=True,
+        schemata="metadata",
+        default_output_type="text/x-html-safe",
+    ),
+    LinesField(
+        name='fileCategories',
+        languageIndependent=True,
+        required=False,
+        multiValued=1,
+        default=[],
+        schemata='metadata',
+        widget=LinesWidget(
+            size=15,
+            label="Categories for Download Files",
+            description=("One category per line."),
+            i18n_domain='eea',
+        )
+    ),
 ))
 
 
 # -----------------------------------------------------------------------------
 # Metadata tab                                    Edit form
 # -----------------------------------------------------------------------------
-#                                                 geographicAccuracy
-#                                                 dataSources
-#                 deprecated fields? >            dataCustodians
-#                                                 descriptionDetailedMetadata
-#                                                 fileCategories
-
 # DATA IDENTIFICATION                             sectionTitleData
 #   Resource title                                dataResourceTitle
 #   Resource abstract                             dataResourceAbstract
@@ -592,6 +595,13 @@ PRODUCT_SCHEMA = Schema((
 # RESPONSIBLE ORGANISATION                        sectionTitleResponsible
 #   Responsible party                             owners
 #   Responsible party role                        responsiblePartyRole
+
+# OTHER FIELDS                                    sectionTitleOther
+#                                                 geographicAccuracy
+#                                                 dataSources
+#                 deprecated fields? >            dataCustodians
+#                                                 descriptionDetailedMetadata
+#                                                 fileCategories
 # -----------------------------------------------------------------------------
 
 
@@ -599,12 +609,6 @@ def finalize_product_schema(schema):
 
     default_fields = ['id', 'title', 'description']
     meta_fields = [
-        'geographicAccuracy',
-        'dataSources',
-        'dataCustodians',
-        'descriptionDetailedMetadata',
-        'fileCategories',
-
         'sectionTitleData',
         'dataResourceTitle',
         'dataResourceAbstract',
@@ -639,6 +643,13 @@ def finalize_product_schema(schema):
         'sectionTitleResponsible',
         'owners',
         'responsiblePartyRole',
+
+        'sectionTitleOther',
+        'geographicAccuracy',
+        'dataSources',
+        'dataCustodians',
+        'descriptionDetailedMetadata',
+        'fileCategories',
     ]
 
     for field in meta_fields:
