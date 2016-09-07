@@ -454,7 +454,7 @@ metadata_tab_old_new_or_both value
 <!-- Access and Use Constraints -->
 <tal:block define="field python:context.getField('accessAndUseConstraints');
                    value python:field.getAccessor(context)()"
-           condition="value">
+           condition="python:value and show_old_meta">
   <h3 id="access-and-use-title" i18n:translate="">Access and Use Constraints</h3>
   <div tal:content="structure value">Access and Use Constraints</div>
 </tal:block>
