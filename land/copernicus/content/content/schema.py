@@ -247,7 +247,7 @@ PRODUCT_SCHEMA = Schema((
             helper_js=("countries_widget.js",),
             helper_css=("countries_widget.css",),
             size=15,
-            label="Geographical coverage",
+            label="Coverage",
             description=("Countries that are covered by the resource"),
             label_msgid='dataservice_label_geographic',
             description_msgid='dataservice_help_geographic',
@@ -551,7 +551,8 @@ PRODUCT_SCHEMA = Schema((
         widget=LinesWidget(
             size=15,
             label="Categories for Download Files",
-            description=("One category per line."),
+            description=("One category per line. This is an important field "
+                         "used to manage possible columns in Download tab."),
             i18n_domain='eea',
         )
     ),
