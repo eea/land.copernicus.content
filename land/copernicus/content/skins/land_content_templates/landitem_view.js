@@ -68,10 +68,10 @@ $(document).ready(function() {
     if(not_validated_text.length < 5) {
       not_validated_text = "Not yet validated.";
     }
-    $("#parent-fieldname-title").after("<span class='not-validated-tag'>" + not_validated_text + "</span>");
+    $("#parent-fieldname-title").after("<div class='not-validated-container'><span class='not-validated-tag'>" + not_validated_text + "</span></div>");
 
     // Fix print button position problem
-    $(".printButton").css({"position": "relative", "top": "29px"});
+    $(".printButton").css({"position": "relative", "top": "-50px"});
   }
 
   function disable_download_buttons() {
