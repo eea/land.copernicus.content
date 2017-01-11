@@ -1,0 +1,90 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+  lang="en"
+  metal:use-macro="here/main_template/macros/master"
+  i18n:domain="plonehelpcenter">
+
+<body>
+    <metal:main metal:fill-slot="content">
+
+    <ul id="sub-nav" class="navigation">
+        <li tal:repeat="item context/getPHCSubNav | nothing">
+            <a href="#"
+               tal:content="item/title"
+               tal:attributes="href item/url;
+                   class python:item['selected'] and 'selected' or nothing;
+                   title item/desc"
+            >Title</a>
+        </li>
+    </ul>
+
+    <div tal:define="show_border context/@@plone/showEditableBorder"
+         tal:attributes="class python:show_border and 'documentEditable' or ''">
+
+        <div id="edit-bar"
+            tal:condition="show_border"
+            tal:content="structure provider:plone.contentviews" />
+
+
+        <div metal:use-macro="context/global_statusmessage/macros/portal_message">
+          Portal status message
+        </div>
+
+        <div id="content">
+            <div tal:define="fullToc python:here.getTOC(current = here);
+                             tocInfo python:here.getTOCInfo(fullToc);
+                             toc     tocInfo/localTOC;
+                             currentIdx tocInfo/currentIdx;
+                             tocList    tocInfo/tocList;
+                             current    python:tocList[currentIdx];
+                             numbering  current/numbering">
+
+              <div tal:replace="structure provider:plone.abovecontenttitle" />
+
+              <h1 class="documentFirstHeading">
+                  <!-- ORIGINAL: <span tal:replace="string:${numbering} ${here/Title}">X.y. Title</span> -->
+                  <span tal:replace="string:${here/Title}">X.y. Title</span>
+              </h1>
+
+              <p class="documentDescription"
+                tal:condition="here/Description"
+                tal:content="structure here/Description">
+                Description
+              </p>
+
+              <div class="portalMessage"
+                   tal:condition="python:here.portal_workflow.getInfoFor(here, 'review_state') != 'published'"
+                   i18n:translate="must_publish_before_visible_to_public">
+                  You must publish this page before it becomes visible to the public.
+              </div>
+
+              <div tal:replace="structure provider:plone.abovecontentbody" />
+
+              <metal:recursion use-macro="here/referencemanual_macros/macros/section_toc"/>
+
+              <p class="visualNoPrint" tal:condition="nocall:toc">
+                <a href="" tal:attributes="href string:${context/absolute_url}/referencemanual-all-pages"
+                   i18n:translate="all_content_on_one_page">
+                All content on one page (useful for printing, presentation mode etc.)</a>
+              </p>
+
+              <p tal:condition="not:nocall:toc" class="discreet">
+                <span i18n:translate="view_no_reference_manual1" tal:omit-tag="">There are no pages or sections in this Reference Manual.</span>
+                <tal:block condition="python:user.has_permission('Modify portal content', here)"
+                           i18n:translate="view_no_reference_manual2">
+                  Use the 'add new item' menu to add Sections, Pages, Files, or Images.
+                  Sections can be nested in an arbitrary depth, but we recommend not
+                  using more than three or four levels for good legibility.
+                </tal:block>
+              </p>
+
+              <div tal:replace="structure provider:plone.belowcontentbody" />
+
+            </div>
+        </div> <!-- End content -->
+
+    </div> <!-- End documentEditable -->
+
+    </metal:main>
+
+</body>
+</html>
