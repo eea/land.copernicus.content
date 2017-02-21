@@ -12,6 +12,11 @@
     factory=".subtypes.LandItemExtender" />
 
   <adapter
+    name="land.copernicus.content.newsitemfields"
+    for="Products.ATContentTypes.interfaces.news.IATNewsItem"
+    factory=".subtypes.ATNewsItemExtender" />
+
+  <adapter
     name="land.copernicus.content.atblob"
     for="plone.app.blob.interfaces.IATBlob"
     factory=".subtypes.ATBlobModifier" />

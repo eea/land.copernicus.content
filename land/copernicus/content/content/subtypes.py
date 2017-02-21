@@ -3,6 +3,7 @@
 from zope.interface import implements
 from Products.Archetypes import atapi
 from archetypes.schemaextender.field import ExtensionField
+from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
 from archetypes.schemaextender.interfaces import ISchemaExtender
 from archetypes.schemaextender.interfaces import ISchemaModifier
 from land.copernicus.content.config import EEAMessageFactory as _
@@ -124,6 +125,40 @@ class LandItemExtender(object):
 
     def __init__(self, context):
         self.context = context
+
+    def getFields(self):
+        return self.fields
+
+
+class ATNewsItemExtender(object):
+    """ Extender for LandItem
+    """
+    implements(IOrderableSchemaExtender)
+
+    fields = [
+        StringField(
+            "long_title",
+            schemata="default",
+            widget=atapi.StringWidget(
+                label=_("Long title"),
+                description=_("The long title for this news item.")
+            ),
+            default=""
+        ),
+    ]
+
+    def __init__(self, context):
+        self.context = context
+
+    def getOrder(self, schematas):
+        """ Manipulate the order in which fields appear.
+        """
+        schematas['default'] = [
+            'id', 'title', 'long_title', 'description', 'text', 'image',
+            'imageCaption'
+        ]
+
+        return schematas
 
     def getFields(self):
         return self.fields
