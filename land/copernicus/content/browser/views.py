@@ -181,6 +181,9 @@ SHEET_COLUMNS = {
     'user_full_name': [1, 'Fullname', 25 * WIDTH_UNIT],
     'user_email': [2, 'Contact email', 35 * WIDTH_UNIT],
     'user_memberships': [3, 'Group memberships', 50 * WIDTH_UNIT],
+    'institutional_domain': [4, 'Institutional Domain', 100 * WIDTH_UNIT],
+    'professional_thematic_domain': [
+        5, 'Professional Thematic Domain', 100 * WIDTH_UNIT],
 }
 
 
@@ -193,6 +196,10 @@ def get_user_data_list(context):
         user_id = member.getId()
         user_full_name = member.getProperty('fullname', '')
         user_email = member.getProperty('email', '')
+        institutional_domain = member.getProperty(
+            'institutional_domain')
+        professional_thematic_domain = member.getProperty(
+            'thematic_domain')
         groups = api.group.get_groups(user=member)
         user_memberships = '; '.join([group.id for group in groups])
 
@@ -200,7 +207,9 @@ def get_user_data_list(context):
             user_id=user_id,
             user_full_name=user_full_name,
             user_email=user_email,
-            user_memberships=user_memberships
+            user_memberships=user_memberships,
+            institutional_domain=institutional_domain,
+            professional_thematic_domain=professional_thematic_domain
         )
 
 
