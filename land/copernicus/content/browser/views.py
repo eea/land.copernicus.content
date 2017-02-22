@@ -1,10 +1,15 @@
+from datetime import datetime
+from DateTime import DateTime
+from plone import api
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.PloneBatch import Batch
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-import subprocess
-from zope.component.hooks import getSite
+from StringIO import StringIO
 from zope.component import getMultiAdapter
+from zope.component.hooks import getSite
+import subprocess
+import xlwt
 
 
 class LandItemsOverview(BrowserView):
@@ -165,3 +170,94 @@ class DownloadLandFileView(BrowserView):
         return {'institutional_domain': institutional_domain,
                 'professional_thematic_domain': professional_thematic_domain,
                 'start_download_url': remoteUrl}
+
+
+# Settings for xls file columns
+SHEET_TITLE = 'Users data'
+WIDTH_UNIT = 340  # Something like a letter width
+SHEET_COLUMNS = {
+    # id, order number, column title, column width
+    'user_id': [0, 'Username', 15 * WIDTH_UNIT],
+    'user_full_name': [1, 'Fullname', 25 * WIDTH_UNIT],
+    'user_email': [2, 'Contact email', 35 * WIDTH_UNIT],
+    'user_memberships': [3, 'Group memberships', 50 * WIDTH_UNIT],
+}
+
+
+def get_user_data_list(context):
+    """ Returns all users data used in xls export
+    """
+    membership_tool = getToolByName(context, 'portal_membership')
+
+    for member in membership_tool.listMembers():
+        user_id = member.getId()
+        user_full_name = member.getProperty('fullname', '')
+        user_email = member.getProperty('email', '')
+        groups = api.group.get_groups(user=member)
+        user_memberships = '; '.join([group.id for group in groups])
+
+        yield dict(
+            user_id=user_id,
+            user_full_name=user_full_name,
+            user_email=user_email,
+            user_memberships=user_memberships
+        )
+
+
+class ExportUsersXLS(BrowserView):
+    """ A view linked from Site Setup that exports a xls file with info
+        about registered users.
+    """
+    def __call__(self):
+        return self.export_users_data()
+
+    def export_users_data(self):
+        """ Generates the xls file
+        """
+        user_data_records = get_user_data_list(self.context)
+
+        xls_book = xlwt.Workbook()
+        xls_sheet = xls_book.add_sheet(SHEET_TITLE)
+
+        for row_index, data_dict in enumerate(user_data_records):
+            for data_key in data_dict:
+                column_index = SHEET_COLUMNS[data_key][0]
+                value = data_dict.get(data_key, None)
+
+                if row_index == 0:
+                    column_name = SHEET_COLUMNS[data_key][1]
+                    column_width = SHEET_COLUMNS[data_key][2]
+                    xls_sheet.write(row_index, column_index, column_name)
+                    xls_sheet.col(column_index).width = column_width
+
+                try:
+                    value = value.replace(tzinfo=None)
+                except:
+                    pass
+
+                if isinstance(value, DateTime):
+                    str_date = value.strftime('%d/%m/%y')
+                    xls_sheet.write(row_index + 1, column_index, str_date)
+                elif isinstance(value, datetime):
+                    str_date = value.strftime('%d/%m/%y')
+                    xls_sheet.write(row_index + 1, column_index, str_date)
+                else:
+                    if value is not None:
+                        xls_sheet.write(
+                            row_index + 1, column_index, value.decode('utf-8'))
+                    else:
+                        xls_sheet.write(row_index + 1, column_index, value)
+
+        xls_file = StringIO()
+        xls_book.save(xls_file)
+        xls_file.seek(0)
+        filename = '{0}.xls'.format(SHEET_TITLE)
+
+        self.request.response.setHeader(
+            'Content-type', 'application/vnd.ms-excel; charset=utf-8'
+        )
+        self.request.response.setHeader(
+            'Content-Disposition', 'attachment; filename={0}'.format(filename)
+        )
+
+        return xls_file.read()
