@@ -12,6 +12,20 @@ import subprocess
 import xlwt
 
 
+def is_EIONET_member(member):
+    """ Check if a given member is EIONET user
+    """
+    site = api.portal.get()
+
+    try:
+        return "EIONET" in site.acl_users.get(
+            "ldap-plugin").acl_users.searchUsers(
+            uid=member.getId())[0].get('dn', '')
+
+    except Exception:
+        return False
+
+
 class LandItemsOverview(BrowserView):
     """Overview page for LandItems
     """
@@ -166,9 +180,11 @@ class DownloadLandFileView(BrowserView):
         professional_thematic_domain = authenticated_user.getProperty(
             'thematic_domain')
         remoteUrl = self.request.form.get('remoteUrl', None)
+        is_eionet_member = is_EIONET_member(authenticated_user)
 
         return {'institutional_domain': institutional_domain,
                 'professional_thematic_domain': professional_thematic_domain,
+                'is_eionet_member': is_eionet_member,
                 'start_download_url': remoteUrl}
 
 
