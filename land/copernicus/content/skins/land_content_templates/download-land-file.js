@@ -28,6 +28,7 @@ $(document).ready(function() {
   // Custom dimensions
   ga('set', 'dimension1', professional_thematic_domain);
   ga('set', 'dimension2', institutional_domain);
+  ga('set', 'dimension3', is_eionet_member);
 
   // Track event
   ga('send', {
