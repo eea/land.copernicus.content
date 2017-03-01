@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1>Multi download</h1>
+  <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+  <script src="./multi-download.js"></script>
+  <script>
+    $(document).ready(function() {
+      var files = new Array("file1", "file2");
+      multiDownload(files);
+    });
+  </script>
+</body>
+</html>

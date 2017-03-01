@@ -51,6 +51,14 @@
     />
 
   <browser:page
+    name="multi-download"
+    class=".views.MultiDownloadView"
+    permission="zope2.View"
+    for="land.copernicus.content.content.landitem.LandItem"
+    template="templates/multi-download.pt"
+    />
+
+  <browser:page
     name="tpdb"
     class=".views.GoPDB"
     permission="zope2.View"

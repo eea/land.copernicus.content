@@ -74,6 +74,20 @@ def remoteUrl_exists(location):
         return False
 
 
+class MultiDownloadView(BrowserView):
+    """ a-land-item/@@multi-download
+        WIP New Download Tab
+    """
+
+    index = ViewPageTemplateFile("templates/multi-download.pt")
+
+    def render(self):
+        return self.index()
+
+    def __call__(self):
+        return self.render()
+
+
 class RedirectDownloadUrl(BrowserView):
     """ Redirect to download url for a LandItem if logged in """
 
