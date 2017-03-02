@@ -95,12 +95,11 @@ class MultiDownloadView(BrowserView):
             'institutional_domain')
         professional_thematic_domain = authenticated_user.getProperty(
             'thematic_domain')
-        # remoteUrl = self.request.form.get('remoteUrl', None)
+        remoteUrl = self.request.form.get('remoteUrl', None)
         is_eionet_member = is_EIONET_member(authenticated_user)
 
-        files = [
-            # list of file urls, not on GitHub
-        ]
+        files = remoteUrl.split("@")
+        # Example: /multi-download?remoteUrl=https://foo@https:bar
 
         return {'institutional_domain': institutional_domain,
                 'professional_thematic_domain': professional_thematic_domain,

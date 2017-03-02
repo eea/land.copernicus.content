@@ -6,30 +6,34 @@
 
   <body>
     <div tal:define="professional_thematic_domain python:view.values.get('professional_thematic_domain', '');
-                     institutional_domain python:view.values.get('institutional_domain');
-                     is_eionet_member python:view.values.get('is_eionet_member');
+                     institutional_domain python:view.values.get('institutional_domain', '');
+                     is_eionet_member python:view.values.get('is_eionet_member', '');
+                     files python:view.values.get('files', []);
+                     files_str python:','.join(files);
                      land_item_title python:context.title">
 
       <script tal:content="string:var land_item_title='${land_item_title}';"></script>
       <script tal:content="string:var professional_thematic_domain='${professional_thematic_domain}';"></script>
       <script tal:content="string:var institutional_domain='${institutional_domain}';"></script>
       <script tal:content="string:var is_eionet_member='${is_eionet_member}';"></script>
+      <script tal:content="string:var files_str='${files_str}';"></script>
 
       <h1>Multi download</h1>
+      <p>Please wait...</p>
+      <ul>
+        <li>land_item_title: <span tal:content="python:land_item_title"></span></li>
+        <li>professional_thematic_domain: <span tal:content="python:professional_thematic_domain"></span></li>
+        <li>institutional_domain: <span tal:content="python:institutional_domain"></span></li>
+        <li>is_eionet_member: <span tal:content="python:is_eionet_member"></span></li>
+        <li>files_str: <span tal:content="python:files_str"></span></li>
+      </ul>
       <script
         src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous">
       </script>
       <script src="./multi-download-plugin.js"></script>
-
-      <script>
-        $(document).ready(function() {
-          console.log(land_item_title, professional_thematic_domain, institutional_domain, is_eionet_member);
-          /*multiDownload(files);*/
-        });
-
-      </script>
+      <script src="./multi-download.js"></script>
     </div>
   </body>
 </html>
