@@ -37,7 +37,7 @@
 
   <browser:page
     name="redirect-download-url"
-    class=".views.RedirectDownloadUrl"
+    class=".views.OldRedirectDownloadUrl"
     permission="zope2.View"
     for="land.copernicus.content.content.landfile.LandFile"
     />
@@ -56,6 +56,13 @@
     permission="zope2.View"
     for="land.copernicus.content.content.landitem.LandItem"
     template="templates/multi-download.pt"
+    />
+
+  <browser:page
+    name="redirect-download-url"
+    class=".views.RedirectDownloadUrl"
+    permission="zope2.View"
+    for="land.copernicus.content.content.landitem.LandItem"
     />
 
   <browser:page

@@ -129,7 +129,7 @@
                       </td>
                       <td class="border-top-only text-centered no-sorting-icons">
                         <span class="download-gray-icon"><i class="fa fa-download"></i></span>
-                        <a tal:attributes="href python: item.absolute_url() + '/@@redirect-download-url'"
+                        <a tal:attributes="href python: context.absolute_url() + '/@@redirect-download-url'"
                            href="" class="download-button" target="_blank">
                            <i class="fa fa-download"></i>
                         </a>

@@ -177,6 +177,7 @@ $(document).ready(function() {
         break;
       } else {
         button_click(button);
+        break; // [TODO] Reimplement. We don't need for.
       }
     }
   }
