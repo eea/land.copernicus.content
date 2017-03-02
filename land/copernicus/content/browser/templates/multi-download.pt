@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title></title>
-</head>
-<body>
-  <h1>Multi download</h1>
-  <script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
-  <script src="./multi-download.js"></script>
-  <script>
-    $(document).ready(function() {
-      var files = new Array("file1", "file2");
-      multiDownload(files);
-    });
-  </script>
-</body>
+  <head>
+    <title></title>
+  </head>
+
+  <body>
+    <div tal:define="professional_thematic_domain python:view.values.get('professional_thematic_domain', '');
+                     institutional_domain python:view.values.get('institutional_domain');
+                     is_eionet_member python:view.values.get('is_eionet_member');
+                     land_item_title python:context.title">
+
+      <script tal:content="string:var land_item_title='${land_item_title}';"></script>
+      <script tal:content="string:var professional_thematic_domain='${professional_thematic_domain}';"></script>
+      <script tal:content="string:var institutional_domain='${institutional_domain}';"></script>
+      <script tal:content="string:var is_eionet_member='${is_eionet_member}';"></script>
+
+      <h1>Multi download</h1>
+      <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous">
+      </script>
+      <script src="./multi-download-plugin.js"></script>
+
+      <script>
+        $(document).ready(function() {
+          console.log(land_item_title, professional_thematic_domain, institutional_domain, is_eionet_member);
+          /*multiDownload(files);*/
+        });
+
+      </script>
+    </div>
+  </body>
 </html>

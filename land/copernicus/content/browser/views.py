@@ -87,6 +87,26 @@ class MultiDownloadView(BrowserView):
     def __call__(self):
         return self.render()
 
+    @property
+    def values(self):
+        membership = getToolByName(self.context, 'portal_membership')
+        authenticated_user = membership.getAuthenticatedMember()
+        institutional_domain = authenticated_user.getProperty(
+            'institutional_domain')
+        professional_thematic_domain = authenticated_user.getProperty(
+            'thematic_domain')
+        # remoteUrl = self.request.form.get('remoteUrl', None)
+        is_eionet_member = is_EIONET_member(authenticated_user)
+
+        files = [
+            # list of file urls, not on GitHub
+        ]
+
+        return {'institutional_domain': institutional_domain,
+                'professional_thematic_domain': professional_thematic_domain,
+                'is_eionet_member': is_eionet_member,
+                'files': files}
+
 
 class RedirectDownloadUrl(BrowserView):
     """ Redirect to download url for a LandItem if logged in """
