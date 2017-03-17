@@ -18,8 +18,9 @@
       <script tal:content="string:var is_eionet_member='${is_eionet_member}';"></script>
       <script tal:content="string:var files_str='${files_str}';"></script>
 
-      <h1>Multi download</h1>
-      <p>Please wait...</p>
+      <p>Downloading files. Please wait...</p>
+      <!-- Debug [TODO] Remove -->
+      <!--
       <ul>
         <li>land_item_title: <span tal:content="python:land_item_title"></span></li>
         <li>professional_thematic_domain: <span tal:content="python:professional_thematic_domain"></span></li>
@@ -27,6 +28,7 @@
         <li>is_eionet_member: <span tal:content="python:is_eionet_member"></span></li>
         <li>files_str: <span tal:content="python:files_str"></span></li>
       </ul>
+      -->
       <script
         src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
