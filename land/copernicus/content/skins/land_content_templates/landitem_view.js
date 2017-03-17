@@ -77,14 +77,12 @@ $(document).ready(function() {
   function disable_download_buttons() {
     /* Disable download, download selected and download all buttons */
     $("#button-download-selected").attr("disabled", "disabled");
-    $("#button-download-all").attr("disabled", "disabled");
     $(".download-button").addClass("disabled");
   }
 
   function enable_download_buttons() {
     /* Enable download, download selected and download all buttons */
     $("#button-download-selected").removeAttr("disabled");
-    $("#button-download-all").removeAttr("disabled");
     $(".download-button").removeClass("disabled");
   }
 
@@ -377,11 +375,6 @@ $(document).ready(function() {
   $('#button-download-selected').on("click", function(evt) {
     evt.preventDefault();
     download_selected();
-  });
-
-  $('#button-download-all').on("click", function(evt) {
-    evt.preventDefault();
-    download_all();
   });
 
   $('.download-button').on("click", function(evt) {

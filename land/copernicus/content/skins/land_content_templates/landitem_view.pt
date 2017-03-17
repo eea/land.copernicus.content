@@ -152,7 +152,6 @@
               <button id="button-download-selected">Download selected items
                 (<span id="number-checked">0</span>)
               </button>
-              <button id="button-download-all">Download all</button>
             </form>
           </div>
 

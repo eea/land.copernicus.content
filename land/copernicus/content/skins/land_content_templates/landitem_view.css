@@ -402,9 +402,9 @@ span.raster {
   margin-bottom: 10px;
 }
 
-#button-download-selected, #button-download-all {
+#button-download-selected {
   background-color: #F2F2F2;
-  width: 49%;
+  width: 100%;
   padding-top: 5px;
   padding-bottom: 5px;
   border: 1px solid #D8D8D8;
@@ -413,13 +413,13 @@ span.raster {
   border-radius: 3px;
 }
 
-#button-download-selected:hover, #button-download-all:hover {
+#button-download-selected:hover {
   background-color: #0870AF;
   border: 1px solid #0063A8;
   color: #fff;
 }
 
-#button-download-selected:disabled, #button-download-all:disabled {
+#button-download-selected:disabled {
   background-color: #F2F2F2;
   border-color: #D8D8D8;
   color: #BBB !important;
@@ -431,10 +431,6 @@ span.raster {
 
 #button-download-selected {
   float: left;
-}
-
-#button-download-all {
-  float: right;
 }
 
 .not-validated-tag {
