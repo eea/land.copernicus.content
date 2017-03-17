@@ -34,8 +34,26 @@
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous">
       </script>
+
       <script src="./multi-download-plugin.js"></script>
       <script src="./multi-download.js"></script>
+
+<!--       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.fileDownload/1.4.2/jquery.fileDownload.min.js"></script>
+      <script type="text/javascript">
+        $(document).ready(function() {
+          $(document).on("click", "a.fileDownloadSimpleRichExperience", function (evt) {
+            $.fileDownload($(this).prop('href'))
+              .done(function () { alert('File download a success!'); })
+              .fail(function () { alert('File download failed!'); });
+
+            evt.preventDefault();
+            return false; //this is critical to stop the click event which will trigger a normal file download
+          });
+        });
+      </script>
+
+      <a href="" class="fileDownloadSimpleRichExperience" href="http://speed.hetzner.de/100MB.bin">AAAA</a>
+      <a href="" class="fileDownloadSimpleRichExperience" href="http://localhost:8081/copernicus/photo_02_CLC.jpg">AAAA</a> -->
     </div>
   </body>
 </html>

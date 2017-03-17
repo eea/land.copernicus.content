@@ -85,6 +85,10 @@ class MultiDownloadView(BrowserView):
         return self.index()
 
     def __call__(self):
+        # [TODO] Not sure
+        name = "fileDownload"
+        value = True
+        self.request.response.setCookie(name, value)
         return self.render()
 
     @property
