@@ -1,59 +1,43 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title></title>
-  </head>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
 
-  <body>
-    <div tal:define="professional_thematic_domain python:view.values.get('professional_thematic_domain', '');
-                     institutional_domain python:view.values.get('institutional_domain', '');
-                     is_eionet_member python:view.values.get('is_eionet_member', '');
-                     files python:view.values.get('files', []);
-                     files_str python:','.join(files);
-                     land_item_title python:context.title">
+<body>
+  <metal:description fill-slot="content-description" />
 
-      <script tal:content="string:var land_item_title='${land_item_title}';"></script>
-      <script tal:content="string:var professional_thematic_domain='${professional_thematic_domain}';"></script>
-      <script tal:content="string:var institutional_domain='${institutional_domain}';"></script>
-      <script tal:content="string:var is_eionet_member='${is_eionet_member}';"></script>
-      <script tal:content="string:var files_str='${files_str}';"></script>
+  <metal:content-core fill-slot="content-core">
+    <metal:main_macro define-macro="content-core">
+      <div tal:define="professional_thematic_domain python:view.values.get('professional_thematic_domain', '');
+                       institutional_domain python:view.values.get('institutional_domain', '');
+                       is_eionet_member python:view.values.get('is_eionet_member', '');
+                       files python:view.values.get('files', []);
+                       files_str python:','.join(files);
+                       land_item_title python:context.title">
 
-      <p>Downloading files. Please wait...</p>
-      <!-- Debug [TODO] Remove -->
-      <!--
-      <ul>
-        <li>land_item_title: <span tal:content="python:land_item_title"></span></li>
-        <li>professional_thematic_domain: <span tal:content="python:professional_thematic_domain"></span></li>
-        <li>institutional_domain: <span tal:content="python:institutional_domain"></span></li>
-        <li>is_eionet_member: <span tal:content="python:is_eionet_member"></span></li>
-        <li>files_str: <span tal:content="python:files_str"></span></li>
-      </ul>
-      -->
-      <script
-        src="https://code.jquery.com/jquery-3.1.1.min.js"
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-        crossorigin="anonymous">
-      </script>
+        <script tal:content="string:var land_item_title='${land_item_title}';"></script>
+        <script tal:content="string:var professional_thematic_domain='${professional_thematic_domain}';"></script>
+        <script tal:content="string:var institutional_domain='${institutional_domain}';"></script>
+        <script tal:content="string:var is_eionet_member='${is_eionet_member}';"></script>
+        <script tal:content="string:var files_str='${files_str}';"></script>
 
-      <script src="./multi-download-plugin.js"></script>
-      <script src="./multi-download.js"></script>
+        <p>Downloading files. Please wait...</p>
 
-<!--       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.fileDownload/1.4.2/jquery.fileDownload.min.js"></script>
-      <script type="text/javascript">
-        $(document).ready(function() {
-          $(document).on("click", "a.fileDownloadSimpleRichExperience", function (evt) {
-            $.fileDownload($(this).prop('href'))
-              .done(function () { alert('File download a success!'); })
-              .fail(function () { alert('File download failed!'); });
+        <!-- [TODO] Remove
+        <ul>
+          <li>land_item_title: <span tal:content="python:land_item_title"></span></li>
+          <li>professional_thematic_domain: <span tal:content="python:professional_thematic_domain"></span></li>
+          <li>institutional_domain: <span tal:content="python:institutional_domain"></span></li>
+          <li>is_eionet_member: <span tal:content="python:is_eionet_member"></span></li>
+          <li>files_str: <span tal:content="python:files_str"></span></li>
+        </ul>
+        -->
 
-            evt.preventDefault();
-            return false; //this is critical to stop the click event which will trigger a normal file download
-          });
-        });
-      </script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.fileDownload/1.4.2/jquery.fileDownload.min.js"></script>
+        <script src="./multi-download.js"></script>
 
-      <a href="" class="fileDownloadSimpleRichExperience" href="http://speed.hetzner.de/100MB.bin">AAAA</a>
-      <a href="" class="fileDownloadSimpleRichExperience" href="http://localhost:8081/copernicus/photo_02_CLC.jpg">AAAA</a> -->
-    </div>
-  </body>
+      </div>
+    </metal:main_macro>
+  </metal:content-core>
+</body>
 </html>
