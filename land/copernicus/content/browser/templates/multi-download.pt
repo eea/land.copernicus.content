@@ -33,7 +33,7 @@
         </ul>
         -->
 
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.fileDownload/1.4.2/jquery.fileDownload.min.js"></script>
+        <script src="./jquery.fileDownload.min.js"></script>
         <script src="./multi-download.js"></script>
 
       </div>
