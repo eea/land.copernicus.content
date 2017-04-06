@@ -32,6 +32,8 @@ $(document).ready(function() {
     );
   }
 
+  /* [TODO] Upgrade step to rewrite all these links or replace them in python code? */
+  files_str = files_str.split("https://cws-download.eea.europa.eu").join("http://demo.copernicus.eea.europa.eu/filedownload");
   var files = files_str.split(',');
   var first_file = files[0];
   var download_result = download_file(first_file);
