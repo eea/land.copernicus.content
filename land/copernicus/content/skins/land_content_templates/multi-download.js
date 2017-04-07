@@ -38,8 +38,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             g = self;
         } else {
             g = this;
-        }
-        f();
+        }g.sameTimeLimit = f();
     }
 })(function () {
     var define, module, exports;return function e(t, n, r) {
@@ -254,7 +253,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
              * @param {Array} store An optional array to store the data in. If `null`, data won't be stored.
              * @returns {LimitIt} The `LimitIt` instance.
              */
-            module.exports = window.SameTimeLimit = function sameTimeLimit(tasks, limit, cb, store) {
+            module.exports = function sameTimeLimit(tasks, limit, cb, store) {
                 var l = new limitIt(limit);
                 sameTime(tasks.map(function (c) {
                     return function (done) {
@@ -512,13 +511,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     return;
                 }
 
-                Object.defineProperty(Function.prototype, NAME_FIELD, {
-                    get: function get() {
-                        var name = this.toString().trim().match(/^function\s*([^\s(]+)/)[1];
-                        Object.defineProperty(this, NAME_FIELD, { value: name });
-                        return name;
-                    }
-                });
+                try {
+                    Object.defineProperty(Function.prototype, NAME_FIELD, {
+                        get: function get() {
+                            var name = this.toString().trim().match(/^function\s*([^\s(]+)/)[1];
+                            Object.defineProperty(this, NAME_FIELD, { value: name });
+                            return name;
+                        }
+                    });
+                } catch (e) {}
             })();
 
             /**
@@ -671,9 +672,270 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         }, { "dup": 6 }] }, {}, [2])(2);
 });
 
+"use strict";
 
-// bindy (https://github.com/IonicaBizau/bindy)
-!function(n){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=n();else if("function"==typeof define&&define.amd)define([],n);else{var t;t="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:this,t.bindy=n()}}(function(){return function n(t,e,r){function o(u,f){if(!e[u]){if(!t[u]){var c="function"==typeof require&&require;if(!f&&c)return c(u,!0);if(i)return i(u,!0);var s=new Error("Cannot find module '"+u+"'");throw s.code="MODULE_NOT_FOUND",s}var p=e[u]={exports:{}};t[u][0].call(p.exports,function(n){var e=t[u][1][n];return o(e?e:n)},p,p.exports,n,t,e,r)}return e[u].exports}for(var i="function"==typeof require&&require,u=0;u<r.length;u++)o(r[u]);return o}({1:[function(n,t,e){"use strict";var r=n("sliced"),o=n("deffy");t.exports=function(n,t){return n=o(n,[]),n.map(function(n,e,o){return function(){var e=r(arguments);return e.unshift(n),t.apply(this,e)}})}},{deffy:2,sliced:6}],2:[function(n,t,e){function r(n,t,e){return"function"==typeof t?t(n):(e="boolean"===o(e)?{empty:e}:{empty:!1},e.empty?n||t:o(n)===o(t)?n:t)}var o=n("typpy");t.exports=r},{typpy:3}],3:[function(n,t,e){"use strict";function r(n,t){return 2===arguments.length?r.is(n,t):r.get(n,!0)}n("function.name"),r.is=function(n,t){return r.get(n,"string"==typeof t)===t},r.get=function(n,t){return"string"==typeof n?t?"string":String:null===n?t?"null":null:void 0===n?t?"undefined":void 0:n!==n?t?"nan":NaN:t?n.constructor.name.toLowerCase():n.constructor},t.exports=r},{"function.name":4}],4:[function(n,t,e){"use strict";var r=n("noop6");!function(){var n="name";"string"!=typeof r.name&&Object.defineProperty(Function.prototype,n,{get:function(){var t=this.toString().trim().match(/^function\s*([^\s(]+)/)[1];return Object.defineProperty(this,n,{value:t}),t}})}(),t.exports=function(n){return n.name}},{noop6:5}],5:[function(n,t,e){"use strict";t.exports=function(){}},{}],6:[function(n,t,e){t.exports=function(n,t,e){var r=[],o=n.length;if(0===o)return r;var i=t<0?Math.max(0,t+o):t||0;for(void 0!==e&&(o=e<0?e+o:e);o-- >i;)r[o-i]=n[o];return r}},{}]},{},[1])(1)});
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+(function (f) {
+    if ((typeof exports === "undefined" ? "undefined" : _typeof(exports)) === "object" && typeof module !== "undefined") {
+        module.exports = f();
+    } else if (typeof define === "function" && define.amd) {
+        define([], f);
+    } else {
+        var g;if (typeof window !== "undefined") {
+            g = window;
+        } else if (typeof global !== "undefined") {
+            g = global;
+        } else if (typeof self !== "undefined") {
+            g = self;
+        } else {
+            g = this;
+        }g.bindy = f();
+    }
+})(function () {
+    var define, module, exports;return function e(t, n, r) {
+        function s(o, u) {
+            if (!n[o]) {
+                if (!t[o]) {
+                    var a = typeof require == "function" && require;if (!u && a) return a(o, !0);if (i) return i(o, !0);var f = new Error("Cannot find module '" + o + "'");throw f.code = "MODULE_NOT_FOUND", f;
+                }var l = n[o] = { exports: {} };t[o][0].call(l.exports, function (e) {
+                    var n = t[o][1][e];return s(n ? n : e);
+                }, l, l.exports, e, t, n, r);
+            }return n[o].exports;
+        }var i = typeof require == "function" && require;for (var o = 0; o < r.length; o++) {
+            s(r[o]);
+        }return s;
+    }({ 1: [function (require, module, exports) {
+            var sliced = require("sliced"),
+                deffy = require("deffy");
+
+            /**
+             * bindy
+             * Creates an array of functions bound to the specified arrays.
+             *
+             * @name bindy
+             * @function
+             * @param {Array} arr An array of elements.
+             * @param {Function} fn The function to use for binding.
+             * @return {Array} An array of functions. Each function is bound to the current
+             * element from the input array.
+             */
+            module.exports = function bindy(arr, cb) {
+                arr = deffy(arr, []);
+                return arr.map(function (c, index, arr) {
+                    return function () {
+                        var args = sliced(arguments);
+                        args.unshift(c);
+                        return cb.apply(this, args);
+                    };
+                });
+            };
+        }, { "deffy": 2, "sliced": 6 }], 2: [function (require, module, exports) {
+            // Dependencies
+            var Typpy = require("typpy");
+
+            /**
+             * Deffy
+             * Computes a final value by providing the input and default values.
+             *
+             * @name Deffy
+             * @function
+             * @param {Anything} input The input value.
+             * @param {Anything|Function} def The default value or a function getting the
+             * input value as first argument.
+             * @param {Object|Boolean} options The `empty` value or an object containing
+             * the following fields:
+             *
+             *  - `empty` (Boolean): Handles the input value as empty field (`input || default`). Default is `false`.
+             *
+             * @return {Anything} The computed value.
+             */
+            function Deffy(input, def, options) {
+
+                // Default is a function
+                if (typeof def === "function") {
+                    return def(input);
+                }
+
+                options = Typpy(options) === "boolean" ? {
+                    empty: options
+                } : {
+                    empty: false
+                };
+
+                // Handle empty
+                if (options.empty) {
+                    return input || def;
+                }
+
+                // Return input
+                if (Typpy(input) === Typpy(def)) {
+                    return input;
+                }
+
+                // Return the default
+                return def;
+            }
+
+            module.exports = Deffy;
+        }, { "typpy": 3 }], 3: [function (require, module, exports) {
+            "use strict";
+
+            require("function.name");
+
+            /**
+             * Typpy
+             * Gets the type of the input value or compares it
+             * with a provided type.
+             *
+             * Usage:
+             *
+             * ```js
+             * Typpy({}) // => "object"
+             * Typpy(42, Number); // => true
+             * Typpy.get([], "array"); => true
+             * ```
+             *
+             * @name Typpy
+             * @function
+             * @param {Anything} input The input value.
+             * @param {Constructor|String} target The target type.
+             * It could be a string (e.g. `"array"`) or a
+             * constructor (e.g. `Array`).
+             * @return {String|Boolean} It returns `true` if the
+             * input has the provided type `target` (if was provided),
+             * `false` if the input type does *not* have the provided type
+             * `target` or the stringified type of the input (always lowercase).
+             */
+            function Typpy(input, target) {
+                if (arguments.length === 2) {
+                    return Typpy.is(input, target);
+                }
+                return Typpy.get(input, true);
+            }
+
+            /**
+             * Typpy.is
+             * Checks if the input value has a specified type.
+             *
+             * @name Typpy.is
+             * @function
+             * @param {Anything} input The input value.
+             * @param {Constructor|String} target The target type.
+             * It could be a string (e.g. `"array"`) or a
+             * constructor (e.g. `Array`).
+             * @return {Boolean} `true`, if the input has the same
+             * type with the target or `false` otherwise.
+             */
+            Typpy.is = function (input, target) {
+                return Typpy.get(input, typeof target === "string") === target;
+            };
+
+            /**
+             * Typpy.get
+             * Gets the type of the input value. This is used internally.
+             *
+             * @name Typpy.get
+             * @function
+             * @param {Anything} input The input value.
+             * @param {Boolean} str A flag to indicate if the return value
+             * should be a string or not.
+             * @return {Constructor|String} The input value constructor
+             * (if any) or the stringified type (always lowercase).
+             */
+            Typpy.get = function (input, str) {
+
+                if (typeof input === "string") {
+                    return str ? "string" : String;
+                }
+
+                if (null === input) {
+                    return str ? "null" : null;
+                }
+
+                if (undefined === input) {
+                    return str ? "undefined" : undefined;
+                }
+
+                if (input !== input) {
+                    return str ? "nan" : NaN;
+                }
+
+                return str ? input.constructor.name.toLowerCase() : input.constructor;
+            };
+
+            module.exports = Typpy;
+        }, { "function.name": 4 }], 4: [function (require, module, exports) {
+            "use strict";
+
+            var noop6 = require("noop6");
+
+            (function () {
+                var NAME_FIELD = "name";
+
+                if (typeof noop6.name === "string") {
+                    return;
+                }
+
+                try {
+                    Object.defineProperty(Function.prototype, NAME_FIELD, {
+                        get: function get() {
+                            var name = this.toString().trim().match(/^function\s*([^\s(]+)/)[1];
+                            Object.defineProperty(this, NAME_FIELD, { value: name });
+                            return name;
+                        }
+                    });
+                } catch (e) {}
+            })();
+
+            /**
+             * functionName
+             * Get the function name.
+             *
+             * @name functionName
+             * @function
+             * @param {Function} input The input function.
+             * @returns {String} The function name.
+             */
+            module.exports = function functionName(input) {
+                return input.name;
+            };
+        }, { "noop6": 5 }], 5: [function (require, module, exports) {
+            "use strict";
+
+            module.exports = function () {};
+        }, {}], 6: [function (require, module, exports) {
+
+            /**
+             * An Array.prototype.slice.call(arguments) alternative
+             *
+             * @param {Object} args something with a length
+             * @param {Number} slice
+             * @param {Number} sliceEnd
+             * @api public
+             */
+
+            module.exports = function (args, slice, sliceEnd) {
+                var ret = [];
+                var len = args.length;
+
+                if (0 === len) return ret;
+
+                var start = slice < 0 ? Math.max(0, slice + len) : slice || 0;
+
+                if (sliceEnd !== undefined) {
+                    len = sliceEnd < 0 ? sliceEnd + len : sliceEnd;
+                }
+
+                while (len-- > start) {
+                    ret[len - start] = args[len];
+                }
+
+                return ret;
+            };
+        }, {}] }, {}, [1])(1);
+});
+
 
   // Download file
   function download_file(url, cb) {
@@ -692,5 +954,5 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   var files = files_str.split(',');
 
   // Download the files in parallel, with a limit of 5 files at the time.
-  SameTimeLimit(bindy(files, download_file), 4, function () {});
+  sameTimeLimit(bindy(files, download_file), 4, function () {});
 });
