@@ -85,10 +85,24 @@ class MultiDownloadView(BrowserView):
     def render(self):
         return self.index()
 
+    def url_login(self):
+        """ Returns the login url """
+
+        portal_state = getMultiAdapter(
+            (self.context, self.request), name=u'plone_portal_state')
+        root_url = portal_state.portal_url()
+        login_url = root_url + "/login"
+
+        return login_url
+
     def __call__(self):
-        # name = "fileDownload"
-        # value = True
-        # self.request.response.setCookie(name, value)
+        is_anonymous = \
+            bool(getToolByName(
+                getSite(), 'portal_membership').isAnonymousUser())
+        if is_anonymous:
+            # Prevent downloading files as anonymous
+            return self.request.response.redirect(self.url_login())
+
         return self.render()
 
     @property
