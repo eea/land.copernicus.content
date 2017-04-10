@@ -6,12 +6,18 @@ def fileHandler(obj):
     """Set the cover for the IATFile object
     """
 
+    request = obj.REQUEST
+
     if obj.getContentType() != 'application/pdf':
         """ Can get cover only for pdf file
         """
         return
 
-    request = obj.REQUEST
+    # generate cover only when requested
+    cover_requested = obj.getField('auto_cover').getAccessor(obj)()
+    if not cover_requested:
+        return
+
     field = obj.getField('image')
     if field:
         pdfimageblob = field.getAccessor(obj)()

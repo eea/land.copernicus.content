@@ -135,12 +135,24 @@ class ATBlobModifier(object):
     implements(ISchemaModifier)
 
     def fiddle(self, schema):
+        schema['auto_cover'] = BooleanField(
+            "auto_cover",
+            schemata="default",
+            widget=atapi.BooleanWidget(
+                label=_("Generate cover automatically."),
+                description=_(
+                     "Select this to create a cover image based "
+                     "on the uplodaded file. Only available for "
+                     "PDF files."
+                )
+            )
+        )
         if not schema.get('image'):
             schema['image'] = ImageField("image",
                                          schemata="default",
                                          sizes=None,
                                          widget=atapi.ImageWidget(
-                                             label=_("cover"),
+                                             label=_("Cover"),
                                              description=_(
                                                  "Cover for Publication"))
                                          )
