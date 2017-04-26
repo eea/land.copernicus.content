@@ -939,7 +939,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
   // Download file
   function download_file(url, cb) {
-    console.log("Downloading " + url)
     return $.fileDownload(url).done(function() {
         cb();
     }).fail(function() {
@@ -954,5 +953,5 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   var files = files_str.split(',');
 
   // Download the files in parallel, with a limit of 5 files at the time.
-  sameTimeLimit(bindy(files, download_file), 4, function () {});
+  sameTimeLimit(bindy(files, download_file), 3, function () {});
 });
