@@ -1,23 +1,4 @@
 $(document).ready(function() {
-  // [TODO] Send the GA custom event for each file
-
-/*
-
- http://localhost:8081/copernicus/local/urban-atlas/urban-atlas-2012/@@redirect-download-url?selected=@barlad@tulcea@la-linea-de-la-concepcion@ceuta@alytus@aviles@torrevieja@santa-lucia-de-tirajana@alphen-aan-den-rijn@eastbourne@siauliai?selected=@barlad
-
-?selected=
-@barlad
-@tulcea
-@la-linea-de-la-concepcion
-@ceuta@alytus
-@aviles
-@torrevieja
-@santa-lucia-de-tirajana
-@alphen-aan-den-rijn
-@eastbourne@siauliai
-?selected=@barlad
-
-*/
 
 // sameTimeLimit (https://github.com/IonicaBizau/same-time-limit)
 "use strict";
@@ -940,6 +921,21 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   // Download file
   function download_file(url, cb) {
     return $.fileDownload(url).done(function() {
+        // GOOGLE ANALYTICS custom event
+        // Custom dimensions
+        ga('set', 'dimension1', professional_thematic_domain);
+        ga('set', 'dimension2', institutional_domain);
+        ga('set', 'dimension3', is_eionet_member);
+
+        // Track event
+        ga('send', {
+          'hitType': 'event',                 // Required.
+          'eventCategory': 'page',            // Required.
+          'eventAction': 'landfile_download', // Required.
+          'eventLabel': land_item_title,
+          'eventValue': 1
+        });
+
         cb();
     }).fail(function() {
         cb();
