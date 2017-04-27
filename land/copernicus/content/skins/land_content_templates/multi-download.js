@@ -942,9 +942,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     });
   }
 
-  /* [TODO] Upgrade step to rewrite all these links or replace them in python code? */
-  files_str = files_str.split("https://cws-download.eea.europa.eu").join("http://demo.copernicus.eea.europa.eu/filedownload");
-
   // Get the list of files
   var files = files_str.split(',');
 

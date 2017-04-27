@@ -122,7 +122,14 @@ class MultiDownloadView(BrowserView):
                 contentFilter={'portal_type': 'LandFile'})
             if x.id in selected_landfiles]
 
-        files = [x.getObject().remoteUrl for x in selected_landfiles_brains]
+        # In apache settings we have use proxy to redirect
+        # website/filedownload/file_path to
+        # https://cws-download.eea.europa.eu/file_path
+        # but in landfiles we have saved the link to cws-download
+        ORIGINAL_DOMAIN = "https://cws-download.eea.europa.eu"
+        PROXY_DOMAIN = api.portal.get().absolute_url() + "/filedownload"
+        files = [x.getObject().remoteUrl.replace(
+            ORIGINAL_DOMAIN, PROXY_DOMAIN) for x in selected_landfiles_brains]
 
         # Example: /multi-download?selected=@id1@id2
 

@@ -23,16 +23,6 @@
 
         <p>Downloading files. Please wait...</p>
 
-        <!-- [TODO] Remove
-        <ul>
-          <li>land_item_title: <span tal:content="python:land_item_title"></span></li>
-          <li>professional_thematic_domain: <span tal:content="python:professional_thematic_domain"></span></li>
-          <li>institutional_domain: <span tal:content="python:institutional_domain"></span></li>
-          <li>is_eionet_member: <span tal:content="python:is_eionet_member"></span></li>
-          <li>files_str: <span tal:content="python:files_str"></span></li>
-        </ul>
-        -->
-
         <script src="./jquery.fileDownload.min.js"></script>
         <script src="./multi-download.js"></script>
 
