@@ -8,10 +8,122 @@
 
   <metal:content-core fill-slot="content-core">
     <metal:main_macro define-macro="content-core">
-      <h1>Search by tags</h1>
-      <p>Search results: <span tal:replace="python:view.do_search().get('results')"></span></p>
 
-      <!-- <script src="./script.js"></script> -->
+
+
+<style type="text/css">
+  div[data-diazo=insitu-news-list],
+  div[data-diazo=insitu-events-list] {
+    display: none;
+  }
+
+</style>
+
+
+
+<div id="search-app" class="container" ng-app="searchApp" ng-controller="searchController as search">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+
+      <h1 class="title">{{search.title[search.language]}}</h1>
+      <h2 class="title">{{search.description[search.language]}}</h2>
+
+      <div id="search" class="container">
+
+        <h1>Search by tags</h1>
+        <p>Search results: <span tal:replace="python:view.do_search().get('results')"></span></p>
+
+        <!-- SEARCH RESULTS -->
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="search-item" ng-repeat="item in search.items">
+              <div class="item">
+                {{item.id}}
+                <a href="{{item.url}}" target="_blank">{{item.title}}</a>
+                {{item.tags}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SEARCH CRITERIA -->
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <button class="btn btn-default" ng-click="search.toggle_tag('tag1')">Tag1</button>
+            <button class="btn btn-default" ng-click="search.toggle_tag('tag2')">Tag2</button>
+            <button class="btn btn-default" ng-click="search.toggle_tag('tag3')">Tag3</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+angular.module('searchApp', [])
+  .controller('searchController', function() {
+    var app = this;
+
+    app.items = [
+      {
+        id: '01',
+        title: 'Title here 1',
+        url: 'http://www.google.com',
+        tags: ['tag1', 'tag2', 'tag3']
+      },
+      {
+        id: '02',
+        title: 'Title here 2',
+        url: 'http://www.google.com',
+        tags: ['tag2', 'tag3']
+      },
+      {
+        id: '03',
+        title: 'Title here 3',
+        url: 'http://www.google.com',
+        tags: ['tag3']
+      }
+    ];
+
+    app.selected_tags = [];
+
+    app.is_selected = function(tag_name) {
+      // Return true if the tag is selected as criteria for search
+      var result = false;
+      angular.forEach(app.selected_tags, function(a_tag_name) {
+        if(a_tag_name == tag_name) {
+          result = true;
+        }
+      });
+      return result;
+    }
+
+    app.add_tag = function(tag_name) {
+      // Add a given tag in the selected tags
+      app.selected_tags.push(tag_name);
+    }
+
+    app.remove_tag = function(tag_name) {
+      // Remove a given tag from the selected tags
+      app.selected_tags.splice(app.selected_tags.indexOf(tag_name), 1);
+    }
+
+    app.toggle_tag = function(tag_name) {
+      if(app.is_selected(tag_name)) {
+        app.remove_tag(tag_name);
+      } else {
+        app.add_tag(tag_name);
+      }
+      alert(app.selected_tags);
+    }
+
+  });
+</script>
+
+
 
     </metal:main_macro>
   </metal:content-core>
