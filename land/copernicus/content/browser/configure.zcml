@@ -50,12 +50,12 @@
     template="templates/download-land-file.pt"
     />
 
-  <browser:page
-    name="tpdb"
-    class=".views.GoPDB"
-    permission="zope2.View"
-    for="*"
-    />
+  <!-- <browser:page -->
+  <!--   name="tpdb" -->
+  <!--   class=".views.GoPDB" -->
+  <!--   permission="cmf.ManagePortal" -->
+  <!--   for="*" -->
+  <!--   /> -->
 
   <browser:page
     name="export_users_xls"
