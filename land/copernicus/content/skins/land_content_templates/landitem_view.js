@@ -48,7 +48,7 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
   return b.localeCompare(a);
 };
 
-$(document).ready(function() {
+(function(){
 
   function user_seems_to_be_anonymous() {
     /* Used only to prevent opening multiple unnecessary login tabs. */
@@ -140,25 +140,6 @@ $(document).ready(function() {
     var click_event = document.createEvent("MouseEvents");
     click_event.initEvent("click", true /* bubble */, true /* cancelable */);
     button.dispatchEvent(click_event);
-  }
-
-  function download_all() {
-    /* Start download all files */
-    check_all_items();
-    save_selected_items_in_url();
-    var anon = user_seems_to_be_anonymous();
-    var download_buttons = $('.download-button');
-    for(var i = 0; i < download_buttons.length; i++) {
-      var button = download_buttons[i];
-      if(anon){
-        /* A single login tab is neccessary. */
-        button.removeAttribute("target");
-        redirect_click(button);
-        break;
-      } else {
-        button_click(button);
-      }
-    }
   }
 
   function download_selected() {
@@ -303,7 +284,7 @@ $(document).ready(function() {
 
   interpret_url_params_if_any();  // set by RedirectDownloadUrl class
 
-  $('#data-table-download').dataTable({
+  var table = $('#data-table-download').dataTable({
     "order": [[ 1, "asc" ]],
     "columnDefs": [
       {
@@ -327,26 +308,20 @@ $(document).ready(function() {
         "targets": 'special-chars-sort',
         "type": 'special-chars-sort'
       }
-    ],
-    "scrollY": "500px",
-    "scrollCollapse": true,
-    "paging": false
+    ]
   });
 
-  replace_missing_or_fix_short();
+  $('tr', table).on('click', 'td', function(){
+    var role = this.getAttribute('data-role');
+    var skip = ['checkbox', 'download'];
+    if (skip.indexOf(role) === -1) {
+      this.parentElement
+        .querySelector('.checkbox-select-item')
+        .click();
+    }
+  });
+
   fix_badges_for_both_raster_vector();
-
-  // tr hover
-  $('.download-button').hide();
-  $('#data-table-download > tbody > tr').on("mouseenter", function() {
-    $(this).find('a.download-button').show();
-    $(this).find('.download-gray-icon').hide();
-  });
-
-  $('#data-table-download > tbody > tr').on("mouseleave", function() {
-    $(this).find('a.download-button').hide();
-    $(this).find('.download-gray-icon').show();
-  });
 
   // accept (un)checked
   $("#checkbox-accept-non-validated").change(function() {
@@ -362,25 +337,10 @@ $(document).ready(function() {
     refresh_counter();
   });
 
-  // (un)select all items
-  $(".checkbox-select-all").change(function() {
-    if(this.checked) {
-      check_all_items();
-    } else {
-      uncheck_all_items();
-    }
-    refresh_counter();
-  });
-
   // DOWNLOAD
   $('#button-download-selected').on("click", function(evt) {
     evt.preventDefault();
     download_selected();
-  });
-
-  $('#button-download-all').on("click", function(evt) {
-    evt.preventDefault();
-    download_all();
   });
 
   $('.download-button').on("click", function(evt) {
@@ -397,4 +357,4 @@ $(document).ready(function() {
       save_selected_items_in_url();
     }
   });
-});
+})();

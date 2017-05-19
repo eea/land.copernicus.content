@@ -1,5 +1,5 @@
 .loading_message {
-  height: 450px; 
+  height: 450px;
   width: 900px;
   line-height: 450px;
   position: absolute;
@@ -192,9 +192,6 @@
 #data-table-download {
   border-collapse: collapse;
   background-color: white;
-  table-layout: fixed;
-  width: 200px;
-  margin-bottom: 0px !important;
 }
 
 #data-table-download thead>tr>th,
@@ -203,7 +200,6 @@
 }
 
 #data-table-download td, th {
-  padding: 15px !important;
   overflow: hidden;
 }
 
@@ -256,7 +252,7 @@ span.raster {
 .download-button {
   margin-top: -3px;
   margin-bottom: -3px;
-  background-color: #0A70B2;
+  background-color: #BBB;
   color: white !important;
   text-decoration: none !important;
   padding-top: 5px;
@@ -266,8 +262,15 @@ span.raster {
   border: none;
 }
 
-.download-button: hover {
+tr:hover .download-button.disabled,
+.download-button.disabled:hover {
+  background-color: #BBB;
+}
+
+tr:hover .download-button,
+.download-button:hover {
   color: #fff !important;
+  background-color: #0A70B2;
 }
 
 #data-table-download_info {
@@ -372,10 +375,6 @@ span.raster {
   display: none; /* Fix Remove "Filed under" section */
 }
 
-.download-gray-icon {
-  color: #CCC;
-}
-
 .text-centered {
   text-align: center;
 }
@@ -423,10 +422,6 @@ span.raster {
   background-color: #F2F2F2;
   border-color: #D8D8D8;
   color: #BBB !important;
-}
-
-.download-button.disabled {
-  background-color: #BBB;
 }
 
 #button-download-selected {
