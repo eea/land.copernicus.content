@@ -1,0 +1,19 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+  <metal:description fill-slot="content-description" />
+
+  <metal:content-core fill-slot="content-core">
+    <metal:main_macro define-macro="content-core">
+      <h1>Search by tags</h1>
+      <p>Search results: <span tal:replace="python:view.do_search().get('results')"></span></p>
+
+      <!-- <script src="./script.js"></script> -->
+
+    </metal:main_macro>
+  </metal:content-core>
+</body>
+</html>

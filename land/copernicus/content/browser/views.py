@@ -69,6 +69,7 @@ class GoPDB(BrowserView):
 def remoteUrl_exists(location):
     try:
         res = subprocess.check_call(['/usr/bin/curl', '-I', '-f', location])
+        res = res
         return True
     except subprocess.CalledProcessError:
         return False
@@ -158,6 +159,23 @@ class RedirectDownloadUrl(BrowserView):
                         self.url_profile_error())
             else:
                 return self.request.response.redirect(self.url_missing_file())
+
+
+class SearchByTags(BrowserView):
+    """ Search by Tags section
+    """
+    index = ViewPageTemplateFile("templates/search-by-tags.pt")
+
+    def render(self):
+        return self.index()
+
+    def __call__(self):
+        return self.render()
+
+    def do_search(self):
+        results = [1, 2, 3, 4, 5]
+
+        return {'results': results}
 
 
 class DownloadLandFileView(BrowserView):
@@ -257,7 +275,7 @@ class ExportUsersXLS(BrowserView):
 
                 try:
                     value = value.replace(tzinfo=None)
-                except:
+                except Exception:
                     pass
 
                 if isinstance(value, DateTime):
