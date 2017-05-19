@@ -21,40 +21,34 @@
 
 
 
-<div id="search-app" class="container" ng-app="searchApp" ng-controller="searchController as search">
+<div id="search-app" class="container" ng-app="searchApp" ng-controller="searchController as app">
   <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 
-      <h1 class="title">{{search.title[search.language]}}</h1>
-      <h2 class="title">{{search.description[search.language]}}</h2>
+      <h1>Search by tags</h1>
+      <p>Search results: <span tal:replace="python:view.do_search().get('results')"></span></p>
 
-      <div id="search" class="container">
-
-        <h1>Search by tags</h1>
-        <p>Search results: <span tal:replace="python:view.do_search().get('results')"></span></p>
-
-        <!-- SEARCH RESULTS -->
-        <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="search-item" ng-repeat="item in search.items">
-              <div class="item">
-                {{item.id}}
-                <a href="{{item.url}}" target="_blank">{{item.title}}</a>
-                {{item.tags}}
-              </div>
+      <!-- SEARCH RESULTS -->
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="search-item" ng-repeat="item in app.get_results()">
+            <div class="item">
+              {{item.id}}
+              <a href="{{item.url}}" target="_blank">{{item.title}}</a>
+              {{item.tags}}
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- SEARCH CRITERIA -->
-        <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <button class="btn btn-default" ng-click="search.toggle_tag('tag1')">Tag1</button>
-            <button class="btn btn-default" ng-click="search.toggle_tag('tag2')">Tag2</button>
-            <button class="btn btn-default" ng-click="search.toggle_tag('tag3')">Tag3</button>
-          </div>
+      <!-- SEARCH CRITERIA -->
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <button class="btn btn-default" ng-click="app.toggle_tag('tag1')">Tag1</button>
+          <button class="btn btn-default" ng-click="app.toggle_tag('tag2')">Tag2</button>
+          <button class="btn btn-default" ng-click="app.toggle_tag('tag3')">Tag3</button>
         </div>
       </div>
     </div>
@@ -88,9 +82,29 @@ angular.module('searchApp', [])
       }
     ];
 
-    app.selected_tags = [];
+    app.selected_tags = ['tag3'];
 
-    app.is_selected = function(tag_name) {
+    app.superset_includes_subset = function arrayContainsArray (superset, subset) {
+      return subset.every(function (value) {
+        return (superset.indexOf(value) >= 0);
+      });
+    }
+
+    app.item_has_tags = function(item, tags) {
+      return app.superset_includes_subset(item.tags, tags);
+    }
+
+    app.get_results = function() {
+      result = [];
+      angular.forEach(app.items, function(an_item) {
+        if(app.item_has_tags(an_item, app.selected_tags)) {
+          result.push(an_item);
+        }
+      });
+      return result;
+    }
+
+    app.tag_is_selected = function(tag_name) {
       // Return true if the tag is selected as criteria for search
       var result = false;
       angular.forEach(app.selected_tags, function(a_tag_name) {
@@ -112,7 +126,7 @@ angular.module('searchApp', [])
     }
 
     app.toggle_tag = function(tag_name) {
-      if(app.is_selected(tag_name)) {
+      if(app.tag_is_selected(tag_name)) {
         app.remove_tag(tag_name);
       } else {
         app.add_tag(tag_name);
