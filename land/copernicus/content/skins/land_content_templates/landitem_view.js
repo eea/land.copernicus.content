@@ -50,240 +50,6 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
 
 (function(){
 
-  function user_seems_to_be_anonymous() {
-    /* Used only to prevent opening multiple unnecessary login tabs. */
-    return $("#personaltools-login").length === 1;
-  }
-
-  function is_validated_dataset() {
-    /* Returns true if validated dataset */
-    return $("#checkbox-accept-non-validated").length === 0;
-  }
-
-  function add_not_validated_tag() {
-    /* Add a custom or default text for not validated dataset after title */
-    $("#parent-fieldname-title").css("display", "inline");
-    var not_validated_text = $("#not-validated-custom-text").text();
-    $("#not-validated-custom-text").hide();
-    if(not_validated_text.length < 5) {
-      not_validated_text = "Not yet validated.";
-    }
-    $("#parent-fieldname-title").after("<div class='not-validated-container'><span class='not-validated-tag'>" + not_validated_text + "</span></div>");
-
-    // Fix print button position problem
-    $(".printButton").css({"position": "relative", "top": "-50px"});
-  }
-
-  function disable_download_buttons() {
-    /* Disable download, download selected and download all buttons */
-    $("#button-download-selected").attr("disabled", "disabled");
-    $("#button-download-all").attr("disabled", "disabled");
-    $(".download-button").addClass("disabled");
-  }
-
-  function enable_download_buttons() {
-    /* Enable download, download selected and download all buttons */
-    $("#button-download-selected").removeAttr("disabled");
-    $("#button-download-all").removeAttr("disabled");
-    $(".download-button").removeClass("disabled");
-  }
-
-  function get_number_checked_items() {
-    /* Count checked files for download */
-    var number_checked = $('.checkbox-select-item:checked').size();
-    return number_checked;
-  }
-
-  function check_all_items() {
-    /* Prepare download all */
-    $('.checkbox-select-item').prop('checked', true);
-  }
-
-  function uncheck_all_items() {
-    /* Reset selected files for download */
-    $('.checkbox-select-item').prop('checked', false);
-  }
-
-  function refresh_counter() {
-    /* Refresh counter in download selected button */
-    $("#number-checked").text(get_number_checked_items());
-  }
-
-  function save_selected_items_in_url() {
-    /* For after login. Download tab is opened and these items will be checked automatically. */
-    var selected = "?selected=";
-    $('.checkbox-select-item').each(function(i) {
-      if(this.checked) {
-        selected += '@' + this.getAttribute("item_id");
-      }
-    });
-
-    $('.download-button').each(function() {
-      var old_href = $(this).attr("href");
-      $(this).attr("href", old_href + selected);
-    });
-  }
-
-  function button_click(button) {
-    /* Open button href in a new tab */
-    if(button.click) {
-      button.click();
-    } else {
-      /* Used instead of button.click() to solve Safari problem:
-      TypeError: 'undefined' is not a function (evaluating 'button.click()') */
-      window.open($(button).attr("href"), '_blank');
-    }
-  }
-
-  function redirect_click(button) {
-    /* Redirect to button href. Works on Safari, too. */
-    var click_event = document.createEvent("MouseEvents");
-    click_event.initEvent("click", true /* bubble */, true /* cancelable */);
-    button.dispatchEvent(click_event);
-  }
-
-  function download_selected() {
-    /* Start download selected files */
-    save_selected_items_in_url();
-    var anon = user_seems_to_be_anonymous();
-    var download_buttons = $('.checkbox-select-item:checked')
-                           .closest('tr').find('.download-button');
-
-    for(var i = 0; i < download_buttons.length; i++) {
-      var button = download_buttons[i];
-      if(anon) {
-        /* A single login tab is neccessary. */
-        button.removeAttribute("target");
-        redirect_click(button);
-        break;
-      } else {
-        button_click(button);
-      }
-    }
-  }
-
-  function auto_accept_not_validated() {
-    /* User already checked it before login */
-    $("#checkbox-accept-non-validated").prop("checked", true);
-    enable_download_buttons();
-  }
-
-  function auto_select_checkboxes(checkboxes_indexes_array) {
-    /* Prepare auto download after login */
-    $('.checkbox-select-item').each(function(i) {
-      var item_id = this.getAttribute("item_id");
-      if($.inArray(item_id.toString(), checkboxes_indexes_array) != -1) {
-        $(this).prop("checked", true);
-      }
-    });
-  }
-
-  function display_portal_message(message_text, message_type) {
-    /* Display message at the top */
-    $('<dl class="portalMessage ' + message_type + '"><dt>Error</dt><dd>' +
-      message_text + '</dd></dl>').insertBefore('.documentFirstHeading');
-  }
-
-  function display_errors_if_any(download_tab_param) {
-  // Example: ?fieldsetlegend-download=true-error-not-found-LandFile3
-  // -> "LandFile3 cannot be downloaded. Broken link."
-    var error_missing_file = "true-error-not-found-";
-    if (download_tab_param.indexOf(error_missing_file) >= 0) {
-      var land_file_title = download_tab_param.substring(error_missing_file.length, download_tab_param.length);
-      if (land_file_title.length == 0) {
-        land_file_title = "This land file"
-      }
-
-      display_portal_message(decodeURI(land_file_title) + " cannot be downloaded. Link is broken.", "error");
-    }
-
-  // Example: ?fieldsetlegend-download=true-error-profile-not-complete
-  // -> "You can't download files until you update your profile with missing thematic and institutional domain info."
-    var error_missing_file = "true-error-profile-not-complete";
-
-    if (download_tab_param.indexOf(error_missing_file) >= 0) {
-      display_portal_message("You can't download files until you <a href=" + portal_url + "/@@personal-information" + "><b>update your profile</b></a> with missing thematic and institutional domain info.", "error");
-    }
-  }
-
-  function download_auto_selected(download_tab_param) {
-  // Example in URL: fieldsetlegend-download=true-selected-@clc_2006@landitem_new => autoselected by id
-  // "clc_2006" and "landitem_new" land items
-    var auto_selected_checkboxes_indexes = download_tab_param.split("@");
-    auto_select_checkboxes(auto_selected_checkboxes_indexes);
-    refresh_counter();
-    auto_accept_not_validated();
-    download_selected();
-  }
-
-  function interpret_url_params_if_any() {
-  // Check parameter in url for after login case or error missing land file
-  // Auto open download tab and download if any auto selected.
-
-    function get_url_parameter(sParam) {
-        var sPageURL = window.location.search.substring(1);
-        var sURLVariables = sPageURL.split('&');
-        for (var i = 0; i < sURLVariables.length; i++) {
-            var sParameterName = sURLVariables[i].split('=');
-            if (sParameterName[0] == sParam) {
-                return sParameterName[1];
-            }
-        }
-    }
-
-    var download_tab_param = get_url_parameter('fieldsetlegend-download');
-    if (download_tab_param != undefined) {
-      $("#fieldsetlegend-download").click();
-      download_auto_selected(download_tab_param);
-      display_errors_if_any(download_tab_param);
-    }
-  }
-
-  function replace_missing_or_fix_short() {
-    /* Hide empty datatable or fix its height for less content. */
-    var number_of_items = $('.checkbox-select-item').length;
-
-    if(number_of_items < 10) {
-      if(number_of_items == 0) {
-        $("#datatable-container").hide();
-        $("#disclaimer-download-container").hide();
-      } else {
-
-        /* Fix table height */
-        var table_height = number_of_items * 50 + 10;
-        $('.dataTables_scrollBody').css('height', table_height);
-      }
-    }
-  }
-
-  function fix_badges_for_both_raster_vector() {
-    /* If a file in datatable has both types raster and vector we fix badge design here. */
-    $('span.vector-raster, span.raster-vector').each(function() {
-      $(this).html("<span class='raster'>Raster</span> <span class='vector'>Vector</span>");
-    });
-  }
-
-  function init_disabled_buttons_behaviour() {
-    /* If a disabled download button is clicked focus checkbox to accept not validated */
-    $(".download-button.disabled").on("click", function() {
-      $("#checkbox-accept-non-validated").focus();
-      $('#text-accept-non-validated').animate({backgroundColor: '#FDA42C'}, 'slow');
-      $('#text-accept-non-validated').animate({backgroundColor: '#fff'}, 'slow');
-    });
-  }
-
-  // INIT
-  if (!is_validated_dataset()) {
-    disable_download_buttons();
-    init_disabled_buttons_behaviour();
-    add_not_validated_tag();
-  } else {
-    enable_download_buttons();
-    $("#not-validated-custom-text").hide();
-  }
-
-  interpret_url_params_if_any();  // set by RedirectDownloadUrl class
-
   var table = $('#data-table-download').dataTable({
     "order": [[ 1, "asc" ]],
     "columnDefs": [
@@ -311,7 +77,7 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
     ]
   });
 
-  $('tr', table).on('click', 'td', function(){
+  table.$('td').on('click', function(){
     var role = this.getAttribute('data-role');
     var skip = ['checkbox', 'download'];
     if (skip.indexOf(role) === -1) {
@@ -321,40 +87,28 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
     }
   });
 
-  fix_badges_for_both_raster_vector();
+  table.$('.download-button').on('click', function(evt) {
+    evt.preventDefault();
+    var chk_accept = $("#checkbox-accept-non-validated");
+    if (!chk_accept.checked) {
+      chk_accept.focus();
+      $('#text-accept-non-validated').fadeOut().fadeIn();
+    }
+  });
+
+  table.$(".checkbox-select-item").change(function() {
+    var selected = table.$('.checkbox-select-item:checked');
+    $("[data-role='number-checked']").text(selected.length);
+  });
+
+  /* If a file in datatable has both types raster and vector we fix badge design here. */
+  table.$('span.vector-raster, span.raster-vector').each(function() {
+    $(this).html("<span class='raster'>Raster</span> <span class='vector'>Vector</span>");
+  });
 
   // accept (un)checked
   $("#checkbox-accept-non-validated").change(function() {
-    if(this.checked) {
-      enable_download_buttons();
-    } else {
-      disable_download_buttons();
-    }
+    table.$(".download-button").toggleClass('disabled', !this.checked);
   });
 
-  // item (un)checked
-  $(".checkbox-select-item").change(function() {
-    refresh_counter();
-  });
-
-  // DOWNLOAD
-  $('#button-download-selected').on("click", function(evt) {
-    evt.preventDefault();
-    download_selected();
-  });
-
-  $('.download-button').on("click", function(evt) {
-    if($(this).hasClass("disabled")) {
-      evt.preventDefault();
-    } else {
-      var anon = user_seems_to_be_anonymous();
-      if(anon) {
-        /* A single login tab is neccessary. */
-        this.removeAttribute("target");
-      }
-      uncheck_all_items();
-      $(this).parent().parent().find('.checkbox-select-item').prop("checked", true);
-      save_selected_items_in_url();
-    }
-  });
 })();

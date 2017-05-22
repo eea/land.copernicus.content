@@ -160,51 +160,18 @@
 }
 
 
-/* Download tab: datatable styles */
-#datatable-container {
-  margin-top: -26px;
-  overflow-y: visible;
-}
+/* Download tab styles */
 
-.dataTables_scrollHeadInner, .dataTable {
-  width: 100% !important;
-}
-
-.dataTables_scrollBody #data-table-download thead {
-  display: none;
-}
-
-#datatable-container table.dataTable thead .sorting_asc {
-  background: url("http://cdn.datatables.net/1.10.0/images/sort_asc.png") no-repeat center left !important;
-  /* Fix move sort icon to left */
-}
-
-#datatable-container table.dataTable thead .sorting_desc {
-  background: url("http://cdn.datatables.net/1.10.0/images/sort_desc.png") no-repeat center left !important;
-  /* Fix move sort icon to left */
-}
-
-#datatable-container table.dataTable thead .sorting {
-  background: url("http://cdn.datatables.net/1.10.0/images/sort_both.png") no-repeat center left !important;
-  /* Fix move sort icon to left */
-}
-
-#data-table-download {
-  border-collapse: collapse;
-  background-color: white;
-}
-
-#data-table-download thead>tr>th,
-.dataTables_scrollHeadInner .dataTable thead>tr>th {
-  padding-left: 16px !important;
-}
-
-#data-table-download td, th {
-  overflow: hidden;
-}
-
-#data-table-download tbody tr td:first-child {
-  width: 35px;
+#fieldset-download #download-info {
+  border: 1px solid #BFD630;
+  border-radius: 10px;
+  background: #fff;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 3px;
+  margin-top:-10px;
+  margin-bottom: 25px;
 }
 
 #data-table-download .border-bottom-only,
@@ -274,29 +241,24 @@ tr:hover .download-button,
 }
 
 #data-table-download_info {
-  padding-top: 3px;
-  padding-left: 15px;
-  float: left;
+  display: none;
 }
 
-#data-table-download_length {
-  float: left;
-  padding-left: 15px;
-  padding-top: 15px;
-  padding-bottom: 15px;
+.not-validated-tag {
+  position: relative;
+  bottom: 2px;
+  display: inline;
+  background-color: #323232;
+  color: white;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  border-radius: 3px;
 }
 
-#data-table-download_filter {
-  float: right;
-  padding-top: 15px;
-  padding-right: 15px;
-}
-
-#data-table-download_paginate {
-  padding-top: 3px;
-  padding-right: 15px;
-  padding-bottom: 15px;
-  float: right;
+.download-button i {
+  color: white !important;
 }
 
 
@@ -379,72 +341,3 @@ tr:hover .download-button,
   text-align: center;
 }
 
-#data-table-download_info {
-  display: none;
-}
-
-#disclaimer-download-container {
-  margin-top: 15px;
-  padding-left: 25%;
-  padding-right: 25%;
-}
-
-#checkbox-accept-non-validated {
-  float: left;
-  width: 7%;
-  margin-top: 3px;
-}
-
-#text-accept-non-validated {
-  float: right;
-  width: 93%;
-  margin-bottom: 10px;
-}
-
-#button-download-selected, #button-download-all {
-  background-color: #F2F2F2;
-  width: 49%;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border: 1px solid #D8D8D8;
-  font-weight: bold;
-  color: #595959;
-  border-radius: 3px;
-}
-
-#button-download-selected:hover, #button-download-all:hover {
-  background-color: #0870AF;
-  border: 1px solid #0063A8;
-  color: #fff;
-}
-
-#button-download-selected:disabled, #button-download-all:disabled {
-  background-color: #F2F2F2;
-  border-color: #D8D8D8;
-  color: #BBB !important;
-}
-
-#button-download-selected {
-  float: left;
-}
-
-#button-download-all {
-  float: right;
-}
-
-.not-validated-tag {
-  position: relative;
-  bottom: 2px;
-  display: inline;
-  background-color: #323232;
-  color: white;
-  padding-left: 7px;
-  padding-right: 7px;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  border-radius: 3px;
-}
-
-.download-button i {
-  color: white !important;
-}

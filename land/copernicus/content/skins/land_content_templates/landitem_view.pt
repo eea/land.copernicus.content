@@ -4,6 +4,15 @@
       i18n:domain="plone">
 
 <body>
+<metal:title fill-slot="content-title">
+ <h1 metal:use-macro="context/kss_generic_macros/macros/generic_title_view"></h1>
+ <div class='not-validated-container'>
+   <span class='not-validated-tag'>
+      <span tal:define="not_validated_custom python: context.getField('notValidatedCustomText').getAccessor(context)()"
+            tal:replace="structure not_validated_custom">
+   </span>
+ </div>
+</metal:title>
 
 <metal:description fill-slot="content-description" />
 
@@ -20,13 +29,6 @@
       @import url("./eea-tooltips.css");
       @import url("./landitem_view.css");
     </style>
-
-    <!-- custom label text for not validated datasets -->
-    <span id="not-validated-custom-text">
-      <span tal:define="not_validated_custom python: context.getField('notValidatedCustomText').getAccessor(context)()"
-            tal:replace="structure not_validated_custom">
-      </span>
-    </span>
 
     <dl class="enableFormTabbing"
         tal:define="membership python:context.portal_membership;
@@ -112,8 +114,7 @@
                                          fileCategories python: item.getField('fileCategories').getAccessor(item)() or [{}];
                                          fileCategories python: {d.get('name', ''): d.get('value', '') for d in fileCategories};">
                       <td class="border-top-only" data-role="checkbox">
-                        <input class="checkbox-select-item" type="checkbox" onclick="console.log(this)"
-                          tal:attributes="value python:item.getId()" />
+                        <input class="checkbox-select-item" type="checkbox" tal:attributes="value python:item.getId()" />
                       </td>
 
                       <td class="border-top-only" tal:content="item/Title"></td>
@@ -127,7 +128,7 @@
                       <td class="border-top-only" tal:content="item/getFileSize">70.14 MB</td>
                       <td class="border-top-only text-centered no-sorting-icons" data-role="download">
                         <a tal:attributes="href python: item.absolute_url() + '/@@redirect-download-url'"
-                           href="" class="download-button" target="_blank">
+                           href="" class="download-button disabled" target="_blank">
                            <i class="fa fa-download"></i>
                         </a>
                       </td>
@@ -139,19 +140,27 @@
             </table>
           </div>
 
+          <hr />
+
           <div id="disclaimer-download-container"
                tal:define="isValidateDataset python:context.getField('isValidatedDataset').getAccessor(context)()">
             <form id="disclaimer-download-form" action="">
+              <p>
+                You selected <strong><span data-role="number-checked">0</span> files</strong> for download. The limit
+                is <strong>20 files</strong>. Please fill in your email to send you the download link.
+              </p>
+              <input type="email" name="email" tal:attributes="placeholder python:user.getProperty('email', '')" required />
+              <button id="button-download-selected">Send</button>
               <tal:condition condition="python:isValidateDataset is not True">
-                <input id="checkbox-accept-non-validated" type="checkbox" name="accept-non-validated" value="accept-non-validated" />
-                <label for="checkbox-accept-non-validated" id="text-accept-non-validated">
+              <hr />
+              <div id="text-accept-non-validated">
+                <input id="checkbox-accept-non-validated" type="checkbox" name="accept-non-validated" value="accept-non-validated" required />
+                <label for="checkbox-accept-non-validated">
                   I am aware that I am downloading non-validated data and I accept to not distribute the
                   information contained in these files or the files themselves any further.
                 </label>
+              </div>
               </tal:condition>
-              <button id="button-download-selected">Download selected items
-                (<span id="number-checked">0</span>)
-              </button>
             </form>
           </div>
 
