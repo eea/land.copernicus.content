@@ -50,7 +50,9 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
 
 (function(){
 
-  var table = $('#data-table-download').dataTable({
+  var TABLE = $('#data-table-download').dataTable({
+    "pageLength": 20,
+    "lengthMenu": [10, 20, 50, 100],
     "order": [[ 1, "asc" ]],
     "columnDefs": [
       {
@@ -77,38 +79,61 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
     ]
   });
 
-  table.$('td').on('click', function(){
+
+  var table_download_buttons = TABLE.$('.download-button');
+  var table_checkboxes = TABLE.$(".checkbox-select-item");
+  var elems_selected_counter = $("[data-role='number-checked']");
+  var chk_accept = $("#checkbox-accept-non-validated");
+  var elem_text_accept = $('#text-accept-non-validated');
+  var elem_limit = $("[data-role='download-limit']");
+
+  var FORM = $('#download-form');
+  var LIMIT = parseInt(elem_limit.text(), 10);
+
+  FORM.on('submit', function(evt) {
+    evt.preventDefault();
+    var selected = table_checkboxes.filter(':checked');
+    console.log(selected.serialize() + '&' + FORM.serialize());
+  });
+
+  TABLE.$('td').on('click', function(){
     var role = this.getAttribute('data-role');
     var skip = ['checkbox', 'download'];
     if (skip.indexOf(role) === -1) {
-      this.parentElement
-        .querySelector('.checkbox-select-item')
-        .click();
+      var chk = this.parentElement.querySelector('.checkbox-select-item');
+      if (chk) {
+        chk.click();
+      }
     }
   });
 
-  table.$('.download-button').on('click', function(evt) {
-    evt.preventDefault();
-    var chk_accept = $("#checkbox-accept-non-validated");
-    if (!chk_accept.checked) {
+  table_download_buttons.on('click', function(evt) {
+    if (!chk_accept.is(':checked')) {
+      evt.preventDefault();
       chk_accept.focus();
-      $('#text-accept-non-validated').fadeOut().fadeIn();
+      elem_text_accept.fadeOut().fadeIn();
     }
   });
 
-  table.$(".checkbox-select-item").change(function() {
-    var selected = table.$('.checkbox-select-item:checked');
-    $("[data-role='number-checked']").text(selected.length);
+  table_checkboxes.change(function(evt) {
+    var selected = table_checkboxes.filter(':checked');
+    elems_selected_counter.text(selected.length);
+    if (selected.length >= LIMIT) {
+      table_checkboxes.filter(':not(:checked)').attr('disabled', 'disabled');
+    }
+    else {
+      table_checkboxes.attr('disabled', null);
+    }
   });
 
   /* If a file in datatable has both types raster and vector we fix badge design here. */
-  table.$('span.vector-raster, span.raster-vector').each(function() {
+  TABLE.$('span.vector-raster, span.raster-vector').each(function() {
     $(this).html("<span class='raster'>Raster</span> <span class='vector'>Vector</span>");
   });
 
   // accept (un)checked
-  $("#checkbox-accept-non-validated").change(function() {
-    table.$(".download-button").toggleClass('disabled', !this.checked);
+  chk_accept.change(function() {
+    table_download_buttons.toggleClass('disabled', !this.checked);
   });
 
 })();
