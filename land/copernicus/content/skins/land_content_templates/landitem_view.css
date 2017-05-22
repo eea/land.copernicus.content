@@ -219,8 +219,7 @@ span.raster {
 .download-button {
   margin-top: -3px;
   margin-bottom: -3px;
-  background-color: #BBB;
-  color: white !important;
+  color: #CCC !important;
   text-decoration: none !important;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -256,11 +255,6 @@ tr:hover .download-button,
   padding-bottom: 1px;
   border-radius: 3px;
 }
-
-.download-button i {
-  color: white !important;
-}
-
 
 /* Metadata tab styles */
 #detailed-metadata-title, #access-and-use-title {

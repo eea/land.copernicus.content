@@ -36,18 +36,10 @@
     />
 
   <browser:page
-    name="redirect-download-url"
-    class=".views.RedirectDownloadUrl"
-    permission="zope2.View"
-    for="land.copernicus.content.content.landfile.LandFile"
-    />
-
-  <browser:page
     name="download-land-file"
     class=".views.DownloadLandFileView"
     permission="zope2.View"
-    for="land.copernicus.content.content.landitem.LandItem"
-    template="templates/download-land-file.pt"
+    for="land.copernicus.content.content.landfile.LandFile"
     />
 
   <browser:page

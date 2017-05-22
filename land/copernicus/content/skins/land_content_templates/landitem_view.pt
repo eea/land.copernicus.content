@@ -127,8 +127,7 @@
                       </tal:repeat>
                       <td class="border-top-only" tal:content="item/getFileSize">70.14 MB</td>
                       <td class="border-top-only text-centered no-sorting-icons" data-role="download">
-                        <a tal:attributes="href python: item.absolute_url() + '/@@redirect-download-url'"
-                           href="" class="download-button disabled" target="_blank">
+                        <a href="#" tal:attributes="data-href string:${item/absolute_url}/download-land-file" class="download-button disabled">
                            <i class="fa fa-download"></i>
                         </a>
                       </td>
@@ -146,7 +145,7 @@
             <form id="download-form" action="." method="POST">
               <p>
                 You selected <strong><span data-role="number-checked">0</span> files</strong> for download. The limit
-                is <strong><span data-role="download-limit">20</span> files</strong>. Please fill in your email to send you the download link.
+                is <strong><span data-role="download-limit">5</span> files</strong>. Please fill in your email to send you the download link.
               </p>
               <label>Email
                 <input type="email" name="email" tal:attributes="placeholder python:user.getProperty('email', '')" required />

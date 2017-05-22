@@ -50,6 +50,39 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
 
 (function(){
 
+
+  function track_download(data) {
+    // Custom dimensions
+    ga('set', 'dimension1', data.thematic_domain);
+    ga('set', 'dimension2', data.institutional_domain);
+    ga('set', 'dimension3', data.is_eionet_member);
+
+    // Track event
+    ga('send', {
+      'hitType': 'event',                 // Required.
+      'eventCategory': 'page',            // Required.
+      'eventAction': 'landfile_download', // Required.
+      'eventLabel': data.land_item_title,
+      'eventValue': 1
+    });
+  };
+
+  function start_download(elem) {
+    var remote_url = elem.data('href');
+    $.ajax({
+      url: remote_url,
+      error: function(resp) {
+        console.log(resp);
+        alert(resp.err);
+      },
+      success: function(resp) {
+        console.log(resp);
+        track_download(resp.ga);
+        window.location.href = resp.url;
+      }
+    });
+  }
+
   var TABLE = $('#data-table-download').dataTable({
     "pageLength": 20,
     "lengthMenu": [10, 20, 50, 100],
@@ -97,10 +130,11 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
   });
 
   TABLE.$('td').on('click', function(){
-    var role = this.getAttribute('data-role');
+    var elem = $(this);
+    var role = elem.data('role');
     var skip = ['checkbox', 'download'];
     if (skip.indexOf(role) === -1) {
-      var chk = this.parentElement.querySelector('.checkbox-select-item');
+      var chk = $('.checkbox-select-item', elem.parent());
       if (chk) {
         chk.click();
       }
@@ -108,10 +142,14 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
   });
 
   table_download_buttons.on('click', function(evt) {
+    evt.preventDefault();
+
     if (!chk_accept.is(':checked')) {
-      evt.preventDefault();
       chk_accept.focus();
       elem_text_accept.fadeOut().fadeIn();
+    }
+    else {
+      start_download($(this));
     }
   });
 

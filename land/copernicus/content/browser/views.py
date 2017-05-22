@@ -1,6 +1,7 @@
+import json
+from functools import partial
 from datetime import datetime
 from DateTime import DateTime
-from plone import api
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.PloneBatch import Batch
 from Products.Five.browser import BrowserView
@@ -8,8 +9,15 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from StringIO import StringIO
 from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
+import plone.api as api
 import subprocess
 import xlwt
+
+
+def jsonify(request, data):
+    header = request.RESPONSE.setHeader
+    header("Content-Type", "application/json")
+    return json.dumps(data, indent=2, sort_keys=True)
 
 
 def is_EIONET_member(member):
@@ -163,29 +171,41 @@ class RedirectDownloadUrl(BrowserView):
 class DownloadLandFileView(BrowserView):
     """ Set Google Analytics custom params and redirect to remoteUrl
     """
-    index = ViewPageTemplateFile("templates/download-land-file.pt")
-
-    def render(self):
-        return self.index()
 
     def __call__(self):
-        return self.render()
+        resp = partial(jsonify, self.request)
+        if api.user.is_anonymous():
+            self.response.setStatus(401)
+            return resp({})
+
+        remoteUrl = (
+            self.context
+                .getField('remoteUrl')
+                    .getAccessor(self.context)()
+        )
+        if not remoteUrl_exists(remoteUrl):
+            self.response.setStatus(404)
+            return resp({'err': 'File does not exist!'})
+
+        try:
+            return resp({
+                'ga': self.values,
+                'url': remoteUrl,
+            })
+        except Exception as ex:
+            self.response.setStatus(500)
+            return resp({'err': ex.message})
 
     @property
     def values(self):
-        membership = getToolByName(self.context, 'portal_membership')
-        authenticated_user = membership.getAuthenticatedMember()
-        institutional_domain = authenticated_user.getProperty(
-            'institutional_domain')
-        professional_thematic_domain = authenticated_user.getProperty(
-            'thematic_domain')
-        remoteUrl = self.request.form.get('remoteUrl', None)
-        is_eionet_member = is_EIONET_member(authenticated_user)
+        user = api.user.get_current()
 
-        return {'institutional_domain': institutional_domain,
-                'professional_thematic_domain': professional_thematic_domain,
-                'is_eionet_member': is_eionet_member,
-                'start_download_url': remoteUrl}
+        return {
+            'institutional_domain': user.getProperty('institutional_domain'),
+            'thematic_domain': user.getProperty('thematic_domain'),
+            'is_eionet_member': is_EIONET_member(user),
+            'land_item_title': self.context.title_or_id(),
+        }
 
 
 # Settings for xls file columns
