@@ -72,8 +72,7 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
     $.ajax({
       url: remote_url,
       error: function(resp) {
-        console.log(resp);
-        alert(resp.err);
+        alert(resp.responseJSON.err);
       },
       success: function(resp) {
         console.log(resp);

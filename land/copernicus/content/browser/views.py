@@ -169,14 +169,14 @@ class RedirectDownloadUrl(BrowserView):
 
 
 class DownloadLandFileView(BrowserView):
-    """ Set Google Analytics custom params and redirect to remoteUrl
+    """ Set Google Analytics custom params
     """
 
     def __call__(self):
         resp = partial(jsonify, self.request)
         if api.user.is_anonymous():
-            self.response.setStatus(401)
-            return resp({})
+            self.request.response.setStatus(401)
+            return resp({'err': 'Unauthorised!'})
 
         remoteUrl = (
             self.context
@@ -184,7 +184,7 @@ class DownloadLandFileView(BrowserView):
                     .getAccessor(self.context)()
         )
         if not remoteUrl_exists(remoteUrl):
-            self.response.setStatus(404)
+            self.request.response.setStatus(404)
             return resp({'err': 'File does not exist!'})
 
         try:
@@ -193,7 +193,7 @@ class DownloadLandFileView(BrowserView):
                 'url': remoteUrl,
             })
         except Exception as ex:
-            self.response.setStatus(500)
+            self.request.response.setStatus(500)
             return resp({'err': ex.message})
 
     @property
