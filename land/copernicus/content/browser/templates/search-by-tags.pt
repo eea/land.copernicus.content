@@ -58,7 +58,7 @@
       <!-- SEARCH CRITERIA -->
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-          <a href class="btn btn-default btn-block insitu-btn-observations"
+          <a href class="btn btn-default btn-block insitu-btn-observations {{app.is_pressed('Observations')}}"
              ng-click="app.toggle_tag('Observations')">
             <img src="./observation-icon.png" alt="Observations">
             <br>
@@ -66,7 +66,7 @@
           </a>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-          <a href class="btn btn-default btn-block insitu-btn-spatial-data"
+          <a href class="btn btn-default btn-block insitu-btn-spatial-data {{app.is_pressed('Spatial Data')}}"
              ng-click="app.toggle_tag('Spatial Data')">
             <img src="./spatial-data-icon.png" alt="Spatial data">
             <br>
@@ -81,45 +81,45 @@
           <div class="insitu-btn-tags-container search-filters text-center">
             <div id="insitu-tags-1">
               <a href ng-click="app.toggle_tag('Policy')"
-                 class="btn btn-default insitu-btn-policy">
+                 class="btn btn-default insitu-btn-policy {{app.is_pressed('Policy')}}">
                 Policy
               </a>
                 <a href ng-click="app.toggle_tag('Agreements')"
-                 class="btn btn-default insitu-btn-agreements">
+                 class="btn btn-default insitu-btn-agreements {{app.is_pressed('Agreements')}}">
                 Agreements
               </a>
               <a href ng-click="app.toggle_tag('Infrastructure')"
-                 class="btn btn-default insitu-btn-infrastructure">
+                 class="btn btn-default insitu-btn-infrastructure {{app.is_pressed('Infrastructure')}}">
                 Infrastructure
               </a>
               <a href ng-click="app.toggle_tag('Open Data')"
-                 class="btn btn-default insitu-btn-open-data">
+                 class="btn btn-default insitu-btn-open-data {{app.is_pressed('Open Data')}}">
                 Open Data
               </a>
             </div>
             <div id="insitu-tags-2">
               <a href ng-click="app.toggle_tag('Land')"
-                 class="btn btn-default insitu-btn-land">
+                 class="btn btn-default insitu-btn-land {{app.is_pressed('Land')}}">
                 Land
               </a>
               <a href ng-click="app.toggle_tag('Marine')"
-                 class="btn btn-default insitu-btn-marine">
+                 class="btn btn-default insitu-btn-marine {{app.is_pressed('Marine')}}">
                 Marine
               </a>
               <a href ng-click="app.toggle_tag('Atmosphere')"
-                 class="btn btn-default insitu-btn-atmosphere">
+                 class="btn btn-default insitu-btn-atmosphere {{app.is_pressed('Atmosphere')}}">
                 Atmosphere
               </a>
               <a href ng-click="app.toggle_tag('Emergency')"
-                 class="btn btn-default insitu-btn-emergency">
+                 class="btn btn-default insitu-btn-emergency {{app.is_pressed('Emergency')}}">
                 Emergency
               </a>
               <a href ng-click="app.toggle_tag('Security')"
-                 class="btn btn-default insitu-btn-security">
+                 class="btn btn-default insitu-btn-security {{app.is_pressed('Security')}}">
                 Security
               </a>
               <a href ng-click="app.toggle_tag('Climate Change')"
-                 class="btn btn-default insitu-btn-climate-change">
+                 class="btn btn-default insitu-btn-climate-change {{app.is_pressed('Climate Change')}}">
                 Climate Change
               </a>
             </div>
@@ -191,6 +191,14 @@ angular.module('searchApp', [])
         }
       });
       return result;
+    }
+
+    app.is_pressed = function(tag_name) {
+      // Return 'pressed' or '' to be used as class name for btn
+      if(app.tag_is_selected(tag_name)) {
+        return 'pressed';
+      }
+      return '';
     }
 
     app.add_tag = function(tag_name) {
