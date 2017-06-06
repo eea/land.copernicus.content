@@ -24,6 +24,9 @@
     border-bottom: 2px solid #000000 !important;
   }
 
+  .insitu-btn-tags-container:not(.search-filters) {
+    display: none;
+  }
 </style>
 
 <div id="search-app" class="container"
@@ -55,14 +58,16 @@
       <!-- SEARCH CRITERIA -->
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-          <a href="#" class="btn btn-default btn-block insitu-btn-observations pressed">
+          <a href class="btn btn-default btn-block insitu-btn-observations"
+             ng-click="app.toggle_tag('Observations')">
             <img src="./observation-icon.png" alt="Observations">
             <br>
             <span class="text">OBSERVATIONS</span>
           </a>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-          <a href="#" class="btn btn-default btn-block insitu-btn-spatial-data pressed">
+          <a href class="btn btn-default btn-block insitu-btn-spatial-data"
+             ng-click="app.toggle_tag('Spatial Data')">
             <img src="./spatial-data-icon.png" alt="Spatial data">
             <br>
             <span class="text">SPATIAL DATA</span>
@@ -73,69 +78,52 @@
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <!-- Insitu Tags -->
-          <div class="insitu-btn-tags-container text-center">
+          <div class="insitu-btn-tags-container search-filters text-center">
             <div id="insitu-tags-1">
-              <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=policy"
-                 class="btn btn-default insitu-btn-policy pressed">
+              <a href ng-click="app.toggle_tag('Policy')"
+                 class="btn btn-default insitu-btn-policy">
                 Policy
               </a>
-              <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=agreements"
-                 class="btn btn-default insitu-btn-agreements pressed">
+                <a href ng-click="app.toggle_tag('Agreements')"
+                 class="btn btn-default insitu-btn-agreements">
                 Agreements
               </a>
-              <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=infrastructure"
-                 class="btn btn-default insitu-btn-infrastructure pressed">
+              <a href ng-click="app.toggle_tag('Infrastructure')"
+                 class="btn btn-default insitu-btn-infrastructure">
                 Infrastructure
               </a>
-              <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=open+data"
-                 class="btn btn-default insitu-btn-open-data pressed">
+              <a href ng-click="app.toggle_tag('Open Data')"
+                 class="btn btn-default insitu-btn-open-data">
                 Open Data
               </a>
             </div>
             <div id="insitu-tags-2">
-              <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=land"
-                 class="btn btn-default insitu-btn-land pressed">
+              <a href ng-click="app.toggle_tag('Land')"
+                 class="btn btn-default insitu-btn-land">
                 Land
               </a>
-              <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=marine"
-                 class="btn btn-default insitu-btn-marine pressed">
+              <a href ng-click="app.toggle_tag('Marine')"
+                 class="btn btn-default insitu-btn-marine">
                 Marine
               </a>
-              <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=atmosphere"
-                 class="btn btn-default insitu-btn-atmosphere pressed">
+              <a href ng-click="app.toggle_tag('Atmosphere')"
+                 class="btn btn-default insitu-btn-atmosphere">
                 Atmosphere
               </a>
-              <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=emergency"
-                 class="btn btn-default insitu-btn-emergency pressed">
+              <a href ng-click="app.toggle_tag('Emergency')"
+                 class="btn btn-default insitu-btn-emergency">
                 Emergency
               </a>
-              <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=security"
-                 class="btn btn-default insitu-btn-security pressed">
+              <a href ng-click="app.toggle_tag('Security')"
+                 class="btn btn-default insitu-btn-security">
                 Security
               </a>
-              <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=climate+change"
-                 class="btn btn-default insitu-btn-climate-change pressed">
+              <a href ng-click="app.toggle_tag('Climate Change')"
+                 class="btn btn-default insitu-btn-climate-change">
                 Climate Change
               </a>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <button class="btn btn-default"
-                  ng-click="app.toggle_tag('tag1')">
-            Tag1
-          </button>
-          <button class="btn btn-default"
-                  ng-click="app.toggle_tag('tag2')">
-            Tag2
-          </button>
-          <button class="btn btn-default"
-                  ng-click="app.toggle_tag('tag3')">
-            Tag3
-          </button>
         </div>
       </div>
     </div>
@@ -153,23 +141,23 @@ angular.module('searchApp', [])
         id: '01',
         title: 'Title here 1',
         url: 'http://www.google.com',
-        tags: ['tag1', 'tag2', 'tag3']
+        tags: ['Security', 'Emergency', 'Observations']
       },
       {
         id: '02',
         title: 'Title here 2',
         url: 'http://www.google.com',
-        tags: ['tag2', 'tag3']
+        tags: ['Spatial Data', 'Security']
       },
       {
         id: '03',
         title: 'Title here 3',
         url: 'http://www.google.com',
-        tags: ['tag3']
+        tags: ['Climate Change']
       }
     ];
 
-    app.selected_tags = ['tag3'];
+    app.selected_tags = ['Security'];
 
     app.superset_includes_subset = function arrayContainsArray (superset, subset) {
       // Return true if all values in subset exist in superset
