@@ -61,6 +61,7 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.js"></script>
 
       <h1>Search by tags</h1>
       <p>
@@ -145,8 +146,8 @@
 
 
 <script type="text/javascript">
-angular.module('searchApp', [])
-  .controller('searchController', function() {
+angular.module('searchApp', ['ngRoute'])
+  .controller('searchController', function($rootScope, $location) {
     var app = this;
 
     app.tags = [
@@ -349,7 +350,18 @@ angular.module('searchApp', [])
       }
     ];
 
-    app.selected_tags = [];
+    app.get_selected_tags_as_url_params = function() {
+      // Check url for existing selected tags
+      var selected_tags = $location.search().selected_tags;
+      if(selected_tags == undefined) {
+        return [];
+      }
+      return selected_tags.split("@");
+    }
+
+    app.selected_tags = app.get_selected_tags_as_url_params();
+
+    //[TODO] Update url params when the selected tags are changed.
 
     app.superset_includes_subset = function arrayContainsArray (superset, subset) {
       // Return true if all values in subset exist in superset
