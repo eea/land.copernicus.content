@@ -50,6 +50,7 @@
               {{item.id}}
               <a href="{{item.url}}" target="_blank">{{item.title}}</a>
               {{item.tags}}
+              {{app.get_tags_info(item.tags)}}
             </div>
           </div>
         </div>
@@ -175,6 +176,8 @@ angular.module('searchApp', [])
         btn_class: 'btn btn-default insitu-btn-climate-change'
       }
     ]
+    app.tagsMappedByTitle = {};
+    app.tags.forEach(function (c) { app.tagsMappedByTitle[c.title] = c; });
 
     app.items = [
       {
@@ -319,6 +322,21 @@ angular.module('searchApp', [])
         if(a_tag.category == category) {
           result.push(a_tag);
         }
+      });
+      return result;
+    }
+
+    app.get_tag_info = function(tag_name) {
+      // Return tag info by given title
+      return app.tagsMappedByTitle[tag_name];
+    }
+
+    app.get_tags_info = function(tags) {
+      // Input: array of strings (tags titles)
+      // Output: array of tags (info)
+      result = [];
+      angular.forEach(tags, function(tag_name) {
+        result.push(app.get_tag_info(tag_name));
       });
       return result;
     }
