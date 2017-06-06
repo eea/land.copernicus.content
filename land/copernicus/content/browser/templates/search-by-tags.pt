@@ -9,26 +9,29 @@
   <metal:content-core fill-slot="content-core">
     <metal:main_macro define-macro="content-core">
 
-
-
 <style type="text/css">
   div[data-diazo=insitu-news-list],
   div[data-diazo=insitu-events-list] {
     display: none;
   }
-
+  .insitu-btn-observations:hover,
+  .insitu-btn-spatial-data:hover {
+    text-decoration: none !important;
+  }
 </style>
 
-
-
-<div id="search-app" class="container" ng-app="searchApp" ng-controller="searchController as app">
+<div id="search-app" class="container"
+     ng-app="searchApp" ng-controller="searchController as app">
   <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 
       <h1>Search by tags</h1>
-      <p>Search results: <span tal:replace="python:view.do_search().get('results')"></span></p>
+      <p>
+        Search results:
+        <span tal:replace="python:view.do_search().get('results')"></span>
+      </p>
 
       <!-- SEARCH RESULTS -->
       <div class="row">
@@ -45,10 +48,88 @@
 
       <!-- SEARCH CRITERIA -->
       <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <a href="#" class="btn btn-default btn-block insitu-btn-observations">
+            <img src="./observation-icon.png" alt="Observations">
+            <br>
+            <span class="text">OBSERVATIONS</span>
+          </a>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <a href="#" class="btn btn-default btn-block insitu-btn-spatial-data">
+            <img src="./spatial-data-icon.png" alt="Spatial data">
+            <br>
+            <span class="text">SPATIAL DATA</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <button class="btn btn-default" ng-click="app.toggle_tag('tag1')">Tag1</button>
-          <button class="btn btn-default" ng-click="app.toggle_tag('tag2')">Tag2</button>
-          <button class="btn btn-default" ng-click="app.toggle_tag('tag3')">Tag3</button>
+          <!-- Insitu Tags -->
+          <div class="insitu-btn-tags-container text-center">
+            <div id="insitu-tags-1">
+              <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=policy"
+                 class="btn btn-default insitu-btn-policy">
+                Policy
+              </a>
+              <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=agreements"
+                 class="btn btn-default insitu-btn-agreements">
+                Agreements
+              </a>
+              <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=infrastructure"
+                 class="btn btn-default insitu-btn-infrastructure">
+                Infrastructure
+              </a>
+              <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=open+data"
+                 class="btn btn-default insitu-btn-open-data">
+                Open Data
+              </a>
+            </div>
+            <div id="insitu-tags-2">
+              <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=land"
+                 class="btn btn-default insitu-btn-land">
+                Land
+              </a>
+              <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=marine"
+                 class="btn btn-default insitu-btn-marine">
+                Marine
+              </a>
+              <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=atmosphere"
+                 class="btn btn-default insitu-btn-atmosphere">
+                Atmosphere
+              </a>
+              <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=emergency"
+                 class="btn btn-default insitu-btn-emergency">
+                Emergency
+              </a>
+              <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=security"
+                 class="btn btn-default insitu-btn-security">
+                Security
+              </a>
+              <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=climate+change"
+                 class="btn btn-default insitu-btn-climate-change">
+                Climate Change
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <button class="btn btn-default"
+                  ng-click="app.toggle_tag('tag1')">
+            Tag1
+          </button>
+          <button class="btn btn-default"
+                  ng-click="app.toggle_tag('tag2')">
+            Tag2
+          </button>
+          <button class="btn btn-default"
+                  ng-click="app.toggle_tag('tag3')">
+            Tag3
+          </button>
         </div>
       </div>
     </div>
@@ -85,16 +166,19 @@ angular.module('searchApp', [])
     app.selected_tags = ['tag3'];
 
     app.superset_includes_subset = function arrayContainsArray (superset, subset) {
+      // Return true if all values in subset exist in superset
       return subset.every(function (value) {
         return (superset.indexOf(value) >= 0);
       });
     }
 
     app.item_has_tags = function(item, tags) {
+      // Return true if all tags are present in item's tags
       return app.superset_includes_subset(item.tags, tags);
     }
 
     app.get_results = function() {
+      // Filter items by selected tags
       result = [];
       angular.forEach(app.items, function(an_item) {
         if(app.item_has_tags(an_item, app.selected_tags)) {
@@ -126,6 +210,7 @@ angular.module('searchApp', [])
     }
 
     app.toggle_tag = function(tag_name) {
+      // Select or deselect a given tag from search criteria
       if(app.tag_is_selected(tag_name)) {
         app.remove_tag(tag_name);
       } else {
