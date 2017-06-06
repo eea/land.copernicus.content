@@ -361,7 +361,8 @@ angular.module('searchApp', ['ngRoute'])
 
     app.selected_tags = app.get_selected_tags_as_url_params();
 
-    //[TODO] Update url params when the selected tags are changed.
+    // [TODO] Update url params when the selected tags are changed.
+    // Example: http://localhost:8080/copernicus/search-by-tags/#/?selected_tags=land@atmosphere
 
     app.superset_includes_subset = function arrayContainsArray (superset, subset) {
       // Return true if all values in subset exist in superset
