@@ -18,6 +18,12 @@
   .insitu-btn-spatial-data:hover {
     text-decoration: none !important;
   }
+
+  .btn.pressed {
+    border: 2px solid #000000;
+    border-bottom: 2px solid #000000 !important;
+  }
+
 </style>
 
 <div id="search-app" class="container"
@@ -49,14 +55,14 @@
       <!-- SEARCH CRITERIA -->
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-          <a href="#" class="btn btn-default btn-block insitu-btn-observations">
+          <a href="#" class="btn btn-default btn-block insitu-btn-observations pressed">
             <img src="./observation-icon.png" alt="Observations">
             <br>
             <span class="text">OBSERVATIONS</span>
           </a>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-          <a href="#" class="btn btn-default btn-block insitu-btn-spatial-data">
+          <a href="#" class="btn btn-default btn-block insitu-btn-spatial-data pressed">
             <img src="./spatial-data-icon.png" alt="Spatial data">
             <br>
             <span class="text">SPATIAL DATA</span>
@@ -70,45 +76,45 @@
           <div class="insitu-btn-tags-container text-center">
             <div id="insitu-tags-1">
               <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=policy"
-                 class="btn btn-default insitu-btn-policy">
+                 class="btn btn-default insitu-btn-policy pressed">
                 Policy
               </a>
               <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=agreements"
-                 class="btn btn-default insitu-btn-agreements">
+                 class="btn btn-default insitu-btn-agreements pressed">
                 Agreements
               </a>
               <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=infrastructure"
-                 class="btn btn-default insitu-btn-infrastructure">
+                 class="btn btn-default insitu-btn-infrastructure pressed">
                 Infrastructure
               </a>
               <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=open+data"
-                 class="btn btn-default insitu-btn-open-data">
+                 class="btn btn-default insitu-btn-open-data pressed">
                 Open Data
               </a>
             </div>
             <div id="insitu-tags-2">
               <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=land"
-                 class="btn btn-default insitu-btn-land">
+                 class="btn btn-default insitu-btn-land pressed">
                 Land
               </a>
               <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=marine"
-                 class="btn btn-default insitu-btn-marine">
+                 class="btn btn-default insitu-btn-marine pressed">
                 Marine
               </a>
               <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=atmosphere"
-                 class="btn btn-default insitu-btn-atmosphere">
+                 class="btn btn-default insitu-btn-atmosphere pressed">
                 Atmosphere
               </a>
               <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=emergency"
-                 class="btn btn-default insitu-btn-emergency">
+                 class="btn btn-default insitu-btn-emergency pressed">
                 Emergency
               </a>
               <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=security"
-                 class="btn btn-default insitu-btn-security">
+                 class="btn btn-default insitu-btn-security pressed">
                 Security
               </a>
               <a href="http://localhost:8080/copernicus/homepage-content/@@search?SearchableText=climate+change"
-                 class="btn btn-default insitu-btn-climate-change">
+                 class="btn btn-default insitu-btn-climate-change pressed">
                 Climate Change
               </a>
             </div>
