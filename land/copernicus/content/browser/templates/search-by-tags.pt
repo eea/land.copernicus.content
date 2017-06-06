@@ -94,8 +94,8 @@
               </p>
               <a href
                  ng-repeat="tag in app.get_tags_info(item.tags)"
-                 ng-click="app.toggle_tag(tag.title)"
-                 class="{{tag.tag_class}} {{app.is_pressed(tag.title)}}">
+                 ng-click="app.toggle_tag(tag.id)"
+                 class="{{tag.tag_class}} {{app.is_pressed(tag.id)}}">
                 {{tag.title}}
               </a>
             </div>
@@ -107,8 +107,8 @@
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"
              ng-repeat="tag in app.get_tags(1)">
-          <a href class="{{tag.btn_class}} {{app.is_pressed(tag.title)}}"
-             ng-click="app.toggle_tag(tag.title)">
+          <a href class="{{tag.btn_class}} {{app.is_pressed(tag.id)}}"
+             ng-click="app.toggle_tag(tag.id)">
             <img ng-src="./{{tag.id}}-icon.png" alt="{{tag.title}}">
             <br>
             <span class="text text-uppercase">{{tag.title}}</span>
@@ -123,16 +123,16 @@
             <div id="insitu-tags-1">
               <a href
                  ng-repeat="tag in app.get_tags(2)"
-                 ng-click="app.toggle_tag(tag.title)"
-                 class="{{tag.btn_class}} {{app.is_pressed(tag.title)}}">
+                 ng-click="app.toggle_tag(tag.id)"
+                 class="{{tag.btn_class}} {{app.is_pressed(tag.id)}}">
                 {{tag.title}}
               </a>
             </div>
             <div id="insitu-tags-2">
               <a href
                  ng-repeat="tag in app.get_tags(3)"
-                 ng-click="app.toggle_tag(tag.title)"
-                 class="{{tag.btn_class}} {{app.is_pressed(tag.title)}}">
+                 ng-click="app.toggle_tag(tag.id)"
+                 class="{{tag.btn_class}} {{app.is_pressed(tag.id)}}">
                 {{tag.title}}
               </a>
             </div>
@@ -235,117 +235,117 @@ angular.module('searchApp', [])
         btn_class: 'btn btn-default insitu-btn-climate-change'
       }
     ]
-    app.tagsMappedByTitle = {};
-    app.tags.forEach(function (c) { app.tagsMappedByTitle[c.title] = c; });
+    app.tagsMappedById = {};
+    app.tags.forEach(function (c) { app.tagsMappedById[c.id] = c; });
 
     app.items = [
       {
         id: '01',
         title: 'Title here 1',
         url: 'http://www.google.com',
-        tags: ['Security', 'Emergency', 'Observations', 'Atmosphere']
+        tags: ['security', 'emergency', 'observations', 'atmosphere']
       },
       {
         id: '02',
         title: 'Title here 2',
         url: 'http://www.google.com',
-        tags: ['Spatial Data', 'Security', 'Atmosphere']
+        tags: ['spatial-data', 'security', 'atmosphere']
       },
       {
         id: '03',
         title: 'Title here 3',
         url: 'http://www.google.com',
-        tags: ['Climate Change', 'Atmosphere']
+        tags: ['climate-change', 'atmosphere']
       },
       {
         id: '04',
         title: 'Title here 4',
         url: 'http://www.google.com',
-        tags: ['Security', 'Emergency', 'Observations', 'Atmosphere']
+        tags: ['security', 'emergency', 'observations', 'atmosphere']
       },
       {
         id: '05',
         title: 'Title here 5',
         url: 'http://www.google.com',
-        tags: ['Spatial Data', 'Security', 'Atmosphere']
+        tags: ['spatial-data', 'security', 'atmosphere']
       },
       {
         id: '06',
         title: 'Title here 6',
         url: 'http://www.google.com',
-        tags: ['Climate Change', 'Marine']
+        tags: ['climate-change', 'marine']
       },
       {
         id: '07',
         title: 'Title here 7',
         url: 'http://www.google.com',
-        tags: ['Security', 'Emergency', 'Observations', 'Marine']
+        tags: ['security', 'emergency', 'observations', 'marine']
       },
       {
         id: '08',
         title: 'Title here 8',
         url: 'http://www.google.com',
-        tags: ['Spatial Data', 'Security', 'Marine']
+        tags: ['spatial-data', 'security', 'marine']
       },
       {
         id: '09',
         title: 'Title here 9',
         url: 'http://www.google.com',
-        tags: ['Climate Change', 'Marine']
+        tags: ['climate-change', 'marine']
       },
       {
         id: '10',
         title: 'Title here 10',
         url: 'http://www.google.com',
-        tags: ['Security', 'Emergency', 'Observations', 'Marine']
+        tags: ['security', 'emergency', 'observations', 'marine']
       },
       {
         id: '11',
         title: 'Title here 11',
         url: 'http://www.google.com',
-        tags: ['Spatial Data', 'Security', 'Land']
+        tags: ['spatial-data', 'security', 'land']
       },
       {
         id: '12',
         title: 'Title here 12',
         url: 'http://www.google.com',
-        tags: ['Climate Change', 'Land']
+        tags: ['climate-change', 'land']
       },
       {
         id: '13',
         title: 'Title here 13',
         url: 'http://www.google.com',
-        tags: ['Security', 'Emergency', 'Observations', 'Land']
+        tags: ['security', 'emergency', 'observations', 'land']
       },
       {
         id: '14',
         title: 'Title here 14',
         url: 'http://www.google.com',
-        tags: ['Spatial Data', 'Security', 'Open Data']
+        tags: ['spatial-data', 'security', 'open-data']
       },
       {
         id: '15',
         title: 'Title here 15',
         url: 'http://www.google.com',
-        tags: ['Climate Change', 'Open Data']
+        tags: ['climate-change', 'open-data']
       },
       {
         id: '16',
         title: 'Title here 16',
         url: 'http://www.google.com',
-        tags: ['Security', 'Emergency', 'Observations', 'Infrastructure']
+        tags: ['security', 'emergency', 'observations', 'infrastructure']
       },
       {
         id: '17',
         title: 'Title here 17',
         url: 'http://www.google.com',
-        tags: ['Spatial Data', 'Security', 'Agreements', 'Infrastructure']
+        tags: ['spatial-data', 'security', 'agreements', 'infrastructure']
       },
       {
         id: '18',
         title: 'Title here 18',
         url: 'http://www.google.com',
-        tags: ['Climate Change', 'Policy']
+        tags: ['climate-change', 'policy']
       }
     ];
 
@@ -385,56 +385,56 @@ angular.module('searchApp', [])
       return result;
     }
 
-    app.get_tag_info = function(tag_name) {
-      // Return tag info by given title
-      return app.tagsMappedByTitle[tag_name];
+    app.get_tag_info = function(tag_id) {
+      // Return tag info by given id
+      return app.tagsMappedById[tag_id];
     }
 
     app.get_tags_info = function(tags) {
-      // Input: array of strings (tags titles)
+      // Input: array of strings (tags ids)
       // Output: array of tags (info)
       result = [];
-      angular.forEach(tags, function(tag_name) {
-        result.push(app.get_tag_info(tag_name));
+      angular.forEach(tags, function(tag_id) {
+        result.push(app.get_tag_info(tag_id));
       });
       return result;
     }
 
-    app.tag_is_selected = function(tag_name) {
+    app.tag_is_selected = function(tag_id) {
       // Return true if the tag is selected as criteria for search
       var result = false;
-      angular.forEach(app.selected_tags, function(a_tag_name) {
-        if(a_tag_name == tag_name) {
+      angular.forEach(app.selected_tags, function(a_tag_id) {
+        if(a_tag_id == tag_id) {
           result = true;
         }
       });
       return result;
     }
 
-    app.is_pressed = function(tag_name) {
+    app.is_pressed = function(tag_id) {
       // Return 'pressed' or '' to be used as class name for btn
-      if(app.tag_is_selected(tag_name)) {
+      if(app.tag_is_selected(tag_id)) {
         return 'pressed';
       }
       return '';
     }
 
-    app.add_tag = function(tag_name) {
+    app.add_tag = function(tag_id) {
       // Add a given tag in the selected tags
-      app.selected_tags.push(tag_name);
+      app.selected_tags.push(tag_id);
     }
 
-    app.remove_tag = function(tag_name) {
+    app.remove_tag = function(tag_id) {
       // Remove a given tag from the selected tags
-      app.selected_tags.splice(app.selected_tags.indexOf(tag_name), 1);
+      app.selected_tags.splice(app.selected_tags.indexOf(tag_id), 1);
     }
 
-    app.toggle_tag = function(tag_name) {
+    app.toggle_tag = function(tag_id) {
       // Select or deselect a given tag from search criteria
-      if(app.tag_is_selected(tag_name)) {
-        app.remove_tag(tag_name);
+      if(app.tag_is_selected(tag_id)) {
+        app.remove_tag(tag_id);
       } else {
-        app.add_tag(tag_name);
+        app.add_tag(tag_id);
       }
     }
 
