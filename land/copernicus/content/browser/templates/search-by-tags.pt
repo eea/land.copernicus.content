@@ -27,6 +27,26 @@
   .insitu-btn-tags-container:not(.search-filters) {
     display: none;
   }
+
+  body.template-search-by-tags .btn.btn-sm.insitu-btn-observations {
+    color: #000000 !important;
+  }
+
+  body.template-search-by-tags .btn.btn-sm {
+    color: #FFFFFF !important;
+    margin-right: 5px;
+    margin-bottom: 2px;
+  }
+
+  body.template-search-by-tags .btn.btn-sm:hover {
+    text-decoration: none !important;
+  }
+
+  .btn.btn-sm.insitu-btn-observations,
+  .btn.btn-sm.insitu-btn-spatial-data {
+    padding: 6px 10px !important;
+    font-size: 12px !important;
+  }
 </style>
 
 <div id="search-app" class="container"
@@ -50,7 +70,12 @@
               {{item.id}}
               <a href="{{item.url}}" target="_blank">{{item.title}}</a>
               {{item.tags}}
-              {{app.get_tags_info(item.tags)}}
+              <a href
+                 ng-repeat="tag in app.get_tags_info(item.tags)"
+                 ng-click="app.toggle_tag(tag.title)"
+                 class="{{tag.tag_class}} {{app.is_pressed(tag.title)}}">
+                {{tag.title}}
+              </a>
             </div>
           </div>
         </div>
@@ -107,72 +132,84 @@ angular.module('searchApp', [])
         category: 1,
         title: 'Observations',
         id: 'observations',
+        tag_class: 'btn btn-default btn-sm insitu-btn-observations',
         btn_class: 'btn btn-default btn-block insitu-btn-observations'
       },
       {
         category: 1,
         title: 'Spatial Data',
         id: 'spatial-data',
+        tag_class: 'btn btn-default btn-sm insitu-btn-spatial-data',
         btn_class: 'btn btn-default btn-block insitu-btn-spatial-data'
       },
       {
         category: 2,
         title: 'Policy',
         id: 'policy',
+        tag_class: 'btn btn-default btn-sm insitu-btn-policy',
         btn_class: 'btn btn-default insitu-btn-policy'
       },
       {
         category: 2,
         title: 'Agreements',
         id: 'agreements',
+        tag_class: 'btn btn-default btn-sm insitu-btn-agreements',
         btn_class: 'btn btn-default insitu-btn-agreements'
       },
       {
         category: 2,
         title: 'Infrastructure',
         id: 'infrastructure',
+        tag_class: 'btn btn-default btn-sm insitu-btn-infrastructure',
         btn_class: 'btn btn-default insitu-btn-infrastructure'
       },
       {
         category: 2,
         title: 'Open Data',
         id: 'open-data',
+        tag_class: 'btn btn-default btn-sm insitu-btn-open-data',
         btn_class: 'btn btn-default insitu-btn-open-data'
       },
       {
         category: 3,
         title: 'Land',
         id: 'land',
+        tag_class: 'btn btn-default btn-sm insitu-btn-land',
         btn_class: 'btn btn-default insitu-btn-land'
       },
       {
         category: 3,
         title: 'Marine',
         id: 'marine',
+        tag_class: 'btn btn-default btn-sm insitu-btn-marine',
         btn_class: 'btn btn-default insitu-btn-marine'
       },
       {
         category: 3,
         title: 'Atmosphere',
         id: 'atmosphere',
+        tag_class: 'btn btn-default btn-sm insitu-btn-atmosphere',
         btn_class: 'btn btn-default insitu-btn-atmosphere'
       },
       {
         category: 3,
         title: 'Emergency',
         id: 'emergency',
+        tag_class: 'btn btn-default btn-sm insitu-btn-emergency',
         btn_class: 'btn btn-default insitu-btn-emergency'
       },
       {
         category: 3,
         title: 'Security',
         id: 'security',
+        tag_class: 'btn btn-default btn-sm insitu-btn-security',
         btn_class: 'btn btn-default insitu-btn-security'
       },
       {
         category: 3,
         title: 'Climate Change',
         id: 'climate-change',
+        tag_class: 'btn btn-default btn-sm insitu-btn-climate-change',
         btn_class: 'btn btn-default insitu-btn-climate-change'
       }
     ]
