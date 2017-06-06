@@ -47,6 +47,12 @@
     padding: 6px 10px !important;
     font-size: 12px !important;
   }
+
+  div.search-item {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #DDDDDD;
+    margin-bottom: 10px;
+  }
 </style>
 
 <div id="search-app" class="container"
@@ -67,9 +73,25 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="search-item" ng-repeat="item in app.get_results()">
             <div class="item">
-              {{item.id}}
-              <a href="{{item.url}}" target="_blank">{{item.title}}</a>
-              {{item.tags}}
+              <a href="{{item.url}}" target="_blank">
+                <h3>
+                  {{item.title}}
+                </h3>
+              </a>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Nullam mollis ut lacus id placerat.
+                Nullam mollis, nisl eget luctus tincidunt, sem lectus
+                efficitur urna, quis aliquet mi tellus id nibh.
+                Sed pharetra iaculis lacinia. Phasellus sagittis, sem vel
+                gravida mattis, mauris lacus posuere odio, sit amet aliquam
+                nunc urna eu quam. Vestibulum sollicitudin ligula eget dui
+                auctor, a malesuada urna molestie.
+                Vivamus in massa mattis, molestie risus ut, hendrerit
+                <a href="{{item.url}}" target="_blank">
+                  [...]
+                </a>
+              </p>
               <a href
                  ng-repeat="tag in app.get_tags_info(item.tags)"
                  ng-click="app.toggle_tag(tag.title)"
