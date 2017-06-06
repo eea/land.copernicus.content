@@ -105,7 +105,7 @@ angular.module('searchApp', [])
       {
         category: 1,
         title: 'Observations',
-        id: 'observation',  // the icon is without s
+        id: 'observations',
         btn_class: 'btn btn-default btn-block insitu-btn-observations'
       },
       {
