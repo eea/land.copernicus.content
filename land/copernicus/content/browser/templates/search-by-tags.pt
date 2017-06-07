@@ -42,6 +42,23 @@
     text-decoration: none !important;
   }
 
+  body.template-search-by-tags ul.pagination {
+    display: inline-flex !important;
+    list-style-type: none !important;
+  }
+
+  body.template-search-by-tags ul.pagination li a {
+    border: none !important;
+  }
+
+  body.template-search-by-tags ul.pagination li.active a {
+    color: #FFFFFF !important;
+  }
+
+  body.template-search-by-tags ul.pagination li a:hover {
+    text-decoration: none !important;
+  }
+
   .btn.btn-sm.insitu-btn-observations,
   .btn.btn-sm.insitu-btn-spatial-data {
     padding: 6px 10px !important;
