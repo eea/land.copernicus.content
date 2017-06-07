@@ -87,11 +87,7 @@
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.js"></script>
       <script src="./dirPagination.js"></script>
 
-      <h1>Search by tags</h1>
-      <p>
-        Search results:
-        <span tal:replace="python:view.do_search().get('results')"></span>
-      </p>
+      <h1 class="page-title">{{app.set_page_title()}}</h1>
 
       <!-- SEARCH RESULTS -->
       <div class="row">
@@ -508,7 +504,28 @@ angular.module('searchApp',
     }
 
     app.set_items_per_page = function(items_number) {
+      // Set items per page for search results pagination
       app.items_per_page = items_number;
+    }
+
+    app.set_page_title = function() {
+      // Set the page title
+      var selected_tags = app.selected_tags;
+
+      if(selected_tags.length == 0) {
+        return "Search";
+      }
+
+      if(selected_tags.length == 1) {
+        return app.get_tag_info(selected_tags[0]).title;
+      }
+
+      var tags_titles = [];
+      angular.forEach(selected_tags, function(a_tag_id) {
+        tags_titles.push(app.get_tag_info(a_tag_id).title);
+      });
+
+      return "Content tagged " + tags_titles.join(" and ");
     }
 
     app.add_tag = function(tag_id) {
