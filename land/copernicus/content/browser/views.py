@@ -10,6 +10,8 @@ from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
 import subprocess
 import xlwt
+from random import randint
+import json
 
 
 def is_EIONET_member(member):
@@ -173,9 +175,31 @@ class SearchByTags(BrowserView):
         return self.render()
 
     def do_search(self):
-        results = [1, 2, 3, 4, 5]
+        """ Search website for tagged content
+        """
+        ALL_TAGS = [
+            'security', 'emergency', 'observations', 'atmosphere',
+            'spatial-data', 'policy', 'agreements', 'infrastructure',
+            'open-data', 'land', 'marine', 'climate-change'
+        ]
+        catalog = getToolByName(self.context, 'portal_catalog')
+        results = catalog.searchResults(
+            {
+                'portal_type': 'Event',
+                'review_state': 'published'
+            }
+        )
 
-        return {'results': results}
+        results = [
+            {
+                'title': x['Title'],
+                'description': x['Description'],
+                'id': x['id'],
+                'url': x.getURL(),
+                # 'tags': x['Subject']
+                'tags': [x for x in ALL_TAGS if randint(0, 3) in [1, 2, 3]]
+            } for x in results]
+        return {'results': json.dumps(results)}
 
 
 class DownloadLandFileView(BrowserView):
