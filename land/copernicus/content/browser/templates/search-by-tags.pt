@@ -301,117 +301,13 @@ angular.module('searchApp',
     app.tags.forEach(function (c) { app.tagsMappedById[c.id] = c; });
 
     app.items = jQuery.parseJSON($("p#results").text());
-
-    app.items_demo = [
-      {
-        id: '01',
-        title: 'Title here 1',
-        url: 'http://www.google.com',
-        tags: ['security', 'emergency', 'observations', 'atmosphere']
-      },
-      {
-        id: '02',
-        title: 'Title here 2',
-        url: 'http://www.google.com',
-        tags: ['spatial-data', 'security', 'atmosphere']
-      },
-      {
-        id: '03',
-        title: 'Title here 3',
-        url: 'http://www.google.com',
-        tags: ['climate-change', 'atmosphere']
-      },
-      {
-        id: '04',
-        title: 'Title here 4',
-        url: 'http://www.google.com',
-        tags: ['security', 'emergency', 'observations', 'atmosphere']
-      },
-      {
-        id: '05',
-        title: 'Title here 5',
-        url: 'http://www.google.com',
-        tags: ['spatial-data', 'security', 'atmosphere']
-      },
-      {
-        id: '06',
-        title: 'Title here 6',
-        url: 'http://www.google.com',
-        tags: ['climate-change', 'marine']
-      },
-      {
-        id: '07',
-        title: 'Title here 7',
-        url: 'http://www.google.com',
-        tags: ['security', 'emergency', 'observations', 'marine']
-      },
-      {
-        id: '08',
-        title: 'Title here 8',
-        url: 'http://www.google.com',
-        tags: ['spatial-data', 'security', 'marine']
-      },
-      {
-        id: '09',
-        title: 'Title here 9',
-        url: 'http://www.google.com',
-        tags: ['climate-change', 'marine']
-      },
-      {
-        id: '10',
-        title: 'Title here 10',
-        url: 'http://www.google.com',
-        tags: ['security', 'emergency', 'observations', 'marine']
-      },
-      {
-        id: '11',
-        title: 'Title here 11',
-        url: 'http://www.google.com',
-        tags: ['spatial-data', 'security', 'land']
-      },
-      {
-        id: '12',
-        title: 'Title here 12',
-        url: 'http://www.google.com',
-        tags: ['climate-change', 'land']
-      },
-      {
-        id: '13',
-        title: 'Title here 13',
-        url: 'http://www.google.com',
-        tags: ['security', 'emergency', 'observations', 'land']
-      },
-      {
-        id: '14',
-        title: 'Title here 14',
-        url: 'http://www.google.com',
-        tags: ['spatial-data', 'security', 'open-data']
-      },
-      {
-        id: '15',
-        title: 'Title here 15',
-        url: 'http://www.google.com',
-        tags: ['climate-change', 'open-data']
-      },
-      {
-        id: '16',
-        title: 'Title here 16',
-        url: 'http://www.google.com',
-        tags: ['security', 'emergency', 'observations', 'infrastructure']
-      },
-      {
-        id: '17',
-        title: 'Title here 17',
-        url: 'http://www.google.com',
-        tags: ['spatial-data', 'security', 'agreements', 'infrastructure']
-      },
-      {
-        id: '18',
-        title: 'Title here 18',
-        url: 'http://www.google.com',
-        tags: ['climate-change', 'policy']
-      }
-    ];
+    // an item example:
+    //  {
+    //    id: 'title-here-1',
+    //    title: 'Title here 1',
+    //    url: 'http://www.google.com',
+    //    tags: ['security', 'emergency', 'open-data', 'atmosphere']
+    //  },
 
     app.tag_exists = function(tag_id) {
       // Return true if the tag exists in the list of tags

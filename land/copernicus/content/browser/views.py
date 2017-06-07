@@ -197,7 +197,7 @@ class SearchByTags(BrowserView):
                 'id': x['id'],
                 'url': x.getURL(),
                 # 'tags': x['Subject']
-                'tags': [x for x in ALL_TAGS if randint(0, 3) in [1, 2, 3]]
+                'tags': [x for x in ALL_TAGS if randint(0, 3) in [1, 2]]
             } for x in results]
         return {'results': json.dumps(results)}
 
