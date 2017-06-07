@@ -350,13 +350,33 @@ angular.module('searchApp', ['ngRoute'])
       }
     ];
 
+    app.tag_exists = function(tag_id) {
+      // Return true if the tag exists in the list of tags
+      var result = false;
+      angular.forEach(app.tags, function(a_tag) {
+        if(a_tag.id == tag_id) {
+          result = true;
+        }
+      });
+      return result;
+    }
+
     app.get_selected_tags_as_url_params = function() {
       // Check url for existing selected tags
       var selected_tags = $location.search().selected_tags;
       if(selected_tags == undefined) {
         return [];
       }
-      return selected_tags.split("@");
+      var possible_tags = selected_tags.split("@");
+
+      var result = [];
+      angular.forEach(possible_tags, function(tag_id) {
+        if(app.tag_exists(tag_id)) {
+          result.push(tag_id);
+        }
+      });
+
+      return result;
     }
 
     app.selected_tags = app.get_selected_tags_as_url_params();
@@ -424,7 +444,7 @@ angular.module('searchApp', ['ngRoute'])
       return result;
     }
 
-    app.is_pressed = function(tag_id) {
+   app.is_pressed = function(tag_id) {
       // Return 'pressed' or '' to be used as class name for btn
       if(app.tag_is_selected(tag_id)) {
         return 'pressed';
