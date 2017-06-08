@@ -10,7 +10,6 @@ from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
 import subprocess
 import xlwt
-from random import randint
 import json
 
 
