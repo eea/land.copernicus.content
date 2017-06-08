@@ -185,7 +185,7 @@ class SearchByTags(BrowserView):
         catalog = getToolByName(self.context, 'portal_catalog')
         results = catalog.searchResults(
             {
-                'portal_type': 'Event',
+                'portal_type': ['Event', 'News Item'],
                 'review_state': 'published'
             }
         )
