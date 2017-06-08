@@ -98,6 +98,10 @@
   p#results {
     display: none;  /* Remove for debug if needed */
   }
+
+  p.item-description {
+    margin-bottom: 20px;
+  }
 </style>
 
 <div id="search-app" class="container"
@@ -123,18 +127,10 @@
                   {{item.title}}
                 </a>
               </h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Nullam mollis ut lacus id placerat.
-                Nullam mollis, nisl eget luctus tincidunt, sem lectus
-                efficitur urna, quis aliquet mi tellus id nibh.
-                Sed pharetra iaculis lacinia. Phasellus sagittis, sem vel
-                gravida mattis, mauris lacus posuere odio, sit amet aliquam
-                nunc urna eu quam. Vestibulum sollicitudin ligula eget dui
-                auctor, a malesuada urna molestie.
-                Vivamus in massa mattis, molestie risus ut, hendrerit
+              <p class="item-description">
+                {{item.description | limitTo:403}}
                 <a href="{{item.url}}" target="_blank">
-                  [...]
+                  Read more
                 </a>
               </p>
               <a href
@@ -314,6 +310,7 @@ angular.module('searchApp',
     //  {
     //    id: 'title-here-1',
     //    title: 'Title here 1',
+    //    description: 'Lorem ipsum description',
     //    url: 'http://www.google.com',
     //    tags: ['security', 'emergency', 'open-data', 'atmosphere']
     //  },
