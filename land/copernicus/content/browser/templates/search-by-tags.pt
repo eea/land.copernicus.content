@@ -434,6 +434,10 @@ angular.module('searchApp',
       app.items_per_page = items_number;
     }
 
+    app.natural_language_join = function(arr) {
+      return arr.slice(0,arr.length-1).join(", ") + " and " + arr[arr.length-1];
+    }
+
     app.set_page_title = function() {
       // Set the page title
       var selected_tags = app.selected_tags;
@@ -451,7 +455,7 @@ angular.module('searchApp',
         tags_titles.push(app.get_tag_info(a_tag_id).title);
       });
 
-      return "Content tagged " + tags_titles.join(" and ");
+      return "Content tagged " + app.natural_language_join(tags_titles);
     }
 
     app.add_tag = function(tag_id) {
