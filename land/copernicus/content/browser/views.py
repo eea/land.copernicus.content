@@ -14,6 +14,13 @@ from random import randint
 import json
 
 
+ALL_TAGS = [
+    'security', 'emergency', 'observations', 'atmosphere',
+    'spatial-data', 'policy', 'agreements', 'infrastructure',
+    'open-data', 'land', 'marine', 'climate-change'
+]
+
+
 def is_EIONET_member(member):
     """ Check if a given member is EIONET user
     """
@@ -174,14 +181,18 @@ class SearchByTags(BrowserView):
     def __call__(self):
         return self.render()
 
+    def format_tags(self, tags):
+        """ Input: ('Climate change', 'Security', 'Marine', 'Not relevant')
+            Output: ['climate-change', 'security', 'marine']
+        """
+        return [
+            y for y in [x.replace(" ", "-").lower() for x in tags]
+            if y in ALL_TAGS
+        ]
+
     def do_search(self):
         """ Search website for tagged content
         """
-        ALL_TAGS = [
-            'security', 'emergency', 'observations', 'atmosphere',
-            'spatial-data', 'policy', 'agreements', 'infrastructure',
-            'open-data', 'land', 'marine', 'climate-change'
-        ]
         catalog = getToolByName(self.context, 'portal_catalog')
         results = catalog.searchResults(
             {
@@ -196,8 +207,8 @@ class SearchByTags(BrowserView):
                 'description': x['Description'],
                 'id': x['id'],
                 'url': x.getURL(),
-                # 'tags': x['Subject']
-                'tags': [x for x in ALL_TAGS if randint(0, 3) in [1, 2]]
+                'tags': self.format_tags(x['Subject'])
+                # 'tags': [x for x in ALL_TAGS if randint(0, 3) in [1, 2]]
             } for x in results]
         return {'results': json.dumps(results)}
 
