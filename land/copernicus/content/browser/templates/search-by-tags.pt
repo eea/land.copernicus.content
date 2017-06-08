@@ -434,8 +434,9 @@ angular.module('searchApp',
       app.items_per_page = items_number;
     }
 
-    app.natural_language_join = function(arr) {
-      return arr.slice(0,arr.length-1).join(", ") + " and " + arr[arr.length-1];
+    app.natural_language_join = function(array) {
+      // Nice format: tag1, tag2 and tag3
+      return array.concat(array.splice(-2, 2).join(' and ')).join(', ');
     }
 
     app.set_page_title = function() {
