@@ -120,6 +120,21 @@ PRODUCT_SCHEMA = Schema((
         searchable=False,
         schemata="default",
     ),
+    LinesField(
+        name='fileCategories',
+        languageIndependent=True,
+        required=False,
+        multiValued=1,
+        default=[],
+        schemata='default',
+        widget=LinesWidget(
+            size=15,
+            label="Categories for Download Files",
+            description=("One category per line. This is an important field "
+                         "used to manage possible columns in Download tab."),
+            i18n_domain='eea',
+        )
+    ),
     # METADATA ================================================================
     StringField(
         name='sectionTitleData',  # ===========================================
@@ -541,21 +556,6 @@ PRODUCT_SCHEMA = Schema((
         schemata="metadata",
         default_output_type="text/x-html-safe",
     ),
-    LinesField(
-        name='fileCategories',
-        languageIndependent=True,
-        required=False,
-        multiValued=1,
-        default=[],
-        schemata='metadata',
-        widget=LinesWidget(
-            size=15,
-            label="Categories for Download Files",
-            description=("One category per line. This is an important field "
-                         "used to manage possible columns in Download tab."),
-            i18n_domain='eea',
-        )
-    ),
 ))
 
 
@@ -602,7 +602,6 @@ PRODUCT_SCHEMA = Schema((
 #                                                 dataSources
 #                 deprecated fields? >            dataCustodians
 #                                                 descriptionDetailedMetadata
-#                                                 fileCategories
 # -----------------------------------------------------------------------------
 
 
@@ -650,7 +649,6 @@ def finalize_product_schema(schema):
         'dataSources',
         'dataCustodians',
         'descriptionDetailedMetadata',
-        'fileCategories',
     ]
 
     for field in meta_fields:
@@ -661,6 +659,7 @@ def finalize_product_schema(schema):
         if name not in fields:
             fields.append(name)
     schema._names = fields
+
 
 SCHEMA = atapi.Schema(())
 
