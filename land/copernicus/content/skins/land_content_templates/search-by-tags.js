@@ -14,18 +14,18 @@ angular.module('searchApp',
     app.items_per_page = 5;
     app.tags = [
       {
-        category: 1,
+        category: 2,
         title: 'Observations',
         id: 'observations',
-        tag_class: 'filter-btn btn btn-default label insitu-btn-observations',
-        btn_class: 'filter-btn btn btn-default btn-block insitu-btn-observations'
+        tag_class: 'filter-btn btn btn-default label insitu-btn-observations-small',
+        btn_class: 'filter-btn btn btn-default insitu-btn-observations-small'
       },
       {
-        category: 1,
+        category: 2,
         title: 'Spatial Data',
         id: 'spatial-data',
-        tag_class: 'filter-btn btn btn-default label insitu-btn-spatial-data',
-        btn_class: 'filter-btn btn btn-default btn-block insitu-btn-spatial-data'
+        tag_class: 'filter-btn btn btn-default label insitu-btn-spatial-data-small',
+        btn_class: 'filter-btn btn btn-default insitu-btn-spatial-data-small'
       },
       {
         category: 2,
