@@ -32,6 +32,43 @@
        </ng-pluralize> found.
       </p>
 
+      <!-- SEARCH CRITERIA -->
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"
+             ng-repeat="tag in app.get_tags(1)">
+          <a href class="{{tag.btn_class}} {{app.is_pressed(tag.id)}}"
+             ng-click="app.toggle_tag(tag.id)">
+            <img ng-src="./{{tag.id}}-icon.png" alt="{{tag.title}}">
+            <br>
+            <span class="text text-uppercase">{{tag.title}}</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <!-- Insitu Tags -->
+          <div class="insitu-btn-tags-container search-filters">
+            <div id="insitu-tags-1">
+              <a href
+                 ng-repeat="tag in app.get_tags(2)"
+                 ng-click="app.toggle_tag(tag.id)"
+                 class="{{tag.btn_class}} {{app.is_pressed(tag.id)}}">
+                {{tag.title}}
+              </a>
+            </div>
+            <div id="insitu-tags-2">
+              <a href
+                 ng-repeat="tag in app.get_tags(3)"
+                 ng-click="app.toggle_tag(tag.id)"
+                 class="{{tag.btn_class}} {{app.is_pressed(tag.id)}}">
+                {{tag.title}}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- SEARCH RESULTS -->
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -76,42 +113,6 @@
         </div>
       </div>
 
-      <!-- SEARCH CRITERIA -->
-      <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"
-             ng-repeat="tag in app.get_tags(1)">
-          <a href class="{{tag.btn_class}} {{app.is_pressed(tag.id)}}"
-             ng-click="app.toggle_tag(tag.id)">
-            <img ng-src="./{{tag.id}}-icon.png" alt="{{tag.title}}">
-            <br>
-            <span class="text text-uppercase">{{tag.title}}</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <!-- Insitu Tags -->
-          <div class="insitu-btn-tags-container search-filters text-center">
-            <div id="insitu-tags-1">
-              <a href
-                 ng-repeat="tag in app.get_tags(2)"
-                 ng-click="app.toggle_tag(tag.id)"
-                 class="{{tag.btn_class}} {{app.is_pressed(tag.id)}}">
-                {{tag.title}}
-              </a>
-            </div>
-            <div id="insitu-tags-2">
-              <a href
-                 ng-repeat="tag in app.get_tags(3)"
-                 ng-click="app.toggle_tag(tag.id)"
-                 class="{{tag.btn_class}} {{app.is_pressed(tag.id)}}">
-                {{tag.title}}
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
