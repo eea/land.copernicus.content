@@ -33,10 +33,6 @@
         &lt;description&gt;External link for this InProximity item.&lt;/description&gt;
         &lt;title&gt;External link&lt;/title&gt;
       &lt;/field&gt;
-      &lt;field name="long_description" type="plone.app.textfield.RichText"&gt;
-        &lt;description&gt;Description for this InProximity item.&lt;/description&gt;
-        &lt;title&gt;Description&lt;/title&gt;
-      &lt;/field&gt;
     &lt;/schema&gt;
   &lt;/model&gt;</property>
  <property name="model_file"></property>
