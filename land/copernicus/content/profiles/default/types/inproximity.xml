@@ -25,16 +25,8 @@
   <element value="plone.app.dexterity.behaviors.metadata.IDublinCore"/>
   <element value="plone.app.content.interfaces.INameFromTitle"/>
  </property>
- <property name="schema"></property>
- <property
-    name="model_source">&lt;model xmlns:i18n="http://xml.zope.org/namespaces/i18n" xmlns:security="http://namespaces.plone.org/supermodel/security" xmlns:marshal="http://namespaces.plone.org/supermodel/marshal" xmlns:form="http://namespaces.plone.org/supermodel/form" xmlns="http://namespaces.plone.org/supermodel/schema"&gt;
-    &lt;schema&gt;
-      &lt;field name="external_link" type="zope.schema.TextLine"&gt;
-        &lt;description&gt;External link for this InProximity item.&lt;/description&gt;
-        &lt;title&gt;External link&lt;/title&gt;
-      &lt;/field&gt;
-    &lt;/schema&gt;
-  &lt;/model&gt;</property>
+ <property name="schema">land.copernicus.content.content.interfaces.IInProximity</property>
+ <property name="model_source"></property>
  <property name="model_file"></property>
  <property name="schema_policy">dexterity</property>
  <alias from="(Default)" to="(dynamic view)"/>
