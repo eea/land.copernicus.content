@@ -20,7 +20,7 @@
       <script src="./search-by-tags.js"></script>
 
       <h1 class="search-page-title">{{app.set_page_title()}}</h1>
-      <h2 class="page-title">{{app.set_page_title()}} - page {{app.current_page}}</h2>
+      <h2 class="page-title">Filter by tags</h2>
       <p id="results" tal:content="python:view.do_search().get('results')"></p>
 
       <p class="found-results">
