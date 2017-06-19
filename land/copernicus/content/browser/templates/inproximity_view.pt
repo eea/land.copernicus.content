@@ -8,9 +8,8 @@
 
   <metal:content-core fill-slot="content-core">
     <metal:main_macro define-macro="content-core">
-      <h1 tal:content="python:context.title"></h1>
       <a href="" tal:attributes="href python:context.external_link">
-        <p tal:content="python:context.description"></p>
+        <p tal:content="python:context.description">Description / Summary</p>
       </a>
     </metal:main_macro>
   </metal:content-core>
