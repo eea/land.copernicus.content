@@ -32,7 +32,7 @@ class ILandFile(Interface):
 class IInProximity(Interface):
     """ In Proximity items are external links with description
     """
-    email = schema.TextLine(
+    external_link = schema.TextLine(
         title=u"External link",
         required=True,
         description=u"External link for this InProximity item."

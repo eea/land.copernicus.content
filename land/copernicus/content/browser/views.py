@@ -337,3 +337,15 @@ class ExportUsersXLS(BrowserView):
         )
 
         return xls_file.read()
+
+
+class InProximityView(BrowserView):
+    """ In Proximity item view
+    """
+    index = ViewPageTemplateFile("templates/inproximity_view.pt")
+
+    def render(self):
+        return self.index()
+
+    def __call__(self):
+        return self.render()

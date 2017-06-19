@@ -1,0 +1,18 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+  <metal:description fill-slot="content-description" />
+
+  <metal:content-core fill-slot="content-core">
+    <metal:main_macro define-macro="content-core">
+      <h1 tal:content="python:context.title"></h1>
+      <a href="" tal:attributes="href python:context.external_link">
+        <p tal:content="python:context.description"></p>
+      </a>
+    </metal:main_macro>
+  </metal:content-core>
+</body>
+</html>

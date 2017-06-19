@@ -71,6 +71,13 @@
     permission="zope2.View"
     />
 
+  <browser:page
+    name="view"
+    for="land.copernicus.content.content.interfaces.IInProximity"
+    class=".views.InProximityView"
+    permission="zope2.View"
+    />
+
   <browser:resource
     name="frozenEntrynoclick.js"
     file="frozenEntrynoclick.js"
