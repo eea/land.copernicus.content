@@ -208,7 +208,24 @@ class SearchByTags(BrowserView):
                 'url': x.getURL(),
                 'tags': self.format_tags(x['Subject'])
             } for x in results]
-        return {'results': json.dumps(results)}
+
+        inproximity_items = catalog.searchResults(
+            {
+                'portal_type': ['inproximity'],
+                'review_state': 'published'
+            }
+        )
+
+        inproximity_results = [
+            {
+                'title': x['Title'],
+                'description': x['Description'],
+                'id': x['id'],
+                'url': x.getObject().external_link,
+                'tags': self.format_tags(x.getObject().subject)
+            } for x in inproximity_items]
+
+        return {'results': json.dumps(results + inproximity_results)}
 
 
 class DownloadLandFileView(BrowserView):
