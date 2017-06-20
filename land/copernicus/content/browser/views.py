@@ -195,7 +195,7 @@ class SearchByTags(BrowserView):
         catalog = getToolByName(self.context, 'portal_catalog')
         results = catalog.searchResults(
             {
-                'portal_type': ['Event', 'News Item'],
+                'portal_type': ['Event', 'News Item', 'inproximity'],
                 'review_state': 'published'
             }
         )
@@ -205,27 +205,14 @@ class SearchByTags(BrowserView):
                 'title': x['Title'],
                 'description': x['Description'],
                 'id': x['id'],
-                'url': x.getURL(),
+                'url': x.getURL() if x['portal_type'] != 'inproximity'
+                else x.getObject().external_link,
                 'tags': self.format_tags(x['Subject'])
+                if x['portal_type'] != 'inproximity' else
+                self.format_tags(x.getObject().subject)
             } for x in results]
 
-        inproximity_items = catalog.searchResults(
-            {
-                'portal_type': ['inproximity'],
-                'review_state': 'published'
-            }
-        )
-
-        inproximity_results = [
-            {
-                'title': x['Title'],
-                'description': x['Description'],
-                'id': x['id'],
-                'url': x.getObject().external_link,
-                'tags': self.format_tags(x.getObject().subject)
-            } for x in inproximity_items]
-
-        return {'results': json.dumps(results + inproximity_results)}
+        return {'results': json.dumps(results)}
 
 
 class DownloadLandFileView(BrowserView):
