@@ -1,1 +1,21 @@
-Administration land files WIP
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+  <metal:description fill-slot="content-description" />
+
+  <metal:content-core fill-slot="content-core">
+    <metal:main_macro define-macro="content-core">
+      <p i18n:translate="">Admin land files.</p>
+      <div tal:define="list1 python:view.values.get('list1', '');
+                       list2 python:view.values.get('list2', '')">
+        <p tal:content="python:list1">List 1 test</p>
+        <p tal:content="python:list2">List 2 test</p>
+      </div>
+
+    </metal:main_macro>
+  </metal:content-core>
+</body>
+</html>
