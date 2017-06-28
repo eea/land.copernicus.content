@@ -64,6 +64,14 @@
     permission="cmf.ManagePortal"
     />
 
+  <browser:page
+    name="admin_land_files"
+    for="land.copernicus.content.content.landitem.LandItem"
+    class=".views.AdminLandFilesView"
+    permission="zope2.View"
+    />
+    <!-- TODO ^^ fix permission before deploy ^^ -->
+
   <browser:resource
     name="frozenEntrynoclick.js"
     file="frozenEntrynoclick.js"

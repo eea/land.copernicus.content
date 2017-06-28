@@ -62,13 +62,15 @@ class LandProductInlineView(BrowserView):
 class GoPDB(BrowserView):
     def __call__(self):
 
-        import pdb; pdb.set_trace()
+        import pdb
+        pdb.set_trace()
         return "done"
 
 
 def remoteUrl_exists(location):
     try:
         res = subprocess.check_call(['/usr/bin/curl', '-I', '-f', location])
+        res = res
         return True
     except subprocess.CalledProcessError:
         return False
@@ -286,3 +288,23 @@ class ExportUsersXLS(BrowserView):
         )
 
         return xls_file.read()
+
+
+class AdminLandFilesView(BrowserView):
+    """ Administration view for land files of a land item
+    """
+    index = ViewPageTemplateFile("templates/admin-land-files.pt")
+
+    def render(self):
+        return self.index()
+
+    def __call__(self):
+        return self.render()
+
+    @property
+    def values(self):
+        # some demo values
+        list1 = [1, 2, 3, 4]
+        list2 = ['a', 'b', 'c']
+        return {'list1': list1,
+                'list2': list2}
