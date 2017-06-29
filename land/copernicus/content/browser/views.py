@@ -315,31 +315,53 @@ class AdminLandFilesView(BrowserView):
             u"Success on " + action + " " + item + " " + details + ".",
             type=u"info")
 
-    def __call__(self):
-        if 'submit' in self.request.form:
-            action = self.request.form.get('inlineRadioOptions', None)
-            txt_file = self.request.form.get('file', None)
-            textarea = self.request.form.get('textarea', None)
-            action = action
-            txt_file = txt_file
-            textarea = textarea
+    def do_get(self, title):
+        """ Get information about a landfile
+            Input: landfile title
+                Output:
+                Title
+                Description
+                Download URL
+                Tags
+        """
+        return {
+            'title': title,
+            'description': 'description here',
+            'download_url': 'download url here',
+            'tags': '(tagname, tagvalue), (tagname, tagvalue)',
+            'status': 'success'
+        }
 
-            demo_title1 = "Land file 1"
-            demo_title2 = "Land file 2"
-            demo_title3 = "Land file 3"
-            details1 = "because of wrong title"
-            details2 = "http://...landfile"
-            self.show_error(demo_title1, action, details1)
-            self.show_info(demo_title1, action, details2)
-            self.show_error(demo_title2, action, details1)
-            self.show_info(demo_title2, action, details2)
-            self.show_info(demo_title3, action, details2)
+    def do_operations(self):
+        """ Do the requested operation by form
+        """
+        action = self.request.form.get('inlineRadioOptions', None)
+        txt_file = self.request.form.get('file', None)
+        textarea = self.request.form.get('textarea', None)
+        action = action
+        txt_file = txt_file
+        textarea = textarea
+
+        demo_title1 = "Land file 1"
+        demo_title2 = "Land file 2"
+        demo_title3 = "Land file 3"
+        details1 = "because of wrong title"
+        details2 = "http://...landfile"
+        self.show_error(demo_title1, action, details1)
+        self.show_info(demo_title1, action, details2)
+        self.show_error(demo_title2, action, details1)
+        self.show_info(demo_title2, action, details2)
+        self.show_info(demo_title3, action, details2)
+
+        output_json = self.do_get(demo_title1)
+        return output_json
+
+    def __call__(self):
+        self.output_json = {}
+        if 'submit' in self.request.form:
+            self.output_json = self.do_operations()
         return self.render()
 
     @property
     def values(self):
-        # some demo values
-        list1 = [1, 2, 3, 4]
-        list2 = ['a', 'b', 'c']
-        return {'list1': list1,
-                'list2': list2}
+        return {'output_json': self.output_json}

@@ -15,6 +15,10 @@
         <p tal:content="python:list2">List 2 test</p>
       </div>
 
+      <p tal:content="python:view.values.get('output_json', 'No JSON.')">
+        Output json
+      </p>
+
       <form enctype="multipart/form-data" method="post">
         <div class="form-group">
           <label for="radioButtons">Select action:</label>
