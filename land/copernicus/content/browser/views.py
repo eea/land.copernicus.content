@@ -318,19 +318,28 @@ class AdminLandFilesView(BrowserView):
     def do_get(self, title):
         """ Get information about a landfile
             Input: landfile title
-                Output:
-                Title
-                Description
-                Download URL
-                Tags
+            Output: json containg landfile details
         """
-        return {
+        landfiles = self.context.getFolderContents(
+            contentFilter={
+                'portal_type': 'LandFile'
+            }
+        )
+        landfile = [x for x in landfiles if x.Title == title]
+        result = {
             'title': title,
-            'description': 'description here',
-            'download_url': 'download url here',
-            'tags': '(tagname, tagvalue), (tagname, tagvalue)',
-            'status': 'success'
+            'status': 'error'
         }
+        if len(landfile) > 0:
+            landfile = landfile[0].getObject()
+            result['status'] = 'success'
+            result['id'] = landfile.id
+            result['description'] = landfile.description
+            result['download_url'] = landfile.remoteUrl
+            result['categorization_tags'] = landfile.fileCategories
+            result['size'] = landfile.fileSize
+            result['url'] = landfile.absolute_url()
+        return result
 
     def do_operations(self):
         """ Do the requested operation by form
@@ -342,7 +351,7 @@ class AdminLandFilesView(BrowserView):
         txt_file = txt_file
         textarea = textarea
 
-        demo_title1 = "Land file 1"
+        demo_title1 = "Alba Iulia"
         demo_title2 = "Land file 2"
         demo_title3 = "Land file 3"
         details1 = "because of wrong title"
