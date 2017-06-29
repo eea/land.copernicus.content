@@ -11,6 +11,7 @@ from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
 import subprocess
 import xlwt
+import json
 
 
 def is_EIONET_member(member):
@@ -351,9 +352,11 @@ class AdminLandFilesView(BrowserView):
 
         if result['status'] == ACTION_SUCCESS:
             self.show_info(title, ACTION_GET, result['url'])
+
         if result['status'] == ACTION_ERROR:
             self.show_error(
                 title, ACTION_GET, '. No item with this title found')
+
         return result
 
     def do_post(self, title):
@@ -377,6 +380,7 @@ class AdminLandFilesView(BrowserView):
         action = action
         txt_file = txt_file
         textarea = textarea
+
         if action == ACTION_GET:
             landfiles = textarea.split(',')
             output_json = []
@@ -386,7 +390,7 @@ class AdminLandFilesView(BrowserView):
             output_json = self.do_delete("Alba Iulia")
             output_json = self.do_post("Alba Iulia")
             output_json = self.do_put("Alba Iulia")
-        return output_json
+        return json.dumps(output_json)
 
     def __call__(self):
         self.output_json = {}
