@@ -291,6 +291,15 @@ class ExportUsersXLS(BrowserView):
         return xls_file.read()
 
 
+ACTION_GET = 'get'
+ACTION_POST = 'post'
+ACTION_PUT = 'put'
+ACTION_DELETE = 'delete'
+ACTION_SUCCESS = 'success'
+ACTION_ERROR = 'error'
+ACTION_INFO = 'info'
+
+
 class AdminLandFilesView(BrowserView):
     """ Administration view for land files of a land item
     """
@@ -305,7 +314,7 @@ class AdminLandFilesView(BrowserView):
         messages = IStatusMessage(self.request)
         messages.add(
             u"Error on " + action + " " + item + " " + details + ".",
-            type=u"error")
+            type=ACTION_ERROR)
 
     def show_info(self, item, action, details):
         """ Show an info message related to an action for a land file
@@ -313,7 +322,7 @@ class AdminLandFilesView(BrowserView):
         messages = IStatusMessage(self.request)
         messages.add(
             u"Success on " + action + " " + item + " " + details + ".",
-            type=u"info")
+            type=ACTION_INFO)
 
     def do_get(self, title):
         """ Get information about a landfile
@@ -328,18 +337,36 @@ class AdminLandFilesView(BrowserView):
         landfile = [x for x in landfiles if x.Title == title]
         result = {
             'title': title,
-            'status': 'error'
+            'status': ACTION_ERROR
         }
         if len(landfile) > 0:
             landfile = landfile[0].getObject()
-            result['status'] = 'success'
+            result['status'] = ACTION_SUCCESS
             result['id'] = landfile.id
             result['description'] = landfile.description
             result['download_url'] = landfile.remoteUrl
             result['categorization_tags'] = landfile.fileCategories
             result['size'] = landfile.fileSize
             result['url'] = landfile.absolute_url()
+
+        if result['status'] == ACTION_SUCCESS:
+            self.show_info(title, ACTION_GET, result['url'])
+        if result['status'] == ACTION_ERROR:
+            self.show_error(
+                title, ACTION_GET, '. No item with this title found')
         return result
+
+    def do_post(self, title):
+        self.show_error(title, ACTION_POST, "[TODO]")
+        return {}
+
+    def do_put(self, title):
+        self.show_error(title, ACTION_PUT, "[TODO]")
+        return {}
+
+    def do_delete(self, title):
+        self.show_error(title, ACTION_DELETE, "[TODO]")
+        return {}
 
     def do_operations(self):
         """ Do the requested operation by form
@@ -351,18 +378,10 @@ class AdminLandFilesView(BrowserView):
         txt_file = txt_file
         textarea = textarea
 
-        demo_title1 = "Alba Iulia"
-        demo_title2 = "Land file 2"
-        demo_title3 = "Land file 3"
-        details1 = "because of wrong title"
-        details2 = "http://...landfile"
-        self.show_error(demo_title1, action, details1)
-        self.show_info(demo_title1, action, details2)
-        self.show_error(demo_title2, action, details1)
-        self.show_info(demo_title2, action, details2)
-        self.show_info(demo_title3, action, details2)
-
-        output_json = self.do_get(demo_title1)
+        output_json = self.do_delete("Alba Iulia")
+        output_json = self.do_post("Alba Iulia")
+        output_json = self.do_put("Alba Iulia")
+        output_json = self.do_get("Alba Iulia")
         return output_json
 
     def __call__(self):
