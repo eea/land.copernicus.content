@@ -355,7 +355,7 @@ class AdminLandFilesView(BrowserView):
 
         if result['status'] == ACTION_ERROR:
             self.show_error(
-                title, ACTION_GET, '. No item with this title found')
+                title, ACTION_GET, '- No item with this title found')
 
         return result
 
@@ -381,8 +381,9 @@ class AdminLandFilesView(BrowserView):
         txt_file = txt_file
         textarea = textarea
 
+        # [TODO] Fix unicode errors
         if action == ACTION_GET:
-            landfiles = textarea.split(',')
+            landfiles = txt_file.read().splitlines()
             output_json = []
             for landfile in landfiles:
                 output_json.append(self.do_get(landfile))
