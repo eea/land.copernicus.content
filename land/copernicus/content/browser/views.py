@@ -377,11 +377,15 @@ class AdminLandFilesView(BrowserView):
         action = action
         txt_file = txt_file
         textarea = textarea
-
-        output_json = self.do_delete("Alba Iulia")
-        output_json = self.do_post("Alba Iulia")
-        output_json = self.do_put("Alba Iulia")
-        output_json = self.do_get("Alba Iulia")
+        if action == ACTION_GET:
+            landfiles = textarea.split(',')
+            output_json = []
+            for landfile in landfiles:
+                output_json.append(self.do_get(landfile))
+        else:
+            output_json = self.do_delete("Alba Iulia")
+            output_json = self.do_post("Alba Iulia")
+            output_json = self.do_put("Alba Iulia")
         return output_json
 
     def __call__(self):
