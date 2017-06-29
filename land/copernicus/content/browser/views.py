@@ -5,6 +5,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.PloneBatch import Batch
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.statusmessages.interfaces import IStatusMessage
 from StringIO import StringIO
 from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
@@ -298,6 +299,22 @@ class AdminLandFilesView(BrowserView):
     def render(self):
         return self.index()
 
+    def show_error(self, item, action, details):
+        """ Show an error message related to an action for a land file
+        """
+        messages = IStatusMessage(self.request)
+        messages.add(
+            u"Error on " + action + " " + item + " " + details + ".",
+            type=u"error")
+
+    def show_info(self, item, action, details):
+        """ Show an info message related to an action for a land file
+        """
+        messages = IStatusMessage(self.request)
+        messages.add(
+            u"Success on " + action + " " + item + " " + details + ".",
+            type=u"info")
+
     def __call__(self):
         if 'submit' in self.request.form:
             action = self.request.form.get('inlineRadioOptions', None)
@@ -306,6 +323,17 @@ class AdminLandFilesView(BrowserView):
             action = action
             txt_file = txt_file
             textarea = textarea
+
+            demo_title1 = "Land file 1"
+            demo_title2 = "Land file 2"
+            demo_title3 = "Land file 3"
+            details1 = "because of wrong title"
+            details2 = "http://...landfile"
+            self.show_error(demo_title1, action, details1)
+            self.show_info(demo_title1, action, details2)
+            self.show_error(demo_title2, action, details1)
+            self.show_info(demo_title2, action, details2)
+            self.show_info(demo_title3, action, details2)
         return self.render()
 
     @property
