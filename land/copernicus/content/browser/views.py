@@ -351,7 +351,7 @@ class AdminLandFilesView(BrowserView):
             result['url'] = landfile.absolute_url()
 
         if result['status'] == ACTION_SUCCESS:
-            self.show_info(title, ACTION_GET, result['url'])
+            self.show_info(title, ACTION_GET, "- " + result['url'])
 
         if result['status'] == ACTION_ERROR:
             self.show_error(
