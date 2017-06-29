@@ -299,6 +299,13 @@ class AdminLandFilesView(BrowserView):
         return self.index()
 
     def __call__(self):
+        if 'submit' in self.request.form:
+            action = self.request.form.get('inlineRadioOptions', None)
+            txt_file = self.request.form.get('file', None)
+            textarea = self.request.form.get('textarea', None)
+            action = action
+            txt_file = txt_file
+            textarea = textarea
         return self.render()
 
     @property
