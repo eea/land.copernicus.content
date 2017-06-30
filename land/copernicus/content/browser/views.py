@@ -375,9 +375,16 @@ class AdminLandFilesView(BrowserView):
             Output: title, status (error or success)
             Also show error or info message
         """
-        # TODO import pdb; pdb.set_trace()
-        self.show_error(title, ACTION_POST, "[TODO]")
-        return {}
+        result = {}
+        try:
+            api.content.create(
+                container=self.context, type='LandFile', title=title,
+                description=description, remoteUrl=download_url)
+            result = self.do_get(title)
+            self.show_info(title, ACTION_POST, "- " + result['url'])
+        except Exception:
+            self.show_error(title, ACTION_POST, "- landfile not created.")
+        return result
 
     def do_put(self, title):
         self.show_error(title, ACTION_PUT, "[TODO]")
