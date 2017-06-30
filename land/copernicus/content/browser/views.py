@@ -350,8 +350,9 @@ class AdminLandFilesView(BrowserView):
         if len(landfile) > 0:
             landfile = landfile[0].getObject()
             result['status'] = ACTION_SUCCESS
+            result['title'] = landfile.Title().decode('utf8')
             result['id'] = landfile.id
-            result['description'] = landfile.description
+            result['description'] = landfile.Description().decode('utf8')
             result['download_url'] = landfile.remoteUrl
             result['categorization_tags'] = landfile.fileCategories
             result['size'] = landfile.fileSize
@@ -397,7 +398,7 @@ class AdminLandFilesView(BrowserView):
             output_json = self.do_delete("Alba Iulia")
             output_json = self.do_post("Alba Iulia")
             output_json = self.do_put("Alba Iulia")
-        return json.dumps(output_json)
+        return json.dumps(output_json, ensure_ascii=False).encode('utf8')
 
     def __call__(self):
         self.output_json = {}
