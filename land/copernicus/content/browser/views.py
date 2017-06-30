@@ -3,6 +3,7 @@ from DateTime import DateTime
 from plone import api
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.PloneBatch import Batch
+from Products.CMFPlone.utils import safe_unicode
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
@@ -314,16 +315,22 @@ class AdminLandFilesView(BrowserView):
         """
         messages = IStatusMessage(self.request)
         messages.add(
-            u"Error on " + action + " " + item + " " + details + ".",
-            type=ACTION_ERROR)
+            u"""Error on {action} {item} {details}""".format(
+                action=safe_unicode(action),
+                item=safe_unicode(item),
+                details=safe_unicode(details)
+            ), type=ACTION_ERROR)
 
     def show_info(self, item, action, details):
         """ Show an info message related to an action for a land file
         """
         messages = IStatusMessage(self.request)
         messages.add(
-            u"Success on " + action + " " + item + " " + details + ".",
-            type=ACTION_INFO)
+            u"""Success on {action} {item} {details}""".format(
+                action=safe_unicode(action),
+                item=safe_unicode(item),
+                details=safe_unicode(details)
+            ), type=ACTION_INFO)
 
     def do_get(self, title):
         """ Get information about a landfile
