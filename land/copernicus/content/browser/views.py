@@ -333,7 +333,7 @@ class AdminLandFilesView(BrowserView):
                 details=safe_unicode(details)
             ), type=ACTION_INFO)
 
-    def do_get(self, title):
+    def do_get(self, title, logs=True):
         """ Get information about a landfile
             Input: landfile title
             Output: dict containing landfile details
@@ -360,16 +360,17 @@ class AdminLandFilesView(BrowserView):
             result['size'] = landfile.fileSize
             result['url'] = landfile.absolute_url()
 
-        if result['status'] == ACTION_SUCCESS:
+        if result['status'] == ACTION_SUCCESS and logs is True:
             self.show_info(title, ACTION_GET, "- " + result['url'])
 
-        if result['status'] == ACTION_ERROR:
+        if result['status'] == ACTION_ERROR and logs is True:
             self.show_error(
                 title, ACTION_GET, '- No item with this title found')
 
         return result
 
-    def do_post(self, title, description, download_url, categorization_tags):
+    def do_post(self, title, description, download_url, categorization_tags,
+                logs=True):
         """ Create a landfile item
             Input: fields values
             Output: title, status (error or success)
@@ -384,13 +385,15 @@ class AdminLandFilesView(BrowserView):
             api.content.create(
                 container=self.context, type='LandFile', title=title,
                 description=description, remoteUrl=download_url)
-            self.show_info(title, ACTION_POST, "")
+            if logs is True:
+                self.show_info(title, ACTION_POST, "")
         except Exception:
             result['status'] = ACTION_ERROR
-            self.show_error(title, ACTION_POST, "- landfile not created.")
+            if logs is True:
+                self.show_error(title, ACTION_POST, "- landfile not created.")
         return result
 
-    def do_delete(self, title):
+    def do_delete(self, title, logs=True):
         """ Delete all landfiles with given title
             Input: landfile title
             Output: title, status
@@ -412,20 +415,25 @@ class AdminLandFilesView(BrowserView):
                 result['title'] = landfile.Title().decode('utf8')
                 url = landfile.absolute_url()
                 self.context.manage_delObjects([landfile.id])
-                self.show_info(title, ACTION_DELETE, "- " + url)
+                if logs is True:
+                    self.show_info(title, ACTION_DELETE, "- " + url)
         else:
             result['status'] = ACTION_ERROR
-            self.show_error(
-                title, ACTION_DELETE, '- No items with this title found')
+            if logs is True:
+                self.show_error(
+                    title, ACTION_DELETE, '- No items with this title found')
 
         return result
 
-    def do_put(self, title, description, download_url, categorization_tags):
+    def do_put(self, title, description, download_url, categorization_tags,
+               logs=True):
         """ Replace a landfile
         """
-        del_result = self.do_delete(title)
+        del_result = self.do_delete(title, logs=False)
         if del_result['status'] == ACTION_ERROR:
-            self.show_error(title, ACTION_PUT, '- Cannot delete old landfile')
+            if logs is True:
+                self.show_error(
+                    title, ACTION_PUT, '- Cannot delete old landfile')
             return {
                 'title': title.decode('utf8'),
                 'status': ACTION_ERROR
@@ -434,18 +442,20 @@ class AdminLandFilesView(BrowserView):
             create_result = self.do_post(
                 title=title, description=description,
                 download_url=download_url,
-                categorization_tags=categorization_tags)
+                categorization_tags=categorization_tags, logs=False)
 
             if create_result['status'] == ACTION_ERROR:
-                self.show_error(
-                    title, ACTION_PUT, '- Cannot create new landfile')
+                if logs is True:
+                    self.show_error(
+                        title, ACTION_PUT, '- Cannot create new landfile')
                 return {
                     'title': title.decode('utf8'),
                     'status': ACTION_ERROR
                 }
             else:
-                self.show_info(
-                    title, ACTION_PUT, '- Landfile replaced')
+                if logs is True:
+                    self.show_info(
+                        title, ACTION_PUT, '- Landfile replaced')
                 return {
                     'title': title.decode('utf8'),
                     'status': ACTION_SUCCESS
