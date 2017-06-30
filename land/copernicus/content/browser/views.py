@@ -374,6 +374,7 @@ class AdminLandFilesView(BrowserView):
             Input: fields values
             Output: title, status (error or success)
             Also show error or info message
+            [TODO] Add tags
         """
         result = {
             'title': title.decode('utf8'),
@@ -394,8 +395,33 @@ class AdminLandFilesView(BrowserView):
         return {}
 
     def do_delete(self, title):
-        self.show_error(title, ACTION_DELETE, "[TODO]")
-        return {}
+        """ Delete landfile
+            Input: landfile title
+            Output: title, status
+            Also show error or info message
+        """
+        landfile = self.context.getFolderContents(
+            contentFilter={
+                'portal_type': 'LandFile',
+                'Title': title
+            }
+        )
+        result = {
+            'title': title.decode('utf8'),
+            'status': ACTION_SUCCESS
+        }
+        if len(landfile) > 0:
+            landfile = landfile[0].getObject()
+            result['title'] = landfile.Title().decode('utf8')
+            url = landfile.absolute_url()
+            self.context.manage_delObjects([landfile.id])
+            self.show_info(title, ACTION_DELETE, "- " + url)
+        else:
+            result['status'] = ACTION_ERROR
+            self.show_error(
+                title, ACTION_DELETE, '- No items with this title found')
+
+        return result
 
     def do_operations(self):
         """ Do the requested operation by form
@@ -414,7 +440,13 @@ class AdminLandFilesView(BrowserView):
                         output_json, ensure_ascii=False).encode('utf8')
 
             elif action == ACTION_DELETE:
-                result = self.do_delete("Alba Iulia")
+                # DELETE a list of landfiles
+                landfiles = txt_file.read().splitlines()
+                output_json = []
+                for landfile in landfiles:
+                    output_json.append(self.do_delete(landfile))
+                result = json.dumps(
+                        output_json, ensure_ascii=False).encode('utf8')
 
             elif action == ACTION_POST:
                 # CREATE landfiles
