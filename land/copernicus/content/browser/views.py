@@ -300,6 +300,7 @@ ACTION_DELETE = 'delete'
 ACTION_SUCCESS = 'success'
 ACTION_ERROR = 'error'
 ACTION_INFO = 'info'
+ACTION_EVALUATE = 'evaluate'
 
 
 class AdminLandFilesView(BrowserView):
@@ -344,7 +345,7 @@ class AdminLandFilesView(BrowserView):
             }
         )
         result = {
-            'title': title,
+            'title': safe_unicode(title),
             'status': ACTION_ERROR
         }
         if len(landfile) > 0:
@@ -384,21 +385,36 @@ class AdminLandFilesView(BrowserView):
         """
         action = self.request.form.get('inlineRadioOptions', None)
         txt_file = self.request.form.get('file', None)
-        textarea = self.request.form.get('textarea', None)
-        action = action
-        txt_file = txt_file
-        textarea = textarea
 
-        if action == ACTION_GET:
-            landfiles = txt_file.read().splitlines()
-            output_json = []
-            for landfile in landfiles:
-                output_json.append(self.do_get(landfile))
+        if txt_file.filename is not '':
+            if action == ACTION_GET:
+                landfiles = txt_file.read().splitlines()
+                output_json = []
+                for landfile in landfiles:
+                    output_json.append(self.do_get(landfile))
+                result = json.dumps(
+                        output_json, ensure_ascii=False).encode('utf8')
+
+            elif action == ACTION_DELETE:
+                result = self.do_delete("Alba Iulia")
+
+            elif action == ACTION_POST:
+                result = self.do_post("Alba Iulia")
+
+            elif action == ACTION_PUT:
+                result = self.do_put("Alba Iulia")
+
+            else:
+                result = {}
+                self.show_error(
+                    action, ACTION_EVALUATE,
+                    " - missing action. Use radio buttons to select one.")
         else:
-            output_json = self.do_delete("Alba Iulia")
-            output_json = self.do_post("Alba Iulia")
-            output_json = self.do_put("Alba Iulia")
-        return json.dumps(output_json, ensure_ascii=False).encode('utf8')
+            result = {}
+            self.show_error(
+                txt_file.filename, ACTION_EVALUATE,
+                " - missing text file. Use file input to upload it.")
+        return result
 
     def __call__(self):
         self.output_json = {}
