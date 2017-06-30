@@ -336,7 +336,8 @@ class AdminLandFilesView(BrowserView):
     def do_get(self, title):
         """ Get information about a landfile
             Input: landfile title
-            Output: json containg landfile details
+            Output: dict containing landfile details
+            Also show error or info msg
         """
         landfile = self.context.getFolderContents(
             contentFilter={
@@ -368,7 +369,13 @@ class AdminLandFilesView(BrowserView):
 
         return result
 
-    def do_post(self, title):
+    def do_post(self, title, description, download_url, categorization_tags):
+        """ Create a landfile item
+            Input: fields values
+            Output: title, status (error or success)
+            Also show error or info message
+        """
+        # TODO import pdb; pdb.set_trace()
         self.show_error(title, ACTION_POST, "[TODO]")
         return {}
 
@@ -388,6 +395,7 @@ class AdminLandFilesView(BrowserView):
 
         if txt_file.filename is not '':
             if action == ACTION_GET:
+                # GET info for a list of landfiles
                 landfiles = txt_file.read().splitlines()
                 output_json = []
                 for landfile in landfiles:
@@ -399,7 +407,18 @@ class AdminLandFilesView(BrowserView):
                 result = self.do_delete("Alba Iulia")
 
             elif action == ACTION_POST:
-                result = self.do_post("Alba Iulia")
+                # CREATE landfiles
+                lines = txt_file.read().splitlines()
+                landfiles = [lines[i:i + 4] for i in xrange(0, len(lines), 4)]
+                result = []
+                for landfile in landfiles:
+                    a_result = self.do_post(
+                        title=landfile[0],
+                        description=landfile[1],
+                        download_url=landfile[2],
+                        categorization_tags=landfile[3]
+                        )
+                    result.append(a_result)
 
             elif action == ACTION_PUT:
                 result = self.do_put("Alba Iulia")
