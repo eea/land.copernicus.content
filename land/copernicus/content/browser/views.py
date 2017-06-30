@@ -330,12 +330,12 @@ class AdminLandFilesView(BrowserView):
             Input: landfile title
             Output: json containg landfile details
         """
-        landfiles = self.context.getFolderContents(
+        landfile = self.context.getFolderContents(
             contentFilter={
-                'portal_type': 'LandFile'
+                'portal_type': 'LandFile',
+                'Title': title
             }
         )
-        landfile = [x for x in landfiles if x.Title == title]
         result = {
             'title': title,
             'status': ACTION_ERROR
@@ -381,7 +381,6 @@ class AdminLandFilesView(BrowserView):
         txt_file = txt_file
         textarea = textarea
 
-        # [TODO] Fix unicode errors
         if action == ACTION_GET:
             landfiles = txt_file.read().splitlines()
             output_json = []
