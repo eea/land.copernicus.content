@@ -376,7 +376,7 @@ class AdminLandFilesView(BrowserView):
             Also show error or info message
         """
         result = {
-            'title': title,
+            'title': title.decode('utf8'),
             'status': ACTION_SUCCESS
         }
         try:
@@ -429,6 +429,8 @@ class AdminLandFilesView(BrowserView):
                         categorization_tags=landfile[3]
                         )
                     result.append(a_result)
+                result = json.dumps(
+                     result, ensure_ascii=False).encode('utf8')
 
             elif action == ACTION_PUT:
                 result = self.do_put("Alba Iulia")
