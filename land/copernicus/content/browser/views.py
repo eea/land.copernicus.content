@@ -432,7 +432,8 @@ class AdminLandFilesView(BrowserView):
             }
         else:
             create_result = self.do_post(
-                title=title, descrption=description, download_url=download_url,
+                title=title, description=description,
+                download_url=download_url,
                 categorization_tags=categorization_tags)
 
             if create_result['status'] == ACTION_ERROR:
