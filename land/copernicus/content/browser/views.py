@@ -390,10 +390,6 @@ class AdminLandFilesView(BrowserView):
             self.show_error(title, ACTION_POST, "- landfile not created.")
         return result
 
-    def do_put(self, title):
-        self.show_error(title, ACTION_PUT, "[TODO]")
-        return {}
-
     def do_delete(self, title):
         """ Delete all landfiles with given title
             Input: landfile title
@@ -423,6 +419,36 @@ class AdminLandFilesView(BrowserView):
                 title, ACTION_DELETE, '- No items with this title found')
 
         return result
+
+    def do_put(self, title, description, download_url, categorization_tags):
+        """ Replace a landfile
+        """
+        del_result = self.do_delete(title)
+        if del_result['status'] == ACTION_ERROR:
+            self.show_error(title, ACTION_PUT, '- Cannot delete old landfile')
+            return {
+                'title': title.decode('utf8'),
+                'status': ACTION_ERROR
+            }
+        else:
+            create_result = self.do_post(
+                title=title, descrption=description, download_url=download_url,
+                categorization_tags=categorization_tags)
+
+            if create_result['status'] == ACTION_ERROR:
+                self.show_error(
+                    title, ACTION_PUT, '- Cannot create new landfile')
+                return {
+                    'title': title.decode('utf8'),
+                    'status': ACTION_ERROR
+                }
+            else:
+                self.show_info(
+                    title, ACTION_PUT, '- Landfile replaced')
+                return {
+                    'title': title.decode('utf8'),
+                    'status': ACTION_SUCCESS
+                }
 
     def do_operations(self):
         """ Do the requested operation by form
@@ -466,7 +492,20 @@ class AdminLandFilesView(BrowserView):
                      result, ensure_ascii=False).encode('utf8')
 
             elif action == ACTION_PUT:
-                result = self.do_put("Alba Iulia")
+                # UPDATE landfiles
+                lines = txt_file.read().splitlines()
+                landfiles = [lines[i:i + 4] for i in xrange(0, len(lines), 4)]
+                result = []
+                for landfile in landfiles:
+                    a_result = self.do_put(
+                        title=landfile[0],
+                        description=landfile[1],
+                        download_url=landfile[2],
+                        categorization_tags=landfile[3]
+                        )
+                    result.append(a_result)
+                result = json.dumps(
+                     result, ensure_ascii=False).encode('utf8')
 
             else:
                 result = {}
