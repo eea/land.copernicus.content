@@ -375,14 +375,17 @@ class AdminLandFilesView(BrowserView):
             Output: title, status (error or success)
             Also show error or info message
         """
-        result = {}
+        result = {
+            'title': title,
+            'status': ACTION_SUCCESS
+        }
         try:
             api.content.create(
                 container=self.context, type='LandFile', title=title,
                 description=description, remoteUrl=download_url)
-            result = self.do_get(title)
-            self.show_info(title, ACTION_POST, "- " + result['url'])
+            self.show_info(title, ACTION_POST, "")
         except Exception:
+            result['status'] = ACTION_ERROR
             self.show_error(title, ACTION_POST, "- landfile not created.")
         return result
 
