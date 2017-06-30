@@ -395,12 +395,12 @@ class AdminLandFilesView(BrowserView):
         return {}
 
     def do_delete(self, title):
-        """ Delete landfile
+        """ Delete all landfiles with given title
             Input: landfile title
             Output: title, status
             Also show error or info message
         """
-        landfile = self.context.getFolderContents(
+        landfiles = self.context.getFolderContents(
             contentFilter={
                 'portal_type': 'LandFile',
                 'Title': title
@@ -410,12 +410,13 @@ class AdminLandFilesView(BrowserView):
             'title': title.decode('utf8'),
             'status': ACTION_SUCCESS
         }
-        if len(landfile) > 0:
-            landfile = landfile[0].getObject()
-            result['title'] = landfile.Title().decode('utf8')
-            url = landfile.absolute_url()
-            self.context.manage_delObjects([landfile.id])
-            self.show_info(title, ACTION_DELETE, "- " + url)
+        if len(landfiles) > 0:
+            for a_landfile in landfiles:
+                landfile = a_landfile.getObject()
+                result['title'] = landfile.Title().decode('utf8')
+                url = landfile.absolute_url()
+                self.context.manage_delObjects([landfile.id])
+                self.show_info(title, ACTION_DELETE, "- " + url)
         else:
             result['status'] = ACTION_ERROR
             self.show_error(
