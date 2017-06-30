@@ -8,16 +8,17 @@
 
   <metal:content-core fill-slot="content-core">
     <metal:main_macro define-macro="content-core">
-      <p i18n:translate="">Admin land files.</p>
+      <h2 i18n:translate="">Admin land files.</h2>
       <div tal:define="list1 python:view.values.get('list1', '');
                        list2 python:view.values.get('list2', '')">
         <p tal:content="python:list1">List 1 test</p>
         <p tal:content="python:list2">List 2 test</p>
       </div>
 
-      <p tal:content="python:view.values.get('output_json', 'No JSON.')">
-        Output json
-      </p>
+      <p>Output JSON:</p>
+      <textarea class="form-control" rows="5" id="comment"
+        tal:content="python:view.values.get('output_json', 'No JSON.')">
+      </textarea>
 
       <form enctype="multipart/form-data" method="post">
         <div class="form-group">
@@ -51,11 +52,6 @@
           <p class="help-block">
             DELETE: Retrieve information of all or specified land files<Paste>
           </p>
-        </div>
-
-        <div class="form-group">
-          <label for="textarea">WIP Paste here the file content</label>
-          <textarea name="textarea" class="form-control" rows="3"></textarea>
         </div>
 
         <div class="form-group">
