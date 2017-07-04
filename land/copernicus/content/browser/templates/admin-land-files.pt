@@ -8,17 +8,16 @@
 
   <metal:content-core fill-slot="content-core">
     <metal:main_macro define-macro="content-core">
-      <h2 i18n:translate="">Admin land files.</h2>
+      <h2 i18n:translate="">Land files administration</h2>
+      <p>Use options below to get, publish, edit or delete landfiles in this
+      context. Select the action, upload the txt file (make sure it has the
+      correct structure), then submit. Please wait until the operations are
+      done. Do not reload the page in this time.</p>
       <div tal:define="list1 python:view.values.get('list1', '');
                        list2 python:view.values.get('list2', '')">
         <p tal:content="python:list1">List 1 test</p>
         <p tal:content="python:list2">List 2 test</p>
       </div>
-
-      <p>Output JSON:</p>
-      <textarea class="form-control" rows="5" id="comment"
-        tal:content="python:view.values.get('output_json', 'No JSON.')">
-      </textarea>
 
       <form enctype="multipart/form-data" method="post">
         <div class="form-group">
@@ -64,6 +63,27 @@
           Submit
         </button>
       </form>
+
+      <h2>Output JSON:</h2>
+      <p>The result of submitted operations in json format.</p>
+      <textarea class="form-control" rows="5" id="comment"
+        tal:content="python:view.values.get('output_json', 'No JSON.')">
+      </textarea>
+
+      <h2>Examples:</h2>
+      <h3>GET or DELETE</h3>
+      <p>Land_File_Title 1</p>
+      <p>Land_File_Title 2</p>
+
+      <h3>POST or PUT</h3>
+      <p>Land_File_Title 1</p>
+      <p>Land_File_Description</p>
+      <p>Download_URL</p>
+      <p>("tag name", "tag value"),("tag name", "tag value")</p>
+      <p>Land_File_Title 2</p>
+      <p>Land_File_Description</p>
+      <p>Download_URL</p>
+      <p>("tag name", "tag value"),("tag name", "tag value")</p>
 
     </metal:main_macro>
   </metal:content-core>
