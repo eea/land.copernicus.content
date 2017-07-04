@@ -10,6 +10,7 @@ from Products.statusmessages.interfaces import IStatusMessage
 from StringIO import StringIO
 from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
+import ast
 import subprocess
 import xlwt
 import json
@@ -375,16 +376,22 @@ class AdminLandFilesView(BrowserView):
             Input: fields values
             Output: title, status (error or success)
             Also show error or info message
-            [TODO] Add tags
         """
         result = {
             'title': title.decode('utf8'),
             'status': ACTION_SUCCESS
         }
+        valid_tags = [
+            {'name': x[0], 'value': x[1]} for x in ast.literal_eval(
+                categorization_tags) if x[0] in
+            self.context.fileCategories
+        ]
+
         try:
             api.content.create(
                 container=self.context, type='LandFile', title=title,
-                description=description, remoteUrl=download_url)
+                description=description, remoteUrl=download_url,
+                fileCategories=valid_tags)
             if logs is True:
                 self.show_info(title, ACTION_POST, "")
         except Exception:
