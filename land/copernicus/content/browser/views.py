@@ -388,12 +388,14 @@ class AdminLandFilesView(BrowserView):
         ]
 
         try:
-            api.content.create(
+            landfile = api.content.create(
                 container=self.context, type='LandFile', title=title,
                 description=description, remoteUrl=download_url,
                 fileCategories=valid_tags)
+            url = landfile.absolute_url()
+            api.content.transition(obj=landfile, transition='publish')
             if logs is True:
-                self.show_info(title, ACTION_POST, "")
+                self.show_info(title, ACTION_POST, "- " + url)
         except Exception:
             result['status'] = ACTION_ERROR
             if logs is True:
