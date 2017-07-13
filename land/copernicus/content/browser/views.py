@@ -449,6 +449,22 @@ class AdminLandFilesView(BrowserView):
 
         return result
 
+    def do_delete_all(self, logs=True):
+        """ Delete all landfiles in this context
+            Output: list of dicts containing title and status
+        """
+        landfiles = self.context.getFolderContents(
+            contentFilter={
+                'portal_type': 'LandFile',
+            }
+        )
+        result = []
+        landfiles_titles = [x.getObject().Title() for x in landfiles]
+        for landfile in landfiles_titles:
+            result.append(self.do_delete(landfile))
+
+        return result
+
     def do_put(self, title, description, download_url, categorization_tags,
                logs=True):
         """ Replace a landfile
@@ -509,8 +525,12 @@ class AdminLandFilesView(BrowserView):
                 # DELETE a list of landfiles
                 landfiles = txt_file.read().splitlines()
                 output_json = []
-                for landfile in landfiles:
-                    output_json.append(self.do_delete(landfile))
+
+                if landfiles[0].lower() == 'all':
+                    output_json = self.do_delete_all()
+                else:
+                    for landfile in landfiles:
+                        output_json.append(self.do_delete(landfile))
                 result = json.dumps(
                         output_json, ensure_ascii=False).encode('utf8')
 
