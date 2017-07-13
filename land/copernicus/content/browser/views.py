@@ -370,6 +370,21 @@ class AdminLandFilesView(BrowserView):
 
         return result
 
+    def do_get_all(self, logs=True):
+        """ Get information about all landfiles in this context
+            Output: list of dicts containing landfiles details
+        """
+        landfiles = self.context.getFolderContents(
+            contentFilter={
+                'portal_type': 'LandFile',
+            }
+        )
+        result = []
+        for landfile in landfiles:
+            result.append(self.do_get(landfile.getObject().Title()))
+
+        return result
+
     def do_post(self, title, description, download_url, categorization_tags,
                 logs=True):
         """ Create a landfile item
@@ -481,10 +496,14 @@ class AdminLandFilesView(BrowserView):
                 # GET info for a list of landfiles
                 landfiles = txt_file.read().splitlines()
                 output_json = []
-                for landfile in landfiles:
-                    output_json.append(self.do_get(landfile))
+
+                if landfiles[0].lower() == 'all':
+                    output_json = self.do_get_all()
+                else:
+                    for landfile in landfiles:
+                        output_json.append(self.do_get(landfile))
                 result = json.dumps(
-                        output_json, ensure_ascii=False).encode('utf8')
+                    output_json, ensure_ascii=False).encode('utf8')
 
             elif action == ACTION_DELETE:
                 # DELETE a list of landfiles
