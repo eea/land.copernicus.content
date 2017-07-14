@@ -66,7 +66,7 @@
 
       <h2>Output JSON:</h2>
       <p>The result of submitted operations in json format.</p>
-      <textarea class="form-control" rows="5" id="comment"
+      <textarea class="form-control" rows="5" id="output-json"
         tal:content="python:view.values.get('output_json', 'No JSON.')">
       </textarea>
 
@@ -85,6 +85,18 @@
       <p>Download_URL</p>
       <p>("tag name", "tag value"),("tag name", "tag value")</p>
 
+      <script>
+$(document).on("ready", function() {
+  function pretty_print() {
+    var ugly = document.getElementById('output-json').value;
+    var obj = JSON.parse(ugly);
+    var pretty = JSON.stringify(obj, undefined, 4);
+    document.getElementById('output-json').value = pretty;
+  }
+
+  pretty_print();
+});
+      </script>
     </metal:main_macro>
   </metal:content-core>
 </body>
