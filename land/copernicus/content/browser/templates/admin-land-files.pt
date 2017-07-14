@@ -79,11 +79,11 @@
       <p>Land_File_Title 1</p>
       <p>Land_File_Description</p>
       <p>Download_URL</p>
-      <p>("tag name", "tag value"),("tag name", "tag value")</p>
+      <p>(tag name, tag value),(tag name, tag value)</p>
       <p>Land_File_Title 2</p>
       <p>Land_File_Description</p>
       <p>Download_URL</p>
-      <p>("tag name", "tag value"),("tag name", "tag value")</p>
+      <p>(tag name, tag value),(tag name, tag value)</p>
 
       <script>
 $(document).on("ready", function() {

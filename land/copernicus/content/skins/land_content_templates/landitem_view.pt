@@ -35,7 +35,7 @@
                     user_is_admin python:'Site Administrator' in roles;">
 
       <p tal:condition="python:user_is_admin is True">
-        <a tal:attributes="href python:context.absolute_url() + '/@@admin-land-files'">
+        <a tal:attributes="href python:context.absolute_url() + '/@@admin_land_files'">
           Land files administration
         </a>
       </p>
