@@ -10,10 +10,10 @@ from Products.statusmessages.interfaces import IStatusMessage
 from StringIO import StringIO
 from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
-import ast
 import subprocess
 import xlwt
 import json
+import re
 
 
 def is_EIONET_member(member):
@@ -304,6 +304,18 @@ ACTION_INFO = 'info'
 ACTION_EVALUATE = 'evaluate'
 
 
+def parse_tags(string_input):
+    """ Input: '(tagname1, tagvalue1),(tagname2,tagvalue2),
+                ( tagname3, tagvalue3 ), (tag name4,tag value4)'
+        Output: [
+            ("tagname1", "tagvalue1"), ("tagname2", "tagvalue2"),
+            ("tagname3", "tagvalue3"), ("tag name4", "tag value4")
+        ]
+    """
+    expression = '\(\s?(.*?)\s?,\s?(.*?)\s?\)'
+    return re.findall(expression, string_input)
+
+
 class AdminLandFilesView(BrowserView):
     """ Administration view for land files of a land item
     """
@@ -397,7 +409,7 @@ class AdminLandFilesView(BrowserView):
             'status': ACTION_SUCCESS
         }
         valid_tags = [
-            {'name': x[0], 'value': x[1]} for x in ast.literal_eval(
+            {'name': x[0], 'value': x[1]} for x in parse_tags(
                 categorization_tags) if x[0] in
             self.context.fileCategories
         ]
