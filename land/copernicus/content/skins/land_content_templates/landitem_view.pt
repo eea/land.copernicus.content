@@ -34,6 +34,12 @@
                     roles python:user.getRoles();
                     user_is_admin python:'Site Administrator' in roles;">
 
+      <p tal:condition="python:user_is_admin is True">
+        <a tal:attributes="href python:context.absolute_url() + '/@@admin-land-files'">
+          Land files administration
+        </a>
+      </p>
+
       <!-- Map View -->
       <tal:mapview define="html context/embed_iframe">
         <dt id="fieldsetlegend-mapview" i18n:translate="">Map View</dt>
