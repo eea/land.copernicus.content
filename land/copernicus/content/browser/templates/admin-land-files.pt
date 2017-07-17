@@ -75,6 +75,9 @@
       <p>Land_File_Title 1</p>
       <p>Land_File_Title 2</p>
 
+      <p><b>or</b></p>
+      <p>All</p>
+
       <h3>POST or PUT</h3>
       <p>Land_File_Title 1</p>
       <p>Land_File_Description</p>
