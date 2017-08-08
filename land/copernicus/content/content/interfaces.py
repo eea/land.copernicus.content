@@ -2,6 +2,7 @@
 """
 from zope.interface import Interface
 from zope import schema
+from plone.supermodel import model
 
 
 class ILandContent(Interface):
@@ -29,10 +30,10 @@ class ILandFile(Interface):
     """
 
 
-class IInProximity(Interface):
+class IInProximity(model.Schema):
     """ In Proximity items are external links with description
     """
-    external_link = schema.TextLine(
+    external_link = schema.URI(
         title=u"External link",
         required=True,
         description=u"External link for this InProximity item."
