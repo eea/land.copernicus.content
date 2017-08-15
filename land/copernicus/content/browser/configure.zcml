@@ -69,6 +69,7 @@
     for="land.copernicus.content.content.landitem.LandItem"
     class=".views.AdminLandFilesView"
     permission="cmf.ManagePortal"
+    allowed_attributes="processing result completed"
     />
 
   <browser:resource
