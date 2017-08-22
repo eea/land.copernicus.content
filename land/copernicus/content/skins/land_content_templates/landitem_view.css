@@ -1,5 +1,5 @@
 .loading_message {
-  height: 450px; 
+  height: 450px;
   width: 900px;
   line-height: 450px;
   position: absolute;
@@ -175,17 +175,17 @@
 }
 
 #datatable-container table.dataTable thead .sorting_asc {
-  background: url("http://cdn.datatables.net/1.10.0/images/sort_asc.png") no-repeat center left !important;
+  background: url("https://cdn.datatables.net/1.10.0/images/sort_asc.png") no-repeat center left !important;
   /* Fix move sort icon to left */
 }
 
 #datatable-container table.dataTable thead .sorting_desc {
-  background: url("http://cdn.datatables.net/1.10.0/images/sort_desc.png") no-repeat center left !important;
+  background: url("https://cdn.datatables.net/1.10.0/images/sort_desc.png") no-repeat center left !important;
   /* Fix move sort icon to left */
 }
 
 #datatable-container table.dataTable thead .sorting {
-  background: url("http://cdn.datatables.net/1.10.0/images/sort_both.png") no-repeat center left !important;
+  background: url("https://cdn.datatables.net/1.10.0/images/sort_both.png") no-repeat center left !important;
   /* Fix move sort icon to left */
 }
 
