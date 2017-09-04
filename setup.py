@@ -34,6 +34,5 @@ setup(
         'eea.forms',
         'Products.ATVocabularyManager',
         'eea.cache',
-        'netsight.async',
     ],
 )

@@ -14,7 +14,6 @@ import subprocess
 import xlwt
 import json
 import re
-from netsight.async.browser.BaseAsyncView import BaseAsyncView
 
 
 def is_EIONET_member(member):
@@ -317,10 +316,13 @@ def parse_tags(string_input):
     return re.findall(expression, string_input)
 
 
-class AdminLandFilesView(BaseAsyncView):
+class AdminLandFilesView(BrowserView):
     """ Administration view for land files of a land item
     """
-    initial_page = ViewPageTemplateFile("templates/admin-land-files.pt")
+    index = ViewPageTemplateFile("templates/admin-land-files.pt")
+
+    def render(self):
+        return self.index()
 
     def show_error(self, item, action, details):
         """ Show an error message related to an action for a land file
@@ -588,10 +590,11 @@ class AdminLandFilesView(BaseAsyncView):
                 " - missing text file. Use file input to upload it.")
         return result
 
-    def run_process(self):
+    def __call__(self):
         self.output_json = {}
         if 'submit' in self.request.form:
             self.output_json = self.do_operations()
+        return self.render()
 
     @property
     def values(self):
