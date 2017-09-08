@@ -131,19 +131,24 @@
     <h4 class="section-title">Geographic reference</h4>
     <dl>
       <!-- Geographic Bounding Box -->
-      <tal:block define="field python:context.getField('geographicBoundingBox');
-                         value python:field.getAccessor(context)()" condition="python:len(value)>3">
-        <dt style="clear: left">
-          <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
-          <span i18n:translate="">Bounding Box:</span>
-        </dt>
-        <dd>
-          <p>West = <span tal:content="structure python:value[0] if len(value)>3 else None"></span></p>
-          <p>East = <span tal:content="structure python:value[1] if len(value)>3 else None"></span></p>
-          <p>North = <span tal:content="structure python:value[2] if len(value)>3 else None"></span></p>
-          <p>South = <span tal:content="structure python:value[3] if len(value)>3 else None"></span></p>
-        </dd>
-      </tal:block>
+      <tal:repeat tal:repeat="fieldname python:['geographicBoundingBox',
+      'geographicBoundingBox2', 'geographicBoundingBox3',
+      'geographicBoundingBox4', 'geographicBoundingBox5',
+      'geographicBoundingBox6', 'geographicBoundingBox7']">
+        <tal:block define="field python:context.getField(fieldname);
+                           value python:field.getAccessor(context)()" condition="python:len(value)>3">
+          <dt style="clear: left">
+            <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
+            <span i18n:translate="">Bounding Box:</span>
+          </dt>
+          <dd>
+            <p>West = <span tal:content="structure python:value[0] if len(value)>3 else None"></span></p>
+            <p>East = <span tal:content="structure python:value[1] if len(value)>3 else None"></span></p>
+            <p>North = <span tal:content="structure python:value[2] if len(value)>3 else None"></span></p>
+            <p>South = <span tal:content="structure python:value[3] if len(value)>3 else None"></span></p>
+          </dd>
+        </tal:block>
+      </tal:repeat>
 
       <!-- Coverage -->
       <tal:block
