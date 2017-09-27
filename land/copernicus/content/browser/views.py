@@ -1,5 +1,4 @@
 import json
-from functools import partial
 from datetime import datetime
 from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
@@ -16,12 +15,6 @@ import subprocess
 import xlwt
 import json
 import re
-
-
-def jsonify(request, data):
-    header = request.RESPONSE.setHeader
-    header("Content-Type", "application/json")
-    return json.dumps(data, indent=2, sort_keys=True)
 
 
 def is_EIONET_member(member):
@@ -172,46 +165,6 @@ class RedirectDownloadUrl(BrowserView):
                         self.url_profile_error())
             else:
                 return self.request.response.redirect(self.url_missing_file())
-
-
-class DownloadLandFileView(BrowserView):
-    """ Set Google Analytics custom params
-    """
-
-    def __call__(self):
-        resp = partial(jsonify, self.request)
-        if api.user.is_anonymous():
-            self.request.response.setStatus(401)
-            return resp({'err': 'Unauthorised!'})
-
-        remoteUrl = (
-            self.context
-                .getField('remoteUrl')
-                    .getAccessor(self.context)()
-        )
-        if not remoteUrl_exists(remoteUrl):
-            self.request.response.setStatus(404)
-            return resp({'err': 'File does not exist!'})
-
-        try:
-            return resp({
-                'ga': self.values,
-                'url': remoteUrl,
-            })
-        except Exception as ex:
-            self.request.response.setStatus(500)
-            return resp({'err': ex.message})
-
-    @property
-    def values(self):
-        user = api.user.get_current()
-
-        return {
-            'institutional_domain': user.getProperty('institutional_domain'),
-            'thematic_domain': user.getProperty('thematic_domain'),
-            'is_eionet_member': is_EIONET_member(user),
-            'land_item_title': self.context.title_or_id(),
-        }
 
 
 # Settings for xls file columns

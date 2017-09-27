@@ -50,6 +50,9 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
 
 (function(){
 
+  // handle no GA code present.
+  var ga = window.ga || function() {};
+
 
   function track_download(data) {
     // Custom dimensions
@@ -125,7 +128,9 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
   FORM.on('submit', function(evt) {
     evt.preventDefault();
     var selected = table_checkboxes.filter(':checked');
-    console.log(selected.serialize() + '&' + FORM.serialize());
+    var payload = selected.serialize() + '&' + FORM.serialize();
+    console.log(payload);
+    document.location.href = document.location.href + '/@@download-land-files?' + payload;
   });
 
   TABLE.$('td').on('click', function(){

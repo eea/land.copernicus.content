@@ -37,9 +37,17 @@
 
   <browser:page
     name="download-land-file"
-    class=".views.DownloadLandFileView"
+    class=".download.DownloadLandFileView"
     permission="zope2.View"
     for="land.copernicus.content.content.landfile.LandFile"
+    />
+
+  <browser:page
+    name="download-land-files"
+    for="land.copernicus.content.content.landitem.LandItem"
+    class=".download.DownloadAsyncView"
+    template="templates/download-land-files.pt"
+    permission="zope2.View"
     />
 
   <!-- <browser:page -->
