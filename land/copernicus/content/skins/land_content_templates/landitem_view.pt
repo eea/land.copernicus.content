@@ -24,8 +24,8 @@
       }
     </script>
     <style>
-      @import url("http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
-      @import url("http://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css");
+      @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
+      @import url("https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css");
       @import url("./eea-tooltips.css");
       @import url("./landitem_view.css");
     </style>

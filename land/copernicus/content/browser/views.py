@@ -4,14 +4,18 @@ from datetime import datetime
 from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.PloneBatch import Batch
+from Products.CMFPlone.utils import safe_unicode
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.statusmessages.interfaces import IStatusMessage
 from StringIO import StringIO
 from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
 import plone.api as api
 import subprocess
 import xlwt
+import json
+import re
 
 
 def jsonify(request, data):
@@ -70,13 +74,15 @@ class LandProductInlineView(BrowserView):
 class GoPDB(BrowserView):
     def __call__(self):
 
-        import pdb; pdb.set_trace()
+        import pdb
+        pdb.set_trace()
         return "done"
 
 
 def remoteUrl_exists(location):
     try:
         res = subprocess.check_call(['/usr/bin/curl', '-I', '-f', location])
+        res = res
         return True
     except subprocess.CalledProcessError:
         return False
@@ -306,3 +312,310 @@ class ExportUsersXLS(BrowserView):
         )
 
         return xls_file.read()
+
+
+ACTION_GET = 'get'
+ACTION_POST = 'post'
+ACTION_PUT = 'put'
+ACTION_DELETE = 'delete'
+ACTION_SUCCESS = 'success'
+ACTION_ERROR = 'error'
+ACTION_INFO = 'info'
+ACTION_EVALUATE = 'evaluate'
+
+
+def parse_tags(string_input):
+    """ Input: '(tagname1, tagvalue1),(tagname2,tagvalue2),
+                ( tagname3, tagvalue3 ), (tag name4,tag value4)'
+        Output: [
+            ("tagname1", "tagvalue1"), ("tagname2", "tagvalue2"),
+            ("tagname3", "tagvalue3"), ("tag name4", "tag value4")
+        ]
+    """
+    expression = '\(\s?(.*?)\s?,\s?(.*?)\s?\)'
+    return re.findall(expression, string_input)
+
+
+class AdminLandFilesView(BrowserView):
+    """ Administration view for land files of a land item
+    """
+    index = ViewPageTemplateFile("templates/admin-land-files.pt")
+
+    def render(self):
+        return self.index()
+
+    def show_error(self, item, action, details):
+        """ Show an error message related to an action for a land file
+        """
+        messages = IStatusMessage(self.request)
+        messages.add(
+            u"""Error on {action} {item} {details}""".format(
+                action=safe_unicode(action),
+                item=safe_unicode(item),
+                details=safe_unicode(details)
+            ), type=ACTION_ERROR)
+
+    def show_info(self, item, action, details):
+        """ Show an info message related to an action for a land file
+        """
+        messages = IStatusMessage(self.request)
+        messages.add(
+            u"""Success on {action} {item} {details}""".format(
+                action=safe_unicode(action),
+                item=safe_unicode(item),
+                details=safe_unicode(details)
+            ), type=ACTION_INFO)
+
+    def do_get(self, title, logs=True):
+        """ Get information about a landfile
+            Input: landfile title
+            Output: dict containing landfile details
+            Also show error or info msg
+        """
+        landfile = self.context.getFolderContents(
+            contentFilter={
+                'portal_type': 'LandFile',
+                'Title': title
+            }
+        )
+        result = {
+            'title': safe_unicode(title),
+            'status': ACTION_ERROR
+        }
+        if len(landfile) > 0:
+            landfile = landfile[0].getObject()
+            result['status'] = ACTION_SUCCESS
+            result['title'] = landfile.Title().decode('utf8')
+            result['id'] = landfile.id
+            result['description'] = landfile.Description().decode('utf8')
+            result['download_url'] = landfile.remoteUrl
+            result['categorization_tags'] = landfile.fileCategories
+            result['size'] = landfile.fileSize
+            result['url'] = landfile.absolute_url()
+
+        if result['status'] == ACTION_SUCCESS and logs is True:
+            self.show_info(title, ACTION_GET, "- " + result['url'])
+
+        if result['status'] == ACTION_ERROR and logs is True:
+            self.show_error(
+                title, ACTION_GET, '- No item with this title found')
+
+        return result
+
+    def do_get_all(self, logs=True):
+        """ Get information about all landfiles in this context
+            Output: list of dicts containing landfiles details
+        """
+        landfiles = self.context.getFolderContents(
+            contentFilter={
+                'portal_type': 'LandFile',
+            }
+        )
+        result = []
+        for landfile in landfiles:
+            result.append(self.do_get(landfile.getObject().Title()))
+
+        return result
+
+    def do_post(self, title, description, download_url, categorization_tags,
+                logs=True):
+        """ Create a landfile item
+            Input: fields values
+            Output: title, status (error or success)
+            Also show error or info message
+        """
+        result = {
+            'title': title.decode('utf8'),
+            'status': ACTION_SUCCESS
+        }
+        valid_tags = [
+            {'name': x[0], 'value': x[1]} for x in parse_tags(
+                categorization_tags) if x[0] in
+            self.context.fileCategories
+        ]
+
+        try:
+            landfile = api.content.create(
+                container=self.context, type='LandFile', title=title,
+                description=description, remoteUrl=download_url,
+                fileCategories=valid_tags)
+            url = landfile.absolute_url()
+            api.content.transition(obj=landfile, transition='publish')
+            if logs is True:
+                self.show_info(title, ACTION_POST, "- " + url)
+        except Exception:
+            result['status'] = ACTION_ERROR
+            if logs is True:
+                self.show_error(title, ACTION_POST, "- landfile not created.")
+        return result
+
+    def do_delete(self, title, logs=True):
+        """ Delete all landfiles with given title
+            Input: landfile title
+            Output: title, status
+            Also show error or info message
+        """
+        landfiles = self.context.getFolderContents(
+            contentFilter={
+                'portal_type': 'LandFile',
+                'Title': title
+            }
+        )
+        result = {
+            'title': title.decode('utf8'),
+            'status': ACTION_SUCCESS
+        }
+        if len(landfiles) > 0:
+            for a_landfile in landfiles:
+                landfile = a_landfile.getObject()
+                result['title'] = landfile.Title().decode('utf8')
+                url = landfile.absolute_url()
+                self.context.manage_delObjects([landfile.id])
+                if logs is True:
+                    self.show_info(title, ACTION_DELETE, "- " + url)
+        else:
+            result['status'] = ACTION_ERROR
+            if logs is True:
+                self.show_error(
+                    title, ACTION_DELETE, '- No items with this title found')
+
+        return result
+
+    def do_delete_all(self, logs=True):
+        """ Delete all landfiles in this context
+            Output: list of dicts containing title and status
+        """
+        landfiles = self.context.getFolderContents(
+            contentFilter={
+                'portal_type': 'LandFile',
+            }
+        )
+        result = []
+        landfiles_titles = [x.getObject().Title() for x in landfiles]
+        for landfile in landfiles_titles:
+            result.append(self.do_delete(landfile))
+
+        return result
+
+    def do_put(self, title, description, download_url, categorization_tags,
+               logs=True):
+        """ Replace a landfile
+        """
+        del_result = self.do_delete(title, logs=False)
+        if del_result['status'] == ACTION_ERROR:
+            if logs is True:
+                self.show_error(
+                    title, ACTION_PUT, '- Cannot delete old landfile')
+            return {
+                'title': title.decode('utf8'),
+                'status': ACTION_ERROR
+            }
+        else:
+            create_result = self.do_post(
+                title=title, description=description,
+                download_url=download_url,
+                categorization_tags=categorization_tags, logs=False)
+
+            if create_result['status'] == ACTION_ERROR:
+                if logs is True:
+                    self.show_error(
+                        title, ACTION_PUT, '- Cannot create new landfile')
+                return {
+                    'title': title.decode('utf8'),
+                    'status': ACTION_ERROR
+                }
+            else:
+                if logs is True:
+                    self.show_info(
+                        title, ACTION_PUT, '- Landfile replaced')
+                return {
+                    'title': title.decode('utf8'),
+                    'status': ACTION_SUCCESS
+                }
+
+    def do_operations(self):
+        """ Do the requested operation by form
+        """
+        action = self.request.form.get('inlineRadioOptions', None)
+        txt_file = self.request.form.get('file', None)
+
+        if txt_file.filename is not '':
+            if action == ACTION_GET:
+                # GET info for a list of landfiles
+                landfiles = txt_file.read().splitlines()
+                output_json = []
+
+                if landfiles[0].lower() == 'all':
+                    output_json = self.do_get_all()
+                else:
+                    for landfile in landfiles:
+                        output_json.append(self.do_get(landfile))
+                result = json.dumps(
+                    output_json, ensure_ascii=False).encode('utf8')
+
+            elif action == ACTION_DELETE:
+                # DELETE a list of landfiles
+                landfiles = txt_file.read().splitlines()
+                output_json = []
+
+                if landfiles[0].lower() == 'all':
+                    output_json = self.do_delete_all()
+                else:
+                    for landfile in landfiles:
+                        output_json.append(self.do_delete(landfile))
+                result = json.dumps(
+                        output_json, ensure_ascii=False).encode('utf8')
+
+            elif action == ACTION_POST:
+                # CREATE landfiles
+                lines = txt_file.read().splitlines()
+                landfiles = [lines[i:i + 4] for i in xrange(0, len(lines), 4)]
+                result = []
+                for landfile in landfiles:
+                    a_result = self.do_post(
+                        title=landfile[0],
+                        description=landfile[1],
+                        download_url=landfile[2],
+                        categorization_tags=landfile[3]
+                        )
+                    result.append(a_result)
+                result = json.dumps(
+                     result, ensure_ascii=False).encode('utf8')
+
+            elif action == ACTION_PUT:
+                # UPDATE landfiles
+                lines = txt_file.read().splitlines()
+                landfiles = [lines[i:i + 4] for i in xrange(0, len(lines), 4)]
+                result = []
+                for landfile in landfiles:
+                    a_result = self.do_put(
+                        title=landfile[0],
+                        description=landfile[1],
+                        download_url=landfile[2],
+                        categorization_tags=landfile[3]
+                        )
+                    result.append(a_result)
+                result = json.dumps(
+                     result, ensure_ascii=False).encode('utf8')
+
+            else:
+                result = {}
+                self.show_error(
+                    action, ACTION_EVALUATE,
+                    " - missing action. Use radio buttons to select one.")
+        else:
+            result = {}
+            self.show_error(
+                txt_file.filename, ACTION_EVALUATE,
+                " - missing text file. Use file input to upload it.")
+        return result
+
+    def __call__(self):
+        self.output_json = {}
+        if 'submit' in self.request.form:
+            self.output_json = self.do_operations()
+        return self.render()
+
+    @property
+    def values(self):
+        return {'output_json': self.output_json}

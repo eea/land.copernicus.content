@@ -16,6 +16,7 @@
   <element value="Image"/>
   <element value="Link"/>
   <element value="Document"/>
+  <element value="LandFile"/>
  </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">landitem_view</property>
@@ -34,6 +35,11 @@
  <action title="Edit" action_id="edit" category="object"
     condition_expr="not:object/@@plone_lock_info/is_locked_for_current_user|python:True"
     url_expr="string:${object_url}/edit" visible="True"
+    i18n:attributes="title">
+  <permission value="Modify portal content"/>
+ </action>
+  <action title="Land files administration" action_id="land_files_administration" category="object"
+    url_expr="string:${object_url}/admin_land_files" visible="True"
     i18n:attributes="title">
   <permission value="Modify portal content"/>
  </action>

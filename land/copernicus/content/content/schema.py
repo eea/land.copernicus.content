@@ -120,6 +120,21 @@ PRODUCT_SCHEMA = Schema((
         searchable=False,
         schemata="default",
     ),
+    LinesField(
+        name='fileCategories',
+        languageIndependent=True,
+        required=False,
+        multiValued=1,
+        default=[],
+        schemata='default',
+        widget=LinesWidget(
+            size=15,
+            label="Categories for Download Files",
+            description=("One category per line. This is an important field "
+                         "used to manage possible columns in Download tab."),
+            i18n_domain='eea',
+        )
+    ),
     # METADATA ================================================================
     StringField(
         name='sectionTitleData',  # ===========================================
@@ -231,6 +246,114 @@ PRODUCT_SCHEMA = Schema((
             description=("Coordinates of the four (West, East, North, South) "
                          "foremost corners of the dataset"),
             label_msgid='eea_geographic_bounding_box',
+            i18n_domain='eea',
+        )
+    ),
+    GeographicBoundingBoxField(
+        name='geographicBoundingBox2',
+        languageIndependent=True,
+        required=False,
+        validators=('isGeographicBoundingBoxValid',),
+        multiValued=1,
+        default=[],
+        schemata='metadata',
+        widget=GeographicBoundingBoxWidget(
+            # Keep updated label and description in
+            # geographic_bounding_box_widget.pt too.
+            label="Bounding Box 2",
+            description=("Coordinates of the four (West, East, North, South) "
+                         "foremost corners of the dataset"),
+            label_msgid='eea_geographic_bounding_box2',
+            i18n_domain='eea',
+        )
+    ),
+    GeographicBoundingBoxField(
+        name='geographicBoundingBox3',
+        languageIndependent=True,
+        required=False,
+        validators=('isGeographicBoundingBoxValid',),
+        multiValued=1,
+        default=[],
+        schemata='metadata',
+        widget=GeographicBoundingBoxWidget(
+            # Keep updated label and description in
+            # geographic_bounding_box_widget.pt too.
+            label="Bounding Box 3",
+            description=("Coordinates of the four (West, East, North, South) "
+                         "foremost corners of the dataset"),
+            label_msgid='eea_geographic_bounding_box3',
+            i18n_domain='eea',
+        )
+    ),
+    GeographicBoundingBoxField(
+        name='geographicBoundingBox4',
+        languageIndependent=True,
+        required=False,
+        validators=('isGeographicBoundingBoxValid',),
+        multiValued=1,
+        default=[],
+        schemata='metadata',
+        widget=GeographicBoundingBoxWidget(
+            # Keep updated label and description in
+            # geographic_bounding_box_widget.pt too.
+            label="Bounding Box 4",
+            description=("Coordinates of the four (West, East, North, South) "
+                         "foremost corners of the dataset"),
+            label_msgid='eea_geographic_bounding_box4',
+            i18n_domain='eea',
+        )
+    ),
+    GeographicBoundingBoxField(
+        name='geographicBoundingBox5',
+        languageIndependent=True,
+        required=False,
+        validators=('isGeographicBoundingBoxValid',),
+        multiValued=1,
+        default=[],
+        schemata='metadata',
+        widget=GeographicBoundingBoxWidget(
+            # Keep updated label and description in
+            # geographic_bounding_box_widget.pt too.
+            label="Bounding Box 5",
+            description=("Coordinates of the four (West, East, North, South) "
+                         "foremost corners of the dataset"),
+            label_msgid='eea_geographic_bounding_box5',
+            i18n_domain='eea',
+        )
+    ),
+    GeographicBoundingBoxField(
+        name='geographicBoundingBox6',
+        languageIndependent=True,
+        required=False,
+        validators=('isGeographicBoundingBoxValid',),
+        multiValued=1,
+        default=[],
+        schemata='metadata',
+        widget=GeographicBoundingBoxWidget(
+            # Keep updated label and description in
+            # geographic_bounding_box_widget.pt too.
+            label="Bounding Box 6",
+            description=("Coordinates of the four (West, East, North, South) "
+                         "foremost corners of the dataset"),
+            label_msgid='eea_geographic_bounding_box6',
+            i18n_domain='eea',
+        )
+    ),
+    GeographicBoundingBoxField(
+        name='geographicBoundingBox7',
+        languageIndependent=True,
+        required=False,
+        validators=('isGeographicBoundingBoxValid',),
+        multiValued=1,
+        default=[],
+        schemata='metadata',
+        widget=GeographicBoundingBoxWidget(
+            # Keep updated label and description in
+            # geographic_bounding_box_widget.pt too.
+            label="Bounding Box 7",
+            description=("Coordinates of the four (West, East, North, South) "
+                         "foremost corners of the dataset"),
+            label_msgid='eea_geographic_bounding_box7',
             i18n_domain='eea',
         )
     ),
@@ -541,21 +664,6 @@ PRODUCT_SCHEMA = Schema((
         schemata="metadata",
         default_output_type="text/x-html-safe",
     ),
-    LinesField(
-        name='fileCategories',
-        languageIndependent=True,
-        required=False,
-        multiValued=1,
-        default=[],
-        schemata='metadata',
-        widget=LinesWidget(
-            size=15,
-            label="Categories for Download Files",
-            description=("One category per line. This is an important field "
-                         "used to manage possible columns in Download tab."),
-            i18n_domain='eea',
-        )
-    ),
 ))
 
 
@@ -573,7 +681,7 @@ PRODUCT_SCHEMA = Schema((
 #   Keyword                                       subject
 
 # GEOGRAPHIC REFERENCE                            sectionTitleGeographic
-#   Bounding Box                                  geographicBoundingBox
+#   Bounding Box                                  geographicBoundingBox 2,3..7
 #   Coverage                                      geographicCoverage
 #   Coordinate Reference System                   coordinateReferenceSystem
 
@@ -602,7 +710,6 @@ PRODUCT_SCHEMA = Schema((
 #                                                 dataSources
 #                 deprecated fields? >            dataCustodians
 #                                                 descriptionDetailedMetadata
-#                                                 fileCategories
 # -----------------------------------------------------------------------------
 
 
@@ -622,6 +729,12 @@ def finalize_product_schema(schema):
 
         'sectionTitleGeographic',
         'geographicBoundingBox',
+        'geographicBoundingBox2',
+        'geographicBoundingBox3',
+        'geographicBoundingBox4',
+        'geographicBoundingBox5',
+        'geographicBoundingBox6',
+        'geographicBoundingBox7',
         'geographicCoverage',
         'coordinateReferenceSystem',
 
@@ -650,7 +763,6 @@ def finalize_product_schema(schema):
         'dataSources',
         'dataCustodians',
         'descriptionDetailedMetadata',
-        'fileCategories',
     ]
 
     for field in meta_fields:
@@ -661,6 +773,7 @@ def finalize_product_schema(schema):
         if name not in fields:
             fields.append(name)
     schema._names = fields
+
 
 SCHEMA = atapi.Schema(())
 
