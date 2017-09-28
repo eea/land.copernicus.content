@@ -50,6 +50,14 @@
     permission="zope2.View"
     />
 
+  <browser:page
+    name="fetch-land-file"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    class=".download.FetchLandFileView"
+    template="templates/fetch-land-file.pt"
+    permission="zope2.View"
+    />
+
   <!-- <browser:page -->
   <!--   name="tpdb" -->
   <!--   class=".views.GoPDB" -->

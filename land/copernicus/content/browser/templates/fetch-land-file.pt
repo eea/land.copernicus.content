@@ -10,16 +10,16 @@
     <metal:main_macro define-macro="content-core">
     <div class="text-center">
 
-      <h2>Your package is being prepared!</h2>
+      <h2>Download will begin shortly</h2>
       <p>Keep this window open and your download will begin automatically as soon as your files are ready.</p>
       <p>Approximately 5 minutes. Please wait...</p>
 
       <div class="panel panel-default">
         <div class="panel-body">
-          <p>Package is being prepared</p>
-          <a tal:attributes="href options/url" tal:content="options/url">URL</a>
+          <p>Package is ready</p>
+          <a tal:attributes="href view/url" tal:content="options/filename">URL</a>
           <p><tal:num replace="options/num_files" /> files, <tal:size replace="options/size" /></p>
-          <p>Available for 24 hours. Expires at <tal:date replace="options/expires" /></p>
+          <p>Available for 24 hours. Expires at <tal:date replace="options/expires|string:IDK" /></p>
         </div>
       </div>
 
@@ -39,4 +39,5 @@
   </metal:content-core>
 </body>
 </html>
+
 

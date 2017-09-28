@@ -34,5 +34,6 @@ setup(
         'eea.forms',
         'Products.ATVocabularyManager',
         'eea.cache',
+        'plone.app.async',
     ],
 )
