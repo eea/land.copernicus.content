@@ -6,24 +6,46 @@
 <body>
   <metal:description fill-slot="content-description" />
 
-  <metal:content-core fill-slot="content-core">
-    <metal:main_macro define-macro="content-core">
-    <div class="text-center">
+  <metal:content-core fill-slot="content" tal:define="pending options/pending|nothing">
+    <div tal:condition="pending">
+      <h2>Still processing</h2>
+      <p>The file you requested is still processing.</p>
+      <p>You will receive an email when it is ready.</p>
+    </div>
+    <div class="text-center" tal:condition="not:pending">
 
       <h2>Download will begin shortly</h2>
-      <p>Keep this window open and your download will begin automatically as soon as your files are ready.</p>
-      <p>Approximately 5 minutes. Please wait...</p>
 
       <div class="panel panel-default">
         <div class="panel-body">
           <p>Package is ready</p>
-          <a tal:attributes="href view/url" tal:content="options/filename">URL</a>
-          <p><tal:num replace="options/num_files" /> files, <tal:size replace="options/size" /></p>
-          <p>Available for 24 hours. Expires at <tal:date replace="options/expires|string:IDK" /></p>
+          <a id="land-package" target="_blank" tal:attributes="href view/url" tal:content="options/filename">URL</a>
+          <p><tal:num replace="options/num_files" />, <tal:size replace="options/size" /></p>
+          <p>Available for <tal:time replace="options/hours" />. Expires at <tal:date replace="options/expires" /></p>
         </div>
       </div>
+      <script>
+        (function(){
+          function UrlExists(url, callback) {
+            var http = new XMLHttpRequest();
+            http.open('HEAD', url);
+            http.onreadystatechange = function() {
+              if (this.readyState == this.DONE && this.status == 200) {
+                  callback();
+              }
+            };
+            http.send();
+          }
+          var target = document.getElementById('land-package').getAttribute('href');
+          UrlExists(target, function(){
+            document.location.href = target;
+          });
+        })()
+      </script>
 
-      We also sent a link to this download to <a tal:attributes="href string:mailto:${options/email}" tal:content="options/email">mail</a>
+      <tal:same_user condition="options/same_user">
+        We also sent a link to this download to <a tal:attributes="href string:mailto:${options/email}" tal:content="options/email">mail</a>
+      </tal:same_user>
 
       <hr />
 
@@ -34,8 +56,6 @@
       <a tal:attributes="href here/absolute_url">&#8592;Return to download page</a>
 
     </div>
-
-    </metal:main_macro>
   </metal:content-core>
 </body>
 </html>

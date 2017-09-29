@@ -6,8 +6,7 @@
 <body>
   <metal:description fill-slot="content-description" />
 
-  <metal:content-core fill-slot="content-core">
-    <metal:main_macro define-macro="content-core">
+  <metal:content-core fill-slot="content">
     <div class="text-center">
 
       <h2>Your package is being prepared!</h2>
@@ -18,8 +17,8 @@
         <div class="panel-body">
           <p>Package is being prepared</p>
           <a tal:attributes="href options/url" tal:content="options/url">URL</a>
-          <p><tal:num replace="options/num_files" /> files, <tal:size replace="options/size" /></p>
-          <p>Available for 24 hours. Expires at <tal:date replace="options/expires" /></p>
+          <p><tal:num replace="options/num_files" />, <tal:size replace="options/size" /></p>
+          <p>Available for <tal:time replace="options/hours" />. Expires at <tal:date replace="options/expires" /></p>
         </div>
       </div>
 
@@ -34,8 +33,6 @@
       <a tal:attributes="href here/absolute_url">&#8592;Return to download page</a>
 
     </div>
-
-    </metal:main_macro>
   </metal:content-core>
 </body>
 </html>

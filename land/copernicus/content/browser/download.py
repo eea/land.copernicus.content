@@ -1,6 +1,7 @@
 import os
 import json
 import zipfile
+import time
 from sha import sha
 from datetime import datetime
 from datetime import timedelta
@@ -27,17 +28,28 @@ from land.copernicus.content.browser.views import is_EIONET_member
 from land.copernicus.content.async import IAsyncService
 from land.copernicus.content.async.subscribers import NAME as Q_NAME
 
+MINUTE = 60
+HOUR = MINUTE ** 2
+
 B = 1
 KB = 1024
 MB = KB ** 2
 GB = KB ** 3
 
-# nice and immutable
-Units = namedtuple('Units', ('b', 'kb', 'mb', 'gb'))
-UNITS = Units(B, KB, MB, GB)
+
+def _nt_to_json(nt):
+    return json.dumps({
+        name: attrgetter(name)(nt)
+        for name in nt._fields
+    })
+
+
+UNITS = namedtuple('Units', ('b', 'kb', 'mb', 'gb'))(B, KB, MB, GB)
 
 
 CONSUME = partial(deque, maxlen=0)
+
+URL_FETCH = '{}/fetch-land-file?hash={}'
 
 
 def jsonify(request, data):
@@ -148,6 +160,10 @@ class JobPaths(namedtuple('_JobPaths', ['base_dst', 'hash'])):
         return os.path.isfile(self.done)
 
 
+def _endln(thing):
+    return '{}\n'.format(thing)
+
+
 def _make_zip(path, paths):
     def mk_zip(pth):
         return zipfile.ZipFile(pth, 'w', zipfile.ZIP_STORED, True)
@@ -157,14 +173,14 @@ def _make_zip(path, paths):
 
 
 def _download_executor(context, job):
-    paths = JobPaths(job.dst, job.hash)
+    paths = JobPaths(job.dst, job.meta.hash)
 
     with open(paths.metadata, 'w') as metadata_file:
-        metadata_file.writelines([name + '\n' for name in job.filenames])
-        metadata_file.write(job.expiration.isoformat())
+        metadata_file.write(_endln(_nt_to_json(job.meta)))
 
     if not paths.has_zip() or not paths.has_done():
-        src_paths = [os.path.join(job.src, name) for name in job.filenames]
+        _joiner = partial(os.path.join, job.src)
+        src_paths = map(_joiner, job.meta.filenames)
         _make_zip(paths.zip, src_paths)
 
         # mark zip as complete
@@ -173,11 +189,12 @@ def _download_executor(context, job):
     return paths.zip
 
 
-Job = namedtuple('Job', ('filenames', 'hash', 'expiration', 'dst', 'src'))
+Job = namedtuple('Job', ('meta', 'dst', 'src'))
+Metadata = namedtuple('Metadata', ('hash', 'filenames', 'exp_time', 'userid'))
 
 
-def _queue_download(context, filenames, file_hash, expiration):
-    job = Job(filenames, file_hash, expiration, DST_PATH, SRC_PATH)
+def _queue_download(context, metadata):
+    job = Job(metadata, DST_PATH, SRC_PATH)
 
     worker = queryUtility(IAsyncService)
     queue = worker.getQueues()['']
@@ -185,37 +202,66 @@ def _queue_download(context, filenames, file_hash, expiration):
     worker.queueJobInQueue(queue, (Q_NAME,), _download_executor, context, job)
 
 
+def _time_from_date(date):
+    return time.mktime(date.timetuple()) + date.microsecond / 1E6
+
+
+def _grammar(base, val, suf='s'):
+    suffix = '' if val == 1 else suf
+    return '{val} {base}{suffix}'.format(val=val, base=base, suffix=suffix)
+
+
+def _friendly_hours(delta):
+    if delta.seconds < HOUR:
+        return _grammar('minute', delta.seconds / MINUTE)
+    return _grammar('hour', delta.seconds / HOUR)
+
+
+def _friendly_date(date):
+    return date.strftime('%H:%M %b %d, %Y')
+
+
+def _view_params(meta, user, size):
+    expiration = datetime.fromtimestamp(meta.exp_time)
+    return dict(
+        num_files=_grammar('file', len(meta.filenames)),
+        email=user.getProperty('email'),
+        file_hash=meta.hash,
+        size=_friendly_size(int(size)),
+        hours=_friendly_hours(expiration - datetime.now()),
+        expires=_friendly_date(expiration)
+    )
+
+
 class DownloadAsyncView(BrowserView):
     """ Async download preparation.
     """
 
     def __call__(self, selected=[]):
+        # fetch items
         selected = selected or self.request.get('selected', [])
         items = tuple(map(self.context.restrictedTraverse, selected))
 
+        # extract files and calculate hash
         filenames = tuple(map(_filename_from_url, map(GET_REMOTE_URL, items)))
         file_hash = sha('|'.join(sorted(filenames))).hexdigest()
 
+        # premare metadata
+        user = api.user.get_current()
+        exp_time = _time_from_date(datetime.now() + timedelta(days=1))
+        metadata = Metadata(file_hash, filenames, exp_time, user.getId())
+
+        # Start async job
+        _queue_download(self.context, metadata)
+
+        # prepare view params
         size = sum(map(_translate_size, map(GET_FILE_SIZE, items)))
+        params = _view_params(metadata, user, size)
 
-        url = '{}/fetch-land-file?hash={}'.format(
-            api.portal.get().absolute_url(),
-            file_hash
-        )
+        # url that will track and redirect to download
+        url = URL_FETCH.format(api.portal.get().absolute_url(), file_hash)
 
-        expiration = datetime.now() + timedelta(days=1)
-
-        _queue_download(self.context, filenames, file_hash, expiration)
-
-        return self.index(
-            num_files=len(filenames),
-            email=self.request.get('email'),
-            file_hash=file_hash,
-            raw_sizes=size,
-            size=_friendly_size(int(size)),
-            url=url,
-            expires=expiration.strftime('%H:%M %b %d, %Y')
-        )
+        return self.index(url=url, **params)
 
 
 class FetchLandFileView(BrowserView):
@@ -228,17 +274,20 @@ class FetchLandFileView(BrowserView):
         self.file_hash = self.request.get('hash', None)
         paths = JobPaths(DST_PATH, self.file_hash)
 
+        if not paths.has_done():
+            return self.index(pending=True)
+
         with open(paths.metadata, 'r') as metadata_file:
-            metadata_content = metadata_file.read().split()
-            filenames, date = metadata_content[:-1], metadata_content[-1]
+            metadata = Metadata(**(json.load(metadata_file)))
             size = os.path.getsize(paths.zip)
 
-        return self.index(
-            num_files=len(filenames),
-            email='to@do.me',
-            size=_friendly_size(int(size)),
-            filename=os.path.basename(paths.zip),
-        )
+        user = api.user.get_current()
+
+        params = _view_params(metadata, user, size)
+        same_user = user.getId() == metadata.userid
+        filename = os.path.basename(paths.zip)
+
+        return self.index(same_user=same_user, filename=filename, **params)
 
     def url(self):
         if self.file_hash:
