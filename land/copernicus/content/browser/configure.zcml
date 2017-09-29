@@ -38,8 +38,8 @@
   <browser:page
     name="download-land-file"
     class=".download.DownloadLandFileView"
-    permission="zope2.View"
     for="land.copernicus.content.content.landfile.LandFile"
+    permission="zope2.View"
     />
 
   <browser:page
@@ -60,7 +60,7 @@
 
   <browser:page
     name="fetch-land-file"
-    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    for="land.copernicus.content.content.landitem.LandItem"
     class=".download.FetchLandFileView"
     template="templates/fetch-land-file.pt"
     permission="zope2.View"

@@ -18,11 +18,6 @@
 
 <metal:content-core fill-slot="content-core">
   <metal:main_macro define-macro="content-core">
-    <script>
-      function show_iframe() {
-        jQuery(".loading_message").hide();
-      }
-    </script>
     <style>
       @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
       @import url("https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css");
@@ -66,6 +61,18 @@
               <center>Please wait, loading map...</center>
             </div>
             <tal:service replace="structure html" />
+            <script>
+              (function(){
+                window.addEventListener('load', function(){
+                  var iframe = document.querySelector('[data-role="iframe"]');
+                  iframe.setAttribute('src', iframe.getAttribute('data-src'));
+                  iframe.addEventListener('load', function(){
+                    var loading = document.querySelector('.loading_message');
+                    loading.parentNode.removeChild(loading);
+                  });
+                })
+              })();
+            </script>
           </div>
         </dd>
       </tal:mapview>
@@ -122,7 +129,8 @@
                                          fileCategories python: {d.get('name', ''): d.get('value', '') for d in fileCategories};">
                       <tal:download condition="can_download">
                         <td class="border-top-only" data-role="checkbox">
-                          <input class="checkbox-select-item" type="checkbox" name="selected:list" tal:attributes="value python:item.getId()" />
+                          <input class="checkbox-select-item" type="checkbox" name="selected:list"
+                            tal:attributes="value python:item.getId(); data-size item/getFileSize" />
                         </td>
                       </tal:download>
 
@@ -155,24 +163,24 @@
           <tal:download condition="can_download">
           <div tal:define="isValidateDataset python:context.getField('isValidatedDataset').getAccessor(context)()">
             <form id="download-form" action="." method="POST">
-              <p>
-                You selected <strong><span data-role="number-checked">0</span> files</strong> for download. The limit
-                is <strong><span data-role="download-limit">5</span> files</strong>. Please fill in your email to send you the download link.
-              </p>
-              <label>Email
-                <input type="email" name="email" tal:attributes="value python:member.getProperty('email', '')" required />
-              </label>
-              <button id="button-download-selected" class="btn btn-default">Send</button>
-              <tal:condition condition="python:isValidateDataset is not True">
-                <hr />
-                <div id="text-accept-non-validated">
-                  <input id="checkbox-accept-non-validated" type="checkbox" name="accept-non-validated" value="yes" required />
-                  <label for="checkbox-accept-non-validated">
-                    I am aware that I am downloading non-validated data and I accept to not distribute the
-                    information contained in these files or the files themselves any further.
-                  </label>
-                </div>
-              </tal:condition>
+              <div class="text-center">
+                <tal:condition condition="python:isValidateDataset is not True">
+                  <div id="text-accept-non-validated">
+                    <input id="checkbox-accept-non-validated" type="checkbox" name="accept-non-validated" value="yes" required />
+                    <label for="checkbox-accept-non-validated">
+                      I am aware that I am downloading non-validated data and I accept to not distribute the
+                      information contained in these files or the files themselves any further.
+                    </label>
+                  </div>
+                  <hr />
+                </tal:condition>
+                <button id="button-download-selected" class="btn btn-default btn-land-download">
+                  <div class="btn-title">Download</div>
+                  <small class="btn-desc">
+                    <span data-role="number-checked">0</span> files selected (<span data-role="file-size"></span> size)
+                  </small>
+                </button>
+              </div>
             </form>
           </div>
           </tal:download>

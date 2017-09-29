@@ -259,7 +259,7 @@ class DownloadAsyncView(BrowserView):
         params = _view_params(metadata, user, size)
 
         # url that will track and redirect to download
-        url = URL_FETCH.format(api.portal.get().absolute_url(), file_hash)
+        url = URL_FETCH.format(self.context.absolute_url(), file_hash)
 
         return self.index(url=url, **params)
 

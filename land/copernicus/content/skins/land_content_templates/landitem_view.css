@@ -335,3 +335,27 @@ tr:hover .download-button,
   text-align: center;
 }
 
+.btn-land-download {
+    background-color: #FDA42C;
+    border-color: #FE9200;
+    width: 70%;
+    font-size: larger;
+}
+
+.btn-land-download:hover {
+    background-color: #FE9200;
+}
+
+.btn-land-download:focus,
+.btn-land-download:active {
+    background-color: #FE9200;
+}
+
+.btn-land-download .btn-title {
+  font-size: larger;
+  font-weight: bold;
+}
+
+.btn-land-download .btn-desc {
+  font-size: small;
+}

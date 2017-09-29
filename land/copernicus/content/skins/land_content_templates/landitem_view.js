@@ -120,10 +120,8 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
   var elems_selected_counter = $("[data-role='number-checked']");
   var chk_accept = $("#checkbox-accept-non-validated");
   var elem_text_accept = $('#text-accept-non-validated');
-  var elem_limit = $("[data-role='download-limit']");
 
   var FORM = $('#download-form');
-  var LIMIT = parseInt(elem_limit.text(), 10);
 
   FORM.on('submit', function(evt) {
     evt.preventDefault();
@@ -160,12 +158,6 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
   table_checkboxes.change(function(evt) {
     var selected = table_checkboxes.filter(':checked');
     elems_selected_counter.text(selected.length);
-    if (selected.length >= LIMIT) {
-      table_checkboxes.filter(':not(:checked)').attr('disabled', 'disabled');
-    }
-    else {
-      table_checkboxes.attr('disabled', null);
-    }
   });
 
   /* If a file in datatable has both types raster and vector we fix badge design here. */

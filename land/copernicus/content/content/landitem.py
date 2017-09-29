@@ -34,7 +34,9 @@ class LandItem(ATFolder):
             if tag.tag == 'iframe':
                 tag.set('height', IFRAME_HEIGHT)
                 tag.set('class', 'widen')
-                tag.set('onload', "javascript:show_iframe();")
+                tag.set('data-role', 'iframe')
+                tag.set('data-src', tag.get('src'))
+                tag.set('src', '')
             html += tostring(tag)
 
         return html
