@@ -263,6 +263,29 @@ class DownloadAsyncView(BrowserView):
 
         return self.index(url=url, **params)
 
+    def estimate(self):
+        file_hash = self.request.get('hash', None)
+        paths = JobPaths(DST_PATH, file_hash)
+
+        try:
+            with open(paths.metadata, 'r') as metadata_file:
+                metadata = Metadata(**(json.load(metadata_file)))
+        except IOError:
+            return json.dumps(dict(target=0, cur=0, proc=0))
+
+        _joiner = partial(os.path.join, SRC_PATH)
+        src_paths = map(_joiner, metadata.filenames)
+        target = sum(map(os.path.getsize, src_paths))
+        size = os.path.getsize(paths.zip)
+
+        result = dict(
+            target=target,
+            cur=size,
+            proc=100 if paths.has_done() else size * 100 / target
+        )
+
+        return json.dumps(result)
+
 
 class FetchLandFileView(BrowserView):
     """ Track download and redirect to Apache-served file.
@@ -279,10 +302,10 @@ class FetchLandFileView(BrowserView):
 
         with open(paths.metadata, 'r') as metadata_file:
             metadata = Metadata(**(json.load(metadata_file)))
-            size = os.path.getsize(paths.zip)
 
         user = api.user.get_current()
 
+        size = os.path.getsize(paths.zip)
         params = _view_params(metadata, user, size)
         same_user = user.getId() == metadata.userid
         filename = os.path.basename(paths.zip)

@@ -11,12 +11,18 @@
 
       <h2>Your package is being prepared!</h2>
       <p>Keep this window open and your download will begin automatically as soon as your files are ready.</p>
-      <p>Approximately 5 minutes. Please wait...</p>
+      <p><span id="estimate">Estimating</span>. Please wait...</p>
+
+      <div class="progress">
+        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+          40%
+        </div>
+      </div>
 
       <div class="panel panel-default">
         <div class="panel-body">
           <p>Package is being prepared</p>
-          <a tal:attributes="href options/url" tal:content="options/url">URL</a>
+          <a id="download-url" tal:attributes="href options/url" tal:content="options/url">URL</a>
           <p><tal:num replace="options/num_files" />, <tal:size replace="options/size" /></p>
           <p>Available for <tal:time replace="options/hours" />. Expires at <tal:date replace="options/expires" /></p>
         </div>
@@ -33,6 +39,63 @@
       <a tal:attributes="href here/absolute_url">&#8592;Return to download page</a>
 
     </div>
+    <input type="hidden" id="update-url" tal:attributes="value string:${context/absolute_url}/download-land-files-estimate?hash=${options/file_hash}" />
+    <script>
+      (function(){
+        var el_progress = document.querySelector('[role="progressbar"]');
+        var el_estimate = document.getElementById('estimate');
+        var update_url = document.getElementById('update-url').getAttribute('value');
+        var last = new Date();
+
+        function update_progress(proc) {
+          var cur = proc + '%';
+          el_progress.style.width = cur;
+          el_progress.innerText = cur;
+        }
+
+        function update_estimate(est) {
+          var prefix = 'Approximately ';
+          if (est <= 60) {
+            el_estimate.innerText = prefix + 'less than a minute';
+          }
+          else {
+            var time = parseInt(est / 60, 10);
+            if (!isNaN(time)) {
+              el_estimate.innerText =  prefix + time + ' minutes';
+            }
+          }
+
+        }
+
+        function get_estimate(proc) {
+          var now = new Date();
+          var timedelta = now - last;
+          last = now;
+
+          // estimate in seconds
+          return (timedelta * 100 / proc) / 1000;
+        }
+
+        function refresh() {
+          $.getJSON(update_url, function(data) {
+            update_progress(data.proc);
+
+            var estimate = get_estimate(data.proc);
+            update_estimate(estimate);
+            if (data.proc === 100) {
+              document.location.href = document.getElementById('download-url').getAttribute('href');
+            }
+            else {
+              setTimeout(refresh, 3000);
+            }
+          });
+        }
+
+        refresh();
+
+
+      })()
+    </script>
   </metal:content-core>
 </body>
 </html>

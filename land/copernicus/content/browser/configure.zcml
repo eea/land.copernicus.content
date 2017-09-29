@@ -51,6 +51,14 @@
     />
 
   <browser:page
+    name="download-land-files-estimate"
+    for="land.copernicus.content.content.landitem.LandItem"
+    class=".download.DownloadAsyncView"
+    attribute="estimate"
+    permission="zope2.View"
+    />
+
+  <browser:page
     name="fetch-land-file"
     for="plone.app.layout.navigation.interfaces.INavigationRoot"
     class=".download.FetchLandFileView"
