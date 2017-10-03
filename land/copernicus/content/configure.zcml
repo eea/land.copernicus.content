@@ -14,6 +14,8 @@
   <include file="permissions.zcml" />
   <include file="overrides.zcml" />
 
+  <include package=".rules" />
+  <include package=".events" />
   <include package=".async" />
   <include package=".browser" />
   <include package=".content" />

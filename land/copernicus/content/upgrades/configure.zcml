@@ -32,8 +32,9 @@
     profile="land.copernicus.content:default">
 
     <genericsetup:upgradeDepends
-        title="Import types: update view for landitem."
-        import_steps="typeinfo"
+        title="Update typeinfo and contentrules."
+        description="Update default view for landitem. Setup contentrules for async notification email."
+        import_steps="typeinfo contentrules"
         />
   </genericsetup:upgradeSteps>
 

@@ -13,9 +13,9 @@ from itertools import dropwhile
 from itertools import imap as map
 
 from zope.component import queryUtility
+from zope.event import notify
 
 from Products.Five.browser import BrowserView
-
 import plone.api as api
 
 from land.copernicus.content.config import ENV_DL_SRC_PATH as SRC_PATH
@@ -27,6 +27,9 @@ from land.copernicus.content.browser.views import is_EIONET_member
 
 from land.copernicus.content.async import IAsyncService
 from land.copernicus.content.async.subscribers import NAME as Q_NAME
+
+from land.copernicus.content.events.download import DownloadReady
+from plone.stringinterp.interfaces import IContextWrapper
 
 MINUTE = 60
 HOUR = MINUTE ** 2
@@ -47,6 +50,7 @@ def _nt_to_json(nt):
 UNITS = namedtuple('Units', ('b', 'kb', 'mb', 'gb'))(B, KB, MB, GB)
 
 
+# instead of a for-loop, will entirely "consume" a generator
 CONSUME = partial(deque, maxlen=0)
 
 URL_FETCH = '{}/fetch-land-file?hash={}'
@@ -172,6 +176,17 @@ def _make_zip(path, paths):
         CONSUME(map(zip_file.write, paths))
 
 
+def _notify_ready(context, job):
+    ctx_wrapper = IContextWrapper(context)(
+        userid=job.meta.userid,
+        exp_time=job.meta.exp_time,
+        filenames=job.meta.filenames,
+        done_url=job.done_url,
+    )
+
+    notify(DownloadReady(ctx_wrapper))
+
+
 def _download_executor(context, job):
     paths = JobPaths(job.dst, job.meta.hash)
 
@@ -186,15 +201,17 @@ def _download_executor(context, job):
         # mark zip as complete
         open(paths.done, 'a').close()
 
+    _notify_ready(context, job)
     return paths.zip
 
 
-Job = namedtuple('Job', ('meta', 'dst', 'src'))
+Job = namedtuple('Job', ('meta', 'dst', 'src', 'done_url'))
 Metadata = namedtuple('Metadata', ('hash', 'filenames', 'exp_time', 'userid'))
 
 
 def _queue_download(context, metadata):
-    job = Job(metadata, DST_PATH, SRC_PATH)
+    done_url = URL_FETCH.format(context.absolute_url(), metadata.hash)
+    job = Job(metadata, DST_PATH, SRC_PATH, done_url)
 
     worker = queryUtility(IAsyncService)
     queue = worker.getQueues()['']
