@@ -27,11 +27,11 @@ jQuery.fn.dataTable.ext.type.order['file-size-pre'] = function (data) {
   var multiplier = 1;
 
   if (units === ' kb') {
-    multiplier = 1000;
+    multiplier = 1024;
   } else if (units === ' mb') {
-      multiplier = 1000000;
+      multiplier = 1048576;
   } else if (units === ' gb') {
-    multiplier = 1000000000;
+    multiplier = 1073741824;
   }
   if (isNaN(parseFloat(data)) == true) {
     return multiplier; // was "N/A", empty or some string.
@@ -49,6 +49,13 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
 };
 
 (function(){
+
+  var UNITS = {
+    b: 1,
+    kb: 1024,
+    mb: Math.pow(1024, 2),
+    gb: Math.pow(1024, 3)
+  }
 
   // handle no GA code present.
   var ga = window.ga || function() {};
@@ -85,6 +92,32 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
     });
   }
 
+  function _friendly_size(size) {
+    var friendly = ['gb', 'mb', 'kb', 'b'].reduce(function(acc, unit){
+      var value = parseInt(size / UNITS[unit], 10);
+      return value > 0 && !acc ? {unit: unit.toUpperCase(), value: value} : acc;
+    }, null)
+    return friendly && friendly['value'] + ' ' + friendly['unit'] || null;
+  }
+
+  function update_filesize(container, target, elems) {
+    var total = [].slice.call(elems).reduce(function(acc, elm){
+      return acc + parseInt(elm.getAttribute('data-size'), 10);
+    }, 0);
+    if (total) {
+      target.textContent = _friendly_size(total);
+      container.style.display = '';
+    } else {
+      container.style.display = 'none';
+    }
+  }
+
+  function update_selection(elem_size_display, elem_file_size, checkboxes) {
+    var selected = checkboxes.filter(':checked');
+    elems_selected_counter.text(selected.length);
+    update_filesize(elem_size_display, elem_file_size, selected);
+  }
+
   var TABLE = $('#data-table-download').dataTable({
     "pageLength": 20,
     "lengthMenu": [10, 20, 50, 100],
@@ -118,6 +151,9 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
   var table_download_buttons = TABLE.$('.download-button');
   var table_checkboxes = TABLE.$(".checkbox-select-item");
   var elems_selected_counter = $("[data-role='number-checked']");
+  var elem_size_display = document.querySelector('[data-role="size-display"]');
+  var elem_file_size = document.querySelector('[data-role="file-size"]');
+  var chk_select_all = $(".checkbox-select-all");
   var chk_accept = $("#checkbox-accept-non-validated");
   var elem_text_accept = $('#text-accept-non-validated');
 
@@ -143,6 +179,12 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
     }
   });
 
+  chk_select_all.on('change', function(evt){
+    table_checkboxes.prop('checked', $(evt.target).is(':checked'));;
+    update_selection(elem_size_display, elem_file_size, table_checkboxes);
+  });
+
+
   table_download_buttons.on('click', function(evt) {
     evt.preventDefault();
 
@@ -155,9 +197,8 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
     }
   });
 
-  table_checkboxes.change(function(evt) {
-    var selected = table_checkboxes.filter(':checked');
-    elems_selected_counter.text(selected.length);
+  table_checkboxes.on('change', function() {
+    update_selection(elem_size_display, elem_file_size, table_checkboxes);
   });
 
   /* If a file in datatable has both types raster and vector we fix badge design here. */

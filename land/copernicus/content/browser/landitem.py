@@ -5,6 +5,7 @@ import plone.api as api
 from lxml.html import fragments_fromstring, tostring
 
 from land.copernicus.content.config import IFRAME_HEIGHT
+from land.copernicus.content.browser.download import _translate_size
 
 
 class LandItemView(BrowserView):
@@ -58,6 +59,11 @@ class LandItemView(BrowserView):
             cat.get('name', ''): cat.get('value', '') for
             cat in categories
         }
+
+    @staticmethod
+    def translate_size(item):
+        field = item.getField('fileSize')
+        return _translate_size(field.getAccessor(item)())
 
 
 class ProductInlineView(BrowserView):

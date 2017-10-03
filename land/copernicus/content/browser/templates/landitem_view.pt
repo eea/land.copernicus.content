@@ -30,7 +30,6 @@
 
 <metal:content-core fill-slot="content-core">
   <metal:main_macro define-macro="content-core">
-
     <dl class="enableFormTabbing"
         tal:define="membership python:context.portal_membership;
                     member python:user if not membership.isAnonymousUser() else None;
@@ -113,6 +112,7 @@
                 <tr role="row">
                   <tal:download condition="can_download">
                     <th class="border-bottom-only no-sort">
+                      <input class="checkbox-select-all" type="checkbox" value="select-item" />
                     </th>
                   </tal:download>
                   <th class="border-bottom-only special-chars-sort">Name</th>
@@ -135,7 +135,7 @@
                       <tal:download condition="can_download">
                         <td class="border-top-only" data-role="checkbox">
                           <input class="checkbox-select-item" type="checkbox" name="selected:list"
-                            tal:attributes="value python:item.getId(); data-size item/getFileSize" />
+                            tal:attributes="value python:item.getId(); data-size python:view.translate_size(item)" />
                         </td>
                       </tal:download>
 
@@ -182,7 +182,8 @@
                 <button id="button-download-selected" class="btn btn-default btn-land-download">
                   <div class="btn-title">Download</div>
                   <small class="btn-desc">
-                    <span data-role="number-checked">0</span> files selected (<span data-role="file-size"></span> size)
+                    <span data-role="number-checked">0</span> files selected
+                    <span data-role="size-display" style="display: none">(<span data-role="file-size"></span> size)</span>
                   </small>
                 </button>
               </div>
