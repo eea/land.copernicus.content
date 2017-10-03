@@ -53,17 +53,6 @@ class LandItemsOverview(BrowserView):
         return batch
 
 
-class LandProductInlineView(BrowserView):
-    """ Inline view for products
-    #TODO: hide plone.belowcontentbody.relateditems viewlet
-    """
-
-    def __call__(self):
-        if not getattr(self.context, 'meta_type', '') == "LandItem":
-            return ""
-        return self.index()
-
-
 class GoPDB(BrowserView):
     def __call__(self):
 

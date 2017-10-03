@@ -35,5 +35,6 @@ setup(
         'Products.ATVocabularyManager',
         'eea.cache',
         'plone.app.async',
+        'five.pt',
     ],
 )

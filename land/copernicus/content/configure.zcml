@@ -3,6 +3,8 @@
   xmlns:browser="http://namespaces.zope.org/browser"
   i18n_domain="eea">
 
+  <include package="five.pt" />
+
   <include package="z3c.jbot" file="meta.zcml" />
   <include package="plone.app.registry" />
   <include package="plone.app.async" />

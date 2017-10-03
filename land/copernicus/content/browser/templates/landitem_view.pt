@@ -14,16 +14,22 @@
  </div>
 </metal:title>
 
+<metal:styleslot fill-slot="style_slot">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" />
+  <link rel="stylesheet" type="text/css" href="${portal_url}/eea-tooltips.css" />
+  <link rel="stylesheet" type="text/css" href="${portal_url}/++resource++land.copernicus.content.static/landitem_view.css" />
+</metal:styleslot>
+
+<metal:javascriptslot fill-slot="javascript_head_slot">
+  <script defer type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+  <script defer type="text/javascript" language="javascript" src="${portal_url}/eea-tooltips.js"></script>
+  <script defer type="text/javascript" language="javascript" src="${portal_url}/++resource++land.copernicus.content.static/landitem_view.js"></script>
+</metal:javascriptslot>
+
 <metal:description fill-slot="content-description" />
 
 <metal:content-core fill-slot="content-core">
   <metal:main_macro define-macro="content-core">
-    <style>
-      @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
-      @import url("https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css");
-      @import url("./eea-tooltips.css");
-      @import url("./landitem_view.css");
-    </style>
 
     <dl class="enableFormTabbing"
         tal:define="membership python:context.portal_membership;
@@ -35,11 +41,11 @@
                     can_download python:member and member_profile">
 
       <!-- Map View -->
-      <tal:mapview define="html context/embed_iframe">
+      <tal:mapview define="html view/embed_iframe">
         <dt id="fieldsetlegend-mapview" i18n:translate="">Map View</dt>
         <dd id="fieldset-mapview" style="margin: 0px; padding-top: 0px !important">
           <div class="mapview-field" style="border: 1px solid #BFD630; border-top: 0px;">
-            <div class="loading_message" tal:condition="context/has_iframe">
+            <div class="loading_message" tal:condition="view/has_iframe">
               <div id="squaresWaveG">
                 <div id="squaresWaveG_1" class="squaresWaveG">
                 </div>
@@ -122,11 +128,10 @@
               </thead>
 
               <tbody >
-                <tal:landfile repeat="item_brain python: context.getFolderContents(contentFilter={'portal_type' : 'LandFile', 'review_state': 'published'})">
+                <tal:landfile repeat="item_brain view/landfiles">
                   <tr>
                     <tal:def tal:define="item python:item_brain.getObject();
-                                         fileCategories python: item.getField('fileCategories').getAccessor(item)() or [{}];
-                                         fileCategories python: {d.get('name', ''): d.get('value', '') for d in fileCategories};">
+                                         fileCategories python:view.categories(item)">
                       <tal:download condition="can_download">
                         <td class="border-top-only" data-role="checkbox">
                           <input class="checkbox-select-item" type="checkbox" name="selected:list"
@@ -185,9 +190,6 @@
           </div>
           </tal:download>
 
-          <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-          <script type="text/javascript" language="javascript" src="eea-tooltips.js"></script>
-          <script type="text/javascript" language="javascript" src="landitem_view.js"></script>
         </dd>
       </tal:download>
       <tal:no-profile condition="python:member and not member_profile">

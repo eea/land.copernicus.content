@@ -19,9 +19,9 @@
   <element value="LandFile"/>
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">landitem_view</property>
+ <property name="default_view">landitem-view</property>
  <property name="view_methods">
-  <element value="landitem_view"/>
+  <element value="landitem-view"/>
  </property>
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="edit" to="atct_edit"/>

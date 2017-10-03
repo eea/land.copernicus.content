@@ -7,10 +7,15 @@
   <include file="backports.zcml" />
   <include file="cookiepolicy.zcml" />
   <include file="patches.zcml" />
+  <include file="landitem.zcml" />
 
   <browser:resourceDirectory
     name="land.copernicus.content.images"
     directory="./images" />
+
+  <browser:resourceDirectory
+    name="land.copernicus.content.static"
+    directory="./static" />
 
   <browser:page
     name="migrate_image_scales"
@@ -25,14 +30,6 @@
     permission="cmf.ManagePortal"
     for="Products.CMFCore.interfaces.ISiteRoot"
     template="templates/overview.pt"
-    />
-
-  <browser:page
-    name="product-inline-view"
-    class=".views.LandProductInlineView"
-    permission="zope2.View"
-    for="*"
-    template="templates/product-inline-view.pt"
     />
 
   <browser:page
