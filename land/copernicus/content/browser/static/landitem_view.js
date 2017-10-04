@@ -112,10 +112,16 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
     }
   }
 
-  function update_selection(elem_size_display, elem_file_size, checkboxes) {
+  function update_selection(elem_size_display, elem_file_size, checkboxes, btn_download) {
     var selected = checkboxes.filter(':checked');
     elems_selected_counter.text(selected.length);
     update_filesize(elem_size_display, elem_file_size, selected);
+    if (selected.length <= 0) {
+      btn_download.disabled = true;
+    }
+    else {
+      btn_download.disabled = false;
+    }
   }
 
   var TABLE = $('#data-table-download').dataTable({
@@ -151,11 +157,13 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
   var table_download_buttons = TABLE.$('.download-button');
   var table_checkboxes = TABLE.$(".checkbox-select-item");
   var elems_selected_counter = $("[data-role='number-checked']");
-  var elem_size_display = document.querySelector('[data-role="size-display"]');
-  var elem_file_size = document.querySelector('[data-role="file-size"]');
   var chk_select_all = $(".checkbox-select-all");
   var chk_accept = $("#checkbox-accept-non-validated");
   var elem_text_accept = $('#text-accept-non-validated');
+  var elem_size_display = document.querySelector('[data-role="size-display"]');
+  var elem_file_size = document.querySelector('[data-role="file-size"]');
+  var elem_btn_download = document.querySelector('#button-download-selected');
+  var base_url = document.querySelector('base').getAttribute('href');
 
   var FORM = $('#download-form');
 
@@ -164,7 +172,7 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
     var selected = table_checkboxes.filter(':checked');
     var payload = selected.serialize() + '&' + FORM.serialize();
     console.log(payload);
-    document.location.href = document.location.href + '/@@download-land-files?' + payload;
+    document.location.href = base_url + '/@@download-land-files?' + payload;
   });
 
   TABLE.$('td').on('click', function(){
@@ -181,9 +189,10 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
 
   chk_select_all.on('change', function(evt){
     table_checkboxes.prop('checked', $(evt.target).is(':checked'));;
-    update_selection(elem_size_display, elem_file_size, table_checkboxes);
+    update_selection(elem_size_display, elem_file_size, table_checkboxes, elem_btn_download);
   });
 
+  table_checkboxes.prop('checked', false);  // make sure all checkboxes are unchecked!
 
   table_download_buttons.on('click', function(evt) {
     evt.preventDefault();
@@ -198,7 +207,7 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
   });
 
   table_checkboxes.on('change', function() {
-    update_selection(elem_size_display, elem_file_size, table_checkboxes);
+    update_selection(elem_size_display, elem_file_size, table_checkboxes, elem_btn_download);
   });
 
   /* If a file in datatable has both types raster and vector we fix badge design here. */

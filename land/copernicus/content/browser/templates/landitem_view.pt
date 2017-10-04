@@ -179,7 +179,7 @@
                   </div>
                   <hr />
                 </tal:condition>
-                <button id="button-download-selected" class="btn btn-default btn-land-download">
+                <button id="button-download-selected" class="btn btn-default btn-land-download" disabled="disabled">
                   <div class="btn-title">Download</div>
                   <small class="btn-desc">
                     <span data-role="number-checked">0</span> files selected

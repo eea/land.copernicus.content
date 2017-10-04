@@ -36,7 +36,7 @@
     name="download-land-file"
     class=".download.DownloadLandFileView"
     for="land.copernicus.content.content.landfile.LandFile"
-    permission="zope2.View"
+    permission="land.copernicus.content.download_landfile"
     />
 
   <browser:page
@@ -44,7 +44,7 @@
     for="land.copernicus.content.content.landitem.LandItem"
     class=".download.DownloadAsyncView"
     template="templates/download-land-files.pt"
-    permission="zope2.View"
+    permission="land.copernicus.content.download_landfile"
     />
 
   <browser:page
@@ -52,7 +52,7 @@
     for="land.copernicus.content.content.landitem.LandItem"
     class=".download.DownloadAsyncView"
     attribute="estimate"
-    permission="zope2.View"
+    permission="land.copernicus.content.download_landfile"
     />
 
   <browser:page
@@ -60,7 +60,7 @@
     for="land.copernicus.content.content.landitem.LandItem"
     class=".download.FetchLandFileView"
     template="templates/fetch-land-file.pt"
-    permission="zope2.View"
+    permission="land.copernicus.content.download_landfile"
     />
 
   <!-- <browser:page -->

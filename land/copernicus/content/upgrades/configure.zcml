@@ -33,8 +33,8 @@
 
     <genericsetup:upgradeDepends
         title="Update typeinfo and contentrules."
-        description="Update default view for landitem. Setup contentrules for async notification email."
-        import_steps="typeinfo contentrules"
+        description="Update default view for landitem. Setup contentrules for async notification email. Add download permission."
+        import_steps="typeinfo contentrules rolemap"
         />
   </genericsetup:upgradeSteps>
 

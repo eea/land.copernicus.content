@@ -11,6 +11,7 @@ from collections import deque
 from operator import attrgetter
 from itertools import dropwhile
 from itertools import imap as map
+from itertools import starmap
 
 from zope.component import queryUtility
 from zope.event import notify
@@ -169,11 +170,17 @@ def _endln(thing):
 
 
 def _make_zip(path, paths):
+    """ paths is an iterable containing pairs in the format:
+        [("/path/to/file.zip", "file.zip"), (...,  ...), ...]
+
+        starmap is the equivalent of:
+        zip_file.write('/path/to/file.zip', 'file.zip')
+    """
     def mk_zip(pth):
         return zipfile.ZipFile(pth, 'w', zipfile.ZIP_STORED, True)
 
     with mk_zip(path) as zip_file:
-        CONSUME(map(zip_file.write, paths))
+        CONSUME(starmap(zip_file.write, paths))
 
 
 def _notify_ready(context, job):
@@ -195,7 +202,7 @@ def _download_executor(context, job):
 
     if not paths.has_zip() or not paths.has_done():
         _joiner = partial(os.path.join, job.src)
-        src_paths = map(_joiner, job.meta.filenames)
+        src_paths = zip(map(_joiner, job.meta.filenames), job.meta.filenames)
         _make_zip(paths.zip, src_paths)
 
         # mark zip as complete
