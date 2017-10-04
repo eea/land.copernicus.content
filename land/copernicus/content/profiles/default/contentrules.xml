@@ -10,14 +10,16 @@
     <property name="source"/>
     <property
       name="message">Dear ${land_user_name},
+
 The download you requested of the ${land_num_files} land files:
 ${land_file_list_star}
 
 is now ready. You can access the following URL to begin the download: ${land_download_url} (valid until: ${land_exp_date}).
 
-----------
-This email is auto-generated and delivered to you because the user associated with this email address has requested a download. If you did not request this download then just ignore this email.
-----------</property>
+Best regards,
+The Copernicus team
+
+P.S. This email is auto-generated and delivered to you because the user associated with this email address has requested a download.</property>
     <property name="subject">[Land files download] Your download is ready!</property>
     <property name="recipients">${land_user_email}</property>
     <property name="exclude_actor">False</property>
