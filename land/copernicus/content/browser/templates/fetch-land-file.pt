@@ -116,27 +116,90 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <h2>Download your archive</h2>
-          <a id="land-package" target="_blank" tal:attributes="href view/url" tal:content="options/filename">URL</a>
+          <a id="land-package" target="_blank" href="${view/url}" data-track="${options/ga_data}">${options/filename}</a>
           <p><tal:num replace="options/num_files" />, <tal:size replace="options/size" /></p>
-          <p>Available for <tal:time replace="options/hours" />. Expires at <tal:date replace="options/expires" /></p>
+          <p>Available for ${options/hours}. Expires at ${options/expires}</p>
         </div>
       </div>
       <script>
         (function(){
-          function UrlExists(url, callback) {
+          var GA = window.ga || function() {
+            // ga is not defined, log function arguments
+            if (window.console) {
+              console.log([].slice.call(arguments));
+            }
+          };
+          var LINK = document.querySelector('#land-package');
+          var REMOTE_URL = LINK.getAttribute('href');
+          var GA_DATA = JSON.parse(LINK.getAttribute('data-track') || "{}");
+          var TIMEOUT;
+
+          function url_exists(url, callback) {
             var http = new XMLHttpRequest();
             http.open('HEAD', url);
-            http.onreadystatechange = function() {
-              if (this.readyState == this.DONE && this.status == 200) {
-                  callback();
+            http.onload = function() {
+              if (this.status == 200) {
+                callback(true);
+              }
+              else {
+                callback(false);
               }
             };
             http.send();
           }
-          var target = document.getElementById('land-package').getAttribute('href');
-          UrlExists(target, function(){
-            document.location.href = target;
+
+          function track_download(data) {
+            // track each file separately
+            data.filenames.forEach(function(filename) {
+              // Custom dimensions
+              GA('set', 'dimension1', data.thematic_domain);
+              GA('set', 'dimension2', data.institutional_domain);
+              GA('set', 'dimension3', data.is_eionet_member);
+
+              // Track event
+              GA('send', {
+                'hitType': 'event',                 // Required.
+                'eventCategory': 'page',            // Required.
+                'eventAction': 'landfile_download', // Required.
+                'eventLabel': filename,
+                'eventValue': 1
+              });
+            });
+          };
+
+          function _clear_timeout(timeout) {
+            if (timeout) {
+              clearTimeout(timeout);
+              TIMEOUT = null;
+            }
+          }
+
+          function start_download(popup) {
+            url_exists(REMOTE_URL, function(exists) {
+              if (exists) {
+                _clear_timeout(TIMEOUT);
+                track_download(GA_DATA);
+                window.location.href = REMOTE_URL;
+              }
+              else if (!exists && popup) {
+                // manual trigger (clicked link)
+                alert('The file is still processing!');
+              }
+              else {
+                // automatic trigger, schedule re-check
+                TIMEOUT = setTimeout(start_download, 3000);
+              }
+            });
+          }
+
+          LINK.addEventListener('click', function(evt){
+            evt.preventDefault();
+            start_download(true);
+            return false;
           });
+
+          start_download();
+
         })()
       </script>
 

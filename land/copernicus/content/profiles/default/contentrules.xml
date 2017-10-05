@@ -15,7 +15,7 @@ The download you requested of the ${land_num_files} land files:
 ${land_file_list_star}
 
 is now ready. You can access the following URL to begin the download: ${land_download_url} (valid until: ${land_exp_date}).
-
+${land_missing_files}
 Best regards,
 The Copernicus team
 

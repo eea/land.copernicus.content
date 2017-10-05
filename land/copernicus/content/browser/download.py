@@ -9,6 +9,7 @@ from functools import partial
 from collections import namedtuple
 from collections import deque
 from operator import attrgetter
+from operator import itemgetter
 from itertools import dropwhile
 from itertools import imap as map
 from itertools import starmap
@@ -41,11 +42,12 @@ MB = KB ** 2
 GB = KB ** 3
 
 
+def _nt_to_dict(nt):
+    return {name: attrgetter(name)(nt) for name in nt._fields}
+
+
 def _nt_to_json(nt):
-    return json.dumps({
-        name: attrgetter(name)(nt)
-        for name in nt._fields
-    })
+    return json.dumps(_nt_to_dict(nt))
 
 
 UNITS = namedtuple('Units', ('b', 'kb', 'mb', 'gb'))(B, KB, MB, GB)
@@ -97,6 +99,16 @@ GET_REMOTE_URL = partial(_get_field_value, 'remoteUrl')
 GET_FILE_SIZE = partial(_get_field_value, 'fileSize')
 
 
+def _userinfo():
+    user = api.user.get_current()
+
+    return dict(
+        institutional_domain=user.getProperty('institutional_domain'),
+        thematic_domain=user.getProperty('thematic_domain'),
+        is_eionet_member=is_EIONET_member(user),
+    )
+
+
 class DownloadLandFileView(BrowserView):
     """ Set Google Analytics custom params
     """
@@ -123,14 +135,10 @@ class DownloadLandFileView(BrowserView):
 
     @property
     def values(self):
-        user = api.user.get_current()
-
-        return {
-            'institutional_domain': user.getProperty('institutional_domain'),
-            'thematic_domain': user.getProperty('thematic_domain'),
-            'is_eionet_member': is_EIONET_member(user),
-            'land_item_title': self.context.title_or_id(),
-        }
+        return dict(
+            land_item_title=self.context.title_or_id(),
+            **_userinfo()
+        )
 
 
 def _append_ext(path, ext):
@@ -183,37 +191,81 @@ def _make_zip(path, paths):
         CONSUME(starmap(zip_file.write, paths))
 
 
-def _notify_ready(context, job):
-    ctx_wrapper = IContextWrapper(context)(
-        userid=job.meta.userid,
+def _send_notification(context, job, missing_files, userid):
+    args = dict(
+        userid=userid,
         exp_time=job.meta.exp_time,
         filenames=job.meta.filenames,
         done_url=job.done_url,
+        missing_files=missing_files,
     )
-
+    ctx_wrapper = IContextWrapper(context)(**args)
     notify(DownloadReady(ctx_wrapper))
+
+
+def _notify_ready(context, job, missing_files, paths):
+    """ Notify each user in metadata, at time of completion """
+    metadata = _read_metadata(paths.metadata)
+    _send = partial(_send_notification, context, job, missing_files)
+    CONSUME(map(_send, metadata.userids))
+
+
+def _read_metadata(path):
+    if os.path.isfile(path):
+        with open(path, 'r') as metadata_file:
+            return Metadata(**(json.load(metadata_file)))
+
+
+def _write_metadata(path, metadata):
+    with open(path, 'w') as metadata_file:
+        metadata_file.write(_endln(_nt_to_json(metadata)))
+
+
+def _update_metadata(path, metadata):
+    existing = _read_metadata(path)
+
+    if existing:
+        updated = _nt_to_dict(existing)
+        updated['userids'] = list(set(updated['userids'] + metadata.userids))
+        updated['exp_time'] = metadata.exp_time
+        return Metadata(**updated)
+
+    return metadata
 
 
 def _download_executor(context, job):
     paths = JobPaths(job.dst, job.meta.hash)
 
-    with open(paths.metadata, 'w') as metadata_file:
-        metadata_file.write(_endln(_nt_to_json(job.meta)))
+    # create/update metadata file
+    _write_metadata(
+        paths.metadata,
+        _update_metadata(paths.metadata, job.meta)
+    )
 
-    if not paths.has_zip() or not paths.has_done():
+    # Build and notify only if the zip file does not exist.
+    # This assumes that another job with the same target hash is already
+    # in progress.
+    # XXX: Handle other job crashed (error, container stopped, etc.)
+    if not paths.has_zip():
         _joiner = partial(os.path.join, job.src)
+
         src_paths = zip(map(_joiner, job.meta.filenames), job.meta.filenames)
-        _make_zip(paths.zip, src_paths)
+        existing_paths = tuple(pp for pp in src_paths if os.path.isfile(pp[0]))
+        _make_zip(paths.zip, existing_paths)
 
         # mark zip as complete
         open(paths.done, 'a').close()
 
-    _notify_ready(context, job)
+        # extract missing files, for email
+        missing_paths = set(src_paths).difference(existing_paths)
+        missing_files = tuple(map(itemgetter(1), missing_paths))
+        _notify_ready(context, job, missing_files, paths)
+
     return paths.zip
 
 
 Job = namedtuple('Job', ('meta', 'dst', 'src', 'done_url'))
-Metadata = namedtuple('Metadata', ('hash', 'filenames', 'exp_time', 'userid'))
+Metadata = namedtuple('Metadata', ('hash', 'filenames', 'exp_time', 'userids'))
 
 
 def _queue_download(context, metadata):
@@ -270,10 +322,11 @@ class DownloadAsyncView(BrowserView):
         filenames = tuple(map(_filename_from_url, map(GET_REMOTE_URL, items)))
         file_hash = sha('|'.join(sorted(filenames))).hexdigest()
 
-        # premare metadata
+        # prepare metadata
         user = api.user.get_current()
+        userid = user.getId()
         exp_time = _time_from_date(datetime.now() + timedelta(days=1))
-        metadata = Metadata(file_hash, filenames, exp_time, user.getId())
+        metadata = Metadata(file_hash, filenames, exp_time, [userid])
 
         # Start async job
         _queue_download(self.context, metadata)
@@ -291,14 +344,14 @@ class DownloadAsyncView(BrowserView):
         file_hash = self.request.get('hash', None)
         paths = JobPaths(DST_PATH, file_hash)
 
-        try:
-            with open(paths.metadata, 'r') as metadata_file:
-                metadata = Metadata(**(json.load(metadata_file)))
-        except IOError:
+        # extract metadata
+        metadata = _read_metadata(paths.metadata)
+        if not metadata:
             return json.dumps(dict(target=0, cur=0, proc=0))
 
+        # build estimate
         _joiner = partial(os.path.join, SRC_PATH)
-        src_paths = map(_joiner, metadata.filenames)
+        src_paths = filter(os.path.isfile, map(_joiner, metadata.filenames))
         target = sum(map(os.path.getsize, src_paths))
         size = os.path.getsize(paths.zip)
 
@@ -311,6 +364,13 @@ class DownloadAsyncView(BrowserView):
         return json.dumps(result)
 
 
+def _make_ga_data(metadata):
+    return dict(
+        filenames=metadata.filenames,
+        **_userinfo()
+    )
+
+
 class FetchLandFileView(BrowserView):
     """ Track download and redirect to Apache-served file.
     """
@@ -321,20 +381,27 @@ class FetchLandFileView(BrowserView):
         self.file_hash = self.request.get('hash', None)
         paths = JobPaths(DST_PATH, self.file_hash)
 
+        # check done
         if not paths.has_done():
             return self.index(pending=True)
 
-        with open(paths.metadata, 'r') as metadata_file:
-            metadata = Metadata(**(json.load(metadata_file)))
+        # extract metadata
+        metadata = _read_metadata(paths.metadata)
 
+        # view params
         user = api.user.get_current()
 
         size = os.path.getsize(paths.zip)
         params = _view_params(metadata, user, size)
-        same_user = user.getId() == metadata.userid
+        same_user = user.getId() in metadata.userids
         filename = os.path.basename(paths.zip)
 
-        return self.index(same_user=same_user, filename=filename, **params)
+        return self.index(
+            same_user=same_user,
+            filename=filename,
+            ga_data=json.dumps(_make_ga_data(metadata)),
+            **params
+        )
 
     def url(self):
         if self.file_hash:

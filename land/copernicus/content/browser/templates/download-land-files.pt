@@ -15,7 +15,6 @@
           <h2>We're preparing your archive.</h2>
           <p>It may take some time to complete your archive. You can close this window, we'll email you at <a href="mailto:${options/email}">${options/email}</a> when it's ready.</p>
 
-          <a id="download-url" tal:attributes="href options/url" tal:content="options/url">URL</a>
           <p><tal:num replace="options/num_files" />, <tal:size replace="options/size" /></p>
           <p>Available for <tal:time replace="options/hours" />. Expires at <tal:date replace="options/expires" /></p>
         </div>
@@ -28,7 +27,8 @@
       <a tal:attributes="href here/absolute_url">&#8592;Return to download page</a>
 
     </div>
-    <input type="hidden" id="update-url" tal:attributes="value string:${context/absolute_url}/download-land-files-estimate?hash=${options/file_hash}" />
+    <input type="hidden" id="update-url" value="${context/absolute_url}/download-land-files-estimate?hash=${options/file_hash}" />
+    <input type="hidden" id="download-url" value="${options/url}" />
     <script>
       (function(){
         var update_url = document.getElementById('update-url').getAttribute('value');
@@ -36,8 +36,8 @@
         function refresh() {
           var no_cache_url = update_url + '&' + new Date().getTime();
           $.getJSON(no_cache_url, function(data) {
-            if (data.proc === 100) {
-              document.location.href = document.getElementById('download-url').getAttribute('href');
+            if (data && data.proc && data.proc === 100) {
+              document.location.href = document.getElementById('download-url').getAttribute('value');
             }
             else {
               setTimeout(refresh, 3000);

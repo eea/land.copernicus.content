@@ -24,6 +24,7 @@
     name="land_user_name"
     />
 
+  <!-- User email -->
   <adapter
     for="plone.stringinterp.interfaces.IContextWrapper"
     provides="plone.stringinterp.interfaces.IStringSubstitution"
@@ -31,6 +32,7 @@
     name="land_user_email"
     />
 
+  <!-- Exp date -->
   <adapter
     for="plone.stringinterp.interfaces.IContextWrapper"
     provides="plone.stringinterp.interfaces.IStringSubstitution"
@@ -38,6 +40,7 @@
     name="land_exp_date"
     />
 
+  <!-- Files -->
   <adapter
     for="plone.stringinterp.interfaces.IContextWrapper"
     provides="plone.stringinterp.interfaces.IStringSubstitution"
@@ -59,6 +62,15 @@
     name="land_num_files"
     />
 
+  <!-- Files -->
+  <adapter
+    for="plone.stringinterp.interfaces.IContextWrapper"
+    provides="plone.stringinterp.interfaces.IStringSubstitution"
+    factory=".adapters.MissingFiles"
+    name="land_missing_files"
+    />
+
+  <!-- URL -->
   <adapter
     for="plone.stringinterp.interfaces.IContextWrapper"
     provides="plone.stringinterp.interfaces.IStringSubstitution"

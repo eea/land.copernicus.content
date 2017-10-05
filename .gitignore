@@ -6,3 +6,5 @@
 *.wpu
 *.log
 *.swp
+build/
+dist/

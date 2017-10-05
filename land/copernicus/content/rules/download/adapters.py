@@ -61,6 +61,23 @@ class NumFiles(BaseSubstitution):
         return len(self.wrapper.filenames)
 
 
+class MissingFiles(BaseSubstitution):
+    category = _(u'Async download')
+    description = _(u'Missing files block')
+
+    def safe_call(self):
+        missing_files = self.wrapper.missing_files
+        if missing_files:
+            numfiles = len(missing_files)
+            joined = ', '.join(missing_files)
+            return (
+                '\n'
+                'The following {} files are missing '
+                'and are not included in the archive: {}.'
+                '\n'
+            ).format(numfiles, joined)
+
+
 class URL(BaseSubstitution):
     category = _(u'Async download')
     description = _(u'Download URL')
