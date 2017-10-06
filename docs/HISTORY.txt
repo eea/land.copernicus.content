@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.5rc2 - (2017-10-06)
+---------------------
+* Feature: async download of Land files - improvements.
+  [batradav #88377]
+
 2.5rc1 - (2017-10-04)
 ---------------------
 * Feature: async download of Land files.
