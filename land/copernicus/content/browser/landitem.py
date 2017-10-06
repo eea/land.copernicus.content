@@ -65,6 +65,9 @@ class LandItemView(BrowserView):
         field = item.getField('fileSize')
         return _translate_size(field.getAccessor(item)())
 
+    def tab(self):
+        return self.request.get('tab', 'metadata')
+
 
 class ProductInlineView(BrowserView):
 

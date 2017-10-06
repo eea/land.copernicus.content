@@ -29,77 +29,94 @@
 <metal:description fill-slot="content-description" />
 
 <metal:content-core fill-slot="content-core">
-  <metal:main_macro define-macro="content-core">
-    <dl class="enableFormTabbing"
-        tal:define="membership python:context.portal_membership;
-                    member python:user if not membership.isAnonymousUser() else None;
-                    user_is_admin python:checkPermission('Manage portal', here);
-                    member_profile python:member and member.getProperty('institutional_domain', False) and member.getProperty('thematic_domain', False);
-                    context_download python:getattr(context, 'show_new_download', None);
-                    show_download python:context_download or user_is_admin;
-                    can_download python:member and member_profile">
+  <metal:main_macro define-macro="content-core" tal:define="tab view/tab">
 
-      <!-- Map View -->
-      <tal:mapview define="html view/embed_iframe">
-        <dt id="fieldsetlegend-mapview" i18n:translate="">Map View</dt>
-        <dd id="fieldset-mapview" style="margin: 0px; padding-top: 0px !important">
-          <div class="mapview-field" style="border: 1px solid #BFD630; border-top: 0px;">
-            <div class="loading_message" tal:condition="view/has_iframe">
-              <div id="squaresWaveG">
-                <div id="squaresWaveG_1" class="squaresWaveG">
-                </div>
-                <div id="squaresWaveG_2" class="squaresWaveG">
-                </div>
-                <div id="squaresWaveG_3" class="squaresWaveG">
-                </div>
-                <div id="squaresWaveG_4" class="squaresWaveG">
-                </div>
-                <div id="squaresWaveG_5" class="squaresWaveG">
-                </div>
-                <div id="squaresWaveG_6" class="squaresWaveG">
-                </div>
-                <div id="squaresWaveG_7" class="squaresWaveG">
-                </div>
-                <div id="squaresWaveG_8" class="squaresWaveG">
-                </div>
+    <!-- Tabs -->
+    <ul class="formTabs">
+      <li class="formTab firstFormTab">
+        <a id="fieldsetlegend-mapview" href="${context/absolute_url}?tab=mapview" class="${python:'selected' if tab == 'mapview' else ''}">
+          <span>Map View</span>
+        </a>
+      </li>
+      <li class="formTab">
+        <a id="fieldsetlegend-metadata" href="${context/absolute_url}?tab=metadata" class="${python:'selected' if tab == 'metadata' else ''}">
+          <span>Metadata</span>
+        </a>
+      </li>
+      <li class="formTab lastFormTab">
+        <a id="fieldsetlegend-download" href="${context/absolute_url}?tab=download" class="${python:'selected' if tab == 'download' else ''}">
+          <span>Download</span>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Map view -->
+    <tal:mapview tal:condition="python:tab == 'mapview'">
+      <tal:mapview-body define="html view/embed_iframe">
+        <div class="mapview-field" style="border: 1px solid #BFD630; border-top: 0px;">
+          <div class="loading_message" tal:condition="view/has_iframe">
+            <div id="squaresWaveG">
+              <div id="squaresWaveG_1" class="squaresWaveG">
               </div>
-              <center>Please wait, loading map...</center>
+              <div id="squaresWaveG_2" class="squaresWaveG">
+              </div>
+              <div id="squaresWaveG_3" class="squaresWaveG">
+              </div>
+              <div id="squaresWaveG_4" class="squaresWaveG">
+              </div>
+              <div id="squaresWaveG_5" class="squaresWaveG">
+              </div>
+              <div id="squaresWaveG_6" class="squaresWaveG">
+              </div>
+              <div id="squaresWaveG_7" class="squaresWaveG">
+              </div>
+              <div id="squaresWaveG_8" class="squaresWaveG">
+              </div>
             </div>
-            <tal:service replace="structure html" />
-            <script>
-              (function(){
-                window.addEventListener('load', function(){
-                  var iframe = document.querySelector('[data-role="iframe"]');
-                  iframe.setAttribute('src', iframe.getAttribute('data-src'));
-                  iframe.addEventListener('load', function(){
-                    var loading = document.querySelector('.loading_message');
-                    loading.parentNode.removeChild(loading);
-                  });
-                })
-              })();
-            </script>
+            <center>Please wait, loading map...</center>
           </div>
-        </dd>
-      </tal:mapview>
+          <tal:service replace="structure html" />
+          <script>
+            (function(){
+              window.addEventListener('load', function(){
+                var iframe = document.querySelector('[data-role="iframe"]');
+                iframe.setAttribute('src', iframe.getAttribute('data-src'));
+                iframe.addEventListener('load', function(){
+                  var loading = document.querySelector('.loading_message');
+                  loading.parentNode.removeChild(loading);
+                });
+              })
+            })();
+          </script>
+        </div>
+      </tal:mapview-body>
+    </tal:mapview>
 
-      <!-- Metadata -->
-      <tal:metadata define="field python:context.getField('text') if getattr(context, 'getField', None) else None;
-                            html python:field.getAccessor(context)() if field else ''">
-        <dt id="fieldsetlegend-metadata" i18n:translate="">Metadata</dt>
-        <dd id="fieldset-metadata">
-          <div class="metadata-field">
-            <tal:service replace="structure html" />
-            <tal:service replace="structure context/@@product-inline-view" />
-          </div>
-        </dd>
-      </tal:metadata>
+    <!-- Metadata -->
+    <tal:metadata condition="python:tab == 'metadata'">
+      <tal:metadata-body
+        define="field python:context.getField('text') if getattr(context, 'getField', None) else None;
+                html python:field.getAccessor(context)() if field else ''">
+        <div class="metadata-field">
+          <tal:service replace="structure html" />
+          <tal:service replace="structure context/@@product-inline-view" />
+        </div>
+      </tal:metadata-body>
+    </tal:metadata>
 
-      <!-- New Download -->
-      <tal:download tal:condition="show_download"
-                    tal:define="portal_url python:context.portal_url()">
-        <dt id="fieldsetlegend-download" i18n:translate="">Download</dt>
-        <dd id="fieldset-download"
-            tal:define="download_info python: context.getField('download').getAccessor(context)()">
+    <!-- New Download -->
+
+    <tal:download condition="python: tab == 'download'">
+      <tal:download-body
+        define="membership python:context.portal_membership;
+                member python:user if not membership.isAnonymousUser() else None;
+                user_is_admin python:checkPermission('Manage portal', here);
+                member_profile python:member and member.getProperty('institutional_domain', False) and member.getProperty('thematic_domain', False);
+                context_download python:getattr(context, 'show_new_download', None);
+                show_download python:context_download or user_is_admin;
+                can_download python:member and member_profile">
+
+        <tal:download condition="show_download" define="download_info python: context.getField('download').getAccessor(context)()">
 
           <div tal:condition="python:download_info" id="download-info">
             <span tal:replace="structure download_info"></span>
@@ -166,41 +183,43 @@
           <hr />
 
           <tal:download condition="can_download">
-          <div tal:define="isValidateDataset python:context.getField('isValidatedDataset').getAccessor(context)()">
-            <form id="download-form" action="." method="POST">
-              <div class="text-center">
-                <tal:condition condition="python:isValidateDataset is not True">
-                  <div id="text-accept-non-validated">
-                    <input id="checkbox-accept-non-validated" type="checkbox" name="accept-non-validated" value="yes" required />
-                    <label for="checkbox-accept-non-validated">
-                      I am aware that I am downloading non-validated data and I accept to not distribute the
-                      information contained in these files or the files themselves any further.
-                    </label>
-                  </div>
-                  <hr />
-                </tal:condition>
-                <button id="button-download-selected" class="btn btn-default btn-land-download" disabled="disabled">
-                  <div class="btn-title">Download</div>
-                  <small class="btn-desc">
-                    <span data-role="number-checked">0</span> files selected
-                    <span data-role="size-display" style="display: none">(<span data-role="file-size"></span> size)</span>
-                  </small>
-                </button>
-              </div>
-            </form>
-          </div>
+            <div tal:define="isValidateDataset python:context.getField('isValidatedDataset').getAccessor(context)()">
+              <form id="download-form" action="." method="POST">
+                <div class="text-center">
+                  <tal:condition condition="python:isValidateDataset is not True">
+                    <div id="text-accept-non-validated">
+                      <input id="checkbox-accept-non-validated" type="checkbox" name="accept-non-validated" value="yes" required />
+                      <label for="checkbox-accept-non-validated">
+                        I am aware that I am downloading non-validated data and I accept to not distribute the
+                        information contained in these files or the files themselves any further.
+                      </label>
+                    </div>
+                    <hr />
+                  </tal:condition>
+                  <button id="button-download-selected" class="btn btn-default btn-land-download" disabled="disabled">
+                    <div class="btn-title">Download</div>
+                    <small class="btn-desc">
+                      <span data-role="number-checked">0</span> files selected
+                      <span data-role="size-display" style="display: none">(<span data-role="file-size"></span> size)</span>
+                    </small>
+                  </button>
+                </div>
+              </form>
+            </div>
           </tal:download>
 
-        </dd>
-      </tal:download>
-      <tal:no-profile condition="python:member and not member_profile">
-        <p>Please <a tal:attributes="href string:${portal_url}/@@personal-information">complete your profile</a> in order to download data.</p>
-      </tal:no-profile>
-      <tal:anon condition="python:not member">
-        <p>Please <a href="./login">login</a> in order to download data.</p>
-      </tal:anon>
+        </tal:download>
 
-    </dl>
+        <tal:no-profile condition="python:member and not member_profile">
+          <p>Please <a tal:attributes="href string:${portal_url}/@@personal-information">complete your profile</a> in order to download data.</p>
+        </tal:no-profile>
+
+        <tal:anon condition="python:not member">
+          <p>Please <a href="./login">login</a> in order to download data.</p>
+        </tal:anon>
+
+      </tal:download-body>
+    </tal:download>
   </metal:main_macro>
 </metal:content-core>
 </body>
