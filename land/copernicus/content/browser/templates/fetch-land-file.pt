@@ -213,7 +213,7 @@
 
       <br />
 
-      <a tal:attributes="href here/absolute_url">&#8592;Return to download page</a>
+      <a href="${here/absolute_url}?tab=download">&#8592;Return to download page</a>
 
     </div>
   </metal:content-core>

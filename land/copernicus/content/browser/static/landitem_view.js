@@ -57,41 +57,6 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
     gb: Math.pow(1024, 3)
   }
 
-  // handle no GA code present.
-  var ga = window.ga || function() {};
-
-
-  function track_download(data) {
-    // Custom dimensions
-    ga('set', 'dimension1', data.thematic_domain);
-    ga('set', 'dimension2', data.institutional_domain);
-    ga('set', 'dimension3', data.is_eionet_member);
-
-    // Track event
-    ga('send', {
-      'hitType': 'event',                 // Required.
-      'eventCategory': 'page',            // Required.
-      'eventAction': 'landfile_download', // Required.
-      'eventLabel': data.land_item_title,
-      'eventValue': 1
-    });
-  };
-
-  function start_download(elem) {
-    var remote_url = elem.data('href');
-    $.ajax({
-      url: remote_url,
-      error: function(resp) {
-        alert(resp.responseJSON.err);
-      },
-      success: function(resp) {
-        console.log(resp);
-        track_download(resp.ga);
-        window.location.href = resp.url;
-      }
-    });
-  }
-
   function _friendly_size(size) {
     var friendly = ['gb', 'mb', 'kb', 'b'].reduce(function(acc, unit){
       var value = parseInt(size / UNITS[unit], 10);
@@ -154,7 +119,6 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
   });
 
 
-  var table_download_buttons = TABLE.$('.download-button');
   var table_checkboxes = TABLE.$(".checkbox-select-item");
   var elems_selected_counter = $("[data-role='number-checked']");
   var chk_select_all = $(".checkbox-select-all");
@@ -194,18 +158,6 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
 
   table_checkboxes.prop('checked', false);  // make sure all checkboxes are unchecked!
 
-  table_download_buttons.on('click', function(evt) {
-    evt.preventDefault();
-
-    if (!chk_accept.is(':checked')) {
-      chk_accept.focus();
-      elem_text_accept.fadeOut().fadeIn();
-    }
-    else {
-      start_download($(this));
-    }
-  });
-
   table_checkboxes.on('change', function() {
     update_selection(elem_size_display, elem_file_size, table_checkboxes, elem_btn_download);
   });
@@ -215,9 +167,5 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
     $(this).html("<span class='raster'>Raster</span> <span class='vector'>Vector</span>");
   });
 
-  // accept (un)checked
-  chk_accept.change(function() {
-    table_download_buttons.toggleClass('disabled', !this.checked);
-  });
 
 })();
