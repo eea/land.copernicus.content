@@ -191,9 +191,9 @@ def _make_zip(path, paths):
         CONSUME(starmap(zip_file.write, paths))
 
 
-def _send_notification(context, job, missing_files, userid):
+def _send_notification(context, job, missing_files, metadata):
     args = dict(
-        userid=userid,
+        userids=metadata.userids,
         exp_time=job.meta.exp_time,
         filenames=job.meta.filenames,
         done_url=job.done_url,
@@ -206,8 +206,7 @@ def _send_notification(context, job, missing_files, userid):
 def _notify_ready(context, job, missing_files, paths):
     """ Notify each user in metadata, at time of completion """
     metadata = _read_metadata(paths.metadata)
-    _send = partial(_send_notification, context, job, missing_files)
-    CONSUME(map(_send, metadata.userids))
+    _send_notification(context, job, missing_files, metadata)
 
 
 def _read_metadata(path):
@@ -313,7 +312,18 @@ class DownloadAsyncView(BrowserView):
     """ Async download preparation.
     """
 
-    def __call__(self, selected=[]):
+    def __call__(self, selected=tuple()):
+
+        # accepted non-validated data?
+        accept = self.request.get('accept-non-validated', False)
+        if not accept or accept != 'yes':
+            api.portal.show_message(
+                message='Please agree to the terms.',
+                request=self.request
+            )
+            self.request.response.redirect(self.context.absolute_url())
+            return
+
         # fetch items
         selected = selected or self.request.get('selected', [])
         items = tuple(map(self.context.restrictedTraverse, selected))

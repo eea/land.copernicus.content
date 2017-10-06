@@ -14,9 +14,7 @@
         <div class="panel-body">
           <h2>We're preparing your archive.</h2>
           <p>It may take some time to complete your archive. You can close this window, we'll email you at <a href="mailto:${options/email}">${options/email}</a> when it's ready.</p>
-
           <p><tal:num replace="options/num_files" />, <tal:size replace="options/size" /></p>
-          <p>Available for <tal:time replace="options/hours" />. Expires at <tal:date replace="options/expires" /></p>
         </div>
       </div>
 

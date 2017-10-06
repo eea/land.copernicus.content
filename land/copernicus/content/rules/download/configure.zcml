@@ -17,19 +17,13 @@
     />
 
   <!-- Content rules substitutions -->
-  <adapter
-    for="plone.stringinterp.interfaces.IContextWrapper"
-    provides="plone.stringinterp.interfaces.IStringSubstitution"
-    factory=".adapters.UserName"
-    name="land_user_name"
-    />
 
-  <!-- User email -->
+  <!-- User email (comma separated if more than one) -->
   <adapter
     for="plone.stringinterp.interfaces.IContextWrapper"
     provides="plone.stringinterp.interfaces.IStringSubstitution"
-    factory=".adapters.UserEmail"
-    name="land_user_email"
+    factory=".adapters.UserEmails"
+    name="land_user_emails"
     />
 
   <!-- Exp date -->

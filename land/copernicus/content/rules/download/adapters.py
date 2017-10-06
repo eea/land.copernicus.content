@@ -1,4 +1,6 @@
 from datetime import datetime
+from operator import methodcaller
+from itertools import imap as map
 
 from plone.stringinterp.adapters import BaseSubstitution
 
@@ -9,22 +11,19 @@ from land.copernicus.content.config import EEAMessageFactory as _
 from land.copernicus.content.browser.download import _friendly_date
 
 
-class UserName(BaseSubstitution):
+def _starlist(filenames):
+    joiner = '\n* '
+    return joiner + joiner.join(filenames)
+
+
+class UserEmails(BaseSubstitution):
     category = _(u'Async download')
-    description = _(u'User first name')
+    description = _(u'User emails')
 
     def safe_call(self):
-        user = api.user.get(userid=self.wrapper.userid)
-        return user.getProperty('fullname') or u''
-
-
-class UserEmail(BaseSubstitution):
-    category = _(u'Async download')
-    description = _(u'User email')
-
-    def safe_call(self):
-        user = api.user.get(userid=self.wrapper.userid)
-        return user.getProperty('email') or u''
+        get_email = methodcaller('getProperty', 'email')
+        users = map(api.user.get, self.wrapper.userids)
+        return ','.join(filter(bool, map(get_email, users)))
 
 
 class ExpDate(BaseSubstitution):
@@ -49,8 +48,7 @@ class FilesStar(BaseSubstitution):
     description = _(u'List of files, newline and leading *')
 
     def safe_call(self):
-        joiner = '\n* '
-        return joiner + joiner.join(self.wrapper.filenames)
+        return _starlist(self.wrapper.filenames)
 
 
 class NumFiles(BaseSubstitution):
@@ -61,21 +59,21 @@ class NumFiles(BaseSubstitution):
         return len(self.wrapper.filenames)
 
 
+def _missing_list(filenames):
+    return (
+        '\n'
+        'The following {} files are missing '
+        'and are not included in the archive: \n {}.'
+        '\n'
+    ).format(len(filenames), _starlist(filenames)) if filenames else ''
+
+
 class MissingFiles(BaseSubstitution):
     category = _(u'Async download')
     description = _(u'Missing files block')
 
     def safe_call(self):
-        missing_files = self.wrapper.missing_files
-        if missing_files:
-            numfiles = len(missing_files)
-            joined = ', '.join(missing_files)
-            return (
-                '\n'
-                'The following {} files are missing '
-                'and are not included in the archive: {}.'
-                '\n'
-            ).format(numfiles, joined)
+        return _missing_list(self.wrapper.missing_files) or u''
 
 
 class URL(BaseSubstitution):
