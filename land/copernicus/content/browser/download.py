@@ -308,21 +308,26 @@ def _view_params(meta, user, size):
     )
 
 
+def _non_validated(context):
+    field = context.getField('isValidatedDataset')
+    return not field.getAccessor(context)()
+
+
 class DownloadAsyncView(BrowserView):
     """ Async download preparation.
     """
 
     def __call__(self, selected=tuple()):
-
-        # accepted non-validated data?
-        accept = self.request.get('accept-non-validated', False)
-        if not accept or accept != 'yes':
-            api.portal.show_message(
-                message='Please agree to the terms.',
-                request=self.request
-            )
-            self.request.response.redirect(self.context.absolute_url())
-            return
+        if _non_validated(self.context):
+            # accepted non-validated data?
+            accept = self.request.get('accept-non-validated', False)
+            if not accept or accept != 'yes':
+                api.portal.show_message(
+                    message='Please agree to the terms.',
+                    request=self.request
+                )
+                self.request.response.redirect(self.context.absolute_url())
+                return
 
         # fetch items
         selected = selected or self.request.get('selected', [])
