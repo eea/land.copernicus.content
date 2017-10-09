@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.5rc3 - (2017-10-09)
+---------------------
+* Feature: Fix GA tracking and non-validated check.
+  [batradav #88377]
+
 2.5rc2 - (2017-10-06)
 ---------------------
 * Feature: async download of Land files - improvements.
@@ -133,4 +138,3 @@ Changelog
 1.0  - (initial release)
 ------------------------
 * Initial release
-
