@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.5rc4 - (2017-10-10)
+---------------------
+* Fix: Retry counter for _read_metadata
+  [batradav #88377]
+
 2.5rc3 - (2017-10-09)
 ---------------------
 * Feature: Fix GA tracking and non-validated check.
