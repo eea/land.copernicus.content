@@ -54,12 +54,12 @@ def _nt_to_json(nt):
 
 def _log_retry(count, wait, name, retries):
     logger.info(
-        'Calling %s. %s/%s retries left, waiting %ss between calls.',
+        'Calling %s. %s/%s retries left, waiting %ss until next call.',
         name, retries, count, wait
     )
 
 
-def _retry(count=3, wait=1):
+def _retry(count=3, wait=1, increase=False):
     """ Calls decorated function until the returned value is not None.
         Or the `count` is reached. Waits `wait` seconds between retries.
     """
@@ -70,11 +70,12 @@ def _retry(count=3, wait=1):
             result = None
 
             while (result is None and retries > 0):
-                _log_retry(count, wait, fnc.__name__, retries)
-                retries = retries - 1
                 result = fnc(*args, **kwargs)
                 if result is None:
-                    time.sleep(wait)
+                    retries = retries - 1
+                    wait_for = wait * (count - retries) if increase else wait
+                    _log_retry(count, wait_for, fnc.__name__, retries + 1)
+                    time.sleep(wait_for)
 
             return result
 
@@ -242,7 +243,7 @@ def _notify_ready(context, job, missing_files, paths):
     _send_notification(context, job, missing_files, metadata)
 
 
-@_retry(count=3, wait=1)
+@_retry(count=5, wait=1, increase=True)
 def _read_metadata(path):
     if os.path.isfile(path):
         with open(path, 'r') as metadata_file:
