@@ -1,9 +1,14 @@
 Changelog
 =========
 
+2.5rc5 - (2017-10-10)
+---------------------
+* Fix: Retry counter for _read_metadata - increasing wait time.
+  [batradav #88377]
+
 2.5rc4 - (2017-10-10)
 ---------------------
-* Fix: Retry counter for _read_metadata
+* Fix: Retry counter for _read_metadata.
   [batradav #88377]
 
 2.5rc3 - (2017-10-09)
