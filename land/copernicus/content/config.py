@@ -2,7 +2,6 @@
 """
 import os
 import logging
-from functools import partial
 
 from zope.i18nmessageid.message import MessageFactory
 

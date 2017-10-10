@@ -6,6 +6,7 @@ from sha import sha
 from datetime import datetime
 from datetime import timedelta
 from functools import partial
+from functools import wraps
 from collections import namedtuple
 from collections import deque
 from operator import attrgetter
@@ -23,6 +24,7 @@ import plone.api as api
 from land.copernicus.content.config import ENV_DL_SRC_PATH as SRC_PATH
 from land.copernicus.content.config import ENV_DL_DST_PATH as DST_PATH
 from land.copernicus.content.config import ENV_DL_STATIC_PATH as ST_PATH
+from land.copernicus.content.config import logger
 
 from land.copernicus.content.browser.views import remoteUrl_exists
 from land.copernicus.content.browser.views import is_EIONET_member
@@ -48,6 +50,37 @@ def _nt_to_dict(nt):
 
 def _nt_to_json(nt):
     return json.dumps(_nt_to_dict(nt))
+
+
+def _log_retry(count, wait, name, retries):
+    logger.info(
+        'Calling %s. %s/%s retries left, waiting %ss between calls.',
+        name, retries, count, wait
+    )
+
+
+def _retry(count=3, wait=1):
+    """ Calls decorated function until the returned value is not None.
+        Or the `count` is reached. Waits `wait` seconds between retries.
+    """
+    def decorator(fnc):
+        @wraps(fnc)
+        def func(*args, **kwargs):
+            retries = count
+            result = None
+
+            while (result is None and retries > 0):
+                _log_retry(count, wait, fnc.__name__, retries)
+                retries = retries - 1
+                result = fnc(*args, **kwargs)
+                if result is None:
+                    time.sleep(wait)
+
+            return result
+
+        return func
+
+    return decorator
 
 
 UNITS = namedtuple('Units', ('b', 'kb', 'mb', 'gb'))(B, KB, MB, GB)
@@ -209,6 +242,7 @@ def _notify_ready(context, job, missing_files, paths):
     _send_notification(context, job, missing_files, metadata)
 
 
+@_retry(count=3, wait=1)
 def _read_metadata(path):
     if os.path.isfile(path):
         with open(path, 'r') as metadata_file:
