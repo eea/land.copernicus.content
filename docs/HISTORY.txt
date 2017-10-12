@@ -1,6 +1,12 @@
 Changelog
 =========
 
+2.5rc6 - (2017-10-12)
+---------------------
+* Fix: _delayed_read_metadata for everything but _download_executor.
+* Fix: email notifications and addressing users by name.
+  [batradav #88377]
+
 2.5rc5 - (2017-10-10)
 ---------------------
 * Fix: Retry counter for _read_metadata - increasing wait time.
