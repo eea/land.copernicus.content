@@ -11,6 +11,7 @@ from collections import namedtuple
 from collections import deque
 from operator import attrgetter
 from operator import itemgetter
+from itertools import chain
 from itertools import dropwhile
 from itertools import imap as map
 from itertools import starmap
@@ -121,7 +122,10 @@ def _friendly_size(size):
     )
 
     # get and return the first non-zero result
-    res, unit = next(dropwhile(lambda x: x[0] <= 0, unitsize))
+    res, unit = next(chain(
+        dropwhile(lambda x: x[0] <= 0, unitsize),
+        [(0, 'b')]  # default result
+    ))
     return '{} {}'.format(res, unit.upper())
 
 
