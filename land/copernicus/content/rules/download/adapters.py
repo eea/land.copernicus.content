@@ -16,14 +16,23 @@ def _starlist(filenames):
     return joiner + joiner.join(filenames)
 
 
-class UserEmails(BaseSubstitution):
+class UserName(BaseSubstitution):
     category = _(u'Async download')
-    description = _(u'User emails')
+    description = _(u'User full name')
 
     def safe_call(self):
-        get_email = methodcaller('getProperty', 'email')
-        users = map(api.user.get, self.wrapper.userids)
-        return ','.join(filter(bool, map(get_email, users)))
+        # Need to get fullname as LDAP does not provide first/last names.
+        user = api.user.get(userid=self.wrapper.userid)
+        return user.getProperty('fullname') or u''
+
+
+class UserEmail(BaseSubstitution):
+    category = _(u'Async download')
+    description = _(u'User email')
+
+    def safe_call(self):
+        user = api.user.get(self.wrapper.userid)
+        return user.getProperty('email')
 
 
 class ExpDate(BaseSubstitution):

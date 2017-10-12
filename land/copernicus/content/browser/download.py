@@ -33,7 +33,11 @@ from land.copernicus.content.async import IAsyncService
 from land.copernicus.content.async.subscribers import NAME as Q_NAME
 
 from land.copernicus.content.events.download import DownloadReady
+
 from plone.stringinterp.interfaces import IContextWrapper
+
+from plone.app.contentrules.handlers import close
+
 
 MINUTE = 60
 HOUR = MINUTE ** 2
@@ -225,29 +229,41 @@ def _make_zip(path, paths):
         CONSUME(starmap(zip_file.write, paths))
 
 
-def _send_notification(context, job, missing_files, metadata):
+def _send_notification(context, job, missing_files, userid):
     args = dict(
-        userids=metadata.userids,
+        userid=userid,
         exp_time=job.meta.exp_time,
         filenames=job.meta.filenames,
         done_url=job.done_url,
         missing_files=missing_files,
     )
     ctx_wrapper = IContextWrapper(context)(**args)
-    notify(DownloadReady(ctx_wrapper))
+    evt = DownloadReady(ctx_wrapper)
+    notify(evt)
+    # Make sure to close the event, otherwise subsequent
+    # notifications will not trigger the content rule.
+    # This is normally done automatically on IEndRequestEvent
+    # but that doesn't seem to trigger on async jobs; and
+    # would not work for multiple notify( triggers anyway.
+    close(evt)
 
 
 def _notify_ready(context, job, missing_files, paths):
     """ Notify each user in metadata, at time of completion """
-    metadata = _read_metadata(paths.metadata)
-    _send_notification(context, job, missing_files, metadata)
+    metadata = _delayed_read_metadata(paths.metadata)
+    notifier = partial(_send_notification, context, job, missing_files)
+    CONSUME(map(notifier, metadata.userids))
 
 
-@_retry(count=5, wait=1, increase=True)
 def _read_metadata(path):
     if os.path.isfile(path):
         with open(path, 'r') as metadata_file:
             return Metadata(**(json.load(metadata_file)))
+
+
+@_retry(count=5, wait=1, increase=True)
+def _delayed_read_metadata(path):
+    return _read_metadata(path)
 
 
 def _write_metadata(path, metadata):
@@ -255,25 +271,29 @@ def _write_metadata(path, metadata):
         metadata_file.write(_endln(_nt_to_json(metadata)))
 
 
-def _update_metadata(path, metadata):
-    existing = _read_metadata(path)
+def _merge_metadata(existing, metadata):
+    updated = _nt_to_dict(existing)
+    updated['userids'] = list(set(updated['userids'] + metadata.userids))
+    updated['exp_time'] = metadata.exp_time
+    return Metadata(**updated)
 
-    if existing:
-        updated = _nt_to_dict(existing)
-        updated['userids'] = list(set(updated['userids'] + metadata.userids))
-        updated['exp_time'] = metadata.exp_time
-        return Metadata(**updated)
 
-    return metadata
+def _update_metadata(existing, metadata):
+    return (existing and _merge_metadata(existing, metadata)) or metadata
 
 
 def _download_executor(context, job):
     paths = JobPaths(job.dst, job.meta.hash)
 
-    # create/update metadata file
+    # Create/update metadata file.
+    # Not using _delayed_read_metadata on purpose! This
+    # function is in charge of creating the metadata.
     _write_metadata(
         paths.metadata,
-        _update_metadata(paths.metadata, job.meta)
+        _update_metadata(
+            _read_metadata(paths.metadata),
+            job.meta
+        )
     )
 
     # Build and notify only if the zip file does not exist.
@@ -395,7 +415,7 @@ class DownloadAsyncView(BrowserView):
         paths = JobPaths(DST_PATH, file_hash)
 
         # extract metadata
-        metadata = _read_metadata(paths.metadata)
+        metadata = _delayed_read_metadata(paths.metadata)
         if not metadata:
             return json.dumps(dict(target=0, cur=0, proc=0))
 
@@ -436,7 +456,7 @@ class FetchLandFileView(BrowserView):
             return self.index(pending=True)
 
         # extract metadata
-        metadata = _read_metadata(paths.metadata)
+        metadata = _delayed_read_metadata(paths.metadata)
 
         # view params
         user = api.user.get_current()
