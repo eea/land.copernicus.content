@@ -77,11 +77,11 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
     }
   }
 
-  function update_selection(elem_size_display, elem_file_size, checkboxes, btn_download) {
+  function update_selection(elem_size_display, elem_file_size, checkboxes, btn_download, accepted) {
     var selected = checkboxes.filter(':checked');
     elems_selected_counter.text(selected.length);
     update_filesize(elem_size_display, elem_file_size, selected);
-    if (selected.length <= 0) {
+    if (selected.length <= 0 || !accepted) {
       btn_download.disabled = true;
     }
     else {
@@ -151,15 +151,28 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
     }
   });
 
+  var _update_selection = function() {
+    var accepted = chk_accept.length > 0 ? $(chk_accept).is(':checked') : true;
+    update_selection(
+      elem_size_display,
+      elem_file_size,
+      table_checkboxes,
+      elem_btn_download,
+      accepted
+    );
+  }
+
   chk_select_all.on('change', function(evt){
     table_checkboxes.prop('checked', $(evt.target).is(':checked'));;
-    update_selection(elem_size_display, elem_file_size, table_checkboxes, elem_btn_download);
+    _update_selection();
   });
+
+  chk_accept.on('change', _update_selection);
 
   table_checkboxes.prop('checked', false);  // make sure all checkboxes are unchecked!
 
   table_checkboxes.on('change', function() {
-    update_selection(elem_size_display, elem_file_size, table_checkboxes, elem_btn_download);
+    _update_selection();
   });
 
   /* If a file in datatable has both types raster and vector we fix badge design here. */
