@@ -1,6 +1,13 @@
 Changelog
 =========
 
+2.5rc7 - (2017-10-16)
+---------------------
+* Fix: disable download button if "non-validated" checkbox is unchecked.
+* Update: download ready email template.
+* Fix: grab download files according to Land File URL, relative to `src` dir.
+  [batradav #88377]
+
 2.5rc6 - (2017-10-12)
 ---------------------
 * Fix: _delayed_read_metadata for everything but _download_executor.
