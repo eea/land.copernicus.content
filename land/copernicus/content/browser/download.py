@@ -2,6 +2,7 @@ import os
 import json
 import zipfile
 import time
+from urlparse import urlparse
 from sha import sha
 from datetime import datetime
 from datetime import timedelta
@@ -133,8 +134,12 @@ def _get_field_value(name, item):
     return item.getField(name).getAccessor(item)()
 
 
-def _filename_from_url(url):
-    return url.split('/')[-1]
+def _filepath_from_url(url):
+    return urlparse(url).path.strip('/')
+
+
+def _filename_from_path(path):
+    return os.path.split(path)[-1]
 
 
 GET_REMOTE_URL = partial(_get_field_value, 'remoteUrl')
@@ -220,24 +225,24 @@ def _endln(thing):
 
 
 def _make_zip(path, paths):
-    """ paths is an iterable containing pairs in the format:
-        [("/path/to/file.zip", "file.zip"), (...,  ...), ...]
-
+    """ path: target zipfile
+        paths: files to add to zipfile
         starmap is the equivalent of:
         zip_file.write('/path/to/file.zip', 'file.zip')
     """
     def mk_zip(pth):
         return zipfile.ZipFile(pth, 'w', zipfile.ZIP_STORED, True)
 
+    zip_args = zip(paths, map(_filename_from_path, paths))
     with mk_zip(path) as zip_file:
-        CONSUME(starmap(zip_file.write, paths))
+        CONSUME(starmap(zip_file.write, zip_args))
 
 
 def _send_notification(context, job, missing_files, userid):
     args = dict(
         userid=userid,
         exp_time=job.meta.exp_time,
-        filenames=job.meta.filenames,
+        filenames=tuple(map(_filename_from_path, job.meta.filepaths)),
         done_url=job.done_url,
         missing_files=missing_files,
     )
@@ -307,8 +312,8 @@ def _download_executor(context, job):
     if not paths.has_zip():
         _joiner = partial(os.path.join, job.src)
 
-        src_paths = zip(map(_joiner, job.meta.filenames), job.meta.filenames)
-        existing_paths = tuple(pp for pp in src_paths if os.path.isfile(pp[0]))
+        src_paths = tuple(map(_joiner, job.meta.filepaths))
+        existing_paths = tuple(filter(os.path.isfile, src_paths))
         _make_zip(paths.zip, existing_paths)
 
         # mark zip as complete
@@ -316,14 +321,14 @@ def _download_executor(context, job):
 
         # extract missing files, for email
         missing_paths = set(src_paths).difference(existing_paths)
-        missing_files = tuple(map(itemgetter(1), missing_paths))
+        missing_files = tuple(map(_filename_from_path, missing_paths))
         _notify_ready(context, job, missing_files, paths)
 
     return paths.zip
 
 
 Job = namedtuple('Job', ('meta', 'dst', 'src', 'done_url'))
-Metadata = namedtuple('Metadata', ('hash', 'filenames', 'exp_time', 'userids'))
+Metadata = namedtuple('Metadata', ('hash', 'filepaths', 'exp_time', 'userids'))
 
 
 def _queue_download(context, metadata):
@@ -358,7 +363,7 @@ def _friendly_date(date):
 def _view_params(meta, user, size):
     expiration = datetime.fromtimestamp(meta.exp_time)
     return dict(
-        num_files=_grammar('file', len(meta.filenames)),
+        num_files=_grammar('file', len(meta.filepaths)),
         email=user.getProperty('email'),
         file_hash=meta.hash,
         size=_friendly_size(int(size)),
@@ -393,14 +398,14 @@ class DownloadAsyncView(BrowserView):
         items = tuple(map(self.context.restrictedTraverse, selected))
 
         # extract files and calculate hash
-        filenames = tuple(map(_filename_from_url, map(GET_REMOTE_URL, items)))
-        file_hash = sha('|'.join(sorted(filenames))).hexdigest()
+        filepaths = tuple(map(_filepath_from_url, map(GET_REMOTE_URL, items)))
+        file_hash = sha('|'.join(sorted(filepaths))).hexdigest()
 
         # prepare metadata
         user = api.user.get_current()
         userid = user.getId()
         exp_time = _time_from_date(datetime.now() + timedelta(days=1))
-        metadata = Metadata(file_hash, filenames, exp_time, [userid])
+        metadata = Metadata(file_hash, filepaths, exp_time, [userid])
 
         # Start async job
         _queue_download(self.context, metadata)
@@ -425,7 +430,7 @@ class DownloadAsyncView(BrowserView):
 
         # build estimate
         _joiner = partial(os.path.join, SRC_PATH)
-        src_paths = filter(os.path.isfile, map(_joiner, metadata.filenames))
+        src_paths = filter(os.path.isfile, map(_joiner, metadata.filepaths))
         target = sum(map(os.path.getsize, src_paths))
         size = os.path.getsize(paths.zip)
 
@@ -440,7 +445,7 @@ class DownloadAsyncView(BrowserView):
 
 def _make_ga_data(metadata):
     return dict(
-        filenames=metadata.filenames,
+        filenames=list(map(_filename_from_path, metadata.filepaths)),
         **_userinfo()
     )
 
