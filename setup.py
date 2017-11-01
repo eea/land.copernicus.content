@@ -34,5 +34,8 @@ setup(
         'eea.forms',
         'Products.ATVocabularyManager',
         'eea.cache',
+        'plone.app.async',
+        'five.pt',
+        'plone.stringinterp==1.0.14',  # needed for IContextWrapper in async
     ],
 )

@@ -5,6 +5,17 @@
   i18n_domain="eea">
 
   <genericsetup:upgradeSteps
+    source="1.0"
+    destination="1.6"
+    profile="land.copernicus.content:default">
+
+    <genericsetup:upgradeDepends
+      title="Upgrade step for land.copernicus.content: import controlpanel"
+      import_steps="controlpanel"
+      />
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
     source="1.6"
     destination="2.4"
     profile="land.copernicus.content:default">
@@ -16,14 +27,15 @@
   </genericsetup:upgradeSteps>
 
   <genericsetup:upgradeSteps
-    source="*"
-    destination="1.6"
+    source="2.4"
+    destination="2.5"
     profile="land.copernicus.content:default">
 
     <genericsetup:upgradeDepends
-      title="Upgrade step for land.copernicus.content: import controlpanel"
-      import_steps="controlpanel"
-      />
+        title="Update typeinfo and contentrules."
+        description="Update default view for landitem. Setup contentrules for async notification email. Add download permission."
+        import_steps="typeinfo contentrules rolemap"
+        />
   </genericsetup:upgradeSteps>
 
 </configure>

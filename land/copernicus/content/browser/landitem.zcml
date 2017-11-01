@@ -1,0 +1,24 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  xmlns:zcml="http://namespaces.zope.org/zcml"
+  i18n_domain="eea">
+
+  <browser:page
+    name="landitem-view"
+    for="land.copernicus.content.content.interfaces.ILandItem"
+    class=".landitem.LandItemView"
+    template="templates/landitem_view.pt"
+    permission="zope2.View"
+    />
+
+  <browser:page
+    name="product-inline-view"
+    for="land.copernicus.content.content.interfaces.ILandItem"
+    class=".landitem.ProductInlineView"
+    permission="zope2.View"
+    template="templates/product-inline-view.pt"
+    />
+
+</configure>
+

@@ -3,14 +3,20 @@
   xmlns:browser="http://namespaces.zope.org/browser"
   i18n_domain="eea">
 
+  <include package="five.pt" />
+
   <include package="z3c.jbot" file="meta.zcml" />
   <include package="plone.app.registry" />
+  <include package="plone.app.async" />
 
   <includeDependencies package="." />
   <include file="profiles.zcml" />
   <include file="permissions.zcml" />
   <include file="overrides.zcml" />
 
+  <include package=".rules" />
+  <include package=".events" />
+  <include package=".async" />
   <include package=".browser" />
   <include package=".content" />
   <include package=".upgrades" />

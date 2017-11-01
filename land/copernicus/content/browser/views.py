@@ -1,6 +1,6 @@
+import json
 from datetime import datetime
 from DateTime import DateTime
-from plone import api
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.PloneBatch import Batch
 from Products.CMFPlone.utils import safe_unicode
@@ -10,6 +10,7 @@ from Products.statusmessages.interfaces import IStatusMessage
 from StringIO import StringIO
 from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
+import plone.api as api
 import subprocess
 import xlwt
 import json
@@ -50,17 +51,6 @@ class LandItemsOverview(BrowserView):
         batch = Batch(results, int(self.limit), int(start), orphan=0)
 
         return batch
-
-
-class LandProductInlineView(BrowserView):
-    """ Inline view for products
-    #TODO: hide plone.belowcontentbody.relateditems viewlet
-    """
-
-    def __call__(self):
-        if not getattr(self.context, 'meta_type', '') == "LandItem":
-            return ""
-        return self.index()
 
 
 class GoPDB(BrowserView):
@@ -164,34 +154,6 @@ class RedirectDownloadUrl(BrowserView):
                         self.url_profile_error())
             else:
                 return self.request.response.redirect(self.url_missing_file())
-
-
-class DownloadLandFileView(BrowserView):
-    """ Set Google Analytics custom params and redirect to remoteUrl
-    """
-    index = ViewPageTemplateFile("templates/download-land-file.pt")
-
-    def render(self):
-        return self.index()
-
-    def __call__(self):
-        return self.render()
-
-    @property
-    def values(self):
-        membership = getToolByName(self.context, 'portal_membership')
-        authenticated_user = membership.getAuthenticatedMember()
-        institutional_domain = authenticated_user.getProperty(
-            'institutional_domain')
-        professional_thematic_domain = authenticated_user.getProperty(
-            'thematic_domain')
-        remoteUrl = self.request.form.get('remoteUrl', None)
-        is_eionet_member = is_EIONET_member(authenticated_user)
-
-        return {'institutional_domain': institutional_domain,
-                'professional_thematic_domain': professional_thematic_domain,
-                'is_eionet_member': is_eionet_member,
-                'start_download_url': remoteUrl}
 
 
 # Settings for xls file columns

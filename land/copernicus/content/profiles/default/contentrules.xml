@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<contentrules>
+ <rule name="land-copernicus-content-download-ready" title="Async download - ready" cascading="False"
+    description="Notify the person who requested the download that it is now ready."
+    enabled="True" event="land.copernicus.content.events.download.IDownloadReady"
+    stop-after="False">
+  <conditions/>
+  <actions>
+   <action type="plone.actions.Mail">
+    <property name="source"/>
+    <property
+      name="message">Dear ${land_user_name},
+
+Requested files:
+${land_file_list_star}
+
+can be downloaded. Please use the following URL to begin the download:
+${land_download_url} (valid until: ${land_exp_date})
+${land_missing_files}
+Best regards,
+Copernicus Team at the European Environment Agency
+
+P.S. This email is auto-generated and delivered to you because the user associated with this email address has requested a download.</property>
+    <property name="subject">Your download is ready!</property>
+    <property name="recipients">${land_user_email}</property>
+    <property name="exclude_actor">False</property>
+   </action>
+  </actions>
+ </rule>
+ <assignment name="land-copernicus-content-download-ready" bubbles="True" enabled="True" location="" />
+</contentrules>

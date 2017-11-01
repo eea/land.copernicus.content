@@ -1,0 +1,83 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope">
+
+  <include package="plone.app.contentrules" />
+
+  <!-- Custom content-rules events -->
+  <interface
+    interface="land.copernicus.content.events.download.IDownloadReady"
+    type="plone.contentrules.rule.interfaces.IRuleEventType"
+    name="Async download - ready"
+    />
+
+  <!-- Content rules subscribers -->
+  <subscriber
+    for="land.copernicus.content.events.download.IDownloadReady"
+    handler=".handler.execute_event"
+    />
+
+  <!-- Content rules substitutions -->
+
+  <!-- User email -->
+  <adapter
+    for="plone.stringinterp.interfaces.IContextWrapper"
+    provides="plone.stringinterp.interfaces.IStringSubstitution"
+    factory=".adapters.UserEmail"
+    name="land_user_email"
+    />
+
+  <!-- User name -->
+  <adapter
+    for="plone.stringinterp.interfaces.IContextWrapper"
+    provides="plone.stringinterp.interfaces.IStringSubstitution"
+    factory=".adapters.UserName"
+    name="land_user_name"
+    />
+
+  <!-- Exp date -->
+  <adapter
+    for="plone.stringinterp.interfaces.IContextWrapper"
+    provides="plone.stringinterp.interfaces.IStringSubstitution"
+    factory=".adapters.ExpDate"
+    name="land_exp_date"
+    />
+
+  <!-- Files -->
+  <adapter
+    for="plone.stringinterp.interfaces.IContextWrapper"
+    provides="plone.stringinterp.interfaces.IStringSubstitution"
+    factory=".adapters.FilesComma"
+    name="land_file_list_comma"
+    />
+
+  <adapter
+    for="plone.stringinterp.interfaces.IContextWrapper"
+    provides="plone.stringinterp.interfaces.IStringSubstitution"
+    factory=".adapters.FilesStar"
+    name="land_file_list_star"
+    />
+
+  <adapter
+    for="plone.stringinterp.interfaces.IContextWrapper"
+    provides="plone.stringinterp.interfaces.IStringSubstitution"
+    factory=".adapters.NumFiles"
+    name="land_num_files"
+    />
+
+  <!-- Files -->
+  <adapter
+    for="plone.stringinterp.interfaces.IContextWrapper"
+    provides="plone.stringinterp.interfaces.IStringSubstitution"
+    factory=".adapters.MissingFiles"
+    name="land_missing_files"
+    />
+
+  <!-- URL -->
+  <adapter
+    for="plone.stringinterp.interfaces.IContextWrapper"
+    provides="plone.stringinterp.interfaces.IStringSubstitution"
+    factory=".adapters.URL"
+    name="land_download_url"
+    />
+
+</configure>

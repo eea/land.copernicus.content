@@ -160,7 +160,7 @@
           <span i18n:translate="">Coverage:</span>
         </dt>
         <dd >
-          <span tal:content="python: u', '.join(context.get_countries_coverage())" />
+          <span tal:content="view/get_countries_coverage" />
         </dd>
       </tal:block>
 

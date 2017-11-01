@@ -7,10 +7,15 @@
   <include file="backports.zcml" />
   <include file="cookiepolicy.zcml" />
   <include file="patches.zcml" />
+  <include file="landitem.zcml" />
 
   <browser:resourceDirectory
     name="land.copernicus.content.images"
     directory="./images" />
+
+  <browser:resourceDirectory
+    name="land.copernicus.content.static"
+    directory="./static" />
 
   <browser:page
     name="migrate_image_scales"
@@ -28,26 +33,34 @@
     />
 
   <browser:page
-    name="product-inline-view"
-    class=".views.LandProductInlineView"
-    permission="zope2.View"
-    for="*"
-    template="templates/product-inline-view.pt"
-    />
-
-  <browser:page
-    name="redirect-download-url"
-    class=".views.RedirectDownloadUrl"
-    permission="zope2.View"
-    for="land.copernicus.content.content.landfile.LandFile"
-    />
-
-  <browser:page
     name="download-land-file"
-    class=".views.DownloadLandFileView"
-    permission="zope2.View"
+    class=".download.DownloadLandFileView"
+    for="land.copernicus.content.content.landfile.LandFile"
+    permission="land.copernicus.content.download_landfile"
+    />
+
+  <browser:page
+    name="download-land-files"
     for="land.copernicus.content.content.landitem.LandItem"
-    template="templates/download-land-file.pt"
+    class=".download.DownloadAsyncView"
+    template="templates/download-land-files.pt"
+    permission="land.copernicus.content.download_landfile"
+    />
+
+  <browser:page
+    name="download-land-files-estimate"
+    for="land.copernicus.content.content.landitem.LandItem"
+    class=".download.DownloadAsyncView"
+    attribute="estimate"
+    permission="land.copernicus.content.download_landfile"
+    />
+
+  <browser:page
+    name="fetch-land-file"
+    for="land.copernicus.content.content.landitem.LandItem"
+    class=".download.FetchLandFileView"
+    template="templates/fetch-land-file.pt"
+    permission="land.copernicus.content.download_landfile"
     />
 
   <!-- <browser:page -->

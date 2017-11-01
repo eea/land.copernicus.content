@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+  <metal:description fill-slot="content-description" />
+
+  <metal:content-core fill-slot="content">
+    <div class="text-center">
+
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h2>We're preparing your archive.</h2>
+          <p>It may take some time to complete your archive. You can close this window, we'll email you at <a href="mailto:${options/email}">${options/email}</a> when it's ready.</p>
+          <p><tal:num replace="options/num_files" />, <tal:size replace="options/size" /></p>
+        </div>
+      </div>
+
+      <p>Please note that archives may take a long time (hours or possibly days) to create.</p>
+
+      <br />
+
+      <a href="${here/absolute_url}?tab=download">&#8592;Return to download page</a>
+
+    </div>
+    <input type="hidden" id="update-url" value="${context/absolute_url}/download-land-files-estimate?hash=${options/file_hash}" />
+    <input type="hidden" id="download-url" value="${options/url}" />
+    <script>
+      (function(){
+        var update_url = document.getElementById('update-url').getAttribute('value');
+
+        function refresh() {
+          var no_cache_url = update_url + '&' + new Date().getTime();
+          $.getJSON(no_cache_url, function(data) {
+            if (data && data.proc && data.proc === 100) {
+              document.location.href = document.getElementById('download-url').getAttribute('value');
+            }
+            else {
+              setTimeout(refresh, 3000);
+            }
+          });
+        }
+
+        refresh();
+
+      })()
+    </script>
+  </metal:content-core>
+</body>
+</html>
+

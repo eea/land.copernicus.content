@@ -1,9 +1,43 @@
 Changelog
 =========
 
-2.5.dev0 - (unreleased)
------------------------
-  WIP Redesign
+2.5rc7 - (2017-10-16)
+---------------------
+* Fix: disable download button if "non-validated" checkbox is unchecked.
+* Update: download ready email template.
+* Fix: grab download files according to Land File URL, relative to `src` dir.
+  [batradav #88377]
+
+2.5rc6 - (2017-10-12)
+---------------------
+* Fix: _delayed_read_metadata for everything but _download_executor.
+* Fix: email notifications and addressing users by name.
+  [batradav #88377]
+
+2.5rc5 - (2017-10-10)
+---------------------
+* Fix: Retry counter for _read_metadata - increasing wait time.
+  [batradav #88377]
+
+2.5rc4 - (2017-10-10)
+---------------------
+* Fix: Retry counter for _read_metadata.
+  [batradav #88377]
+
+2.5rc3 - (2017-10-09)
+---------------------
+* Feature: Fix GA tracking and non-validated check.
+  [batradav #88377]
+
+2.5rc2 - (2017-10-06)
+---------------------
+* Feature: async download of Land files - improvements.
+  [batradav #88377]
+
+2.5rc1 - (2017-10-04)
+---------------------
+* Feature: async download of Land files.
+  [batradav #88377]
 
 2.4 - (2016-08-08)
 ------------------
@@ -28,7 +62,7 @@ Changelog
 * Bug fix: [Jenkins] Updated install requires.
   [GhitaB refs #28876]
 
-* Feature: Changed widget for thematic_domain and institutional_domain to 
+* Feature: Changed widget for thematic_domain and institutional_domain to
   MultiCheckBoxVocabularyWidget
   [olimpiurob refs #24190]
 * Feature: Added LDAP specific properties to local users
@@ -61,7 +95,7 @@ Changelog
   [tiberich #23775]
 * Change: Switched to curl in the jenkins build install script
   [olimpiurob refs #22402]
-* Change: Changed fetch url for jenkins build install script to the install 
+* Change: Changed fetch url for jenkins build install script to the install
   script from the main EEA CPB repository
   [olimpiurob refs #22402]
 
@@ -98,7 +132,7 @@ Changelog
 
 1.5 - (2013-11-14)
 ------------------
-* Bug fix: don't hardcode width, instead set the class=widen 
+* Bug fix: don't hardcode width, instead set the class=widen
   to the embeded iframes
   [tiberich #17266]
 
@@ -127,4 +161,3 @@ Changelog
 1.0  - (initial release)
 ------------------------
 * Initial release
-

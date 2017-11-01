@@ -8,4 +8,10 @@
     description="Add Land Content"
     />
 
+  <permission
+    id="land.copernicus.content.download_landfile"
+    title="land.copernicus.content: Download land files"
+    description="Download Land files"
+    />
+
 </configure>

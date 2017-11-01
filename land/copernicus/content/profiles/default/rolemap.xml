@@ -8,5 +8,9 @@
     <permission name="Can download PDF" acquire="True">
       <role name="Anonymous"/>
     </permission>
+    <permission name="land.copernicus.content: Download land files" acquire="True">
+      <role name="Authenticated"/>
+      <role name="Member"/>
+    </permission>
   </permissions>
 </rolemap>

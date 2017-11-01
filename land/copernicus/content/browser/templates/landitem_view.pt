@@ -1,0 +1,216 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+<metal:title fill-slot="content-title">
+ <h1 metal:use-macro="context/kss_generic_macros/macros/generic_title_view"></h1>
+ <div class='not-validated-container'>
+   <span class='not-validated-tag'>
+      <span tal:define="not_validated_custom python: context.getField('notValidatedCustomText').getAccessor(context)()"
+            tal:replace="structure not_validated_custom">
+   </span>
+ </div>
+</metal:title>
+
+<metal:styleslot fill-slot="style_slot">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" />
+  <link rel="stylesheet" type="text/css" href="${portal_url}/eea-tooltips.css" />
+  <link rel="stylesheet" type="text/css" href="${portal_url}/++resource++land.copernicus.content.static/landitem_view.css" />
+</metal:styleslot>
+
+<metal:javascriptslot fill-slot="javascript_head_slot">
+  <script defer type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+  <script defer type="text/javascript" language="javascript" src="${portal_url}/eea-tooltips.js"></script>
+  <script defer type="text/javascript" language="javascript" src="${portal_url}/++resource++land.copernicus.content.static/landitem_view.js"></script>
+</metal:javascriptslot>
+
+<metal:description fill-slot="content-description" />
+
+<metal:content-core fill-slot="content-core">
+  <metal:main_macro define-macro="content-core" tal:define="tab view/tab">
+
+    <!-- Tabs -->
+    <ul class="formTabs">
+      <li class="formTab firstFormTab">
+        <a id="fieldsetlegend-mapview" href="${context/absolute_url}?tab=mapview" class="${python:'selected' if tab == 'mapview' else ''}">
+          <span>Map View</span>
+        </a>
+      </li>
+      <li class="formTab">
+        <a id="fieldsetlegend-metadata" href="${context/absolute_url}?tab=metadata" class="${python:'selected' if tab == 'metadata' else ''}">
+          <span>Metadata</span>
+        </a>
+      </li>
+      <li class="formTab lastFormTab">
+        <a id="fieldsetlegend-download" href="${context/absolute_url}?tab=download" class="${python:'selected' if tab == 'download' else ''}">
+          <span>Download</span>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Map view -->
+    <tal:mapview tal:condition="python:tab == 'mapview'">
+      <tal:mapview-body define="html view/embed_iframe">
+        <div class="mapview-field" style="border: 1px solid #BFD630; border-top: 0px;">
+          <div class="loading_message" tal:condition="view/has_iframe">
+            <div id="squaresWaveG">
+              <div id="squaresWaveG_1" class="squaresWaveG">
+              </div>
+              <div id="squaresWaveG_2" class="squaresWaveG">
+              </div>
+              <div id="squaresWaveG_3" class="squaresWaveG">
+              </div>
+              <div id="squaresWaveG_4" class="squaresWaveG">
+              </div>
+              <div id="squaresWaveG_5" class="squaresWaveG">
+              </div>
+              <div id="squaresWaveG_6" class="squaresWaveG">
+              </div>
+              <div id="squaresWaveG_7" class="squaresWaveG">
+              </div>
+              <div id="squaresWaveG_8" class="squaresWaveG">
+              </div>
+            </div>
+            <center>Please wait, loading map...</center>
+          </div>
+          <tal:service replace="structure html" />
+          <script>
+            (function(){
+              window.addEventListener('load', function(){
+                var iframe = document.querySelector('[data-role="iframe"]');
+                iframe.setAttribute('src', iframe.getAttribute('data-src'));
+                iframe.addEventListener('load', function(){
+                  var loading = document.querySelector('.loading_message');
+                  loading.parentNode.removeChild(loading);
+                });
+              })
+            })();
+          </script>
+        </div>
+      </tal:mapview-body>
+    </tal:mapview>
+
+    <!-- Metadata -->
+    <tal:metadata condition="python:tab == 'metadata'">
+      <tal:metadata-body
+        define="field python:context.getField('text') if getattr(context, 'getField', None) else None;
+                html python:field.getAccessor(context)() if field else ''">
+        <div class="metadata-field">
+          <tal:service replace="structure html" />
+          <tal:service replace="structure context/@@product-inline-view" />
+        </div>
+      </tal:metadata-body>
+    </tal:metadata>
+
+    <!-- New Download -->
+
+    <tal:download condition="python: tab == 'download'">
+      <tal:download-body
+        define="membership python:context.portal_membership;
+                member python:user if not membership.isAnonymousUser() else None;
+                user_is_admin python:checkPermission('Manage portal', here);
+                member_profile python:member and member.getProperty('institutional_domain', False) and member.getProperty('thematic_domain', False);
+                context_download python:getattr(context, 'show_new_download', None);
+                show_download python:context_download or user_is_admin;
+                can_download python:member and member_profile">
+
+        <tal:download condition="show_download" define="download_info python: context.getField('download').getAccessor(context)()">
+
+          <div tal:condition="python:download_info" id="download-info">
+            <span tal:replace="structure download_info"></span>
+          </div>
+
+          <div id="datatable-container">
+            <table id="data-table-download" width="100%"
+                   tal:define="catfields python:context.getField('fileCategories').getAccessor(context)()">
+              <thead>
+                <tr role="row">
+                  <tal:download condition="can_download">
+                    <th class="border-bottom-only no-sort">
+                      <input class="checkbox-select-all" type="checkbox" value="select-item" />
+                    </th>
+                  </tal:download>
+                  <th class="border-bottom-only special-chars-sort">Name</th>
+                  <th class="border-bottom-only" tal:repeat="cat catfields">
+                    <span tal:replace="cat">Type</span>
+                  </th>
+                  <th class="border-bottom-only file-size-column">Size</th>
+                  <th class="border-bottom-only search-tags-hidden-column">Search tags</th>
+                </tr>
+              </thead>
+
+              <tbody >
+                <tal:landfile repeat="item_brain view/landfiles">
+                  <tr>
+                    <tal:def tal:define="item python:item_brain.getObject();
+                                         fileCategories python:view.categories(item)">
+                      <tal:download condition="can_download">
+                        <td class="border-top-only" data-role="checkbox">
+                          <input class="checkbox-select-item" type="checkbox" name="selected:list"
+                            tal:attributes="value python:item.getId(); data-size python:view.translate_size(item)" />
+                        </td>
+                      </tal:download>
+
+                      <td class="border-top-only" tal:content="item/Title"></td>
+
+                      <tal:repeat repeat="catName catfields">
+                        <td tal:define="value python:fileCategories.get(catName, '')" class="border-top-only">
+                          <span tal:content="python:value"
+                                tal:attributes="class python:value.lower().replace(' ', '-')">Value</span>
+                        </td>
+                      </tal:repeat>
+                      <td class="border-top-only" tal:content="item/getFileSize">70.14 MB</td>
+                      <td tal:content="python:item.Description()"></td>
+                    </tal:def>
+                  </tr>
+                </tal:landfile>
+              </tbody>
+            </table>
+          </div>
+
+          <hr />
+
+          <tal:download condition="can_download">
+            <div tal:define="isValidateDataset python:context.getField('isValidatedDataset').getAccessor(context)()">
+              <form id="download-form" action="." method="POST">
+                <div class="text-center">
+                  <tal:condition condition="python:isValidateDataset is not True">
+                    <div id="text-accept-non-validated">
+                      <input id="checkbox-accept-non-validated" type="checkbox" name="accept-non-validated" value="yes" required />
+                      <label for="checkbox-accept-non-validated">
+                        I am aware that I am downloading non-validated data and I accept to not distribute the
+                        information contained in these files or the files themselves any further.
+                      </label>
+                    </div>
+                    <hr />
+                  </tal:condition>
+                  <button id="button-download-selected" class="btn btn-default btn-land-download" disabled="disabled">
+                    <div class="btn-title">Download</div>
+                    <small class="btn-desc">
+                      <span data-role="number-checked">0</span> files selected
+                      <span data-role="size-display" style="display: none">(<span data-role="file-size"></span> size)</span>
+                    </small>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </tal:download>
+
+        </tal:download>
+
+        <tal:no-profile condition="python:member and not member_profile">
+          <p>Please <a tal:attributes="href string:${portal_url}/@@personal-information">complete your profile</a> in order to download data.</p>
+        </tal:no-profile>
+
+        <tal:anon condition="python:not member">
+          <p>Please <a href="./login">login</a> in order to download data.</p>
+        </tal:anon>
+
+      </tal:download-body>
+    </tal:download>
+  </metal:main_macro>
+</metal:content-core>
+</body>
+</html>
