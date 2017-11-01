@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.5 - (2017-11-01)
+------------------
+* Release land downloads and performance improvements.
+  [batradav #88377 #88278]
+
 2.5rc7 - (2017-10-16)
 ---------------------
 * Fix: disable download button if "non-validated" checkbox is unchecked.
