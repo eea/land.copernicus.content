@@ -15,13 +15,13 @@
 </metal:title>
 
 <metal:styleslot fill-slot="style_slot">
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" />
+  <link rel="stylesheet" type="text/css" href="${portal_url}/++resource++land.copernicus.content.static/lib/jquery.dataTables.min.css" />
   <link rel="stylesheet" type="text/css" href="${portal_url}/eea-tooltips.css" />
   <link rel="stylesheet" type="text/css" href="${portal_url}/++resource++land.copernicus.content.static/landitem_view.css" />
 </metal:styleslot>
 
 <metal:javascriptslot fill-slot="javascript_head_slot">
-  <script defer type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+  <script defer type="text/javascript" language="javascript" src="${portal_url}/++resource++land.copernicus.content.static/lib/jquery.dataTables.min.js"></script>
   <script defer type="text/javascript" language="javascript" src="${portal_url}/eea-tooltips.js"></script>
   <script defer type="text/javascript" language="javascript" src="${portal_url}/++resource++land.copernicus.content.static/landitem_view.js"></script>
 </metal:javascriptslot>
@@ -174,7 +174,7 @@
 
           <tal:download condition="can_download">
             <div tal:define="isValidateDataset python:context.getField('isValidatedDataset').getAccessor(context)()">
-              <form id="download-form" action="." method="POST">
+              <form id="download-form" action="@@download-land-files" method="POST">
                 <div class="text-center">
                   <tal:condition condition="python:isValidateDataset is not True">
                     <div id="text-accept-non-validated">

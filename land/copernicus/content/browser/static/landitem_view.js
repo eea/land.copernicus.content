@@ -132,11 +132,14 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
   var FORM = $('#download-form');
 
   FORM.on('submit', function(evt) {
-    evt.preventDefault();
-    var selected = table_checkboxes.filter(':checked');
-    var payload = selected.serialize() + '&' + FORM.serialize();
-    console.log(payload);
-    document.location.href = base_url + '/@@download-land-files?' + payload;
+    var selected = [].slice.call(table_checkboxes.filter(':checked'));
+    selected.forEach(function(elm){
+      var input = document.createElement('input');
+      input.setAttribute('type', 'hidden');
+      input.setAttribute('name', elm.getAttribute('name'));
+      input.setAttribute('value', elm.getAttribute('value'));
+      FORM[0].appendChild(input);
+    });
   });
 
   TABLE.$('td').on('click', function(){
