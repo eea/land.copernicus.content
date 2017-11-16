@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.7 - (2017-11-17)
+------------------
+* Fix: pre-fill search fields if "selected:list" GET param is present.
+  [batradav #89774]
+
 2.6 - (2017-11-16)
 ------------------
 * Fix: send selected land files in POST.
