@@ -138,20 +138,21 @@
                   </th>
                   <th class="border-bottom-only file-size-column">Size</th>
                   <th class="border-bottom-only search-tags-hidden-column">Search tags</th>
+                  <th class="border-bottom-only search-id-hidden-column">Search id</th>
                 </tr>
               </thead>
 
               <tbody >
                 <tal:landfile repeat="item_brain view/landfiles">
-                  <tr>
-                    <tal:def tal:define="item python:item_brain.getObject();
-                                         item_id python:item.getId();
-                                         fileCategories python:view.categories(item)">
+                  <tal:def tal:define="item python:item_brain.getObject();
+                                       item_id python:item.getId();
+                                       fileCategories python:view.categories(item)">
+                    <tr data-selected="${python:'true' if item_id in request.get('selected', []) else 'false'}" data-value="${item_id}">
                       <tal:download condition="can_download">
                         <td class="border-top-only" data-role="checkbox">
                           <input class="checkbox-select-item" type="checkbox" name="selected:list"
                                  value="${item_id}" data-size="${python:view.translate_size(item)}"
-                                 data-checked="${python:'true' if item_id in request.get('selected', []) else 'false'}" />
+                          />
                         </td>
                       </tal:download>
 
@@ -165,8 +166,9 @@
                       </tal:repeat>
                       <td class="border-top-only" tal:content="item/getFileSize">70.14 MB</td>
                       <td tal:content="python:item.Description()"></td>
-                    </tal:def>
-                  </tr>
+                      <td>${item_id}</td>
+                    </tr>
+                  </tal:def>
                 </tal:landfile>
               </tbody>
             </table>

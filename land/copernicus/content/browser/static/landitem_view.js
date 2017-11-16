@@ -1,26 +1,26 @@
 /**
-* IMPORTANT: Don't use version on CDN for this plugin.
-* This code used here was FIXED to work for NaN values like "N/A".
-*
-* When dealing with computer file sizes, it is common to append a post fix
-* such as B, KB, MB or GB to a string in order to easily denote the order of
-* magnitude of the file size. This plug-in allows sorting to take these
-* indicates of size into account.
-*
-* A counterpart type detection plug-in is also available.
-*
-*  @name File size
-*  @summary Sort abbreviated file sizes correctly (8MB, 4KB, etc)
-*  @author Allan Jardine - datatables.net
-*
-*  @example
-*    $('#example').DataTable( {
-*       columnDefs: [
-*         { type: 'file-size', targets: 0 }
-*       ]
-*    } );
-*
-*/
+ * IMPORTANT: Don't use version on CDN for this plugin.
+ * This code used here was FIXED to work for NaN values like "N/A".
+ *
+ * When dealing with computer file sizes, it is common to append a post fix
+ * such as B, KB, MB or GB to a string in order to easily denote the order of
+ * magnitude of the file size. This plug-in allows sorting to take these
+ * indicates of size into account.
+ *
+ * A counterpart type detection plug-in is also available.
+ *
+ *  @name File size
+ *  @summary Sort abbreviated file sizes correctly (8MB, 4KB, etc)
+ *  @author Allan Jardine - datatables.net
+ *
+ *  @example
+ *    $('#example').DataTable( {
+ *       columnDefs: [
+ *         { type: 'file-size', targets: 0 }
+ *       ]
+ *    } );
+ *
+ */
 
 jQuery.fn.dataTable.ext.type.order['file-size-pre'] = function (data) {
   var units = data.replace(/[\d\.]/g, '').toLowerCase();
@@ -29,7 +29,7 @@ jQuery.fn.dataTable.ext.type.order['file-size-pre'] = function (data) {
   if (units === ' kb') {
     multiplier = 1024;
   } else if (units === ' mb') {
-      multiplier = 1048576;
+    multiplier = 1048576;
   } else if (units === ' gb') {
     multiplier = 1073741824;
   }
@@ -90,6 +90,9 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
   }
 
   var TABLE = $('#data-table-download').dataTable({
+    "search": {
+      "smart": true
+    },
     "pageLength": 20,
     "lengthMenu": [10, 20, 50, 100],
     "order": [[ 1, "asc" ]],
@@ -104,6 +107,11 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
       },
       {
         "targets": 'search-tags-hidden-column',
+        "visible": false,
+        "searchable": true
+      },
+      {
+        "targets": 'search-id-hidden-column',
         "visible": false,
         "searchable": true
       },
@@ -156,13 +164,15 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
 
   var _update_selection = function() {
     var accepted = chk_accept.length > 0 ? $(chk_accept).is(':checked') : true;
-    update_selection(
-      elem_size_display,
-      elem_file_size,
-      table_checkboxes,
-      elem_btn_download,
-      accepted
-    );
+    if(elem_size_display) {
+      update_selection(
+        elem_size_display,
+        elem_file_size,
+        table_checkboxes,
+        elem_btn_download,
+        accepted
+      );
+    }
   }
 
   chk_select_all.on('change', function(evt){
@@ -175,10 +185,23 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
   table_checkboxes.prop('checked', false);  // make sure all checkboxes are unchecked!
 
   // check items passed in GET
-  table_checkboxes.each(function(i, o) {
-    var elm = $(o);
-    elm.prop('checked', elm.data('checked'));
-  }); _update_selection();
+  (function(){
+    var checked = TABLE.$('tr[data-selected="true"]');
+
+    var search = checked.map(function(i, o){
+      var elm = $(o);
+      var chk = $('input[type="checkbox"]', elm);
+      if (chk.length > 0) {
+        chk.prop('checked', true);
+      };
+      return elm.data('value');
+    });
+
+    TABLE.api().search(search.get().join('|'), true, false).draw();
+
+    _update_selection();
+
+  })();
 
   table_checkboxes.on('change', function() {
     _update_selection();
