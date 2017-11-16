@@ -145,11 +145,13 @@
                 <tal:landfile repeat="item_brain view/landfiles">
                   <tr>
                     <tal:def tal:define="item python:item_brain.getObject();
+                                         item_id python:item.getId();
                                          fileCategories python:view.categories(item)">
                       <tal:download condition="can_download">
                         <td class="border-top-only" data-role="checkbox">
                           <input class="checkbox-select-item" type="checkbox" name="selected:list"
-                            tal:attributes="value python:item.getId(); data-size python:view.translate_size(item)" />
+                                 value="${item_id}" data-size="${python:view.translate_size(item)}"
+                                 data-checked="${python:'true' if item_id in request.get('selected', []) else 'false'}" />
                         </td>
                       </tal:download>
 

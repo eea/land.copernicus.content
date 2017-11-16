@@ -174,6 +174,12 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
 
   table_checkboxes.prop('checked', false);  // make sure all checkboxes are unchecked!
 
+  // check items passed in GET
+  table_checkboxes.each(function(i, o) {
+    var elm = $(o);
+    elm.prop('checked', elm.data('checked'));
+  }); _update_selection();
+
   table_checkboxes.on('change', function() {
     _update_selection();
   });
