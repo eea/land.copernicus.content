@@ -1,6 +1,13 @@
 Changelog
 =========
 
+2.6 - (2017-11-16)
+------------------
+* Fix: send selected land files in POST.
+* Fix: automatically check land files passed in "selected:list" GET param.
+* Fix: "download" tab as default view for land item.
+  [batradav #89774]
+
 2.5 - (2017-11-01)
 ------------------
 * Release land downloads and performance improvements.
