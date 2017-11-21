@@ -176,7 +176,9 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
   }
 
   chk_select_all.on('change', function(evt){
-    table_checkboxes.prop('checked', $(evt.target).is(':checked'));;
+    var has_search = TABLE.fnSettings().oPreviousSearch.sSearch !== '';
+    var checkboxes = has_search ? TABLE.$('.checkbox-select-item', { filter: 'applied' }) : table_checkboxes;
+    checkboxes.prop('checked', $(evt.target).is(':checked'));;
     _update_selection();
   });
 
