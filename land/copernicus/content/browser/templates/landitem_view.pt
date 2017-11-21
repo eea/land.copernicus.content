@@ -5,13 +5,12 @@
 
 <body>
 <metal:title fill-slot="content-title">
- <h1 metal:use-macro="context/kss_generic_macros/macros/generic_title_view"></h1>
- <div class='not-validated-container'>
-   <span class='not-validated-tag'>
-      <span tal:define="not_validated_custom python: context.getField('notValidatedCustomText').getAccessor(context)()"
-            tal:replace="structure not_validated_custom">
-   </span>
- </div>
+  <h1 metal:use-macro="context/kss_generic_macros/macros/generic_title_view"></h1>
+  <tal:not-validated condition="not:view/is_validated">
+    <div class='not-validated-container'>
+      <span class='not-validated-tag'>${python:view.not_validated_text() or "Not yet validated"}</span>
+    </div>
+  </tal:not-validated>
 </metal:title>
 
 <metal:styleslot fill-slot="style_slot">

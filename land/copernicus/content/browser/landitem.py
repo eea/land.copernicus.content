@@ -68,6 +68,14 @@ class LandItemView(BrowserView):
     def tab(self):
         return self.request.get('tab', 'download')
 
+    def is_validated(self):
+        field = self.context.getField('isValidatedDataset')
+        return field.getAccessor(self.context)()
+
+    def not_validated_text(self):
+        field = self.context.getField('notValidatedCustomText')
+        return field.getAccessor(self.context)()
+
 
 class ProductInlineView(BrowserView):
 
