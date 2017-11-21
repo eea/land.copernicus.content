@@ -443,9 +443,10 @@ class DownloadAsyncView(BrowserView):
         return json.dumps(result)
 
 
-def _make_ga_data(metadata):
+def _make_ga_data(context, metadata):
     return dict(
         filenames=list(map(_filename_from_path, metadata.filepaths)),
+        land_item_title=context.title,
         **_userinfo()
     )
 
@@ -478,7 +479,7 @@ class FetchLandFileView(BrowserView):
         return self.index(
             same_user=same_user,
             filename=filename,
-            ga_data=json.dumps(_make_ga_data(metadata)),
+            ga_data=json.dumps(_make_ga_data(self.context, metadata)),
             **params
         )
 
