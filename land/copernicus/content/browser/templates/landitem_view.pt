@@ -121,6 +121,22 @@
             <span tal:replace="structure download_info"></span>
           </div>
 
+          <tal:no-profile condition="python:member and not member_profile">
+            <br />
+            <p class="text-center">
+              <strong>Please <a tal:attributes="href string:${portal_url}/@@personal-information">complete your profile</a> in order to download data.</strong>
+            </p>
+            <br />
+          </tal:no-profile>
+
+          <tal:anon condition="python:not member">
+            <br />
+            <p class="text-center">
+              <strong>Please <a href="./login">login</a> in order to download data.</strong>
+            </p>
+            <br />
+          </tal:anon>
+
           <div id="datatable-container">
             <table id="data-table-download" width="100%"
                    tal:define="catfields python:context.getField('fileCategories').getAccessor(context)()">
@@ -202,14 +218,6 @@
           </tal:download>
 
         </tal:download>
-
-        <tal:no-profile condition="python:member and not member_profile">
-          <p>Please <a tal:attributes="href string:${portal_url}/@@personal-information">complete your profile</a> in order to download data.</p>
-        </tal:no-profile>
-
-        <tal:anon condition="python:not member">
-          <p>Please <a href="./login">login</a> in order to download data.</p>
-        </tal:anon>
 
       </tal:download-body>
     </tal:download>
