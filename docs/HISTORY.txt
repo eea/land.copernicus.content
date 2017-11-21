@@ -1,6 +1,14 @@
 Changelog
 =========
 
+2.8 - (2017-11-21)
+------------------
+* Fix: non-validated content tag
+* Fix: download event with section name instead of filename
+* Fix: "select all" checkbox only for searched content, if active search
+* Update: move "login" message above table, strong and centered
+  [batradav #89915 #90054 #89982]
+
 2.7 - (2017-11-17)
 ------------------
 * Fix: pre-fill search fields if "selected:list" GET param is present.
