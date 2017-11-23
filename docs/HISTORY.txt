@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.9 - (2017-11-23)
+------------------
+* Fix: Empty zip files. Smarter checks when deciding to build or not.
+  [batradav #90046]
+
 2.8 - (2017-11-21)
 ------------------
 * Fix: non-validated content tag
