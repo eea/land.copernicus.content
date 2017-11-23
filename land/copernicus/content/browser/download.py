@@ -220,6 +220,13 @@ class JobPaths(namedtuple('_JobPaths', ['base_dst', 'hash'])):
     def has_done(self):
         return os.path.isfile(self.done)
 
+    def do_cleanup(self):
+        if self.has_zip():
+            os.remove(self.zip)
+        if self.has_done():
+            os.remove(self.done)
+        logger.info('Did cleanup for: %s', self.hash)
+
 
 def _endln(thing):
     return '{}\n'.format(thing)
@@ -292,6 +299,64 @@ def _update_metadata(existing, metadata):
     return (existing and _merge_metadata(existing, metadata)) or metadata
 
 
+def _size_of(paths):
+    return sum(map(os.path.getsize, paths))
+
+
+def _should_build(paths, existing):
+    decision = False
+
+    if not paths.has_zip():
+        logger.info('No .zip for hash: %s', paths.hash)
+        decision = True
+
+    elif paths.has_zip() and paths.has_done():
+        src_size = float(_size_of(existing))
+        dst_size = float(os.path.getsize(paths.zip))
+
+        # rebuild if zip size greatly differs from the input files
+        # (assumes something went wrong when making the archive)
+        ratio = dst_size / src_size
+        logger.info(
+            '.zip and .done found for hash: %s. '
+            'The size ratio is %s (%s / %s).',
+            paths.hash, ratio, dst_size, src_size
+        )
+        if ratio < 0.9:
+            decision = True
+
+    elif paths.has_zip():
+        wait = 3
+        t0_size = os.path.getsize(paths.zip)
+        time.sleep(wait)
+        t1_size = os.path.getsize(paths.zip)
+
+        dt_size = t1_size - t0_size
+
+        logger.info(
+            '.zip found for hash: %s. But no .done. '
+            'The size difference over %s seconds is %s.',
+            paths.hash, wait, dt_size
+        )
+
+        # Rebuild if size doesn't change, despite not having .done.
+        # Re-check done, just in case it finished during our sleep.
+        # (assumes the file was in progress but the process died)
+        if dt_size == 0 and not paths.has_done():
+            decision = True
+
+    if decision is True:
+        paths.do_cleanup()
+
+    logger.info(
+        'Decided %s hash: %s.',
+        'to build' if decision else 'not to build',
+        paths.hash
+    )
+
+    return decision
+
+
 def _download_executor(context, job):
     paths = JobPaths(job.dst, job.meta.hash)
 
@@ -306,15 +371,11 @@ def _download_executor(context, job):
         )
     )
 
-    # Build and notify only if the zip file does not exist.
-    # This assumes that another job with the same target hash is already
-    # in progress.
-    # XXX: Handle other job crashed (error, container stopped, etc.)
-    if not paths.has_zip():
-        _joiner = partial(os.path.join, job.src)
+    _joiner = partial(os.path.join, job.src)
+    src_paths = tuple(map(_joiner, job.meta.filepaths))
+    existing_paths = tuple(filter(os.path.isfile, src_paths))
 
-        src_paths = tuple(map(_joiner, job.meta.filepaths))
-        existing_paths = tuple(filter(os.path.isfile, src_paths))
+    if _should_build(paths, existing_paths):
         _make_zip(paths.zip, existing_paths)
 
         # mark zip as complete
