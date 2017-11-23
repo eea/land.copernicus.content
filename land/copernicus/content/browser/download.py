@@ -3,6 +3,7 @@ import json
 import zipfile
 import time
 from urlparse import urlparse
+from urllib import unquote
 from sha import sha
 from datetime import datetime
 from datetime import timedelta
@@ -135,7 +136,7 @@ def _get_field_value(name, item):
 
 
 def _filepath_from_url(url):
-    return urlparse(url).path.strip('/')
+    return unquote(urlparse(url).path.strip('/'))
 
 
 def _filename_from_path(path):
