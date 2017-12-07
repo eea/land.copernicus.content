@@ -53,6 +53,9 @@
     <tal:mapview tal:condition="python:tab == 'mapview'">
       <tal:mapview-body define="html view/embed_iframe">
         <div class="mapview-field" style="border: 1px solid #BFD630; border-top: 0px;">
+          <button class="fullscreen-map">
+            Full window
+          </button>
           <div class="loading_message" tal:condition="view/has_iframe">
             <div id="squaresWaveG">
               <div id="squaresWaveG_1" class="squaresWaveG">
@@ -76,6 +79,49 @@
           </div>
           <tal:service replace="structure html" />
           <script>
+            $(document).on("ready", function() {
+              function requestFullScreen(element) {
+                var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+                if (requestMethod) {
+                  // Native full screen.
+                  requestMethod.call(element);
+                } else {
+                  if (typeof window.ActiveXObject !== "undefined") {
+                    // Older IE.
+                    var wscript = new ActiveXObject("WScript.Shell");
+                    alert(wscript);
+                    if (wscript !== null) {
+                      wscript.SendKeys("{F11}");
+                    }
+                  } else {
+                    var map_iframe = $(".mapview-field iframe");
+                    $(map_iframe).toggleClass("fullscreen");
+                    $("#header-section nav").toggle();
+                    if(map_iframe.hasClass("fullscreen")) {
+                      $(btn_fullscreen).text("Return to default map view");
+                      $(btn_fullscreen).addClass("on");
+                      $(btn_fullscreen).parent().css({position: 'relative'});
+                    } else {
+                      $(btn_fullscreen).text("Full window");
+                      $(btn_fullscreen).removeClass("on");
+                    }
+                  }
+                }
+              }
+
+              var mapview_div = document.getElementsByClassName("mapview-field")[0];
+              var iframe = mapview_div.getElementsByTagName('iframe')[0];
+              var btn_fullscreen = $("button.fullscreen-map");
+
+              if(iframe === undefined) {
+                $(btn_fullscreen).hide();
+              } else {
+                $(btn_fullscreen).on("click", function() {
+                  requestFullScreen(iframe);
+                });
+              }
+            });
+
             (function(){
               window.addEventListener('load', function(){
                 var iframe = document.querySelector('[data-role="iframe"]');
@@ -87,6 +133,32 @@
               })
             })();
           </script>
+
+          <style>
+            button.fullscreen-map.on {
+              z-index: 1000;
+              position: fixed;
+            }
+
+            button.fullscreen-map {
+              float: right;
+              position: relative;
+              top: 5px;
+              right: 8px;
+              margin-bottom: -23px;
+              background: transparent;
+              border: none;
+            }
+
+            .fullscreen {
+              position: fixed;
+              z-index: 101;
+              top: 0;
+              left: 0;
+              height: 100%;
+              width: 100%;
+            }
+          </style>
         </div>
       </tal:mapview-body>
     </tal:mapview>
