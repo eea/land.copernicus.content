@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.10 - (2017-12-07)
+------------------
+* Improve login and reset password pages with info for EIONET members
+  [GhitaB #90575]
+
 2.9 - (2017-11-23)
 ------------------
 * Fix: Empty zip files. Smarter checks when deciding to build or not.
