@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.11 - (2017-12-..)
+------------------
+* Feature: fullscreen mode for map iframe in landitem view
+  [GhitaB #90422]
+
 2.10 - (2017-12-07)
 ------------------
 * Improve login and reset password pages with info for EIONET members
