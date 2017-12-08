@@ -80,44 +80,28 @@
           <tal:service replace="structure html" />
           <script>
             $(document).on("ready", function() {
-              function requestFullScreen(element) {
-                var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
-                if (requestMethod) {
-                  // Native full screen.
-                  requestMethod.call(element);
+              function toggle_fullscreen(iframe, btn) {
+                $(iframe).toggleClass("fullscreen-iframe");
+                $("#header-section nav").toggle();
+
+                if(iframe.hasClass("fullscreen-iframe")) {
+                  $(btn).text("Return to default map view");
+                  $(btn).addClass("on");
+                  // $(btn).parent().css({position: 'relative'});
                 } else {
-                  if (typeof window.ActiveXObject !== "undefined") {
-                    // Older IE.
-                    var wscript = new ActiveXObject("WScript.Shell");
-                    alert(wscript);
-                    if (wscript !== null) {
-                      wscript.SendKeys("{F11}");
-                    }
-                  } else {
-                    var map_iframe = $(".mapview-field iframe");
-                    $(map_iframe).toggleClass("fullscreen");
-                    $("#header-section nav").toggle();
-                    if(map_iframe.hasClass("fullscreen")) {
-                      $(btn_fullscreen).text("Return to default map view");
-                      $(btn_fullscreen).addClass("on");
-                      $(btn_fullscreen).parent().css({position: 'relative'});
-                    } else {
-                      $(btn_fullscreen).text("Full window");
-                      $(btn_fullscreen).removeClass("on");
-                    }
-                  }
+                  $(btn).text("Full window");
+                  $(btn).removeClass("on");
                 }
               }
 
-              var mapview_div = document.getElementsByClassName("mapview-field")[0];
-              var iframe = mapview_div.getElementsByTagName('iframe')[0];
+              var map_iframe = $(".mapview-field iframe");
               var btn_fullscreen = $("button.fullscreen-map");
 
-              if(iframe === undefined) {
+              if(map_iframe.length == 0) {
                 $(btn_fullscreen).hide();
               } else {
                 $(btn_fullscreen).on("click", function() {
-                  requestFullScreen(iframe);
+                  toggle_fullscreen(map_iframe, btn_fullscreen);
                 });
               }
             });
@@ -135,12 +119,12 @@
           </script>
 
           <style>
-            button.fullscreen-map.on {
+            body.template-landitem-view button.fullscreen-map.on {
               z-index: 1000;
               position: fixed;
             }
 
-            button.fullscreen-map {
+            body.template-landitem-view button.fullscreen-map {
               float: right;
               position: relative;
               top: 5px;
@@ -148,9 +132,10 @@
               margin-bottom: -23px;
               background: transparent;
               border: none;
+              outline: none;
             }
 
-            .fullscreen {
+            body.template-landitem-view .fullscreen-iframe {
               position: fixed;
               z-index: 101;
               top: 0;
