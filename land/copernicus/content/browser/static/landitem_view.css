@@ -165,6 +165,7 @@ body.template-landitem-view button.fullscreen-map.on {
   position: fixed;
   margin: 0 auto;
   left: 50%;
+  right: auto;
   margin-left: -95px;
   top: 7px;
 }
