@@ -80,17 +80,28 @@
           <tal:service replace="structure html" />
           <script>
             $(document).on("ready", function() {
+              function enter_fullscreen(iframe, btn) {
+                // Map View - maximize map iframe
+                $(iframe).addClass("fullscreen-iframe");
+                $("#header-section nav").hide();
+                $(btn).text("Return to default map view");
+                $(btn).addClass("on");
+              }
+
+              function exit_fullscreen(iframe, btn) {
+                // Map View - minimize map iframe
+                $(iframe).removeClass("fullscreen-iframe");
+                $("#header-section nav").show();
+                $(btn).text("Full window");
+                $(btn).removeClass("on");
+              }
+
               function toggle_fullscreen(iframe, btn) {
                 // Map View - fullscreen mode for map iframe
-                $(iframe).toggleClass("fullscreen-iframe");
-                $("#header-section nav").toggle();
-
                 if(iframe.hasClass("fullscreen-iframe")) {
-                  $(btn).text("Return to default map view");
-                  $(btn).addClass("on");
+                  exit_fullscreen(iframe, btn);
                 } else {
-                  $(btn).text("Full window");
-                  $(btn).removeClass("on");
+                  enter_fullscreen(iframe, btn);
                 }
               }
 
@@ -102,6 +113,12 @@
               } else {
                 $(btn_fullscreen).on("click", function() {
                   toggle_fullscreen(map_iframe, btn_fullscreen);
+                });
+
+                $(document).keydown(function(e){
+                  if(e.keyCode == 27) {
+                    exit_fullscreen(map_iframe, btn_fullscreen);
+                  }
                 });
               }
             });
