@@ -66,7 +66,7 @@ class LandItemView(BrowserView):
         return _translate_size(field.getAccessor(item)())
 
     def tab(self):
-        return self.request.get('tab', 'download')
+        return self.request.get('tab', 'mapview')
 
     def is_validated(self):
         field = self.context.getField('isValidatedDataset')
