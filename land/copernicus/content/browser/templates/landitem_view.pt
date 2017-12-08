@@ -81,13 +81,13 @@
           <script>
             $(document).on("ready", function() {
               function toggle_fullscreen(iframe, btn) {
+                // Map View - fullscreen mode for map iframe
                 $(iframe).toggleClass("fullscreen-iframe");
                 $("#header-section nav").toggle();
 
                 if(iframe.hasClass("fullscreen-iframe")) {
                   $(btn).text("Return to default map view");
                   $(btn).addClass("on");
-                  // $(btn).parent().css({position: 'relative'});
                 } else {
                   $(btn).text("Full window");
                   $(btn).removeClass("on");
@@ -118,32 +118,6 @@
             })();
           </script>
 
-          <style>
-            body.template-landitem-view button.fullscreen-map.on {
-              z-index: 1000;
-              position: fixed;
-            }
-
-            body.template-landitem-view button.fullscreen-map {
-              float: right;
-              position: relative;
-              top: 5px;
-              right: 8px;
-              margin-bottom: -23px;
-              background: transparent;
-              border: none;
-              outline: none;
-            }
-
-            body.template-landitem-view .fullscreen-iframe {
-              position: fixed;
-              z-index: 101;
-              top: 0;
-              left: 0;
-              height: 100%;
-              width: 100%;
-            }
-          </style>
         </div>
       </tal:mapview-body>
     </tal:mapview>
