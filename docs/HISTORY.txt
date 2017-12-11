@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.11 - (2017-12-08)
+2.11 - (2017-12-11)
 ------------------
 * Feature: fullscreen mode for map iframe in landitem view
 * Update: Land item view: Change back to Map view as default selected tab.
