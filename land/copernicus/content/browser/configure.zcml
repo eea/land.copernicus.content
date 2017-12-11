@@ -73,7 +73,7 @@
   <browser:page
     name="export_users_xls"
     for="plone.app.layout.navigation.interfaces.INavigationRoot"
-    class=".views.ExportUsersXLS"
+    class=".users_statistics.ExportUsersXLS"
     permission="cmf.ManagePortal"
     />
 
