@@ -78,6 +78,13 @@
     />
 
   <browser:page
+    name="users_statistics"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    class=".users_statistics.UsersStatisticsView"
+    permission="cmf.ManagePortal"
+    />
+
+  <browser:page
     name="admin_land_files"
     for="land.copernicus.content.content.landitem.LandItem"
     class=".views.AdminLandFilesView"
