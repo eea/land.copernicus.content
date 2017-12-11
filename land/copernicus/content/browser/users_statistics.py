@@ -113,6 +113,10 @@ class UsersStatisticsView(BrowserView):
     """
     def __call__(self):
         NA = "N/A"
+
+        date_from = DateTime("2016/01/01")
+        date_to = DateTime("2017/01/01")
+
         site = self.context.portal_url.getPortalObject()
         mt = getToolByName(site, 'portal_membership')
         md = getToolByName(site, 'portal_memberdata')
@@ -124,6 +128,8 @@ class UsersStatisticsView(BrowserView):
         stats = []
         incomplete = 0
         strange = 0
+        active = 0
+        inactive = 0
         max_records = 200  # TODO Iterate over all members, when done
 
         for i in range(0, max_records):
@@ -144,14 +150,20 @@ class UsersStatisticsView(BrowserView):
                 except Exception:
                     active_from = NA
 
+                is_active = False
+
                 if(active_last is not NA and active_from is not NA):
                     if active_last < active_from:
                         strange += 1
+                    else:
+                        if active_last >= date_from and active_from <= date_to:
+                            is_active = True
 
             else:
                 active_last = NA
                 active_from = NA
                 incomplete += 1
+                is_active = False
 
             record = {
                 'id': user_id,
@@ -159,7 +171,13 @@ class UsersStatisticsView(BrowserView):
                 'to': active_last,
                 'is_eionet': user_id in eionet_members
             }
-            stats.append(record)
+            if is_active:
+                active += 1
+                stats.append(record)
+                print user_id
+            else:
+                inactive += 1
+                print "inactive: " + user_id
 
             print i
 
@@ -169,5 +187,7 @@ class UsersStatisticsView(BrowserView):
             'eionet_members': len(eionet_members),
             'stats': stats,
             'incomplete': incomplete,
-            'strange': strange
+            'strange': strange,
+            'inactive': inactive,
+            'active': active
         }
