@@ -148,6 +148,60 @@ def users_statistics(site, time_periods=[]):
     for period in time_periods:
         res.append(RES_TEMPLATE)
 
+    mt = getToolByName(site, 'portal_membership')
+    md = getToolByName(site, 'portal_memberdata')
+
+    all_members = [x for x in md._members.keys()]
+
+    for i in range(0, 2):
+        print i
+        user_id = all_members[i]
+        user_member_data = mt.getMemberById(user_id)
+
+        if user_member_data is not None:
+            user = user_member_data.getUser()
+
+            try:
+                active_last = user.getPropertysheet(
+                    'mutable_properties').getProperty('last_login_time')
+            except Exception:
+                active_last = None
+
+            try:
+                active_from = user_member_data.bobobase_modification_time()
+            except Exception:
+                active_from = None
+
+            if active_last is not None and active_from is not None:
+                if active_last < active_from:
+                    # Make sure dates are ordered to have a time period
+                    # TODO: Investigate why this case exists.
+                    temp = active_last
+                    active_last = active_from
+                    active_from = temp
+
+                for j in range(0, len(time_periods)):
+                    start_date = time_periods[j][0]
+                    end_date = time_periods[j][1]
+
+                    if active_last >= start_date and \
+                            active_from <= end_date:
+                        res[j]['active'] += 1
+                        print """{4} [{0} >= {1}] && [{2} <= {3}]""".format(
+                            active_last, start_date, active_from, end_date,
+                            user_id
+                        )
+
+                    if active_from <= end_date:
+                        res[j]['total'] += 1
+                        print """{2} [{0} <= {1}] == TRUE""".format(
+                                active_from, end_date, user_id)
+                        if active_from >= start_date:
+                            res[j]['new'] += 1
+                            print """{2} [{0} <= {1}] == TRUE""".format(
+                                active_from, start_date, user_id)
+
+    # TODO: Something is very wrong here
     return res
 
 
@@ -166,56 +220,59 @@ class UsersStatisticsView(BrowserView):
         all_members = [x for x in md._members.keys()]
 
         # TODO WIP here
+        # return users_statistics(
+        #         site=site,
+        #         time_periods=[(start_date, end_date)])
         return users_statistics(site=site, time_periods=all_periods())
 
-        active_users = 0
-        new_users = 0
-        total_users = len(all_members)
-
-        # for i in range(0, 1000):
-        for i in range(0, total_users):
-            print i
-            user_id = all_members[i]
-            user_member_data = mt.getMemberById(user_id)
-
-            if user_member_data is not None:
-                user = user_member_data.getUser()
-
-                try:
-                    active_last = user.getPropertysheet(
-                        'mutable_properties').getProperty('last_login_time')
-                except Exception:
-                    active_last = None
-
-                try:
-                    active_from = user_member_data.bobobase_modification_time()
-                except Exception:
-                    active_from = None
-
-                if active_last is not None and active_from is not None:
-                    if active_last < active_from:
-                        # Make sure dates are ordered to have a time period
-                        # TODO: Investigate why this case exists.
-                        temp = active_last
-                        active_last = active_from
-                        active_from = temp
-
-                    if active_last >= start_date and \
-                            active_from <= end_date:
-                        active_users += 1
-
-                if active_from is not None:
-                    if active_from >= start_date and active_from <= end_date:
-                        new_users += 1
-
-                    # TODO Total users = users active anywhere in the past
-                    # active_from <= end_date without condition >= start_date
-                    #
-                    # This is the way to have statistics for number of users
-                    # in past
-
-        return {
-            'total': total_users,
-            'active': active_users,
-            'new': new_users
-        }
+        # active_users = 0
+        # new_users = 0
+        # total_users = len(all_members)
+        #
+        # # for i in range(0, 1000):
+        # for i in range(0, total_users):
+        #     print i
+        #     user_id = all_members[i]
+        #     user_member_data = mt.getMemberById(user_id)
+        #
+        #     if user_member_data is not None:
+        #         user = user_member_data.getUser()
+        #
+        #         try:
+        #             active_last = user.getPropertysheet(
+        #                 'mutable_properties').getProperty('last_login_time')
+        #         except Exception:
+        #             active_last = None
+        #
+        #         try:
+        #             active_from = user_member_data.bobobase_modification_time()
+        #         except Exception:
+        #             active_from = None
+        #
+        #         if active_last is not None and active_from is not None:
+        #             if active_last < active_from:
+        #                 # Make sure dates are ordered to have a time period
+        #                 # TODO: Investigate why this case exists.
+        #                 temp = active_last
+        #                 active_last = active_from
+        #                 active_from = temp
+        #
+        #             if active_last >= start_date and \
+        #                     active_from <= end_date:
+        #                 active_users += 1
+        #
+        #         if active_from is not None:
+        #             if active_from >= start_date and active_from <= end_date:
+        #                 new_users += 1
+        #
+        #             # TODO Total users = users active anywhere in the past
+        #             # active_from <= end_date without condition >= start_date
+        #             #
+        #             # This is the way to have statistics for number of users
+        #             # in past
+        #
+        # return {
+        #     'total': total_users,
+        #     'active': active_users,
+        #     'new': new_users
+        # }
