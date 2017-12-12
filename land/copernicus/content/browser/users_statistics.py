@@ -158,7 +158,7 @@ class UsersStatisticsView(BrowserView):
                         active_users += 1
 
                 if active_from is not None:
-                    if active_from >= start_date:
+                    if active_from >= start_date and active_from <= end_date:
                         new_users += 1
 
         return {
