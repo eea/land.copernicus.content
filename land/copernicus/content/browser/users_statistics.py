@@ -113,7 +113,7 @@ class UsersStatisticsView(BrowserView):
     """
     def __call__(self):
         start_date = DateTime("2016/01/01")
-        end_date = DateTime("2017/01/01")
+        end_date = DateTime("2018/01/01")
 
         site = self.context.portal_url.getPortalObject()
         mt = getToolByName(site, 'portal_membership')
@@ -125,8 +125,8 @@ class UsersStatisticsView(BrowserView):
         new_users = 0
         total_users = len(all_members)
 
-        # for i in range(0, total_users):
-        for i in range(0, 1000):
+        # for i in range(0, 1000):
+        for i in range(0, total_users):
             print i
             user_id = all_members[i]
             user_member_data = mt.getMemberById(user_id)
@@ -141,7 +141,7 @@ class UsersStatisticsView(BrowserView):
                     active_last = None
 
                 try:
-                    active_from = user.bobobase_modification_time()
+                    active_from = user_member_data.bobobase_modification_time()
                 except Exception:
                     active_from = None
 
