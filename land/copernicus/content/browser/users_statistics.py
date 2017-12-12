@@ -112,30 +112,25 @@ class UsersStatisticsView(BrowserView):
         TODO replace with script
     """
     def __call__(self):
-        NA = "N/A"
-
-        date_from = DateTime("2016/01/01")
-        date_to = DateTime("2017/01/01")
+        start_date = DateTime("2016/01/01")
+        end_date = DateTime("2017/01/01")
 
         site = self.context.portal_url.getPortalObject()
         mt = getToolByName(site, 'portal_membership')
         md = getToolByName(site, 'portal_memberdata')
 
         all_members = [x for x in md._members.keys()]
-        local_members = mt.listMemberIds()
-        eionet_members = [x for x in all_members if x not in local_members]
 
-        stats = []
-        incomplete = 0
-        strange = 0
-        active = 0
-        inactive = 0
-        max_records = 200  # TODO Iterate over all members, when done
+        active_users = 0
+        new_users = 0
+        total_users = len(all_members)
 
-        for i in range(0, max_records):
-
+        # for i in range(0, total_users):
+        for i in range(0, 1000):
+            print i
             user_id = all_members[i]
             user_member_data = mt.getMemberById(user_id)
+
             if user_member_data is not None:
                 user = user_member_data.getUser()
 
@@ -143,51 +138,31 @@ class UsersStatisticsView(BrowserView):
                     active_last = user.getPropertysheet(
                         'mutable_properties').getProperty('last_login_time')
                 except Exception:
-                    active_last = NA
+                    active_last = None
 
                 try:
                     active_from = user.bobobase_modification_time()
                 except Exception:
-                    active_from = NA
+                    active_from = None
 
-                is_active = False
-
-                if(active_last is not NA and active_from is not NA):
+                if active_last is not None and active_from is not None:
                     if active_last < active_from:
-                        strange += 1
-                    else:
-                        if active_last >= date_from and active_from <= date_to:
-                            is_active = True
+                        # Make sure dates are ordered to have a time period
+                        # TODO: Investigate why this case exists.
+                        temp = active_last
+                        active_last = active_from
+                        active_from = temp
 
-            else:
-                active_last = NA
-                active_from = NA
-                incomplete += 1
-                is_active = False
+                    if active_last >= start_date and \
+                            active_from <= end_date:
+                        active_users += 1
 
-            record = {
-                'id': user_id,
-                'from': active_from,
-                'to': active_last,
-                'is_eionet': user_id in eionet_members
-            }
-            if is_active:
-                active += 1
-                stats.append(record)
-                print user_id
-            else:
-                inactive += 1
-                print "inactive: " + user_id
-
-            print i
+                if active_from is not None:
+                    if active_from >= start_date:
+                        new_users += 1
 
         return {
-            'all': len(all_members),
-            'local': len(local_members),
-            'eionet_members': len(eionet_members),
-            'stats': stats,
-            'incomplete': incomplete,
-            'strange': strange,
-            'inactive': inactive,
-            'active': active
+            'total': total_users,
+            'active': active_users,
+            'new': new_users
         }
