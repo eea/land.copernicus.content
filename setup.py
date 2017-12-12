@@ -1,5 +1,6 @@
-from setuptools import setup, find_packages
 import os
+
+from setuptools import find_packages, setup
 
 name = 'land.copernicus.content'
 path = name.split('.') + ['version.txt']
@@ -37,5 +38,6 @@ setup(
         'plone.app.async',
         'five.pt',
         'plone.stringinterp==1.0.14',  # needed for IContextWrapper in async
+        'eea.rdfmarshaller>10.2'
     ],
 )
