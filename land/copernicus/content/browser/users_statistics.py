@@ -143,17 +143,16 @@ def users_statistics(site, time_periods=[]):
         yesterday = today - 1
         time_periods.append((yesterday, today))
 
-    RES_TEMPLATE = {'total': 0, 'active': 0, 'new': 0}
     res = []
     for period in time_periods:
-        res.append(RES_TEMPLATE)
+        res.append({'total': 0, 'active': 0, 'new': 0})
 
     mt = getToolByName(site, 'portal_membership')
     md = getToolByName(site, 'portal_memberdata')
 
     all_members = [x for x in md._members.keys()]
 
-    for i in range(0, 2):
+    for i in range(0, len(all_members)):
         print i
         user_id = all_members[i]
         user_member_data = mt.getMemberById(user_id)
@@ -187,21 +186,12 @@ def users_statistics(site, time_periods=[]):
                     if active_last >= start_date and \
                             active_from <= end_date:
                         res[j]['active'] += 1
-                        print """{4} [{0} >= {1}] && [{2} <= {3}]""".format(
-                            active_last, start_date, active_from, end_date,
-                            user_id
-                        )
 
                     if active_from <= end_date:
                         res[j]['total'] += 1
-                        print """{2} [{0} <= {1}] == TRUE""".format(
-                                active_from, end_date, user_id)
                         if active_from >= start_date:
                             res[j]['new'] += 1
-                            print """{2} [{0} <= {1}] == TRUE""".format(
-                                active_from, start_date, user_id)
 
-    # TODO: Something is very wrong here
     return res
 
 
@@ -223,6 +213,10 @@ class UsersStatisticsView(BrowserView):
         # return users_statistics(
         #         site=site,
         #         time_periods=[(start_date, end_date)])
+        # return users_statistics(site=site, time_periods=[
+        #         (DateTime('2015/01/01'), DateTime('2016/01/01')),
+        #         (DateTime('2016/01/02'), DateTime('2017/01/01'))
+        #         ])
         return users_statistics(site=site, time_periods=all_periods())
 
         # active_users = 0
