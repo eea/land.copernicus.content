@@ -2,6 +2,7 @@ from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from StringIO import StringIO
+from calendar import monthrange
 from datetime import datetime
 import plone.api as api
 import xlwt
@@ -107,6 +108,49 @@ class ExportUsersXLS(BrowserView):
         return xls_file.read()
 
 
+def all_periods():
+    """ Prepare initial input for users_statistics()
+    """
+    res = []
+    years = [x for x in range(2010, 2018)]
+    months = [x for x in range(1, 13)]
+    for year in years:
+        for month in months:
+            days = monthrange(year, month)[1]
+            start_date = DateTime("""{0}/{1}/{2}""".format(year, month, 1))
+            end_date = DateTime("""{0}/{1}/{2}""".format(year, month, days))
+            res.append((start_date, end_date))
+
+    return res
+
+
+def users_statistics(site, time_periods=[]):
+    """ Return statistics for given time periods
+
+        Input: [(DateTime, DateTime), (DateTime, DateTime), ...]
+            Default: [(yesterday, today)]
+
+        Output: [results, results, results, ...]
+            results format:
+                {
+                    'total': 12000,
+                    'active': 350,
+                    'new': 20
+                }
+    """
+    if len(time_periods) == 0:
+        today = DateTime(DateTime().strftime('%Y/%m/%d'))
+        yesterday = today - 1
+        time_periods.append((yesterday, today))
+
+    RES_TEMPLATE = {'total': 0, 'active': 0, 'new': 0}
+    res = []
+    for period in time_periods:
+        res.append(RES_TEMPLATE)
+
+    return res
+
+
 class UsersStatisticsView(BrowserView):
     """ WIP Users Statistics
         TODO replace with script
@@ -120,6 +164,9 @@ class UsersStatisticsView(BrowserView):
         md = getToolByName(site, 'portal_memberdata')
 
         all_members = [x for x in md._members.keys()]
+
+        # TODO WIP here
+        return users_statistics(site=site, time_periods=all_periods())
 
         active_users = 0
         new_users = 0
@@ -160,6 +207,12 @@ class UsersStatisticsView(BrowserView):
                 if active_from is not None:
                     if active_from >= start_date and active_from <= end_date:
                         new_users += 1
+
+                    # TODO Total users = users active anywhere in the past
+                    # active_from <= end_date without condition >= start_date
+                    #
+                    # This is the way to have statistics for number of users
+                    # in past
 
         return {
             'total': total_users,
