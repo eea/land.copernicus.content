@@ -112,13 +112,23 @@ class ExportUsersXLS(BrowserView):
         return xls_file.read()
 
 
+def period_title(period):
+    """ Input: (DateTime, DateTime)
+        Output format (as used in annotations): 2015/01/01-2015/01/31
+    """
+    return "{0}-{1}".format(
+        period[0].strftime("%Y/%m/%d"),
+        period[1].strftime("%Y/%m/%d")
+    )
+
+
 def save_users_statistics_reports(site, time_periods, reports):
     """ Input:
         - the list of time periods (as used in generate_users_statistics())
         - the list of reports (as returned by generate_users_statistics())
 
         Save reports as annotations on site in format:
-        site['users_statistics']['2015/01/01-2015/01/31'] = {
+        '2015/01/01-2015/01/31': {
             'active': 300,
             'new': 100,
             'total': 2000
@@ -133,15 +143,10 @@ def save_users_statistics_reports(site, time_periods, reports):
 
     if len(time_periods) == len(reports):
         for i in range(0, len(time_periods)):
-            time_period = time_periods[i]
-
-            period_title = "{0}-{1}".format(
-                time_period[0].strftime("%Y/%m/%d"),
-                time_period[1].strftime("%Y/%m/%d")
-            )
-            stats_annot[period_title] = reports[i]
+            stats_annot[period_title(time_periods[i])] = reports[i]
     else:
         return False
+
     return True
 
 
@@ -190,7 +195,7 @@ def generate_users_statistics(site, time_periods=[]):
     all_members = [x for x in md._members.keys()]
 
     # for i in range(0, len(all_members)):
-    for i in range(0, 15):
+    for i in range(0, 300):
         print i
         user_id = all_members[i]
         user_member_data = mt.getMemberById(user_id)
