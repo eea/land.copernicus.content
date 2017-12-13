@@ -4,6 +4,7 @@ from Products.Five.browser import BrowserView
 from StringIO import StringIO
 from calendar import monthrange
 from datetime import datetime
+from persistent.dict import PersistentDict
 from zope.annotation import IAnnotations
 import plone.api as api
 import xlwt
@@ -137,10 +138,8 @@ def save_users_statistics_reports(site, time_periods, reports):
 
         Return True on saved or False for invalid input
     """
-    annotations = IAnnotations(site)
-    stats_annot = annotations.get(USERS_STATISTICS_KEY, None)
-    if stats_annot is None:
-        stats_annot = {}
+    stats_annot = IAnnotations(site).setdefault(
+            USERS_STATISTICS_KEY, PersistentDict({}))
 
     if len(time_periods) == len(reports):
         for i in range(0, len(time_periods)):
@@ -151,6 +150,15 @@ def save_users_statistics_reports(site, time_periods, reports):
         return False
 
     return True
+
+
+def get_users_statistics_reports(site):
+    """ Get existing reports saved in annotations
+    """
+    annotations = IAnnotations(site)
+    reports = annotations.get(USERS_STATISTICS_KEY, None)
+
+    return reports
 
 
 def all_periods():
@@ -198,7 +206,7 @@ def generate_users_statistics(site, time_periods=[]):
     all_members = [x for x in md._members.keys()]
 
     # for i in range(0, len(all_members)):
-    for i in range(0, 300):
+    for i in range(0, 30):
         print i
         user_id = all_members[i]
         user_member_data = mt.getMemberById(user_id)
@@ -248,13 +256,16 @@ class UsersStatisticsView(BrowserView):
     def __call__(self):
         site = self.context.portal_url.getPortalObject()
 
-        periods = all_periods()
+        test_period = [(DateTime('2017/03/01'), DateTime('2017/03/31'))]
+        # periods = all_periods()
+        periods = test_period
 
-        reports = generate_users_statistics(site=site, time_periods=periods)
+        # reports = generate_users_statistics(
+        #    site=site, time_periods=test_period)
 
-        res = save_users_statistics_reports(site, time_periods=periods,
-                                            reports=reports)
-        if res is True:
-            return "Done."
-        else:
-            return "Error."
+        #save_users_statistics_reports(
+        #    site, time_periods=periods, reports=reports)
+
+        reports = get_users_statistics_reports(site)
+
+        return reports
