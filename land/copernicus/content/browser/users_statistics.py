@@ -273,7 +273,7 @@ class UsersStatisticsView(BrowserView):
         #    site, time_periods=periods, reports=reports)
 
         if 'submit' in self.request.form:
-            pass
+            print "Submitted"
             # TODO get reports, add pending reports
 
         return self.render()

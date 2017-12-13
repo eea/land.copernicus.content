@@ -1,1 +1,36 @@
-ZZZ
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+  <metal:description fill-slot="content-description" />
+
+  <metal:content-core fill-slot="content-core">
+    <metal:main_macro define-macro="content-core">
+      <div class="users-statistics-container">
+        <h2 i18n:translate="">Users Statistics</h2>
+        <p>
+          Check the existing reports first. If the info is missing you can
+          schedule a report for needed time period.
+        </p>
+
+        <form method="post">
+          <div class="form-group">
+            <label for="txtFile">TODO WIP</label>
+            <input type="file" id="txtFile" name="file">
+            <p class="help-block">Upload the .txt file.</p>
+          </div>
+
+          <button name="submit" type="submit" class="btn btn-default">
+            Generate report
+          </button>
+        </form>
+
+        <h2>Reports</h2>
+        <p>Check requested reports (content and status) here.</p>
+      </div>
+    </metal:main_macro>
+  </metal:content-core>
+</body>
+</html>
