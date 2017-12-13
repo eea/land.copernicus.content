@@ -8,7 +8,8 @@
 
   <metal:content-core fill-slot="content-core">
     <metal:main_macro define-macro="content-core">
-      <div class="users-statistics-container">
+      <div class="users-statistics-container"
+           tal:define="reports python:view.reports">
         <h2 i18n:translate="">Users Statistics</h2>
         <p>
           Check the existing reports first. If the info is missing you can
@@ -29,6 +30,38 @@
 
         <h2>Reports</h2>
         <p>Check requested reports (content and status) here.</p>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time period</th>
+              <th>Active</th>
+              <th>New</th>
+              <th>Total</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tal:reports tal:repeat="period_title python:sorted(reports.keys(), reverse=True)">
+              <tr tal:define="report python: reports.get(period_title)">
+                <td tal:content="python:period_title">
+                  2010/01/01-2010/01/31
+                </td>
+                <td tal:content="python:report.get('active', 'N/A')">
+                  23
+                </td>
+                <td tal:content="python:report.get('new', 'N/A')">
+                  12
+                </td>
+                <td tal:content="python:report.get('total', 'N/A')">
+                  432
+                </td>
+                <td tal:content="python:report.get('last_update', 'N/A')">
+                  pending or DateTime
+                </td>
+              </tr>
+            </tal:reports>
+          </tbody>
+        </table>
       </div>
     </metal:main_macro>
   </metal:content-core>
