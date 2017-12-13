@@ -131,7 +131,8 @@ def save_users_statistics_reports(site, time_periods, reports):
         '2015/01/01-2015/01/31': {
             'active': 300,
             'new': 100,
-            'total': 2000
+            'total': 2000,
+            'last_update': DateTime
         }
 
         Return True on saved or False for invalid input
@@ -143,7 +144,9 @@ def save_users_statistics_reports(site, time_periods, reports):
 
     if len(time_periods) == len(reports):
         for i in range(0, len(time_periods)):
-            stats_annot[period_title(time_periods[i])] = reports[i]
+            report = reports[i]
+            report['last_update'] = DateTime()
+            stats_annot[period_title(time_periods[i])] = report
     else:
         return False
 
