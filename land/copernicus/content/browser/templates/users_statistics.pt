@@ -4,6 +4,14 @@
       i18n:domain="plone">
 
 <body>
+  <metal:styleslot fill-slot="style_slot">
+    <link rel="stylesheet" type="text/css" href="${portal_url}/++resource++land.copernicus.content.static/lib/jquery.dataTables.min.css" />
+  </metal:styleslot>
+
+  <metal:javascriptslot fill-slot="javascript_head_slot">
+    <script defer type="text/javascript" language="javascript" src="${portal_url}/++resource++land.copernicus.content.static/lib/jquery.dataTables.min.js"></script>
+  </metal:javascriptslot>
+
   <metal:description fill-slot="content-description" />
 
   <metal:content-core fill-slot="content-core">
@@ -30,7 +38,7 @@
 
         <h2>Reports</h2>
         <p>Check requested reports (content and status) here.</p>
-        <table class="table table-bordered">
+        <table class="table table-bordered user-stats-reports">
           <thead>
             <tr>
               <th>Time period</th>
@@ -63,6 +71,12 @@
           </tbody>
         </table>
       </div>
+
+      <script>
+        $(document).ready(function() {
+          $('table.user-stats-reports').DataTable();
+        });
+      </script>
     </metal:main_macro>
   </metal:content-core>
 </body>
