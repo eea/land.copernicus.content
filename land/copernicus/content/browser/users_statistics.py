@@ -175,9 +175,12 @@ def users_statistics(site, time_periods=[]):
                 if active_last < active_from:
                     # Make sure dates are ordered to have a time period
                     # TODO: Investigate why this case exists.
-                    temp = active_last
-                    active_last = active_from
-                    active_from = temp
+                    # temp = active_last
+                    # active_last = active_from
+                    # active_from = temp
+                    print "{0}: {1} - {2}".format(
+                        user_id, active_from, active_last
+                    )
 
                 for j in range(0, len(time_periods)):
                     start_date = time_periods[j][0]
@@ -200,73 +203,6 @@ class UsersStatisticsView(BrowserView):
         TODO replace with script
     """
     def __call__(self):
-        start_date = DateTime("2016/01/01")
-        end_date = DateTime("2018/01/01")
-
         site = self.context.portal_url.getPortalObject()
-        mt = getToolByName(site, 'portal_membership')
-        md = getToolByName(site, 'portal_memberdata')
 
-        all_members = [x for x in md._members.keys()]
-
-        # TODO WIP here
-        # return users_statistics(
-        #         site=site,
-        #         time_periods=[(start_date, end_date)])
-        # return users_statistics(site=site, time_periods=[
-        #         (DateTime('2015/01/01'), DateTime('2016/01/01')),
-        #         (DateTime('2016/01/02'), DateTime('2017/01/01'))
-        #         ])
         return users_statistics(site=site, time_periods=all_periods())
-
-        # active_users = 0
-        # new_users = 0
-        # total_users = len(all_members)
-        #
-        # # for i in range(0, 1000):
-        # for i in range(0, total_users):
-        #     print i
-        #     user_id = all_members[i]
-        #     user_member_data = mt.getMemberById(user_id)
-        #
-        #     if user_member_data is not None:
-        #         user = user_member_data.getUser()
-        #
-        #         try:
-        #             active_last = user.getPropertysheet(
-        #                 'mutable_properties').getProperty('last_login_time')
-        #         except Exception:
-        #             active_last = None
-        #
-        #         try:
-        #             active_from = user_member_data.bobobase_modification_time()
-        #         except Exception:
-        #             active_from = None
-        #
-        #         if active_last is not None and active_from is not None:
-        #             if active_last < active_from:
-        #                 # Make sure dates are ordered to have a time period
-        #                 # TODO: Investigate why this case exists.
-        #                 temp = active_last
-        #                 active_last = active_from
-        #                 active_from = temp
-        #
-        #             if active_last >= start_date and \
-        #                     active_from <= end_date:
-        #                 active_users += 1
-        #
-        #         if active_from is not None:
-        #             if active_from >= start_date and active_from <= end_date:
-        #                 new_users += 1
-        #
-        #             # TODO Total users = users active anywhere in the past
-        #             # active_from <= end_date without condition >= start_date
-        #             #
-        #             # This is the way to have statistics for number of users
-        #             # in past
-        #
-        # return {
-        #     'total': total_users,
-        #     'active': active_users,
-        #     'new': new_users
-        # }
