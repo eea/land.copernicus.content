@@ -1,6 +1,7 @@
 from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from StringIO import StringIO
 from calendar import monthrange
 from datetime import datetime
@@ -8,7 +9,6 @@ from persistent.dict import PersistentDict
 from zope.annotation import IAnnotations
 import plone.api as api
 import xlwt
-
 
 USERS_STATISTICS_KEY = "land.copernicus.content.users_statistics"
 
@@ -253,19 +253,27 @@ class UsersStatisticsView(BrowserView):
     """ WIP Users Statistics
         TODO replace with script
     """
-    def __call__(self):
+    index = ViewPageTemplateFile("templates/users_statistics.pt")
+
+    def render(self):
+        return self.index()
+
+    @property
+    def reports(self):
         site = self.context.portal_url.getPortalObject()
+        return get_users_statistics_reports(site)
 
-        test_period = [(DateTime('2017/03/01'), DateTime('2017/03/31'))]
+    def __call__(self):
+        # site = self.context.portal_url.getPortalObject()
+        # test_period = [(DateTime('2017/03/01'), DateTime('2017/03/31'))]
         # periods = all_periods()
-        periods = test_period
-
-        # reports = generate_users_statistics(
-        #    site=site, time_periods=test_period)
-
-        #save_users_statistics_reports(
+        # periods = test_period
+        # reports = generate_users_statistics(site=site, time_periods=periods)
+        # save_users_statistics_reports(
         #    site, time_periods=periods, reports=reports)
 
-        reports = get_users_statistics_reports(site)
+        if 'submit' in self.request.form:
+            pass
+            # TODO get reports, add pending reports
 
-        return reports
+        return self.render()
