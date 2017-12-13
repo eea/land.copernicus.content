@@ -171,23 +171,28 @@ def users_statistics(site, time_periods=[]):
             except Exception:
                 active_from = None
 
+            was_active = True
             if active_last is not None and active_from is not None:
                 if active_last < active_from:
-                    # Make sure dates are ordered to have a time period
-                    # TODO: Investigate why this case exists.
-                    # temp = active_last
-                    # active_last = active_from
-                    # active_from = temp
-                    print "{0}: {1} - {2}".format(
-                        user_id, active_from, active_last
-                    )
+                    if active_last < DateTime("2010/01/01"):
+                        # NEVER USED
+                        # A lot of accounts have 2000/01/01 as last login.
+                        # This means the account was created but never used.
+                        was_active = False
+
+                    # SINGLE TIME USED
+                    # Also we have the case: active_last < active_from
+                    # the user logs in a single time then some hours later
+                    # he fills his profile. To have a time period for this
+                    # we swap the values:
+                    active_last, active_from = active_from, active_last
 
                 for j in range(0, len(time_periods)):
                     start_date = time_periods[j][0]
                     end_date = time_periods[j][1]
 
                     if active_last >= start_date and \
-                            active_from <= end_date:
+                            active_from <= end_date and was_active:
                         res[j]['active'] += 1
 
                     if active_from <= end_date:
