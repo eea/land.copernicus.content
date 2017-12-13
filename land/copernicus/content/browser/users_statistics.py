@@ -108,8 +108,25 @@ class ExportUsersXLS(BrowserView):
         return xls_file.read()
 
 
+def save_users_statistics_reports(site, time_periods, reports):
+    """ Input:
+        - the list of time periods (as used in generate_users_statistics())
+        - the list of reports (as returned by generate_users_statistics())
+
+        Save reports as annotations on site in format:
+        site['users_statistics']['2015/01/01-2015/01/31'] = {
+            'active': 300,
+            'new': 100,
+            'total': 2000
+        }
+    """
+    # TODO: WIP here
+    # import pdb; pdb.set_trace()
+    return "Done"
+
+
 def all_periods():
-    """ Prepare initial input for users_statistics()
+    """ Return the list of time_periods by months from Jan. 2010 to Dec. 2017
     """
     res = []
     years = [x for x in range(2010, 2018)]
@@ -124,7 +141,7 @@ def all_periods():
     return res
 
 
-def users_statistics(site, time_periods=[]):
+def generate_users_statistics(site, time_periods=[]):
     """ Return statistics for given time periods
 
         Input: [(DateTime, DateTime), (DateTime, DateTime), ...]
@@ -152,7 +169,8 @@ def users_statistics(site, time_periods=[]):
 
     all_members = [x for x in md._members.keys()]
 
-    for i in range(0, len(all_members)):
+    # for i in range(0, len(all_members)):
+    for i in range(0, 150):
         print i
         user_id = all_members[i]
         user_member_data = mt.getMemberById(user_id)
@@ -173,19 +191,11 @@ def users_statistics(site, time_periods=[]):
 
             was_active = True
             if active_last is not None and active_from is not None:
-                if active_last < active_from:
-                    if active_last < DateTime("2010/01/01"):
-                        # NEVER USED
-                        # A lot of accounts have 2000/01/01 as last login.
-                        # This means the account was created but never used.
-                        was_active = False
-
-                    # SINGLE TIME USED
-                    # Also we have the case: active_last < active_from
-                    # the user logs in a single time then some hours later
-                    # he fills his profile. To have a time period for this
-                    # we swap the values:
-                    active_last, active_from = active_from, active_last
+                if active_last < DateTime("2010/01/01"):
+                    # NEVER USED
+                    # A lot of accounts have 2000/01/01 as last login.
+                    # This means the account was created but never used.
+                    was_active = False
 
                 for j in range(0, len(time_periods)):
                     start_date = time_periods[j][0]
@@ -210,4 +220,9 @@ class UsersStatisticsView(BrowserView):
     def __call__(self):
         site = self.context.portal_url.getPortalObject()
 
-        return users_statistics(site=site, time_periods=all_periods())
+        periods = all_periods()
+
+        reports = generate_users_statistics(site=site, time_periods=periods)
+
+        save_users_statistics_reports(site, time_periods=periods,
+                                      reports=reports)
