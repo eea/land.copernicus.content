@@ -273,7 +273,10 @@ class UsersStatisticsView(BrowserView):
         #    site, time_periods=periods, reports=reports)
 
         if 'submit' in self.request.form:
-            print "Submitted"
-            # TODO get reports, add pending reports
+            start_date = DateTime(self.request.form.get('start-date'))
+            end_date = DateTime(self.request.form.get('end-date'))
+            # schedule_report(start_date, end_date)
+            # TODO WIP here
+            print "Scheduled: {0}, {1}".format(start_date, end_date)
 
         return self.render()
