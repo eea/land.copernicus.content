@@ -4,8 +4,12 @@ from Products.Five.browser import BrowserView
 from StringIO import StringIO
 from calendar import monthrange
 from datetime import datetime
+from zope.annotation import IAnnotations
 import plone.api as api
 import xlwt
+
+
+USERS_STATISTICS_KEY = "land.copernicus.content.users_statistics"
 
 
 # Settings for xls file columns
@@ -119,10 +123,26 @@ def save_users_statistics_reports(site, time_periods, reports):
             'new': 100,
             'total': 2000
         }
+
+        Return True on saved or False for invalid input
     """
-    # TODO: WIP here
-    # import pdb; pdb.set_trace()
-    return "Done"
+    annotations = IAnnotations(site)
+    stats_annot = annotations.get(USERS_STATISTICS_KEY, None)
+    if stats_annot is None:
+        stats_annot = {}
+
+    if len(time_periods) == len(reports):
+        for i in range(0, len(time_periods)):
+            time_period = time_periods[i]
+
+            period_title = "{0}-{1}".format(
+                time_period[0].strftime("%Y/%m/%d"),
+                time_period[1].strftime("%Y/%m/%d")
+            )
+            stats_annot[period_title] = reports[i]
+    else:
+        return False
+    return True
 
 
 def all_periods():
@@ -170,7 +190,7 @@ def generate_users_statistics(site, time_periods=[]):
     all_members = [x for x in md._members.keys()]
 
     # for i in range(0, len(all_members)):
-    for i in range(0, 150):
+    for i in range(0, 15):
         print i
         user_id = all_members[i]
         user_member_data = mt.getMemberById(user_id)
@@ -224,5 +244,9 @@ class UsersStatisticsView(BrowserView):
 
         reports = generate_users_statistics(site=site, time_periods=periods)
 
-        save_users_statistics_reports(site, time_periods=periods,
-                                      reports=reports)
+        res = save_users_statistics_reports(site, time_periods=periods,
+                                            reports=reports)
+        if res is True:
+            return "Done."
+        else:
+            return "Error."
