@@ -205,8 +205,7 @@ def generate_users_statistics(site, time_periods=[]):
 
     all_members = [x for x in md._members.keys()]
 
-    # for i in range(0, len(all_members)):
-    for i in range(0, 30):
+    for i in range(0, len(all_members)):
         print i
         user_id = all_members[i]
         user_member_data = mt.getMemberById(user_id)
@@ -301,8 +300,7 @@ def solve_pending_reports(site):
 
 
 class UsersStatisticsView(BrowserView):
-    """ WIP Users Statistics
-        TODO replace with script
+    """ Admin panel for users statistics
     """
     index = ViewPageTemplateFile("templates/users_statistics.pt")
 
@@ -316,14 +314,6 @@ class UsersStatisticsView(BrowserView):
 
     def __call__(self):
         site = self.context.portal_url.getPortalObject()
-        # test_period = [(DateTime('2017/03/01'), DateTime('2017/03/31'))]
-        # periods = all_periods()
-        # periods = test_period
-        # reports = generate_users_statistics(site=site, time_periods=periods)
-        # save_users_statistics_reports(
-        #    site, time_periods=periods, reports=reports)
-
-        # schedule_all_reports(site)
         solve_pending_reports(site)
 
         if 'submit' in self.request.form:
