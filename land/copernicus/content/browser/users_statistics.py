@@ -249,6 +249,30 @@ def generate_users_statistics(site, time_periods=[]):
     return res
 
 
+def schedule_reports(site, time_periods=[]):
+    """ Schedule reports by setting last_update param as pending.
+        The script will take care of them.
+    """
+    stats_annot = IAnnotations(site).setdefault(
+            USERS_STATISTICS_KEY, PersistentDict({}))
+
+    for period in time_periods:
+        title = period_title(period)
+        if stats_annot.get(title, None) is None:
+            stats_annot[title] = {'active': 0, 'new': 0, 'total': 0}
+
+        stats_annot[title]['last_update'] = 'pending'
+    return True
+
+
+def schedule_all_reports(site):
+    """ Good for init lots of reports
+    """
+    periods = all_periods()
+    schedule_reports(site=site, time_periods=periods)
+    return True
+
+
 class UsersStatisticsView(BrowserView):
     """ WIP Users Statistics
         TODO replace with script
@@ -264,7 +288,7 @@ class UsersStatisticsView(BrowserView):
         return get_users_statistics_reports(site)
 
     def __call__(self):
-        # site = self.context.portal_url.getPortalObject()
+        site = self.context.portal_url.getPortalObject()
         # test_period = [(DateTime('2017/03/01'), DateTime('2017/03/31'))]
         # periods = all_periods()
         # periods = test_period
@@ -272,11 +296,12 @@ class UsersStatisticsView(BrowserView):
         # save_users_statistics_reports(
         #    site, time_periods=periods, reports=reports)
 
+        schedule_all_reports(site)
+
         if 'submit' in self.request.form:
             start_date = DateTime(self.request.form.get('start-date'))
             end_date = DateTime(self.request.form.get('end-date'))
-            # schedule_report(start_date, end_date)
-            # TODO WIP here
-            print "Scheduled: {0}, {1}".format(start_date, end_date)
+            time_periods = [(start_date, end_date)]
+            schedule_reports(site=site, time_periods=time_periods)
 
         return self.render()
