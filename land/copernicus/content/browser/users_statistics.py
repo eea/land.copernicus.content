@@ -205,7 +205,8 @@ def generate_users_statistics(site, time_periods=[]):
 
     all_members = [x for x in md._members.keys()]
 
-    for i in range(0, len(all_members)):
+    for i in range(0, 10):
+    # for i in range(0, len(all_members)):
         print i
         user_id = all_members[i]
         user_member_data = mt.getMemberById(user_id)
@@ -299,6 +300,20 @@ def solve_pending_reports(site):
         site, time_periods=pending_time_periods, reports=reports)
 
 
+def users_statistics_operations_center(site):
+    """ Take care annotations exists, we have reports initialized,
+        and pending reports are solved.
+
+        To be used by scheduled script.
+    """
+    reports = get_users_statistics_reports(site)
+    if reports is None:
+        schedule_all_reports(site)
+
+    solve_pending_reports(site)
+    return True
+
+
 class UsersStatisticsView(BrowserView):
     """ Admin panel for users statistics
     """
@@ -314,7 +329,9 @@ class UsersStatisticsView(BrowserView):
 
     def __call__(self):
         site = self.context.portal_url.getPortalObject()
-        solve_pending_reports(site)
+
+        # TODO: a script will start this:
+        users_statistics_operations_center(site)
 
         if 'submit' in self.request.form:
             start_date = DateTime(self.request.form.get('start-date'))
