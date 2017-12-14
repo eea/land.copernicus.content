@@ -360,4 +360,7 @@ class UsersStatisticsView(BrowserView):
         if 'refresh' in self.request.form:
             self.request.form = {}
 
+        if 'remove' in self.request.form:
+            remove_all_reports(site)
+            self.request.form = {}
         return self.render()
