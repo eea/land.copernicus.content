@@ -294,8 +294,10 @@ def solve_pending_reports(site):
     """ Generate users statistics for all pending reports
     """
     pending_time_periods = get_pending_reports(site)
-    generate_users_statistics(site, time_periods=pending_time_periods)
-    return True
+    reports = generate_users_statistics(
+        site, time_periods=pending_time_periods)
+    return save_users_statistics_reports(
+        site, time_periods=pending_time_periods, reports=reports)
 
 
 class UsersStatisticsView(BrowserView):
