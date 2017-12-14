@@ -1,10 +1,8 @@
 from land.copernicus.content.browser.users_statistics import \
         users_statistics_operations_center
+from land.copernicus.content.config import ENV_HOST_USERS_STATS
 
-
-# HOST = 'land.copernicus.eu'
-# HOST = 'demo-copernicus.eea.europa.eu'
-HOST = 'localhost:8090'
+HOST = ENV_HOST_USERS_STATS
 
 PLONE = "/copernicus"
 

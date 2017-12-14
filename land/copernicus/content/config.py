@@ -45,3 +45,7 @@ def ENVPATH(name, default=None):
 ENV_DL_SRC_PATH = ENVPATH('LAND_DOWNLOADS_SRC_PATH')
 ENV_DL_DST_PATH = ENVPATH('LAND_DOWNLOADS_DST_PATH')
 ENV_DL_STATIC_PATH = ENVPATH('LAND_DOWNLOADS_STATIC_PATH', '/land-files/')
+
+ENV_HOST_USERS_STATS = ENVPATH('LAND_HOST_USERS_STATS', 'land.copernicus.eu')
+# Possible values: 'land.copernicus.eu', 'demo-copernicus.eea.europa.eu' or
+# 'localhost:8090'
