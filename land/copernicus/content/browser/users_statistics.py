@@ -162,17 +162,26 @@ def get_users_statistics_reports(site):
 
 
 def all_periods():
-    """ Return the list of time_periods by months from Jan. 2010 to Dec. 2017
+    """ Return the list of time_periods by months from Jan. 2013 to current
+        year, last complete month
     """
     res = []
-    years = [x for x in range(2010, 2018)]
+    now = DateTime()
+    current_year = now.year()
+    current_month = now.month()
+
+    years = [x for x in range(2013, current_year + 1)]
     months = [x for x in range(1, 13)]
     for year in years:
         for month in months:
-            days = monthrange(year, month)[1]
-            start_date = DateTime("""{0}/{1}/{2}""".format(year, month, 1))
-            end_date = DateTime("""{0}/{1}/{2}""".format(year, month, days))
-            res.append((start_date, end_date))
+            if year == current_year and month >= current_month:
+                pass
+            else:
+                days = monthrange(year, month)[1]
+                start_date = DateTime("""{0}/{1}/{2}""".format(year, month, 1))
+                end_date = DateTime(
+                        """{0}/{1}/{2}""".format(year, month, days))
+                res.append((start_date, end_date))
 
     return res
 
@@ -205,7 +214,9 @@ def generate_users_statistics(site, time_periods=[]):
 
     all_members = [x for x in md._members.keys()]
 
-    for i in range(0, len(all_members)):
+    # TODO enable all
+    # for i in range(0, len(all_members)):
+    for i in range(0, 10):
         print i
         user_id = all_members[i]
         user_member_data = mt.getMemberById(user_id)
@@ -335,7 +346,6 @@ class UsersStatisticsView(BrowserView):
     def __call__(self):
         site = self.context.portal_url.getPortalObject()
 
-        remove_all_reports(site)
         # TODO: a script will start this:
         users_statistics_operations_center(site)
 
