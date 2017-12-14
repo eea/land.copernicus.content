@@ -273,6 +273,31 @@ def schedule_all_reports(site):
     return True
 
 
+def get_pending_reports(site):
+    """ Return all pending reports as list of time periods
+    """
+    reports = get_users_statistics_reports(site)
+
+    pending = []
+    for report_title in reports.keys():
+        report = reports[report_title]
+        if report.get('last_update', None) == 'pending':
+            parts = report_title.split('-')
+            start_date = DateTime(parts[0])
+            end_date = DateTime(parts[1])
+            pending.append((start_date, end_date))
+
+    return pending
+
+
+def solve_pending_reports(site):
+    """ Generate users statistics for all pending reports
+    """
+    pending_time_periods = get_pending_reports(site)
+    generate_users_statistics(site, time_periods=pending_time_periods)
+    return True
+
+
 class UsersStatisticsView(BrowserView):
     """ WIP Users Statistics
         TODO replace with script
@@ -296,7 +321,8 @@ class UsersStatisticsView(BrowserView):
         # save_users_statistics_reports(
         #    site, time_periods=periods, reports=reports)
 
-        schedule_all_reports(site)
+        # schedule_all_reports(site)
+        solve_pending_reports(site)
 
         if 'submit' in self.request.form:
             start_date = DateTime(self.request.form.get('start-date'))
