@@ -40,4 +40,10 @@ setup(
         'plone.stringinterp==1.0.14',  # needed for IContextWrapper in async
         'eea.rdfmarshaller>10.2'
     ],
+
+    entry_points="""
+    # -*- Entry points: -*-
+    [console_scripts]
+    users_stats = land.copernicus.content.browser.scripts:users_stats
+    """,
 )
