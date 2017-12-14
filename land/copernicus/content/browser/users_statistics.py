@@ -205,8 +205,7 @@ def generate_users_statistics(site, time_periods=[]):
 
     all_members = [x for x in md._members.keys()]
 
-    for i in range(0, 10):
-    # for i in range(0, len(all_members)):
+    for i in range(0, len(all_members)):
         print i
         user_id = all_members[i]
         user_member_data = mt.getMemberById(user_id)
@@ -338,12 +337,17 @@ class UsersStatisticsView(BrowserView):
 
         remove_all_reports(site)
         # TODO: a script will start this:
-        # users_statistics_operations_center(site)
+        users_statistics_operations_center(site)
 
         if 'submit' in self.request.form:
             start_date = DateTime(self.request.form.get('start-date'))
             end_date = DateTime(self.request.form.get('end-date'))
             time_periods = [(start_date, end_date)]
             schedule_reports(site=site, time_periods=time_periods)
+
+            self.request.form = {}
+
+        if 'refresh' in self.request.form:
+            self.request.form = {}
 
         return self.render()
