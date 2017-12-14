@@ -36,9 +36,9 @@ def get_plone_site():
     return site
 
 
-def user_stats():
+def users_stats():
     """ A cron callable script to take care of our users statistics reports
-        bin/www1 run bin/users_stats
+        bin/zeo_client run bin/users_stats
     """
     site = get_plone_site()
     users_statistics_operations_center(site)

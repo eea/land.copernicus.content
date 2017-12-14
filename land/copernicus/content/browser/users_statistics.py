@@ -8,6 +8,7 @@ from datetime import datetime
 from persistent.dict import PersistentDict
 from zope.annotation import IAnnotations
 import plone.api as api
+import transaction
 import xlwt
 
 USERS_STATISTICS_KEY = "land.copernicus.content.users_statistics"
@@ -149,6 +150,7 @@ def save_users_statistics_reports(site, time_periods, reports):
     else:
         return False
 
+    transaction.commit()
     return True
 
 
@@ -369,9 +371,6 @@ class UsersStatisticsView(BrowserView):
 
     def __call__(self):
         site = self.context.portal_url.getPortalObject()
-
-        # TODO: a script will start this:
-        users_statistics_operations_center(site)
 
         if 'submit' in self.request.form:
             start_date = DateTime(self.request.form.get('start-date'))
