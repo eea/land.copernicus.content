@@ -300,6 +300,12 @@ def solve_pending_reports(site):
         site, time_periods=pending_time_periods, reports=reports)
 
 
+def remove_all_reports(site):
+    """ Delete annotations related to users statistics
+    """
+    del IAnnotations(site)[USERS_STATISTICS_KEY]
+
+
 def users_statistics_operations_center(site):
     """ Take care annotations exists, we have reports initialized,
         and pending reports are solved.
@@ -330,8 +336,9 @@ class UsersStatisticsView(BrowserView):
     def __call__(self):
         site = self.context.portal_url.getPortalObject()
 
+        remove_all_reports(site)
         # TODO: a script will start this:
-        users_statistics_operations_center(site)
+        # users_statistics_operations_center(site)
 
         if 'submit' in self.request.form:
             start_date = DateTime(self.request.form.get('start-date'))
