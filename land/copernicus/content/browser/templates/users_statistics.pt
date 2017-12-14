@@ -55,7 +55,8 @@
             </tr>
           </thead>
           <tbody>
-            <tal:reports tal:repeat="period_title python:sorted(reports.keys(), reverse=True)">
+            <tal:reports tal:repeat="period_title python:sorted(reports.keys(), reverse=True)"
+                         tal:condition="python:reports is not None">
               <tr tal:define="report python: reports.get(period_title)">
                 <td tal:content="python:period_title">
                   2010/01/01-2010/01/31
