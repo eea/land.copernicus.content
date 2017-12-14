@@ -283,6 +283,26 @@ def schedule_all_reports(site):
     return True
 
 
+def schedule_missing_monthly_reports(site):
+    """ Make sure we are up to date with monthly reports
+    """
+    periods = all_periods()
+    reports = get_users_statistics_reports(site)
+
+    todo_reports = []
+    for period in periods:
+        title = period_title(period)
+        try:
+            if title not in reports.keys():
+                todo_reports.append(period)
+        except Exception:
+            todo_reports.append(period)
+
+    if len(todo_reports) > 0:
+        schedule_reports(site=site, time_periods=todo_reports)
+    return True
+
+
 def get_pending_reports(site):
     """ Return all pending reports as list of time periods
     """
@@ -317,14 +337,18 @@ def remove_all_reports(site):
 
 
 def users_statistics_operations_center(site):
-    """ Take care annotations exists, we have reports initialized,
-        and pending reports are solved.
+    """ Take care of:
+        - annotations exist
+        - we are up to date with monthly reports
+        - all pending reports are solved
 
         To be used by scheduled script.
     """
     reports = get_users_statistics_reports(site)
     if reports is None:
         schedule_all_reports(site)
+    else:
+        schedule_missing_monthly_reports(site)
 
     solve_pending_reports(site)
     return True
