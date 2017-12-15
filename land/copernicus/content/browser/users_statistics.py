@@ -217,9 +217,7 @@ def generate_users_statistics(site, time_periods=[]):
 
     all_members = [x for x in md._members.keys()]
 
-    # TODO enable all
-    # for i in range(0, len(all_members)):
-    for i in range(0, 100):
+    for i in range(0, len(all_members)):
         user_id = all_members[i]
         print "{0}: {1}".format(i, user_id)
         user_member_data = mt.getMemberById(user_id)
