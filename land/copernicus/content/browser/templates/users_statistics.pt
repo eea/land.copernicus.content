@@ -105,7 +105,7 @@
              Usefull after first tests, when the client tell us: it works, but
              let's clear test data.
         -->
-        <form method="post" class="pull-right">
+        <form method="post" class="pull-right" style="display:none">
           <button name="remove" type="submit" class="btn btn-danger">
             Remove reports
           </button>
