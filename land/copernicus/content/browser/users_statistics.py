@@ -147,6 +147,8 @@ def save_users_statistics_reports(site, time_periods, reports):
             report = reports[i]
             report['last_update'] = DateTime()
             stats_annot[period_title(time_periods[i])] = report
+
+            print "Saved report: {0}".format(period_title(time_periods[i]))
     else:
         return False
 
@@ -202,12 +204,11 @@ def generate_users_statistics(site, time_periods=[]):
                     'new': 20
                 }
     """
-    if len(time_periods) == 0:
-        today = DateTime(DateTime().strftime('%Y/%m/%d'))
-        yesterday = today - 1
-        time_periods.append((yesterday, today))
-
     res = []
+
+    if len(time_periods) == 0:
+        return res
+
     for period in time_periods:
         res.append({'total': 0, 'active': 0, 'new': 0})
 
@@ -274,6 +275,8 @@ def schedule_reports(site, time_periods=[]):
             stats_annot[title] = {'active': 0, 'new': 0, 'total': 0}
 
         stats_annot[title]['last_update'] = 'pending'
+
+        print "Scheduled report: {0}".format(title)
     return True
 
 
