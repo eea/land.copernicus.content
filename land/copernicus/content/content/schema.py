@@ -3,6 +3,8 @@
 from AccessControl import ClassSecurityInfo
 from DateTime import DateTime
 from eea.forms.browser.app.temporal_coverage import grouped_coverage
+from eea.geotags.field import GeotagsLinesField
+from eea.geotags.widget import GeotagsWidget
 from land.copernicus.content.content.vocabulary import COUNTRIES_DICTIONARY_ID
 from Products.Archetypes import atapi
 from Products.Archetypes.atapi import BooleanField
@@ -377,6 +379,7 @@ PRODUCT_SCHEMA = Schema((
             i18n_domain='eea',
         )
     ),
+
     StringField(
         name='coordinateReferenceSystem',
         widget=StringWidget(
@@ -663,6 +666,20 @@ PRODUCT_SCHEMA = Schema((
         searchable=True,
         schemata="metadata",
         default_output_type="text/x-html-safe",
+    ),
+    # CATEGORIZATION ==========================================================
+    GeotagsLinesField(
+        'geographicCoverageGT',
+        schemata='categorization',
+        required=True,
+        widget=GeotagsWidget(
+            label='Geographic coverage',
+            description="Type in here the exact geographic names/places "\
+            "that are covered by the data. Add Countries names only "\
+            "if the data displayed is really about the entire country. "\
+            "Example of locations/places are lakes, rivers, cities, "\
+            "marine areas, glaciers, bioregions like alpine region etc."
+        )
     ),
 ))
 
