@@ -1,8 +1,8 @@
 Changelog
 =========
 
-3.2.dev0 - (unreleased)
------------------------
+3.2 - (2017-12-18)
+------------------
 * Tweak eea.rdfmarshaller required version
   [tiberich]
 
