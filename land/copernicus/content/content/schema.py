@@ -668,19 +668,19 @@ PRODUCT_SCHEMA = Schema((
         default_output_type="text/x-html-safe",
     ),
     # CATEGORIZATION ==========================================================
-    GeotagsLinesField(
-        'geographicCoverageGT',
-        schemata='categorization',
-        required=True,
-        widget=GeotagsWidget(
-            label='Geographic coverage',
-            description="Type in here the exact geographic names/places "\
-            "that are covered by the data. Add Countries names only "\
-            "if the data displayed is really about the entire country. "\
-            "Example of locations/places are lakes, rivers, cities, "\
-            "marine areas, glaciers, bioregions like alpine region etc."
-        )
-    ),
+    # GeotagsLinesField(
+    #     'geographicCoverageGT',
+    #     schemata='categorization',
+    #     required=True,
+    #     widget=GeotagsWidget(
+    #         label='Geographic coverage',
+    #         description="Type in here the exact geographic names/places "\
+    #         "that are covered by the data. Add Countries names only "\
+    #         "if the data displayed is really about the entire country. "\
+    #         "Example of locations/places are lakes, rivers, cities, "\
+    #         "marine areas, glaciers, bioregions like alpine region etc."
+    #     )
+    # ),
 ))
 
 
