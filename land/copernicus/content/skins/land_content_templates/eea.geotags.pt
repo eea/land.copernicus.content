@@ -1,4 +1,7 @@
-<!-- Override to set key:
+<!--
+eea.geotags/eea/geotags/skins/eea_geotags/eea.geotags.pt
+
+Override to set key:
 Add key:
 site/manage_propertiesForm
 Name: google_maps_api_key
@@ -74,8 +77,8 @@ Usage:
 
         <!-- OVERRIDE: -->
         <script type="text/javascript"
-            tal:define="gmaps_key context/portal_properties/google_maps_api_key | nothing"
-            tal:attributes="src python:'https://maps.google.com/maps/api/js?sensor=true&key={0}=en&region=US'.format(gmaps_key)">
+                tal:define="gmaps_key python:(getattr(context, 'google_maps_api_key', ''));"
+                tal:attributes="src python:'https://maps.google.com/maps/api/js?sensor=true&key={0}&language=en&region=US'.format(gmaps_key)">
         </script>
 
     </tal:google>
