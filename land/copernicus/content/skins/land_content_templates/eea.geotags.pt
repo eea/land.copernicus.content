@@ -78,7 +78,7 @@ Usage:
         <!-- OVERRIDE: -->
         <script type="text/javascript"
                 tal:define="gmaps_key python:(getattr(context, 'google_maps_api_key', ''));"
-                tal:attributes="src python:'https://maps.google.com/maps/api/js?sensor=true&key={0}&language=en&region=US'.format(gmaps_key)">
+                tal:attributes="src python:'https://maps.google.com/maps/api/js?key={0}&language=en&region=US'.format(gmaps_key)">
         </script>
 
     </tal:google>
