@@ -1,6 +1,9 @@
 Changelog
 =========
 
+3.4.dev0 - (unreleased)
+-----------------------
+
 3.3 - (2017-12-20)
 ------------------
 * Use special configure.zcml file from eea.rdfmarshaller to activate
