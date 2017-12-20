@@ -38,7 +38,7 @@ setup(
         'plone.app.async',
         'five.pt',
         'plone.stringinterp==1.0.14',  # needed for IContextWrapper in async
-        # 'eea.rdfmarshaller>10.2'
+        'eea.rdfmarshaller>=10.5'
     ],
 
     entry_points="""

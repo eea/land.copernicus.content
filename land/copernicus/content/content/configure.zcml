@@ -29,10 +29,9 @@
     for="land.copernicus.content.content.interfaces.ILandFile"
     factory=".landfile.SchemaExtender" />
 
-  <!-- TODO: restore this (#90546) -->
-  <!-- <adapter -->
-  <!--   name="description" -->
-  <!--   for="* land.copernicus.content.content.interfaces.ILandItem *" -->
-  <!--   factory=".marshaller.LandItemDescription" /> -->
+  <adapter
+    name="description"
+    for="* land.copernicus.content.content.interfaces.ILandItem *"
+    factory=".marshaller.LandItemDescription" />
 
 </configure>
