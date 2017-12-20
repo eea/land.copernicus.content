@@ -3,6 +3,8 @@ Changelog
 
 3.3.dev0 - (unreleased)
 -----------------------
+* Use special configure.zcml file from eea.rdfmarshaller to activate
+  license widget
 
 3.2 - (2017-12-18)
 ------------------
