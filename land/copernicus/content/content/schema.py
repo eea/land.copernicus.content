@@ -671,7 +671,7 @@ PRODUCT_SCHEMA = Schema((
     GeotagsLinesField(
         'geographicCoverageGT',
         schemata='categorization',
-        required=True,
+        required=False,
         widget=GeotagsWidget(
             label='Geographic coverage',
             description="Type in here the exact geographic names/places "\
