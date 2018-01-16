@@ -1,8 +1,46 @@
-from zope.component.hooks import getSite
 from Products.CMFCore.utils import getToolByName
-from zope.globalrequest import getRequest
 from Products.statusmessages.interfaces import IStatusMessage
+from plone import api
+from smtplib import SMTPRecipientsRefused
+from zope.component.hooks import getSite
+from zope.globalrequest import getRequest
+import logging
 import subprocess
+
+logger = logging.getLogger("land.copernicus.content")
+
+
+def handleEventFail(func):
+    def wrapper(*args, **kwargs):
+        try:
+            func(*args, **kwargs)
+        except Exception:
+            logger.exception('in {0}'.format(func.__name__))
+    return wrapper
+
+
+@handleEventFail
+def userDeleted(user_id, event):
+    """ Notify deleted user about this action. """
+    try:
+        membership_tool = getToolByName(api.portal.get(), 'portal_membership')
+        email = membership_tool.getMemberById(user_id).getProperty('email')
+    except Exception:
+        email = None
+    if email is not None:
+        mail_text = """
+Hi!
+Your land.copernicus.eu account ({0}) was deleted.
+
+Best regards,
+Copernicus Team at the European Environment Agency""".format(user_id)
+        print mail_text
+        # TODO WIP here (use email as receiver)
+        # try:
+        #     mail_host = api.portal.get_tool(name='MailHost')
+        #     return mail_host.send(mail_text, immediate=True)
+        # except SMTPRecipientsRefused:
+        #     raise SMTPRecipientsRefused('Recipient rejected by server')
 
 
 def autofillFullname(principal, event):

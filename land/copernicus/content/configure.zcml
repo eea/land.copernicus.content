@@ -46,6 +46,10 @@
     handler="land.copernicus.content.globalhandlers.autofillFullname" />
 
   <subscriber
+    for="* Products.PluggableAuthService.interfaces.events.IPrincipalDeletedEvent"
+    handler="land.copernicus.content.globalhandlers.userDeleted" />
+
+  <subscriber
     for="*
          Products.PluggableAuthService.interfaces.events.IUserLoggedInEvent"
     handler="land.copernicus.content.globalhandlers.forceUpdateProfile" />
