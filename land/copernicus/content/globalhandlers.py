@@ -24,8 +24,7 @@ def userBeforeDeleted(user_id, event):
     """ Notify deleted user about this action. """
     membership_tool = getToolByName(api.portal.get(), 'portal_membership')
     user = membership_tool.getMemberById(user_id)
-    # .getProperty('email')
-    # import pdb; pdb.set_trace()
+    email = user.getProperty('email')
     mail_text = """
 Hi!
 Your land.copernicus.eu account ({0}) was deleted.
@@ -33,6 +32,7 @@ Your land.copernicus.eu account ({0}) was deleted.
 Best regards,
 Copernicus Team at the European Environment Agency""".format(user_id)
     print mail_text
+    print email
     # TODO WIP here (use email as receiver)
     # try:
     #     mail_host = api.portal.get_tool(name='MailHost')
