@@ -25,20 +25,22 @@ def userBeforeDeleted(user_id, event):
     membership_tool = getToolByName(api.portal.get(), 'portal_membership')
     user = membership_tool.getMemberById(user_id)
     email = user.getProperty('email')
-    mail_text = """
+    mfrom = 'test@test.com'
+    subject = u"Copernicus Land Monitoring Service - deleted account"
+    mail_text = u"""
 Hi!
 Your land.copernicus.eu account ({0}) was deleted.
 
 Best regards,
 Copernicus Team at the European Environment Agency""".format(user_id)
-    print mail_text
-    print email
-    # TODO WIP here (use email as receiver)
-    # try:
-    #     mail_host = api.portal.get_tool(name='MailHost')
-    #     return mail_host.send(mail_text, immediate=True)
-    # except SMTPRecipientsRefused:
-    #     raise SMTPRecipientsRefused('Recipient rejected by server')
+
+    try:
+        mail_host = api.portal.get_tool(name='MailHost')
+        return mail_host.simple_send(
+            mto=email, mfrom=mfrom, subject=subject,
+            body=mail_text, immediate=True)
+    except SMTPRecipientsRefused:
+        raise SMTPRecipientsRefused('Recipient rejected by server')
 
 
 def autofillFullname(principal, event):
