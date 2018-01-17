@@ -12,6 +12,10 @@ from Products.PluggableAuthService.PluggableAuthService import \
     PluggableAuthService
 
 from Products.PlonePAS.pas import _doDelUser
+from Products.PluggableAuthService.interfaces.events import IPASEvent
+
+from zope.interface import implements
+from Products.PluggableAuthService.events import PASEvent
 
 old_enabled = ConversationView.enabled
 old_crop = SearchView.crop
@@ -49,17 +53,20 @@ def crop(self, text):
     return old_crop(self)
 
 
+class IPrincipalBeforeDeletedEvent(IPASEvent):
+    """A user is marked to be removed but still into database.
+    """
+
+
+class PrincipalBeforeDeleted(PASEvent):
+    implements(IPrincipalBeforeDeletedEvent)
+
+
 def _doDelUser(self, id):
     """
     Given a user id, hand off to a deleter plugin if available.
     Fix: Add PrincipalBeforeDeleted notification
     """
-    # import pdb; pdb.set_trace()
-    # notify(PrincipalBeforeDeleted(id)) TODO WIP here
-    print "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
-    print "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
-    print "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
-    print "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
     plugins = self._getOb('plugins')
     userdeleters = plugins.listPlugins(IUserManagement)
 
@@ -68,6 +75,10 @@ def _doDelUser(self, id):
             "There is no plugin that can delete users.")
 
     for userdeleter_id, userdeleter in userdeleters:
+        # vvv Custom
+        notify(PrincipalBeforeDeleted(id))
+        # ^^^ Custom
+
         try:
             userdeleter.doDeleteUser(id)
         except _SWALLOWABLE_PLUGIN_EXCEPTIONS:

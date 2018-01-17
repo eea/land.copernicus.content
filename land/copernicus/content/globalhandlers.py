@@ -20,7 +20,7 @@ def handleEventFail(func):
 
 
 @handleEventFail
-def userDeleted(user_id, event):
+def userBeforeDeleted(user_id, event):
     """ Notify deleted user about this action. """
     membership_tool = getToolByName(api.portal.get(), 'portal_membership')
     user = membership_tool.getMemberById(user_id)

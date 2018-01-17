@@ -46,8 +46,8 @@
     handler="land.copernicus.content.globalhandlers.autofillFullname" />
 
   <subscriber
-    for="* Products.PluggableAuthService.interfaces.events.IPrincipalDeletedEvent"
-    handler="land.copernicus.content.globalhandlers.userDeleted" />
+    for="* land.copernicus.content.patches.IPrincipalBeforeDeletedEvent"
+    handler="land.copernicus.content.globalhandlers.userBeforeDeleted" />
 
   <subscriber
     for="*
