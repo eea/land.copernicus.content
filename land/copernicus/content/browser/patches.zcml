@@ -17,4 +17,10 @@
                   original="crop"
                   replacement="land.copernicus.content.patches.crop"
                   docstringWarning="true" />
+
+    <monkey:patch description="Add PrincipalBeforeDeleted event"
+                  class="Products.PlonePAS.pas"
+                  original="_doDelUser"
+                  replacement="land.copernicus.content.patches._doDelUser"
+                  docstringWarning="true" />
 </configure>

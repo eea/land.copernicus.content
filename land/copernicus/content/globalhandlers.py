@@ -22,25 +22,23 @@ def handleEventFail(func):
 @handleEventFail
 def userDeleted(user_id, event):
     """ Notify deleted user about this action. """
-    try:
-        membership_tool = getToolByName(api.portal.get(), 'portal_membership')
-        email = membership_tool.getMemberById(user_id).getProperty('email')
-    except Exception:
-        email = None
-    if email is not None:
-        mail_text = """
+    membership_tool = getToolByName(api.portal.get(), 'portal_membership')
+    user = membership_tool.getMemberById(user_id)
+    # .getProperty('email')
+    # import pdb; pdb.set_trace()
+    mail_text = """
 Hi!
 Your land.copernicus.eu account ({0}) was deleted.
 
 Best regards,
 Copernicus Team at the European Environment Agency""".format(user_id)
-        print mail_text
-        # TODO WIP here (use email as receiver)
-        # try:
-        #     mail_host = api.portal.get_tool(name='MailHost')
-        #     return mail_host.send(mail_text, immediate=True)
-        # except SMTPRecipientsRefused:
-        #     raise SMTPRecipientsRefused('Recipient rejected by server')
+    print mail_text
+    # TODO WIP here (use email as receiver)
+    # try:
+    #     mail_host = api.portal.get_tool(name='MailHost')
+    #     return mail_host.send(mail_text, immediate=True)
+    # except SMTPRecipientsRefused:
+    #     raise SMTPRecipientsRefused('Recipient rejected by server')
 
 
 def autofillFullname(principal, event):

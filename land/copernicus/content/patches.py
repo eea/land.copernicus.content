@@ -3,8 +3,19 @@ from plone.app.discussion.browser.conversation import ConversationView
 from Products.Ploneboard.browser.search import SearchView
 from zope.component import getMultiAdapter
 
+from zope.event import notify
+from Products.PluggableAuthService.events import PrincipalDeleted
+from Products.PlonePAS.interfaces.plugins import IUserManagement
+from Products.PluggableAuthService.PluggableAuthService import \
+     _SWALLOWABLE_PLUGIN_EXCEPTIONS
+from Products.PluggableAuthService.PluggableAuthService import \
+    PluggableAuthService
+
+from Products.PlonePAS.pas import _doDelUser
+
 old_enabled = ConversationView.enabled
 old_crop = SearchView.crop
+old_doDelUser = _doDelUser
 
 
 def enabled(self):
@@ -36,3 +47,33 @@ def crop(self, text):
         self.site_properties.ellipsis
     )
     return old_crop(self)
+
+
+def _doDelUser(self, id):
+    """
+    Given a user id, hand off to a deleter plugin if available.
+    Fix: Add PrincipalBeforeDeleted notification
+    """
+    # import pdb; pdb.set_trace()
+    # notify(PrincipalBeforeDeleted(id)) TODO WIP here
+    print "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
+    print "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
+    print "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
+    print "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
+    plugins = self._getOb('plugins')
+    userdeleters = plugins.listPlugins(IUserManagement)
+
+    if not userdeleters:
+        raise NotImplementedError(
+            "There is no plugin that can delete users.")
+
+    for userdeleter_id, userdeleter in userdeleters:
+        try:
+            userdeleter.doDeleteUser(id)
+        except _SWALLOWABLE_PLUGIN_EXCEPTIONS:
+            pass
+        else:
+            notify(PrincipalDeleted(id))
+
+
+PluggableAuthService._doDelUser = _doDelUser
