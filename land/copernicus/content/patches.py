@@ -1,21 +1,18 @@
 from Acquisition import aq_inner
-from plone.app.discussion.browser.conversation import ConversationView
-from Products.Ploneboard.browser.search import SearchView
-from zope.component import getMultiAdapter
-
-from zope.event import notify
-from Products.PluggableAuthService.events import PrincipalDeleted
 from Products.PlonePAS.interfaces.plugins import IUserManagement
-from Products.PluggableAuthService.PluggableAuthService import \
-     _SWALLOWABLE_PLUGIN_EXCEPTIONS
+from Products.PlonePAS.pas import _doDelUser
+from Products.Ploneboard.browser.search import SearchView
 from Products.PluggableAuthService.PluggableAuthService import \
     PluggableAuthService
-
-from Products.PlonePAS.pas import _doDelUser
-from Products.PluggableAuthService.interfaces.events import IPASEvent
-
-from zope.interface import implements
+from Products.PluggableAuthService.PluggableAuthService import \
+    _SWALLOWABLE_PLUGIN_EXCEPTIONS
 from Products.PluggableAuthService.events import PASEvent
+from Products.PluggableAuthService.events import PrincipalDeleted
+from Products.PluggableAuthService.interfaces.events import IPASEvent
+from plone.app.discussion.browser.conversation import ConversationView
+from zope.component import getMultiAdapter
+from zope.event import notify
+from zope.interface import implements
 
 old_enabled = ConversationView.enabled
 old_crop = SearchView.crop

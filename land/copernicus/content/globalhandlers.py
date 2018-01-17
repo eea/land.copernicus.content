@@ -22,10 +22,11 @@ def handleEventFail(func):
 @handleEventFail
 def userBeforeDeleted(user_id, event):
     """ Notify deleted user about this action. """
-    membership_tool = getToolByName(api.portal.get(), 'portal_membership')
+    site = api.portal.get()
+    membership_tool = getToolByName(site, 'portal_membership')
     user = membership_tool.getMemberById(user_id)
     email = user.getProperty('email')
-    mfrom = 'test@test.com'
+    mfrom = site.getProperty('email_from_address', 'copernicus@eea.europa.eu')
     subject = u"Copernicus Land Monitoring Service - deleted account"
     mail_text = u"""
 Hi!
