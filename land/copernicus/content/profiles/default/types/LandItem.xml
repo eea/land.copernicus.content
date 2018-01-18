@@ -27,6 +27,11 @@
  <alias from="edit" to="atct_edit"/>
  <alias from="sharing" to="@@sharing"/>
  <alias from="view" to="(selected layout)"/>
+ <action title="Land files contents" action_id="landfiles" category="object"
+    url_expr="string:${object_url}/landfiles_content" visible="True"
+    i18n:attributes="title">
+  <permission value="Modify portal content"/>
+ </action>
  <action title="View" action_id="view" category="object" condition_expr=""
     url_expr="string:${object_url}" visible="True"
     i18n:attributes="title">
@@ -38,7 +43,7 @@
     i18n:attributes="title">
   <permission value="Modify portal content"/>
  </action>
-  <action title="Land files administration" action_id="land_files_administration" category="object"
+ <action title="Land files administration" action_id="land_files_administration" category="object"
     url_expr="string:${object_url}/admin_land_files" visible="True"
     i18n:attributes="title">
   <permission value="Modify portal content"/>

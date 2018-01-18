@@ -10,6 +10,7 @@ import json
 import plone.api as api
 import re
 import subprocess
+from land.copernicus.content.content.api import LandFileApi
 
 
 def is_EIONET_member(member):
@@ -181,7 +182,7 @@ class AdminLandFilesView(BrowserView):
     def render(self):
         return self.index()
 
-    def show_error(self, item, action, details):
+    def show_error(self, item, action, details=''):
         """ Show an error message related to an action for a land file
         """
         messages = IStatusMessage(self.request)
@@ -192,7 +193,7 @@ class AdminLandFilesView(BrowserView):
                 details=safe_unicode(details)
             ), type=ACTION_ERROR)
 
-    def show_info(self, item, action, details):
+    def show_info(self, item, action, details=''):
         """ Show an info message related to an action for a land file
         """
         messages = IStatusMessage(self.request)
@@ -265,25 +266,29 @@ class AdminLandFilesView(BrowserView):
             'title': title.decode('utf8'),
             'status': ACTION_SUCCESS
         }
-        valid_tags = [
-            {'name': x[0], 'value': x[1]} for x in parse_tags(
-                categorization_tags) if x[0] in
-            self.context.fileCategories
-        ]
+
+        fileCategories = self.context.fileCategories
+        valid_tags = tuple(
+            (name, value)
+            for name, value in parse_tags(categorization_tags)
+            if name in fileCategories
+        )
+
+        lfa = LandFileApi(self.context.landfiles)
 
         try:
-            landfile = api.content.create(
-                container=self.context, type='LandFile', title=title,
-                description=description, remoteUrl=download_url,
-                fileCategories=valid_tags)
-            url = landfile.absolute_url()
-            api.content.transition(obj=landfile, transition='publish')
+            lfa.add(
+                title=title,
+                description=description,
+                remoteUrl=download_url,
+                fileCategories=valid_tags
+            )
             if logs is True:
-                self.show_info(title, ACTION_POST, "- " + url)
-        except Exception:
+                self.show_info(title, ACTION_POST)
+        except KeyError as err:
             result['status'] = ACTION_ERROR
             if logs is True:
-                self.show_error(title, ACTION_POST, "- landfile not created.")
+                self.show_error(title, ACTION_POST, '- ' + err.message)
         return result
 
     def do_delete(self, title, logs=True):
@@ -292,25 +297,16 @@ class AdminLandFilesView(BrowserView):
             Output: title, status
             Also show error or info message
         """
-        landfiles = self.context.getFolderContents(
-            contentFilter={
-                'portal_type': 'LandFile',
-                'Title': title
-            }
-        )
         result = {
             'title': title.decode('utf8'),
             'status': ACTION_SUCCESS
         }
-        if len(landfiles) > 0:
-            for a_landfile in landfiles:
-                landfile = a_landfile.getObject()
-                result['title'] = landfile.Title().decode('utf8')
-                url = landfile.absolute_url()
-                self.context.manage_delObjects([landfile.id])
-                if logs is True:
-                    self.show_info(title, ACTION_DELETE, "- " + url)
-        else:
+        lfa = LandFileApi(self.context.landfiles)
+        try:
+            lfa.delete(title)
+            if logs is True:
+                self.show_info(title, ACTION_DELETE)
+        except KeyError:
             result['status'] = ACTION_ERROR
             if logs is True:
                 self.show_error(
@@ -322,53 +318,50 @@ class AdminLandFilesView(BrowserView):
         """ Delete all landfiles in this context
             Output: list of dicts containing title and status
         """
-        landfiles = self.context.getFolderContents(
-            contentFilter={
-                'portal_type': 'LandFile',
-            }
-        )
-        result = []
-        landfiles_titles = [x.getObject().Title() for x in landfiles]
-        for landfile in landfiles_titles:
-            result.append(self.do_delete(landfile))
-
-        return result
+        tree = self.context.landfiles
+        landfiles_titles = tuple(tree.keys())
+        tree.clear()
+        if logs is True:
+            for title in landfiles_titles:
+                self.show_info(title, ACTION_DELETE)
+        return [
+            dict(title=title, status=ACTION_SUCCESS)
+            for title in landfiles_titles
+        ]
 
     def do_put(self, title, description, download_url, categorization_tags,
                logs=True):
         """ Replace a landfile
         """
-        del_result = self.do_delete(title, logs=False)
-        if del_result['status'] == ACTION_ERROR:
-            if logs is True:
-                self.show_error(
-                    title, ACTION_PUT, '- Cannot delete old landfile')
-            return {
-                'title': title.decode('utf8'),
-                'status': ACTION_ERROR
-            }
-        else:
-            create_result = self.do_post(
-                title=title, description=description,
-                download_url=download_url,
-                categorization_tags=categorization_tags, logs=False)
+        result = {
+            'title': title.decode('utf8'),
+            'status': ACTION_SUCCESS
+        }
 
-            if create_result['status'] == ACTION_ERROR:
-                if logs is True:
-                    self.show_error(
-                        title, ACTION_PUT, '- Cannot create new landfile')
-                return {
-                    'title': title.decode('utf8'),
-                    'status': ACTION_ERROR
-                }
-            else:
-                if logs is True:
-                    self.show_info(
-                        title, ACTION_PUT, '- Landfile replaced')
-                return {
-                    'title': title.decode('utf8'),
-                    'status': ACTION_SUCCESS
-                }
+        fileCategories = self.context.fileCategories
+        valid_tags = tuple(
+            (name, value)
+            for name, value in parse_tags(categorization_tags)
+            if name in fileCategories
+        )
+
+        lfa = LandFileApi(self.context.landfiles)
+
+        try:
+            lfa.edit(
+                title=title,
+                description=description,
+                remoteUrl=download_url,
+                fileCategories=valid_tags
+            )
+            if logs is True:
+                self.show_info(title, ACTION_PUT, '- Landfile replaced')
+        except KeyError as err:
+            result['status'] = ACTION_ERROR
+            if logs is True:
+                self.show_error(title, ACTION_POST, '- ' + err.message)
+
+        return result
 
     def do_operations(self):
         """ Do the requested operation by form
@@ -456,3 +449,10 @@ class AdminLandFilesView(BrowserView):
     @property
     def values(self):
         return {'output_json': self.output_json}
+
+
+class LandFilesContentView(BrowserView):
+
+    @property
+    def landfiles(self):
+        return self.context.landfiles.values()

@@ -1,5 +1,6 @@
 """ Land content-types
 """
+import BTrees
 
 from Products.ATContentTypes.content.folder import ATFolder
 from land.copernicus.content.content import schema
@@ -17,3 +18,11 @@ class LandItem(ATFolder):
     portal_type = 'LandItem'
     archetype_name = 'LandItem'
     schema = schema.ITEM_SCHEMA
+
+    _landfiles = None
+
+    @property
+    def landfiles(self):
+        if self._landfiles is None:
+            self._landfiles = BTrees.OOBTree.BTree()
+        return self._landfiles

@@ -1,6 +1,7 @@
 """ Land File: a shortcut to an FTP uploaded file
 """
 
+import persistent
 from Products.ATContentTypes.content.link import ATLink
 from Products.DataGridField import DataGridField
 from Products.DataGridField import DataGridWidget
@@ -8,7 +9,24 @@ from archetypes.schemaextender.field import ExtensionField
 from archetypes.schemaextender.interfaces import ISchemaExtender
 from land.copernicus.content.content import schema
 from land.copernicus.content.content.interfaces import ILandFile
+from land.copernicus.content.content.interfaces import IPLandFile
 from zope.interface import implements
+from zope.interface import implementer
+
+
+@implementer(IPLandFile)
+class PLandFile(persistent.Persistent):
+    """ Lightweight implementation of LandFile,
+        inheriting only from persistent.Persistent,
+        the bare-minimum requirement for ZODB storage.
+    """
+    def __init__(self, **fields):
+        for name, value in fields.items():
+            setattr(self, name, value)
+
+    @property
+    def fileSize(self):
+        return getattr(self, '_fileSize', 'N/A')
 
 
 class LandFile(ATLink):
