@@ -1,8 +1,8 @@
 Changelog
 =========
 
-3.4.dev0 - (unreleased)
------------------------
+3.4 - (2018-01-18)
+------------------
 * Feature: Notify user on deleting his account.
   [GhitaB #91704]
 
