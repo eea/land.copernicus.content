@@ -13,6 +13,7 @@
       <table class="listing">
         <thead>
           <tr>
+            <th>ID</th>
             <th>Title</th>
             <th>Description</th>
             <th>URL</th>
@@ -22,6 +23,7 @@
         </thead>
         <tbody>
           <tr tal:repeat="landfile python:view.landfiles">
+            <td>${python:landfile.shortname}</td>
             <td>${python:landfile.title}</td>
             <td>${python:landfile.description}</td>
             <td><a href="${python:landfile.remoteUrl}">${python:landfile.remoteUrl}</a></td>

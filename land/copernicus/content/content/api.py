@@ -12,17 +12,15 @@ def add_landfile(tree, **props):
 
 
 def edit_landfile(tree, **props):
-    landfile = PLandFile(**props)
-    title = landfile.title
-    if tree.has_key(title): # NOQA 'in' is slower for BTree
-        tree[title] = landfile
-    else:
-        raise KeyError('Land file with that title does not exist!')
-    return landfile
+    delete_landfile(tree, props['title'])
+    return add_landfile(tree, **props)
 
 
 def delete_landfile(tree, title):
-    del tree[title]
+    try:
+        del tree[title]
+    except KeyError:
+        raise KeyError('Land file with that title does not exist!')
 
 
 def get_landfile(tree, title):

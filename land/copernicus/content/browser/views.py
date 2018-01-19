@@ -262,8 +262,9 @@ class AdminLandFilesView(BrowserView):
             Output: title, status (error or success)
             Also show error or info message
         """
+        title
         result = {
-            'title': title.decode('utf8'),
+            'title': title,
             'status': ACTION_SUCCESS
         }
 
@@ -298,7 +299,7 @@ class AdminLandFilesView(BrowserView):
             Also show error or info message
         """
         result = {
-            'title': title.decode('utf8'),
+            'title': title,
             'status': ACTION_SUCCESS
         }
         lfa = LandFileApi(self.context.landfiles)
@@ -334,7 +335,7 @@ class AdminLandFilesView(BrowserView):
         """ Replace a landfile
         """
         result = {
-            'title': title.decode('utf8'),
+            'title': title,
             'status': ACTION_SUCCESS
         }
 
@@ -370,35 +371,40 @@ class AdminLandFilesView(BrowserView):
         txt_file = self.request.form.get('file', None)
 
         if txt_file.filename is not '':
+            txt_content = txt_file.read()
+            txt_decoded = None
+            try:
+                txt_decoded = txt_content.decode('utf-8')
+            except UnicodeDecodeError:
+                txt_decoded = txt_content.decode('latin1')
+            txt_decoded = txt_decoded or safe_unicode(txt_content)
+            lines = txt_decoded.splitlines()
             if action == ACTION_GET:
                 # GET info for a list of landfiles
-                landfiles = txt_file.read().splitlines()
                 output_json = []
 
-                if landfiles[0].lower() == 'all':
+                if lines[0].lower() == 'all':
                     output_json = self.do_get_all()
                 else:
-                    for landfile in landfiles:
-                        output_json.append(self.do_get(landfile))
+                    for line in lines:
+                        output_json.append(self.do_get(line))
                 result = json.dumps(
-                    output_json, ensure_ascii=False).encode('utf8')
+                    output_json, ensure_ascii=False)
 
             elif action == ACTION_DELETE:
                 # DELETE a list of landfiles
-                landfiles = txt_file.read().splitlines()
                 output_json = []
 
-                if landfiles[0].lower() == 'all':
+                if lines[0].lower() == 'all':
                     output_json = self.do_delete_all()
                 else:
-                    for landfile in landfiles:
-                        output_json.append(self.do_delete(landfile))
+                    for line in lines:
+                        output_json.append(self.do_delete(line))
                 result = json.dumps(
-                        output_json, ensure_ascii=False).encode('utf8')
+                        output_json, ensure_ascii=False)
 
             elif action == ACTION_POST:
                 # CREATE landfiles
-                lines = txt_file.read().splitlines()
                 landfiles = [lines[i:i + 4] for i in xrange(0, len(lines), 4)]
                 result = []
                 for landfile in landfiles:
@@ -410,11 +416,10 @@ class AdminLandFilesView(BrowserView):
                         )
                     result.append(a_result)
                 result = json.dumps(
-                     result, ensure_ascii=False).encode('utf8')
+                     result, ensure_ascii=False)
 
             elif action == ACTION_PUT:
                 # UPDATE landfiles
-                lines = txt_file.read().splitlines()
                 landfiles = [lines[i:i + 4] for i in xrange(0, len(lines), 4)]
                 result = []
                 for landfile in landfiles:
@@ -426,7 +431,7 @@ class AdminLandFilesView(BrowserView):
                         )
                     result.append(a_result)
                 result = json.dumps(
-                     result, ensure_ascii=False).encode('utf8')
+                     result, ensure_ascii=False)
 
             else:
                 result = {}
