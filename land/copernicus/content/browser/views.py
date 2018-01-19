@@ -188,9 +188,9 @@ class AdminLandFilesView(BrowserView):
         messages = IStatusMessage(self.request)
         messages.add(
             u"""Error on {action} {item} {details}""".format(
-                action=safe_unicode(action),
-                item=safe_unicode(item),
-                details=safe_unicode(details)
+                action=action,
+                item=item,
+                details=details,
             ), type=ACTION_ERROR)
 
     def show_info(self, item, action, details=''):
@@ -199,9 +199,9 @@ class AdminLandFilesView(BrowserView):
         messages = IStatusMessage(self.request)
         messages.add(
             u"""Success on {action} {item} {details}""".format(
-                action=safe_unicode(action),
-                item=safe_unicode(item),
-                details=safe_unicode(details)
+                action=action,
+                item=item,
+                details=details,
             ), type=ACTION_INFO)
 
     def do_get(self, title, logs=True):
@@ -210,29 +210,24 @@ class AdminLandFilesView(BrowserView):
             Output: dict containing landfile details
             Also show error or info msg
         """
-        landfile = self.context.getFolderContents(
-            contentFilter={
-                'portal_type': 'LandFile',
-                'Title': title
-            }
-        )
+        lfa = LandFileApi(self.context.landfiles)
+        landfile = lfa.get(title)
+
         result = {
-            'title': safe_unicode(title),
+            'title': title,
             'status': ACTION_ERROR
         }
-        if len(landfile) > 0:
-            landfile = landfile[0].getObject()
+        if landfile:
             result['status'] = ACTION_SUCCESS
-            result['title'] = landfile.Title().decode('utf8')
-            result['id'] = landfile.id
-            result['description'] = landfile.Description().decode('utf8')
+            result['title'] = landfile.title
+            result['id'] = landfile.shortname
+            result['description'] = landfile.description
             result['download_url'] = landfile.remoteUrl
             result['categorization_tags'] = landfile.fileCategories
             result['size'] = landfile.fileSize
-            result['url'] = landfile.absolute_url()
 
         if result['status'] == ACTION_SUCCESS and logs is True:
-            self.show_info(title, ACTION_GET, "- " + result['url'])
+            self.show_info(title, ACTION_GET)
 
         if result['status'] == ACTION_ERROR and logs is True:
             self.show_error(
@@ -240,20 +235,13 @@ class AdminLandFilesView(BrowserView):
 
         return result
 
-    def do_get_all(self, logs=True):
+    def do_get_all(self):
         """ Get information about all landfiles in this context
             Output: list of dicts containing landfiles details
         """
-        landfiles = self.context.getFolderContents(
-            contentFilter={
-                'portal_type': 'LandFile',
-            }
-        )
-        result = []
-        for landfile in landfiles:
-            result.append(self.do_get(landfile.getObject().Title()))
-
-        return result
+        landfiles = self.context.landfiles
+        do_get = self.do_get
+        return [do_get(title) for title in landfiles]
 
     def do_post(self, title, description, download_url, categorization_tags,
                 logs=True):
@@ -262,7 +250,6 @@ class AdminLandFilesView(BrowserView):
             Output: title, status (error or success)
             Also show error or info message
         """
-        title
         result = {
             'title': title,
             'status': ACTION_SUCCESS
