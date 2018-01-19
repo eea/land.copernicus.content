@@ -1,15 +1,20 @@
+import re
+import json
+import subprocess
+from urlparse import urlparse
+
+from zope.component import getMultiAdapter
+from zope.component.hooks import getSite
+
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.PloneBatch import Batch
 from Products.CMFPlone.utils import safe_unicode
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
-from zope.component import getMultiAdapter
-from zope.component.hooks import getSite
-import json
+
 import plone.api as api
-import re
-import subprocess
+
 from land.copernicus.content.content.api import LandFileApi
 
 
@@ -19,9 +24,11 @@ def is_EIONET_member(member):
     site = api.portal.get()
 
     try:
-        return "EIONET" in site.acl_users.get(
-            "ldap-plugin").acl_users.searchUsers(
-            uid=member.getId())[0].get('dn', '')
+        return "EIONET" in (
+            site.acl_users.get("ldap-plugin")
+            .acl_users.searchUsers(uid=member.getId())
+            [0].get('dn', '')
+        )
 
     except Exception:
         return False
@@ -269,11 +276,12 @@ class AdminLandFilesView(BrowserView):
                 title=title,
                 description=description,
                 remoteUrl=download_url,
-                fileCategories=valid_tags
+                fileCategories=valid_tags,
+                _fileSize=lfa.get_filesize_from_url(download_url),
             )
             if logs is True:
                 self.show_info(title, ACTION_POST)
-        except KeyError as err:
+        except (OSError, KeyError) as err:
             result['status'] = ACTION_ERROR
             if logs is True:
                 self.show_error(title, ACTION_POST, '- ' + err.message)
@@ -340,11 +348,12 @@ class AdminLandFilesView(BrowserView):
                 title=title,
                 description=description,
                 remoteUrl=download_url,
-                fileCategories=valid_tags
+                fileCategories=valid_tags,
+                _fileSize=lfa.get_filesize_from_url(download_url),
             )
             if logs is True:
                 self.show_info(title, ACTION_PUT, '- Landfile replaced')
-        except KeyError as err:
+        except (OSError, KeyError) as err:
             result['status'] = ACTION_ERROR
             if logs is True:
                 self.show_error(title, ACTION_POST, '- ' + err.message)
@@ -448,3 +457,7 @@ class LandFilesContentView(BrowserView):
     @property
     def landfiles(self):
         return self.context.landfiles.values()
+
+    @staticmethod
+    def relative_url(url):
+        return urlparse(url).path

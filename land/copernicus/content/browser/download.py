@@ -37,6 +37,8 @@ from land.copernicus.content.async.subscribers import NAME as Q_NAME
 
 from land.copernicus.content.events.download import DownloadReady
 
+from land.copernicus.content.content.api import LandFileApi
+
 from plone.stringinterp.interfaces import IContextWrapper
 
 from plone.app.contentrules.handlers import close
@@ -131,10 +133,6 @@ def _friendly_size(size):
     return '{} {}'.format(res, unit.upper())
 
 
-def _get_field_value(name, item):
-    return item.getField(name).getAccessor(item)()
-
-
 def _filepath_from_url(url):
     return unquote(urlparse(url).path.strip('/'))
 
@@ -143,8 +141,8 @@ def _filename_from_path(path):
     return os.path.split(path)[-1]
 
 
-GET_REMOTE_URL = partial(_get_field_value, 'remoteUrl')
-GET_FILE_SIZE = partial(_get_field_value, 'fileSize')
+GET_REMOTE_URL = attrgetter('remoteUrl')
+GET_FILE_SIZE = attrgetter('fileSize')
 
 
 def _userinfo():
@@ -457,7 +455,9 @@ class DownloadAsyncView(BrowserView):
 
         # fetch items
         selected = selected or self.request.get('selected', [])
-        items = tuple(map(self.context.restrictedTraverse, selected))
+        lfa = LandFileApi(self.context.landfiles)
+        _landitem_fetcher = partial(lfa.get_by_prop, 'shortname')
+        items = tuple(chain(*map(_landitem_fetcher, selected)))
 
         # extract files and calculate hash
         filepaths = tuple(map(_filepath_from_url, map(GET_REMOTE_URL, items)))

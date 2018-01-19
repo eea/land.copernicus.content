@@ -26,7 +26,7 @@
             <td>${python:landfile.shortname}</td>
             <td>${python:landfile.title}</td>
             <td>${python:landfile.description}</td>
-            <td><a href="${python:landfile.remoteUrl}">${python:landfile.remoteUrl}</a></td>
+            <td><a href="${python:landfile.remoteUrl}">${python:view.relative_url(landfile.remoteUrl)}</a></td>
             <td>${python:landfile.fileSize}</td>
             <td tal:define="categories python:landfile.fileCategories">
               <dl tal:condition="categories">
