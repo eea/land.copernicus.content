@@ -1,0 +1,12 @@
+<tal:scripts>
+    <script src="https://cdn.ravenjs.com/3.22.1/raven.min.js"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        // because all scripts are defered
+        window.addEventListener('load', function(){
+          Raven.config('${view/get_dsn}').install()
+        })
+    </script>
+</tal:scripts>
+
+
