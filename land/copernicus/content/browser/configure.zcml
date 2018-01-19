@@ -63,6 +63,21 @@
     permission="land.copernicus.content.download_landfile"
     />
 
+  <browser:page
+    for="land.copernicus.content.content.landitem.LandItem"
+    name="add-landfile"
+    class=".forms.AddLandFileFormView"
+    permission="cmf.ModifyPortalContent"
+    />
+
+  <browser:page
+    for="land.copernicus.content.content.landitem.LandItem"
+    name="edit-landfile"
+    class=".forms.EditLandFileFormView"
+    permission="cmf.ModifyPortalContent"
+    />
+
+
   <!-- <browser:page -->
   <!--   name="tpdb" -->
   <!--   class=".views.GoPDB" -->

@@ -32,6 +32,7 @@ setup(
         'z3c.jbot',
         'Wand',
         'Products.DataGridField',
+        'collective.z3cform.datagridfield',
         'eea.forms',
         'Products.ATVocabularyManager',
         'eea.cache',

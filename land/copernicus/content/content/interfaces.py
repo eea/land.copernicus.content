@@ -35,6 +35,10 @@ class IPLandFile(Interface):
         the bare-minimum requirement for ZODB storage.
     """
     title = schema.TextLine(title=u'Title', required=True)
+    shortname = schema.TextLine(
+        title=u'Short name',
+        required=True
+    )
     description = schema.Text(title=u'Description', required=False)
     remoteUrl = schema.URI(title=u'URL', required=True)
     fileSize = schema.TextLine(
@@ -44,7 +48,7 @@ class IPLandFile(Interface):
         required=False
     )
     fileCategories = schema.Tuple(
-        title=u'Security domains',
+        title=u'Categorization of this file',
         description=u'Enter, for each category, its value',
         required=False
     )
