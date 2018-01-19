@@ -21,10 +21,18 @@ class PLandFile(persistent.Persistent):
         inheriting only from persistent.Persistent,
         the bare-minimum requirement for ZODB storage.
     """
+    title = ''
+    description = ''
+    shortname = ''
+    remoteUrl = ''
+    _fileSize = 'N/A'
+    fileCategories = tuple()
+
     def __init__(self, **fields):
         for name, value in fields.items():
             setattr(self, name, value)
-        self.shortname = queryUtility(IURLNormalizer).normalize(self.title)
+        if not self.shortname:
+            self.shortname = queryUtility(IURLNormalizer).normalize(self.title)
 
     @property
     def fileSize(self):
