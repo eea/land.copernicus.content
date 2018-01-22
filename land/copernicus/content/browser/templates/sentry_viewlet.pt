@@ -4,7 +4,7 @@
     <script type="text/javascript">
         // because all scripts are defered
         window.addEventListener('load', function(){
-          Raven.config('${view/get_dsn}').install()
+          Raven.config('${view/get_dsn}').install();
         })
     </script>
 </tal:scripts>
