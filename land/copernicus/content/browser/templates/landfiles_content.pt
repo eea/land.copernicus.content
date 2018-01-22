@@ -9,7 +9,7 @@
   <metal:content-core fill-slot="content-core">
     <metal:main_macro define-macro="content-core">
       <h2 i18n:translate="">Land files listing</h2>
-      <p>Use the table below to manage land files.</p>
+      <p>Use the table below to manage individual land files.</p>
       <table class="listing">
         <thead>
           <tr>
@@ -19,6 +19,7 @@
             <th>URL</th>
             <th>Size</th>
             <th>Categories</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -35,6 +36,10 @@
                   <dd>${python:categ[1]}</dd>
                 </tal:categ>
               </dl>
+            </td>
+            <td>
+              <a href="${python:context.absolute_url()}/edit-landfile?form.widgets.orig_title=${python:landfile.title}">edit</a>
+              <a href="${python:context.absolute_url()}/delete-landfile?form.widgets.orig_title=${python:landfile.title}">delete</a>
             </td>
           </tr>
         </tbody>

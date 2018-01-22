@@ -77,6 +77,13 @@
     permission="cmf.ModifyPortalContent"
     />
 
+  <browser:page
+    for="land.copernicus.content.content.landitem.LandItem"
+    name="delete-landfile"
+    class=".forms.DeleteLandfileFormView"
+    permission="cmf.ModifyPortalContent"
+    />
+
 
   <!-- <browser:page -->
   <!--   name="tpdb" -->

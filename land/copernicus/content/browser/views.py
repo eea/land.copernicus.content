@@ -272,12 +272,11 @@ class AdminLandFilesView(BrowserView):
         lfa = LandFileApi(self.context.landfiles)
 
         try:
-            lfa.add(
+            lfa.add_with_filesize(
                 title=title,
                 description=description,
                 remoteUrl=download_url,
                 fileCategories=valid_tags,
-                _fileSize=lfa.get_filesize_from_url(download_url),
             )
             if logs is True:
                 self.show_info(title, ACTION_POST)
@@ -344,12 +343,12 @@ class AdminLandFilesView(BrowserView):
         lfa = LandFileApi(self.context.landfiles)
 
         try:
-            lfa.edit(
+            lfa.edit_with_filesize(
+                title,
                 title=title,
                 description=description,
                 remoteUrl=download_url,
                 fileCategories=valid_tags,
-                _fileSize=lfa.get_filesize_from_url(download_url),
             )
             if logs is True:
                 self.show_info(title, ACTION_PUT, '- Landfile replaced')
