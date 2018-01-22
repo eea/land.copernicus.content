@@ -90,7 +90,10 @@ class AddLandFileForm(BaseForm):
         categories.auto_append = False
 
         columns = self.context.getFileCategories() or []
-        categories.value = [{'name': col, 'value': u''} for col in columns]
+        categories.value = categories.value or [
+            {'name': col, 'value': u''}
+            for col in columns
+        ]
 
     @button.buttonAndHandler(u'Save')
     def handle_save(self, action):
@@ -111,7 +114,7 @@ class AddLandFileForm(BaseForm):
         lfa = LandFileApi(self.context.landfiles)
         try:
             landfile = lfa.add_with_filesize(**props)
-        except (KeyError, OSError, AssertionError) as err:
+        except (KeyError, OSError) as err:
             raise ActionExecutionError(Invalid(err.message))
 
         messages = IStatusMessage(self.request)
@@ -214,13 +217,10 @@ class DeleteLandFileForm(EditLandFileForm):
     def updateWidgets(self, prefix=None):
         super(DeleteLandFileForm, self).updateWidgets(prefix)
 
-        # Needed to preserve the title of the landfile that will be modified.
+        # Needed to preserve the title of the landfile that will be deleted.
         orig_title = self.widgets['orig_title']
         orig_title.mode = HIDDEN_MODE
         orig_title.value = self.request.get('form.widgets.orig_title')
-
-        # Hide the shortname so it isn't edited.
-        self.widgets['shortname'].mode = HIDDEN_MODE
 
     @button.buttonAndHandler(u'Delete')
     def handle_delete(self, action):
