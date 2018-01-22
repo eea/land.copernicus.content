@@ -10,6 +10,9 @@
     <metal:main_macro define-macro="content-core">
       <h2 i18n:translate="">Land files listing</h2>
       <p>Use the table below to manage individual land files.</p>
+      <p>
+        <a class="btn btn-default" style="color: white" href="${python:context.absolute_url()}/add-landfile">Add landfile</a>
+      </p>
       <table class="listing">
         <thead>
           <tr>
