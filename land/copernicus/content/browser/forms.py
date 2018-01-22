@@ -5,6 +5,7 @@ from zope.interface import implementer
 from zope import schema
 
 from z3c.form.interfaces import HIDDEN_MODE
+from z3c.form.interfaces import DISPLAY_MODE
 from z3c.form.interfaces import ActionExecutionError
 
 from z3c.form import form
@@ -20,6 +21,9 @@ from collective.z3cform.datagridfield import DictRow
 
 from land.copernicus.content.content.api import LandFileApi
 from land.copernicus.content.content.interfaces import IPLandFile
+
+
+LANDFILE_LISTING = '{}/landfiles_content'
 
 
 class ITableRowSchema(Interface):
@@ -56,7 +60,14 @@ def fields_landfile(categories, landfile):
     )
 
 
-class AddLandFileForm(form.Form):
+class BaseForm(form.Form):
+    def redirect_to_listing(self):
+        return self.request.RESPONSE.redirect(
+            LANDFILE_LISTING.format(self.context.absolute_url())
+        )
+
+
+class AddLandFileForm(BaseForm):
     label = 'Add land file'
 
     fields = field.Fields(IFormSchema).select(
@@ -106,14 +117,14 @@ class AddLandFileForm(form.Form):
         messages = IStatusMessage(self.request)
         messages.add(u'Added landfile: {}'.format(landfile.title))
 
-        return self.request.RESPONSE.redirect(self.context.absolute_url())
+        self.redirect_to_listing()
 
     @button.buttonAndHandler(u'Cancel')
     def handle_cancel(self, action):
-        return self.request.response.redirect(self.context.absolute_url())
+        self.redirect_to_listing()
 
 
-class EditLandFileForm(form.Form):
+class EditLandFileForm(BaseForm):
     label = 'Edit land file'
 
     fields = field.Fields(IFormSchema).select(
@@ -131,9 +142,13 @@ class EditLandFileForm(form.Form):
     def updateWidgets(self, prefix=None):
         super(EditLandFileForm, self).updateWidgets(prefix)
 
+        # Needed to preserve the title of the landfile that will be modified.
         orig_title = self.widgets['orig_title']
         orig_title.mode = HIDDEN_MODE
         orig_title.value = self.request.get('form.widgets.orig_title')
+
+        # Hide the shortname so it isn't edited.
+        self.widgets['shortname'].mode = HIDDEN_MODE
 
         categories = self.widgets['fileCategories']
         categories.allow_insert = False
@@ -185,41 +200,49 @@ class EditLandFileForm(form.Form):
         messages = IStatusMessage(self.request)
         messages.add(u'Edited landfile: {}'.format(landfile.title))
 
-        return self.request.RESPONSE.redirect(self.context.absolute_url())
+        self.redirect_to_listing()
 
     @button.buttonAndHandler(u'Cancel')
     def handle_cancel(self, action):
-        return self.request.response.redirect(self.context.absolute_url())
+        self.redirect_to_listing()
 
 
-class DeleteLandFileForm(form.Form):
+class DeleteLandFileForm(EditLandFileForm):
+    label = 'Delete land file'
+    mode = DISPLAY_MODE
 
-    ignoreContext = True
+    def updateWidgets(self, prefix=None):
+        super(DeleteLandFileForm, self).updateWidgets(prefix)
 
-    def getContent(self):
-        title = self.context.get('title', None)
-        if title:
-            lfa = LandFileApi(self.context.landfiles)
-            landfile = lfa.get(title)
-            return landfile
-        else:
-            self.request.response.redirect(self.context.absolute_url())
+        # Needed to preserve the title of the landfile that will be modified.
+        orig_title = self.widgets['orig_title']
+        orig_title.mode = HIDDEN_MODE
+        orig_title.value = self.request.get('form.widgets.orig_title')
 
-    @button.buttonAndHandler(u'Update')
-    def handle_save(self, action):
+        # Hide the shortname so it isn't edited.
+        self.widgets['shortname'].mode = HIDDEN_MODE
+
+    @button.buttonAndHandler(u'Delete')
+    def handle_delete(self, action):
         data, errors = self.extractData()
         if errors:
             return
 
-        return self.request.RESPONSE.redirect(self.context.absolute_url())
+        title = data['orig_title']
+        lfa = LandFileApi(self.context.landfiles)
+        try:
+            lfa.delete(title)
+        except KeyError as err:
+            raise ActionExecutionError(Invalid(err.message))
+
+        messages = IStatusMessage(self.request)
+        messages.add(u'Deleted landfile: {}'.format(title))
+
+        self.redirect_to_listing()
 
     @button.buttonAndHandler(u'Cancel')
     def handle_cancel(self, action):
-        return self.request.response.redirect(self.context.absolute_url())
-
-    @property
-    def label(self):
-        return 'Edit land file - {}'.format('IDK!')
+        self.redirect_to_listing()
 
 
 AddLandFileFormView = layout.wrap_form(AddLandFileForm)
