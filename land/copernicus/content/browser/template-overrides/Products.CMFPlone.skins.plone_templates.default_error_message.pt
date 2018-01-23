@@ -187,13 +187,13 @@
 
             <script>
             window.addEventListener('load', function(){
-                function handleRouteError(err) {
+                function errorUserFeedback(err) {
                     Raven.captureException(err);
                     Raven.showReportDialog();
                 };
 
                 err = new Error(${python:'"{}"'.format(err_log_id) or ''});
-                handleRouteError(err);
+                errorUserFeedback(err);
             });
             </script>
 
