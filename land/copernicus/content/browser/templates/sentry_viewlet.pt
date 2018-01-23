@@ -1,4 +1,4 @@
-<tal:scripts>
+<tal:scripts condition="view/has_dsn">
     <script src="https://cdn.ravenjs.com/3.22.1/raven.min.js"
         crossorigin="anonymous"></script>
     <script type="text/javascript">
