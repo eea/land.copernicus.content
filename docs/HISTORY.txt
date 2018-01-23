@@ -6,6 +6,9 @@ Changelog
 * Feature: High performance land files.
   [batradav #90628]
 
+* Feature: Sentry logging
+  [boteziri #87458]
+
 3.4 - (2018-01-18)
 ------------------
 * Feature: Notify user on deleting his account.
