@@ -63,6 +63,28 @@
     permission="land.copernicus.content.download_landfile"
     />
 
+  <browser:page
+    for="land.copernicus.content.content.landitem.LandItem"
+    name="add-landfile"
+    class=".forms.AddLandFileFormView"
+    permission="cmf.ModifyPortalContent"
+    />
+
+  <browser:page
+    for="land.copernicus.content.content.landitem.LandItem"
+    name="edit-landfile"
+    class=".forms.EditLandFileFormView"
+    permission="cmf.ModifyPortalContent"
+    />
+
+  <browser:page
+    for="land.copernicus.content.content.landitem.LandItem"
+    name="delete-landfile"
+    class=".forms.DeleteLandfileFormView"
+    permission="cmf.ModifyPortalContent"
+    />
+
+
   <!-- <browser:page -->
   <!--   name="tpdb" -->
   <!--   class=".views.GoPDB" -->
@@ -88,6 +110,14 @@
     name="admin_land_files"
     for="land.copernicus.content.content.landitem.LandItem"
     class=".views.AdminLandFilesView"
+    permission="cmf.ManagePortal"
+    />
+
+  <browser:page
+    name="landfiles_content"
+    for="land.copernicus.content.content.landitem.LandItem"
+    class=".views.LandFilesContentView"
+    template="templates/landfiles_content.pt"
     permission="cmf.ManagePortal"
     />
 

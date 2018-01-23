@@ -206,30 +206,28 @@
               </thead>
 
               <tbody >
-                <tal:landfile repeat="item_brain view/landfiles">
-                  <tal:def tal:define="item python:item_brain.getObject();
-                                       item_id python:item.getId();
-                                       fileCategories python:view.categories(item)">
-                    <tr data-selected="${python:'true' if item_id in request.get('selected', []) else 'false'}" data-value="${item_id}">
+                <tal:landfile repeat="landfile view/landfiles">
+                  <tal:def tal:define="shortname python:landfile.shortname;
+                                       fileCategories python:dict(landfile.fileCategories)">
+                    <tr data-selected="${python:'true' if shortname in request.get('selected', []) else 'false'}" data-value="${shortname}">
                       <tal:download condition="can_download">
                         <td class="border-top-only" data-role="checkbox">
                           <input class="checkbox-select-item" type="checkbox" name="selected:list"
-                                 value="${item_id}" data-size="${python:view.translate_size(item)}"
+                                 value="${shortname}" data-size="${python:view.translate_size(landfile)}"
                           />
                         </td>
                       </tal:download>
 
-                      <td class="border-top-only" tal:content="item/Title"></td>
+                      <td class="border-top-only">${python:landfile.title}</td>
 
                       <tal:repeat repeat="catName catfields">
                         <td tal:define="value python:fileCategories.get(catName, '')" class="border-top-only">
-                          <span tal:content="python:value"
-                                tal:attributes="class python:value.lower().replace(' ', '-')">Value</span>
+                          <span class="${python:value.lower().replace(' ', '-')}">${value}</span>
                         </td>
                       </tal:repeat>
-                      <td class="border-top-only" tal:content="item/getFileSize">70.14 MB</td>
-                      <td tal:content="python:item.Description()"></td>
-                      <td>${item_id}</td>
+                      <td class="border-top-only">${python:landfile.fileSize}</td>
+                      <td>${python:landfile.description}</td>
+                      <td>${shortname}</td>
                     </tr>
                   </tal:def>
                 </tal:landfile>

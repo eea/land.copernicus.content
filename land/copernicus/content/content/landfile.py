@@ -1,6 +1,7 @@
 """ Land File: a shortcut to an FTP uploaded file
 """
 
+import persistent
 from Products.ATContentTypes.content.link import ATLink
 from Products.DataGridField import DataGridField
 from Products.DataGridField import DataGridWidget
@@ -8,14 +9,40 @@ from archetypes.schemaextender.field import ExtensionField
 from archetypes.schemaextender.interfaces import ISchemaExtender
 from land.copernicus.content.content import schema
 from land.copernicus.content.content.interfaces import ILandFile
-from zope.interface import implements
+from land.copernicus.content.content.interfaces import IPLandFile
+from plone.i18n.normalizer.interfaces import IURLNormalizer
+from zope.interface import implementer
+from zope.component import queryUtility
 
 
+@implementer(IPLandFile)
+class PLandFile(persistent.Persistent):
+    """ Lightweight implementation of LandFile,
+        inheriting only from persistent.Persistent,
+        the bare-minimum requirement for ZODB storage.
+    """
+    title = ''
+    description = ''
+    shortname = ''
+    remoteUrl = ''
+    _fileSize = 'N/A'
+    fileCategories = tuple()
+
+    def __init__(self, **fields):
+        for name, value in fields.items():
+            setattr(self, name, value)
+        if not self.shortname:
+            self.shortname = queryUtility(IURLNormalizer).normalize(self.title)
+
+    @property
+    def fileSize(self):
+        return getattr(self, '_fileSize', 'N/A')
+
+
+@implementer(ILandFile)
 class LandFile(ATLink):
     """ Land Link for a Land Product
     """
-
-    implements(ILandFile)
 
     meta_type = 'LandFile'
     portal_type = 'LandFile'
@@ -28,8 +55,8 @@ class ExtendedDataGridField(ExtensionField, DataGridField):
     """
 
 
+@implementer(ISchemaExtender)
 class SchemaExtender(object):
-    implements(ISchemaExtender)
 
     def __init__(self, context):
         self.context = context

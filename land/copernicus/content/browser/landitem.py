@@ -46,24 +46,11 @@ class LandItemView(BrowserView):
         return False
 
     def landfiles(self):
-        return self.context.getFolderContents(contentFilter=dict(
-            portal_type='LandFile',
-            review_state='published',
-        ))
+        return self.context.landfiles.values()
 
     @staticmethod
-    def categories(item):
-        field = item.getField('fileCategories')
-        categories = field.getAccessor(item)() or [{}]
-        return {
-            cat.get('name', ''): cat.get('value', '') for
-            cat in categories
-        }
-
-    @staticmethod
-    def translate_size(item):
-        field = item.getField('fileSize')
-        return _translate_size(field.getAccessor(item)())
+    def translate_size(landfile):
+        return _translate_size(landfile.fileSize)
 
     def tab(self):
         return self.request.get('tab', 'mapview')

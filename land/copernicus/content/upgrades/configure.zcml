@@ -38,4 +38,23 @@
         />
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+    source="2.5"
+    destination="3.0"
+    profile="land.copernicus.content:default">
+
+    <genericsetup:upgradeDepends
+        title="Update typeinfo"
+        description="Add Land files contents action on LandItem"
+        import_steps="typeinfo"
+        />
+
+    <genericsetup:upgradeStep
+      title="Migrate LandFile content to PLandFile"
+      description="Create landfiles OOBTrees on LandItem content types. Move LandFile content there, as PLandFile."
+      handler=".evolve30.run"
+      />
+
+  </genericsetup:upgradeSteps>
+
 </configure>
