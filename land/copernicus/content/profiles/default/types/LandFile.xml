@@ -9,7 +9,7 @@
  <property name="content_meta_type">LandFile</property>
  <property name="product">land.copernicus.content</property>
  <property name="factory">addLandFile</property>
- <property name="add_view_expr"></property>
+ <property name="add_view_expr">string:${folder_url}/add-landfile</property>
  <property name="link_target"></property>
  <property name="immediate_view">view</property>
  <property name="global_allow">True</property>
