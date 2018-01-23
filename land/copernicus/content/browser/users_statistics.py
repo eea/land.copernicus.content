@@ -215,30 +215,22 @@ def generate_users_statistics(site, time_periods=[]):
     mt = getToolByName(site, 'portal_membership')
     md = getToolByName(site, 'portal_memberdata')
 
-    all_members = [x for x in md._members.keys()]
+    _members = md._members
+    _properties = site['acl_users']['mutable_properties']._storage
+    _never_active = DateTime("2010/01/01")
 
-    for i in range(0, len(all_members)):
-        user_id = all_members[i]
-        print "{0}: {1}".format(i, user_id)
-        user_member_data = mt.getMemberById(user_id)
+    for idx, user_id in enumerate(_members.iterkeys()):
+        print "{0}: {1}".format(idx, user_id)
+        user_properties = _properties.get(user_id, dict())
+        user_member_data = _members.get(user_id)
 
         if user_member_data is not None:
-            user = user_member_data.getUser()
-
-            try:
-                active_last = user.getPropertysheet(
-                    'mutable_properties').getProperty('last_login_time')
-            except Exception:
-                active_last = None
-
-            try:
-                active_from = user_member_data.bobobase_modification_time()
-            except Exception:
-                active_from = None
+            active_last = user_properties.get('last_login_time')
+            active_from = user_member_data.bobobase_modification_time()
 
             was_active = True
             if active_last is not None and active_from is not None:
-                if active_last < DateTime("2010/01/01"):
+                if active_last < _never_active:
                     # NEVER USED
                     # A lot of accounts have 2000/01/01 as last login.
                     # This means the account was created but never used.
