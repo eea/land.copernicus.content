@@ -53,7 +53,6 @@ def fields_landfile(categories, landfile):
     return dict(
         title=landfile.title,
         description=landfile.description,
-        shortname=landfile.shortname,
         remoteUrl=landfile.remoteUrl,
         fileSize=landfile.fileSize,
         fileCategories=fileCategories,
@@ -133,7 +132,6 @@ class EditLandFileForm(BaseForm):
     fields = field.Fields(IFormSchema).select(
         'orig_title',
         'title',
-        'shortname',
         'description',
         'remoteUrl',
         'fileCategories',
@@ -149,9 +147,6 @@ class EditLandFileForm(BaseForm):
         orig_title = self.widgets['orig_title']
         orig_title.mode = HIDDEN_MODE
         orig_title.value = self.request.get('form.widgets.orig_title')
-
-        # Hide the shortname so it isn't edited.
-        self.widgets['shortname'].mode = HIDDEN_MODE
 
         categories = self.widgets['fileCategories']
         categories.allow_insert = False
@@ -184,7 +179,6 @@ class EditLandFileForm(BaseForm):
 
         props = dict(
             title=data['title'],
-            shortname=data['shortname'],
             description=data.get('description', ''),
             remoteUrl=data['remoteUrl'],
             fileCategories=tuple(

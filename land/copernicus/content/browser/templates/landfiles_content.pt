@@ -16,7 +16,7 @@
       <table class="listing">
         <thead>
           <tr>
-            <th>ID</th>
+            <th>Shortname</th>
             <th>Title</th>
             <th>Description</th>
             <th>URL</th>
