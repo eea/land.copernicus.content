@@ -187,13 +187,16 @@
 
             <script>
             window.addEventListener('load', function(){
-                function errorUserFeedback(err) {
-                    Raven.captureException(err);
-                    Raven.showReportDialog();
-                };
+                if(Raven)
+                {
+                    function errorUserFeedback(err) {
+                        Raven.captureException(err);
+                        Raven.showReportDialog();
+                    };
 
-                err = new Error(${python:'"{}"'.format(err_log_id) or ''});
-                errorUserFeedback(err);
+                    err = new Error(${python:'"{}"'.format(err_log_id) or ''});
+                    errorUserFeedback(err);
+                }
             });
             </script>
 
