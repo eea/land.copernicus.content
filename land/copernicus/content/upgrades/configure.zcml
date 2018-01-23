@@ -38,4 +38,15 @@
         />
   </genericsetup:upgradeSteps>
 
+   <genericsetup:upgradeSteps
+      source="2.10"
+      destination="2.11"
+      profile="land.copernicus.content:default">
+
+    <genericsetup:upgradeDepends
+      title="Sentry configuration viewlet"
+      import_steps="viewlets"
+      />
+  </genericsetup:upgradeSteps>
+
 </configure>
