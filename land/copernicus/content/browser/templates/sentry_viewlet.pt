@@ -1,0 +1,13 @@
+<tal:scripts define="dsn view/get_dsn"
+             condition="dsn">
+    <script src="https://cdn.ravenjs.com/3.22.1/raven.min.js"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        // because all scripts are defered
+        window.addEventListener('load', function(){
+          if(Raven) Raven.config('${dsn}').install();
+        })
+    </script>
+</tal:scripts>
+
+

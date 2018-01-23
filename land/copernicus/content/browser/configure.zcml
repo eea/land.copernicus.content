@@ -121,6 +121,16 @@
     permission="cmf.ManagePortal"
     />
 
+  <browser:viewlet
+    name="sentry.script"
+    for="*"
+    manager="plone.app.layout.viewlets.interfaces.IHtmlHead"
+    class=".viewlets.SentryViewlet"
+    template="templates/sentry_viewlet.pt"
+    layer="zope.interface.Interface"
+    permission="zope2.View"
+    />
+
   <browser:resource
     name="frozenEntrynoclick.js"
     file="frozenEntrynoclick.js"

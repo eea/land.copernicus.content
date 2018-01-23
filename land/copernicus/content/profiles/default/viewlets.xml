@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<object>
+    <order manager="plone.app.layout.viewlets.interfaces.IHtmlHead"
+           skinname="Copernicus Theme">
+        <viewlet name="sentry.script"/>
+    </order>
+</object>
