@@ -23,6 +23,9 @@ class LandItem(ATFolder):
 
     @property
     def landfiles(self):
+        """ OOBTree land file storage for faster operation.
+            Land file titles need to be unique, as they are used as keys.
+        """
         if self._landfiles is None:
             self._landfiles = BTrees.OOBTree.BTree()
         return self._landfiles

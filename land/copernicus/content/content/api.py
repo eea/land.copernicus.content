@@ -27,6 +27,10 @@ def edit_landfile(tree, old_title, **props):
 
 
 def edit_landfile_with_filesize(tree, old_title, **props):
+    # If we delete the landfile first and then call add_landfile_with_filesize
+    # (like edit_landfile); in the event of get_filesize raising an error,
+    # the entry will still get deleted and nothing will be added.
+    # That is why the file size is fetched first.
     props['_fileSize'] = get_filesize(props['remoteUrl'])
     return edit_landfile(tree, old_title, **props)
 
@@ -66,6 +70,9 @@ def get_filesize(remoteUrl):
 
 
 class LandFileApi(object):
+    """ Exposing basic operations for landfile OOBTree storage.
+        All edit operations are a combination of delete and add.
+    """
     def __init__(self, tree):
         self.tree = tree
 
