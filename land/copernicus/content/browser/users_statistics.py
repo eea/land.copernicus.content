@@ -375,6 +375,9 @@ class UsersStatisticsView(BrowserView):
         if 'refresh' in self.request.form:
             self.request.form = {}
 
+        if 'generate' in self.request.form:
+            users_statistics_operations_center(site)
+
         if 'remove' in self.request.form:
             remove_all_reports(site)
             self.request.form = {}
