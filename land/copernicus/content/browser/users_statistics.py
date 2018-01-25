@@ -212,7 +212,6 @@ def generate_users_statistics(site, time_periods=[]):
     for period in time_periods:
         res.append({'total': 0, 'active': 0, 'new': 0})
 
-    mt = getToolByName(site, 'portal_membership')
     md = getToolByName(site, 'portal_memberdata')
 
     _members = md._members
