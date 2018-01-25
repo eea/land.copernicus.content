@@ -1,11 +1,10 @@
 Changelog
 =========
 
-3.6.dev0 - (unreleased)
------------------------
+3.6 - (2018-01-25)
+------------------
 * Optimize users statistics scripts to skip LDAP.
   [batradav #90919]
-
 * Improve users statistics administration page.
   [GhitaB #90919]
 
@@ -13,7 +12,6 @@ Changelog
 ------------------
 * Feature: High performance land files.
   [batradav #90628]
-
 * Feature: Sentry logging
   [boteziri #87458]
 
