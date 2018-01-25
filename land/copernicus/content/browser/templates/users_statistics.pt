@@ -29,12 +29,8 @@
 
           If the info is missing you can schedule a report for needed time period.
 
-          After scheduling a report it will appear with 'pending' status until
-          our script generates the report. It will be available next day.
-          You can use Refresh button to get a fresh status of your reports.
-          But it is not needed to keep the page opened.
-          It's perfect to schedule multiple reports at once, this will save resources.
-          Scheduling a report for an existing period will override the existing report based on current data.
+          After scheduling a report it will appear with 'pending' status.
+          Use <em>Generate reports</em> button to solve pending reports.
         </p>
 
         <form method="post">
@@ -99,7 +95,7 @@
 
         <form method="post" class="pull-right">
           <button name="generate" type="submit" class="btn btn-danger">
-            Generate statistics
+            Generate reports
           </button>
         </form>
 
