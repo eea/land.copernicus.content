@@ -1,6 +1,9 @@
 Changelog
 =========
 
+3.7.dev0 - (unreleased)
+-----------------------
+
 3.6 - (2018-01-25)
 ------------------
 * Optimize users statistics scripts to skip LDAP.
