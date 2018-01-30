@@ -1,6 +1,9 @@
 Changelog
 =========
 
+3.8.dev0 - (unreleased)
+-----------------------
+
 3.7 - (2018-01-30)
 ------------------
 * Fix monthly reports values by including end date in report's period.
