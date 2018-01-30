@@ -3,6 +3,8 @@ Changelog
 
 3.7.dev0 - (unreleased)
 -----------------------
+* Fix monthly reports values by including end date in report's period.
+  [GhitaB #90919]
 
 3.6 - (2018-01-25)
 ------------------
