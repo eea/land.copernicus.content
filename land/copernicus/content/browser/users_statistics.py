@@ -237,7 +237,7 @@ def generate_users_statistics(site, time_periods=[]):
 
                 for j in range(0, len(time_periods)):
                     start_date = time_periods[j][0]
-                    end_date = time_periods[j][1]
+                    end_date = time_periods[j][1] + 1
 
                     if active_last >= start_date and \
                             active_from <= end_date and was_active:
