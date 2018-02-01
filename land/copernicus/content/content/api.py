@@ -47,7 +47,7 @@ def get_landfile_by_shortname(store, shortname):
 
 
 def get_landfile_by_prop(store, name, value):
-    for landfile in store.get_by_shortname(name, value):
+    for landfile in store.get_by_prop(name, value):
         yield landfile
 
 

@@ -59,18 +59,16 @@ class LandFileStore(persistent.Persistent):
 
         return landfile
 
-    def edit(self, old_title, landfile):
-        self.delete(old_title)
-        self.add(landfile)
-
     def delete(self, title):
-        hash_title = _long_hash(title)
-        landfile = _long_hash(hash_title)
+        tree, ids = self.tree, self.ids
 
+        hash_title = _long_hash(title)
+
+        landfile = tree[hash_title]
         hash_shortname = _long_hash(landfile.shortname)
 
-        del self.tree[hash_title]
-        del self.ids[hash_shortname]
+        del tree[hash_title]
+        del ids[hash_shortname]
 
     def get_by_title(self, title):
         hash_title = _long_hash(title)
