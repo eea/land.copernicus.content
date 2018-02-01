@@ -1,11 +1,12 @@
 """ Land content-types
 """
-import BTrees
+from zope.interface import implements
 
 from Products.ATContentTypes.content.folder import ATFolder
+
 from land.copernicus.content.content import schema
 from land.copernicus.content.content.interfaces import ILandItem
-from zope.interface import implements
+from land.copernicus.content.content.landfile import LandFileStore
 
 
 class LandItem(ATFolder):
@@ -19,13 +20,13 @@ class LandItem(ATFolder):
     archetype_name = 'LandItem'
     schema = schema.ITEM_SCHEMA
 
-    _landfiles = None
+    _landfiles = None  # type: LandFileStore
 
     @property
     def landfiles(self):
-        """ OOBTree land file storage for faster operation.
-            Land file titles need to be unique, as they are used as keys.
+        """ BTree land file storage for faster operation.
+            Title and shortnames need to be unique, as they are used as keys!
         """
         if self._landfiles is None:
-            self._landfiles = BTrees.OOBTree.BTree()
+            self._landfiles = LandFileStore()
         return self._landfiles

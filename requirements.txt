@@ -1,0 +1,18 @@
+--find-links https://eggrepo.eea.europa.eu/simple
+
+Plone
+Products.ATVocabularyManager
+Products.DataGridField
+Wand
+archetypes.schemaextender
+collective.z3cform.datagridfield
+eea.cache
+eea.forms
+eea.geotags
+eea.rdfmarshaller
+five.pt
+lxml
+plone.app.async
+plone.app.registry
+plone.stringinterp
+z3c.jbot
