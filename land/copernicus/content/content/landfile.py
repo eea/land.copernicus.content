@@ -31,6 +31,10 @@ SHIFT_63 = 9223372036854775808  # 2**63
 def _long_hash(hashable):
     """ Convert string to 64bit signed int.
         May create collisions some time after the universe dies.
+        (int % MOD_64) - SHIFT_63 is necessary in order to transform
+        the result into something that LLBTree will accept, since it
+        deals with signed longs and int(hexdigest) will always output
+        very large unsigned longs.
     """
     return (int(sha256(hashable).hexdigest(), 16) % MOD_64) - SHIFT_63
 
@@ -84,6 +88,13 @@ class LandFileStore(persistent.Persistent):
             if getattr(landfile, propname) == propvalue:
                 yield landfile
 
+    def get_all(self):
+        return self.tree.values()
+
+    def clear_all(self):
+        self.tree.clear()
+        self.ids.clear()
+
 
 @implementer(IPLandFile)
 class PLandFile(persistent.Persistent):
@@ -107,12 +118,6 @@ class PLandFile(persistent.Persistent):
     @property
     def fileSize(self):
         return getattr(self, '_fileSize', 'N/A')
-
-    def int_hash_title(self):
-        return _long_hash(self.title)
-
-    def int_hash_shortname(self):
-        return _long_hash(self.shortname)
 
 
 @implementer(ILandFile)

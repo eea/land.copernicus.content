@@ -1,28 +1,16 @@
 from time import time
-import os
 import pytest
-import string
-import random
 
 from land.copernicus.content.content.landfile import LandFileStore
 from land.copernicus.content.content.api import LandFileApi
 
-from land.copernicus.content.config import ENV_DL_SRC_PATH
 
-try:
-    os.makedirs(ENV_DL_SRC_PATH)
-except OSError:
-    pass
+from utils import make_temp_dir
+from utils import add_testfile
+from utils import rm_testfile
 
 
-def make_random_string(size):
-    return ''.join(random.choice(string.ascii_uppercase) for _ in range(size))
-
-
-def add_testfile(name, size):
-    path_testfile = os.path.join(ENV_DL_SRC_PATH, name)
-    with open(path_testfile, 'w') as testfile:
-        testfile.write(make_random_string(size))
+make_temp_dir()
 
 
 def test_api_add():
@@ -126,23 +114,26 @@ def test_api_add_edit_with_filesize():
             remoteUrl='http://localhost/testfile_missing'
         )
 
+    rm_testfile('testfile0')
+    rm_testfile('testfile1')
+
 
 def test_performance():
     store = LandFileStore()
     api = LandFileApi(store)
 
     t0 = time()
-    for num in range(1, 100001):
+    for num in range(1, 10001):
         title = str(num)
         api.add(title=title, shortname=title)
 
     tf0 = time() - t0
-    assert tf0 < 3
+    assert tf0 < 1
 
     t00 = time()
-    for num in range(1, 100001):
+    for num in range(1, 10001):
         title = str(num)
         api.delete(title=title)
 
     tf1 = time() - t00
-    assert tf1 < 1
+    assert tf1 < 0.1

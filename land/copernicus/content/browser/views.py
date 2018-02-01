@@ -211,6 +211,17 @@ class AdminLandFilesView(BrowserView):
                 details=details,
             ), type=ACTION_INFO)
 
+    def _do_get(self, landfile):
+        return dict(
+            status=ACTION_SUCCESS,
+            title=landfile.title,
+            id=landfile.shortname,
+            description=landfile.description,
+            download_url=landfile.remoteUrl,
+            categorization_tags=landfile.fileCategories,
+            size=landfile.fileSize,
+        )
+
     def do_get(self, title, logs=True):
         """ Get information about a landfile
             Input: landfile title
@@ -225,13 +236,7 @@ class AdminLandFilesView(BrowserView):
             'status': ACTION_ERROR
         }
         if landfile:
-            result['status'] = ACTION_SUCCESS
-            result['title'] = landfile.title
-            result['id'] = landfile.shortname
-            result['description'] = landfile.description
-            result['download_url'] = landfile.remoteUrl
-            result['categorization_tags'] = landfile.fileCategories
-            result['size'] = landfile.fileSize
+            result.update(self._do_get(landfile))
 
         if result['status'] == ACTION_SUCCESS and logs is True:
             self.show_info(title, ACTION_GET)
@@ -246,9 +251,9 @@ class AdminLandFilesView(BrowserView):
         """ Get information about all landfiles in this context
             Output: list of dicts containing landfiles details
         """
-        landfiles = self.context.landfiles
-        do_get = self.do_get
-        return [do_get(title) for title in landfiles]
+        landfiles = self.context.landfiles.get_all()
+        _do_get = self._do_get
+        return [_do_get(landfile) for landfile in landfiles]
 
     def do_post(self, title, description, download_url, categorization_tags,
                 logs=True):
@@ -313,9 +318,9 @@ class AdminLandFilesView(BrowserView):
         """ Delete all landfiles in this context
             Output: list of dicts containing title and status
         """
-        tree = self.context.landfiles
-        landfiles_titles = tuple(tree.keys())
-        tree.clear()
+        store = self.context.landfiles
+        landfiles_titles = [lf.title for lf in store.get_all()]
+        store.clear()
         if logs is True:
             for title in landfiles_titles:
                 self.show_info(title, ACTION_DELETE)
@@ -455,7 +460,7 @@ class LandFilesContentView(BrowserView):
 
     @property
     def landfiles(self):
-        return self.context.landfiles.values()
+        return self.context.landfiles.get_all()
 
     @staticmethod
     def relative_url(url):
