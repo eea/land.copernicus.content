@@ -320,7 +320,7 @@ class AdminLandFilesView(BrowserView):
         """
         store = self.context.landfiles
         landfiles_titles = [lf.title for lf in store.get_all()]
-        store.clear()
+        store.clear_all()
         if logs is True:
             for title in landfiles_titles:
                 self.show_info(title, ACTION_DELETE)
