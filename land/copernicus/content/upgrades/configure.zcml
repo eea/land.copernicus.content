@@ -67,4 +67,16 @@
       />
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+    source="3.0"
+    destination="3.1"
+    profile="land.copernicus.content:default">
+
+    <genericsetup:upgradeStep
+      title="Migrate to LandFileStore"
+      description="Move landfile OOBTree to LandFileStore structure that uses multiple BTrees for unique ids."
+      handler=".evolve31.run"
+      />
+  </genericsetup:upgradeSteps>
+
 </configure>

@@ -36,7 +36,8 @@ def _long_hash(hashable):
         deals with signed longs and int(hexdigest) will always output
         very large unsigned longs.
     """
-    return (int(sha256(hashable).hexdigest(), 16) % MOD_64) - SHIFT_63
+    encoded = hashable.encode('utf-8')  # sha256 expects str
+    return (int(sha256(encoded).hexdigest(), 16) % MOD_64) - SHIFT_63
 
 
 class LandFileStore(persistent.Persistent):

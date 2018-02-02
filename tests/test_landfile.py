@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 from time import time
 import pytest
 
@@ -44,6 +47,21 @@ def test_api_add():
 
     with pytest.raises(KeyError):
         api.add(title='Another title', shortname='a-title')
+
+
+def test_add_unicode():
+    store = LandFileStore()
+    api = LandFileApi(store)
+
+    title = u'ășđățăâß€ășđă€ăș€'
+
+    api.add(
+        title=title,
+        shortname='a-title',
+        description='desc'
+    )
+
+    assert api.get(title) is not None
 
 
 def test_api_edit():
