@@ -20,7 +20,7 @@ setup(
     author_email="webadmin@eea.europa.eu",
     url='http://github.com/eea/land.copernicus.content',
     license='GPL',
-    packages=find_packages(exclude=['ez_setup']),
+    packages=find_packages(exclude=['ez_setup', 'tests']),
     namespace_packages=['land', 'land.copernicus'],
     include_package_data=True,
     zip_safe=False,
@@ -36,12 +36,14 @@ setup(
         'eea.forms',
         'Products.ATVocabularyManager',
         'eea.cache',
+        'eea.geotags',
         'plone.app.async',
         'five.pt',
         'plone.stringinterp==1.0.14',  # needed for IContextWrapper in async
         'eea.rdfmarshaller>=10.5'
     ],
-
+    setup_requires=['pytest-runner'],
+    tests_require=['pytest'],
     entry_points="""
     # -*- Entry points: -*-
     [console_scripts]

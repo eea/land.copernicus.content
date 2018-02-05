@@ -18,33 +18,40 @@
           <tr>
             <th>Shortname</th>
             <th>Title</th>
-            <th>Description</th>
-            <th>URL</th>
             <th>Size</th>
-            <th>Categories</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr tal:repeat="landfile python:view.landfiles">
-            <td>${python:landfile.shortname}</td>
-            <td>${python:landfile.title}</td>
-            <td>${python:landfile.description}</td>
-            <td><a href="${python:landfile.remoteUrl}">${python:view.relative_url(landfile.remoteUrl)}</a></td>
-            <td>${python:landfile.fileSize}</td>
-            <td tal:define="categories python:landfile.fileCategories">
-              <dl tal:condition="categories">
-                <tal:categ tal:repeat="categ categories">
-                  <dt>${python:categ[0]}</dt>
-                  <dd>${python:categ[1]}</dd>
-                </tal:categ>
-              </dl>
-            </td>
-            <td>
-              <a href="${python:context.absolute_url()}/edit-landfile?form.widgets.orig_title=${python:landfile.title}">edit</a>
-              <a href="${python:context.absolute_url()}/delete-landfile?form.widgets.orig_title=${python:landfile.title}">delete</a>
-            </td>
-          </tr>
+          <tal:landfile repeat="landfile python:view.landfiles">
+            <tr>
+              <td>${python:landfile.shortname}</td>
+              <td>${python:landfile.title}</td>
+              <td>${python:landfile.fileSize}</td>
+              <td>
+                <a href="${python:context.absolute_url()}/edit-landfile?form.widgets.shortname=${python:landfile.shortname}">edit</a>
+                <a href="${python:context.absolute_url()}/delete-landfile?form.widgets.shortname=${python:landfile.shortname}">delete</a>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <dl>
+                  <dt>Description</dt>
+                  <dd>${python:landfile.description}</dd>
+                  <dt>URL</dt>
+                  <dd><a href="${python:landfile.remoteUrl}">${python:view.relative_url(landfile.remoteUrl)}</a></dd>
+                </dl>
+              </td>
+              <td colspan="2" tal:define="categories python:landfile.fileCategories">
+                <dl tal:condition="categories">
+                  <tal:categ tal:repeat="categ categories">
+                    <dt>${python:categ[0]}</dt>
+                    <dd>${python:categ[1]}</dd>
+                  </tal:categ>
+                </dl>
+              </td>
+            </tr>
+          </tal:landfile>
         </tbody>
       </table>
     </metal:main_macro>

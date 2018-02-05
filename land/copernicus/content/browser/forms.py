@@ -1,6 +1,5 @@
 from zope.interface import Interface
 from zope.interface import Invalid
-from zope.interface import implementer
 
 from zope import schema
 
@@ -32,9 +31,9 @@ class ITableRowSchema(Interface):
 
 
 class IFormSchema(IPLandFile):
-    orig_title = schema.TextLine(
-        title=u'Original title',
-        description=u'Used by the edit form to remember the title.'
+    shortname = schema.TextLine(
+        title=u'Shortname',
+        description=u'Used by the edit form to identify the land file.'
     )
     fileCategories = schema.List(
         title=u'Categorization of this file',
@@ -130,7 +129,7 @@ class EditLandFileForm(BaseForm):
     label = 'Edit land file'
 
     fields = field.Fields(IFormSchema).select(
-        'orig_title',
+        'shortname',
         'title',
         'description',
         'remoteUrl',
@@ -144,9 +143,9 @@ class EditLandFileForm(BaseForm):
         super(EditLandFileForm, self).updateWidgets(prefix)
 
         # Needed to preserve the title of the landfile that will be modified.
-        orig_title = self.widgets['orig_title']
-        orig_title.mode = HIDDEN_MODE
-        orig_title.value = self.request.get('form.widgets.orig_title')
+        shortname = self.widgets['shortname']
+        shortname.mode = HIDDEN_MODE
+        shortname.value = self.request.get('form.widgets.shortname')
 
         categories = self.widgets['fileCategories']
         categories.allow_insert = False
@@ -155,18 +154,18 @@ class EditLandFileForm(BaseForm):
         categories.auto_append = False
 
     def getContent(self):
-        title = self.request.get('form.widgets.orig_title', None)
+        shortname = self.request.get('form.widgets.shortname', None)
         content = dict()
-        if title:
+        if shortname:
             lfa = LandFileApi(self.context.landfiles)
             categories = self.context.getFileCategories() or []
-            landfile = lfa.get(title)
+            landfile = lfa.get_by_shortname(shortname)
             if landfile:
                 content = fields_landfile(categories, landfile)
             else:
                 messages = IStatusMessage(self.request)
                 messages.add(
-                    u'No landfile with title {}!'.format(title),
+                    u'No landfile with shortname {}!'.format(shortname),
                     type='error'
                 )
         return content
@@ -188,9 +187,9 @@ class EditLandFileForm(BaseForm):
         )
 
         lfa = LandFileApi(self.context.landfiles)
+        orig = lfa.get_by_shortname(data['shortname'])
         try:
-            landfile = lfa.edit_with_filesize(
-                data['orig_title'], **props)
+            landfile = lfa.edit_with_filesize(orig.title, **props)
         except (KeyError, OSError) as err:
             raise ActionExecutionError(Invalid(err.message))
 
@@ -212,9 +211,9 @@ class DeleteLandFileForm(EditLandFileForm):
         super(DeleteLandFileForm, self).updateWidgets(prefix)
 
         # Needed to preserve the title of the landfile that will be deleted.
-        orig_title = self.widgets['orig_title']
-        orig_title.mode = HIDDEN_MODE
-        orig_title.value = self.request.get('form.widgets.orig_title')
+        shortname = self.widgets['shortname']
+        shortname.mode = HIDDEN_MODE
+        shortname.value = self.request.get('form.widgets.shortname')
 
     @button.buttonAndHandler(u'Delete')
     def handle_delete(self, action):
@@ -222,8 +221,9 @@ class DeleteLandFileForm(EditLandFileForm):
         if errors:
             return
 
-        title = data['orig_title']
         lfa = LandFileApi(self.context.landfiles)
+        orig = lfa.get_by_shortname(data['shortname'])
+        title = orig.title
         try:
             lfa.delete(title)
         except KeyError as err:

@@ -304,7 +304,11 @@ def _size_of(paths):
 def _should_build(paths, existing):
     decision = False
 
-    if not paths.has_zip():
+    if not existing:
+        logger.info('All requested files are missing!')
+        decision = False
+
+    elif not paths.has_zip():
         logger.info('No .zip for hash: %s', paths.hash)
         decision = True
 
@@ -456,8 +460,7 @@ class DownloadAsyncView(BrowserView):
         # fetch items
         selected = selected or self.request.get('selected', [])
         lfa = LandFileApi(self.context.landfiles)
-        _landitem_fetcher = partial(lfa.get_by_prop, 'shortname')
-        items = tuple(chain(*map(_landitem_fetcher, selected)))
+        items = tuple(map(lfa.get_by_shortname, selected))
 
         # extract files and calculate hash
         filepaths = tuple(map(_filepath_from_url, map(GET_REMOTE_URL, items)))

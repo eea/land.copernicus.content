@@ -46,7 +46,7 @@ class LandItemView(BrowserView):
         return False
 
     def landfiles(self):
-        return self.context.landfiles.values()
+        return self.context.landfiles.get_all()
 
     @staticmethod
     def translate_size(landfile):

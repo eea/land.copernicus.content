@@ -8,3 +8,7 @@
 *.swp
 build/
 dist/
+.eggs/
+.pytest_cache/
+.tox/
+.testenv_downloads/

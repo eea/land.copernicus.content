@@ -1,18 +1,100 @@
 """ Land File: a shortcut to an FTP uploaded file
 """
 
+from hashlib import sha256
+
 import persistent
+
+from zope.interface import implementer
+from zope.component import queryUtility
+
+import BTrees
+
+from plone.i18n.normalizer.interfaces import IURLNormalizer
+
 from Products.ATContentTypes.content.link import ATLink
 from Products.DataGridField import DataGridField
 from Products.DataGridField import DataGridWidget
+
 from archetypes.schemaextender.field import ExtensionField
 from archetypes.schemaextender.interfaces import ISchemaExtender
+
 from land.copernicus.content.content import schema
 from land.copernicus.content.content.interfaces import ILandFile
 from land.copernicus.content.content.interfaces import IPLandFile
-from plone.i18n.normalizer.interfaces import IURLNormalizer
-from zope.interface import implementer
-from zope.component import queryUtility
+
+
+MOD_64 = 18446744073709551616  # 2**64
+SHIFT_63 = 9223372036854775808  # 2**63
+
+
+def _long_hash(hashable):
+    """ Convert string to 64bit signed int.
+        May create collisions some time after the universe dies.
+        (int % MOD_64) - SHIFT_63 is necessary in order to transform
+        the result into something that LLBTree will accept, since it
+        deals with signed longs and int(hexdigest) will always output
+        very large unsigned longs.
+    """
+    encoded = hashable.encode('utf-8')  # sha256 expects str
+    return (int(sha256(encoded).hexdigest(), 16) % MOD_64) - SHIFT_63
+
+
+class LandFileStore(persistent.Persistent):
+    tree = None  # type: BTree.LOBTree.BTree((long(title), PLandFile))
+    ids = None   # type: BTree.LLBTree.BTree((long(shortname), long(title))
+
+    def __init__(self):
+        self.tree = BTrees.LOBTree.BTree()
+        self.ids = BTrees.LLBTree.BTree()
+
+    def add(self, landfile):
+        tree, ids = self.tree, self.ids
+
+        hash_title = _long_hash(landfile.title)
+        hash_shortname = _long_hash(landfile.shortname)
+
+        if tree.get(hash_title):
+            raise KeyError('Land file with same title exists!')
+        if ids.get(hash_shortname):
+            raise KeyError('Land file with same shortname exists!')
+        else:
+            tree[hash_title] = landfile
+            ids[hash_shortname] = hash_title
+
+        return landfile
+
+    def delete(self, title):
+        tree, ids = self.tree, self.ids
+
+        hash_title = _long_hash(title)
+
+        landfile = tree[hash_title]
+        hash_shortname = _long_hash(landfile.shortname)
+
+        del tree[hash_title]
+        del ids[hash_shortname]
+
+    def get_by_title(self, title):
+        hash_title = _long_hash(title)
+        return self.tree.get(hash_title)
+
+    def get_by_shortname(self, shortname):
+        hash_shortname = _long_hash(shortname)
+        hash_title = self.ids.get(hash_shortname)
+        return self.tree.get(hash_title)
+
+    def get_by_prop(self, propname, propvalue):
+        for landfile in self.tree.values():
+            if getattr(landfile, propname) == propvalue:
+                yield landfile
+
+    def get_all(self):
+        return self.tree.values()
+
+    def clear_all(self):
+        self.tree.clear()
+        self.ids.clear()
 
 
 @implementer(IPLandFile)
