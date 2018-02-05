@@ -1,8 +1,10 @@
 Changelog
 =========
 
-3.8.dev0 - (unreleased)
------------------------
+3.8 - (2018-02-05)
+------------------
+* Feature: High performance land files - improvements and tests.
+  [batradav #90628]
 
 3.7 - (2018-01-30)
 ------------------
