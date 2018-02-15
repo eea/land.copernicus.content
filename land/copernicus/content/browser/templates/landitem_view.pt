@@ -54,7 +54,7 @@
       <tal:mapview-body define="html view/embed_iframe">
         <div class="mapview-field" style="border: 1px solid #BFD630; border-top: 0px;">
           <button class="fullscreen-map">
-            Full window
+            <i class="fa fa-expand"></i>
           </button>
           <div class="loading_message" tal:condition="view/has_iframe">
             <div id="squaresWaveG">
@@ -80,11 +80,14 @@
           <tal:service replace="structure html" />
           <script>
             $(document).on("ready", function() {
+              var icon_expand = "<i class='fa fa-expand'></i>";
+              var icon_retract = "<i class='fa fa-compress'>";
+
               function enter_fullscreen(iframe, btn) {
                 // Map View - maximize map iframe
                 $(iframe).addClass("fullscreen-iframe");
                 $("#header-section nav").hide();
-                $(btn).text("Return to default map view");
+                $(btn).html(icon_retract);
                 $(btn).addClass("on");
               }
 
@@ -92,7 +95,7 @@
                 // Map View - minimize map iframe
                 $(iframe).removeClass("fullscreen-iframe");
                 $("#header-section nav").show();
-                $(btn).text("Full window");
+                $(btn).html(icon_expand);
                 $(btn).removeClass("on");
               }
 

@@ -163,19 +163,14 @@
 body.template-landitem-view button.fullscreen-map.on {
   z-index: 1000;
   position: fixed;
-  margin: 0 auto;
-  left: 50%;
-  right: auto;
-  margin-left: -95px;
-  top: 7px;
+  right: 10px;
+  top: 10px;
 }
 
 body.template-landitem-view button.fullscreen-map {
-  margin: 0 auto;
   display: block;
   position: relative;
-  top: 3px;
-  right: 8px;
+  right: calc(25px - 100%);
   margin-bottom: -23px;
   background: transparent;
   border: none;
