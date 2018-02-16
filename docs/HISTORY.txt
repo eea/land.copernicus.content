@@ -1,10 +1,10 @@
 Changelog
 =========
 
-3.9 - (2018-02-15)
+3.9 - (2018-02-16)
 ------------------
 * Landitem view - icons for map fullscreen mode.
-+ [GhitaB refs #92986]
++ [GhitaB #92986]
 
 3.8 - (2018-02-05)
 ------------------
