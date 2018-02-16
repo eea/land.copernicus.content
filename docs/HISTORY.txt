@@ -1,8 +1,8 @@
 Changelog
 =========
 
-3.9.dev0 - (unreleased)
------------------------
+3.9 - (2018-02-16)
+------------------
 * Landitem view - icons for map fullscreen mode.
 + [GhitaB #92986]
 
