@@ -1,18 +1,23 @@
-from zope.component import getUtility
-from plone.app.users.userdataschema import IUserDataSchema
-from plone.app.users.userdataschema import IUserDataSchemaProvider
-from plone.app.users.browser.register import RegistrationForm
+from Products.CMFCore.interfaces import ISiteRoot
+from collective.captcha.form.field import Captcha
+from collective.captcha.form.widget import CaptchaWidget
+from land.copernicus.content.config import EEAMessageFactory as _
+from plone.app.controlpanel.widgets import MultiCheckBoxVocabularyWidget
 from plone.app.users.browser.personalpreferences import UserDataPanel
 from plone.app.users.browser.register import CantChoosePasswordWidget
-from Products.CMFCore.interfaces import ISiteRoot
-from plone.app.controlpanel.widgets import MultiCheckBoxVocabularyWidget
+from plone.app.users.browser.register import RegistrationForm
+from plone.app.users.userdataschema import IUserDataSchema
+from plone.app.users.userdataschema import IUserDataSchemaProvider
 from zope import schema
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.interface import implements
 from zope.browserpage import ViewPageTemplateFile
+from zope.component import getUtility
+from zope.formlib import form
 from zope.formlib.boolwidgets import CheckBoxWidget
-from land.copernicus.content.config import EEAMessageFactory as _
+from zope.interface import Interface
+from zope.interface import implements
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 import re
+
 
 professional_thematic_domain_options = SimpleVocabulary([
     # Keep alphabetical order here.
@@ -78,6 +83,12 @@ class DisclaimerWidget(CheckBoxWidget):
         return self.template()
 
 
+class ICaptchaSchema(Interface):
+    captcha = Captcha(
+        title=_(u'Verification'),
+    )
+
+
 class CopernicusRegistrationForm(RegistrationForm):
 
     @property
@@ -108,6 +119,16 @@ class CopernicusRegistrationForm(RegistrationForm):
         institutional_domain = defaultFields['institutional_domain']
         thematic_domain.custom_widget = MultiCheckBoxVocabularyWidget
         institutional_domain.custom_widget = MultiCheckBoxVocabularyWidget
+
+        # Add a captcha field to the schema
+        defaultFields += form.Fields(ICaptchaSchema)
+        defaultFields['captcha'].custom_widget = CaptchaWidget
+
+        # before the disclaimer
+        defaultFields = defaultFields.select(
+                'username', 'email', 'first_name', 'last_name',
+                'thematic_domain', 'institutional_domain',
+                'mail_me', 'captcha', 'disclaimer')
 
         return defaultFields
 
