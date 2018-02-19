@@ -3,6 +3,8 @@ Changelog
 
 4.0.dev0 - (unreleased)
 -----------------------
+* Feature: Add captcha field in register form.
+  [GhitaB #92752]
 * Register: override message template adding "Please ignore..." text.
   [GhitaB #92752]
 
