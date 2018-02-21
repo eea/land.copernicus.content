@@ -120,16 +120,15 @@ class CopernicusRegistrationForm(RegistrationForm):
         thematic_domain.custom_widget = MultiCheckBoxVocabularyWidget
         institutional_domain.custom_widget = MultiCheckBoxVocabularyWidget
 
-        # WIP TODO: fix validation problem
-        # # Add a captcha field to the schema
-        # defaultFields += form.Fields(ICaptchaSchema)
-        # defaultFields['captcha'].custom_widget = CaptchaWidget
-        #
-        # # before the disclaimer
-        # defaultFields = defaultFields.select(
-        #         'username', 'email', 'first_name', 'last_name',
-        #         'thematic_domain', 'institutional_domain',
-        #         'mail_me', 'captcha', 'disclaimer')
+        # Add a captcha field to the schema
+        defaultFields += form.Fields(ICaptchaSchema)
+        defaultFields['captcha'].custom_widget = CaptchaWidget
+
+        # before the disclaimer
+        defaultFields = defaultFields.select(
+                'username', 'email', 'first_name', 'last_name',
+                'thematic_domain', 'institutional_domain',
+                'mail_me', 'captcha', 'disclaimer')
 
         return defaultFields
 
