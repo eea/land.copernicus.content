@@ -164,21 +164,22 @@ body.template-landitem-view button.fullscreen-map.on {
   z-index: 1000;
   position: fixed;
   right: 10px;
-  top: 10px;
+  top: 6px;
 }
 
 body.template-landitem-view button.fullscreen-map {
+  top: -5px;
   display: block;
   position: relative;
   right: calc(25px - 100%);
-  margin-bottom: -23px;
+  margin-bottom: -29px;
   background: transparent;
   border: none;
   outline: none;
   color: #616161;
   font-weight: bold;
   font-family: Arial,FreeSans,sans-serif;
-  font-size: 13px;
+  font-size: 18px;
 }
 
 body.template-landitem-view .fullscreen-iframe {
