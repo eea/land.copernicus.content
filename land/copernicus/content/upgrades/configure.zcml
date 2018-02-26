@@ -79,4 +79,15 @@
       />
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+    source="3.1"
+    destination="3.2"
+    profile="land.copernicus.content:default">
+
+    <genericsetup:upgradeStep
+      title="Migrate Geographic Coverage field (eea.geotags format)."
+      description="Copy and transform value of geographicCoverage field into geographicCoverageGT."
+      handler=".evolve32.run"
+      />
+  </genericsetup:upgradeSteps>
 </configure>
