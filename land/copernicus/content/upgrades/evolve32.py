@@ -5,7 +5,7 @@ import logging
 
 logger = logging.getLogger('land.copernicus.content')
 
-templates = {
+COUNTRIES_DATA = {
     'Albania': {
         u'type': u'FeatureCollection',
         u'features': [{
@@ -2034,28 +2034,44 @@ templates = {
 }
 
 
-def generate_json(locations):
+def generate_data(locations):
     """ Input: locations - list of countries
-        Output: the json to be saved in annotations in eea.geotags format
+        Output: the data to be saved in annotations in eea.geotags format
     """
-    return {'locations': locations}
+    features = []
+    for location in locations:
+        country = COUNTRIES_DATA.get(location, None)
+        if country is not None:
+            features.append(country['features'][0])
+        else:
+            print "!!! Unknown location: {0}".format(location)
+
+    data = {
+        u'type': u'FeatureCollection',
+        u'features': features
+    }
+
+    if len(features) > 0:
+        return data
+    else:
+        return None
 
 
 def do_migration(landitem):
-    # tool = api.portal.get_tool('portal_languages')
-    # countries = dict(tool.listAvailableCountries())
+    tool = api.portal.get_tool('portal_languages')
+    countries = dict(tool.listAvailableCountries())
 
-    # locations = [
-    #     countries.get(t, t) for t in landitem.getGeographicCoverage()
-    # ]
+    locations = [
+        countries.get(t, t) for t in landitem.getGeographicCoverage()
+    ]
+
+    # if "test-landitem" in landitem.absolute_url():
+    #     locations = ['Austria', 'Albania']
+    #     anno = getattr(landitem, '__annotations__', {})
+    #     print anno.get('eea.geotags.tags')
+    #     data = generate_data(locations)
     #
-    # json_data = generate_json(locations)
-    # print json_data
-
-    if "test-landitem" in landitem.absolute_url():
-        anno = getattr(landitem, '__annotations__', {})
-        print anno.get('eea.geotags.tags')
-
+    #     import pdb; pdb.set_trace()
     # if "test-landitem" in landitem.absolute_url():
     #     locations = [
     #         countries.get(t, t) for t in landitem.getGeographicCoverage()
