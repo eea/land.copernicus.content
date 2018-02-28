@@ -2071,7 +2071,7 @@ def do_migration(landitem):
 
     if len(locations) > 0:
         geo = getAdapter(landitem, IGeoTags)
-        tags = generate_geotags(locations, landfile)
+        tags = generate_geotags(locations, landitem)
         if tags is not None:
             geo.tags = tags
             landitem.reindexObject()
