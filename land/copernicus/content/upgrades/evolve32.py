@@ -1,7 +1,8 @@
 from plone import api
 import logging
-# import transaction
-
+import transaction
+from zope.component import getAdapter
+from eea.geotags.interfaces import IGeoTags
 
 logger = logging.getLogger('land.copernicus.content')
 
@@ -2034,7 +2035,7 @@ COUNTRIES_DATA = {
 }
 
 
-def generate_data(locations):
+def generate_geotags(locations, landfile):
     """ Input: locations - list of countries
         Output: the data to be saved in annotations in eea.geotags format
     """
@@ -2044,7 +2045,7 @@ def generate_data(locations):
         if country is not None:
             features.append(country['features'][0])
         else:
-            print "!!! Unknown location: {0}".format(location)
+            logger.info("Unknown location: {0}!".format(location))
 
     data = {
         u'type': u'FeatureCollection',
@@ -2058,6 +2059,9 @@ def generate_data(locations):
 
 
 def do_migration(landitem):
+    """ - Get information from geographicCoverage field (a list of countries)
+        - Save country geotags in geographicCoverageGT field
+    """
     tool = api.portal.get_tool('portal_languages')
     countries = dict(tool.listAvailableCountries())
 
@@ -2065,32 +2069,21 @@ def do_migration(landitem):
         countries.get(t, t) for t in landitem.getGeographicCoverage()
     ]
 
-    # if "test-landitem" in landitem.absolute_url():
-    #     locations = ['Austria', 'Albania']
-    #     anno = getattr(landitem, '__annotations__', {})
-    #     print anno.get('eea.geotags.tags')
-    #     data = generate_data(locations)
-    #
-    #     import pdb; pdb.set_trace()
-    # if "test-landitem" in landitem.absolute_url():
-    #     locations = [
-    #         countries.get(t, t) for t in landitem.getGeographicCoverage()
-    #     ]
-    #
-    #     import pdb; pdb.set_trace()
-    #     locations = ['Bulgaria', 'Romania']
-    #     # landitem.geographicCoverageGT = locations
-    #     landitem.getField('geographicCoverageGT').set(landitem, locations)
-    #     landitem.reindexObject()
-    #     transaction.commit()
-
-    # print "WIP getGeographicCoverage -> getGeographicCoverageGT"
+    if len(locations) > 0:
+        geo = getAdapter(landitem, IGeoTags)
+        tags = generate_geotags(locations)
+        if tags is not None:
+            geo.tags = tags
+            landitem.reindexObject()
+            transaction.commit()
+        else:
+            logger.info("No tags.")
 
 
 def run(_):
     catalog = api.portal.get_tool(name='portal_catalog')
     landitems = [b.getObject() for b in catalog(portal_type='LandItem')]
     for landitem in landitems:
-        # logger.info('Migrating: %s!', landitem.absolute_url(1))
+        logger.info('Migrating: %s!', landitem.absolute_url(1))
         do_migration(landitem)
-        # logger.info('Success: %s!', landitem.absolute_url(1))
+        logger.info('Success: %s!', landitem.absolute_url(1))
