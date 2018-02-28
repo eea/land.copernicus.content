@@ -3,11 +3,14 @@ Changelog
 
 4.0.dev0 - (unreleased)
 -----------------------
+* Feature: Use eea.geotags field for landitems. Initialize field value with
+  existing selected countries geographic coverage.
+  [GhitaB #90603]
 * Feature: Add captcha field in register form.
   [GhitaB #92752]
-* Register: override message template adding "Please ignore..." text.
+* Feature: Register - override message template adding "Please ignore..." text.
   [GhitaB #92752]
-* Landitem view - larger icons for map fullscreen mode.
+* Fix: Landitem view - larger icons for map fullscreen mode.
   [GhitaB #92986]
 
 3.9 - (2018-02-16)
