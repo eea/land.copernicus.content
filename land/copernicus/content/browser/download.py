@@ -12,7 +12,6 @@ from functools import wraps
 from collections import namedtuple
 from collections import deque
 from operator import attrgetter
-from operator import itemgetter
 from itertools import chain
 from itertools import dropwhile
 from itertools import imap as map
@@ -497,12 +496,13 @@ class DownloadAsyncView(BrowserView):
         _joiner = partial(os.path.join, SRC_PATH)
         src_paths = filter(os.path.isfile, map(_joiner, metadata.filepaths))
         target = sum(map(os.path.getsize, src_paths))
-        size = os.path.getsize(paths.zip)
+        size = os.path.getsize(paths.zip) if os.path.isfile(paths.zip) else 0
 
         result = dict(
             target=target,
             cur=size,
-            proc=100 if paths.has_done() else size * 100 / target
+            proc=100 if paths.has_done() else (
+                size * 100 / target if target else 0)
         )
 
         return json.dumps(result)
