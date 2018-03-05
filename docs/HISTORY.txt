@@ -12,6 +12,10 @@ Changelog
   [GhitaB #92752]
 * Fix: Landitem view - larger icons for map fullscreen mode.
   [GhitaB #92986]
+* Fix: Multiple log errors regarding async land file downloads
+  [batradav #93407]
+* Fix: N/A Size for recently uploaded land files
+  [batradav #92039]
 
 3.9 - (2018-02-16)
 ------------------
