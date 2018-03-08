@@ -12,7 +12,6 @@ from functools import wraps
 from collections import namedtuple
 from collections import deque
 from operator import attrgetter
-from operator import itemgetter
 from itertools import chain
 from itertools import dropwhile
 from itertools import imap as map
@@ -191,6 +190,10 @@ def _append_ext(path, ext):
     return '{}.{}'.format(path, ext)
 
 
+def _build_path_metadata(base, file_hash):
+    return _append_ext(os.path.join(base, file_hash), 'metadata')
+
+
 class JobPaths(namedtuple('_JobPaths', ['base_dst', 'hash'])):
 
     @property
@@ -297,6 +300,21 @@ def _update_metadata(existing, metadata):
     return (existing and _merge_metadata(existing, metadata)) or metadata
 
 
+def _create_update_metadata(base_path, file_hash, metadata):
+    """ Create/update metadata file.
+        Not using _delayed_read_metadata on purpose! This
+        function is in charge of creating the metadata.
+    """
+    _path_metadata = _build_path_metadata(base_path, file_hash)
+    _write_metadata(
+        _path_metadata,
+        _update_metadata(
+            _read_metadata(_path_metadata),
+            metadata
+        )
+    )
+
+
 def _size_of(paths):
     return sum(map(os.path.getsize, paths))
 
@@ -361,17 +379,6 @@ def _should_build(paths, existing):
 
 def _download_executor(context, job):
     paths = JobPaths(job.dst, job.meta.hash)
-
-    # Create/update metadata file.
-    # Not using _delayed_read_metadata on purpose! This
-    # function is in charge of creating the metadata.
-    _write_metadata(
-        paths.metadata,
-        _update_metadata(
-            _read_metadata(paths.metadata),
-            job.meta
-        )
-    )
 
     _joiner = partial(os.path.join, job.src)
     src_paths = tuple(map(_joiner, job.meta.filepaths))
@@ -472,6 +479,11 @@ class DownloadAsyncView(BrowserView):
         exp_time = _time_from_date(datetime.now() + timedelta(days=1))
         metadata = Metadata(file_hash, filepaths, exp_time, [userid])
 
+        # Create / update metadata before starting the job, this should avoid
+        # read delays for views as the metadata should be created regardless
+        # of worker thread load.
+        _create_update_metadata(DST_PATH, file_hash, metadata)
+
         # Start async job
         _queue_download(self.context, metadata)
 
@@ -497,12 +509,13 @@ class DownloadAsyncView(BrowserView):
         _joiner = partial(os.path.join, SRC_PATH)
         src_paths = filter(os.path.isfile, map(_joiner, metadata.filepaths))
         target = sum(map(os.path.getsize, src_paths))
-        size = os.path.getsize(paths.zip)
+        size = os.path.getsize(paths.zip) if os.path.isfile(paths.zip) else 0
 
         result = dict(
             target=target,
             cur=size,
-            proc=100 if paths.has_done() else size * 100 / target
+            proc=100 if paths.has_done() else (
+                size * 100 / target if target else 0)
         )
 
         return json.dumps(result)

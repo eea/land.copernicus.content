@@ -90,4 +90,16 @@
       handler=".evolve32.run"
       />
   </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+    source="3.2"
+    destination="3.3"
+    profile="land.copernicus.content:default">
+
+    <genericsetup:upgradeStep
+      title="Update file size for land files."
+      description="[refs #92039] Go trough land files and update the file size from disk."
+      handler=".evolve33.run"
+      />
+  </genericsetup:upgradeSteps>
 </configure>

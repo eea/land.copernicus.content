@@ -1,8 +1,11 @@
 Changelog
 =========
 
-4.0.dev0 - (unreleased)
+4.1.dev0 - (unreleased)
 -----------------------
+
+4.0 - (2018-03-06)
+------------------
 * Feature: Use eea.geotags field for landitems. Initialize field value with
   existing selected countries geographic coverage.
   [GhitaB #90603]
@@ -12,6 +15,10 @@ Changelog
   [GhitaB #92752]
 * Fix: Landitem view - larger icons for map fullscreen mode.
   [GhitaB #92986]
+* Fix: Multiple log errors regarding async land file downloads
+  [batradav #93407]
+* Fix: N/A Size for recently uploaded land files
+  [batradav #92039]
 
 3.9 - (2018-02-16)
 ------------------
