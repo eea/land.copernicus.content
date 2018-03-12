@@ -10,6 +10,7 @@
   dataCustodians_value python:context.getField('dataCustodians').getAccessor(context)();
   descriptionDM_value python:context.getField('descriptionDetailedMetadata').getAccessor(context)();
   accessAUC_value python:context.getField('accessAndUseConstraints').getAccessor(context)();
+  geographicCoverageGT_value python:context.getField('geographicCoverageGT').getAccessor(context)();
 
   has_metadata_details python:geographicAccuracy_value or tags_value or rights_value or coordinateRS_value or dataSources_value or owners_value or dataCustodians_value or descriptionDM_value or accessAUC_value;
 
@@ -161,6 +162,20 @@
         </dt>
         <dd >
           <span tal:content="view/get_countries_coverage" />
+        </dd>
+      </tal:block>
+
+      <!-- Geotags -->
+      <tal:block
+        define="field python:context.getField('geographicCoverageGT');
+        value python:field.getAccessor(context)()"
+        condition="value">
+        <dt style="clear: left">
+          <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
+          <span i18n:translate="">Geotags:</span>
+        </dt>
+        <dd >
+          <span tal:content="python:value" />
         </dd>
       </tal:block>
 
