@@ -75,3 +75,10 @@ class ProductInlineView(BrowserView):
             countries.get(t, t)
             for t in self.context.getGeographicCoverage()
         ])
+
+    def get_geotags(self):
+        """ Return geotags
+        """
+        field = self.context.getField('geographicCoverageGT')
+        value = field.getAccessor(self.context)()
+        return u", ".join(value)

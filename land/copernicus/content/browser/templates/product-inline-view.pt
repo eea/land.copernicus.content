@@ -175,7 +175,7 @@
           <span i18n:translate="">Geotags:</span>
         </dt>
         <dd >
-          <span tal:content="python:value" />
+          <span tal:content="view/get_geotags" />
         </dd>
       </tal:block>
 
