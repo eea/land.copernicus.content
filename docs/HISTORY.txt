@@ -1,6 +1,9 @@
 Changelog
 =========
 
+4.3.dev0 - (unreleased)
+-----------------------
+
 4.2 - (2018-03-13)
 ------------------
 * Improve: display geotags in metadata tab of landitem view.
