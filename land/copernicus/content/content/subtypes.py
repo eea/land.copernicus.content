@@ -142,7 +142,7 @@ class ATBlobModifier(object):
                 label=_("Generate cover automatically."),
                 description=_(
                      "Select this to create a cover image based "
-                     "on the uplodaded file. Only available for "
+                     "on the uploaded file. Only available for "
                      "PDF files."
                 )
             )
