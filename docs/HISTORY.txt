@@ -3,6 +3,8 @@ Changelog
 
 4.3.dev0 - (unreleased)
 -----------------------
+* Fix typo in field description.
+  [GhitaB refs #92357]
 
 4.2 - (2018-03-13)
 ------------------
