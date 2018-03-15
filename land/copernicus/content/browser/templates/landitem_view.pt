@@ -129,11 +129,13 @@
             (function(){
               window.addEventListener('load', function(){
                 var iframe = document.querySelector('[data-role="iframe"]');
-                iframe.setAttribute('src', iframe.getAttribute('data-src'));
-                iframe.addEventListener('load', function(){
-                  var loading = document.querySelector('.loading_message');
-                  loading.parentNode.removeChild(loading);
-                });
+                if(iframe) {
+                  iframe.setAttribute('src', iframe.getAttribute('data-src'));
+                  iframe.addEventListener('load', function(){
+                    var loading = document.querySelector('.loading_message');
+                    loading.parentNode.removeChild(loading);
+                  });
+                }
               })
             })();
           </script>
