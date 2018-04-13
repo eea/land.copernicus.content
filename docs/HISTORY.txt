@@ -3,6 +3,8 @@ Changelog
 
 4.3.dev0 - (unreleased)
 -----------------------
+* Improve: landitem view - use Download tab as default when map view is empty.
+  [GhitaB #94690]
 * Fix typo in field description.
   [GhitaB #92357]
 * Fix js error in landitem view when map is missing.
