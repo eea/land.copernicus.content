@@ -32,7 +32,7 @@ IFRAME_HEIGHT = "450"
 # Other consts here ===========================================================
 
 MAX_NUMBER_NEWS = 3
-MAX_NUMBER_EVENTS = 2
+MAX_NUMBER_EVENTS = 3
 
 
 def ENVPATH(name, default=None):
