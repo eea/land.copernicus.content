@@ -1,21 +1,17 @@
-import re
-import json
-import subprocess
-from urlparse import urlparse
-
-from zope.component import getMultiAdapter
-from zope.component.hooks import getSite
-
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.PloneBatch import Batch
 from Products.CMFPlone.utils import safe_unicode
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
-
-import plone.api as api
-
 from land.copernicus.content.content.api import LandFileApi
+from urlparse import urlparse
+from zope.component import getMultiAdapter
+from zope.component.hooks import getSite
+import json
+import plone.api as api
+import re
+import subprocess
 
 
 def is_EIONET_member(member):
