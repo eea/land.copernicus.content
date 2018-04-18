@@ -4,6 +4,7 @@ Changelog
 4.3.dev0 - (unreleased)
 -----------------------
 * Improve: landitem view - use Download tab as default when map view is empty.
+* Improve: homepage layout, add news carousel.
   [GhitaB #94690]
 * Fix typo in field description.
   [GhitaB #92357]
