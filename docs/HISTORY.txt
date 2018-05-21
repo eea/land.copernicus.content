@@ -3,6 +3,8 @@ Changelog
 
 4.4.dev0 - (unreleased)
 -----------------------
+* Improve: homepage - show 4 news instead of 3.
+  [GhitaB #95161]
 * Fix: add validation in Register for domains (at least one checked).
   [GhitaB #95169]
 * Fix: solve error for non-ascii chars in geotags (metadata tab of landitems).
