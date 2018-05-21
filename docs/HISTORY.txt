@@ -3,6 +3,8 @@ Changelog
 
 4.4.dev0 - (unreleased)
 -----------------------
+* Fix: add validation in Register for domains (at least one checked).
+  [GhitaB #95169]
 
 4.3 - (2018-04-18)
 ------------------
