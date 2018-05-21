@@ -65,6 +65,12 @@ def validateAccept(value):
     return True
 
 
+def at_least_one_checked(value):
+    if len(value) == 0:
+        return False
+    return True
+
+
 def validate_phone(value):
     phone_re = re.compile(r'(\d{3})\D*(\d{3})\D*(\d{4})\D*(\d*)$', re.VERBOSE)
     if phone_re.match(value):
@@ -191,12 +197,18 @@ class IEnhancedUserDataSchema(IUserDataSchema):
         title=_(u'label_thematic_domain',
                 default=u'Professional thematic domain'),
         value_type=schema.Choice(
-            vocabulary=professional_thematic_domain_options))
+            vocabulary=professional_thematic_domain_options),
+        required=True,
+        constraint=at_least_one_checked
+    )
 
     institutional_domain = schema.List(
         title=_(u'label_institutional_domain',
                 default=u'Institutional domain'),
-        value_type=schema.Choice(vocabulary=institutional_domain_options))
+        value_type=schema.Choice(vocabulary=institutional_domain_options),
+        required=True,
+        constraint=at_least_one_checked
+    )
 
     reason = schema.TextLine(
         title=_(u'label_reason', default=u'Reason to create the account'),
