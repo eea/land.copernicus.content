@@ -5,6 +5,8 @@ Changelog
 -----------------------
 * Fix: add validation in Register for domains (at least one checked).
   [GhitaB #95169]
+* Fix: solve error for non-ascii chars in metadata tab of landitems.
+  [GhitaB #94900]
 
 4.3 - (2018-04-18)
 ------------------

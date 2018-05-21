@@ -84,4 +84,4 @@ class ProductInlineView(BrowserView):
         """
         field = self.context.getField('geographicCoverageGT')
         value = field.getAccessor(self.context)()
-        return u", ".join(value)
+        return u", ".join(x.decode('utf-8') for x in value)
