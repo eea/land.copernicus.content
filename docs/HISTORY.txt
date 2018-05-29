@@ -3,6 +3,8 @@ Changelog
 
 4.5.dev0 - (unreleased)
 -----------------------
+* Fix: Prevent error when uploaded file is empty in Admin land files.
+  [GhitaB #95890]
 
 4.4 - (2018-05-22)
 ------------------
