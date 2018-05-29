@@ -375,6 +375,13 @@ class AdminLandFilesView(BrowserView):
                 txt_decoded = txt_content.decode('latin1')
             txt_decoded = txt_decoded or safe_unicode(txt_content)
             lines = txt_decoded.splitlines()
+
+            if len(lines) == 0:
+                result = {}
+                self.show_error(
+                    action, ACTION_EVALUATE, " - the uploaded file is empty.")
+                return result
+
             if action == ACTION_GET:
                 # GET info for a list of landfiles
                 output_json = []
