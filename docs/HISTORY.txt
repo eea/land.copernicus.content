@@ -5,6 +5,8 @@ Changelog
 -----------------------
 * Fix: Prevent error when uploaded file is empty in Admin land files.
   [GhitaB #95890]
+* Fix: Prevent non-ascii error in user profile information form.
+  [GhitaB #95900]
 
 4.4 - (2018-05-22)
 ------------------
