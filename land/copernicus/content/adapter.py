@@ -6,7 +6,7 @@ class EnhancedUserDataPanelAdapter(UserDataPanelAdapter):
     """
     def get_first_name(self):
         first_name = self.context.getProperty('first_name', '')
-        return first_name
+        return first_name.decode('utf-8')
 
     def set_first_name(self, value):
         first_name = value
@@ -15,7 +15,7 @@ class EnhancedUserDataPanelAdapter(UserDataPanelAdapter):
 
     def get_last_name(self):
         last_name = self.context.getProperty('last_name', '')
-        return last_name
+        return last_name.decode('utf-8')
 
     def set_last_name(self, value):
         last_name = value
