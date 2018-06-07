@@ -468,3 +468,22 @@ class LandFilesContentView(BrowserView):
     @staticmethod
     def relative_url(url):
         return urlparse(url).path
+
+
+class ResourceResponseHeadersFixerView(BrowserView):
+    """ With /resource_rhf?resource=FontAwesome.eot&params=oavxt5#iefix
+        - get the resource font from
+        /++resource++land.copernicus.theme/fonts/FontAwesome.eot?oavxt5#iefix
+        - return it with fixed response headers:
+
+            Get rid of Pragma cache
+            Fix Cache-Control to be not no-cache
+
+        instead of not working
+            - Pragma: no-cache
+            - Cache-Control: no-cache, max-age=0, must-revalidate
+
+        in order to fix bug on IE [refs #95088]
+    """
+    def __call__(self):
+        return "WIP"
