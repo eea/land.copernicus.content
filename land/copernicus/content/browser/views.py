@@ -498,13 +498,13 @@ class ResourceResponseHeadersFixerView(BrowserView):
         if font is None:
             return None
 
-        if params is not None:
-            font_url = "{0}{1}?{2}".format(FONTS_PATH, font, params)
-        else:
-            font_url = "{0}{1}".format(FONTS_PATH, font)
+        site = self.context.absolute_url()
 
-        return font_url
-        # [TODO]
-        # get file
-        # set rensponse headers
-        # return file
+        if params is not None:
+            font_url = "{0}{1}{2}?{3}".format(site, FONTS_PATH, font, params)
+        else:
+            font_url = "{0}{1}{2}".format(site, FONTS_PATH, font)
+
+        # [TODO] It seems the response headers are already solved. True?
+
+        return self.request.response.redirect(font_url)
