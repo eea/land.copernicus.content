@@ -486,4 +486,25 @@ class ResourceResponseHeadersFixerView(BrowserView):
         in order to fix bug on IE [refs #95088]
     """
     def __call__(self):
-        return "WIP"
+        FONT_NAME = "FontAwesome"
+        FONTS_PATH = "/++resource++land.copernicus.theme/fonts/"
+
+        if FONT_NAME not in self.request.QUERY_STRING:
+            return None
+
+        font = self.request.get('resource', None)
+        params = self.request.get('params', None)
+
+        if font is None:
+            return None
+
+        if params is not None:
+            font_url = "{0}{1}?{2}".format(FONTS_PATH, font, params)
+        else:
+            font_url = "{0}{1}".format(FONTS_PATH, font)
+
+        return font_url
+        # [TODO]
+        # get file
+        # set rensponse headers
+        # return file
