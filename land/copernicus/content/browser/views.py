@@ -505,6 +505,28 @@ class ResourceResponseHeadersFixerView(BrowserView):
         else:
             font_url = "{0}{1}{2}".format(site, FONTS_PATH, font)
 
-        # [TODO] It seems the response headers are already solved. True?
+        if params is not None:
+            aa_url = "{0}{1}?{2}".format(FONTS_PATH, font, params)
+        else:
+            aa_url = "{0}{1}".format(FONTS_PATH, font)
+
+        bb_url = "{0}{1}".format(FONTS_PATH, font)
+
+        font_file = self.context.restrictedTraverse(bb_url)
+
+        # [TODO] WIP
+        # self.request.response.setHeader("Pragma", "no-cache")
+        # import pdb; pdb.set_trace()
+
+        # (Pdb) font_file
+        # <Products.Five.browser.resource.FileResource object at 0x7f796e3779d0>
+        # (Pdb) font_file.chooseContext()
+        # <zope.browserresource.file.File object at 0x7f796da48310>
+        # (Pdb) font_file.chooseContext().path
+        # u'/plone/instance/src/land.copernicus.theme/land/copernicus/theme/browser/theme/fonts/FontAwesome.ttf'
+        # (Pdb) font_file.index_html()
+        # *** AttributeError: 'FileResource' object has no attribute 'index_html'
+        # (Pdb) font_file.chooseContext().index_html()
+        # *** AttributeError: 'File' object has no attribute 'index_html'
 
         return self.request.response.redirect(font_url)
