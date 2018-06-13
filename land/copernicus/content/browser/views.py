@@ -5,6 +5,7 @@ from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
 from land.copernicus.content.content.api import LandFileApi
+from pkg_resources import resource_filename
 from urlparse import urlparse
 from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
@@ -487,46 +488,19 @@ class ResourceResponseHeadersFixerView(BrowserView):
     """
     def __call__(self):
         FONT_NAME = "FontAwesome"
-        FONTS_PATH = "/++resource++land.copernicus.theme/fonts/"
+        FONTS_PATH = "browser/theme/fonts/"
 
         if FONT_NAME not in self.request.QUERY_STRING:
             return None
 
         font = self.request.get('resource', None)
-        params = self.request.get('params', None)
 
         if font is None:
             return None
 
-        site = self.context.absolute_url()
+        font_path = "{0}{1}".format(FONTS_PATH, font)
 
-        if params is not None:
-            font_url = "{0}{1}{2}?{3}".format(site, FONTS_PATH, font, params)
-        else:
-            font_url = "{0}{1}{2}".format(site, FONTS_PATH, font)
+        font_file = resource_filename('land.copernicus.theme', font_path)
 
-        if params is not None:
-            aa_url = "{0}{1}?{2}".format(FONTS_PATH, font, params)
-        else:
-            aa_url = "{0}{1}".format(FONTS_PATH, font)
-
-        bb_url = "{0}{1}".format(FONTS_PATH, font)
-
-        font_file = self.context.restrictedTraverse(bb_url)
-
-        # [TODO] WIP
-        # self.request.response.setHeader("Pragma", "no-cache")
-        # import pdb; pdb.set_trace()
-
-        # (Pdb) font_file
-        # <Products.Five.browser.resource.FileResource object at 0x7f796e3779d0>
-        # (Pdb) font_file.chooseContext()
-        # <zope.browserresource.file.File object at 0x7f796da48310>
-        # (Pdb) font_file.chooseContext().path
-        # u'/plone/instance/src/land.copernicus.theme/land/copernicus/theme/browser/theme/fonts/FontAwesome.ttf'
-        # (Pdb) font_file.index_html()
-        # *** AttributeError: 'FileResource' object has no attribute 'index_html'
-        # (Pdb) font_file.chooseContext().index_html()
-        # *** AttributeError: 'File' object has no attribute 'index_html'
-
-        return self.request.response.redirect(font_url)
+        with open(font_file, 'rb') as f:
+            return "WIP"
