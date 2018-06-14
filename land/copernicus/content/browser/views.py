@@ -10,6 +10,7 @@ from urlparse import urlparse
 from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
 import json
+import os
 import plone.api as api
 import re
 import subprocess
@@ -502,5 +503,18 @@ class ResourceResponseHeadersFixerView(BrowserView):
 
         font_file = resource_filename('land.copernicus.theme', font_path)
 
+        if 'ttf' in font:
+            content_type = "font/truetype"
+        elif 'woff' in font:
+            content_type = "font/woff2"
+        else:
+            content_type = "WIP [TODO]"
+
+        RESPONSE = self.request.RESPONSE
+        RESPONSE.setHeader('content-type', content_type)
+        RESPONSE.setHeader('content-length', str(os.stat(font_file)[6]))
+
         with open(font_file, 'rb') as f:
-            return "WIP"
+            data = f.read()
+            if data:
+                RESPONSE.write(data)
