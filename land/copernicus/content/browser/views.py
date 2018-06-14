@@ -507,7 +507,7 @@ class ResourceResponseHeadersFixerView(BrowserView):
             content_type = "font/truetype"
         elif 'woff' in font:
             content_type = "font/woff2"
-        elif 'eof' in font:
+        elif 'eot' in font:
             content_type = "font/eot"
         elif 'svg' in font:
             content_type = "image/svg+xml"
@@ -517,6 +517,7 @@ class ResourceResponseHeadersFixerView(BrowserView):
         RESPONSE = self.request.RESPONSE
         RESPONSE.setHeader('content-type', content_type)
         RESPONSE.setHeader('content-length', str(os.stat(font_file)[6]))
+        RESPONSE.setHeader('Cache-Control', "max-age=3600, must-revalidate")
 
         with open(font_file, 'rb') as f:
             data = f.read()
