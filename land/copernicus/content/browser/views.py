@@ -507,8 +507,12 @@ class ResourceResponseHeadersFixerView(BrowserView):
             content_type = "font/truetype"
         elif 'woff' in font:
             content_type = "font/woff2"
+        elif 'eof' in font:
+            content_type = "font/eot"
+        elif 'svg' in font:
+            content_type = "image/svg+xml"
         else:
-            content_type = "WIP [TODO]"
+            content_type = "font"
 
         RESPONSE = self.request.RESPONSE
         RESPONSE.setHeader('content-type', content_type)
@@ -518,3 +522,5 @@ class ResourceResponseHeadersFixerView(BrowserView):
             data = f.read()
             if data:
                 RESPONSE.write(data)
+
+        return
