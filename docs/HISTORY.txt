@@ -1,8 +1,8 @@
 Changelog
 =========
 
-4.6.dev0 - (unreleased)
------------------------
+4.6 - (2018-06-15)
+------------------
 * Fix: Fix response headers for fonts files in order to fix IE bug for icons.
   [GhitaB #95088]
 
