@@ -3,6 +3,9 @@ Changelog
 
 4.7.dev0 - (unreleased)
 -----------------------
+* Landitem view/Download: use button for login.
+* Landitem view: Hide unused tabs. Metadata tab as default when no iframe and landfiles.
+  [GhitaB #96128]
 
 4.6 - (2018-06-15)
 ------------------
