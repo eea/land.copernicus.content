@@ -48,6 +48,11 @@ class LandItemView(BrowserView):
     def landfiles(self):
         return self.context.landfiles.get_all()
 
+    def has_landfiles(self):
+        if len(self.landfiles()) > 0:
+            return True
+        return False
+
     @staticmethod
     def translate_size(landfile):
         return _translate_size(landfile.fileSize)
@@ -55,8 +60,11 @@ class LandItemView(BrowserView):
     def tab(self):
         if self.has_iframe() is True:
             return self.request.get('tab', 'mapview')
-        else:
+
+        if self.has_landfiles() is True:
             return self.request.get('tab', 'download')
+
+        return self.request.get('tab', 'metadata')
 
     def is_validated(self):
         field = self.context.getField('isValidatedDataset')
