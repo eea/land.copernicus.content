@@ -185,7 +185,10 @@
           <tal:anon condition="python:not member">
             <br />
             <p class="text-center">
-              <strong>Please <a href="./login">login</a> in order to download data.</strong>
+              <a href="./login" class="btn btn-default btn-login">
+                <i class="fa fa-user-circle"></i>
+                Log in to download the data
+              </a>
             </p>
             <br />
           </tal:anon>
