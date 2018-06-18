@@ -53,6 +53,17 @@ class LandItemView(BrowserView):
             return True
         return False
 
+    def extra_class(self, tab):
+        hidden_tab = "hide-me"
+
+        if (tab == "download" and not self.has_landfiles()):
+            return hidden_tab
+
+        if (tab == "mapview" and not self.has_iframe()):
+            return hidden_tab
+
+        return ""
+
     @staticmethod
     def translate_size(landfile):
         return _translate_size(landfile.fileSize)

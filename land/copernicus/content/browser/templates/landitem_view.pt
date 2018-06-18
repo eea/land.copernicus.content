@@ -32,17 +32,17 @@
 
     <!-- Tabs -->
     <ul class="formTabs">
-      <li class="formTab firstFormTab">
+      <li class="formTab firstFormTab ${python:view.extra_class('mapview')}">
         <a id="fieldsetlegend-mapview" href="${context/absolute_url}?tab=mapview" class="${python:'selected' if tab == 'mapview' else ''}">
           <span>Map View</span>
         </a>
       </li>
-      <li class="formTab">
+      <li class="formTab ${python:view.extra_class('metadata')}">
         <a id="fieldsetlegend-metadata" href="${context/absolute_url}?tab=metadata" class="${python:'selected' if tab == 'metadata' else ''}">
           <span>Metadata</span>
         </a>
       </li>
-      <li class="formTab lastFormTab">
+      <li class="formTab lastFormTab ${python:view.extra_class('download')}">
         <a id="fieldsetlegend-download" href="${context/absolute_url}?tab=download" class="${python:'selected' if tab == 'download' else ''}">
           <span>Download</span>
         </a>
