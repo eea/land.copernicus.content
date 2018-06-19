@@ -196,7 +196,9 @@ class SearchByTags(BrowserView):
         results = catalog.searchResults(
             {
                 'portal_type': ['Event', 'News Item', 'inproximity'],
-                'review_state': 'published'
+                'review_state': 'published',
+                'sort_on': 'effective',
+                'sort_order': 'descending'
             }
         )
 
