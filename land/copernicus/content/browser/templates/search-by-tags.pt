@@ -81,10 +81,10 @@
               <div class="pull-right pagination-items pagination-items-top">
                 <p>
                   Items per page:
-                  <button class="btn filter-btn btn-default {{app.is_active(5)}}"
-                          ng-click="app.set_items_per_page(5)">5</button>
-                  <button class="btn filter-btn btn-default {{app.is_active(10)}}"
-                          ng-click="app.set_items_per_page(10)">10</button>
+                  <button class="btn filter-btn btn-default {{app.is_active(8)}}"
+                          ng-click="app.set_items_per_page(8)">8</button>
+                  <button class="btn filter-btn btn-default {{app.is_active(25)}}"
+                          ng-click="app.set_items_per_page(25)">25</button>
                   <button class="btn filter-btn btn-default {{app.is_active(50)}}"
                           ng-click="app.set_items_per_page(50)">50</button>
                   <button class="btn filter-btn btn-default {{app.is_active(100)}}"
@@ -130,10 +130,10 @@
               <div class="pull-right pagination-items pagination-items-bottom">
                 <p>
                   Items per page:
-                  <button class="btn filter-btn btn-default {{app.is_active(5)}}"
-                          ng-click="app.set_items_per_page(5)">5</button>
-                  <button class="btn filter-btn btn-default {{app.is_active(10)}}"
-                          ng-click="app.set_items_per_page(10)">10</button>
+                  <button class="btn filter-btn btn-default {{app.is_active(8)}}"
+                          ng-click="app.set_items_per_page(8)">8</button>
+                  <button class="btn filter-btn btn-default {{app.is_active(25)}}"
+                          ng-click="app.set_items_per_page(25)">25</button>
                   <button class="btn filter-btn btn-default {{app.is_active(50)}}"
                           ng-click="app.set_items_per_page(50)">50</button>
                   <button class="btn filter-btn btn-default {{app.is_active(100)}}"

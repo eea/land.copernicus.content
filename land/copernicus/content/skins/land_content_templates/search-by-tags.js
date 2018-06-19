@@ -11,7 +11,7 @@ angular.module('searchApp',
 
     app.current_page = 1;
 
-    app.items_per_page = 5;
+    app.items_per_page = 8;
     app.tags = [
       {
         category: 2,
