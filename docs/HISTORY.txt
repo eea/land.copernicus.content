@@ -4,6 +4,7 @@ Changelog
 4.7.dev0 - (unreleased)
 -----------------------
 * Feature: Register form - Add disclaimer permission field.
+* Improve: Register form - Update text for Terms field.
   [GhitaB #96522]
 * Improve: Landitem view/Download - Use button for login.
 * Improve: Landitem view - Hide unused tabs. Metadata tab as default when no
