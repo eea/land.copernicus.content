@@ -27,13 +27,17 @@ def userBeforeDeleted(user_id, event):
     user = membership_tool.getMemberById(user_id)
     email = user.getProperty('email')
     mfrom = site.getProperty('email_from_address', 'copernicus@eea.europa.eu')
-    subject = u"Copernicus Land Monitoring Service - deleted account"
+    subject = u"Your user account has been deleted"
     mail_text = u"""
-Hi!
-Your land.copernicus.eu account ({0}) was deleted.
+Hello
 
-Best regards,
-Copernicus Team at the European Environment Agency""".format(user_id)
+We have received a request to delete your account ({0}) on the website of the
+Copernicus Land Monitoring Service.  This has now been actioned.
+
+If you have any questions please contact us at copernicus@eea.europa.eu.
+
+Kind regards
+Copernicus Land Monitoring Helpdesk Team""".format(user_id)
 
     try:
         mail_host = api.portal.get_tool(name='MailHost')
