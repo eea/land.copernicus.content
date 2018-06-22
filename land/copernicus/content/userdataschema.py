@@ -89,6 +89,18 @@ class DisclaimerWidget(CheckBoxWidget):
         return self.template()
 
 
+class DisclaimerPermissionWidget(CheckBoxWidget):
+    """ Widget for permission to be contacted by email """
+
+    template = ViewPageTemplateFile(
+        'browser/templates/disclaimer-permission-widget.pt')
+
+    def __call__(self):
+        val = super(DisclaimerPermissionWidget, self).__call__()
+        self.val = val
+        return self.template()
+
+
 class ICaptchaSchema(Interface):
     captcha = Captcha(
         title=_(u'Verification'),
@@ -106,9 +118,8 @@ class IDisclaimerPermissionSchema(Interface):
             "service and about this website."
         ),
         description=_(u'help_disclaimer_permission',
-                      default=u"Tick this box."),
+                      default=u""),
         required=True,
-        constraint=validateAccept,
     )
 
 
@@ -145,7 +156,8 @@ class CopernicusRegistrationForm(RegistrationForm):
 
         # Add disclaimer permission field to the schema
         defaultFields += form.Fields(IDisclaimerPermissionSchema)
-        defaultFields['disclaimer_permission'].custom_widget = DisclaimerWidget
+        defaultFields[
+            'disclaimer_permission'].custom_widget = DisclaimerPermissionWidget
 
         # Add a captcha field to the schema
         defaultFields += form.Fields(ICaptchaSchema)
