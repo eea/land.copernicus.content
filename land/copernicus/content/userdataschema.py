@@ -95,6 +95,23 @@ class ICaptchaSchema(Interface):
     )
 
 
+class IDisclaimerPermissionSchema(Interface):
+    disclaimer_permission = schema.Bool(
+        title=_(
+            u'label_disclaimer_permission',
+            default=u"I give permission to the Copernicus Land Monitoring "
+            "Service to contact me by e-mail with the information about "
+            "the new products or product updates and other important events "
+            "in the service or for my feedback about the products of the "
+            "service and about this website."
+        ),
+        description=_(u'help_disclaimer_permission',
+                      default=u"Tick this box."),
+        required=True,
+        constraint=validateAccept,
+    )
+
+
 class CopernicusRegistrationForm(RegistrationForm):
 
     @property
@@ -126,15 +143,19 @@ class CopernicusRegistrationForm(RegistrationForm):
         thematic_domain.custom_widget = MultiCheckBoxVocabularyWidget
         institutional_domain.custom_widget = MultiCheckBoxVocabularyWidget
 
+        # Add disclaimer permission field to the schema
+        defaultFields += form.Fields(IDisclaimerPermissionSchema)
+        defaultFields['disclaimer_permission'].custom_widget = DisclaimerWidget
+
         # Add a captcha field to the schema
         defaultFields += form.Fields(ICaptchaSchema)
         defaultFields['captcha'].custom_widget = CaptchaWidget
 
-        # before the disclaimer
+        # Fix fields order
         defaultFields = defaultFields.select(
                 'username', 'email', 'first_name', 'last_name',
                 'thematic_domain', 'institutional_domain',
-                'mail_me', 'captcha', 'disclaimer')
+                'mail_me', 'disclaimer_permission', 'captcha', 'disclaimer')
 
         return defaultFields
 
