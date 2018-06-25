@@ -269,9 +269,7 @@
                      i18n:translate="description_no_account_registration_linktext"
                       >Registration</a>
                 </span> is free. Personal data will only be used internally. For more details, see the
-                <span i18n:name="terms_of_use">
-                  <a href="" tal:attributes="href string:${context/absolute_url}/terms-of-use">Terms of Use</a>
-                </span>.
+                <span i18n:name="terms_of_use"><a href="" tal:attributes="href string:${context/absolute_url}/terms-of-use">Privacy policy and terms of use</a></span>.
               </p>
             </div>
           </div><!-- login_form_details -->
