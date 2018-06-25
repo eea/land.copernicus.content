@@ -32,7 +32,7 @@ def userBeforeDeleted(user_id, event):
 Hello
 
 We have received a request to delete your account ({0}) on the website of the
-Copernicus Land Monitoring Service.  This has now been actioned.
+Copernicus Land Monitoring Service. This has now been actioned.
 
 If you have any questions please contact us at copernicus@eea.europa.eu.
 
