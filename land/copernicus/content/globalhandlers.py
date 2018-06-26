@@ -26,7 +26,12 @@ def userBeforeDeleted(user_id, event):
     membership_tool = getToolByName(site, 'portal_membership')
     user = membership_tool.getMemberById(user_id)
     email = user.getProperty('email')
-    mfrom = site.getProperty('email_from_address', 'copernicus@eea.europa.eu')
+    email_from_name = site.getProperty(
+        'email_from_name', 'Copernicus Land Monitoring Service at the \
+        European Environment Agency')
+    email_from_address = site.getProperty(
+        'email_from_address', 'copernicus@eea.europa.eu')
+    mfrom = "{0} <{1}>".format(email_from_name, email_from_address)
     subject = u"Your user account has been deleted"
     mail_text = u"""
 Hello
