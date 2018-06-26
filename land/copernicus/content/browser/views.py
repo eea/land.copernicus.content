@@ -9,6 +9,7 @@ from pkg_resources import resource_filename
 from urlparse import urlparse
 from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
+import datetime
 import json
 import os
 import plone.api as api
@@ -481,7 +482,10 @@ class ResetPasswordExpirationView(BrowserView):
             valid until <date and time>.
     """
     def __call__(self):
-        return "12.12.2018 WIP"
+        hours = self.context.unrestrictedTraverse(
+            "portal_password_reset").getExpirationTimeout()
+        expiration = datetime.datetime.now() + datetime.timedelta(hours=hours)
+        return expiration.strftime('%d/%m/%Y %H:%M')
 
 
 class ResourceResponseHeadersFixerView(BrowserView):
