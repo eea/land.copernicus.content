@@ -485,7 +485,7 @@ class ResetPasswordExpirationView(BrowserView):
         hours = self.context.unrestrictedTraverse(
             "portal_password_reset").getExpirationTimeout()
         expiration = datetime.datetime.now() + datetime.timedelta(hours=hours)
-        return expiration.strftime('%d/%m/%Y %H:%M')
+        return expiration
 
 
 class ResourceResponseHeadersFixerView(BrowserView):
