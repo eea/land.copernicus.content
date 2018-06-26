@@ -472,6 +472,18 @@ class LandFilesContentView(BrowserView):
         return urlparse(url).path
 
 
+class ResetPasswordExpirationView(BrowserView):
+    """ Return the expiration time as date and hours
+
+        used in mail_password_template to replace:
+            valid for x hours
+        with:
+            valid until <date and time>.
+    """
+    def __call__(self):
+        return "12.12.2018 WIP"
+
+
 class ResourceResponseHeadersFixerView(BrowserView):
     """ With /resource_rhf?resource=FontAwesome.eot&params=oavxt5#iefix
         - get the resource font from
