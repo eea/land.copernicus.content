@@ -33,8 +33,26 @@ def is_EIONET_member(member):
         return False
 
 
+class MySettingsView(BrowserView):
+    """ Just a redirect to solve:
+        * we want Password tab displayed by default
+        * but an EIONET account doesn't have this tab
+    """
+    def __call__(self):
+        user = api.user.get_current()
+        is_EIONET = is_EIONET_member(user)
+        is_EIONET = True  # [TODO] Remove.
+        if is_EIONET:
+            tab = "@@personal-information"
+        else:
+            tab = "@@change-password"
+        url = "{0}/{1}".format(api.portal.get().absolute_url(), tab)
+
+        return self.request.response.redirect(url)
+
+
 class LandItemsOverview(BrowserView):
-    """Overview page for LandItems
+    """ Overview page for LandItems
     """
     def __call__(self):
         """ Render the content item listing.

@@ -135,6 +135,13 @@
     permission="zope2.View"
     />
 
+  <browser:page
+    name="my_settings"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    class=".views.MySettingsView"
+    permission="zope2.View"
+    />
+
   <browser:viewlet
     name="sentry.script"
     for="*"
