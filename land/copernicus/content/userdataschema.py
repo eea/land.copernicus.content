@@ -107,22 +107,6 @@ class ICaptchaSchema(Interface):
     )
 
 
-class IDisclaimerPermissionSchema(Interface):
-    disclaimer_permission = schema.Bool(
-        title=_(
-            u'label_disclaimer_permission',
-            default=u"I give permission to the Copernicus Land Monitoring "
-            "Service to contact me by e-mail with the information about "
-            "the new products or product updates and other important events "
-            "in the service or for my feedback about the products of the "
-            "service and about this website."
-        ),
-        description=_(u'help_disclaimer_permission',
-                      default=u""),
-        required=True,
-    )
-
-
 class CopernicusRegistrationForm(RegistrationForm):
 
     @property
@@ -149,15 +133,15 @@ class CopernicusRegistrationForm(RegistrationForm):
             defaultFields = defaultFields.omit('mail_me')
 
         defaultFields = defaultFields.omit('fullname')
+
         thematic_domain = defaultFields['thematic_domain']
-        institutional_domain = defaultFields['institutional_domain']
         thematic_domain.custom_widget = MultiCheckBoxVocabularyWidget
+
+        institutional_domain = defaultFields['institutional_domain']
         institutional_domain.custom_widget = MultiCheckBoxVocabularyWidget
 
-        # Add disclaimer permission field to the schema
-        defaultFields += form.Fields(IDisclaimerPermissionSchema)
-        defaultFields[
-            'disclaimer_permission'].custom_widget = DisclaimerPermissionWidget
+        disclaimer_permission = defaultFields['disclaimer_permission']
+        disclaimer_permission.custom_widget = DisclaimerPermissionWidget
 
         # Add a captcha field to the schema
         defaultFields += form.Fields(ICaptchaSchema)
@@ -315,10 +299,6 @@ class IEnhancedUserDataSchema(IUserDataSchema):
                 default=u'I give permission'),
         description=_(
                 u'help_disclaimer_permission',
-                default=u'I give permission to the Copernicus Land Monitoring'
-                ' Service to contact me by e-mail with the information about '
-                'the new products or product updates and other important '
-                'events in the service or for my feedback about the products '
-                'of the service and about this website.'),
+                default=u""),
         required=True,
     )
