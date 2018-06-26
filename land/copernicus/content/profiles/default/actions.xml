@@ -76,10 +76,10 @@
    <property name="visible">False</property>
   </object>
   <object name="preferences" meta_type="CMF Action" i18n:domain="plone">
-   <property name="title" i18n:translate="">Preferences</property>
+   <property name="title" i18n:translate="">Settings</property>
    <property name="description" i18n:translate=""></property>
    <property
-      name="url_expr">string:${globals_view/navigationRootUrl}/@@personal-preferences</property>
+      name="url_expr">string:${globals_view/navigationRootUrl}/@@my_settings</property>
    <property name="link_target"></property>
    <property name="icon_expr"></property>
    <property name="available_expr">python:member is not None</property>
