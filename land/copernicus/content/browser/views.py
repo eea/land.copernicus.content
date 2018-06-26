@@ -41,7 +41,6 @@ class MySettingsView(BrowserView):
     def __call__(self):
         user = api.user.get_current()
         is_EIONET = is_EIONET_member(user)
-        is_EIONET = True  # [TODO] Remove.
         if is_EIONET:
             tab = "@@personal-information"
         else:
