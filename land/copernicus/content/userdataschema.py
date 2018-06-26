@@ -188,6 +188,9 @@ class CustomizedUserDataPanel(UserDataPanel):
         institutional_domain = self.form_fields['institutional_domain']
         institutional_domain.custom_widget = MultiCheckBoxVocabularyWidget
 
+        disclaimer_permission = self.form_fields['disclaimer_permission']
+        disclaimer_permission.custom_widget = DisclaimerPermissionWidget
+
     def validate(self, action, data):
         # We omit email field in form, so we must prevent error:
         # Module plone.app.users.browser.personalpreferences, line 262,
@@ -305,4 +308,17 @@ class IEnhancedUserDataSchema(IUserDataSchema):
                       "purposes to the EP and Council."),
         required=True,
         constraint=validateAccept,
+    )
+
+    disclaimer_permission = schema.Bool(
+        title=_(u'label_disclaimer_permission',
+                default=u'I give permission'),
+        description=_(
+                u'help_disclaimer_permission',
+                default=u'I give permission to the Copernicus Land Monitoring'
+                ' Service to contact me by e-mail with the information about '
+                'the new products or product updates and other important '
+                'events in the service or for my feedback about the products '
+                'of the service and about this website.'),
+        required=True,
     )

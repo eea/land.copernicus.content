@@ -105,3 +105,12 @@ class EnhancedUserDataPanelAdapter(UserDataPanelAdapter):
     def set_disclaimer(self, value):
         return self.context.setMemberProperties({'disclaimer': value})
     disclaimer = property(get_disclaimer, set_disclaimer)
+
+    def get_disclaimer_permission(self):
+        return self.context.getProperty('disclaimer_permission', '')
+
+    def set_disclaimer_permission(self, value):
+        return self.context.setMemberProperties(
+            {'disclaimer_permission': value})
+    disclaimer_permission = property(
+        get_disclaimer_permission, set_disclaimer_permission)
