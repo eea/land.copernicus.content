@@ -14,10 +14,8 @@ $(function() {
   }
 
   function init_pages() {
-    $("#terms-source-container p").first().appendTo($("#terms-page1-container"));
-    $("#terms-source-container p").first().appendTo($("#terms-page1-container"));
-    $("#terms-source-container p").first().appendTo($("#terms-page1-container"));
-    $("#terms-source-container").appendTo($("#terms-page2-container"));
+    $("#terms-source-container div#first-page").first().appendTo($("#terms-page1-container"));
+    $("#terms-source-container div#second-page").appendTo($("#terms-page2-container"));
   }
 
   function init_dialog() {
