@@ -1,6 +1,9 @@
 Changelog
 =========
 
+4.8.dev0 - (unreleased)
+-----------------------
+
 4.7 - (2018-06-27)
 ------------------
 * Feature: Multiple improvements related to login, register, password reset,
