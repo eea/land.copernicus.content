@@ -1,7 +1,7 @@
 <div tal:content="structure view/val" />
 <label>I accept <a id="terms-of-use-link" href="">privacy policy and terms of use of this website</a></label>
 
-<div style="display: none;" id="terms-of-use-modal" title="Terms of Use"
+<div style="display: none;" id="terms-of-use-modal" title="Privacy policy and terms of use"
      tal:define="terms_of_use_doc python:view.context.context.portal_catalog.searchResults(Title='Terms of Use')">
   <div id='terms-container'>
     <tal:condition condition="python:terms_of_use_doc">
