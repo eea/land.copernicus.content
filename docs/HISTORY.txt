@@ -9,6 +9,8 @@ Changelog
   Manual step: delete customization of eea.geotags.js in portal_skins/custom.
   Manual step: create geonames.org account and use it in @@geotags-controlpanel
   [GhitaB #95147]
+* Improve: Add info text in landitem view for registering account.
+  [GhitaB #96128]
 
 4.7 - (2018-06-27)
 ------------------

@@ -5,6 +5,10 @@
   position: absolute;
 }
 
+.template-landitem-view p.text-center.info-text {
+  font-size: 90%;
+}
+
 #squaresWaveG {
   position: absolute;
   top: 250px;

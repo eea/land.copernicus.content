@@ -190,6 +190,9 @@
                 Log in to download the data
               </a>
             </p>
+            <p class="text-center info-text">
+            <i>New user? <a href="/@@register">Follow this link to register.</a></i>
+            </p>
             <br />
           </tal:anon>
 
