@@ -1,8 +1,8 @@
 Changelog
 =========
 
-4.8.dev0 - (unreleased)
------------------------
+4.8 - (2018-07-12)
+------------------
 * Improve: get rid of customization of eea.geotags template in order to use
   Open Street Map support recently implemented.
   Manual step: clear google maps key in site/manage_propertiesForm
