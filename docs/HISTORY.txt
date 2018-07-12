@@ -1,6 +1,9 @@
 Changelog
 =========
 
+4.9.dev0 - (unreleased)
+-----------------------
+
 4.8 - (2018-07-12)
 ------------------
 * Improve: get rid of customization of eea.geotags template in order to use
