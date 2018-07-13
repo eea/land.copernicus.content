@@ -124,4 +124,15 @@
       import_steps="memberdata-properties propertiestool"
       />
   </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+    source="3.3.2"
+    destination="3.3.3"
+    profile="land.copernicus.content:default">
+
+    <genericsetup:upgradeDepends
+      title="Upgrade step for land.copernicus.content: import registry for eea.geotags."
+      import_steps="plone.app.registry"
+      />
+  </genericsetup:upgradeSteps>
 </configure>
