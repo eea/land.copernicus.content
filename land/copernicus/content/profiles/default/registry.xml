@@ -1,19 +1,360 @@
-<!-- Operation Definitions -->
-<registry xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-          i18n:domain="plone">
-
-    <records interface="plone.app.querystring.interfaces.IQueryField"
-             prefix="plone.app.querystring.field.getObjPositionInParent">
-        <value key="title" i18n:translate="">Order in folder</value>
-        <value key="description" i18n:translate="">The order of an item in its parent folder</value>
-        <value key="enabled">True</value>
-        <value key="sortable">True</value>
-        <value key="operations">
-            <element>plone.app.querystring.operation.int.is</element>
-            <element>plone.app.querystring.operation.int.lessThan</element>
-            <element>plone.app.querystring.operation.int.largerThan</element>
-        </value>
-       <value key="group" i18n:translate="">Metadata</value>
-    </records>
-
+<?xml version="1.0"?>
+<registry>
+  <records interface="eea.geotags.controlpanel.interfaces.IGeotagsSettings"/>
+  <records interface="eea.geotags.controlpanel.interfaces.IGeoVocabularies"/>
+  <record name="eea.geotags.controlpanel.interfaces.IGeoVocabularies.geotags">
+    <value purge="True">
+      <element key="efta4">
+        <element key="title">EFTA4</element>
+        <element key="geo-3042058">Liechtenstein</element>
+        <element key="geo-2658434">Switzerland</element>
+        <element key="geo-2629691">Iceland</element>
+        <element key="geo-3144096">Norway</element>
+      </element>
+      <element key="eu15">
+        <element key="title">EU15</element>
+        <element key="geo-2802361">Belgium</element>
+        <element key="geo-2661886">Sweden</element>
+        <element key="geo-2635167">United Kingdom</element>
+        <element key="geo-390903">Greece</element>
+        <element key="geo-2264397">Portugal</element>
+        <element key="geo-3017382">France</element>
+        <element key="geo-660013">Finland</element>
+        <element key="geo-2510769">Spain</element>
+        <element key="geo-2921044">Germany</element>
+        <element key="geo-3175395">Italy</element>
+        <element key="geo-2782113">Austria</element>
+        <element key="geo-2623032">Denmark</element>
+        <element key="geo-2960313">Luxembourg</element>
+        <element key="geo-2963597">Ireland</element>
+        <element key="geo-2750405">Netherlands</element>
+      </element>
+      <element key="eu27">
+        <element key="title">EU27</element>
+        <element key="geo-146669">Cyprus</element>
+        <element key="geo-453733">Estonia</element>
+        <element key="geo-798544">Poland</element>
+        <element key="geo-2623032">Denmark</element>
+        <element key="geo-2960313">Luxembourg</element>
+        <element key="geo-2963597">Ireland</element>
+        <element key="geo-2750405">Netherlands</element>
+        <element key="geo-2802361">Belgium</element>
+        <element key="geo-458258">Latvia</element>
+        <element key="geo-2562770">Malta</element>
+        <element key="geo-2921044">Germany</element>
+        <element key="geo-3077311">Czech Republic</element>
+        <element key="geo-719819">Hungary</element>
+        <element key="geo-732800">Bulgaria</element>
+        <element key="geo-2661886">Sweden</element>
+        <element key="geo-390903">Greece</element>
+        <element key="geo-2264397">Portugal</element>
+        <element key="geo-2510769">Spain</element>
+        <element key="geo-3175395">Italy</element>
+        <element key="geo-2782113">Austria</element>
+        <element key="geo-660013">Finland</element>
+        <element key="geo-798549">Romania</element>
+        <element key="geo-2635167">United Kingdom</element>
+        <element key="geo-3017382">France</element>
+        <element key="geo-597427">Lithuania</element>
+        <element key="geo-3190538">Slovenia</element>
+        <element key="geo-3057568">Slovakia</element>
+      </element>
+      <element key="eu25">
+        <element key="title">EU25</element>
+        <element key="geo-146669">Cyprus</element>
+        <element key="geo-453733">Estonia</element>
+        <element key="geo-798544">Poland</element>
+        <element key="geo-2623032">Denmark</element>
+        <element key="geo-2960313">Luxembourg</element>
+        <element key="geo-2963597">Ireland</element>
+        <element key="geo-2750405">Netherlands</element>
+        <element key="geo-2802361">Belgium</element>
+        <element key="geo-458258">Latvia</element>
+        <element key="geo-2562770">Malta</element>
+        <element key="geo-2921044">Germany</element>
+        <element key="geo-3077311">Czech Republic</element>
+        <element key="geo-719819">Hungary</element>
+        <element key="geo-2661886">Sweden</element>
+        <element key="geo-390903">Greece</element>
+        <element key="geo-2264397">Portugal</element>
+        <element key="geo-2510769">Spain</element>
+        <element key="geo-3175395">Italy</element>
+        <element key="geo-2782113">Austria</element>
+        <element key="geo-660013">Finland</element>
+        <element key="geo-2635167">United Kingdom</element>
+        <element key="geo-3017382">France</element>
+        <element key="geo-597427">Lithuania</element>
+        <element key="geo-3190538">Slovenia</element>
+        <element key="geo-3057568">Slovakia</element>
+      </element>
+      <element key="pan-europe">
+        <element key="title">Pan-Europe</element>
+        <element key="geo-146669">Cyprus</element>
+        <element key="geo-453733">Estonia</element>
+        <element key="geo-798544">Poland</element>
+        <element key="geo-2623032">Denmark</element>
+        <element key="geo-2960313">Luxembourg</element>
+        <element key="geo-2963597">Ireland</element>
+        <element key="geo-2750405">Netherlands</element>
+        <element key="geo-2802361">Belgium</element>
+        <element key="geo-458258">Latvia</element>
+        <element key="geo-2562770">Malta</element>
+        <element key="geo-2921044">Germany</element>
+        <element key="geo-3077311">Czech Republic</element>
+        <element key="geo-719819">Hungary</element>
+        <element key="geo-732800">Bulgaria</element>
+        <element key="geo-2661886">Sweden</element>
+        <element key="geo-390903">Greece</element>
+        <element key="geo-2264397">Portugal</element>
+        <element key="geo-2510769">Spain</element>
+        <element key="geo-3175395">Italy</element>
+        <element key="geo-2782113">Austria</element>
+        <element key="geo-660013">Finland</element>
+        <element key="geo-798549">Romania</element>
+        <element key="geo-2635167">United Kingdom</element>
+        <element key="geo-3017382">France</element>
+        <element key="geo-597427">Lithuania</element>
+        <element key="geo-3190538">Slovenia</element>
+        <element key="geo-3057568">Slovakia</element>
+        <element key="geo-2658434">Switzerland</element>
+        <element key="geo-2629691">Iceland</element>
+        <element key="geo-3042058">Liechtenstein</element>
+        <element key="geo-3144096">Norway</element>
+        <element key="geo-298795">Turkey</element>
+        <element key="geo-783754">Albania</element>
+        <element key="geo-174982">Armenia</element>
+        <element key="geo-587116">Azerbaijan</element>
+        <element key="geo-630336">Belarus</element>
+        <element key="geo-3277605">Bosnia and Herzegovina</element>
+        <element key="geo-3202326">Croatia</element>
+        <element key="geo-718075">The former Yugoslav Republic of Macedonia</element>
+        <element key="geo-614540">Georgia</element>
+        <element key="geo-1522867">Kazakhstan</element>
+        <element key="geo-1527747">Kyrgyzstan</element>
+        <element key="geo-831053">Kosovo</element>
+        <element key="geo-2993457">Monaco</element>
+        <element key="geo-3194884">Montenegro</element>
+        <element key="geo-617790">Moldova</element>
+        <element key="geo-2017370">Russia</element>
+        <element key="geo-3168068">San Marino</element>
+        <element key="geo-6290252">Serbia</element>
+        <element key="geo-1220409">Tajikistan</element>
+        <element key="geo-1218197">Turkmenistan</element>
+        <element key="geo-690791">Ukraine</element>
+        <element key="geo-1512440">Uzbekistan</element>
+      </element>
+      <element key="eea32">
+        <element key="title">EEA32</element>
+        <element key="geo-146669">Cyprus</element>
+        <element key="geo-453733">Estonia</element>
+        <element key="geo-798544">Poland</element>
+        <element key="geo-2623032">Denmark</element>
+        <element key="geo-2960313">Luxembourg</element>
+        <element key="geo-2963597">Ireland</element>
+        <element key="geo-2750405">Netherlands</element>
+        <element key="geo-2802361">Belgium</element>
+        <element key="geo-458258">Latvia</element>
+        <element key="geo-2562770">Malta</element>
+        <element key="geo-2921044">Germany</element>
+        <element key="geo-3077311">Czech Republic</element>
+        <element key="geo-719819">Hungary</element>
+        <element key="geo-732800">Bulgaria</element>
+        <element key="geo-2661886">Sweden</element>
+        <element key="geo-390903">Greece</element>
+        <element key="geo-2264397">Portugal</element>
+        <element key="geo-2510769">Spain</element>
+        <element key="geo-3175395">Italy</element>
+        <element key="geo-2782113">Austria</element>
+        <element key="geo-660013">Finland</element>
+        <element key="geo-798549">Romania</element>
+        <element key="geo-2635167">United Kingdom</element>
+        <element key="geo-3017382">France</element>
+        <element key="geo-597427">Lithuania</element>
+        <element key="geo-3190538">Slovenia</element>
+        <element key="geo-3057568">Slovakia</element>
+        <element key="geo-2658434">Switzerland</element>
+        <element key="geo-2629691">Iceland</element>
+        <element key="geo-3042058">Liechtenstein</element>
+        <element key="geo-3144096">Norway</element>
+        <element key="geo-298795">Turkey</element>
+      </element>
+      <element key="eu28">
+        <element key="title">EU28</element>
+        <element key="geo-146669">Cyprus</element>
+        <element key="geo-453733">Estonia</element>
+        <element key="geo-798544">Poland</element>
+        <element key="geo-2623032">Denmark</element>
+        <element key="geo-2960313">Luxembourg</element>
+        <element key="geo-2963597">Ireland</element>
+        <element key="geo-2750405">Netherlands</element>
+        <element key="geo-2802361">Belgium</element>
+        <element key="geo-458258">Latvia</element>
+        <element key="geo-2562770">Malta</element>
+        <element key="geo-2921044">Germany</element>
+        <element key="geo-3077311">Czech Republic</element>
+        <element key="geo-719819">Hungary</element>
+        <element key="geo-732800">Bulgaria</element>
+        <element key="geo-2661886">Sweden</element>
+        <element key="geo-390903">Greece</element>
+        <element key="geo-2264397">Portugal</element>
+        <element key="geo-2510769">Spain</element>
+        <element key="geo-3175395">Italy</element>
+        <element key="geo-2782113">Austria</element>
+        <element key="geo-660013">Finland</element>
+        <element key="geo-798549">Romania</element>
+        <element key="geo-2635167">United Kingdom</element>
+        <element key="geo-3017382">France</element>
+        <element key="geo-597427">Lithuania</element>
+        <element key="geo-3190538">Slovenia</element>
+        <element key="geo-3057568">Slovakia</element>
+        <element key="geo-3202326">Croatia</element>
+      </element>
+      <element key="eea33">
+        <element key="title">EEA33</element>
+        <element key="geo-146669">Cyprus</element>
+        <element key="geo-453733">Estonia</element>
+        <element key="geo-798544">Poland</element>
+        <element key="geo-2623032">Denmark</element>
+        <element key="geo-2960313">Luxembourg</element>
+        <element key="geo-2963597">Ireland</element>
+        <element key="geo-2750405">Netherlands</element>
+        <element key="geo-2802361">Belgium</element>
+        <element key="geo-458258">Latvia</element>
+        <element key="geo-2562770">Malta</element>
+        <element key="geo-2921044">Germany</element>
+        <element key="geo-3077311">Czech Republic</element>
+        <element key="geo-719819">Hungary</element>
+        <element key="geo-732800">Bulgaria</element>
+        <element key="geo-2661886">Sweden</element>
+        <element key="geo-390903">Greece</element>
+        <element key="geo-2264397">Portugal</element>
+        <element key="geo-2510769">Spain</element>
+        <element key="geo-3175395">Italy</element>
+        <element key="geo-2782113">Austria</element>
+        <element key="geo-660013">Finland</element>
+        <element key="geo-798549">Romania</element>
+        <element key="geo-2635167">United Kingdom</element>
+        <element key="geo-3017382">France</element>
+        <element key="geo-597427">Lithuania</element>
+        <element key="geo-3190538">Slovenia</element>
+        <element key="geo-3057568">Slovakia</element>
+        <element key="geo-2658434">Switzerland</element>
+        <element key="geo-2629691">Iceland</element>
+        <element key="geo-3042058">Liechtenstein</element>
+        <element key="geo-3144096">Norway</element>
+        <element key="geo-298795">Turkey</element>
+        <element key="geo-3202326">Croatia</element>
+      </element>
+    </value>
+  </record>
+  <record name="eea.geotags.controlpanel.interfaces.IGeoVocabularies.biotags">
+    <value purge="True">
+      <element key="MMAC">
+        <element key="title">Marine Macaronesian/Atlantic ocean</element>
+        <element key="latitude">28.29</element>
+        <element key="longitude">-15.63</element>
+      </element>
+      <element key="STE">
+        <element key="title">Steppic</element>
+        <element key="latitude">44.212</element>
+        <element key="longitude">28.255</element>
+      </element>
+      <element key="MED">
+        <element key="title">Mediterranean</element>
+        <element key="latitude">37.72</element>
+        <element key="longitude">12.89</element>
+      </element>
+      <element key="PAN">
+        <element key="title">Pannonian</element>
+        <element key="longitude">19.04</element>
+        <element key="latitude">47.49</element>
+      </element>
+      <element key="MMED">
+        <element key="title">Marine Mediterranean sea</element>
+        <element key="latitude">34.553</element>
+        <element key="longitude">18.048</element>
+      </element>
+      <element key="BLS">
+        <element key="title">Black Sea</element>
+        <element key="longitude">28.532</element>
+        <element key="latitude">43.536</element>
+      </element>
+      <element key="MBLS">
+        <element key="title">Marine Black sea</element>
+        <element key="longitude">34.299</element>
+        <element key="latitude">43.413</element>
+      </element>
+      <element key="CON">
+        <element key="title">Continental</element>
+        <element key="latitude">49.91</element>
+        <element key="longitude">10.82</element>
+      </element>
+      <element key="MCAS">
+        <element key="title">Marine Caspian sea</element>
+        <element key="longitude">50.668</element>
+        <element key="latitude">41.934</element>
+      </element>
+      <element key="MATL">
+        <element key="title">Marine North-east Atlantic ocean</element>
+        <element key="latitude">35.74</element>
+        <element key="longitude">-39.46</element>
+      </element>
+      <element key="BOR">
+        <element key="title">Boreal</element>
+        <element key="latitude">60.15</element>
+        <element key="longitude">19.96</element>
+      </element>
+      <element key="ATL">
+        <element key="title">Atlantic</element>
+        <element key="latitude">50.826</element>
+        <element key="longitude">1.902</element>
+      </element>
+      <element key="MBAL">
+        <element key="title">Marine Baltic sea</element>
+        <element key="longitude">19.86</element>
+        <element key="latitude">58.48</element>
+      </element>
+      <element key="ALP">
+        <element key="title">Alpine</element>
+        <element key="latitude">46.61</element>
+        <element key="longitude">10.85</element>
+      </element>
+      <element key="ANA">
+        <element key="title">Anatolian</element>
+        <element key="latitude">49.12</element>
+        <element key="longitude">-1.30</element>
+      </element>
+      <element key="MARC">
+        <element key="title">Marine Arctic Ocean</element>
+        <element key="latitude">82.402</element>
+        <element key="longitude">37.265</element>
+      </element>
+      <element key="ARC">
+        <element key="title">Arctic</element>
+        <element key="latitude">70.259</element>
+        <element key="longitude">29.548</element>
+      </element>
+      <element key="MNOS">
+        <element key="title">Marine North sea</element>
+        <element key="longitude">3.515</element>
+        <element key="latitude">56.511</element>
+      </element>
+      <element key="MAC">
+        <element key="title">Macaronesia</element>
+        <element key="latitude">28.29</element>
+        <element key="longitude">-16.63</element>
+      </element>
+    </value>
+  </record>
+  <record name="eea.geotags.controlpanel.interfaces.IGeoVocabularies.countries_mapping">
+    <value purge="True">
+      <element key="Czechia">Czech Republic</element>
+      <element key="Macedonia (ARYM)">Former Yugoslav Republic of Macedonia, the</element>
+      <element key="Macedonia (FYR)">Former Yugoslav Republic of Macedonia, the</element>
+      <element key="Macedonia (FYROM)">Former Yugoslav Republic of Macedonia, the</element>
+      <element key="Macedonia">Former Yugoslav Republic of Macedonia, the</element>
+      <element key="Kosova (Kosovo)">Kosovo (UNSCR 1244/99)</element>
+      <element key="Kosovo">Kosovo (UNSCR 1244/99)</element>
+    </value>
+  </record>
 </registry>
