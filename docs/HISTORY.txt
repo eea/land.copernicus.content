@@ -3,6 +3,9 @@ Changelog
 
 4.9.dev0 - (unreleased)
 -----------------------
+* Fix: update eea.geotags registry with values we have in production website
+  (country groups, biotags). See script in docs for exporting values.
+  [GhitaB #95147]
 
 4.8 - (2018-07-12)
 ------------------
