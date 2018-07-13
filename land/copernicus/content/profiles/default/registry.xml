@@ -183,10 +183,10 @@
         <element key="latitude">35.74</element>
         <element key="longitude">-39.46</element>
       </element>
-      <element key="BOR">
-        <element key="title">Boreal</element>
-        <element key="latitude">60.15</element>
-        <element key="longitude">19.96</element>
+      <element key="ALP">
+        <element key="title">Alpine</element>
+        <element key="latitude">46.61</element>
+        <element key="longitude">10.85</element>
       </element>
       <element key="ATL">
         <element key="title">Atlantic</element>
@@ -198,10 +198,10 @@
         <element key="longitude">19.86</element>
         <element key="latitude">58.48</element>
       </element>
-      <element key="ALP">
-        <element key="title">Alpine</element>
-        <element key="latitude">46.61</element>
-        <element key="longitude">10.85</element>
+      <element key="BOR">
+        <element key="title">Boreal</element>
+        <element key="latitude">60.15</element>
+        <element key="longitude">19.96</element>
       </element>
       <element key="ANA">
         <element key="title">Anatolian</element>
