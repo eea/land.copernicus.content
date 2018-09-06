@@ -1,8 +1,8 @@
 Changelog
 =========
 
-5.0.dev0 - (unreleased)
------------------------
+5.0 - (2018-09-06)
+------------------
 * Feature: add .maintenance script to generate csv file containing aliases,
   when we want to move the contents of a folder to a new location.
   [GhitaB #98233]
