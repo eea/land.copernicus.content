@@ -3,6 +3,7 @@
 
     To be added as useful script in ZMI: .maintenance folder.
 """
+SITE_URL = "https://land.copernicus.eu"  # For tests
 SITE_INSTANCE = "/copernicus"   # Example: /copernicus
 FOLDER = "/in-situ"  # Where are the items now (before moving them)?
 # Example: Use /old-folder for /copernicus/old-folder
@@ -48,7 +49,15 @@ for item in items:
     else:
         result.append(item + "," + NEW_FOLDER + exclude_old_parent(item))
 
+print "-------------- CSV ------------------"
 for x in result:
     print x
+
+print ""
+print "-------------- Test ------------------"
+for x in result:
+    old, new = x.split(",")
+    print "OLD: " + SITE_URL + old
+    print "NEW: " + SITE_URL + new
 
 return printed
