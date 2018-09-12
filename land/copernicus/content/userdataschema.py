@@ -17,7 +17,6 @@ from zope.interface import Interface
 from zope.interface import implements
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 import re
-# from plone.formwidget.recaptcha.widget import ReCaptchaFieldWidget
 
 
 professional_thematic_domain_options = SimpleVocabulary([
@@ -106,11 +105,6 @@ class ICaptchaSchema(Interface):
     captcha = Captcha(
         title=_(u'Verification'),
     )
-    # captcha = schema.TextLine(
-    #     title=u"Verification",
-    #     description=u"",
-    #     required=False
-    # )
 
 
 class CopernicusRegistrationForm(RegistrationForm):
@@ -152,7 +146,6 @@ class CopernicusRegistrationForm(RegistrationForm):
         # Add a captcha field to the schema
         defaultFields += form.Fields(ICaptchaSchema)
         defaultFields['captcha'].custom_widget = CaptchaWidget
-        # defaultFields['captcha'].widgetFactory = ReCaptchaFieldWidget
 
         # Fix fields order
         defaultFields = defaultFields.select(
