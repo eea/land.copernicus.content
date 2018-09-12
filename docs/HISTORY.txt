@@ -3,6 +3,11 @@ Changelog
 
 5.1.dev0 - (unreleased)
 -----------------------
+* Improve: use reCAPTCHA (from Google) for register and contact forms.
+  Manual step: get private and public keys for reCAPTCHA v2
+  https://www.google.com/recaptcha/ and configure @@recaptcha-settings
+  after activating recaptcha add-ons.
+  [GhitaB #98066]
 
 5.0 - (2018-09-06)
 ------------------
