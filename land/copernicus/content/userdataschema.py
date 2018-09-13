@@ -104,6 +104,7 @@ class DisclaimerPermissionWidget(CheckBoxWidget):
 class ICaptchaSchema(Interface):
     captcha = Captcha(
         title=_(u'Verification'),
+        required=False
     )
 
 
