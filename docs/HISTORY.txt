@@ -3,6 +3,8 @@ Changelog
 
 5.2.dev0 - (unreleased)
 -----------------------
+* Fix: Make sure Global Image Mosaics is working in album view.
+  [GhitaB #98234]
 
 5.1 - (2018-09-13)
 ------------------
