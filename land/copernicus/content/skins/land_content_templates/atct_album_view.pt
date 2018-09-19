@@ -37,9 +37,13 @@
                          frozen python:field.getAccessor(image)() if field else False;"
              tal:attributes="class python: 'photoAlbumEntry frozenEntry' if frozen else 'photoAlbumEntry'">
           <a tal:define="id python:int(b_start)+int(repeat['image'].number()-1)"
-             tal:attributes="href string:${image/absolute_url}/view; title image/Description">
-            <span class="photoAlbumEntryWrapper">
-              <img src="" alt="" tal:replace="structure python:image.tag(scale='thumb', title=image.Description(), alt='')" />
+             tal:attributes="href string:${image/absolute_url}; title image/Description">
+            <span class="photoAlbumEntryWrapper"
+                  tal:define="is_external_section python:'/imagery-in-situ/global-image-mosaics' in image.absolute_url()">
+              <img tal:condition="python:is_external_section is False"
+                   src="" alt="" tal:replace="structure python:image.tag(scale='thumb', title=image.Description(), alt='')" />
+              <img tal:condition="python:is_external_section is True"
+                   src="./global-image-mosaics-thumb.png" alt="Global Image Mosaics" />
             </span>
             <span class="photoAlbumEntryTitle" tal:content="image/pretty_title_or_id">
               Title
