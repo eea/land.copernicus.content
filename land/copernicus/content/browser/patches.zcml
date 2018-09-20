@@ -23,4 +23,11 @@
                   original="_doDelUser"
                   replacement="land.copernicus.content.patches._doDelUser"
                   docstringWarning="true" />
+
+    <monkey:patch description="Fix error on demo website for missing interface"
+                  class="collective.z3cform.datagridfield.interfaces"
+                  original="IDataGridFieldLayer"
+                  ignoreOriginal="true"
+                  replacement="land.copernicus.content.patches.IDataGridFieldLayer"
+                  docstringWarning="true" />
 </configure>

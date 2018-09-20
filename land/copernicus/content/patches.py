@@ -15,10 +15,23 @@ from zope.component import getMultiAdapter
 from zope.event import notify
 from zope.interface import implements
 
+from plone.app.z3cform.interfaces import IPloneFormLayer
+
 old_enabled = ConversationView.enabled
 old_crop = SearchView.crop
 old_doDelUser = _doDelUser
 old_verify = Captcha.verify
+
+
+class IDataGridFieldLayer(IPloneFormLayer):
+    """ Marker interface that defines a browser layer.
+        (in order to skip PicklingError: Can't pickle <class
+         'collective.z3cform.datagridfield.interfaces.IDataGridFieldLayer'>:
+        attribute lookup collective.z3cform.datagridfield.interfaces
+        .IDataGridFieldLayer failed in demo website)
+
+        We are using an older collective.z3cform.datagridfield version.
+    """
 
 
 def enabled(self):
