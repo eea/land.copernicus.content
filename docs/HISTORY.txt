@@ -3,6 +3,10 @@ Changelog
 
 5.2.dev0 - (unreleased)
 -----------------------
+* Fix: Monkey patch - add a placeholder of missing IDataGridFieldLayer in older
+  version of collective.z3cform.datagridfield in order to solve PicklingError
+  on activate/deactivate add-ons in demo website.
+  [GhitaB #98613]
 * Fix: Make sure Global Image Mosaics is working in album view.
   [GhitaB #98234]
 
