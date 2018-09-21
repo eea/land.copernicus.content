@@ -79,7 +79,6 @@ Products.PloneLDAP==1.2
 Products.PloneLanguageTool==3.2.7
 Products.PlonePAS==5.0.11
 Products.PloneTestCase==0.9.18
-Products.Ploneboard==3.6
 Products.PluggableAuthService==1.11.0
 Products.PluginRegistry==1.4
 Products.PortalTransforms==2.1.12
