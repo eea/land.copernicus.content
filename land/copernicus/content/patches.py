@@ -1,7 +1,6 @@
 from Acquisition import aq_inner
 from Products.PlonePAS.interfaces.plugins import IUserManagement
 from Products.PlonePAS.pas import _doDelUser
-from Products.Ploneboard.browser.search import SearchView
 from Products.PluggableAuthService.PluggableAuthService import \
     PluggableAuthService
 from Products.PluggableAuthService.PluggableAuthService import \
@@ -11,14 +10,12 @@ from Products.PluggableAuthService.events import PrincipalDeleted
 from Products.PluggableAuthService.interfaces.events import IPASEvent
 from collective.captcha.browser.captcha import Captcha
 from plone.app.discussion.browser.conversation import ConversationView
-from zope.component import getMultiAdapter
 from zope.event import notify
 from zope.interface import implements
 
 from plone.app.z3cform.interfaces import IPloneFormLayer
 
 old_enabled = ConversationView.enabled
-old_crop = SearchView.crop
 old_doDelUser = _doDelUser
 old_verify = Captcha.verify
 
@@ -51,18 +48,6 @@ def enabled(self):
     ]:
         return True
     return old_enabled(self)
-
-
-def crop(self, text):
-    """ Fix search results view in Ploneboard
-    """
-    plone = getMultiAdapter((self.context, self.request), name="plone")
-    return plone.cropText(
-        text,
-        self.site_properties.search_results_description_length,
-        self.site_properties.ellipsis
-    )
-    return old_crop(self)
 
 
 def verify(self, input):
