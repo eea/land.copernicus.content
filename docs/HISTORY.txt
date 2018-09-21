@@ -1,8 +1,8 @@
 Changelog
 =========
 
-5.3.dev0 - (unreleased)
------------------------
+5.3 - (2018-09-21)
+------------------
 * Fix: Get rid of unused Ploneboard (with python-dateutil<2.0dev version
   constraint) to make possible KGS update.
   [GhitaB #98613]
