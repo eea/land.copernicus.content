@@ -135,4 +135,16 @@
       import_steps="plone.app.registry"
       />
   </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+    source="3.3.3"
+    destination="3.4"
+    profile="land.copernicus.content:default">
+
+    <genericsetup:upgradeStep
+      title="Clean portal_transforms."
+      description="Unregister portal_transforms items defined by unused Ploneboard."
+      handler=".evolve34.run"
+      />
+  </genericsetup:upgradeSteps>
 </configure>
