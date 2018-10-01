@@ -1,8 +1,9 @@
 """ Unregister portal_transforms items defined by unused Ploneboard
 """
-import logging
-from plone import api
 from Products.CMFCore.utils import getToolByName
+from Products.MimetypesRegistry.common import MimeTypeException
+from plone import api
+import logging
 
 logger = logging.getLogger('land.copernicus.content')
 
@@ -13,7 +14,11 @@ def unregister_transform(name):
 
     result = ""
     try:
-        transforms.unregisterTransform(name)
+        try:
+            transforms.unregisterTransform(name)
+        except MimeTypeException:
+            if name in transforms.objectIds():
+                transforms._delObject(name)
         result = ("Removed transform %s" % name)
     except AttributeError:
         result = ("Could not remove transform %s (not found)" % name)
@@ -26,5 +31,5 @@ def run(_):
     broken_items = ['text_to_emoticons', 'url_to_hyperlink']
     for item in broken_items:
         result = unregister_transform(item)
-        logger(result)
+        logger.info(result)
     logger.info('Done cleaning portal_transforms.')
