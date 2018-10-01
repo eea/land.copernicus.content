@@ -3,8 +3,12 @@ Changelog
 
 5.4.dev0 - (unreleased)
 -----------------------
-* Add Matomo traking custom download event & custom dimensions. (untested)
+* Feature: Add Matomo traking custom download event & custom dimensions. (WIP)
   [GhitaB #98853]
+* Fix: Clean portal_transforms items defined by unused Ploneboard, fix errors:
+  PortalTransforms Cannot register transform url_to_hyperlink (ImportError),
+  PortalTransforms Cannot register transform text_to_emoticons (ImportError).
+  [GhitaB #97529]
 
 5.3 - (2018-09-21)
 ------------------
