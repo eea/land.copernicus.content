@@ -22,6 +22,9 @@
   <include package=".content" />
   <include package=".upgrades" />
 
+  <utility name="subscriber_roles"
+           component=".eea_meeting.subscriber_roles_vocabulary" />
+
   <browser:page
     name="register"
     for="Products.CMFPlone.Portal.PloneSite"
