@@ -41,7 +41,8 @@ setup(
         'five.pt',
         'plone.stringinterp==1.0.14',  # needed for IContextWrapper in async
         'eea.rdfmarshaller>=10.5',
-        'collective.recaptcha'
+        'collective.recaptcha',
+        'eea.meeting'
     ],
     setup_requires=['pytest-runner'],
     tests_require=['pytest'],
