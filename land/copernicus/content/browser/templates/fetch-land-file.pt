@@ -179,7 +179,7 @@
                data.land_item_title, // name
                1,                    // value
                {                     // custom dimensions
-                 dimesnion1: data.thematic_domain,
+                 dimension1: data.thematic_domain,
                  dimension2: data.institutional_domain,
                  dimension2: data.is_eionet_membet
                }
