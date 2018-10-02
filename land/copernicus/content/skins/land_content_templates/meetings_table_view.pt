@@ -1,0 +1,98 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+
+  <metal:content-core fill-slot="content-core">
+
+    <metal:block define-macro="listing" extend-macro="context/folder_listing/macros/content-core">
+
+      <metal:entries fill-slot="long_description"></metal:entries>
+
+      <metal:entries fill-slot="entries">
+
+        <legend>
+          <span class="level-national">
+            <i class="fa fa-circle level-national" aria-hidden="true"></i>
+            <span>National Event</span>
+          </span>
+          <span class="level-regional">
+            <i class="fa fa-circle level-regional" aria-hidden="true"></i>
+            <span>Regional Event</span>
+          </span>
+          <span class="other">
+            <i class="fa fa-circle other" aria-hidden="true"></i>
+            <span>Other Event</span>
+          </span>
+        </legend>
+
+        <div tal:replace="structure tab/long_description | nothing" tal:on-error="nothing"></div>
+
+        <table class="listing event-table table table-responsive table-hover"
+               summary="Content listing"
+               i18n:attributes="summary summary_content_listing;">
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Dates</th>
+              <th>Title</th>
+              <th>Location</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <metal:block use-macro="context/folder_listing/macros/entries">
+              <metal:entry fill-slot="entry">
+
+                <metal:listitem metal:define-macro="listitem"
+                  tal:define="oddrow repeat/item/odd;"
+                  tal:condition="python:item.portal_type == 'eea.meeting'">
+                <tr tal:attributes="class python:'level-'
+                  + context.get_event_level(item) + ' ' + test(oddrow, 'even', 'odd')">
+                  <td class="event-dates">
+                    <tal:condition tal:condition="python: context.get_event_year(item)">
+                      <span tal:content="python:context.get_event_year(item)"></span>
+                    </tal:condition>
+                  </td>
+
+                  <td class="event-dates">
+                    <tal:condition tal:condition="python: context.get_event_dates(item)">
+                      <span tal:content="python:context.get_event_dates(item)"></span>
+                    </tal:condition>
+                  </td>
+
+                  <td class="event-link">
+                    <a href="" tal:attributes="href item/getURL" tal:content="item/Title">Item</a>
+                  </td>
+
+                  <td class="event-table-location">
+                    <span tal:content="python: context.get_event_location(item)"></span>
+                  </td>
+
+                </tr>
+                </metal:listitem>
+
+              </metal:entry>
+            </metal:block>
+          </tbody>
+        </table>
+
+        <div tal:on-error="nothing" tal:condition="python: not context.portal_membership.isAnonymousUser()">
+          <form method="GET" action="" tal:attributes="action string:${tab/absolute_url}/++add++eea.meeting">
+            <button type="submit" class="btn btn-default">Create a new Meeting</button>
+          </form>
+        </div>
+      </metal:entries>
+    </metal:block>
+
+    <metal:subtopics use-macro="context/atct_topic_view/macros/folderlisting_macro" />
+
+  </metal:content-core>
+
+</body>
+</html>
