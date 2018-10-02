@@ -52,8 +52,7 @@
                 <metal:listitem metal:define-macro="listitem"
                   tal:define="oddrow repeat/item/odd;"
                   tal:condition="python:item.portal_type == 'eea.meeting'">
-                <tr tal:attributes="class python:'level-'
-                  + context.get_event_level(item) + ' ' + test(oddrow, 'even', 'odd')">
+                <tr>
                   <td class="event-dates">
                     <tal:condition tal:condition="python: context.get_event_year(item)">
                       <span tal:content="python:context.get_event_year(item)"></span>
