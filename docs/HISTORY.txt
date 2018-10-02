@@ -1,6 +1,9 @@
 Changelog
 =========
 
+5.5.dev0 - (unreleased)
+-----------------------
+
 5.4 - (2018-10-02)
 ------------------
 * Feature: Add Matomo traking custom download event & custom dimensions. (WIP)
