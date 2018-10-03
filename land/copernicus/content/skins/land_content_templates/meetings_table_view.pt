@@ -67,7 +67,7 @@
         </table>
 
         <div tal:on-error="nothing" tal:condition="python: not context.portal_membership.isAnonymousUser()">
-          <form method="GET" action="" tal:attributes="action string:${tab/absolute_url}/++add++eea.meeting">
+          <form method="GET" action="" tal:attributes="action string:${context/absolute_url}/++add++eea.meeting">
             <button type="submit" class="btn btn-default">Create a new Meeting</button>
           </form>
         </div>
