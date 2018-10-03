@@ -5,6 +5,7 @@ Changelog
 -----------------------
 * Feature: Copy and adapt eea.meeting features and overrides from
   eni.seis.content.
+  Manual step: make sure validate_email is checked in /manage_propertiesForm.
   [GhitaB #97529]
 
 5.4 - (2018-10-02)
