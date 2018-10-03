@@ -11,6 +11,7 @@
     name="register"
     class=".meeting.Register"
     permission="zope2.View"
+    layer="land.copernicus.content.interfaces.ILandCopernicusContentLayer"
     />
 
   <browser:page
@@ -18,6 +19,7 @@
     name="edit"
     class=".subscriber.EditForm"
     permission="zope2.View"
+    layer="land.copernicus.content.interfaces.ILandCopernicusContentLayer"
     />
 
   <browser:page
@@ -26,6 +28,7 @@
     class=".subscriber.SubscriberView"
     template="subscriber_view.pt"
     permission="eea.meeting.view_subscribers"
+    layer="land.copernicus.content.interfaces.ILandCopernicusContentLayer"
     />
 
  <adapter

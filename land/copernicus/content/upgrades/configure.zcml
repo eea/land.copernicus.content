@@ -147,4 +147,16 @@
       handler=".evolve34.run"
       />
   </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+    source="3.4"
+    destination="3.4.1"
+    profile="land.copernicus.content:default">
+
+    <genericsetup:upgradeDepends
+      title="Import browserlayer"
+      import_steps="browserlayer"
+      />
+
+  </genericsetup:upgradeSteps>
 </configure>
