@@ -3,6 +3,9 @@ Changelog
 
 5.5.dev0 - (unreleased)
 -----------------------
+* Feature: Copy and adapt eea.meeting features and overrides from
+  eni.seis.content.
+  [GhitaB #97529]
 
 5.4 - (2018-10-02)
 ------------------
