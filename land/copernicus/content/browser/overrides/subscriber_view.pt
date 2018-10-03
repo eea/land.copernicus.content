@@ -1,0 +1,167 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+         metal:use-macro="context/main_template/macros/master"
+         i18n:domain="plone">
+<body>
+
+<metal:content-core fill-slot="content-core">
+    <metal:block define-macro="content-core">
+      <div class="indicator-details" tal:define="
+        subscriber python:context;
+        details python:subscriber.get_details();
+        roles_dict python:context.aq_parent.aq_parent.get_subscriber_roles_dict()">
+
+        <div class="subscriber-details">
+
+          <div class="field" id="formfield-form-widgets-userid">
+            <label for="form-widgets-userid" class="horizontal">
+              User id:
+            </label>
+
+            <span id="form-widgets-userid" class="text-widget textline-field"
+                  tal:content="python:subscriber.userid">
+              ghitab
+            </span>
+          </div>
+
+          <div class="field" id="formfield-form-widgets-first_name">
+            <label for="form-widgets-first_name" class="horizontal">
+              First name:
+            </label>
+
+            <span id="form-widgets-email" class="text-widget textline-field"
+                  tal:content="python:details.get('first_name', '')">
+              Ghita
+            </span>
+          </div>
+
+          <div class="field" id="formfield-form-widgets-last_name">
+            <label for="form-widgets-first_name" class="horizontal">
+              Last name:
+            </label>
+
+            <span id="form-widgets-last_name" class="text-widget textline-field"
+                  tal:content="python:details.get('last_name', '')">
+              Bizau
+            </span>
+          </div>
+
+          <div class="field" id="formfield-form-widgets-email">
+            <label for="form-widgets-email" class="horizontal">
+              Email:
+            </label>
+
+            <span id="form-widgets-email" class="text-widget textline-field"
+                  tal:content="python:subscriber.email">
+              ghitab@some.thing
+            </span>
+          </div>
+
+          <div class="field" id="formfield-form-widgets-institution">
+            <label for="form-widgets-institution" class="horizontal">
+              Organisation:
+            </label>
+
+            <span id="form-widgets-institution" class="text-widget textline-field"
+                  tal:content="python:details.get('institution', '')">
+              EDW
+            </span>
+          </div>
+
+          <div class="field" id="formfield-form-widgets-position">
+            <label for="form-widgets-position" class="horizontal">
+              Position:
+            </label>
+
+            <span id="form-widgets-position" class="text-widget textline-field"
+                  tal:content="python:details.get('position', '')">
+              Web developer
+            </span>
+          </div>
+
+          <div class="field" id="formfield-form-widgets-from_country">
+            <label for="form-widgets-from_country" class="horizontal">
+              Country:
+            </label>
+
+            <span id="form-widgets-position" class="text-widget textline-field"
+                  tal:content="python:details.get('from_country', '')">
+              Romania
+            </span>
+          </div>
+
+          <div class="field" id="formfield-form-widgets-from_city">
+            <label for="form-widgets-from_city" class="horizontal">
+              City:
+            </label>
+
+            <span id="form-widgets-from_city" class="text-widget textline-field"
+                  tal:content="python:details.get('from_city', '')">
+              Oradea
+            </span>
+          </div>
+
+          <div class="field" id="formfield-form-widgets-address">
+            <label for="form-widgets-address" class="horizontal">
+              Address:
+            </label>
+
+            <span id="form-widgets-address" class="text-widget textline-field"
+                  tal:content="python:details.get('address', '')">
+              Oradea, Bihor
+            </span>
+          </div>
+
+          <div class="field" id="formfield-form-widgets-phone_numbers">
+            <label for="form-widgets-plone_numbers" class="horizontal">
+              Phone:
+            </label>
+
+            <span id="form-widgets-phone_numbers" class="text-widget textline-field"
+                  tal:content="python:details.get('phone_numbers', '')">
+              0987 654 321
+            </span>
+          </div>
+
+          <div class="field" id="formfield-form-widgets-reimbursed">
+            <label for="form-widgets-reimbursed" class="horizontal">
+              Reimbursed participation:
+            </label>
+
+            <span id="form-widgets-reimbursed" class="text-widget textline-field"
+                  tal:content="python:subscriber.reimbursed and 'Yes' or 'No'">
+              Yes
+            </span>
+          </div>
+
+          <div class="field" id="formfield-form-widgets-visa">
+            <label for="form-widgets-visa" class="horizontal">
+              I need visa support letter:
+            </label>
+
+            <span id="form-widgets-visa" class="text-widget textline-field"
+                  tal:content="python:subscriber.visa and 'Yes' or 'No'">
+              No
+            </span>
+          </div>
+
+          <div class="field" id="formfield-form-widgets-role">
+            <label for="form-widgets-role" class="horizontal">
+              Role:
+            </label>
+
+            <span id="form-widgets-role" class="text-widget textline-field"
+                  tal:content="python:subscriber.role_other if subscriber.role == 'other' else roles_dict.get(subscriber.role)">
+              ENI-SEIS II South NFP
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </metal:block>
+</metal:content-core>
+</body>
+</html>

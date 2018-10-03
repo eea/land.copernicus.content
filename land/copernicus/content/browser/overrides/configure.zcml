@@ -1,0 +1,43 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  xmlns:plone="http://namespaces.plone.org/plone"
+  i18n_domain="eni.seis.content">
+
+  <include package="eea.meeting" file="permissions.zcml" />
+
+  <browser:page
+    for="eea.meeting.interfaces.IMeeting"
+    name="register"
+    class=".meeting.Register"
+    permission="zope2.View"
+    layer="eni.seis.content.interfaces.IEniSeisContentLayer"
+    />
+
+  <browser:page
+    for="eea.meeting.interfaces.ISubscriber"
+    name="edit"
+    class=".subscriber.EditForm"
+    permission="zope2.View"
+    layer="eni.seis.content.interfaces.IEniSeisContentLayer"
+    />
+
+  <browser:page
+    for="eea.meeting.interfaces.ISubscriber"
+    name="view"
+    class=".subscriber.SubscriberView"
+    template="subscriber_view.pt"
+    permission="eea.meeting.view_subscribers"
+    layer="eni.seis.content.interfaces.IEniSeisContentLayer"
+    />
+
+ <adapter
+    provides="plone.z3cform.fieldsets.interfaces.IFormExtender"
+    for="eea.meeting.interfaces.ISubscriber
+    zope.publisher.interfaces.browser.IDefaultBrowserLayer
+    .subscriber.EditForm"
+    factory=".subscriber.EditFormExtender"
+    />
+
+</configure>
+

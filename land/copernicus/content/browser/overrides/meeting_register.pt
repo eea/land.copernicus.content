@@ -1,0 +1,302 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone.app.event">
+
+<head>
+  <metal:styleslot fill-slot="style_slot">
+    <link rel="stylesheet" type="text/css"
+      tal:attributes="href string:${portal_url}/++resource++eni.seis.content/meeting/register.css" />
+  </metal:styleslot>
+  <metal:javascriptslot fill-slot="javascript_head_slot">
+    <script type="text/javascript"
+      tal:attributes="src string:${portal_url}/++resource++eni.seis.content/meeting/register.js"></script>
+  </metal:javascriptslot>
+</head>
+<body>
+
+<metal:fill fill-slot="column_two_slot"></metal:fill>
+
+<metal:title fill-slot="content-title">
+  <h1 class="documentFirstHeading"><span tal:replace="context/title_or_id"></span> - Registration</h1>`
+</metal:title>
+
+<metal:content-core fill-slot="content-core"
+  tal:define="show_register_form python:request.get('form', '') == 'register'">
+<metal:block define-macro="content-core">
+
+<tal:anon condition="view/is_anon">
+<p>
+  Log in to register to this meeting.
+  If you have an account on this portal, type it in the form below.
+  If you don't have an account yet, use the button on the right to create one.
+</p>
+
+<div id="choice" tal:attributes="style python:'display: none' if show_register_form else ''">
+  <div class="login" tal:define="message python:options.get('login_message', None)">
+    <metal:message define-macro="message">
+      <tal:message tal:condition="message">
+        <div tal:attributes="class string:message ${message/type}"
+          onclick="$(this).fadeOut()">
+          <div tal:content="message/text"></div>
+        </div>
+      </tal:message>
+    </metal:message>
+    <form id="form-login" action="./register" name="login" method="POST" class="register-form">
+      <div class="register-form-fields">
+        <metal:field define-macro="field">
+          <div class="field">
+            <div class="field-label">
+              <metal:field-label define-slot="label">
+                <label for="f_username">Username</label>
+              </metal:field-label>
+            </div>
+            <div class="field-body">
+              <metal:field-body define-slot="body">
+                <input id="f_username" type="text" name="__ac_name" required />
+              </metal:field-body>
+            </div>
+          </div>
+        </metal:field>
+        <metal:field use-macro="template/macros/field">
+          <metal:label fill-slot="label">
+            <label>Password</label>
+          </metal:label>
+          <metal:body fill-slot="body">
+            <input type="password" name="__ac_password" required />
+          </metal:body>
+        </metal:field>
+        <div class="buttons">
+          <span>
+            <button type="submit" name="submit.login">Login</button>
+            <a href="./">Back to meeting</a>
+          </span>
+          <span>
+            <a href="./mail_password_form?userid=">Forgot password?</a>
+            <span class="info" title="Will not work for Eionet users. If you have an Eionet account you will need to contact the Eionet Helpdesk to reset your password.">&#x24d8;</span>
+          </span>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="register">
+    <a href="./register?form=register" class="choice-button"
+      onclick="meeting.show_registration();return false">Create new account</a>
+  </div>
+</div>
+
+
+<form id="form-register" class="register-form" tal:attributes="style python:'display: none' if not show_register_form else ''"
+  action="./register?form=register" name="register" method="POST" class="register-form"
+  tal:define="message python:options.get('register_message', None); fields python:options.get('fields', {});">
+  <h2>Personal information</h2>
+  <metal:message use-macro="template/macros/message" />
+  <div class="register-form-fields">
+    <metal:field use-macro="template/macros/field">
+      <metal:label fill-slot="label">
+        <label>First name<span class="required"></span></label>
+      </metal:label>
+      <metal:body fill-slot="body">
+        <input type="text" name="first_name" required
+          tal:attributes="value python:fields.get('first_name', '')" />
+      </metal:body>
+    </metal:field>
+    <metal:field use-macro="template/macros/field">
+      <metal:label fill-slot="label">
+        <label>Last name<span class="required"></span></label>
+      </metal:label>
+      <metal:body fill-slot="body">
+        <input type="text" name="last_name" required
+          tal:attributes="value python:fields.get('last_name', '')" />
+      </metal:body>
+    </metal:field>
+    <metal:field use-macro="template/macros/field">
+      <metal:label fill-slot="label">
+        <label>Position<span class="required"></span></label>
+      </metal:label>
+      <metal:body fill-slot="body">
+        <input type="text" name="position" required
+          tal:attributes="value python:fields.get('position', '')" />
+      </metal:body>
+    </metal:field>
+    <metal:field use-macro="template/macros/field">
+      <metal:label fill-slot="label">
+        <label>Organisation<span class="required"></span></label>
+      </metal:label>
+      <metal:body fill-slot="body">
+        <input type="text" name="organisation" required
+          tal:attributes="value python:fields.get('organisation', '')" />
+      </metal:body>
+    </metal:field>
+    <metal:field use-macro="template/macros/field">
+      <metal:label fill-slot="label">
+        <label>Address<span class="required"></span></label>
+      </metal:label>
+      <metal:body fill-slot="body">
+        <textarea rows="5" cols="30" name="address" required
+          tal:content="python:fields.get('address', '')"></textarea>
+      </metal:body>
+    </metal:field>
+    <metal:field use-macro="template/macros/field">
+      <metal:label fill-slot="label">
+        <label>Country<span class="required"></span></label>
+      </metal:label>
+      <metal:body fill-slot="body">
+        <input type="text" name="country" required
+          tal:attributes="value python:fields.get('country', '')" />
+      </metal:body>
+    </metal:field>
+    <metal:field use-macro="template/macros/field">
+      <metal:label fill-slot="label">
+        <label>Email address<span class="required"></span></label>
+      </metal:label>
+      <metal:body fill-slot="body">
+        <input type="email" name="email" required
+          tal:attributes="value python:fields.get('email', '')" />
+      </metal:body>
+    </metal:field>
+    <metal:field use-macro="template/macros/field">
+      <metal:label fill-slot="label">
+        <label>Phone numbers</label>
+      </metal:label>
+      <metal:body fill-slot="body">
+        <textarea rows="5" cols="30" name="phone_numbers:lines"
+          tal:content="python:'\n'.join(fields.get('phone_numbers', []))"></textarea>
+      </metal:body>
+    </metal:field>
+  </div>
+
+  <h2>Login details</h2>
+  <div class="register-form-fields">
+    <metal:field use-macro="template/macros/field">
+      <metal:label fill-slot="label">
+        <label>Username<span class="required"></span></label>
+        <p class="formHelp">
+          The username must contain only ASCII letters [a..z] or [A..Z].
+        </p>
+      </metal:label>
+      <metal:body fill-slot="body">
+        <input type="text" name="username" required
+          tal:attributes="value python:fields.get('username', '')" />
+      </metal:body>
+    </metal:field>
+    <metal:field use-macro="template/macros/field">
+      <metal:label fill-slot="label">
+        <label>Password<span class="required"></span></label>
+        <p class="formHelp">
+          The password must be at least 5 characters long.
+        </p>
+      </metal:label>
+      <metal:body fill-slot="body">
+        <input type="password" name="pw1" required />
+      </metal:body>
+    </metal:field>
+    <metal:field use-macro="template/macros/field">
+      <metal:label fill-slot="label">
+        <label>Password confirmation<span class="required"></span></label>
+      </metal:label>
+      <metal:body fill-slot="body">
+        <input type="password" name="pw2" required />
+      </metal:body>
+    </metal:field>
+
+    <button type="submit" name="submit.register">Register new account</button>
+    <a href="./register" onclick="meeting.show_choice();return false">Cancel</a>
+  </div>
+</form>
+<script>meeting.setup_pages()</script>
+
+</tal:anon>
+
+<tal:member tal:condition="not:view/is_anon" tal:define="is_registered python:context.is_registered()">
+  <tal:message-created define="message python:options.get('created_message', None)">
+    <metal:message use-macro="template/macros/message" />
+  </tal:message-created>
+  <tal:message-login define="message python:options.get('login_message', None)">
+    <metal:message use-macro="template/macros/message" />
+  </tal:message-login>
+  <tal:signup condition="not:is_registered" tal:define="fields python:options.get('fields', {});">
+    <p>Hello, <span tal:replace="python:user.getProperty('fullname')"></span>. Please complete the following form in order to register to this meeting.</p>
+
+    <tal:message-signup define="message python:options.get('signup_message', None)">
+      <metal:message use-macro="template/macros/message" />
+    </tal:message-signup>
+
+    <form id="form-signup" action="./register" name="signup" method="POST" class="register-form">
+      <div class="register-form-fields">
+        <metal:field use-macro="template/macros/field">
+          <metal:label fill-slot="label">
+            <label for="f_role">Role<span class="required"></span></label>
+          </metal:label>
+          <metal:body fill-slot="body">
+            <select id="f_role" name="role" required>
+              <option></option>
+              <tal:role repeat="option view/role_options">
+                <option tal:attributes="
+                  value python:option[0];
+                  selected python:'selected' if option[0] == fields.get('role') else ''"
+                  tal:content="python:option[1]"></option>
+              </tal:role>
+            </select>
+            <input class="other" type="text" id="f_role_other"
+                   name="role_other"
+                   tal:attributes="value python:fields.get('role_other', '')"
+                   placeholder="please specify"
+                   />
+            <span>&nbsp;</span>
+            <script>meeting.widget_other('#f_role', '#f_role_other')</script>
+          </metal:body>
+        </metal:field>
+        <metal:field use-macro="template/macros/field">
+          <metal:label fill-slot="label">
+            <label for="f_visa">I need visa support letter<span class="required"></span></label>
+          </metal:label>
+          <metal:body fill-slot="body">
+            <select id="f_visa" name="visa:int" required>
+              <option></option>
+              <option tal:attributes="selected python:'selected' if fields.get('visa') == 1 else ''" value="1">Yes</option>
+              <option tal:attributes="selected python:'selected' if fields.get('visa') == 0 else ''" value="0">No</option>
+            </select>
+            <span>&nbsp;</span>
+          </metal:body>
+        </metal:field>
+        <metal:field use-macro="template/macros/field">
+          <metal:label fill-slot="label">
+            <label for="f_reimbursed">Reimbursed participation<span class="required"></span></label>
+          </metal:label>
+          <metal:body fill-slot="body">
+            <select id="f_reimbursed" name="reimbursed:int" required>
+              <option></option>
+              <option tal:attributes="selected python:'selected' if fields.get('reimbursed') == 1 else ''" value="1">Yes</option>
+              <option tal:attributes="selected python:'selected' if fields.get('reimbursed') == 0 else ''" value="0">No</option>
+            </select>
+            <span class="info" title="Only a limited number of participants will be eligible for pre-paid travel ticket, accommodation and subsistence expenses, as specified in the invitation letter. Once you confirm your participation, we will provide you with additional information.">&#x24d8;</span>
+          </metal:body>
+        </metal:field>
+        <div class="buttons">
+          <span>
+            <button type="submit" name="submit.signup">Register to this meeting</button>
+            <a href="./">Cancel</a>
+          </span>
+        </div>
+      </div>
+    </form>
+  </tal:signup>
+  <tal:registered tal:condition="is_registered">
+    <tal:message-signup define="message python:options.get('signup_message', None)">
+      <metal:message use-macro="template/macros/message" />
+    </tal:message-signup>
+    <p>You are registered to this meeting! Do not forget to look into your spam folder.</p>
+    <a tal:attributes="href context/absolute_url">Return to the meeting page</a>
+  </tal:registered>
+
+</tal:member>
+
+</metal:block>
+</metal:content-core>
+
+</body>
+</html>
