@@ -142,6 +142,13 @@
     permission="zope2.View"
     />
 
+  <browser:page
+    name="get_upcoming_events"
+    for="*"
+    permission="zope2.View"
+    class=".views.GetUpcomingEventsView"
+    />
+
   <browser:viewlet
     name="sentry.script"
     for="*"
