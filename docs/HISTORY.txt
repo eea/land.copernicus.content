@@ -1,8 +1,11 @@
 Changelog
 =========
 
-5.4.dev0 - (unreleased)
+5.5.dev0 - (unreleased)
 -----------------------
+
+5.4 - (2018-10-02)
+------------------
 * Feature: Add Matomo traking custom download event & custom dimensions. (WIP)
   [GhitaB #98853]
 * Fix: Clean portal_transforms BROKEN items defined by unused Ploneboard.
