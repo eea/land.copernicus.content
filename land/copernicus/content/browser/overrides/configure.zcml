@@ -2,7 +2,7 @@
   xmlns="http://namespaces.zope.org/zope"
   xmlns:browser="http://namespaces.zope.org/browser"
   xmlns:plone="http://namespaces.plone.org/plone"
-  i18n_domain="eni.seis.content">
+  i18n_domain="land.copernicus.content">
 
   <include package="eea.meeting" file="permissions.zcml" />
 
@@ -11,7 +11,6 @@
     name="register"
     class=".meeting.Register"
     permission="zope2.View"
-    layer="eni.seis.content.interfaces.IEniSeisContentLayer"
     />
 
   <browser:page
@@ -19,7 +18,6 @@
     name="edit"
     class=".subscriber.EditForm"
     permission="zope2.View"
-    layer="eni.seis.content.interfaces.IEniSeisContentLayer"
     />
 
   <browser:page
@@ -28,7 +26,6 @@
     class=".subscriber.SubscriberView"
     template="subscriber_view.pt"
     permission="eea.meeting.view_subscribers"
-    layer="eni.seis.content.interfaces.IEniSeisContentLayer"
     />
 
  <adapter

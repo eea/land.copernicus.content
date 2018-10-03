@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from eni.seis.content.config import MessageFactory as _
+from land.copernicus.content.config import EEAMessageFactory as _
 from plone import api
 from plone.dexterity.browser import edit
 from plone.dexterity.interfaces import IDexterityEditForm
