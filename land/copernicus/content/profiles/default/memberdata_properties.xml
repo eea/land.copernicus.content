@@ -1,4 +1,9 @@
 <?xml version="1.0"?>
 <object name="portal_memberdata" meta_type="PlonePAS MemberData Tool">
- <property name="disclaimer_permission" type="boolean">False</property>
+  <property name="phone_numbers" type="lines"></property>  <!-- Phone numbers -->
+  <property name="institution" type="string"></property>   <!-- Institution -->
+  <property name="position" type="string"></property>      <!-- Position -->
+  <property name="from_country" type="string"></property>  <!-- From Country -->
+  <property name="from_city" type="string"></property>     <!-- From City -->
+  <property name="address" type="text"></property>         <!-- Address -->
 </object>

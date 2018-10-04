@@ -303,3 +303,47 @@ class IEnhancedUserDataSchema(IUserDataSchema):
                 default=u""),
         required=True,
     )
+
+    phone_numbers = schema.List(
+        title=_(u'label_phone_numbers', default=u'Phone numbers'),
+        description=_(u'help_phone_numbers',
+                      default=u'Fill in phone numbers.'),
+        value_type=schema.TextLine(),
+        required=False
+    )
+
+    institution = schema.TextLine(
+        title=_(u'label_institution', default=u'Institution'),
+        description=_(u'help_institution',
+                      default=u'Fill in the institution'),
+        required=True,
+    )
+
+    position = schema.TextLine(
+        title=_(u'label_position', default=u'Position'),
+        description=_(
+            u'help_position',
+            default=u'Fill in your position within your Institution'),
+        required=True,
+    )
+
+    from_country = schema.TextLine(
+        title=_(u'label_from_country', default=u'From country'),
+        description=_(u'help_from_country',
+                      default=u'Fill in the From country'),
+        required=True,
+    )
+
+    from_city = schema.TextLine(
+        title=_(u'label_from_city', default=u'From city'),
+        description=_(u'help_from_city',
+                      default=u'Fill in the From city'),
+        required=False,
+    )
+
+    address = schema.Text(
+        title=_(u'label_address', default=u'Address'),
+        description=_(u'help_address',
+                      default=u'Fill in the address'),
+        required=True,
+    )

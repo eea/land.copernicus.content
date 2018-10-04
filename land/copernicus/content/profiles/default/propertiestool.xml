@@ -4,7 +4,12 @@
   <!-- Fields that will be added to the form after installation of the product
   -->
   <property name="user_registration_fields" type="lines" purge="False">
-   <element value="disclaimer_permission" />
+   <element value="phone_numbers" />
+   <element value="institution" />
+   <element value="position" />
+   <element value="from_country" />
+   <element value="from_city" />
+   <element value="address" />
   </property>
  </object>
 </object>

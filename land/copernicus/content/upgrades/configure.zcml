@@ -159,4 +159,15 @@
       />
 
   </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+    source="3.4.1"
+    destination="3.4.2"
+    profile="land.copernicus.content:default">
+
+    <genericsetup:upgradeDepends
+      title="Upgrade step for land.copernicus.content: import memberdata-properties and propertiestool"
+      import_steps="memberdata-properties propertiestool"
+      />
+  </genericsetup:upgradeSteps>
 </configure>
