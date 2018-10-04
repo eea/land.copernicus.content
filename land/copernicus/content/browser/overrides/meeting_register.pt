@@ -9,11 +9,11 @@
 <head>
   <metal:styleslot fill-slot="style_slot">
     <link rel="stylesheet" type="text/css"
-      tal:attributes="href string:${portal_url}/++resource++eni.seis.content/meeting/register.css" />
+      tal:attributes="href string:${portal_url}/++resource++land.copernicus.content.static/meeting/register.css" />
   </metal:styleslot>
   <metal:javascriptslot fill-slot="javascript_head_slot">
     <script type="text/javascript"
-      tal:attributes="src string:${portal_url}/++resource++eni.seis.content/meeting/register.js"></script>
+      tal:attributes="src string:${portal_url}/++resource++land.copernicus.content.static/meeting/register.js"></script>
   </metal:javascriptslot>
 </head>
 <body>

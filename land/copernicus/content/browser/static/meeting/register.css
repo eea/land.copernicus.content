@@ -1,0 +1,116 @@
+#parent-fieldname-description,
+.documentByLine {
+    display: none !important;
+}
+
+form .field {
+    padding: 1rem;
+}
+
+form .info {
+    cursor: help;
+    font-weight: bold;
+}
+
+form input.other {
+    font-size: initial !important;
+    vertical-align: middle;
+    width: 10em !important;
+}
+
+.field-label {
+    width: 15em;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.field-body {
+    display: inline-block;
+    text-align: left;
+    width: 20em;
+    vertical-align: middle;
+}
+
+.field-body > * {
+    vertical-align: middle !important;
+}
+
+.message {
+    border: 1px solid #dfdfdf;
+    cursor: pointer;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.message:hover:before {
+    content: "\02713";
+    float: right;
+}
+
+.message.error {
+    border-color: #b70f0f;
+    background-color: #b70f0f;
+    color: #fff;
+}
+
+.message.good {
+    border-color: #009245;
+    background-color: #009245;
+    color: #fff;
+}
+
+#form-login .field label {
+    min-width: 10em;
+}
+
+#form-login .buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.register-form-fields {
+    text-align: center;
+}
+
+.register-form h2 {
+    margin-top: 3em;
+}
+
+.register-form button {
+    padding: 0.5rem 1rem;
+    background: white;
+    border: 1px solid #dfdfdf;
+    border-radius: 5px;
+}
+
+.register-form button:hover {
+    background: #dfdfdf;
+}
+
+#choice {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-flow: row wrap;
+}
+
+#choice .login {
+    padding: 1em;
+    border: 1px solid #dfdfdf;
+    border-radius: 10px;
+}
+
+.choice-button {
+    padding: 1rem;
+    margin-right: 2rem;
+    font-size: x-large;
+    background: white;
+    border: 2px solid #31456e;
+    border-radius: 5px;
+}
+
+.choice-button:hover {
+    background: #31456e;
+    color: #fff;
+}
