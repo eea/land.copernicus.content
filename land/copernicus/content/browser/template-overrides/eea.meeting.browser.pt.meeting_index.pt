@@ -1,0 +1,166 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  i18n:domain="eea.meeting"
+  metal:use-macro="context/main_template/macros/master">
+  <body>
+
+    <!-- OVERRIDE, we like 2 columns... <metal:fill fill&#45;slot="column_two_slot" /> -->
+    <metal:styleslot fill-slot="style_slot">
+      <link rel="stylesheet" type="text/css" media="screen" href="++resource++eea.meeting/common.css" />
+      <link rel="stylesheet" type="text/css" media="screen" href="++resource++eea.meeting/view.css" />
+    </metal:styleslot>
+
+    <div metal:fill-slot="content-core">
+
+      <div class="event clearfix" itemscope itemtype="http://data-vocabulary.org/Event">
+
+        <ul class="hiddenStructure" style="display:none">
+          <li><a itemprop="url" class="url" href="" tal:attributes="href context/absolute_url" tal:content="context/absolute_url">url</a></li>
+          <li itemprop="summary" class="summary" tal:content="context/title">title</li>
+          <li itemprop="startDate" class="dtstart" tal:content="context/start/isoformat">start</li>
+          <li itemprop="endDate" class="dtend" tal:content="context/end/isoformat">end</li>
+          <li itemprop="description" class="description" tal:content="context/description">description</li>
+        </ul>
+
+        <!-- Event summary -->
+
+        <div tal:attributes="class python:'event-information webminar' if context.is_webminar() else 'event-information'">
+
+          <div class="event-metadata">
+            <div class="eventDetails vcard">
+            <table class="vertical listing"
+              summary="Event details" i18n:attributes="summary summary_event_details;">
+
+              <tbody>
+
+                <tr>
+                  <th i18n:translate="event_when">When</th>
+                  <td>
+                    <div tal:define="start_tzname context/timezone;
+                      start_utcdelta python:context.start.tzinfo.utcoffset(context.start);
+                      start_utcoffset python:(start_utcdelta.days*86400+start_utcdelta.seconds)*100/60/60;">
+                      <span tal:replace="structure python:view.formatted_date(context)" ></span>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr tal:define="location context/location"
+                    tal:condition="python:context.location and (context.is_webminar() is not True)">
+                  <th i18n:translate="event_where">Where</th>
+                  <td class="location">
+                    <a
+                      tal:content="location"
+                      tal:attributes="href string:http://maps.google.com?q=$location"
+                      title="View on map" itemprop="location" >Location</a>
+                  </td>
+                </tr>
+                <tr tal:define="mail context/contact_email;
+                  name context/contact_name"
+                  tal:condition="python:name or mail">
+                  <th i18n:translate="contact_name">Contact Name</th>
+                  <td>
+                    <a class="email" tal:condition="mail" tal:attributes="href
+                      string:mailto:${mail}" tal:content="name" >name</a>
+                    <span tal:condition="not:mail" tal:content="name" ></span>
+                  </td>
+                </tr>
+                <tr tal:define="event_type context/meeting_type;"
+                  tal:condition="event_type">
+                  <th i18n:translate="type">Type</th>
+                  <td>
+                    <span itemprop="type" tal:content="structure python:view.w.get('meeting_type').render()">Type</span>
+                  </td>
+                </tr>
+                <tr tal:define="event_level context/meeting_level;"
+                  tal:condition="event_level">
+                  <th i18n:translate="type">Level</th>
+                  <td>
+                    <span itemprop="level" tal:content="structure python:view.w.get('meeting_level').render()">Level</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th i18n:translate="">Registration</th>
+                  <td tal:define="registered context/is_registered">
+                    <tal:notregister tal:condition="not:registered">
+                      <tal:canregister tal:condition="context/can_register">
+                          <a tal:attributes="href string:${context/absolute_url}/register" class="btn event-register">
+                            Register to this meeting
+                          </a>
+                      </tal:canregister>
+                      <span tal:condition="not:context/can_register">Not available</span>
+                    </tal:notregister>
+                    <tal:registered tal:condition="registered">
+                      <span>You are registered</span>
+                    </tal:registered>
+                  </td>
+                </tr>
+                <tr tal:define="host context/hosting_organisation | nothing"
+                     tal:condition="python:host">
+                     <th i18n:translate="hosting_organisation">Hosting organisation</th>
+                     <td tal:content="host">ONU</td>
+                 </tr>
+                <tr tal:condition="context/countries|nothing">
+                  <th>Countries</th>
+                  <td tal:define="countries_vocab python: context.event_countries_vocab(key_based=True)">
+                    <tal:rep tal:repeat="c_code context/countries">
+                      <span tal:content="python: countries_vocab[c_code]">Ukraine</span><span tal:condition="not:repeat/c_code/end">,</span>
+                    </tal:rep>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+            <div class="event-icons">
+              <div class="event-menu">
+                <div class="event-menu-item" id="register"
+                    tal:condition="python:context.registrations_open() and not context.is_registered()">
+                  <a href="./register">
+                    <img src="++resource++eea.meeting/img/register.png" />
+                    <span>Register</span>
+                  </a>
+                </div>
+                <div class="event-menu-item">
+                  <a href="./ics_view">
+                    <img src="++resource++eea.meeting/img/ical.png" />
+                    <span>ICal</span>
+                  </a>
+                </div>
+                <div class="event-menu-item" tal:condition="python:view.has_subscribers() and checkPermission('EEA Meting: View subscribers', context)">
+                  <a href="./subscribers">
+                    <img src="++resource++eea.meeting/img/participants.png" />
+                    <span>Participants</span>
+                  </a>
+                </div>
+                <div class="event-menu-item" tal:condition="python:view.has_sent_emails() and checkPermission('EEA Meting: View Emails', context)">
+                  <a href="./emails">
+                    <img src="++resource++eea.meeting/img/mail-archive.png" />
+                    <span>Mail archive</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div tal:condition="python:context.geolocation and (context.is_webminar() is not True)"
+               tal:replace="structure python: view.w.get('IGeolocatable.geolocation').render()"></div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div id="parent-fieldname-text" tal:content="structure context/text/output"></div>
+
+        <tal:listing tal:define="allowed view/can_list_content" tal:condition="allowed">
+          <div class="meeting-items" tal:define="
+            contentFilter python:{'portal_type': view.allowedPortalTypes};
+            folderContents python:context.getFolderContents(contentFilter);" tal:condition="folderContents">
+            <metal:content metal:use-macro="here/folder_tabular_view/macros/listing" >
+              <metal:fill fill-slot="long_description"></metal:fill>
+            </metal:content>
+          </div>
+        </tal:listing>
+
+      </div>
+    </div>
+  </body>
+</html>
