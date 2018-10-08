@@ -105,12 +105,15 @@ form input.other {
     padding: 1rem;
     margin-right: 2rem;
     font-size: x-large;
-    background: white;
-    border: 2px solid #31456e;
+    background: #a0b228;
+    border: 2px solid #a0b228;
     border-radius: 5px;
+    color: #FFFFFF !important;
+    text-decoration: none !important;
 }
 
 .choice-button:hover {
-    background: #31456e;
+    background: #808f12;
+    border: 2px solid #808f12;
     color: #fff;
 }
