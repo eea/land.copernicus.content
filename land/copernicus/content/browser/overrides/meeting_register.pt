@@ -207,7 +207,11 @@
     <a href="./register" onclick="meeting.show_choice();return false">Cancel</a>
   </div>
 </form>
-<script>meeting.setup_pages()</script>
+<script>
+  $(document).on("ready", function(){
+    meeting.setup_pages()
+  });
+</script>
 
 </tal:anon>
 
@@ -247,7 +251,11 @@
                    placeholder="please specify"
                    />
             <span>&nbsp;</span>
-            <script>meeting.widget_other('#f_role', '#f_role_other')</script>
+            <script>
+              $(document).on("ready", function() {
+                meeting.widget_other('#f_role', '#f_role_other')
+              });
+            </script>
           </metal:body>
         </metal:field>
         <metal:field use-macro="template/macros/field">
