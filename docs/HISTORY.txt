@@ -1,6 +1,9 @@
 Changelog
 =========
 
+5.6.dev0 - (unreleased)
+-----------------------
+
 5.5 - (2018-10-08)
 ------------------
 * Feature: Copy and adapt eea.meeting features and overrides from
