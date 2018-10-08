@@ -1,8 +1,8 @@
 Changelog
 =========
 
-5.5.dev0 - (unreleased)
------------------------
+5.5 - (2018-10-08)
+------------------
 * Feature: Copy and adapt eea.meeting features and overrides from
   eni.seis.content.
   Manual step: make sure validate_email is checked in /manage_propertiesForm.
