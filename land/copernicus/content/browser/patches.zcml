@@ -12,9 +12,4 @@
                   replacement="land.copernicus.content.patches.enabled"
                   docstringWarning="true" />
 
-    <monkey:patch description="Fix search results view in Ploneboard"
-                  class="Products.Ploneboard.browser.search.SearchView"
-                  original="crop"
-                  replacement="land.copernicus.content.patches.crop"
-                  docstringWarning="true" />
 </configure>
