@@ -3,6 +3,8 @@ Changelog
 
 5.6.dev0 - (unreleased)
 -----------------------
+* Fix: add missing datatables images.
+  [GhitaB #99730]
 
 5.5 - (2018-10-08)
 ------------------
