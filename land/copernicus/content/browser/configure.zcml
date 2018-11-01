@@ -151,6 +151,13 @@
     class=".views.GetUpcomingEventsView"
     />
 
+  <browser:page
+    name="view"
+    for="land.copernicus.content.content.interfaces.IFilesLibraryItem"
+    class=".fileslibraryitem.FilesLibraryItemView"
+    permission="zope2.View"
+    />
+
   <browser:viewlet
     name="sentry.script"
     for="*"

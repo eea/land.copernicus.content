@@ -2,6 +2,7 @@
 """
 from zope import schema
 from zope.interface import Interface
+from plone.supermodel import model
 
 
 class ILandContent(Interface):
@@ -51,4 +52,14 @@ class IPLandFile(Interface):
         title=u'Categorization of this file',
         description=u'Enter, for each category, its value',
         required=False
+    )
+
+
+class IFilesLibraryItem(model.Schema):
+    """ Files Library Item (as used for Technical Library)
+    """
+    external_link = schema.URI(
+        title=u"External link",
+        required=True,
+        description=u"External link test"
     )

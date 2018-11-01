@@ -157,7 +157,6 @@
       title="Import browserlayer"
       import_steps="browserlayer"
       />
-
   </genericsetup:upgradeSteps>
 
   <genericsetup:upgradeSteps
@@ -170,4 +169,17 @@
       import_steps="memberdata-properties propertiestool"
       />
   </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+    source="3.4.2"
+    destination="3.4.3"
+    profile="land.copernicus.content:default">
+
+    <genericsetup:upgradeDepends
+        title="Update typeinfo"
+        description="Add FilesLibraryItem dexterity content type."
+        import_steps="typeinfo"
+        />
+  </genericsetup:upgradeSteps>
+
 </configure>
