@@ -158,6 +158,13 @@
     permission="zope2.View"
     />
 
+  <browser:page
+    name="edit"
+    for="land.copernicus.content.content.interfaces.IFilesLibraryItem"
+    class=".fileslibraryitem.FilesLibraryItemAdminView"
+    permission="cmf.ManagePortal"
+    />
+
   <browser:viewlet
     name="sentry.script"
     for="*"
