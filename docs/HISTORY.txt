@@ -6,8 +6,12 @@ Changelog
 * Fix: user profiles for 'Energy, Utilities and Industrial Infrastructure'
   value in thematic_domain. Rename key in vocabulary for this term, too.
   [GhitaB #99886]
-* Feature: add FilesLibraryItem content type.
+* Feature: add FilesLibraryItem content type.                             (WIP)
   [GhitaB #99875]
+* Feature: Implement application for view mode                            (WIP)
+  [GhitaB #99878]
+* Feature: Implement administration panel for FilesLibraryItem.           (WIP)
+  [GhitaB #99876]
 * Fix: add missing datatables images.
   [GhitaB #99730]
 
@@ -20,7 +24,7 @@ Changelog
 
 5.4 - (2018-10-02)
 ------------------
-* Feature: Add Matomo traking custom download event & custom dimensions. (WIP)
+* Feature: Add Matomo traking custom download event & custom dimensions.  (WIP)
   [GhitaB #98853]
 * Fix: Clean portal_transforms BROKEN items defined by unused Ploneboard.
   [GhitaB #97529]
