@@ -1,1 +1,31 @@
-Files Library Item here
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+<metal:title fill-slot="content-title">
+  <h1 metal:use-macro="context/kss_generic_macros/macros/generic_title_view"></h1>
+</metal:title>
+
+<!-- <metal:styleslot fill&#45;slot="style_slot"> -->
+<!--   <link rel="stylesheet" type="text/css" href="${portal_url}/++resource++land.copernicus.content.static/lib/jquery.dataTables.min.css" /> -->
+<!--   <link rel="stylesheet" type="text/css" href="${portal_url}/eea&#45;tooltips.css" /> -->
+<!--   <link rel="stylesheet" type="text/css" href="${portal_url}/++resource++land.copernicus.content.static/landitem_view.css" /> -->
+<!-- </metal:styleslot> -->
+
+<!-- <metal:javascriptslot fill&#45;slot="javascript_head_slot"> -->
+<!--   <script defer type="text/javascript" language="javascript" src="${portal_url}/++resource++land.copernicus.content.static/lib/jquery.dataTables.min.js"></script> -->
+<!--   <script defer type="text/javascript" language="javascript" src="${portal_url}/eea&#45;tooltips.js"></script> -->
+<!--   <script defer type="text/javascript" language="javascript" src="${portal_url}/++resource++land.copernicus.content.static/landitem_view.js"></script> -->
+<!-- </metal:javascriptslot> -->
+
+<!-- <metal:description fill&#45;slot="content&#45;description" /> -->
+
+<metal:content-core fill-slot="content-core">
+  <metal:main_macro define-macro="content-core">
+    Files Library Item
+  </metal:main_macro>
+</metal:content-core>
+</body>
+</html>
