@@ -1,8 +1,9 @@
 """ Content interfaces
 """
+from plone.app.textfield import RichText
+from plone.supermodel import model
 from zope import schema
 from zope.interface import Interface
-from plone.supermodel import model
 
 
 class ILandContent(Interface):
@@ -58,8 +59,13 @@ class IPLandFile(Interface):
 class IFilesLibraryItem(model.Schema):
     """ Files Library Item (as used for Technical Library)
     """
-    external_link = schema.URI(
-        title=u"External link",
-        required=True,
-        description=u"External link test"
+    text = RichText(
+        title=u"Body text",
+        required=False,
+    )
+
+    json_data = schema.URI(
+        title=u"Data",
+        required=False,
+        description=u"Ignore it. It's automatically filled in edit mode."
     )
