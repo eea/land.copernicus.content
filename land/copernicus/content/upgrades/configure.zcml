@@ -182,4 +182,15 @@
         />
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+    source="3.4.3"
+    destination="3.5"
+    profile="land.copernicus.content:default">
+
+    <genericsetup:upgradeStep
+      title="Fix profiles for professional_thematic_domain: Energy, Utilities and Industrial Infrastructure."
+      description="[refs #99886] Go trough all user profiles and fix broken ones."
+      handler=".evolve35.run"
+      />
+  </genericsetup:upgradeSteps>
 </configure>

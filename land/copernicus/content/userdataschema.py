@@ -21,6 +21,7 @@ import re
 
 professional_thematic_domain_options = SimpleVocabulary([
     # Keep alphabetical order here.
+    # Don't use "," in values. The "," is the separator. Replace with "_".
     SimpleTerm(value='Agriculture', title=_(u'Agriculture')),
     SimpleTerm(value='Architectural and Landscape Design',
                title=_(u'Architectural and Landscape Design')),
@@ -30,7 +31,7 @@ professional_thematic_domain_options = SimpleVocabulary([
     SimpleTerm(value='Ecology and Environment',
                title=_(u'Ecology and Environment')),
     SimpleTerm(value='Emergency Management', title=_(u'Emergency Management')),
-    SimpleTerm(value='Energy, Utilities and Industrial Infrastructure',
+    SimpleTerm(value='Energy_ Utilities and Industrial Infrastructure',
                title=_(u'Energy, Utilities and Industrial Infrastructure')),
     SimpleTerm(value='Forestry', title=_(u'Forestry')),
     SimpleTerm(value='Health', title=_(u'Health')),
