@@ -3,6 +3,9 @@ Changelog
 
 5.6.dev0 - (unreleased)
 -----------------------
+* Fix: user profiles for 'Energy, Utilities and Industrial Infrastructure'
+  value in thematic_domain. Rename key in vocabulary for this term, too.
+  [GhitaB #99886]
 * Feature: add FilesLibraryItem content type.
   [GhitaB #99875]
 * Fix: add missing datatables images.
