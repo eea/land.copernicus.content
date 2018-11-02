@@ -1,1 +1,28 @@
-Edit mode of Files Library Item
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+<metal:title fill-slot="content-title">
+  <h1 metal:use-macro="context/kss_generic_macros/macros/generic_title_view"></h1>
+</metal:title>
+
+<!-- <metal:styleslot fill&#45;slot="style_slot"> -->
+<!--   <link rel="stylesheet" type="text/css" href="${portal_url}/++resource++land.copernicus.content.static/lib/jquery.dataTables.min.css" /> -->
+<!--   <link rel="stylesheet" type="text/css" href="${portal_url}/++resource++land.copernicus.content.static/fileslibraryitem/fileslibraryitem.css" /> -->
+<!-- </metal:styleslot> -->
+<!--  -->
+<!-- <metal:javascriptslot fill&#45;slot="javascript_head_slot"> -->
+<!--   <!&#45;&#45; TODO get rid of CDN &#45;&#45;> -->
+<!--   <script defer type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script> -->
+<!-- </metal:javascriptslot> -->
+
+<metal:content-core fill-slot="content-core">
+  <metal:main_macro define-macro="content-core">
+    <div id="parent-fieldname-text" tal:content="structure context/text/output"></div>
+
+  </metal:main_macro>
+</metal:content-core>
+</body>
+</html>
