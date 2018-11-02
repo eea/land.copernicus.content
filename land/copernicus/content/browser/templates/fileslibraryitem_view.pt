@@ -8,26 +8,44 @@
   <h1 metal:use-macro="context/kss_generic_macros/macros/generic_title_view"></h1>
 </metal:title>
 
-<!-- <metal:styleslot fill&#45;slot="style_slot"> -->
-<!--   <link rel="stylesheet" type="text/css" href="${portal_url}/++resource++land.copernicus.content.static/lib/jquery.dataTables.min.css" /> -->
-<!--   <link rel="stylesheet" type="text/css" href="${portal_url}/eea&#45;tooltips.css" /> -->
-<!--   <link rel="stylesheet" type="text/css" href="${portal_url}/++resource++land.copernicus.content.static/landitem_view.css" /> -->
-<!-- </metal:styleslot> -->
+<metal:styleslot fill-slot="style_slot">
+  <link rel="stylesheet" type="text/css" href="${portal_url}/++resource++land.copernicus.content.static/lib/jquery.dataTables.min.css" />
+</metal:styleslot>
 
-<!-- <metal:javascriptslot fill&#45;slot="javascript_head_slot"> -->
-<!--   <script defer type="text/javascript" language="javascript" src="${portal_url}/++resource++land.copernicus.content.static/lib/jquery.dataTables.min.js"></script> -->
-<!--   <script defer type="text/javascript" language="javascript" src="${portal_url}/eea&#45;tooltips.js"></script> -->
-<!--   <script defer type="text/javascript" language="javascript" src="${portal_url}/++resource++land.copernicus.content.static/landitem_view.js"></script> -->
-<!-- </metal:javascriptslot> -->
-
-<!-- <metal:description fill&#45;slot="content&#45;description" /> -->
+<metal:javascriptslot fill-slot="javascript_head_slot">
+  <!-- TODO get rid of CDN -->
+  <script defer type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+</metal:javascriptslot>
 
 <metal:content-core fill-slot="content-core">
   <metal:main_macro define-macro="content-core">
     <div id="parent-fieldname-text" tal:content="structure context/text/output"></div>
 
-    TODO Files table listing here.
+    <!-- TODO Replace with rendered table based on json_data  -->
+    <table class="files-library"><thead><tr><th>Click me to edit</th><th>Demo column 2</th><th>Demo column 3</th><th>URL</th></tr></thead><tbody><tr><td>Demo category</td><td>Sub-category 1</td><td>col3 data1</td><td><a href="https://www.google.com" target="_blank" title="https://www.google.com">Link<span style="display:none !important">https://www.google.com</span></a></td></tr><tr><td>Demo category</td><td>Sub-category 2</td><td>col3 data2</td><td><a href="https://www.yahoo.com" target="_blank" title="https://www.yahoo.com">Link<span style="display:none !important">https://www.yahoo.com</span></a></td></tr><tr><td>Demo category 2</td><td>Sub-category 3</td><td>col3 data3</td><td><a href="https://www.yahoo.com" target="_blank" title="https://www.yahoo.com">Link<span style="display:none !important">https://www.yahoo.com</span></a></td></tr></tbody></table>
 
+    <!-- TODO Replace with rendered search filters based on json_data  -->
+    <p><b>Search filters:</b></p>
+    <ul class="filters-list"><li class="search-filter">Demo category</li><li class="search-filter">Demo category 2</li><li class="search-filter">Sub-category 3</li></ul>
+
+    <script>
+    $(document).ready(function() {
+      if ($.fn.DataTable.isDataTable(".table-render-preview")) {
+        $('.table-render-preview').DataTable().clear().destroy();
+      }
+
+      var the_table = $('table.files-library').dataTable({
+        "destroy": true,
+        aaSorting: []
+      });
+
+      $(".search-filter").on("click", function() {
+        the_table.fnFilter('"' + $(this).text() + '"');
+        $(".search-filter").removeClass("is-selected");
+        $(this).addClass("is-selected");
+      });
+    });
+    </script>
   </metal:main_macro>
 </metal:content-core>
 </body>
