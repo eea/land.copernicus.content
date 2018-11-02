@@ -10,6 +10,7 @@
 
 <metal:styleslot fill-slot="style_slot">
   <link rel="stylesheet" type="text/css" href="${portal_url}/++resource++land.copernicus.content.static/lib/jquery.dataTables.min.css" />
+  <link rel="stylesheet" type="text/css" href="${portal_url}/++resource++land.copernicus.content.static/fileslibraryitem/fileslibraryitem.css" />
 </metal:styleslot>
 
 <metal:javascriptslot fill-slot="javascript_head_slot">
@@ -25,8 +26,10 @@
     <table class="files-library"><thead><tr><th>Click me to edit</th><th>Demo column 2</th><th>Demo column 3</th><th>URL</th></tr></thead><tbody><tr><td>Demo category</td><td>Sub-category 1</td><td>col3 data1</td><td><a href="https://www.google.com" target="_blank" title="https://www.google.com">Link<span style="display:none !important">https://www.google.com</span></a></td></tr><tr><td>Demo category</td><td>Sub-category 2</td><td>col3 data2</td><td><a href="https://www.yahoo.com" target="_blank" title="https://www.yahoo.com">Link<span style="display:none !important">https://www.yahoo.com</span></a></td></tr><tr><td>Demo category 2</td><td>Sub-category 3</td><td>col3 data3</td><td><a href="https://www.yahoo.com" target="_blank" title="https://www.yahoo.com">Link<span style="display:none !important">https://www.yahoo.com</span></a></td></tr></tbody></table>
 
     <!-- TODO Replace with rendered search filters based on json_data  -->
-    <p><b>Search filters:</b></p>
-    <ul class="filters-list"><li class="search-filter">Demo category</li><li class="search-filter">Demo category 2</li><li class="search-filter">Sub-category 3</li></ul>
+    <div class="filters-container">
+      <p><b>Search filters:</b></p>
+      <ul class="filters-list"><li class="search-filter">Demo category</li><li class="search-filter">Demo category 2</li><li class="search-filter">Sub-category 3</li></ul>
+    </div>
 
     <script>
     $(document).ready(function() {

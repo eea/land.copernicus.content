@@ -1,0 +1,30 @@
+body.portaltype-fileslibraryitem.template-view div.filters-container {
+  clear: both;
+  text-align: center;
+}
+
+body.portaltype-fileslibraryitem.template-view div.filters-container ul.filters-list {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  /* For IE, the outcast */
+  zoom:1;
+  *display: inline;
+}
+
+body.portaltype-fileslibraryitem.template-view ul.filters-list li {
+  float: left;
+  color: #A0B228;
+  padding: 10px 20px;
+  margin-right: 20px;
+  list-style: none;
+}
+
+body.portaltype-fileslibraryitem.template-view ul.filters-list li.is-selected {
+  border-bottom: 2px solid #A0B228;
+}
+
+body.portaltype-fileslibraryitem.template-view ul.filters-list li:hover {
+  cursor: pointer;
+  color: #819110;
+}
