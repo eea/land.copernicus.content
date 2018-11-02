@@ -24,7 +24,10 @@
 
 <metal:content-core fill-slot="content-core">
   <metal:main_macro define-macro="content-core">
-    Files Library Item
+    <div id="parent-fieldname-text" tal:content="structure context/text/output"></div>
+
+    TODO Files table listing here.
+
   </metal:main_macro>
 </metal:content-core>
 </body>
