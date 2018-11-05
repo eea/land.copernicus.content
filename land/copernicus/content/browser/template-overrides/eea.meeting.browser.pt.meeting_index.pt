@@ -68,7 +68,7 @@
                 </tr>
                 <tr tal:define="event_type context/meeting_type;"
                   tal:condition="event_type">
-                  <th i18n:translate="type">Type</th>
+                  <th i18n:translate="type">Event type</th>
                   <td>
                     <span itemprop="type" tal:content="structure python:view.w.get('meeting_type').render()">Type</span>
                   </td>
