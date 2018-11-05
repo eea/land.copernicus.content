@@ -24,4 +24,10 @@
                   ignoreOriginal="true"
                   replacement="land.copernicus.content.patches.IDataGridFieldLayer"
                   docstringWarning="true" />
+
+    <monkey:patch description="Customize Meeting type values"
+                  class="eea.meeting.interfaces"
+                  original="IMeeting"
+                  replacement="land.copernicus.content.eea_meeting.IMeeting"
+                  docstringWarning="true" />
 </configure>
