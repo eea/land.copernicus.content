@@ -156,7 +156,7 @@
           <div class="meeting-items" tal:define="
             contentFilter python:{'portal_type': view.allowedPortalTypes};
             folderContents python:context.getFolderContents(contentFilter);" tal:condition="folderContents">
-            <metal:content metal:use-macro="here/folder_tabular_view/macros/listing" >
+            <metal:content metal:use-macro="here/custom_folder_tabular_view/macros/listing" >
               <metal:fill fill-slot="long_description"></metal:fill>
             </metal:content>
           </div>
