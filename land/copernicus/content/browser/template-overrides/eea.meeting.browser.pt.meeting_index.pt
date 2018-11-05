@@ -122,11 +122,13 @@
                     <span>ICal</span>
                   </a>
                 </div>
-                <div class="event-menu-item" id="agenda">
+                <div class="event-menu-item" id="agenda"
+                     tal:define="agenda_file nocall:context/agenda"
+                     tal:condition="nocall:agenda_file">
                   <a tal:attributes="href string:${context/absolute_url}/@@download/agenda/${context/agenda/filename}">
                     <img src="++resource++eea.meeting/img/register.png" />
                     <span>Agenda</span>
-                    <!-- TODO add condition + replace image -->
+                    <!-- TODO replace image -->
                   </a>
                 </div>
                 <div class="event-menu-item" tal:condition="python:view.has_subscribers() and checkPermission('EEA Meting: View subscribers', context)">
