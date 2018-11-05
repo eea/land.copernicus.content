@@ -42,7 +42,7 @@
                 <th>City</th>
                 <th>Address</th>
                 <th>Phone</th>
-                <th>State</th>
+                <th>Registration status</th>
                 <th>Reimbursed</th>
                 <th>Role</th>
               </tr>
