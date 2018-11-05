@@ -53,7 +53,7 @@ class IMeeting(Interface):
     )
 
     max_participants = schema.Int(
-        title=_(u"Maximum number of participants"),
+        title=_(u"Maximum number of subscribers"),
         required=True,
     )
 
