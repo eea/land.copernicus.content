@@ -64,7 +64,7 @@ class IMeeting(Interface):
     )
 
     contact_name = schema.TextLine(
-        title=_(u"Contact person"),
+        title=_(u"Contact name"),
         required=True,
     )
 
