@@ -25,7 +25,7 @@
     </metal:styleslot>
 
     <div metal:fill-slot="content-core" class="meeting-items" tal:define="can_edit python:view.can_edit()">
-       <p>CUSTOMIZED ZZZ Users registered to participate in this meeting</p>
+       <p>Users registered to participate in this meeting</p>
        <a class="back-button" tal:attributes="href python:context.aq_parent.absolute_url()">Back to meeting page</a>
        <div class="clearfix"></div>
        <form action="./api" method="POST">
@@ -44,7 +44,6 @@
                 <th>Phone</th>
                 <th>State</th>
                 <th>Reimbursed</th>
-                <th>Visa</th>
                 <th>Role</th>
               </tr>
             <thead>
@@ -74,7 +73,6 @@
                     <span tal:content="subscriber/state" />
                   </td>
                   <td tal:content="python:subscriber.reimbursed and 'Yes' or 'No'" />
-                  <td tal:content="python:subscriber.visa and 'Yes' or 'No'" />
                   <td tal:content="python:subscriber.role_other if subscriber.role == 'other' else roles_dict.get(subscriber.role)" />
                 </tr>
               </tal:subscribers>
