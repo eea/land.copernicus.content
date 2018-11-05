@@ -56,6 +56,13 @@
                       title="View on map" itemprop="location" >Location</a>
                   </td>
                 </tr>
+                <tr tal:define="event_type context/meeting_type;"
+                  tal:condition="event_type">
+                  <th i18n:translate="type">Event type</th>
+                  <td>
+                    <span itemprop="type" tal:content="structure python:view.w.get('meeting_type').render()">Type</span>
+                  </td>
+                </tr>
                 <tr tal:define="mail context/contact_email;
                   name context/contact_name"
                   tal:condition="python:name or mail">
@@ -64,13 +71,6 @@
                     <a class="email" tal:condition="mail" tal:attributes="href
                       string:mailto:${mail}" tal:content="name" >name</a>
                     <span tal:condition="not:mail" tal:content="name" ></span>
-                  </td>
-                </tr>
-                <tr tal:define="event_type context/meeting_type;"
-                  tal:condition="event_type">
-                  <th i18n:translate="type">Event type</th>
-                  <td>
-                    <span itemprop="type" tal:content="structure python:view.w.get('meeting_type').render()">Type</span>
                   </td>
                 </tr>
                 <tr tal:define="event_level context/meeting_level;"
