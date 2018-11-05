@@ -74,7 +74,7 @@
                     <tal:notregister tal:condition="not:registered">
                       <tal:canregister tal:condition="context/can_register">
                           <a tal:attributes="href string:${context/absolute_url}/register" class="btn event-register">
-                            Register to this meeting
+                            Register to the event
                           </a>
                       </tal:canregister>
                       <span tal:condition="not:context/can_register">Not available</span>
