@@ -63,6 +63,11 @@
                     <span itemprop="type" tal:content="structure python:view.w.get('meeting_type').render()">Type</span>
                   </td>
                 </tr>
+                <tr tal:define="host context/hosting_organisation | nothing"
+                     tal:condition="python:host">
+                     <th i18n:translate="supporting_organisations">Supporting organisations</th>
+                     <td tal:content="host">ONU</td>
+                </tr>
                 <tr tal:define="mail context/contact_email;
                   name context/contact_name"
                   tal:condition="python:name or mail">
@@ -96,11 +101,6 @@
                     </tal:registered>
                   </td>
                 </tr>
-                <tr tal:define="host context/hosting_organisation | nothing"
-                     tal:condition="python:host">
-                     <th i18n:translate="supporting_organisations">Supporting organisations</th>
-                     <td tal:content="host">ONU</td>
-                 </tr>
                 <tr tal:condition="context/countries|nothing">
                   <th>Countries</th>
                   <td tal:define="countries_vocab python: context.event_countries_vocab(key_based=True)">
