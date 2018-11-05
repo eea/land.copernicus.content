@@ -125,7 +125,7 @@
                 <div class="event-menu-item" tal:condition="python:view.has_subscribers() and checkPermission('EEA Meting: View subscribers', context)">
                   <a href="./subscribers">
                     <img src="++resource++eea.meeting/img/participants.png" />
-                    <span>Participants</span>
+                    <span>Subscribers</span>
                   </a>
                 </div>
                 <div class="event-menu-item" tal:condition="python:view.has_sent_emails() and checkPermission('EEA Meting: View Emails', context)">
