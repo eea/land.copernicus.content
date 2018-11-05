@@ -70,6 +70,7 @@
                 </tr>
                 <tr>
                   <th i18n:translate="">Registration status</th>
+
                   <td tal:define="registered context/is_registered">
                     <tal:notregister tal:condition="not:registered">
                       <tal:canregister tal:condition="context/can_register">
@@ -79,8 +80,17 @@
                       </tal:canregister>
                       <span tal:condition="not:context/can_register">Not available</span>
                     </tal:notregister>
+
                     <tal:registered tal:condition="registered">
-                      <span>You are registered</span>
+                      <tal:approved tal:condition="python:context.subscriber_status() == 'approved'">
+                        Registered
+                      </tal:approved>
+                      <tal:pending tal:condition="python:context.subscriber_status() == 'new'">
+                        Request for registration sent
+                      </tal:pending>
+                      <tal:rejected tal:condition="python:context.subscriber_status() == 'rejected'">
+                        Registration rejected
+                      </tal:rejected>
                     </tal:registered>
                   </td>
                 </tr>
