@@ -58,7 +58,7 @@ class IMeeting(Interface):
     )
 
     hosting_organisation = schema.TextLine(
-        title=_(u"Hosting organisation"),
+        title=_(u"Supporting organisations"),
         required=True,
         default=None,
     )
