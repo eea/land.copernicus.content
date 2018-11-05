@@ -68,6 +68,22 @@
                      <th i18n:translate="supporting_organisations">Supporting organisations</th>
                      <td tal:content="host">ONU</td>
                 </tr>
+                <tr>
+                  <th i18n:translate="">Registration status</th>
+                  <td tal:define="registered context/is_registered">
+                    <tal:notregister tal:condition="not:registered">
+                      <tal:canregister tal:condition="context/can_register">
+                          <a tal:attributes="href string:${context/absolute_url}/register" class="btn event-register">
+                            Register to this meeting
+                          </a>
+                      </tal:canregister>
+                      <span tal:condition="not:context/can_register">Not available</span>
+                    </tal:notregister>
+                    <tal:registered tal:condition="registered">
+                      <span>You are registered</span>
+                    </tal:registered>
+                  </td>
+                </tr>
                 <tr tal:define="mail context/contact_email;
                   name context/contact_name"
                   tal:condition="python:name or mail">
@@ -83,22 +99,6 @@
                   <th i18n:translate="type">Level</th>
                   <td>
                     <span itemprop="level" tal:content="structure python:view.w.get('meeting_level').render()">Level</span>
-                  </td>
-                </tr>
-                <tr>
-                  <th i18n:translate="">Registration status</th>
-                  <td tal:define="registered context/is_registered">
-                    <tal:notregister tal:condition="not:registered">
-                      <tal:canregister tal:condition="context/can_register">
-                          <a tal:attributes="href string:${context/absolute_url}/register" class="btn event-register">
-                            Register to this meeting
-                          </a>
-                      </tal:canregister>
-                      <span tal:condition="not:context/can_register">Not available</span>
-                    </tal:notregister>
-                    <tal:registered tal:condition="registered">
-                      <span>You are registered</span>
-                    </tal:registered>
                   </td>
                 </tr>
                 <tr tal:condition="context/countries|nothing">
