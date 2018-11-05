@@ -131,7 +131,7 @@
                 <div class="event-menu-item" tal:condition="python:view.has_sent_emails() and checkPermission('EEA Meting: View Emails', context)">
                   <a href="./emails">
                     <img src="++resource++eea.meeting/img/mail-archive.png" />
-                    <span>Mail archive</span>
+                    <span>Mailing list</span>
                   </a>
                 </div>
               </div>
