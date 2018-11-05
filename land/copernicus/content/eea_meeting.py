@@ -12,8 +12,15 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 
 meeting_types = SimpleVocabulary(
-    [SimpleTerm(value=u'meeting', title=_(u'Meeting')),
-     SimpleTerm(value=u'webminar', title=_(u'Webminar'))]
+    [
+        SimpleTerm(value=u'conference', title=_(u'Conference')),
+        SimpleTerm(value=u'meeting', title=_(u'Meeting')),
+        SimpleTerm(value=u'workshop', title=_(u'Workshop')),
+        SimpleTerm(value=u'webminar', title=_(u'Webminar')),
+        SimpleTerm(value=u'eionet-copernicus-nrc-lc-meeting',
+                   title=_(u'EIONET Copernicus NRC LC Meeting')),
+        SimpleTerm(value=u'other', title=_(u'Other')),
+    ]
 )
 
 meeting_levels = SimpleVocabulary(
