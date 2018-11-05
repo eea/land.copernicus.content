@@ -87,26 +87,11 @@
                 <tr tal:define="mail context/contact_email;
                   name context/contact_name"
                   tal:condition="python:name or mail">
-                  <th i18n:translate="contact_name">Contact Name</th>
+                  <th i18n:translate="contact_name">Contact name</th>
                   <td>
                     <a class="email" tal:condition="mail" tal:attributes="href
                       string:mailto:${mail}" tal:content="name" >name</a>
                     <span tal:condition="not:mail" tal:content="name" ></span>
-                  </td>
-                </tr>
-                <tr tal:define="event_level context/meeting_level;"
-                  tal:condition="event_level">
-                  <th i18n:translate="type">Level</th>
-                  <td>
-                    <span itemprop="level" tal:content="structure python:view.w.get('meeting_level').render()">Level</span>
-                  </td>
-                </tr>
-                <tr tal:condition="context/countries|nothing">
-                  <th>Countries</th>
-                  <td tal:define="countries_vocab python: context.event_countries_vocab(key_based=True)">
-                    <tal:rep tal:repeat="c_code context/countries">
-                      <span tal:content="python: countries_vocab[c_code]">Ukraine</span><span tal:condition="not:repeat/c_code/end">,</span>
-                    </tal:rep>
                   </td>
                 </tr>
               </tbody>
