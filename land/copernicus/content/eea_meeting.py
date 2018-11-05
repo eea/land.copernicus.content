@@ -2,6 +2,7 @@
 from eea.meeting import _
 from eea.meeting.interfaces.util import validate_email
 from plone.app.textfield import RichText
+from plone.namedfile.field import NamedBlobFile
 from zope import schema
 from zope.interface import Interface
 from zope.interface import invariant, Invalid
@@ -85,6 +86,12 @@ class IMeeting(Interface):
         ),
         required=False,
         default=None
+    )
+
+    agenda = NamedBlobFile(
+        title=_(u"Event agenda"),
+        description=_(u"Upload your agenda file."),
+        required=False,
     )
 
     @invariant
