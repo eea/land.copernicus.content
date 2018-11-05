@@ -23,12 +23,6 @@ meeting_types = SimpleVocabulary(
     ]
 )
 
-meeting_levels = SimpleVocabulary(
-    [SimpleTerm(value=u'national', title=_(u'National Level')),
-     SimpleTerm(value=u'regional', title=_(u'Regional Level')),
-     SimpleTerm(value=u'other', title=_(u'Other'))]
-)
-
 
 class IMeeting(Interface):
     """ Meeting """
@@ -40,12 +34,6 @@ class IMeeting(Interface):
     meeting_type = schema.Choice(
         title=_(u"Meeting type"),
         vocabulary=meeting_types,
-        required=True,
-    )
-
-    meeting_level = schema.Choice(
-        title=_(u"Meeting level"),
-        vocabulary=meeting_levels,
         required=True,
     )
 
