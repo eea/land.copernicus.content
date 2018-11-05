@@ -123,10 +123,10 @@
                   </a>
                 </div>
                 <div class="event-menu-item" id="agenda">
-                  <a href="./agenda">
+                  <a tal:attributes="href string:${context/absolute_url}/@@download/agenda/${context/agenda/filename}">
                     <img src="++resource++eea.meeting/img/register.png" />
                     <span>Agenda</span>
-                    <!-- TODO link to file, add condition + replace image -->
+                    <!-- TODO add condition + replace image -->
                   </a>
                 </div>
                 <div class="event-menu-item" tal:condition="python:view.has_subscribers() and checkPermission('EEA Meting: View subscribers', context)">
