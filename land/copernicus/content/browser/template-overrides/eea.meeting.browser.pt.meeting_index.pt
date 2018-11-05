@@ -86,7 +86,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <th i18n:translate="">Registration</th>
+                  <th i18n:translate="">Registration status</th>
                   <td tal:define="registered context/is_registered">
                     <tal:notregister tal:condition="not:registered">
                       <tal:canregister tal:condition="context/can_register">
