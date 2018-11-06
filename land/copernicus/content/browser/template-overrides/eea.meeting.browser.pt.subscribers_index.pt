@@ -9,7 +9,7 @@
       <script type="text/javascript"
         tal:attributes="src string:${portal_url}/++resource++eea.meeting/html_json.js"></script>
       <script type="text/javascript"
-        tal:attributes="src string:${portal_url}/++resource++eea.meeting/excel.js"></script>
+        tal:attributes="src string:${portal_url}/eea.meeting.browser.static.excel.js"></script><!-- customized -->
       <script type="text/javascript"
         tal:attributes="src string:${portal_url}/++resource++eea.meeting/third-party/Vanilla-DataTables/vanilla-dataTables.min.js"></script>
       <script type="text/javascript"
