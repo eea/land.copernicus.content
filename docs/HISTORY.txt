@@ -3,6 +3,8 @@ Changelog
 
 5.7.dev0 - (unreleased)
 -----------------------
+* Improve: Subscribers list - add excel.js customization.
+  [GhitaB #99958]
 
 5.6 - (2018-11-06)
 ------------------
