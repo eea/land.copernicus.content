@@ -317,7 +317,7 @@ class IEnhancedUserDataSchema(IUserDataSchema):
         title=_(u'label_institution', default=u'Institution'),
         description=_(u'help_institution',
                       default=u'Fill in the institution'),
-        required=True,
+        required=False,
     )
 
     position = schema.TextLine(
@@ -325,14 +325,14 @@ class IEnhancedUserDataSchema(IUserDataSchema):
         description=_(
             u'help_position',
             default=u'Fill in your position within your Institution'),
-        required=True,
+        required=False,
     )
 
     from_country = schema.TextLine(
         title=_(u'label_from_country', default=u'From country'),
         description=_(u'help_from_country',
                       default=u'Fill in the From country'),
-        required=True,
+        required=False,
     )
 
     from_city = schema.TextLine(
@@ -346,5 +346,5 @@ class IEnhancedUserDataSchema(IUserDataSchema):
         title=_(u'label_address', default=u'Address'),
         description=_(u'help_address',
                       default=u'Fill in the address'),
-        required=True,
+        required=False,
     )
