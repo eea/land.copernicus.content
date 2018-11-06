@@ -1,8 +1,11 @@
 Changelog
 =========
 
-5.6.dev0 - (unreleased)
+5.7.dev0 - (unreleased)
 -----------------------
+
+5.6 - (2018-11-06)
+------------------
 * Subscribers view - multiple changes                                     (WIP)
   [GhitaB #99958]
 * Meeting view - multiple changes                                         (WIP)
