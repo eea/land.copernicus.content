@@ -21,7 +21,7 @@
 <metal:fill fill-slot="column_two_slot"></metal:fill>
 
 <metal:title fill-slot="content-title">
-  <h1 class="documentFirstHeading"><span tal:replace="context/title_or_id"></span> - Registration</h1>`
+  <h1 class="documentFirstHeading"><span tal:replace="context/title_or_id"></span> - Registration</h1>
 </metal:title>
 
 <metal:content-core fill-slot="content-core"
@@ -297,7 +297,7 @@
     <tal:message-signup define="message python:options.get('signup_message', None)">
       <metal:message use-macro="template/macros/message" />
     </tal:message-signup>
-    <p>You are registered to this meeting! Do not forget to look into your spam folder.</p>
+    <p>Your registration request has been sent to event organisers. As soon as your registration is confirmed you will receive a notification e-mail.</p>
     <a tal:attributes="href context/absolute_url">Return to the meeting page</a>
   </tal:registered>
 

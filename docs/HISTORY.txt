@@ -3,6 +3,8 @@ Changelog
 
 5.7.dev0 - (unreleased)
 -----------------------
+* Improve: Update text on registration sent.
+  [GhitaB #99957]
 * Improve: Subscribers list - add excel.js customization.
   [GhitaB #99958]
 
