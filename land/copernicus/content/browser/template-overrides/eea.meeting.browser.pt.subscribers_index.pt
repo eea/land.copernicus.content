@@ -53,8 +53,7 @@
                 <td colspan="13">No subscribers.</td>
               </tr>
               <tal:subscribers tal:repeat="subscriber subscribers">
-                <tr tal:define="subscriber_details python:subscriber.get_details();
-                                roles_dict python:context.aq_parent.get_subscriber_roles_dict()">
+                <tr tal:define="subscriber_details python:subscriber.get_details();">
                   <td tal:condition="can_edit">
                     <input type="checkbox" data-role="select-subscriber" name="subscribers:list" tal:attributes="value subscriber/getId"/>
                   </td>
@@ -74,7 +73,7 @@
                     <span tal:content="subscriber/state" />
                   </td>
                   <td tal:content="python:subscriber.reimbursed and 'Yes' or 'No'" />
-                  <td tal:content="python:subscriber.role_other if subscriber.role == 'other' else roles_dict.get(subscriber.role)" />
+                  <td tal:content="python:subscriber.role_other if subscriber.role == 'other' else subscriber.role" />
                   <td tal:define="toLocalizedTime nocall: context/@@plone/toLocalizedTime;"
                       tal:content="python:toLocalizedTime(subscriber.created(), long_format=1)"></td>
                 </tr>

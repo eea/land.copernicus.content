@@ -123,8 +123,8 @@ class IMeeting(Interface):
 @provider(IVocabularyFactory)
 def subscriber_roles_vocabulary(context):
     items = [
-        ('test1', u'Test value 1'),
-        ('test2', u'Test value 2')
+        ('Speaker', u'Speaker'),
+        ('Participant', u'Participant')
     ]
 
     terms = [
