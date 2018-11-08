@@ -4,6 +4,7 @@ Changelog
 5.7.dev0 - (unreleased)
 -----------------------
 * Improve: add 'E-pass is required' field to meeting schema.
+* Improve: add allow From, To fields to meeting schema.
   [GhitaB #99956]
 * Improve: Update text on registration sent.
   [GhitaB #99957]
