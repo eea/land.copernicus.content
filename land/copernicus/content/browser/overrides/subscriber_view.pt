@@ -126,17 +126,6 @@
             </span>
           </div>
 
-          <div class="field" id="formfield-form-widgets-visa">
-            <label for="form-widgets-visa" class="horizontal">
-              I need visa support letter:
-            </label>
-
-            <span id="form-widgets-visa" class="text-widget textline-field"
-                  tal:content="python:subscriber.visa and 'Yes' or 'No'">
-              No
-            </span>
-          </div>
-
           <div class="field" id="formfield-form-widgets-role">
             <label for="form-widgets-role" class="horizontal">
               Role:

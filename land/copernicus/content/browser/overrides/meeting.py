@@ -39,7 +39,6 @@ FIELDS_REQUIRED = (
 
 FIELDS_SIGNUP = (
     ('role', 'role'),
-    ('visa', 'visa'),
 )
 
 
@@ -225,7 +224,6 @@ class Register(views.Register):
                 userid=uid,
                 email=user.getProperty('email', ''),
                 role=self.request.get('role'),
-                visa=bool(self.request.get('visa')),
                 role_other=self.request.get('role_other', ''),
             )
             views.add_subscriber(subscribers, **props)

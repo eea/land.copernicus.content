@@ -258,19 +258,6 @@
             </script>
           </metal:body>
         </metal:field>
-        <metal:field use-macro="template/macros/field">
-          <metal:label fill-slot="label">
-            <label for="f_visa">I need visa support letter<span class="required"></span></label>
-          </metal:label>
-          <metal:body fill-slot="body">
-            <select id="f_visa" name="visa:int" required>
-              <option></option>
-              <option tal:attributes="selected python:'selected' if fields.get('visa') == 1 else ''" value="1">Yes</option>
-              <option tal:attributes="selected python:'selected' if fields.get('visa') == 0 else ''" value="0">No</option>
-            </select>
-            <span>&nbsp;</span>
-          </metal:body>
-        </metal:field>
         <div class="buttons">
           <span>
             <button type="submit" name="submit.signup">Register to this meeting</button>
