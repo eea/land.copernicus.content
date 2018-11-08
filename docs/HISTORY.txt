@@ -6,7 +6,7 @@ Changelog
 * Improve: add 'E-pass is required' field to meeting schema.
 * Improve: add allow From, To fields to meeting schema.
   [GhitaB #99956]
-* Improve: Update text on registration sent.
+* Improve: Update text on registration sent. Change text label for Role field.
   [GhitaB #99957]
 * Improve: Subscribers list - add excel.js customization.
   [GhitaB #99958]
