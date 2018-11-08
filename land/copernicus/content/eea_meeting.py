@@ -43,6 +43,11 @@ class IMeeting(Interface):
         required=True,
     )
 
+    need_e_pass = schema.Bool(
+        title=_(u"E-pass is required"),
+        required=True,
+    )
+
     restrict_content_access = schema.Bool(
         title=_(u"Hide meeting content list for not registered users"),
         required=True
