@@ -233,7 +233,7 @@
       <div class="register-form-fields">
         <metal:field use-macro="template/macros/field">
           <metal:label fill-slot="label">
-            <label for="f_role">Role<span class="required"></span></label>
+            <label for="f_role">I would like to attend the event in the capacity of<span class="required"></span></label>
           </metal:label>
           <metal:body fill-slot="body">
             <select id="f_role" name="role" required>
