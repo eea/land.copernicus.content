@@ -43,14 +43,13 @@
                 <th>Address</th>
                 <th>Phone</th>
                 <th>Registration status</th>
-                <th>Reimbursed</th>
                 <th>Role</th>
                 <th title="When the registration request was submitted">Time stamp</th>
               </tr>
             <thead>
             <tbody tal:define="subscribers python:context.get_subscribers()">
               <tr tal:condition="not:subscribers">
-                <td colspan="13">No subscribers.</td>
+                <td colspan="12">No subscribers.</td>
               </tr>
               <tal:subscribers tal:repeat="subscriber subscribers">
                 <tr tal:define="subscriber_details python:subscriber.get_details();">
@@ -72,7 +71,6 @@
                   <td>
                     <span tal:content="subscriber/state" />
                   </td>
-                  <td tal:content="python:subscriber.reimbursed and 'Yes' or 'No'" />
                   <td tal:content="python:subscriber.role_other if subscriber.role == 'other' else subscriber.role" />
                   <td tal:define="toLocalizedTime nocall: context/@@plone/toLocalizedTime;"
                       tal:content="python:toLocalizedTime(subscriber.created(), long_format=1)"></td>

@@ -271,19 +271,6 @@
             <span>&nbsp;</span>
           </metal:body>
         </metal:field>
-        <metal:field use-macro="template/macros/field">
-          <metal:label fill-slot="label">
-            <label for="f_reimbursed">Reimbursed participation<span class="required"></span></label>
-          </metal:label>
-          <metal:body fill-slot="body">
-            <select id="f_reimbursed" name="reimbursed:int" required>
-              <option></option>
-              <option tal:attributes="selected python:'selected' if fields.get('reimbursed') == 1 else ''" value="1">Yes</option>
-              <option tal:attributes="selected python:'selected' if fields.get('reimbursed') == 0 else ''" value="0">No</option>
-            </select>
-            <span class="info" title="Only a limited number of participants will be eligible for pre-paid travel ticket, accommodation and subsistence expenses, as specified in the invitation letter. Once you confirm your participation, we will provide you with additional information.">&#x24d8;</span>
-          </metal:body>
-        </metal:field>
         <div class="buttons">
           <span>
             <button type="submit" name="submit.signup">Register to this meeting</button>

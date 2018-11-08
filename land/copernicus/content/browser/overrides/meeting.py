@@ -40,14 +40,12 @@ FIELDS_REQUIRED = (
 FIELDS_SIGNUP = (
     ('role', 'role'),
     ('visa', 'visa'),
-    ('reimbursed', 'reimbursed'),
 )
 
 
 FIELDS_SIGNUP_REQUIRED = (
     ('role', 'Role'),
     ('visa', 'Visa support'),
-    ('reimbursed', 'Reimbursed participation'),
 )
 
 
@@ -226,7 +224,6 @@ class Register(views.Register):
                 id=uid,
                 userid=uid,
                 email=user.getProperty('email', ''),
-                reimbursed=bool(self.request.get('reimbursed')),
                 role=self.request.get('role'),
                 visa=bool(self.request.get('visa')),
                 role_other=self.request.get('role_other', ''),

@@ -126,17 +126,6 @@
             </span>
           </div>
 
-          <div class="field" id="formfield-form-widgets-reimbursed">
-            <label for="form-widgets-reimbursed" class="horizontal">
-              Reimbursed participation:
-            </label>
-
-            <span id="form-widgets-reimbursed" class="text-widget textline-field"
-                  tal:content="python:subscriber.reimbursed and 'Yes' or 'No'">
-              Yes
-            </span>
-          </div>
-
           <div class="field" id="formfield-form-widgets-visa">
             <label for="form-widgets-visa" class="horizontal">
               I need visa support letter:
