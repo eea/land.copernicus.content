@@ -51,5 +51,6 @@ setup(
     # -*- Entry points: -*-
     [console_scripts]
     users_stats = land.copernicus.content.browser.scripts:users_stats
+    subscrib_reset = land.copernicus.content.browser.scripts:subscrib_reset
     """,
 )

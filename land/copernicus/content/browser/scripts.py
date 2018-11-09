@@ -1,5 +1,7 @@
 from land.copernicus.content.browser.users_statistics import \
         users_statistics_operations_center
+from land.copernicus.content.browser.subscribers_data_reset import \
+        clean_old_subscribers_data
 from land.copernicus.content.config import ENV_HOST_USERS_STATS
 
 HOST = ENV_HOST_USERS_STATS
@@ -40,3 +42,17 @@ def users_stats():
     """
     site = get_plone_site()
     users_statistics_operations_center(site)
+
+
+def subscrib_reset():
+    """ A cron callable script to reset subscribers data based on this request:
+
+        E-pass information due to its sensitivity shall be treated very
+        carefully – we would like to ask whether it would be possible to
+        automate the deletion of this information, ie that E-pass information
+        is deleted automatically 72hrs (3 days) after the end of the event
+
+        bin/zeo_client run bin/subscrib_reset
+    """
+    site = get_plone_site()
+    clean_old_subscribers_data(site)

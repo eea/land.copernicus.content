@@ -1,0 +1,16 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+  <metal:description fill-slot="content-description" />
+
+  <metal:content-core fill-slot="content-core">
+    <metal:main_macro define-macro="content-core">
+      <h2 i18n:translate="">Reset subscribers old data...</h2>
+      <p>Done!</p>
+    </metal:main_macro>
+  </metal:content-core>
+</body>
+</html>
