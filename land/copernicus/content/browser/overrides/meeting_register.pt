@@ -124,7 +124,7 @@
   <div class="register-form-fields">
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
-        <label>First name<span class="required"></span></label>
+        <label>Name<span class="required"></span></label>
       </metal:label>
       <metal:body fill-slot="body">
         <input type="text" name="first_name" required
@@ -134,21 +134,11 @@
 
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
-        <label>Last name<span class="required"></span></label>
+        <label>Family name<span class="required"></span></label>
       </metal:label>
       <metal:body fill-slot="body">
         <input type="text" name="last_name" required
           tal:attributes="value python:fields.get('last_name', '')" />
-      </metal:body>
-    </metal:field>
-
-    <metal:field use-macro="template/macros/field">
-      <metal:label fill-slot="label">
-        <label>Position<span class="required"></span></label>
-      </metal:label>
-      <metal:body fill-slot="body">
-        <input type="text" name="position" required
-          tal:attributes="value python:fields.get('position', '')" />
       </metal:body>
     </metal:field>
 
@@ -164,11 +154,11 @@
 
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
-        <label>Address<span class="required"></span></label>
+        <label>Position<span class="required"></span></label>
       </metal:label>
       <metal:body fill-slot="body">
-        <textarea rows="5" cols="30" name="address" required
-          tal:content="python:fields.get('address', '')"></textarea>
+        <input type="text" name="position" required
+          tal:attributes="value python:fields.get('position', '')" />
       </metal:body>
     </metal:field>
 
@@ -184,6 +174,16 @@
 
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
+        <label>City<span class="required"></span></label>
+      </metal:label>
+      <metal:body fill-slot="body">
+        <input type="text" name="address" required
+          tal:attributes="value python:fields.get('address', '')" />
+      </metal:body>
+    </metal:field>
+
+    <metal:field use-macro="template/macros/field">
+      <metal:label fill-slot="label">
         <label>Email address<span class="required"></span></label>
       </metal:label>
       <metal:body fill-slot="body">
@@ -194,7 +194,7 @@
 
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
-        <label>Phone numbers</label>
+        <label>Phone no</label>
       </metal:label>
       <metal:body fill-slot="body">
         <textarea rows="5" cols="30" name="phone_numbers:lines"
