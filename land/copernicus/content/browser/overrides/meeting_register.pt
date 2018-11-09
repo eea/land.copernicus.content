@@ -117,7 +117,9 @@
 <form id="form-register" class="register-form" tal:attributes="style python:'display: none' if not show_register_form else ''"
   action="./register?form=register" name="register" method="POST" class="register-form"
   tal:define="message python:options.get('register_message', None); fields python:options.get('fields', {});">
-  <h2>Personal information</h2>
+
+  <h2 class="land-title">Personal information</h2>
+
   <metal:message use-macro="template/macros/message" />
   <div class="register-form-fields">
     <metal:field use-macro="template/macros/field">
@@ -201,7 +203,8 @@
     </metal:field>
   </div>
 
-  <h2>Login details</h2>
+  <h2 class="land-title">Login details</h2>
+
   <div class="register-form-fields">
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
