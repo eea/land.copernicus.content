@@ -53,9 +53,11 @@
 
 <tal:anon condition="view/is_anon">
 <p>
-  Log in to register to this meeting.
-  If you have an account on this portal, type it in the form below.
-  If you don't have an account yet, use the button on the right to create one.
+  You have to log in to register to this event.
+  If you have EIONET account or account on https://land.copernicus.eu please
+  type your username and password in the form on the left.
+  Otherwise, please use the button on the right to create a new account on
+  https://land.copernicus.eu.
 </p>
 
 <div id="choice" tal:attributes="style python:'display: none' if show_register_form else ''">
