@@ -357,6 +357,19 @@
           </metal:body>
         </metal:field>
 
+        <metal:field use-macro="template/macros/field">
+          <metal:label fill-slot="label">
+            <label for="f_disclaimer">
+              I accept <a href="/terms-of-use" target="_blank">privacy policy and terms of use</a> of this website
+              <span class="required advanced"></span>
+            </label>
+          </metal:label>
+          <metal:body fill-slot="body">
+            <input type="text" name="disclaimer" required
+              tal:attributes="value python:fields.get('disclaimer', '')" />
+          </metal:body>
+        </metal:field>
+
         <div class="buttons">
           <span>
             <button type="submit" name="submit.signup" class="btn btn-default">Register to this meeting</button>
