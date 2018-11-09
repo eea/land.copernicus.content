@@ -44,7 +44,6 @@ FIELDS_SIGNUP = (
 
 FIELDS_SIGNUP_REQUIRED = (
     ('role', 'Role'),
-    ('visa', 'Visa support'),
 )
 
 
