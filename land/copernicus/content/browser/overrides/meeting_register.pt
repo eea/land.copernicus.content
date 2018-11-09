@@ -49,6 +49,8 @@
       </span>
     </span>
   </p>
+
+  <p tal:content="context/need_e_pass">TODO Remove</p>
 </div>
 
 <tal:anon condition="view/is_anon">
@@ -295,6 +297,67 @@
             </script>
           </metal:body>
         </metal:field>
+
+        <metal:field use-macro="template/macros/field" tal:condition="context/need_e_pass">
+          <metal:label fill-slot="label">
+            <label for="f_date_of_birth">DATE OF BIRTH<span class="required"></span></label>
+          </metal:label>
+          <metal:body fill-slot="body">
+            <input type="text" name="date_of_birth" required
+              tal:attributes="value python:fields.get('date_of_birth', '')" />
+          </metal:body>
+        </metal:field>
+
+        <metal:field use-macro="template/macros/field" tal:condition="context/need_e_pass">
+          <metal:label fill-slot="label">
+            <label for="f_nationality">NATIONALITY<span class="required"></span></label>
+          </metal:label>
+          <metal:body fill-slot="body">
+            <input type="text" name="nationality" required
+              tal:attributes="value python:fields.get('nationality', '')" />
+          </metal:body>
+        </metal:field>
+
+        <metal:field use-macro="template/macros/field" tal:condition="context/need_e_pass">
+          <metal:label fill-slot="label">
+            <label for="f_id_card_nbr">ID CARD NBR<span class="required"></span></label>
+          </metal:label>
+          <metal:body fill-slot="body">
+            <input type="text" name="id_card_nbr" required
+              tal:attributes="value python:fields.get('id_card_nbr', '')" />
+          </metal:body>
+        </metal:field>
+
+        <metal:field use-macro="template/macros/field" tal:condition="context/need_e_pass">
+          <metal:label fill-slot="label">
+            <label for="f_id_valid_date">ID VALID DATE</label>
+          </metal:label>
+          <metal:body fill-slot="body">
+            <input type="text" name="id_valid_date" required
+              tal:attributes="value python:fields.get('id_valid_date', '')" />
+          </metal:body>
+        </metal:field>
+
+        <metal:field use-macro="template/macros/field" tal:condition="context/need_e_pass">
+          <metal:label fill-slot="label">
+            <label for="f_parking">PARKING<span class="required"></span></label>
+          </metal:label>
+          <metal:body fill-slot="body">
+            <input type="text" name="parking" required
+              tal:attributes="value python:fields.get('parking', '')" />
+          </metal:body>
+        </metal:field>
+
+        <metal:field use-macro="template/macros/field" tal:condition="context/need_e_pass">
+          <metal:label fill-slot="label">
+            <label for="f_car_id">CAR ID<span class="required advanced"></span></label>
+          </metal:label>
+          <metal:body fill-slot="body">
+            <input type="text" name="car_id" required
+              tal:attributes="value python:fields.get('car_id', '')" />
+          </metal:body>
+        </metal:field>
+
         <div class="buttons">
           <span>
             <button type="submit" name="submit.signup" class="btn btn-default">Register to this meeting</button>
