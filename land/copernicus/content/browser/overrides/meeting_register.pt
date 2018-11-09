@@ -21,7 +21,7 @@
 <metal:fill fill-slot="column_two_slot"></metal:fill>
 
 <metal:title fill-slot="content-title">
-  <h1 class="documentFirstHeading"><span tal:replace="context/title_or_id"></span> - Registration</h1>
+  <h1 class="documentFirstHeading text-center land-title"><span tal:replace="context/title_or_id"></span> - registration</h1>
 </metal:title>
 
 <metal:content-core fill-slot="content-core"
