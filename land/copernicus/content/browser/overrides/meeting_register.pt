@@ -248,7 +248,7 @@
     <metal:message use-macro="template/macros/message" />
   </tal:message-login>
   <tal:signup condition="not:is_registered" tal:define="fields python:options.get('fields', {});">
-    <p>Hello, <span tal:replace="python:user.getProperty('fullname')"></span>. Please complete the following form in order to register to this meeting.</p>
+    <p>Hello, <span tal:replace="python:user.getProperty('fullname')"></span>, please validate and complete the following information to register to this event:</p>
 
     <tal:message-signup define="message python:options.get('signup_message', None)">
       <metal:message use-macro="template/macros/message" />
