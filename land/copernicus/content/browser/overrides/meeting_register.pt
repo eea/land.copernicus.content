@@ -285,7 +285,7 @@
         </metal:field>
         <div class="buttons">
           <span>
-            <button type="submit" name="submit.signup">Register to this meeting</button>
+            <button type="submit" name="submit.signup" class="btn btn-default">Register to this meeting</button>
             <a href="./">Cancel</a>
           </span>
         </div>
