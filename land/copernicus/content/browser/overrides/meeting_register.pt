@@ -50,7 +50,6 @@
     </span>
   </p>
 
-  <p tal:content="context/need_e_pass">TODO Remove</p>
 </div>
 
 <tal:anon condition="view/is_anon">

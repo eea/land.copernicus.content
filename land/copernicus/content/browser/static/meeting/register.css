@@ -3,6 +3,10 @@
     display: none !important;
 }
 
+h1.documentFirstHeading.land-title {
+  font-size: 24px;
+}
+
 form .field {
     padding: 1rem;
 }
