@@ -129,6 +129,7 @@
           tal:attributes="value python:fields.get('first_name', '')" />
       </metal:body>
     </metal:field>
+
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
         <label>Last name<span class="required"></span></label>
@@ -138,6 +139,7 @@
           tal:attributes="value python:fields.get('last_name', '')" />
       </metal:body>
     </metal:field>
+
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
         <label>Position<span class="required"></span></label>
@@ -147,6 +149,7 @@
           tal:attributes="value python:fields.get('position', '')" />
       </metal:body>
     </metal:field>
+
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
         <label>Organisation<span class="required"></span></label>
@@ -156,6 +159,7 @@
           tal:attributes="value python:fields.get('organisation', '')" />
       </metal:body>
     </metal:field>
+
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
         <label>Address<span class="required"></span></label>
@@ -165,6 +169,7 @@
           tal:content="python:fields.get('address', '')"></textarea>
       </metal:body>
     </metal:field>
+
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
         <label>Country<span class="required"></span></label>
@@ -174,6 +179,7 @@
           tal:attributes="value python:fields.get('country', '')" />
       </metal:body>
     </metal:field>
+
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
         <label>Email address<span class="required"></span></label>
@@ -183,6 +189,7 @@
           tal:attributes="value python:fields.get('email', '')" />
       </metal:body>
     </metal:field>
+
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
         <label>Phone numbers</label>
@@ -208,6 +215,7 @@
           tal:attributes="value python:fields.get('username', '')" />
       </metal:body>
     </metal:field>
+
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
         <label>Password<span class="required"></span></label>
@@ -219,6 +227,7 @@
         <input type="password" name="pw1" required />
       </metal:body>
     </metal:field>
+
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
         <label>Password confirmation<span class="required"></span></label>
@@ -228,7 +237,7 @@
       </metal:body>
     </metal:field>
 
-    <button type="submit" name="submit.register">Register new account</button>
+    <button type="submit" name="submit.register" class="btn btn-default">Register new account</button>
     <a href="./register" onclick="meeting.show_choice();return false">Cancel</a>
   </div>
 </form>
