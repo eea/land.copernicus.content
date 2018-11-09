@@ -96,7 +96,7 @@
         </metal:field>
         <div class="buttons">
           <span>
-            <button type="submit" name="submit.login">Login</button>
+            <button type="submit" name="submit.login" class="btn btn-default">LOGIN</button>
             <a href="./">Back to meeting</a>
           </span>
           <span>
@@ -109,7 +109,7 @@
   </div>
   <div class="register">
     <a href="./register?form=register" class="choice-button"
-      onclick="meeting.show_registration();return false">Create new account</a>
+      onclick="meeting.show_registration();return false">CREATE NEW</a>
   </div>
 </div>
 

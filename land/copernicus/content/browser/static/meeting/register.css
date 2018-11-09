@@ -77,17 +77,6 @@ form input.other {
     margin-top: 3em;
 }
 
-.register-form button {
-    padding: 0.5rem 1rem;
-    background: white;
-    border: 1px solid #dfdfdf;
-    border-radius: 5px;
-}
-
-.register-form button:hover {
-    background: #dfdfdf;
-}
-
 #choice {
     display: flex;
     justify-content: space-around;
