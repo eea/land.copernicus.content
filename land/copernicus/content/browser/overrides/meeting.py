@@ -1,15 +1,15 @@
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from eea.meeting.browser import views
+from eea.meeting.events.rules import SendNewSubscriberEmailEvent
+from functools import partial
+from zope.component import getMultiAdapter
+from zope.component import getUtility
+from zope.contentprovider.interfaces import IContentProvider
+from zope.event import notify
+from zope.schema.interfaces import IVocabularyFactory
+import plone.api as api
 import socket
 import transaction
-from functools import partial
-from zope.event import notify
-from zope.component import getUtility
-from zope.schema.interfaces import IVocabularyFactory
-from eea.meeting.events.rules import SendNewSubscriberEmailEvent
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-import plone.api as api
-
-from eea.meeting.browser import views
-
 
 FIELDS_REGISTRATION = (
     ('first_name', 'first_name'),
@@ -136,6 +136,13 @@ def signup_error(request, template, msg):
 
 class Register(views.Register):
     index = ViewPageTemplateFile('meeting_register.pt')
+
+    def formatted_date(self, occ):
+        provider = getMultiAdapter(
+            (self.context, self.request, self),
+            IContentProvider, name='formatted_date'
+        )
+        return provider(occ)
 
     def __call__(self):
         self.is_anon = api.user.is_anonymous()

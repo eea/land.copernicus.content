@@ -28,6 +28,29 @@
   tal:define="show_register_form python:request.get('form', '') == 'register'">
 <metal:block define-macro="content-core">
 
+<div class="meeting-info-container">
+  <p class="text-center">
+    <b>When:</b>
+    <span tal:define="start_tzname context/timezone;
+          start_utcdelta python:context.start.tzinfo.utcoffset(context.start);
+          start_utcoffset python:(start_utcdelta.days*86400+start_utcdelta.seconds)*100/60/60;">
+      <span tal:replace="structure python:view.formatted_date(context)" ></span>
+    </span>
+  </p>
+
+  <p class="text-center">
+    <b>Where:</b>
+    <span tal:define="location context/location"
+          tal:condition="python:context.location and (context.is_webminar() is not True)">
+      <span class="location">
+        <a tal:content="location"
+           tal:attributes="href string:http://maps.google.com?q=$location"
+           title="View on map" itemprop="location" >Location</a>
+      </span>
+    </span>
+  </p>
+</div>
+
 <tal:anon condition="view/is_anon">
 <p>
   Log in to register to this meeting.
