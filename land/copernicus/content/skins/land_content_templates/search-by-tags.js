@@ -1,9 +1,3 @@
-$(document).ready(function() {
-  $("h1#insitu-article-title").replaceWith(
-    $("h1.search-page-title")
-  );
-});
-
 angular.module('searchApp',
                ['ngRoute','angularUtils.directives.dirPagination'])
   .controller('searchController', function($scope, $rootScope, $location) {
@@ -97,7 +91,7 @@ angular.module('searchApp',
         tag_class: 'filter-btn btn btn-default label insitu-btn-climate-change',
         btn_class: 'filter-btn btn btn-default insitu-btn-climate-change'
       }
-    ]
+    ];
     app.tagsMappedById = {};
     app.tags.forEach(function (c) { app.tagsMappedById[c.id] = c; });
 
@@ -120,7 +114,7 @@ angular.module('searchApp',
         }
       });
       return result;
-    }
+    };
 
     app.get_selected_tags_as_url_params = function() {
       // Check url for existing selected tags
@@ -138,14 +132,14 @@ angular.module('searchApp',
       });
 
       return result;
-    }
+    };
 
     app.selected_tags = app.get_selected_tags_as_url_params();
 
     app.set_selected_tags_as_url_params = function() {
       var tags_params = app.selected_tags.join("@");
       $location.search('selected_tags', tags_params);
-    }
+    };
 
     app.set_selected_tags_as_url_params();
 
@@ -154,12 +148,12 @@ angular.module('searchApp',
       return subset.every(function (value) {
         return (superset.indexOf(value) >= 0);
       });
-    }
+    };
 
     app.item_has_tags = function(item, tags) {
       // Return true if all tags are present in item's tags
       return app.superset_includes_subset(item.tags, tags);
-    }
+    };
 
     app.get_results = function() {
       // Filter items by selected tags
@@ -170,7 +164,7 @@ angular.module('searchApp',
         }
       });
       return result;
-    }
+    };
 
     app.get_tags = function(category) {
       // Return tags by given category
@@ -181,12 +175,12 @@ angular.module('searchApp',
         }
       });
       return result;
-    }
+    };
 
     app.get_tag_info = function(tag_id) {
       // Return tag info by given id
       return app.tagsMappedById[tag_id];
-    }
+    };
 
     app.get_tags_info = function(tags) {
       // Input: array of strings (tags ids)
@@ -196,7 +190,7 @@ angular.module('searchApp',
         result.push(app.get_tag_info(tag_id));
       });
       return result;
-    }
+    };
 
     app.tag_is_selected = function(tag_id) {
       // Return true if the tag is selected as criteria for search
@@ -207,7 +201,7 @@ angular.module('searchApp',
         }
       });
       return result;
-    }
+    };
 
     app.is_pressed = function(tag_id) {
       // Return 'pressed' or '' to be used as class name for btn
@@ -215,7 +209,7 @@ angular.module('searchApp',
         return 'pressed';
       }
       return '';
-    }
+    };
 
     app.is_active = function(items_number) {
       // Return 'pressed' or '' to be used as class name for items/page btn
@@ -223,17 +217,17 @@ angular.module('searchApp',
         return 'pressed';
       }
       return '';
-    }
+    };
 
     app.set_items_per_page = function(items_number) {
       // Set items per page for search results pagination
       app.items_per_page = items_number;
-    }
+    };
 
     app.natural_language_join = function(array) {
       // Nice format: tag1, tag2 and tag3
       return array.concat(array.splice(-2, 2).join(' and ')).join(', ');
-    }
+    };
 
     app.set_page_title = function() {
       // Set the page title
@@ -253,19 +247,19 @@ angular.module('searchApp',
       });
 
       return "Content tagged " + app.natural_language_join(tags_titles);
-    }
+    };
 
     app.add_tag = function(tag_id) {
       // Add a given tag in the selected tags
       app.selected_tags.push(tag_id);
       app.set_selected_tags_as_url_params();
-    }
+    };
 
     app.remove_tag = function(tag_id) {
       // Remove a given tag from the selected tags
       app.selected_tags.splice(app.selected_tags.indexOf(tag_id), 1);
       app.set_selected_tags_as_url_params();
-    }
+    };
 
     app.toggle_tag = function(tag_id) {
       // Select or deselect a given tag from search criteria
@@ -274,6 +268,10 @@ angular.module('searchApp',
       } else {
         app.add_tag(tag_id);
       }
-    }
-
+    };
+    $(document).ready(function() {
+        $("h1#insitu-article-title").replaceWith(
+            $("h1.search-page-title")
+        );
+    });
   });
