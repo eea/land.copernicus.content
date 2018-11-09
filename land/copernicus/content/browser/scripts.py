@@ -48,7 +48,7 @@ def subscrib_reset():
     """ A cron callable script to reset subscribers data based on this request:
 
         E-pass information due to its sensitivity shall be treated very
-        carefully – we would like to ask whether it would be possible to
+        carefully - we would like to ask whether it would be possible to
         automate the deletion of this information, ie that E-pass information
         is deleted automatically 72hrs (3 days) after the end of the event
 
