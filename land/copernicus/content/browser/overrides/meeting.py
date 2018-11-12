@@ -261,7 +261,7 @@ class Register(views.Register):
             'fields': {
                 "first_name": user.getProperty('first_name', uid),
                 "last_name": user.getProperty('last_name', uid),
-                "organisation": user.getProperty('organisation', uid),
+                "organisation": user.getProperty('institution', uid),
                 "position": user.getProperty('position', uid),
                 "country": user.getProperty('from_country', uid),
                 "address": user.getProperty('address', uid),
