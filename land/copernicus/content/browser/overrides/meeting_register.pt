@@ -362,8 +362,11 @@
             <label for="f_parking">PARKING<span class="required"></span></label>
           </metal:label>
           <metal:body fill-slot="body">
-            <input type="text" name="parking" required
-              tal:attributes="value python:fields.get('parking', '')" />
+            <select id="f_parking" name="parking" required>
+              <option></option>
+              <option>Yes</option>
+              <option>No</option>
+            </select>
           </metal:body>
         </metal:field>
 
