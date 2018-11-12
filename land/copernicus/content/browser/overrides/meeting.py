@@ -261,11 +261,11 @@ class Register(views.Register):
             'fields': {
                 "first_name": user.getProperty('first_name', uid),
                 "last_name": user.getProperty('last_name', uid),
-                "organisation": "Organisation",
-                "position": "Position",
-                "country": "Country",
-                "address": "City",
-                "email": "Email address",
-                "phone_no": "123123123"
+                "organisation": user.getProperty('organisation', uid),
+                "position": user.getProperty('position', uid),
+                "country": user.getProperty('country', uid),
+                "address": user.getProperty('address', uid),
+                "email": user.getProperty('email', uid),
+                "phone_no": user.getProperty('phone_no', uid)
             }
         }
