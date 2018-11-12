@@ -8,6 +8,8 @@ Changelog
   [GhitaB #99956]
 * Improve: Update text on registration sent. Change text label for Role field
   and define its possible values. Get rid of Visa and Reimbursed fields.
+  Update form (texts, styles), add disclaimer. Add script for deleting old
+  subscribers data.
   [GhitaB #99957]
 * Improve: Subscribers list - add excel.js customization. Update Subscribers
   table.
