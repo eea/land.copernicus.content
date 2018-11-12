@@ -3,21 +3,26 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from datetime import datetime
 from datetime import timedelta
 from plone import api
+import logging
 import pytz
+
+logger = logging.getLogger('land.copernicus.content')
 
 
 EXPIRE_AFTER_HOURS = 72
 
 
 def clean_old_subscribers_data(site):
+    logger.info('Subscribers data reseting... START.')
     catalog = api.portal.get_tool(name='portal_catalog')
     meetings = [b.getObject() for b in catalog(portal_type='eea.meeting')]
 
     for meeting in meetings:
         if datetime.now(pytz.UTC) > meeting.end + timedelta(
                 hours=EXPIRE_AFTER_HOURS):
-            print "DELETED WIP TODO"
-            print meeting
+            logger.info('Reseting data for %s', meeting.absolute_url())
+            #  TODO clean data for all subscribers
+    logger.info('Subscribers data reseting... DONE.')
     return True
 
 
