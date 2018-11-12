@@ -11,6 +11,8 @@ import plone.api as api
 import socket
 import transaction
 
+simple_test = "TEST TODO"
+
 FIELDS_REGISTRATION = (
     ('first_name', 'first_name'),
     ('last_name', 'last_name'),
@@ -250,3 +252,17 @@ class Register(views.Register):
             name='subscriber_roles'
         )(self.context)
         return tuple((term.token, term.title) for term in vocab)
+
+    def prefill_form_data(self):
+        return {
+            'fields': {
+                "first_name": "First Name",
+                "last_name": "Last Name",
+                "organisation": "Organisation",
+                "position": "Position",
+                "country": "Country",
+                "address": "City",
+                "email": "Email address",
+                "phone_no": "123123123"
+            }
+        }

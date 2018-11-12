@@ -257,7 +257,10 @@
 
 </tal:anon>
 
-<tal:member tal:condition="not:view/is_anon" tal:define="is_registered python:context.is_registered()">
+<tal:member tal:condition="not:view/is_anon"
+     tal:define="is_registered python:context.is_registered();
+                 options python:view.prefill_form_data()">
+
   <tal:message-created define="message python:options.get('created_message', None)">
     <metal:message use-macro="template/macros/message" />
   </tal:message-created>
