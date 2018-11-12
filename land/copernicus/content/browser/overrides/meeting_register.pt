@@ -367,6 +367,15 @@
               <option>Yes</option>
               <option>No</option>
             </select>
+
+            <script type="text/javascript">
+              $(function() {
+                $('#f_parking').bind('change', function () {
+                  console.log($(this).find(":selected").text());
+                });
+                $('#f_parking').trigger('change');
+              });
+            </script>
           </metal:body>
         </metal:field>
 
