@@ -254,10 +254,13 @@ class Register(views.Register):
         return tuple((term.token, term.title) for term in vocab)
 
     def prefill_form_data(self):
+        user = api.user.get_current()
+        uid = user.getId()
+
         return {
             'fields': {
-                "first_name": "First Name",
-                "last_name": "Last Name",
+                "first_name": user.getProperty('first_name', uid),
+                "last_name": user.getProperty('last_name', uid),
                 "organisation": "Organisation",
                 "position": "Position",
                 "country": "Country",
