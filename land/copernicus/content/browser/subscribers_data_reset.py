@@ -21,7 +21,10 @@ def clean_old_subscribers_data(site):
         if datetime.now(pytz.UTC) > meeting.end + timedelta(
                 hours=EXPIRE_AFTER_HOURS):
             logger.info('Reseting data for %s', meeting.absolute_url())
-            #  TODO clean data for all subscribers
+            for subscriber in meeting.subscribers.get_subscribers():
+                logger.info('Reseting data for %s', subscriber.absolute_url())
+                #  TODO update the list of fields
+                subscriber.role = "N/A"
     logger.info('Subscribers data reseting... DONE.')
     return True
 
