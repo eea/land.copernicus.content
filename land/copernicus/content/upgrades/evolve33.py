@@ -1,7 +1,6 @@
 import logging
 from plone import api
 from land.copernicus.content.content.api import get_filesize
-from land.copernicus.content.content.landfile import LandFileStore
 
 
 logger = logging.getLogger('land.copernicus.content')
@@ -15,7 +14,7 @@ def run(_):
     for idx_li, land_item in enumerate(land_items, start=1):
         url_land_item = land_item.absolute_url(1)
         logger.info('[%s/%s] Updating %s', idx_li, total_li, url_land_item)
-        store = land_item.landfiles # type: LandFileStore
+        store = land_item.landfiles  # type: LandFileStore
         land_files = store.get_all()
         total_lf = len(land_files)
 
