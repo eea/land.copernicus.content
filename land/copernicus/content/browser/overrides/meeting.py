@@ -266,6 +266,6 @@ class Register(views.Register):
                 "country": user.getProperty('country', uid),
                 "address": user.getProperty('address', uid),
                 "email": user.getProperty('email', uid),
-                "phone_no": user.getProperty('phone_no', uid)
+                "phone_no": user.getProperty('phone_numbers', uid)
             }
         }
