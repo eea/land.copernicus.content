@@ -346,6 +346,14 @@
           <metal:body fill-slot="body">
             <input type="text" name="id_valid_date" required
               tal:attributes="value python:fields.get('id_valid_date', '')" />
+
+            <script type="text/javascript">
+              $(function() {
+                $('input[name="id_valid_date"]').datetimepicker({
+                  format: 'DD-MM-YYYY'
+                });
+              });
+            </script>
           </metal:body>
         </metal:field>
 
