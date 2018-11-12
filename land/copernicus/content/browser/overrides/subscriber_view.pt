@@ -11,8 +11,7 @@
     <metal:block define-macro="content-core">
       <div class="indicator-details" tal:define="
         subscriber python:context;
-        details python:subscriber.get_details();
-        roles_dict python:context.aq_parent.aq_parent.get_subscriber_roles_dict()">
+        details python:subscriber.get_details();">
 
         <div class="subscriber-details">
 
@@ -132,8 +131,8 @@
             </label>
 
             <span id="form-widgets-role" class="text-widget textline-field"
-                  tal:content="python:subscriber.role_other if subscriber.role == 'other' else roles_dict.get(subscriber.role)">
-              ENI-SEIS II South NFP
+                  tal:content="python:subscriber.role">
+              Speaker
             </span>
           </div>
 
