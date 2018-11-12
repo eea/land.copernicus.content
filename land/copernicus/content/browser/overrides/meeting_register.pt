@@ -385,7 +385,7 @@
             </label>
           </metal:label>
           <metal:body fill-slot="body">
-            <input type="text" name="disclaimer" required
+            <input type="checkbox" name="disclaimer" required
               tal:attributes="value python:fields.get('disclaimer', '')" />
           </metal:body>
         </metal:field>
