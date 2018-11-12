@@ -353,7 +353,7 @@
           </metal:label>
           <metal:body fill-slot="body">
             <textarea rows="5" cols="30" name="phone_numbers:lines"
-              tal:content="python:'\n'.join(fields.get('phone_numbers', []))"></textarea>
+              tal:content="python:'\n'.join(fields.get('phone_no', []))"></textarea>
           </metal:body>
         </metal:field>
         <metal:field use-macro="template/macros/field">
