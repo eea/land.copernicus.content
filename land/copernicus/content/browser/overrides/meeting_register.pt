@@ -189,7 +189,12 @@
 
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
-        <label>Email address<span class="required"></span></label>
+        <label>E-mail<span class="required"></span></label>
+        <p class="formHelp">
+          Enter an email address. This is necessary in case the password is lost.
+          We respect your privacy, and will not give the address away to any
+          third parties or expose it anywhere.
+        </p>
       </metal:label>
       <metal:body fill-slot="body">
         <input type="email" name="email" required
@@ -342,7 +347,12 @@
 
         <metal:field use-macro="template/macros/field">
           <metal:label fill-slot="label">
-            <label>Email address<span class="required"></span></label>
+            <label>E-mail<span class="required"></span></label>
+            <p class="formHelp">
+              Enter an email address. This is necessary in case the password is lost.
+              We respect your privacy, and will not give the address away to any
+              third parties or expose it anywhere.
+            </p>
           </metal:label>
           <metal:body fill-slot="body">
             <input type="email" name="email" required
