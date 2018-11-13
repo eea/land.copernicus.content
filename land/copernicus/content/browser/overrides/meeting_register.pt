@@ -215,7 +215,10 @@
       <metal:label fill-slot="label">
         <label>User Name<span class="required"></span></label>
         <p class="formHelp">
-          The username must contain only ASCII letters [a..z] or [A..Z].
+          Enter a user name, usually something like 'jsmith'. No spaces or
+          special characters. Usernames and passwords are case sensitive,
+          make sure the caps lock key is not enabled.
+          This is the name used to log in.
         </p>
       </metal:label>
       <metal:body fill-slot="body">
