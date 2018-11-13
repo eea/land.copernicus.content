@@ -11,15 +11,13 @@ import plone.api as api
 import socket
 import transaction
 
-simple_test = "TEST TODO"
-
 FIELDS_REGISTRATION = (
     ('first_name', 'first_name'),
     ('last_name', 'last_name'),
-    ('position', 'position'),
     ('organisation', 'institution'),
-    ('address', 'address'),
+    ('position', 'position'),
     ('country', 'from_country'),
+    ('city', 'from_city'),
     ('email', 'email'),
     ('phone_numbers', 'phone_numbers'),
     ('username', None),
@@ -27,12 +25,12 @@ FIELDS_REGISTRATION = (
 
 
 FIELDS_REQUIRED = (
-    ('first_name', 'First name'),
-    ('last_name', 'Last name'),
-    ('position', 'Position'),
+    ('first_name', 'Name'),
+    ('last_name', 'Family name'),
     ('organisation', 'Organisation'),
-    ('address', 'Address'),
+    ('position', 'Position'),
     ('country', 'Country'),
+    ('city', 'City'),
     ('username', 'User Name'),
     ('email', 'Email'),
     ('pw1', 'Password'),
@@ -41,11 +39,13 @@ FIELDS_REQUIRED = (
 
 FIELDS_SIGNUP = (
     ('role', 'role'),
+    # TODO Update
 )
 
 
 FIELDS_SIGNUP_REQUIRED = (
     ('role', 'Role'),
+    # TODO Update
 )
 
 
