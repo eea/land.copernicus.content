@@ -1,3 +1,39 @@
+"""
+  WIP fields clarification
+
+userdataschema.py
+captcha
+disclaimer
+disclaimer_permission
+email
+first_name
+fullname                ?
+institutional_domain
+last_name
+mail_me                 ?
+password                x
+password_ctl            x
+thematic_domain
+username
+description             x
+fax                     x
+home_page               x
+job_title               x
+location                x
+mobile                  x
+postal_address          x
+portrait                x
+pdelete                 x
+organisation
+reason                  x
+telephone               x
+phone_numbers
+institution
+position
+from_country
+from_city
+address
+"""
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from eea.meeting.browser import views
 from eea.meeting.events.rules import SendNewSubscriberEmailEvent
