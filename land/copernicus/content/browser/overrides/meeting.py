@@ -39,13 +39,24 @@ FIELDS_REQUIRED = (
 
 FIELDS_SIGNUP = (
     ('role', 'role'),
-    # TODO Update
+    ('date_of_birth', 'date_of_birth'),
+    ('nationality', 'nationality'),
+    ('id_card_nbr', 'id_card_nbr'),
+    ('id_valid_date', 'id_valid_date'),
+    ('parking', 'parking'),
+    ('car_id', 'car_id'),
+    ('disclaimer', 'disclaimer')
 )
-
 
 FIELDS_SIGNUP_REQUIRED = (
     ('role', 'Role'),
-    # TODO Update
+    ('date_of_birth', 'DATE OF BIRTH'),
+    ('nationality', 'NATIONALITY'),
+    ('id_card_nbr', 'ID CARD NBR'),
+    ('id_valid_date', 'ID VALID DATE'),
+    ('parking', 'PARKING'),
+    ('car_id', 'CAR ID'),
+    ('disclaimer', 'I accept...')
 )
 
 
