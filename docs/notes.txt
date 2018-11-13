@@ -1,0 +1,44 @@
+===============================================================================
+Field name            Field title          site/@@register   meeting/@@register
+-------------------------------------------------------------------------------
+username              User Name                       YES
+email                 E-mail                          YES
+first_name            First Name                      YES    YES (Name)
+last_name             Last Name                       YES    YES (Family Name)
+fullname              ?
+organisation          Organisation                    NO     YES
+position              Position                        NO     YES
+thematic_domain       Professional thematic domain    YES
+institutional_domain  Institutional domain            YES
+disclaimer_permission I give permission to the        YES
+                      Copernicus Land Monitoring
+                      Service to contact me by e-mail
+                      with the information about the
+                      new products or product updates
+                      and other important events in
+                      the service or for my feedback
+                      about the products of the
+                      service and about this website.
+captcha               Verification                    YES
+disclaimer            I accept privacy policy and     YES
+                      terms of use of this website
+address
+description           x
+fax                   x
+from_city
+from_country
+home_page             x
+institution
+job_title             x
+location              x
+mail_me               ?
+mobile                x
+password              x
+password_ctl          x
+pdelete               x
+phone_numbers
+portrait              x
+postal_address        x
+reason                x
+telephone             x
+-------------------------------------------------------------------------------
