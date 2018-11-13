@@ -130,6 +130,9 @@
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
         <label>Name<span class="required"></span></label>
+        <p class="formHelp">
+          Enter your first name.
+        </p>
       </metal:label>
       <metal:body fill-slot="body">
         <input type="text" name="first_name" required
@@ -140,6 +143,9 @@
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
         <label>Family name<span class="required"></span></label>
+        <p class="formHelp">
+          Enter your last name.
+        </p>
       </metal:label>
       <metal:body fill-slot="body">
         <input type="text" name="last_name" required
@@ -288,6 +294,9 @@
         <metal:field use-macro="template/macros/field">
           <metal:label fill-slot="label">
             <label>Name<span class="required"></span></label>
+            <p class="formHelp">
+              Enter your first name.
+            </p>
           </metal:label>
           <metal:body fill-slot="body">
             <input type="text" name="first_name" required
@@ -298,6 +307,9 @@
         <metal:field use-macro="template/macros/field">
           <metal:label fill-slot="label">
             <label>Family name<span class="required"></span></label>
+            <p class="formHelp">
+              Enter your last name.
+            </p>
           </metal:label>
           <metal:body fill-slot="body">
             <input type="text" name="last_name" required

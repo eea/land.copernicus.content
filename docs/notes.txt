@@ -3,8 +3,8 @@ Field name            Field title          site/@@register   meeting/@@register
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 username              User Name                       YES    YES                                  OK
 email                 E-mail                          YES    YES                                  OK
-first_name            First Name                      YES    YES (Name)                           OK (Name?)
-last_name             Last Name                       YES    YES (Family name)                    OK (Family name)
+first_name            Name                            YES    YES                                  OK
+last_name             Family Name                     YES    YES                                  OK
 fullname              ?                                                                           ?? (Fill in on register meeting too)
 organisation          Organisation                    NO     YES                                  OK (check vs institution)
 position              Position                        NO     YES                                  OK (make sure it's saved)

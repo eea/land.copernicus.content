@@ -202,14 +202,14 @@ class IEnhancedUserDataSchema(IUserDataSchema):
     extra fields.
     """
     first_name = schema.TextLine(
-        title=_(u'label_first_name', default=u'First Name'),
+        title=_(u'label_first_name', default=u'Name'),
         description=_(u'help_first_name',
                       default=u'Enter your first name.'),
         required=True,
     )
 
     last_name = schema.TextLine(
-        title=_(u'label_last_name', default=u'Last Name'),
+        title=_(u'label_last_name', default=u'Family name'),
         description=_(u'help_last_name',
                       default=u'Enter your last name.'),
         required=True,
