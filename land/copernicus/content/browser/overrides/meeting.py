@@ -264,7 +264,7 @@ class Register(views.Register):
                 "organisation": user.getProperty('institution', uid),
                 "position": user.getProperty('position', uid),
                 "country": user.getProperty('from_country', uid),
-                "address": user.getProperty('address', uid),
+                "city": user.getProperty('from_city', uid),
                 "email": user.getProperty('email', uid),
                 "phone_no": user.getProperty('phone_numbers', uid)
             }

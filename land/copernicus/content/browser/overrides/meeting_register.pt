@@ -188,8 +188,8 @@
         <label>City<span class="required"></span></label>
       </metal:label>
       <metal:body fill-slot="body">
-        <input type="text" name="address" required
-          tal:attributes="value python:fields.get('address', '')" />
+        <input type="text" name="city" required
+          tal:attributes="value python:fields.get('city', '')" />
       </metal:body>
     </metal:field>
 
@@ -355,8 +355,8 @@
             <label>City<span class="required"></span></label>
           </metal:label>
           <metal:body fill-slot="body">
-            <input type="text" name="address" required
-              tal:attributes="value python:fields.get('address', '')" />
+            <input type="text" name="city" required
+              tal:attributes="value python:fields.get('city', '')" />
           </metal:body>
         </metal:field>
 
