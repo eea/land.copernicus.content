@@ -211,6 +211,9 @@
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
         <label>Phone no</label>
+        <p class="formHelp">
+          Add your phone numbers, one per line.
+        </p>
       </metal:label>
       <metal:body fill-slot="body">
         <textarea rows="5" cols="30" name="phone_numbers:lines"
@@ -375,6 +378,9 @@
         <metal:field use-macro="template/macros/field">
           <metal:label fill-slot="label">
             <label>Phone no</label>
+            <p class="formHelp">
+              Add your phone numbers, one per line.
+            </p>
           </metal:label>
           <metal:body fill-slot="body">
             <textarea rows="5" cols="30" name="phone_numbers:lines"
