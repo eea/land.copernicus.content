@@ -1,16 +1,16 @@
 =======================================================================================================================================================================
-Field name            Field title          site/@@register   meeting/@@register
+Field name            Field title          site/@@register   meeting/@@register   Is memberdata property
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-username              User Name                       YES    YES                                  OK
-email                 E-mail                          YES    YES                                  OK
-first_name            Name                            YES    YES                                  OK
-last_name             Family Name                     YES    YES                                  OK
-fullname              ?                                                                           ?? (Fill in on register meeting too)
-organisation          Organisation                    NO     YES                                  OK (check vs institution)
-position              Position                        NO     YES                                  OK (make sure it's saved)
-thematic_domain       Professional thematic domain    YES    NO                                   ??
-institutional_domain  Institutional domain            YES    NO                                   ??
-disclaimer_permission I give permission to the        YES    NO                                   ??
+username              User Name                       YES    YES
+email                 E-mail                          YES    YES                  YES
+first_name            Name                            YES    YES                  YES
+last_name             Family Name                     YES    YES                  YES
+fullname              (not visible)                   YES    YES                  YES
+institution           Organisation                    NO     YES                  YES
+position              Position                        NO     YES                  YES
+thematic_domain       Professional thematic domain    YES    NO                   YES
+institutional_domain  Institutional domain            YES    NO                   YES
+disclaimer_permission I give permission to the        YES    NO                   YES
                       Copernicus Land Monitoring
                       Service to contact me by e-mail
                       with the information about the
@@ -19,27 +19,27 @@ disclaimer_permission I give permission to the        YES    NO                 
                       the service or for my feedback
                       about the products of the
                       service and about this website.
-captcha               Verification                    YES    NO                                   ?? Add it. The new one.
-disclaimer            I accept privacy policy and     YES    NO                                   ??
+captcha               Verification                    YES    NO
+disclaimer            I accept privacy policy and     YES    NO
                       terms of use of this website
-description           --                              NO     NO
-fax                   --
-from_country          Country                         NO     YES                                  ?? Use instead of country?
-from_city             City                            NO     YES                                  ?? Use instead of address?
-phone_numbers         Phone no                        NO     YES                                  ?? Make sure it is saved.
-password              Password                        NO     YES                                  ?? Check.
+fax                   --                              NO     NO                   YES
+from_country          Country                         NO     YES                  YES
+from_city             City                            NO     YES                  YES
+phone_numbers         Phone no                        NO     YES                  YES
+password              Password                        NO     YES
 pw2                   Password confirmation           NO     YES
-address               ??                              NO     NO                                   ?? Make sure not used.
-home_page             --                              NO     NO
-institution           --                              NO     NO                                   ?? Make sure it's not used.
-job_title             --                              NO     NO
-location              --                              NO     NO
-mail_me               --                              NO     NO                                   ?? Maybe used somehow.
-mobile                --                              NO     NO
-password_ctl          --                              NO     NO                                   ?? Maybe used somehow.
-pdelete               --                              NO     NO                                   ?? Maybe used somehow.
+address               --                              NO     NO                   YES
+home_page             --                              NO     NO                   YES
+organisation          --                              NO     NO                   YES
+job_title             --                              NO     NO                   YES
+location              --                              NO     NO                   YES
+description           --                              NO     NO                   YES
+mail_me               --                              NO     NO
+mobile                --                              NO     NO                   YES
+password_ctl          --                              NO     NO
+pdelete               --                              NO     NO
 portrait              --                              NO     NO
-postal_address        --                              NO     NO                                   ?? Clean?
-reason                --                              NO     NO                                   ?? Clean?
-telephone             --                              NO     NO                                   ?? Clean?
+postal_address        --                              NO     NO                   YES
+reason                --                              NO     NO                   YES
+telephone             --                              NO     NO                   YES
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
