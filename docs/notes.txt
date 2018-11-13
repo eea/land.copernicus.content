@@ -1,16 +1,17 @@
-=======================================================================================================================================================================
-Field name            Field title          site/@@register   meeting/@@register   Is memberdata property
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-username              User Name                       YES    YES
-email                 E-mail                          YES    YES                  YES
-first_name            Name                            YES    YES                  YES
-last_name             Family Name                     YES    YES                  YES
-fullname              (not visible)                   YES    YES                  YES
-institution           Organisation                    NO     YES                  YES
-position              Position                        NO     YES                  YES
-thematic_domain       Professional thematic domain    YES    NO                   YES
-institutional_domain  Institutional domain            YES    NO                   YES
-disclaimer_permission I give permission to the        YES    NO                   YES
+===================================================================================================================
+Field name            Field title          site/@@register   meeting    Is memberdata /@@personal-information
+                                                            /@@register property           /@@change-password
+-------------------------------------------------------------------------------------------------------------------
+username              User Name                       YES    YES                      NO
+email                 E-mail                          YES    YES        YES           NO
+first_name            Name                            YES    YES        YES           NO
+last_name             Family Name                     YES    YES        YES           NO
+fullname              (not visible)                   YES    YES        YES           NO
+institution           Organisation                    NO     YES        YES           NO
+position              Position                        NO     YES        YES           NO
+thematic_domain       Professional thematic domain    YES    NO         YES           YES
+institutional_domain  Institutional domain            YES    NO         YES           YES
+disclaimer_permission I give permission to the        YES    NO         YES           YES
                       Copernicus Land Monitoring
                       Service to contact me by e-mail
                       with the information about the
@@ -19,27 +20,27 @@ disclaimer_permission I give permission to the        YES    NO                 
                       the service or for my feedback
                       about the products of the
                       service and about this website.
-captcha               Verification                    YES    NO
-disclaimer            I accept privacy policy and     YES    NO
+captcha               Verification                    YES    NO                        NO
+disclaimer            I accept privacy policy and     YES    NO                        NO
                       terms of use of this website
-fax                   --                              NO     NO                   YES
-from_country          Country                         NO     YES                  YES
-from_city             City                            NO     YES                  YES
-phone_numbers         Phone no                        NO     YES                  YES
-password              Password                        NO     YES
-pw2                   Password confirmation           NO     YES
-address               --                              NO     NO                   YES
-home_page             --                              NO     NO                   YES
-organisation          --                              NO     NO                   YES
-job_title             --                              NO     NO                   YES
-location              --                              NO     NO                   YES
-description           --                              NO     NO                   YES
-mail_me               --                              NO     NO
-mobile                --                              NO     NO                   YES
-password_ctl          --                              NO     NO
-pdelete               --                              NO     NO
-portrait              --                              NO     NO
-postal_address        --                              NO     NO                   YES
-reason                --                              NO     NO                   YES
-telephone             --                              NO     NO                   YES
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+fax                   --                              NO     NO         YES            NO
+from_country          Country                         NO     YES        YES            NO
+from_city             City                            NO     YES        YES            NO
+phone_numbers         Phone no                        NO     YES        YES            NO
+password              Password                        NO     YES                       NO   YES
+pw2                   Password confirmation           NO     YES                       NO
+address               --                              NO     NO         YES            NO
+home_page             --                              NO     NO         YES            NO
+organisation          --                              NO     NO         YES            NO
+job_title             --                              NO     NO         YES            NO
+location              --                              NO     NO         YES            NO
+description           --                              NO     NO         YES            NO
+mail_me               --                              NO     NO                        NO
+mobile                --                              NO     NO         YES            NO
+password_ctl          --                              NO     NO                        NO   YES
+pdelete               --                              NO     NO                        NO
+portrait              --                              NO     NO                        NO
+postal_address        --                              NO     NO         YES            NO
+reason                --                              NO     NO         YES            NO
+telephone             --                              NO     NO         YES            NO
+-------------------------------------------------------------------------------------------------------------------
