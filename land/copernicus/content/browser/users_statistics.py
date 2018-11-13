@@ -19,7 +19,7 @@ SHEET_TITLE = 'Users data'
 WIDTH_UNIT = 340  # Something like a letter width
 SHEET_COLUMNS = {
     # id, order number, column title, column width
-    'user_id': [0, 'Username', 15 * WIDTH_UNIT],
+    'user_id': [0, 'User Name', 15 * WIDTH_UNIT],
     'user_full_name': [1, 'Fullname', 25 * WIDTH_UNIT],
     'user_email': [2, 'Contact email', 35 * WIDTH_UNIT],
     'user_memberships': [3, 'Group memberships', 50 * WIDTH_UNIT],

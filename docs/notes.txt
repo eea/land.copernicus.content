@@ -1,7 +1,7 @@
 =======================================================================================================================================================================
 Field name            Field title          site/@@register   meeting/@@register
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-username              User Name                       YES    YES (Username)                       OK (Username?)
+username              User Name                       YES    YES                                  OK
 email                 E-mail                          YES    YES (Email address)                  OK (Email address?)
 first_name            First Name                      YES    YES (Name)                           OK (Name?)
 last_name             Last Name                       YES    YES (Family name)                    OK (Family name)

@@ -81,7 +81,7 @@
           <div class="field">
             <div class="field-label">
               <metal:field-label define-slot="label">
-                <label for="f_username">Username</label>
+                <label for="f_username">User Name</label>
               </metal:field-label>
             </div>
             <div class="field-body">
@@ -213,7 +213,7 @@
   <div class="register-form-fields">
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
-        <label>Username<span class="required"></span></label>
+        <label>User Name<span class="required"></span></label>
         <p class="formHelp">
           The username must contain only ASCII letters [a..z] or [A..Z].
         </p>

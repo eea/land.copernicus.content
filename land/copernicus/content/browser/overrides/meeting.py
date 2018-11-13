@@ -33,7 +33,7 @@ FIELDS_REQUIRED = (
     ('organisation', 'Organisation'),
     ('address', 'Address'),
     ('country', 'Country'),
-    ('username', 'Username'),
+    ('username', 'User Name'),
     ('email', 'Email'),
     ('pw1', 'Password'),
 )
