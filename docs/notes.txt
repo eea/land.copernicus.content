@@ -22,21 +22,22 @@ disclaimer_permission I give permission to the        YES    NO                 
 captcha               Verification                    YES    NO                                   ?? Add it. The new one.
 disclaimer            I accept privacy policy and     YES    NO                                   ??
                       terms of use of this website
-address
 description           --                              NO     NO
 fax                   --
-from_city             City                            NO     YES                                  ?? Use instead of address?
 from_country          Country                         NO     YES                                  ?? Use instead of country?
+from_city             City                            NO     YES                                  ?? Use instead of address?
+phone_numbers         Phone no                        NO     YES                                  ?? Make sure it is saved.
+password              Password                        NO     YES                                  ?? Check.
+pw2                   Password confirmation           NO     YES
+address               ??                              NO     NO                                   ?? Make sure not used.
 home_page             --                              NO     NO
 institution           --                              NO     NO                                   ?? Make sure it's not used.
 job_title             --                              NO     NO
 location              --                              NO     NO
 mail_me               --                              NO     NO                                   ?? Maybe used somehow.
 mobile                --                              NO     NO
-password              Password                        NO     YES                                  ?? Check.
 password_ctl          --                              NO     NO                                   ?? Maybe used somehow.
 pdelete               --                              NO     NO                                   ?? Maybe used somehow.
-phone_numbers         Phone no                        NO     YES                                  ?? Make sure it is saved.
 portrait              --                              NO     NO
 postal_address        --                              NO     NO                                   ?? Clean?
 reason                --                              NO     NO                                   ?? Clean?
