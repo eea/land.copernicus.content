@@ -21,7 +21,7 @@ disclaimer_permission I give permission to the        YES    NO         YES     
                       about the products of the
                       service and about this website.
 captcha               Verification                    YES    NO                        NO
-disclaimer            I accept privacy policy and     YES    NO                        NO
+disclaimer            I accept privacy policy and     YES    YES ***                   NO    *** = custom (new link)
                       terms of use of this website
 fax                   --                              NO     NO         YES            NO
 from_country          Country                         NO     YES        YES            NO
@@ -43,4 +43,12 @@ portrait              --                              NO     NO                 
 postal_address        --                              NO     NO         YES            NO
 reason                --                              NO     NO         YES            NO
 telephone             --                              NO     NO         YES            NO
+role                  Role (I would like to attend    NO     YES        NO             NO
+                      the event in the capacity of)
+date_of_birth         DATE OF BIRTH                   NO     YES  *     NO             NO       * = for E-pass only
+nationality           NATIONALITY                     NO     YES  *     NO             NO
+id_card_nbr           ID CARD NBR                     NO     YES  *     NO             NO
+id_valid_date         ID VALID DATE                   NO     YES  *     NO             NO
+parking               PARKING                         NO     YES  *     NO             NO
+car_id                CAR ID                          NO     YES  *  ** NO             NO      ** = only if Parking
 -------------------------------------------------------------------------------------------------------------------
