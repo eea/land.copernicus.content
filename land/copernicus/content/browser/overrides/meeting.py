@@ -237,6 +237,8 @@ class Register(views.Register):
             user = api.user.get_current()
             uid = user.getId()
 
+            # TODO Update memberdata properties, too
+
             props = dict(
                 title=user.getProperty('fullname', uid),
                 id=uid,
@@ -244,6 +246,7 @@ class Register(views.Register):
                 email=user.getProperty('email', ''),
                 role=self.request.get('role'),
                 role_other=self.request.get('role_other', ''),
+                # TODO all fields here
             )
             views.add_subscriber(subscribers, **props)
             notify(SendNewSubscriberEmailEvent(self.context))
