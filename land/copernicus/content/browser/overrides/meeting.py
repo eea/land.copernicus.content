@@ -1,38 +1,50 @@
 """
   WIP fields clarification
 
-userdataschema.py
-captcha
-disclaimer
-disclaimer_permission
-email
-first_name
+===============================================================================
+Field name              Field title                     site/@@register
+-------------------------------------------------------------------------------
+username                User Name                       YES
+email                   E-mail                          YES
+first_name              First Name                      YES
+last_name               Last Name                       YES
 fullname                ?
-institutional_domain
-last_name
-mail_me                 ?
-password                x
-password_ctl            x
-thematic_domain
-username
+thematic_domain         Professional thematic domain    YES
+institutional_domain    Institutional domain            YES
+disclaimer_permission   I give permission to the        YES
+                        Copernicus Land Monitoring
+                        Service to contact me by e-mail
+                        with the information about the
+                        new products or product updates
+                        and other important events in
+                        the service or for my feedback
+                        about the products of the
+                        service and about this website.
+captcha                 Verification                    YES
+disclaimer              I accept privacy policy and     YES
+                        terms of use of this website
+address
 description             x
 fax                     x
+from_city
+from_country
 home_page               x
+institution
 job_title               x
 location                x
+mail_me                 ?
 mobile                  x
-postal_address          x
-portrait                x
-pdelete                 x
 organisation
+password                x
+password_ctl            x
+pdelete                 x
+phone_numbers
+portrait                x
+position
+postal_address          x
 reason                  x
 telephone               x
-phone_numbers
-institution
-position
-from_country
-from_city
-address
+-------------------------------------------------------------------------------
 """
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from eea.meeting.browser import views
