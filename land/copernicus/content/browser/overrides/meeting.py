@@ -221,6 +221,7 @@ class Register(views.Register):
             self.context.absolute_url() + '/register?created=true')
 
     def signup(self):
+        # import pdb; pdb.set_trace()
         err_msg = partial(signup_error, self.request, self.index)
 
         errors = reduce(err_reducer, (
@@ -237,7 +238,34 @@ class Register(views.Register):
             user = api.user.get_current()
             uid = user.getId()
 
-            # TODO Update memberdata properties, too
+            # first_name = user.getProperty('first_name')
+            # if self.request.get('first_name', None):
+            #     first_name = self.request.get('first_name')
+            #
+            # last_name = user.getProperty('last_name')
+            # if self.request.get('last_name', None):
+            #     last_name = self.request.get('last_name')
+
+            # import pdb; pdb.set_trace()
+            #     # 'last_name': last_name,
+            #     # 'fullname': fullname,
+            #     # 'institution': organisation,
+            #     # 'position': position,
+            #     # 'from_country': country,
+            #     # 'from_city': city,
+            #     # 'email': email,
+            #     # 'phone_numbers': phone_no
+            # user.setMemberProperties({
+            #     'first_name': first_name,
+            #     'last_name': last_name,
+            #     # 'fullname': fullname,
+            #     # 'institution': organisation,
+            #     # 'position': position,
+            #     # 'from_country': country,
+            #     # 'from_city': city,
+            #     # 'email': email,
+            #     # 'phone_numbers': phone_no
+            #     })
 
             props = dict(
                 title=user.getProperty('fullname', uid),
