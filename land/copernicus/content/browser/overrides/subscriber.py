@@ -36,9 +36,9 @@ class EditFormExtender(FormExtender):
 
             last_name = schema.TextLine(
                 __name__="last_name",
-                title=_(u'label_last_name', default=u'Surname'),
+                title=_(u'label_last_name', default=u'Family name'),
                 description=_(u'help_last_name',
-                              default=u'Enter your last name (family name).'),
+                              default=u'Enter your last name.'),
                 required=False,
                 default=util.toUnicode(details.get("last_name", ""))
             )
@@ -55,9 +55,9 @@ class EditFormExtender(FormExtender):
 
             institution = schema.TextLine(
                 __name__="institution",
-                title=_(u'label_institution', default=u'Institution'),
+                title=_(u'label_institution', default=u'Organisation'),
                 description=_(u'help_institution',
-                              default=u'Fill in the institution'),
+                              default=u'Fill in the organisation'),
                 required=False,
                 default=util.toUnicode(details.get("institution", ""))
             )
@@ -67,41 +67,32 @@ class EditFormExtender(FormExtender):
                 title=_(u'label_position', default=u'Position'),
                 description=_(
                     u'help_position',
-                    default=u'Fill in your position within your Institution'),
+                    default=u'Fill in your position within your Organisation'),
                 required=False,
                 default=util.toUnicode(details.get("position", ""))
             )
 
             from_country = schema.TextLine(
                 __name__="from_country",
-                title=_(u'label_from_country', default=u'From country'),
+                title=_(u'label_from_country', default=u'Country'),
                 description=_(u'help_from_country',
-                              default=u'Fill in the From country'),
+                              default=u'Fill in your country.'),
                 required=False,
                 default=util.toUnicode(details.get("from_country", ""))
             )
 
             from_city = schema.TextLine(
                 __name__="from_city",
-                title=_(u'label_from_city', default=u'From city'),
+                title=_(u'label_from_city', default=u'City'),
                 description=_(u'help_from_city',
-                              default=u'Fill in the From city'),
+                              default=u'Fill in your city.'),
                 required=False,
                 default=util.toUnicode(details.get("from_city", ""))
             )
 
-            address = schema.Text(
-                __name__="address",
-                title=_(u'label_address', default=u'Address'),
-                description=_(u'help_address',
-                              default=u'Fill in the address'),
-                required=False,
-                default=util.toUnicode(details.get("address", ""))
-            )
-
             self.form.fields += Fields(
                 first_name, last_name, phone_numbers,
-                institution, position, from_country, from_city, address)
+                institution, position, from_country, from_city)
 
         if self.request.REQUEST_METHOD == 'POST':
             # save values
@@ -124,8 +115,6 @@ class EditFormExtender(FormExtender):
                         prefix + 'from_country'),
                     "from_city": self.request.form.get(
                         prefix + 'from_city'),
-                    "address": self.request.form.get(
-                        prefix + 'address')
                     })
 
 
