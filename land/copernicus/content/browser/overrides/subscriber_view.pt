@@ -11,6 +11,7 @@
     <metal:block define-macro="content-core">
       <div class="indicator-details" tal:define="
         subscriber python:context;
+        meeting python:context.aq_parent.aq_parent;
         details python:subscriber.get_details();">
 
         <div class="subscriber-details">
@@ -125,7 +126,8 @@
             </span>
           </div>
 
-          <div class="field" id="formfield-form-widgets-date_of_birth">
+          <div class="field" id="formfield-form-widgets-date_of_birth"
+               tal:condition="meeting/need_e_pass">
             <label for="form-widgets-date_of_birth" class="horizontal">
               DATE OF BIRTH:
             </label>
@@ -136,7 +138,8 @@
             </span>
           </div>
 
-          <div class="field" id="formfield-form-widgets-nationality">
+          <div class="field" id="formfield-form-widgets-nationality"
+               tal:condition="meeting/need_e_pass">
             <label for="form-widgets-nationality" class="horizontal">
               NATIONALITY:
             </label>
@@ -147,7 +150,8 @@
             </span>
           </div>
 
-          <div class="field" id="formfield-form-widgets-id_card_nbr">
+          <div class="field" id="formfield-form-widgets-id_card_nbr"
+               tal:condition="meeting/need_e_pass">
             <label for="form-widgets-id_card_nbr" class="horizontal">
               ID CARD NBR:
             </label>
@@ -158,7 +162,8 @@
             </span>
           </div>
 
-          <div class="field" id="formfield-form-widgets-id_valid_date">
+          <div class="field" id="formfield-form-widgets-id_valid_date"
+               tal:condition="meeting/need_e_pass">
             <label for="form-widgets-id_valid_date" class="horizontal">
               ID VALID DATE:
             </label>
@@ -169,7 +174,8 @@
             </span>
           </div>
 
-          <div class="field" id="formfield-form-widgets-parking">
+          <div class="field" id="formfield-form-widgets-parking"
+               tal:condition="meeting/need_e_pass">
             <label for="form-widgets-parking" class="horizontal">
               PARKING:
             </label>
@@ -180,7 +186,8 @@
             </span>
           </div>
 
-          <div class="field" id="formfield-form-widgets-car_id">
+          <div class="field" id="formfield-form-widgets-car_id"
+               tal:condition="meeting/need_e_pass">
             <label for="form-widgets-car_id" class="horizontal">
               CAR ID:
             </label>
