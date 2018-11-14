@@ -56,7 +56,6 @@ FIELDS_SIGNUP_REQUIRED = (
     ('id_valid_date', 'ID VALID DATE'),
     ('parking', 'PARKING'),
     ('car_id', 'CAR ID'),
-    ('disclaimer', 'I accept...')
 )
 
 
@@ -221,7 +220,6 @@ class Register(views.Register):
             self.context.absolute_url() + '/register?created=true')
 
     def signup(self):
-        # import pdb; pdb.set_trace()
         err_msg = partial(signup_error, self.request, self.index)
 
         errors = reduce(err_reducer, (
@@ -238,34 +236,51 @@ class Register(views.Register):
             user = api.user.get_current()
             uid = user.getId()
 
-            # first_name = user.getProperty('first_name')
-            # if self.request.get('first_name', None):
-            #     first_name = self.request.get('first_name')
-            #
-            # last_name = user.getProperty('last_name')
-            # if self.request.get('last_name', None):
-            #     last_name = self.request.get('last_name')
+            first_name = user.getProperty('first_name')
+            if self.request.get('first_name', None):
+                first_name = self.request.get('first_name')
 
-            # import pdb; pdb.set_trace()
-            #     # 'last_name': last_name,
-            #     # 'fullname': fullname,
-            #     # 'institution': organisation,
-            #     # 'position': position,
-            #     # 'from_country': country,
-            #     # 'from_city': city,
-            #     # 'email': email,
-            #     # 'phone_numbers': phone_no
-            # user.setMemberProperties({
-            #     'first_name': first_name,
-            #     'last_name': last_name,
-            #     # 'fullname': fullname,
-            #     # 'institution': organisation,
-            #     # 'position': position,
-            #     # 'from_country': country,
-            #     # 'from_city': city,
-            #     # 'email': email,
-            #     # 'phone_numbers': phone_no
-            #     })
+            last_name = user.getProperty('last_name')
+            if self.request.get('last_name', None):
+                last_name = self.request.get('last_name')
+
+            fullname = '{} {}'.format(first_name, last_name)
+
+            organisation = user.getProperty('institution')
+            if self.request.get('organisation', None):
+                organisation = self.request.get('organisation')
+
+            position = user.getProperty('position')
+            if self.request.get('position', None):
+                position = self.request.get('position')
+
+            country = user.getProperty('from_country')
+            if self.request.get('country', None):
+                country = self.request.get('country')
+
+            city = user.getProperty('from_city')
+            if self.request.get('city', None):
+                city = self.request.get('city')
+
+            email = user.getProperty('email')
+            if self.request.get('email', None):
+                email = self.request.get('email')
+
+            phone_no = user.getProperty('phone_numbers')
+            if self.request.get('phone_numbers', None):
+                phone_no = self.request.get('phone_numbers')
+
+            user.setMemberProperties({
+                'first_name': first_name,
+                'last_name': last_name,
+                'fullname': fullname,
+                'institution': organisation,
+                'position': position,
+                'from_country': country,
+                'from_city': city,
+                'email': email,
+                'phone_numbers': phone_no
+                })
 
             props = dict(
                 title=user.getProperty('fullname', uid),
