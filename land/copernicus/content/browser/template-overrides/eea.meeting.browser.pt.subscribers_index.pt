@@ -82,12 +82,12 @@
                   <td tal:content="subscriber/email|string:" />
                   <td tal:content="python:subscriber_details.get('phone_numbers', '')">Telephone</td>
                   <td tal:content="python:subscriber.role_other if subscriber.role == 'other' else subscriber.role" />
-                  <td tal:content="python:subscriber_details.get('date_of_birth', '')">DATE OF BIRTH</td>
-                  <td tal:content="python:subscriber_details.get('nationality', '')">NATIONALITY</td>
-                  <td tal:content="python:subscriber_details.get('id_card_nbr', '')">ID CARD NBR</td>
-                  <td tal:content="python:subscriber_details.get('id_valid_date', '')">ID VALID DATE</td>
-                  <td tal:content="python:subscriber_details.get('parking', '')">PARKING</td>
-                  <td tal:content="python:subscriber_details.get('car_id', '')">CAR ID</td>
+                  <td tal:content="python:subscriber.date_of_birth">DATE OF BIRTH</td>
+                  <td tal:content="python:subscriber.nationality">NATIONALITY</td>
+                  <td tal:content="python:subscriber.id_card_nbr">ID CARD NBR</td>
+                  <td tal:content="python:subscriber.id_valid_date">ID VALID DATE</td>
+                  <td tal:content="python:subscriber.parking">PARKING</td>
+                  <td tal:content="python:subscriber.car_id">CAR ID</td>
                 </tr>
               </tal:subscribers>
             </tbody>

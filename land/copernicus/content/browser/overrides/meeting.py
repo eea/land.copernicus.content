@@ -289,7 +289,13 @@ class Register(views.Register):
                 email=user.getProperty('email', ''),
                 role=self.request.get('role'),
                 role_other=self.request.get('role_other', ''),
-                # TODO all fields here
+                phone_numbers=self.request.get('phone_numbers', []),
+                date_of_birth=self.request.get('date_of_birth', ''),
+                nationality=self.request.get('nationality', ''),
+                id_card_nbr=self.request.get('id_card_nbr', ''),
+                id_valid_date=self.request.get('id_valid_date', ''),
+                parking=self.request.get('parking', ''),
+                car_id=self.request.get('car_id', ''),
             )
             views.add_subscriber(subscribers, **props)
             notify(SendNewSubscriberEmailEvent(self.context))
