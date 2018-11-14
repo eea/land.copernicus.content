@@ -40,8 +40,7 @@
                 <th>Organisation</th>
                 <th>Country</th>
                 <th>City</th>
-                <th>Address</th>
-                <th>Phone</th>
+                <th>Phone numbers</th>
                 <th>Registration status</th>
                 <th>Role</th>
                 <th title="When the registration request was submitted">Time stamp</th>
@@ -66,7 +65,6 @@
                   <td tal:content="python:subscriber_details.get('institution', '')">Organisation</td>
                   <td tal:content="python:subscriber_details.get('from_country', '')">From country</td>
                   <td tal:content="python:subscriber_details.get('from_city', '')">From city</td>
-                  <td tal:content="python:subscriber_details.get('address', '')">Address</td>
                   <td tal:content="python:subscriber_details.get('phone_numbers', '')">Telephone</td>
                   <td>
                     <span tal:content="subscriber/state" />
