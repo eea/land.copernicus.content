@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 from eea.meeting import _
 from eea.meeting.interfaces.util import validate_email
+from eea.meeting.interfaces.util import validate_userid
 from plone.app.textfield import RichText
+from plone.autoform import directives
 from plone.namedfile.field import NamedBlobFile
+from z3c.form.browser.radio import RadioFieldWidget
 from zope import schema
 from zope.interface import Interface
 from zope.interface import invariant, Invalid
@@ -132,3 +135,50 @@ def subscriber_roles_vocabulary(context):
         for pair in items
     ]
     return SimpleVocabulary(terms)
+
+
+class ISubscriber(Interface):
+    """ Meeting subscriber """
+    # TODO add fields
+    # ('role', 'role'),
+    # ('date_of_birth', 'date_of_birth'),
+    # ('nationality', 'nationality'),
+    # ('id_card_nbr', 'id_card_nbr'),
+    # ('id_valid_date', 'id_valid_date'),
+    # ('parking', 'parking'),
+    # ('car_id', 'car_id'),
+
+    userid = schema.TextLine(
+        title=_("User id"),
+        required=True,
+        constraint=validate_userid,
+    )
+
+    email = schema.TextLine(
+        title=_(u"Email"),
+        required=True,
+        constraint=validate_email
+    )
+
+    directives.widget(reimbursed=RadioFieldWidget)
+    reimbursed = schema.Bool(
+        title=_(u"Reimbursed participation"),
+        required=True
+    )
+
+    directives.widget(visa=RadioFieldWidget)
+    visa = schema.Bool(
+        title=_(u"I need visa support letter"),
+        required=True
+    )
+
+    role = schema.Choice(
+        title=_(u"Role"),
+        vocabulary="subscriber_roles",
+        required=True,
+    )
+
+    role_other = schema.TextLine(
+        title=_(u"Role (other)"),
+        required=False,
+    )

@@ -30,4 +30,10 @@
                   original="IMeeting"
                   replacement="land.copernicus.content.eea_meeting.IMeeting"
                   docstringWarning="true" />
+
+    <monkey:patch description="Customize Subscriber type values"
+                  class="eea.meeting.interfaces"
+                  original="ISubscriber"
+                  replacement="land.copernicus.content.eea_meeting.ISubscriber"
+                  docstringWarning="true" />
 </configure>
