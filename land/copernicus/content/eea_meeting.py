@@ -139,14 +139,6 @@ def subscriber_roles_vocabulary(context):
 
 class ISubscriber(Interface):
     """ Meeting subscriber """
-    # TODO add fields
-    # ('role', 'role'),
-    # ('date_of_birth', 'date_of_birth'),
-    # ('nationality', 'nationality'),
-    # ('id_card_nbr', 'id_card_nbr'),
-    # ('id_valid_date', 'id_valid_date'),
-    # ('parking', 'parking'),
-    # ('car_id', 'car_id'),
 
     userid = schema.TextLine(
         title=_("User id"),
@@ -180,5 +172,35 @@ class ISubscriber(Interface):
 
     role_other = schema.TextLine(
         title=_(u"Role (other)"),
+        required=False,
+    )
+
+    date_of_birth = schema.TextLine(
+        title=_(u"DATE OF BIRTH"),
+        required=False,
+    )
+
+    nationality = schema.TextLine(
+        title=_(u"NATIONALITY"),
+        required=False,
+    )
+
+    id_card_nbr = schema.TextLine(
+        title=_(u"ID CARD NBR"),
+        required=False,
+    )
+
+    id_valid_date = schema.TextLine(
+        title=_(u"ID VALID DATE"),
+        required=False,
+    )
+
+    parking = schema.TextLine(
+        title=_(u"PARKING"),
+        required=False,
+    )
+
+    car_id = schema.TextLine(
+        title=_(u"CAR ID"),
         required=False,
     )
