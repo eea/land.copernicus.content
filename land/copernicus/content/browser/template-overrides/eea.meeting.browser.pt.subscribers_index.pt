@@ -34,22 +34,29 @@
             <thead>
               <tr>
                 <th tal:condition="can_edit"><input type="checkbox" data-role="select-all" /></th>
+                <th>Registration status</th>
+                <th title="When the registration request was submitted">Time stamp</th>
                 <th>User Name</th>
                 <th>Name</th>
-                <th>Email</th>
+                <th>Family name</th>
                 <th>Organisation</th>
                 <th>Position</th>
                 <th>Country</th>
                 <th>City</th>
-                <th>Phone numbers</th>
-                <th>Registration status</th>
+                <th>Email</th>
+                <th>Phone no</th>
                 <th>Role</th>
-                <th title="When the registration request was submitted">Time stamp</th>
+                <th>DATE OF BIRTH</th>
+                <th>NATIONALITY</th>
+                <th>ID CARD NBR</th>
+                <th>ID VALID DATE</th>
+                <th>PARKING</th>
+                <th>CAR ID</th>
               </tr>
             <thead>
             <tbody tal:define="subscribers python:context.get_subscribers()">
               <tr tal:condition="not:subscribers">
-                <td colspan="12">No subscribers.</td>
+                <td colspan="19">No subscribers.</td>
               </tr>
               <tal:subscribers tal:repeat="subscriber subscribers">
                 <tr tal:define="subscriber_details python:subscriber.get_details();">
@@ -57,23 +64,30 @@
                     <input type="checkbox" data-role="select-subscriber" name="subscribers:list" tal:attributes="value subscriber/getId"/>
                   </td>
                   <td>
+                    <span tal:content="subscriber/state" />
+                  </td>
+                  <td tal:define="toLocalizedTime nocall: context/@@plone/toLocalizedTime;"
+                      tal:content="python:toLocalizedTime(subscriber.created(), long_format=1)"></td>
+                  <td>
                     <a href="" tal:attributes="href python:subscriber_details.get('edit_url', '')">
                       <span tal:replace="subscriber/getId" >User Name</span>
                     </a>
                   </td>
-                  <td tal:content="python:subscriber_details.get('fullname', '')">Name</td>
-                  <td tal:content="subscriber/email|string:" />
+                  <td tal:content="python:subscriber_details.get('first_name', '')">Name</td>
+                  <td tal:content="python:subscriber_details.get('last_name', '')">Family name</td>
                   <td tal:content="python:subscriber_details.get('institution', '')">Organisation</td>
                   <td tal:content="python:subscriber_details.get('position', '')">Position</td>
                   <td tal:content="python:subscriber_details.get('from_country', '')">From country</td>
                   <td tal:content="python:subscriber_details.get('from_city', '')">From city</td>
+                  <td tal:content="subscriber/email|string:" />
                   <td tal:content="python:subscriber_details.get('phone_numbers', '')">Telephone</td>
-                  <td>
-                    <span tal:content="subscriber/state" />
-                  </td>
                   <td tal:content="python:subscriber.role_other if subscriber.role == 'other' else subscriber.role" />
-                  <td tal:define="toLocalizedTime nocall: context/@@plone/toLocalizedTime;"
-                      tal:content="python:toLocalizedTime(subscriber.created(), long_format=1)"></td>
+                  <td tal:content="python:subscriber_details.get('date_of_birth', '')">DATE OF BIRTH</td>
+                  <td tal:content="python:subscriber_details.get('nationality', '')">NATIONALITY</td>
+                  <td tal:content="python:subscriber_details.get('id_card_nbr', '')">ID CARD NBR</td>
+                  <td tal:content="python:subscriber_details.get('id_valid_date', '')">ID VALID DATE</td>
+                  <td tal:content="python:subscriber_details.get('parking', '')">PARKING</td>
+                  <td tal:content="python:subscriber_details.get('car_id', '')">CAR ID</td>
                 </tr>
               </tal:subscribers>
             </tbody>
