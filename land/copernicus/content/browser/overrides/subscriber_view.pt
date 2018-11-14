@@ -125,6 +125,71 @@
             </span>
           </div>
 
+          <div class="field" id="formfield-form-widgets-date_of_birth">
+            <label for="form-widgets-date_of_birth" class="horizontal">
+              DATE OF BIRTH:
+            </label>
+
+            <span id="form-widgets-date_of_birth" class="text-widget textline-field"
+                  tal:content="python:subscriber.date_of_birth">
+              27-03-1988
+            </span>
+          </div>
+
+          <div class="field" id="formfield-form-widgets-nationality">
+            <label for="form-widgets-nationality" class="horizontal">
+              NATIONALITY:
+            </label>
+
+            <span id="form-widgets-nationality" class="text-widget textline-field"
+                  tal:content="python:subscriber.nationality">
+              romanian
+            </span>
+          </div>
+
+          <div class="field" id="formfield-form-widgets-id_card_nbr">
+            <label for="form-widgets-id_card_nbr" class="horizontal">
+              ID CARD NBR:
+            </label>
+
+            <span id="form-widgets-id_card_nbr" class="text-widget textline-field"
+                  tal:content="python:subscriber.id_card_nbr">
+              romanian
+            </span>
+          </div>
+
+          <div class="field" id="formfield-form-widgets-id_valid_date">
+            <label for="form-widgets-id_valid_date" class="horizontal">
+              ID VALID DATE:
+            </label>
+
+            <span id="form-widgets-id_valid_date" class="text-widget textline-field"
+                  tal:content="python:subscriber.id_valid_date">
+              14-11-2018
+            </span>
+          </div>
+
+          <div class="field" id="formfield-form-widgets-parking">
+            <label for="form-widgets-parking" class="horizontal">
+              PARKING:
+            </label>
+
+            <span id="form-widgets-parking" class="text-widget textline-field"
+                  tal:content="python:subscriber.parking">
+              Yes
+            </span>
+          </div>
+
+          <div class="field" id="formfield-form-widgets-car_id">
+            <label for="form-widgets-car_id" class="horizontal">
+              CAR ID:
+            </label>
+
+            <span id="form-widgets-car_id" class="text-widget textline-field"
+                  tal:content="python:subscriber.car_id">
+              BH 27 ABC
+            </span>
+          </div>
         </div>
       </div>
     </metal:block>
