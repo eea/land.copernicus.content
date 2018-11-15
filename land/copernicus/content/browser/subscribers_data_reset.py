@@ -5,6 +5,7 @@ from datetime import timedelta
 from plone import api
 import logging
 import pytz
+import transaction
 
 logger = logging.getLogger('land.copernicus.content')
 
@@ -23,8 +24,13 @@ def clean_old_subscribers_data(site):
             logger.info('Reseting data for %s', meeting.absolute_url())
             for subscriber in meeting.subscribers.get_subscribers():
                 logger.info('Reseting data for %s', subscriber.absolute_url())
-                #  TODO update the list of fields
-                subscriber.role = "N/A"
+                subscriber.date_of_birth = None
+                subscriber.nationality = None
+                subscriber.id_card_nbr = None
+                subscriber.id_valid_date = None
+                subscriber.parking = None
+                subscriber.car_id = None
+                transaction.commit()
     logger.info('Subscribers data reseting... DONE.')
     return True
 
