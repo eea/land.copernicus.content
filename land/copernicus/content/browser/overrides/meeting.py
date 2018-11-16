@@ -7,9 +7,11 @@ from zope.component import getUtility
 from zope.contentprovider.interfaces import IContentProvider
 from zope.event import notify
 from zope.schema.interfaces import IVocabularyFactory
+import datetime
 import plone.api as api
 import socket
 import transaction
+
 
 FIELDS_REGISTRATION = (
     ('first_name', 'first_name'),
@@ -282,6 +284,14 @@ class Register(views.Register):
                 'phone_numbers': phone_no
                 })
 
+            def date_from_string(x):
+                """ Input: 'dd-mm-yyyy'
+                """
+                try:
+                    return datetime.datetime.strptime(x, "%d-%m-%Y").date()
+                except ValueError:
+                    return None
+
             props = dict(
                 title=user.getProperty('fullname', uid),
                 id=uid,
@@ -290,10 +300,14 @@ class Register(views.Register):
                 role=self.request.get('role'),
                 role_other=self.request.get('role_other', ''),
                 phone_numbers=self.request.get('phone_numbers', []),
-                date_of_birth=self.request.get('date_of_birth', ''),
+                date_of_birth=date_from_string(
+                    self.request.get('date_of_birth', '')
+                    ),
                 nationality=self.request.get('nationality', ''),
                 id_card_nbr=self.request.get('id_card_nbr', ''),
-                id_valid_date=self.request.get('id_valid_date', ''),
+                id_valid_date=date_from_string(
+                    self.request.get('id_valid_date', '')
+                    ),
                 parking=self.request.get('parking', ''),
                 car_id=self.request.get('car_id', ''),
             )
