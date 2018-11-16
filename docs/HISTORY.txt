@@ -9,10 +9,14 @@ Changelog
 * Improve: Update text on registration sent. Change text label for Role field
   and define its possible values. Get rid of Visa and Reimbursed fields.
   Update form (texts, styles), add disclaimer. Add script for deleting old
-  subscribers data.
+  subscribers data. Prefill meeting registration form with account existing
+  details. Update titles and descriptions for all forms that are using fields
+  related to meeting registration. Adapt meeting signup to new added fields.
+  Update subscriber view template to include new fields and updated texts.
   [GhitaB #99957]
 * Improve: Subscribers list - add excel.js customization. Update Subscribers
-  table.
+  table. Add new columns for new fields values, make table optional columns
+  for E-pass related fields.
   [GhitaB #99958]
 
 5.6 - (2018-11-06)
