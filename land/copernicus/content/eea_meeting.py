@@ -169,7 +169,7 @@ class ISubscriber(Interface):
         required=False,
     )
 
-    date_of_birth = schema.TextLine(
+    date_of_birth = schema.Date(
         title=_(u"DATE OF BIRTH"),
         required=False,
     )
@@ -184,7 +184,7 @@ class ISubscriber(Interface):
         required=False,
     )
 
-    id_valid_date = schema.TextLine(
+    id_valid_date = schema.Date(
         title=_(u"ID VALID DATE"),
         required=False,
     )
