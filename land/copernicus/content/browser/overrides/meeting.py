@@ -57,7 +57,6 @@ FIELDS_SIGNUP_REQUIRED = (
     ('id_card_nbr', 'ID CARD NBR'),
     ('id_valid_date', 'ID VALID DATE'),
     ('parking', 'PARKING'),
-    ('car_id', 'CAR ID'),
 )
 
 
