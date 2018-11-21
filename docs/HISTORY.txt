@@ -1,6 +1,9 @@
 Changelog
 =========
 
+5.8.dev0 - (unreleased)
+-----------------------
+
 5.7 - (2018-11-21)
 ------------------
 * Improve: add 'E-pass is required' field to meeting schema. Add allow From, To
