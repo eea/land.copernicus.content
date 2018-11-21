@@ -52,11 +52,6 @@ FIELDS_SIGNUP = (
 
 FIELDS_SIGNUP_REQUIRED = (
     ('role', 'Role'),
-    ('date_of_birth', 'DATE OF BIRTH'),
-    ('nationality', 'NATIONALITY'),
-    ('id_card_nbr', 'ID CARD NBR'),
-    ('id_valid_date', 'ID VALID DATE'),
-    ('parking', 'PARKING'),
 )
 
 
