@@ -420,12 +420,14 @@
             <label for="f_date_of_birth">DATE OF BIRTH<span class="required"></span></label>
           </metal:label>
           <metal:body fill-slot="body">
-            <input type="text" name="date_of_birth" required
+            <input type="text" name="date_of_birth" autocomplete="off" required
               tal:attributes="value python:fields.get('date_of_birth', '')" />
 
             <script type="text/javascript">
               $(function() {
-                $('input[name="date_of_birth"]').datepicker();
+                $('input[name="date_of_birth"]').datepicker({
+                  format: 'dd-mm-yyyy'
+                });
               });
             </script>
           </metal:body>
@@ -456,12 +458,14 @@
             <label for="f_id_valid_date">ID VALID DATE</label>
           </metal:label>
           <metal:body fill-slot="body">
-            <input type="text" name="id_valid_date" required
+            <input type="text" name="id_valid_date" autocomplete="off" required
               tal:attributes="value python:fields.get('id_valid_date', '')" />
 
             <script type="text/javascript">
               $(function() {
-                $('input[name="id_valid_date"]').datepicker();
+                $('input[name="id_valid_date"]').datepicker({
+                  format: 'dd-mm-yyyy'
+                });
               });
             </script>
           </metal:body>
