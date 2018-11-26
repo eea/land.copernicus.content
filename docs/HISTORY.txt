@@ -3,6 +3,8 @@ Changelog
 
 5.9.dev0 - (unreleased)
 -----------------------
+* Improve: Add captcha field in meeting register form.
+  [GhitaB #99957]
 
 5.8 - (2018-11-26)
 ------------------
