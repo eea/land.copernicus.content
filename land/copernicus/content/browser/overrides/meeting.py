@@ -93,7 +93,7 @@ def check_captcha(request):
     value = request.get("captcha", "")
     is_ok = value in request.PARENTS[0].unrestrictedTraverse(
         "captcha")._generate_words()
-    return is_ok or 'Wrong captcha text for Verification field!'
+    return is_ok or 'Verification: The code you entered is wrong.'
 
 
 def check_required(fields, request):
