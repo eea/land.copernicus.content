@@ -262,6 +262,20 @@
       </metal:body>
     </metal:field>
 
+    <metal:field use-macro="template/macros/field">
+      <metal:label fill-slot="label">
+        <label>Verification<span class="required"></span></label>
+      </metal:label>
+      <metal:body fill-slot="body">
+
+        <div class="captchaImage">
+          <img tal:attributes="src python:context.absolute_url() + '/@@captcha/image'" />
+        </div>
+
+        <input id="form-widgets-captcha" type="text" value="" name="captcha" class="text-widget textline-field" required />
+      </metal:body>
+    </metal:field>
+
     <button type="submit" name="submit.register" class="btn btn-default">Register new account</button>
     <a href="./register" onclick="meeting.show_choice();return false">Cancel</a>
   </div>
