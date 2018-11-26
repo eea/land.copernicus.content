@@ -1,8 +1,8 @@
 Changelog
 =========
 
-5.9.dev0 - (unreleased)
------------------------
+5.9 - (2018-11-26)
+------------------
 * Improve: Add captcha field in meeting register form.
   Manual step: activate Captcha widget 1.0.3.
   [GhitaB #99957]
