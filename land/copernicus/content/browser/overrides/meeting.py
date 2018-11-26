@@ -89,6 +89,13 @@ def check_pw(request):
     return pw1 == pw2 or 'Passwords do not match!'
 
 
+def check_captcha(request):
+    value = request.get("captcha", "")
+    is_ok = value in request.PARENTS[0].unrestrictedTraverse(
+        "captcha")._generate_words()
+    return is_ok or 'Wrong captcha text for Verification field!'
+
+
 def check_required(fields, request):
     missing_fields = [
         label for fname, label in fields
@@ -111,6 +118,7 @@ def check_signup_other(request):
 
 VALIDATORS_REGISTER = (
     check_pw,
+    check_captcha,
     partial(check_required, FIELDS_REQUIRED),
 )
 
