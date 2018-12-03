@@ -78,7 +78,7 @@
                             Register to the event
                           </a>
                       </tal:canregister>
-                      <span tal:condition="not:context/can_register">Not available</span>
+                      <span tal:condition="not:context/can_register">Closed</span>
                     </tal:notregister>
 
                     <tal:registered tal:condition="registered">
