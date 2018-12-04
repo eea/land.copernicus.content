@@ -180,7 +180,7 @@
                {                     // custom dimensions
                  dimension1: data.thematic_domain,
                  dimension2: data.institutional_domain,
-                 dimension2: data.is_eionet_membet
+                 dimension3: data.is_eionet_membet
                }
              ]);
            };
