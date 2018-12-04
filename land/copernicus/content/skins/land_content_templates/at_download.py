@@ -7,17 +7,17 @@
 ##bind subpath=traverse_subpath
 
 """ Start customization """
-# TODO WIP
-# parents = context.aq_inner.aq_parent.absolute_url().split('/')[3:]
-# parents_paths = [
-#     '/' + '/'.join(parents[0:x+1]) + '/' for x in range(0, len(parents))]
-# find_workspace = [
-#     context.restrictedTraverse(x) for x in parents_paths if
-#     context.restrictedTraverse(x).portal_type == "eea.meeting.workspace"]
-#
-# if len(find_workspace) > 0:
-#     workspace = find_workspace[0]
-#     return workspace.current_user_has_access()
+parents = context.aq_inner.aq_parent.absolute_url().split('/')[3:]
+parents_paths = [
+    '/' + '/'.join(parents[0:x+1]) + '/' for x in range(0, len(parents))]
+find_workspace = [
+    context.restrictedTraverse(x) for x in parents_paths if
+    context.restrictedTraverse(x).portal_type == "eea.meeting.workspace"]
+
+if len(find_workspace) > 0:
+    workspace = find_workspace[0]
+    has_access = workspace.restrictedTraverse("current_user_has_access")()
+    # return has_access
 """ End customization """
 
 if traverse_subpath:
