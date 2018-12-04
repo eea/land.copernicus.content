@@ -3,6 +3,8 @@ Changelog
 
 6.0.dev0 - (unreleased)
 -----------------------
+* Fix: js error for loading message in map view of landitems.
+  [GhitaB #99772]
 * Feature: Add matomo custom event on landfile download.
   [GhitaB #100472]
 * Feature: Added external templates for land.copernicus search
