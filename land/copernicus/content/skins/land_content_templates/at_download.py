@@ -17,7 +17,10 @@ find_workspace = [
 if len(find_workspace) > 0:
     workspace = find_workspace[0]
     has_access = workspace.restrictedTraverse("current_user_has_access")()
-    # return has_access
+    if has_access != "has_access":
+        from zExceptions import Unauthorized
+        raise Unauthorized('Field %s requires %s permission' % (
+            field, field.read_permission))
 """ End customization """
 
 if traverse_subpath:
