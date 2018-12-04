@@ -133,7 +133,9 @@
                   iframe.setAttribute('src', iframe.getAttribute('data-src'));
                   iframe.addEventListener('load', function(){
                     var loading = document.querySelector('.loading_message');
-                    loading.parentNode.removeChild(loading);
+                    if (loading) {
+                      loading.parentNode.removeChild(loading);
+                    }
                   });
                 }
               })
