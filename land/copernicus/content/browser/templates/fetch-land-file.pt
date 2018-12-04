@@ -164,26 +164,25 @@
                'eventValue': 1
              });
 
-             // Matomo (disabled until demo website set as subdomain) TODO
-             // var MA = window._paq || function() {
-             //   // Matomo is not defined, log function arguments
-             //   if (window.console) {
-             //     console.log([].slice.call(arguments));
-             //   }
-             // };
-             //
-             // MA.push([
-             //   'trackEvent',
-             //   'page',               // category
-             //   'landfile_download',  // action
-             //   data.land_item_title, // name
-             //   1,                    // value
-             //   {                     // custom dimensions
-             //     dimension1: data.thematic_domain,
-             //     dimension2: data.institutional_domain,
-             //     dimension2: data.is_eionet_membet
-             //   }
-             // ]);
+             var MA = window._paq || function() {
+               // Matomo is not defined, log function arguments
+               if (window.console) {
+                 console.log([].slice.call(arguments));
+               }
+             };
+
+             MA.push([
+               'trackEvent',
+               'page',               // category
+               'landfile_download',  // action
+               data.land_item_title, // name
+               1,                    // value
+               {                     // custom dimensions
+                 dimension1: data.thematic_domain,
+                 dimension2: data.institutional_domain,
+                 dimension2: data.is_eionet_membet
+               }
+             ]);
            };
 
            function _clear_timeout(timeout) {
