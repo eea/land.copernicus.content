@@ -172,6 +172,28 @@
     permission="cmf.ManagePortal"
     />
 
+  <browser:page
+    name="external-template-head"
+    for="*"
+    template="templates/external-template-head.pt"
+    permission="zope2.View"
+    />
+
+  <browser:page
+    name="external-template-header"
+    for="*"
+    template="templates/external-template-header.pt"
+    permission="zope2.View"
+    class=".views.ExternalTemplateHeader"
+    />
+
+  <browser:page
+    name="external-template-footer"
+    for="*"
+    template="templates/external-template-footer.pt"
+    permission="zope2.View"
+    />
+
   <browser:viewlet
     name="sentry.script"
     for="*"

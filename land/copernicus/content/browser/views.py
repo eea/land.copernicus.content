@@ -6,9 +6,11 @@ from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
 from land.copernicus.content.content.api import LandFileApi
+from plone.app.theming.interfaces import IThemeSettings
+from plone.registry.interfaces import IRegistry
 from pkg_resources import resource_filename
 from urlparse import urlparse
-from zope.component import getMultiAdapter
+from zope.component import getMultiAdapter, getUtility
 from zope.component.hooks import getSite
 import datetime
 import json
@@ -576,3 +578,22 @@ class GetUpcomingEventsView(BrowserView):
         ]
 
         return events
+
+
+class ExternalTemplateHeader(BrowserView):
+    """ View used for EEA Search header
+    """
+
+    def theme_base_url(self):
+        reg = getUtility(IRegistry)
+        settings = reg.forInterface(IThemeSettings, False)
+        portal = api.portal.get()
+        base_url = portal.absolute_url()
+
+        return base_url + '/++theme++' + settings.currentTheme + '/'
+
+    def theme_base(self):
+        reg = getUtility(IRegistry)
+        settings = reg.forInterface(IThemeSettings, False)
+        return 'xxx'
+        return '/++theme++' + settings.currentTheme + '/'
