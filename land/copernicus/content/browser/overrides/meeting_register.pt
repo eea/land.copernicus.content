@@ -550,6 +550,19 @@
           </metal:body>
         </metal:field>
 
+        <metal:field use-macro="template/macros/field">
+          <metal:label fill-slot="label">
+            <label for="f_request_data_deletion">
+              Please delete my personal information after the event has ended,
+              at latest 4 weeks after.
+            </label>
+          </metal:label>
+          <metal:body fill-slot="body">
+            <input type="checkbox" name="request_data_deletion" required
+              tal:attributes="value python:fields.get('request_data_deletion', '')" />
+          </metal:body>
+        </metal:field>
+
         <div class="buttons">
           <span>
             <button type="submit" name="submit.signup" class="btn btn-default">Register to this meeting</button>
