@@ -3,6 +3,8 @@ Changelog
 
 6.0.dev0 - (unreleased)
 -----------------------
+* Improve: add new column Request data deletion in subscribers view.
+  [GhitaB #99958]
 * Fix: js error for loading message in map view of landitems.
   [GhitaB #99772]
 * Feature: Add matomo custom event on landfile download.
@@ -11,6 +13,7 @@ Changelog
   [iulianpetchesi #99788]
 * Improve: Update text for closed registration case in meeting view.
 * Improve: update disclaimer field label in meeting register.
+* Feature: add new field request_data_deletion for subscribers.
   [GhitaB #97529]
 
 5.9 - (2018-11-26)
