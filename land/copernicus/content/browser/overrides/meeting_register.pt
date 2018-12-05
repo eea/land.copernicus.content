@@ -558,7 +558,7 @@
             </label>
           </metal:label>
           <metal:body fill-slot="body">
-            <input type="checkbox" name="request_data_deletion" required
+            <input type="checkbox" name="request_data_deletion"
               tal:attributes="value python:fields.get('request_data_deletion', '')" />
           </metal:body>
         </metal:field>

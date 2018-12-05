@@ -313,10 +313,9 @@ class Register(views.Register):
                     ),
                 parking=self.request.get('parking', ''),
                 car_id=self.request.get('car_id', ''),
-                request_data_deletion=self.request.get(
-                    'request_data_deletion', ''),
+                request_data_deletion=(self.request.get(
+                    'request_data_deletion') is not None),
             )
-            # import pdb; pdb.set_trace()
             views.add_subscriber(subscribers, **props)
             notify(SendNewSubscriberEmailEvent(self.context))
         except socket.gaierror:
