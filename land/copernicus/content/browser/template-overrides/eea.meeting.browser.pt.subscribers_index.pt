@@ -53,11 +53,12 @@
                 <th tal:condition="meeting/need_e_pass">ID VALID DATE</th>
                 <th tal:condition="meeting/need_e_pass">PARKING</th>
                 <th tal:condition="meeting/need_e_pass">CAR ID</th>
+                <th>Request data deletion</th>
               </tr>
             <thead>
             <tbody tal:define="subscribers python:context.get_subscribers()">
               <tr tal:condition="not:subscribers">
-                <td colspan="19">No subscribers.</td>
+                <td colspan="20">No subscribers.</td>
               </tr>
               <tal:subscribers tal:repeat="subscriber subscribers">
                 <tr tal:define="subscriber_details python:subscriber.get_details();">
@@ -89,6 +90,7 @@
                   <td tal:content="python:subscriber.id_valid_date" tal:condition="meeting/need_e_pass">ID VALID DATE</td>
                   <td tal:content="python:subscriber.parking" tal:condition="meeting/need_e_pass">PARKING</td>
                   <td tal:content="python:subscriber.car_id" tal:condition="meeting/need_e_pass">CAR ID</td>
+                  <td tal:content="python:subscriber.request_data_deletion">Request data deletion</td>
                 </tr>
               </tal:subscribers>
             </tbody>
