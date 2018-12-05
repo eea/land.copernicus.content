@@ -539,7 +539,8 @@
         <metal:field use-macro="template/macros/field">
           <metal:label fill-slot="label">
             <label for="f_disclaimer">
-              I accept <a href="/terms-of-use" target="_blank">privacy policy and terms of use</a> of this website
+              I consent on the processing of my personal data according to the
+              <a href="/terms-of-use" target="_blank">privacy statement</a>
               <span class="required advanced"></span>
             </label>
           </metal:label>
