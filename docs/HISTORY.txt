@@ -10,6 +10,7 @@ Changelog
 * Feature: Added external templates for land.copernicus search
   [iulianpetchesi #99788]
 * Improve: Update text for closed registration case in meeting view.
+* Improve: update disclaimer field label in meeting register.
   [GhitaB #97529]
 
 5.9 - (2018-11-26)
