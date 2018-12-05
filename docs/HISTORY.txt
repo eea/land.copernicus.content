@@ -1,8 +1,8 @@
 Changelog
 =========
 
-6.0.dev0 - (unreleased)
------------------------
+6.0 - (2018-12-05)
+------------------
 * Improve: add new column Request data deletion in subscribers view.
   [GhitaB #99958]
 * Fix: js error for loading message in map view of landitems.
@@ -447,3 +447,4 @@ Changelog
 1.0  - (initial release)
 ------------------------
 * Initial release
+
