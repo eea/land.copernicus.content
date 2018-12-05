@@ -47,7 +47,8 @@ FIELDS_SIGNUP = (
     ('id_valid_date', 'id_valid_date'),
     ('parking', 'parking'),
     ('car_id', 'car_id'),
-    ('disclaimer', 'disclaimer')
+    ('disclaimer', 'disclaimer'),
+    ('request_data_deletion', 'request_data_deletion')
 )
 
 FIELDS_SIGNUP_REQUIRED = (
@@ -312,7 +313,10 @@ class Register(views.Register):
                     ),
                 parking=self.request.get('parking', ''),
                 car_id=self.request.get('car_id', ''),
+                request_data_deletion=self.request.get(
+                    'request_data_deletion', ''),
             )
+            # import pdb; pdb.set_trace()
             views.add_subscriber(subscribers, **props)
             notify(SendNewSubscriberEmailEvent(self.context))
         except socket.gaierror:

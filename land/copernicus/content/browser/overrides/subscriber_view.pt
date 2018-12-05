@@ -197,6 +197,17 @@
               BH 27 ABC
             </span>
           </div>
+
+          <div class="field" id="formfield-form-widgets-request_data_deletion">
+            <label for="form-widgets-request_data_deletion" class="horizontal">
+              Request data deletion:
+            </label>
+
+            <span id="form-widgets-request_data_deletion" class="text-widget textline-field"
+                  tal:content="python:subscriber.request_data_deletion">
+              True
+            </span>
+          </div>
         </div>
       </div>
     </metal:block>
