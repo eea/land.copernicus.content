@@ -1,6 +1,9 @@
 Changelog
 =========
 
+6.1.dev0 - (unreleased)
+-----------------------
+
 6.0 - (2018-12-05)
 ------------------
 * Improve: add new column Request data deletion in subscribers view.
