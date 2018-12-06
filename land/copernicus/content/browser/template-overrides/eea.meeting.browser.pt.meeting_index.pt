@@ -155,9 +155,10 @@
         <div id="parent-fieldname-text" tal:content="structure context/text/output"></div>
 
         <tal:listing tal:define="allowed view/can_list_content" tal:condition="allowed">
-          <div class="meeting-items" tal:define="
-            contentFilter python:{'portal_type': view.allowedPortalTypes};
-            folderContents python:context.getFolderContents(contentFilter);" tal:condition="folderContents">
+          <div class="meeting-items"
+               tal:define="folderContents python:view.get_meeting_contents();"
+               tal:condition="folderContents">
+
             <metal:content metal:use-macro="here/custom_folder_tabular_view/macros/listing" >
               <metal:fill fill-slot="long_description"></metal:fill>
             </metal:content>
