@@ -3,6 +3,7 @@ Changelog
 
 6.3.dev0 - (unreleased)
 -----------------------
+* Update text for hide additional materials.
 * Fix: typo webminar -> webinar.
   [GhitaB #97529]
 
