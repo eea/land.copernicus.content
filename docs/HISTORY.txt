@@ -3,6 +3,8 @@ Changelog
 
 6.3.dev0 - (unreleased)
 -----------------------
+* Fix: typo webminar -> webinar.
+  [GhitaB #97529]
 
 6.2 - (2018-12-11)
 ------------------
