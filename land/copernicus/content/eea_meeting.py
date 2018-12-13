@@ -19,7 +19,7 @@ meeting_types = SimpleVocabulary(
         SimpleTerm(value=u'conference', title=_(u'Conference')),
         SimpleTerm(value=u'meeting', title=_(u'Meeting')),
         SimpleTerm(value=u'workshop', title=_(u'Workshop')),
-        SimpleTerm(value=u'webminar', title=_(u'Webminar')),
+        SimpleTerm(value=u'webinar', title=_(u'Webinar')),
         SimpleTerm(value=u'eionet-copernicus-nrc-lc-meeting',
                    title=_(u'EIONET Copernicus NRC LC Meeting')),
         SimpleTerm(value=u'other', title=_(u'Other')),
@@ -115,11 +115,11 @@ class IMeeting(Interface):
 
     @invariant
     def validate_location_required(data):
-        if data.meeting_type != 'webminar' and data.location is None:
+        if data.meeting_type != 'webinar' and data.location is None:
             raise Invalid(_(
                 u"Event location input is missing." +
                 " This field is not required only in " +
-                "'Meeting type: webminar' case."))
+                "'Meeting type: webinar' case."))
 
 
 @provider(IVocabularyFactory)

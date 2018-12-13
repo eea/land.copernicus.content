@@ -45,7 +45,7 @@
   <p class="text-center">
     <b>Where:</b>
     <span tal:define="location context/location"
-          tal:condition="python:context.location and (context.is_webminar() is not True)">
+          tal:condition="python:context.location and (context.is_webinar() is not True)">
       <span class="location">
         <a tal:content="location"
            tal:attributes="href string:http://maps.google.com?q=$location"
