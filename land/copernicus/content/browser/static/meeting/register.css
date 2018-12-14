@@ -73,8 +73,17 @@ form input.other {
   align-items: center;
 }
 
+.register-form {
+  max-width: initial !important;
+  padding-left: 2em;
+}
+
 .register-form h2 {
   margin-top: 3em;
+}
+
+.register-form .field {
+  margin-bottom: 0.3em;
 }
 
 #choice {
