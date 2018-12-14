@@ -9,7 +9,8 @@ Changelog
 * Fix: Spacing and responsivity in meeting registration page.
 * Improve: Update welcome text in meeting register.
 * Improve: left align fields in meeting register.
-* Improve: remove not important form help texts.
+* Improve: remove not important form help texts in meeting register.
+* Improve: fields spacing in meeting register.
   [GhitaB #97529]
 
 6.2 - (2018-12-11)
