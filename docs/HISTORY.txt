@@ -3,11 +3,12 @@ Changelog
 
 6.3.dev0 - (unreleased)
 -----------------------
-* Improve: Update welcome text in meeting register.
-* Fix: Spacing and responsivity in meeting registration page.
-* Fix: Don't show location in meeting register if webinar.
-* Improve: Update text for hide additional materials.
 * Fix: typo webminar -> webinar.
+* Improve: Update text for hide additional materials.
+* Fix: Don't show location in meeting register if webinar.
+* Fix: Spacing and responsivity in meeting registration page.
+* Improve: Update welcome text in meeting register.
+* Improve: left align fields in meeting register.
   [GhitaB #97529]
 
 6.2 - (2018-12-11)
