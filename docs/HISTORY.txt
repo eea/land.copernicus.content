@@ -14,6 +14,7 @@ Changelog
 * Improve: update register button text in meeting register.
 * Improve: cancel link text and buttons spacing in meeting register.
 * Improve: add validation for phone numbers fields in meeting register.
+* Improve: update info text after registration sent in meeting register.
   [GhitaB #97529]
 
 6.2 - (2018-12-11)
