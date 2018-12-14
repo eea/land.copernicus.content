@@ -594,7 +594,12 @@
     <tal:message-signup define="message python:options.get('signup_message', None)">
       <metal:message use-macro="template/macros/message" />
     </tal:message-signup>
-    <p>Your registration request has been sent to event organisers. As soon as your registration is confirmed you will receive a notification e-mail.</p>
+    <p>
+      Hello, <span tal:replace="python:user.getProperty('fullname')"></span>,<br />
+      Your registration request has been sent to event organisers. As soon as
+      your registration is confirmed you will receive a notification e-mail.
+    </p>
+
     <a tal:attributes="href context/absolute_url">Return to the meeting page</a>
   </tal:registered>
 
