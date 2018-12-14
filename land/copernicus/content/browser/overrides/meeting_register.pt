@@ -261,8 +261,16 @@
       </metal:body>
     </metal:field>
 
-    <button type="submit" name="submit.register" class="btn btn-default">Register new account</button>
-    <a href="./register" onclick="meeting.show_choice();return false">Cancel</a>
+    <p>
+      <button type="submit" name="submit.register" class="btn btn-default">
+        Register new account
+      </button>
+    </p>
+    <p>
+      <a href="./register" onclick="meeting.show_choice();return false">
+        Cancel and return to the event page
+      </a>
+    </p>
   </div>
 </form>
 <script>
@@ -538,10 +546,16 @@
         </metal:field>
 
         <div class="buttons">
-          <span>
-            <button type="submit" name="submit.signup" class="btn btn-default">Register to this event</button>
-            <a href="./">Cancel</a>
-          </span>
+          <p>
+            <button type="submit" name="submit.signup" class="btn btn-default">
+              Register to this event
+            </button>
+          </p>
+          <p>
+            <a href="./">
+              Cancel and return to the event page
+            </a>
+          </p>
         </div>
       </div>
     </form>
