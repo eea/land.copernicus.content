@@ -19,6 +19,8 @@ Changelog
 * Improve: replace URLs in info text with 'this website' in meeting register.
 * Improve: update text for cancel link and fix center align.
 * Improve: create account position in meeting register for different screens.
+* Improve: meeting form for creating new account by removing not important
+  form help texts and improving layout spacing.
   [GhitaB #97529]
 
 6.2 - (2018-12-11)

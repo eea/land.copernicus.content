@@ -67,6 +67,11 @@ form input.other {
   min-width: 10em;
 }
 
+form#form-register {
+  margin-top: 1em;
+}
+
+form#form-register,
 .register-form {
   max-width: initial !important;
   padding-left: 2em;

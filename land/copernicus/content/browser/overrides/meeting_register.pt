@@ -229,12 +229,6 @@
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
         <label>User Name<span class="required"></span></label>
-        <p class="formHelp">
-          Enter a user name, usually something like 'jsmith'. No spaces or
-          special characters. Usernames and passwords are case sensitive,
-          make sure the caps lock key is not enabled.
-          This is the name used to log in.
-        </p>
       </metal:label>
       <metal:body fill-slot="body">
         <input type="text" name="username" required
@@ -245,9 +239,6 @@
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
         <label>Password<span class="required"></span></label>
-        <p class="formHelp">
-          The password must be at least 5 characters long.
-        </p>
       </metal:label>
       <metal:body fill-slot="body">
         <input type="password" name="pw1" required />
