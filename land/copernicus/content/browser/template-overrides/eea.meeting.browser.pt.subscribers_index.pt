@@ -26,7 +26,7 @@
 
     <div metal:fill-slot="content-core" class="meeting-items" tal:define="can_edit python:view.can_edit()">
        <p>Users registered to participate in this meeting</p>
-       <a class="back-button" tal:attributes="href python:context.aq_parent.absolute_url()">Back to meeting page</a>
+       <a class="back-button" tal:attributes="href python:context.aq_parent.absolute_url()">Back to event page</a>
        <div class="clearfix"></div>
        <form action="./api" method="POST"
              tal:define="meeting python:context.aq_parent">
@@ -36,7 +36,7 @@
               <tr>
                 <th tal:condition="can_edit"><input type="checkbox" data-role="select-all" /></th>
                 <th>Registration status</th>
-                <th title="When the registration request was submitted">Time stamp</th>
+                <th>Registration request time stamp</th>
                 <th>User Name</th>
                 <th>Name</th>
                 <th>Family name</th>
@@ -66,7 +66,7 @@
                     <input type="checkbox" data-role="select-subscriber" name="subscribers:list" tal:attributes="value subscriber/getId"/>
                   </td>
                   <td>
-                    <span tal:content="subscriber/state" />
+                    <span tal:content="python:subscriber.state().capitalize()" />
                   </td>
                   <td tal:define="toLocalizedTime nocall: context/@@plone/toLocalizedTime;"
                       tal:content="python:toLocalizedTime(subscriber.created(), long_format=1)"></td>
@@ -90,7 +90,7 @@
                   <td tal:content="python:subscriber.id_valid_date" tal:condition="meeting/need_e_pass">ID VALID DATE</td>
                   <td tal:content="python:subscriber.parking" tal:condition="meeting/need_e_pass">PARKING</td>
                   <td tal:content="python:subscriber.car_id" tal:condition="meeting/need_e_pass">CAR ID</td>
-                  <td tal:content="python:subscriber.request_data_deletion">Request data deletion</td>
+                  <td tal:content="python:'Yes' if subscriber.request_data_deletion else 'No'">Request data deletion</td>
                 </tr>
               </tal:subscribers>
             </tbody>

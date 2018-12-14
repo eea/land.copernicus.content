@@ -21,6 +21,9 @@ Changelog
 * Improve: create account position in meeting register for different screens.
 * Improve: meeting form for creating new account by removing not important
   form help texts and improving layout spacing.
+* Improve: Subscribers view - capitalize stubscriber status; Yes / No - values
+  for request data deletion; rename Registration request time stamp column;
+  update text for back to event btn.
   [GhitaB #97529]
 
 6.2 - (2018-12-11)
