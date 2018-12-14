@@ -87,12 +87,21 @@ def forceUpdateProfile(principal, event):
                 "thematic domain and Institutional domain.", type=u"info")
 
             if request.get('came_from', None):
+                came_from = request.get("came_from")
                 request['came_from'] = ''
                 request.form['came_from'] = ''
                 request.form['next'] = ''
 
-            edit_profile_url = site.portal_url() + '/@@personal-information'
-            request.RESPONSE.redirect(edit_profile_url)
+                url = "{0}{1}{2}".format(
+                    site.portal_url(),
+                    '/@@personal-information?came_from=',
+                    came_from)
+
+            else:
+                url = "{0}{1}".format(site.portal_url(),
+                                      '/@@personal-information')
+
+            request.RESPONSE.redirect(url)
 
 
 def nice_sizeof(num, suffix='B'):
