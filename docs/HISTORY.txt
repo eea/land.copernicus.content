@@ -24,6 +24,7 @@ Changelog
 * Improve: Subscribers view - capitalize stubscriber status; Yes / No - values
   for request data deletion; rename Registration request time stamp column;
   update text for back to event btn.
+* Fix: keep came_from value when redirected to @@personal-information form.
   [GhitaB #97529]
 
 6.2 - (2018-12-11)
