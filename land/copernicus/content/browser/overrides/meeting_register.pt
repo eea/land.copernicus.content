@@ -201,8 +201,19 @@
         <label>Phone no</label>
       </metal:label>
       <metal:body fill-slot="body">
-        <textarea rows="5" cols="30" name="phone_numbers:lines"
+        <textarea rows="5" cols="30" name="phone_numbers:lines" class="numeric"
           tal:content="python:'\n'.join(fields.get('phone_numbers', []))"></textarea>
+        <script>
+          $(document).on("ready", function() {
+            $(".numeric").on("keypress", function(e) {
+              if(e.which != 13) {
+                if(event.which != 8 && isNaN(String.fromCharCode(event.which))){
+                  event.preventDefault(); //stop character from entering input
+                }
+              }
+            });
+          });
+        </script>
       </metal:body>
     </metal:field>
   </div>
@@ -379,8 +390,19 @@
             <label>Phone no</label>
           </metal:label>
           <metal:body fill-slot="body">
-            <textarea rows="5" cols="30" name="phone_numbers:lines"
+            <textarea rows="5" cols="30" name="phone_numbers:lines" class="numeric"
               tal:content="python:'\n'.join(fields.get('phone_no', []))"></textarea>
+            <script>
+              $(document).on("ready", function() {
+                $(".numeric").on("keypress", function(e) {
+                  if(e.which != 13) {
+                    if(event.which != 8 && isNaN(String.fromCharCode(event.which))){
+                      event.preventDefault(); //stop character from entering input
+                    }
+                  }
+                });
+              });
+            </script>
           </metal:body>
         </metal:field>
         <metal:field use-macro="template/macros/field">
