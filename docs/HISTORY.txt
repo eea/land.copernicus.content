@@ -3,6 +3,7 @@ Changelog
 
 6.3.dev0 - (unreleased)
 -----------------------
+* Fix: Spacing and responsivity in meeting registration page.
 * Fix: Don't show location in meeting register if webinar.
 * Improve: Update text for hide additional materials.
 * Fix: typo webminar -> webinar.
