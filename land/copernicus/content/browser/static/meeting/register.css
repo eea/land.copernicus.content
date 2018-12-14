@@ -81,6 +81,7 @@ form#form-register,
   margin-top: 3em;
 }
 
+form#form-register .field,
 .register-form .field {
   margin-bottom: 0.3em;
 }
