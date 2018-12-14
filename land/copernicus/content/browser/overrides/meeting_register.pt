@@ -114,7 +114,7 @@
       onclick="meeting.show_registration();return false">CREATE NEW</a>
   </div>
   <div class="back-to-meeting">
-    <a href="./">Back to meeting</a>
+    <a href="./">Cancel and return to the event page</a>
   </div>
 </div>
 
