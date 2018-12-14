@@ -67,12 +67,6 @@ form input.other {
   min-width: 10em;
 }
 
-#form-login .buttons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .register-form {
   max-width: initial !important;
   padding-left: 2em;
@@ -123,4 +117,16 @@ div.meeting-info-container {
 div.login {
   margin-top: 2em;
   margin-bottom: 2em;
+}
+
+div.login .register-form {
+  padding-left: 0px;
+}
+
+div.login .register-form div.buttons {
+  padding-left: 1rem;
+}
+
+div.back-to-meeting {
+  width: 100%;
 }
