@@ -600,7 +600,7 @@
       your registration is confirmed you will receive a notification e-mail.
     </p>
 
-    <a tal:attributes="href context/absolute_url">Return to the meeting page</a>
+    <a tal:attributes="href context/absolute_url">Return to the event page</a>
   </tal:registered>
 
 </tal:member>
