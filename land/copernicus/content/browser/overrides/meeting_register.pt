@@ -129,9 +129,6 @@
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
         <label>Name<span class="required"></span></label>
-        <p class="formHelp">
-          Enter your first name.
-        </p>
       </metal:label>
       <metal:body fill-slot="body">
         <input type="text" name="first_name" required
@@ -142,9 +139,6 @@
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
         <label>Family name<span class="required"></span></label>
-        <p class="formHelp">
-          Enter your last name.
-        </p>
       </metal:label>
       <metal:body fill-slot="body">
         <input type="text" name="last_name" required
@@ -195,11 +189,6 @@
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
         <label>E-mail<span class="required"></span></label>
-        <p class="formHelp">
-          Enter an email address. This is necessary in case the password is lost.
-          We respect your privacy, and will not give the address away to any
-          third parties or expose it anywhere.
-        </p>
       </metal:label>
       <metal:body fill-slot="body">
         <input type="email" name="email" required
@@ -210,9 +199,6 @@
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
         <label>Phone no</label>
-        <p class="formHelp">
-          Add your phone numbers, one per line.
-        </p>
       </metal:label>
       <metal:body fill-slot="body">
         <textarea rows="5" cols="30" name="phone_numbers:lines"
@@ -313,9 +299,6 @@
         <metal:field use-macro="template/macros/field">
           <metal:label fill-slot="label">
             <label>Name<span class="required"></span></label>
-            <p class="formHelp">
-              Enter your first name.
-            </p>
           </metal:label>
           <metal:body fill-slot="body">
             <input type="text" name="first_name" required
@@ -326,9 +309,6 @@
         <metal:field use-macro="template/macros/field">
           <metal:label fill-slot="label">
             <label>Family name<span class="required"></span></label>
-            <p class="formHelp">
-              Enter your last name.
-            </p>
           </metal:label>
           <metal:body fill-slot="body">
             <input type="text" name="last_name" required
@@ -379,11 +359,6 @@
         <metal:field use-macro="template/macros/field">
           <metal:label fill-slot="label">
             <label>E-mail<span class="required"></span></label>
-            <p class="formHelp">
-              Enter an email address. This is necessary in case the password is lost.
-              We respect your privacy, and will not give the address away to any
-              third parties or expose it anywhere.
-            </p>
           </metal:label>
           <metal:body fill-slot="body">
             <input type="email" name="email" required
@@ -394,9 +369,6 @@
         <metal:field use-macro="template/macros/field">
           <metal:label fill-slot="label">
             <label>Phone no</label>
-            <p class="formHelp">
-              Add your phone numbers, one per line.
-            </p>
           </metal:label>
           <metal:body fill-slot="body">
             <textarea rows="5" cols="30" name="phone_numbers:lines"
