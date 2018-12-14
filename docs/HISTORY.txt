@@ -18,6 +18,7 @@ Changelog
 * Improve: update return to event link text in meeting register.
 * Improve: replace URLs in info text with 'this website' in meeting register.
 * Improve: update text for cancel link and fix center align.
+* Improve: create account position in meeting register for different screens.
   [GhitaB #97529]
 
 6.2 - (2018-12-11)
