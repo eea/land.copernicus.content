@@ -93,9 +93,14 @@ form input.other {
   border-radius: 10px;
 }
 
+@media all and (min-width: 1200px) {
+  .choice-button {
+    margin-right: 9rem;
+  }
+}
+
 .choice-button {
   padding: 1rem;
-  margin-right: 9rem;
   font-size: x-large;
   background: #a0b228;
   border: 2px solid #a0b228;
