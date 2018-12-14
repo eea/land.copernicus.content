@@ -199,6 +199,9 @@
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
         <label>Phone no</label>
+        <p class="formHelp phone-numbers-validation" style="display:none;">
+          Enter only numbers. For multiple phone numbers write them one per line.
+        </p>
       </metal:label>
       <metal:body fill-slot="body">
         <textarea rows="5" cols="30" name="phone_numbers:lines" class="numeric"
@@ -207,6 +210,7 @@
           $(document).on("ready", function() {
             $(".numeric").on("keypress", function(e) {
               if(e.which != 13) {
+                $("p.formHelp.phone-numbers-validation").css("display", "inherit");
                 if(event.which != 8 && isNaN(String.fromCharCode(event.which))){
                   event.preventDefault(); //stop character from entering input
                 }
@@ -388,6 +392,9 @@
         <metal:field use-macro="template/macros/field">
           <metal:label fill-slot="label">
             <label>Phone no</label>
+            <p class="formHelp phone-numbers-validation" style="display:none;">
+              Enter only numbers. For multiple phone numbers write them one per line.
+            </p>
           </metal:label>
           <metal:body fill-slot="body">
             <textarea rows="5" cols="30" name="phone_numbers:lines" class="numeric"
@@ -396,6 +403,7 @@
               $(document).on("ready", function() {
                 $(".numeric").on("keypress", function(e) {
                   if(e.which != 13) {
+                    $("p.formHelp.phone-numbers-validation").css("display", "inherit");
                     if(event.which != 8 && isNaN(String.fromCharCode(event.which))){
                       event.preventDefault(); //stop character from entering input
                     }
