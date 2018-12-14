@@ -1,6 +1,6 @@
 #parent-fieldname-description,
 .documentByLine {
-    display: none !important;
+  display: none !important;
 }
 
 h1.documentFirstHeading.land-title {
@@ -8,105 +8,114 @@ h1.documentFirstHeading.land-title {
 }
 
 form .field {
-    padding: 1rem;
+  padding: 1rem;
 }
 
 form .info {
-    cursor: help;
-    font-weight: bold;
+  cursor: help;
+  font-weight: bold;
 }
 
 form input.other {
-    font-size: initial !important;
-    vertical-align: middle;
-    width: 10em !important;
+  font-size: initial !important;
+  vertical-align: middle;
+  width: 10em !important;
 }
 
 .field-label {
-    width: 15em;
-    display: inline-block;
-    vertical-align: middle;
+  width: 15em;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .field-body {
-    display: inline-block;
-    text-align: left;
-    width: 20em;
-    vertical-align: middle;
+  display: inline-block;
+  text-align: left;
+  width: 20em;
+  vertical-align: middle;
 }
 
 .field-body > * {
-    vertical-align: middle !important;
+  vertical-align: middle !important;
 }
 
 .message {
-    border: 1px solid #dfdfdf;
-    cursor: pointer;
-    padding: 0.5em;
-    margin-bottom: 0.5em;
+  border: 1px solid #dfdfdf;
+  cursor: pointer;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 .message:hover:before {
-    content: "\02713";
-    float: right;
+  content: "\02713";
+  float: right;
 }
 
 .message.error {
-    border-color: #b70f0f;
-    background-color: #b70f0f;
-    color: #fff;
+  border-color: #b70f0f;
+  background-color: #b70f0f;
+  color: #fff;
 }
 
 .message.good {
-    border-color: #a0b228;
-    background-color: #a0b228;
-    color: #fff;
+  border-color: #a0b228;
+  background-color: #a0b228;
+  color: #fff;
 }
 
 #form-login .field label {
-    min-width: 10em;
+  min-width: 10em;
 }
 
 #form-login .buttons {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .register-form-fields {
-    text-align: center;
+  text-align: center;
 }
 
 .register-form h2 {
-    margin-top: 3em;
+  margin-top: 3em;
 }
 
 #choice {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-flow: row wrap;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-flow: row wrap;
 }
 
 #choice .login {
-    padding: 1em;
-    border: 1px solid #dfdfdf;
-    border-radius: 10px;
+  padding: 1em;
+  border: 1px solid #dfdfdf;
+  border-radius: 10px;
 }
 
 .choice-button {
-    padding: 1rem;
-    margin-right: 2rem;
-    font-size: x-large;
-    background: #a0b228;
-    border: 2px solid #a0b228;
-    border-radius: 5px;
-    color: #FFFFFF !important;
-    text-decoration: none !important;
+  padding: 1rem;
+  margin-right: 2rem;
+  font-size: x-large;
+  background: #a0b228;
+  border: 2px solid #a0b228;
+  border-radius: 5px;
+  color: #FFFFFF !important;
+  text-decoration: none !important;
 }
 
 .choice-button:hover {
-    background: #808f12;
-    border: 2px solid #808f12;
-    color: #fff;
+  background: #808f12;
+  border: 2px solid #808f12;
+  color: #fff;
+}
+
+div.meeting-info-container {
+  margin-bottom: 2em;
+}
+
+div.login {
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
