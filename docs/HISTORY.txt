@@ -11,6 +11,7 @@ Changelog
 * Improve: left align fields in meeting register.
 * Improve: remove not important form help texts in meeting register.
 * Improve: fields spacing in meeting register.
+* Improve: update register button text in meeting register.
   [GhitaB #97529]
 
 6.2 - (2018-12-11)
