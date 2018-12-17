@@ -188,6 +188,15 @@ class CustomizedUserDataPanel(UserDataPanel):
         return errors
 
     def _on_save(self, data=None):
+        """ Example:
+            Login from a meeting view with a new account (that has not the
+            complete profile). We want to redirect the user to meeting view
+            after the profile is saved.
+
+            Nothing happens if the came_from parameter is missing, so basic
+            usage - when the user edits his Personal settings - remains the
+            same.
+        """
         referer = self.request.get('HTTP_REFERER', None)
         if referer:
             if "came_from" in referer:
