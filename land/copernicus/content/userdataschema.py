@@ -187,10 +187,17 @@ class CustomizedUserDataPanel(UserDataPanel):
 
         return errors
 
-    # def _on_save(self, data=None):
-    #     TODO
-    #     WIP posssible redirect to came from here?
-    #     import pdb; pdb.set_trace()
+    def _on_save(self, data=None):
+        referer = self.request.get('HTTP_REFERER', None)
+        if referer:
+            if "came_from" in referer:
+                try:
+                    came_from = referer.split("came_from=")[-1]
+                except Exception:
+                    came_from = None
+
+                if came_from:
+                    self.request.response.redirect(came_from)
 
 
 class UserDataSchemaProvider(object):
