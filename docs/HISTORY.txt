@@ -25,6 +25,8 @@ Changelog
   for request data deletion; rename Registration request time stamp column;
   update text for back to event btn.
 * Fix: keep came_from value when redirected to @@personal-information form.
+* Improve: redirect to came_from in case user is logged in from a meeting view
+  with a new account, after the profile settings are saved.
   [GhitaB #97529]
 
 6.2 - (2018-12-11)
