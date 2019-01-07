@@ -1,0 +1,38 @@
+Stop fish, use simple terminal:
+$ npm install -g @vue/cli
+
+$ vue --version
+You are using Node v8.6.0, but this version of vue-cli requires Node >=8.9.
+Please upgrade your Node version.
+
+$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+Restart terminal.
+
+$ nvm --version
+0.33.11
+
+$ nvm install node
+$ nvm use --delete-prefix v10.11.0
+$ nvm alias default 10.11.0
+$ node --version
+v10.11.0
+
+$ vue --version
+3.0.5
+
+$ npm install -g @vue/cli-init
+$ vue init webpack datatables-admin
+
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
+
+# build for production and view the bundle analyzer report
+npm run build --report
+
+Set gh-pages: https://medium.com/@mwolfhoffman/deploying-to-github-pages-with-vue-webpack-cli-5b2ba17f14a0
