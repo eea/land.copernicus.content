@@ -3,6 +3,8 @@ Changelog
 
 6.4.dev0 - (unreleased)
 -----------------------
+* Improve: Clear unused GA code, update names to matomo.
+  [GhitaB #100472]
 
 6.3 - (2018-12-17)
 ------------------
