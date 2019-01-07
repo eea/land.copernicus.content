@@ -12,3 +12,4 @@ dist/
 .pytest_cache/
 .tox/
 .testenv_downloads/
+land/copernicus/content/browser/static/fileslibraryitem/app/node_modules/
