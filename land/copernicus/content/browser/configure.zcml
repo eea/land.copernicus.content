@@ -166,7 +166,7 @@
     />
 
   <browser:page
-    name="edit"
+    name="admin_files_library"
     for="land.copernicus.content.content.interfaces.IFilesLibraryItem"
     class=".fileslibraryitem.FilesLibraryItemAdminView"
     permission="cmf.ManagePortal"
