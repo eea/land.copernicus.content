@@ -116,7 +116,7 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <h2>Download your archive</h2>
-          <a id="land-package" target="_blank" href="${view/url}" data-track="${options/ga_data}">${options/filename}</a>
+          <a id="land-package" target="_blank" href="${view/url}" data-track="${options/matomo_data}">${options/filename}</a>
           <p><tal:num replace="options/num_files" />, <tal:size replace="options/size" /></p>
           <p>Available for ${options/hours}. Expires at ${options/expires}</p>
         </div>
@@ -125,7 +125,7 @@
        (function(){
            var LINK = document.querySelector('#land-package');
            var REMOTE_URL = LINK.getAttribute('href');
-           var GA_DATA = JSON.parse(LINK.getAttribute('data-track') || "{}");
+           var MATOMO_DATA = JSON.parse(LINK.getAttribute('data-track') || "{}");
            var TIMEOUT;
 
            function url_exists(url, callback) {
@@ -143,27 +143,6 @@
            }
 
            function track_download(data) {
-             var GA = window.ga || function() {
-               // ga is not defined, log function arguments
-               if (window.console) {
-                 console.log([].slice.call(arguments));
-               }
-             };
-
-             // Custom dimensions
-             GA('set', 'dimension1', data.thematic_domain);
-             GA('set', 'dimension2', data.institutional_domain);
-             GA('set', 'dimension3', data.is_eionet_member);
-
-             // Track event
-             GA('send', {
-               'hitType': 'event',                 // Required.
-               'eventCategory': 'page',            // Required.
-               'eventAction': 'landfile_download', // Required.
-               'eventLabel': data.land_item_title,
-               'eventValue': 1
-             });
-
              var MA = window._paq || function() {
                // Matomo is not defined, log function arguments
                if (window.console) {
@@ -196,7 +175,7 @@
                url_exists(REMOTE_URL, function(exists) {
                    if (exists) {
                        _clear_timeout(TIMEOUT);
-                       track_download(GA_DATA);
+                       track_download(MATOMO_DATA);
                        window.location.href = REMOTE_URL;
                    }
                    else if (!exists && popup) {
