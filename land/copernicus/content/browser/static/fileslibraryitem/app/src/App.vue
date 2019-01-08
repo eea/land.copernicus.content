@@ -44,6 +44,8 @@
       </p>
     </div>
 
+    <div id="exported-json">JSON PLACEHOLDER</div>
+
     <table-preview></table-preview>
   </div>
 </template>
@@ -55,7 +57,7 @@ export default {
     return {
       LOREM: "Click me to edit",
       NONE: "",
-      IS_DEBUG_MODE: false,  // Show or hide data
+      IS_DEBUG_MODE: true,  // Show or hide data
       filters: [
         {
           'id': 'filter01',

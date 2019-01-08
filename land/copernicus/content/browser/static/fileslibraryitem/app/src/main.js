@@ -22,12 +22,26 @@ Vue.component('editable', {
 Vue.component('table-preview', {
   template: `
     <div class="table-preview-container">
+      <button class='render-table' v-on:click="export_json">Save</button>
       <button class='render-table' v-on:click="render_table">Preview table</button>
       <table class="table-render-preview"></table>
     </div>
   `,
   props: ['content'],
   methods: {
+    export_json() {
+      var columns = this.$parent.columns;
+      var rows = this.$parent.rows;
+      var filters = this.$parent.filters;
+      var result = JSON.stringify({
+        "columns": columns,
+        "rows": rows,
+        "filters": filters
+      });
+
+      $("#exported-json").text(result);
+    },
+
     render_table() {
       var columns = this.$parent.columns;
       var rows = this.$parent.rows;
