@@ -1,5 +1,6 @@
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+import transaction
 
 
 class FilesLibraryItemView(BrowserView):
@@ -24,6 +25,9 @@ class FilesLibraryItemAdminView(BrowserView):
 
     def __call__(self):
         if self.request.method == 'POST':
-            import pdb; pdb.set_trace()
+            data = self.request.form.get("exported-json", None)
+            if data:
+                self.context.json_data = data
+                transaction.commit()
 
         return self.render()

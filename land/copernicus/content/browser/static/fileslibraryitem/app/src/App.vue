@@ -44,7 +44,7 @@
       </p>
     </div>
 
-    <form id="save-work" action="./" method="post">
+    <form id="save-work" action="./admin_files_library" method="post">
       <textarea id="exported-json" name="exported-json">JSON PLACEHOLDER</textarea>
     </form>
 
