@@ -22,7 +22,7 @@ Vue.component('editable', {
 Vue.component('table-preview', {
   template: `
     <div class="table-preview-container">
-      <button class='render-table' v-on:click="export_json">Save</button>
+      <button class='render-table' v-on:click="save_work">Save</button>
       <button class='render-table' v-on:click="render_table">Preview table</button>
       <table class="table-render-preview"></table>
     </div>
@@ -40,6 +40,11 @@ Vue.component('table-preview', {
       });
 
       $("#exported-json").text(result);
+    },
+
+    save_work() {
+      this.export_json();
+      $("form#save-work").submit();
     },
 
     render_table() {

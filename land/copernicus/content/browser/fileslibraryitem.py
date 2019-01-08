@@ -1,6 +1,5 @@
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from plone.dexterity.browser import edit
 
 
 class FilesLibraryItemView(BrowserView):
@@ -15,10 +14,16 @@ class FilesLibraryItemView(BrowserView):
         return self.render()
 
 
-class FilesLibraryItemAdminView(edit.DefaultEditForm):
+class FilesLibraryItemAdminView(BrowserView):
     """ Administration view for Files Library Item
     """
     index = ViewPageTemplateFile("templates/fileslibraryitem_edit.pt")
 
     def render(self):
         return self.index()
+
+    def __call__(self):
+        if self.request.method == 'POST':
+            import pdb; pdb.set_trace()
+
+        return self.render()

@@ -44,7 +44,9 @@
       </p>
     </div>
 
-    <div id="exported-json">JSON PLACEHOLDER</div>
+    <form id="save-work" action="./" method="post">
+      <textarea id="exported-json" name="exported-json">JSON PLACEHOLDER</textarea>
+    </form>
 
     <table-preview></table-preview>
   </div>
