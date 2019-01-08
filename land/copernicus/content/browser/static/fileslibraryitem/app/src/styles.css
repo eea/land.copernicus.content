@@ -1,26 +1,9 @@
 /* https://coolors.co/96adc8-d7ffab-fcff6c-d89d6a-6d454c
    #FFFFFF #EEEEEE #757575 #000000 #bfd630 #A0B228 #819110
 */
-@import url('https://fonts.googleapis.com/css?family=Open+Sans|Tangerine');
-
-body.template-admin_files_library {
-  font-family: 'Open Sans', sans-serif;
-  background: #EEEEEE;
-  color: #000000;
-}
-
 body.template-admin_files_library div#datatables-admin {
   background: #FFFFFF;
   padding: 20px;
-  margin: 20px;
-}
-
-body.template-admin_files_library div#datatables-admin h1 {
-  font-family: 'Tangerine', cursive;
-  color: #000000;
-  text-align: center;
-  font-size: 86px;
-  font-weight: 500;
   margin: 20px;
 }
 
@@ -80,7 +63,6 @@ body.template-admin_files_library div#datatables-admin button.render-table {
   color: #FFFFFF;
   border: none;
   font-size: 16px;
-  font-weight: 900;
 }
 
 body.template-admin_files_library div#datatables-admin button.render-table:hover {
@@ -91,7 +73,6 @@ body.template-admin_files_library div#datatables-admin button.render-table:hover
 body.template-admin_files_library a {
   color: #A0B228;
   text-decoration: none;
-  font-weight: 900;
 }
 
 body.template-admin_files_library a:hover {

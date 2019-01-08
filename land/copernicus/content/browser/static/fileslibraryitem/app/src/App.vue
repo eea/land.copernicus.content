@@ -1,7 +1,5 @@
 <template>
   <div id="datatables-admin">
-    <h1>Datatables admin</h1>
-
     <table id="editor">
       <thead>
         <tr>
