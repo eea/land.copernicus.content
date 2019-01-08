@@ -5,7 +5,9 @@
 
 <body>
 <metal:title fill-slot="content-title">
-  <h1 metal:use-macro="context/kss_generic_macros/macros/generic_title_view"></h1>
+  <h1 id="parent-fieldname-title" class="documentFirstHeading">
+    <span tal:replace="context/title">Files Library</span> - administration panel
+  </h1>
 </metal:title>
 
 <metal:styleslot fill-slot="style_slot">
@@ -24,6 +26,12 @@
 <metal:content-core fill-slot="content-core">
   <metal:main_macro define-macro="content-core">
     <div id="parent-fieldname-text" tal:content="structure context/text/output"></div>
+
+    <p>
+      <a href="./edit">Edit summary and body text.</a>
+      (You will be redirected on click, make sure your work is saved.)
+    </p>
+
     <div id=datatables-admin></div>
 
     <script src=https://code.jquery.com/jquery-3.3.1.min.js
