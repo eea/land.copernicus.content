@@ -3,19 +3,19 @@
 */
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Tangerine');
 
-body.dta {
+body.template-admin_files_library {
   font-family: 'Open Sans', sans-serif;
   background: #EEEEEE;
   color: #000000;
 }
 
-body.dta div#datatables-admin {
+body.template-admin_files_library div#datatables-admin {
   background: #FFFFFF;
   padding: 20px;
   margin: 20px;
 }
 
-body.dta div#datatables-admin h1 {
+body.template-admin_files_library div#datatables-admin h1 {
   font-family: 'Tangerine', cursive;
   color: #000000;
   text-align: center;
@@ -24,23 +24,23 @@ body.dta div#datatables-admin h1 {
   margin: 20px;
 }
 
-body.dta div#datatables-admin table#editor {
+body.template-admin_files_library div#datatables-admin table#editor {
   background: #EEEEEE;
   border-spacing: 5px;
   color: #000000;
   margin: auto;
 }
 
-body.dta div#datatables-admin table#editor tr,
-body.dta div#datatables-admin table#editor td,
-body.dta div#datatables-admin table#editor th {
+body.template-admin_files_library div#datatables-admin table#editor tr,
+body.template-admin_files_library div#datatables-admin table#editor td,
+body.template-admin_files_library div#datatables-admin table#editor th {
   background: #FFFFFF;
   padding: 5px;
   margin: 5px;
   text-align: center;
 }
 
-body.dta div#datatables-admin table#editor th {
+body.template-admin_files_library div#datatables-admin table#editor th {
   user-select: none;
   -moz-user-select: none;
   -khtml-user-select: none;
@@ -48,7 +48,7 @@ body.dta div#datatables-admin table#editor th {
   -o-user-select: none;
 }
 
-body.dta div#datatables-admin .dta-btn {
+body.template-admin_files_library div#datatables-admin .dta-btn {
   color: #A0B228;
 
   user-select: none;
@@ -58,21 +58,21 @@ body.dta div#datatables-admin .dta-btn {
   -o-user-select: none;
 }
 
-body.dta div#datatables-admin .dta-btn:hover {
+body.template-admin_files_library div#datatables-admin .dta-btn:hover {
   color: #819110;
   cursor: pointer;
 }
 
-body.dta div#datatables-admin div.table-preview-container {
+body.template-admin_files_library div#datatables-admin div.table-preview-container {
   text-align: center;
   margin-top: 40px;
 }
 
-body.dta div#datatables-admin table.table-render-preview {
+body.template-admin_files_library div#datatables-admin table.table-render-preview {
   margin: auto;
 }
 
-body.dta div#datatables-admin button.render-table {
+body.template-admin_files_library div#datatables-admin button.render-table {
   margin-bottom: 40px;
   padding: 10px;
   border-radius: 6px;
@@ -83,27 +83,27 @@ body.dta div#datatables-admin button.render-table {
   font-weight: 900;
 }
 
-body.dta div#datatables-admin button.render-table:hover {
+body.template-admin_files_library div#datatables-admin button.render-table:hover {
   background: #819110;
   cursor: pointer;
 }
 
-body.dta a {
+body.template-admin_files_library a {
   color: #A0B228;
   text-decoration: none;
   font-weight: 900;
 }
 
-body.dta a:hover {
+body.template-admin_files_library a:hover {
   color: #819110;
 }
 
-body.dta div.filters-container {
+body.template-admin_files_library div.filters-container {
   clear: both;
   text-align: center;
 }
 
-body.dta div.filters-container ul.filters-list {
+body.template-admin_files_library div.filters-container ul.filters-list {
   display: inline-block;
   margin: 0;
   padding: 0;
@@ -112,7 +112,7 @@ body.dta div.filters-container ul.filters-list {
   *display: inline;
 }
 
-body.dta ul.filters-list li {
+body.template-admin_files_library ul.filters-list li {
   float: left;
   color: #A0B228;
   padding: 10px 20px;
@@ -120,11 +120,11 @@ body.dta ul.filters-list li {
   list-style: none;
 }
 
-body.dta ul.filters-list li.is-selected {
+body.template-admin_files_library ul.filters-list li.is-selected {
   border-bottom: 2px solid #A0B228;
 }
 
-body.dta ul.filters-list li:hover {
+body.template-admin_files_library ul.filters-list li:hover {
   cursor: pointer;
   color: #819110;
 }

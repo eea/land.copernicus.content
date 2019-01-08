@@ -12,7 +12,8 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
   <link rel="stylesheet" type="text/css" href="${portal_url}/++resource++land.copernicus.content.static/lib/jquery.dataTables.min.css" />
-  <link rel="stylesheet" type="text/css" href="${portal_url}/++resource++land.copernicus.content.static/fileslibraryitem/fileslibraryitem.css" />
+  <!-- <link rel="stylesheet" type="text/css" href="${portal_url}/++resource++land.copernicus.content.static/fileslibraryitem/fileslibraryitem.css" /> -->
+  <link rel="stylesheet" type="text/css" href="${portal_url}/++resource++land.copernicus.content.static/fileslibraryitem/app/dist/static/css/app.css" />
 </metal:styleslot>
 
 <metal:javascriptslot fill-slot="javascript_head_slot">
@@ -30,9 +31,9 @@
             crossorigin=anonymous></script>
     <script src=https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js></script>
 
-    <script type="text/javascript" src="${portal_url}/++resource++land.copernicus.content.static/fileslibraryitem/app/docs/static/js/manifest.2ae2e69a05c33dfc65f8.js"></script>
-    <script type="text/javascript" src="${portal_url}/++resource++land.copernicus.content.static/fileslibraryitem/app/docs/static/js/vendor.bb335a033c3b9e5d296a.js"></script>
-    <script type="text/javascript" src="${portal_url}/++resource++land.copernicus.content.static/fileslibraryitem/app/docs/static/js/app.34192fcf62436d2f7bd3.js"></script>
+    <script type="text/javascript" src="${portal_url}/++resource++land.copernicus.content.static/fileslibraryitem/app/dist/static/js/manifest.js"></script>
+    <script type="text/javascript" src="${portal_url}/++resource++land.copernicus.content.static/fileslibraryitem/app/dist/static/js/vendor.js"></script>
+    <script type="text/javascript" src="${portal_url}/++resource++land.copernicus.content.static/fileslibraryitem/app/dist/static/js/app.js"></script>
   </metal:main_macro>
 </metal:content-core>
 </body>
