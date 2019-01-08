@@ -13,3 +13,4 @@ dist/
 .tox/
 .testenv_downloads/
 land/copernicus/content/browser/static/fileslibraryitem/app/node_modules/
+!land/copernicus/content/browser/static/fileslibraryitem/app/dist
