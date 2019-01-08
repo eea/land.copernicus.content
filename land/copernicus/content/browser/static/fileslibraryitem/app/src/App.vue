@@ -1,5 +1,8 @@
 <template>
   <div id="datatables-admin">
+    <!-- The data as saved in context.json_data -->
+    <div id="initial-json-data">{"columns":[{"id":"001","text":"Click me to edit"},{"id":"002","text":"Demo column 2"},{"id":"003","text":"Demo column 3"},{"id":"004","text":"URL"}],"rows":[[{"id":"005","text":"Demo category"},{"id":"006","text":"Sub-category 1"},{"id":"007","text":"col3 data1"},{"id":"008","text":"https://www.google.com"}],[{"id":"009","text":"Demo category"},{"id":"010","text":"Sub-category 2"},{"id":"011","text":"col3 data2"},{"id":"012","text":"https://www.yahoo.com"}],[{"id":"013","text":"Demo category 2"},{"id":"014","text":"Sub-category 3"},{"id":"015","text":"col3 data3"},{"id":"016","text":"https://www.yahoo.com"}]],"filters":[{"id":"filter01","text":"Demo category"},{"id":"filter02","text":"Demo category 2"},{"id":"filter02","text":"Sub-category 3"}]}</div>
+
     <table id="editor">
       <thead>
         <tr>
@@ -70,103 +73,123 @@ export default {
         return Math.random() * (max - min) + min;
     },
 
+    get_initial_json_data: function() {
+      var json_data = $("#initial-json-data").text();
+      return JSON.parse(json_data);
+    },
+
     get_filters: function() {
-      return [
-        {
-          'id': 'filter01',
-          'text': 'Demo category'
-        },
-        {
-          'id': 'filter02',
-          'text': 'Demo category 2'
-        },
-        {
-          'id': 'filter02',
-          'text': 'Sub-category 3'
-        }
-      ];
-    },
-
-    get_columns: function() {
-      return [
-        {
-          'id': '001',
-          'text': 'Click me to edit'
-        },
-        {
-          'id': '002',
-          'text': 'Demo column 2'
-        },
-        {
-          'id': '003',
-          'text': 'Demo column 3'
-        },
-        {
-          'id': '004',
-          'text': 'URL'
-        }
-      ];
-    },
-
-    get_rows: function() {
-      return [
-        [
+      var data = this.get_initial_json_data();
+      if(data.filters) {
+        return data.filters;
+      } else {
+        return [
           {
-            'id': '005',
+            'id': 'filter01',
             'text': 'Demo category'
           },
           {
-            'id': '006',
-            'text': 'Sub-category 1'
-          },
-          {
-            'id': '007',
-            'text': 'col3 data1'
-          },
-          {
-            'id': '008',
-            'text': 'https://www.google.com'
-          }
-        ],
-
-        [
-          {
-            'id': '009',
-            'text': 'Demo category'
-          },
-          {
-            'id': '010',
-            'text': 'Sub-category 2'
-          },
-          {
-            'id': '011',
-            'text': 'col3 data2'
-          },
-          {
-            'id': '012',
-            'text': 'https://www.yahoo.com'
-          }
-        ],
-
-        [
-          {
-            'id': '013',
+            'id': 'filter02',
             'text': 'Demo category 2'
           },
           {
-            'id': '014',
+            'id': 'filter02',
             'text': 'Sub-category 3'
-          },
-          {
-            'id': '015',
-            'text': 'col3 data3'
-          },
-          {
-            'id': '016',
-            'text': 'https://www.yahoo.com'
           }
-        ]
-      ];
+        ];
+      }
+    },
+
+    get_columns: function() {
+      var data = this.get_initial_json_data();
+      if(data.columns) {
+        return data.columns;
+      } else {
+        return [
+          {
+            'id': '001',
+            'text': 'Click me to edit'
+          },
+          {
+            'id': '002',
+            'text': 'Demo column 2'
+          },
+          {
+            'id': '003',
+            'text': 'Demo column 3'
+          },
+          {
+            'id': '004',
+            'text': 'URL'
+          }
+        ];
+      }
+    },
+
+    get_rows: function() {
+      var data = this.get_initial_json_data();
+      if(data.rows) {
+        return data.rows;
+      } else {
+        return [
+          [
+            {
+              'id': '005',
+              'text': 'Demo category'
+            },
+            {
+              'id': '006',
+              'text': 'Sub-category 1'
+            },
+            {
+              'id': '007',
+              'text': 'col3 data1'
+            },
+            {
+              'id': '008',
+              'text': 'https://www.google.com'
+            }
+          ],
+
+          [
+            {
+              'id': '009',
+              'text': 'Demo category'
+            },
+            {
+              'id': '010',
+              'text': 'Sub-category 2'
+            },
+            {
+              'id': '011',
+              'text': 'col3 data2'
+            },
+            {
+              'id': '012',
+              'text': 'https://www.yahoo.com'
+            }
+          ],
+
+          [
+            {
+              'id': '013',
+              'text': 'Demo category 2'
+            },
+            {
+              'id': '014',
+              'text': 'Sub-category 3'
+            },
+            {
+              'id': '015',
+              'text': 'col3 data3'
+            },
+            {
+              'id': '016',
+              'text': 'https://www.yahoo.com'
+            }
+          ]
+        ];
+      }
     },
 
     generate_id: function() {

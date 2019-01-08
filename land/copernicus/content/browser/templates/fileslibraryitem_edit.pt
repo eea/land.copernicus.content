@@ -32,6 +32,7 @@
       (You will be redirected on click, make sure your work is saved.)
     </p>
 
+    <div id="initial-json-data" tal:content="context/json_data"></div>
     <div id=datatables-admin></div>
 
     <script src=https://code.jquery.com/jquery-3.3.1.min.js
