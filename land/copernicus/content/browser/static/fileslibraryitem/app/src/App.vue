@@ -60,7 +60,18 @@ export default {
       LOREM: "Click me to edit",
       NONE: "",
       IS_DEBUG_MODE: true,  // Show or hide data
-      filters: [
+      filters: this.get_filters(),
+      columns: this.get_columns(),
+      rows: this.get_rows(),
+    }
+  },
+  methods: {
+    generate_random(min, max) {
+        return Math.random() * (max - min) + min;
+    },
+
+    get_filters: function() {
+      return [
         {
           'id': 'filter01',
           'text': 'Demo category'
@@ -73,8 +84,11 @@ export default {
           'id': 'filter02',
           'text': 'Sub-category 3'
         }
-      ],
-      columns: [
+      ];
+    },
+
+    get_columns: function() {
+      return [
         {
           'id': '001',
           'text': 'Click me to edit'
@@ -91,8 +105,11 @@ export default {
           'id': '004',
           'text': 'URL'
         }
-      ],
-      rows: [
+      ];
+    },
+
+    get_rows: function() {
+      return [
         [
           {
             'id': '005',
@@ -149,12 +166,7 @@ export default {
             'text': 'https://www.yahoo.com'
           }
         ]
-      ]
-    }
-  },
-  methods: {
-    generate_random(min, max) {
-        return Math.random() * (max - min) + min;
+      ];
     },
 
     generate_id: function() {
