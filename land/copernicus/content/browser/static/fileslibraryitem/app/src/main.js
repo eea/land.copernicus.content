@@ -49,7 +49,7 @@ Vue.component('table-preview', {
     },
 
     cancel_work() {
-      console.log("Canceled");
+      window.location.href = "./";
     },
 
     render_table() {
