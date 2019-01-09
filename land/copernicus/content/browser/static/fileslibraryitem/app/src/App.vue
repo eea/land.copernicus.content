@@ -75,7 +75,11 @@ export default {
 
     get_initial_json_data: function() {
       var json_data = $("#initial-json-data").text();
-      return JSON.parse(json_data);
+      try {
+        return JSON.parse(json_data);
+      } catch(e) {
+        return {};
+      }
     },
 
     get_filters: function() {
