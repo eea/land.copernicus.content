@@ -7,8 +7,8 @@
       <thead>
         <tr>
           <th v-for="(column, index_col) in columns" :key="column.id">
-            <i class="fas fa-long-arrow-alt-left fa-2x dta-btn move-col-left" title="Move column to left" v-on:click="move_col_to_left(index_col)"></i>
-            <i class="fas fa-long-arrow-alt-right fa-2x dta-btn move-col-right" title="Move column to right" v-on:click="move_col_to_right(index_col)"></i>
+            <i class="fas fa-arrow-left fa-2x dta-btn move-col-left" title="Move column to left" v-on:click="move_col_to_left(index_col)"></i>
+            <i class="fas fa-arrow-right fa-2x dta-btn move-col-right" title="Move column to right" v-on:click="move_col_to_right(index_col)"></i>
             <i class="fas fa-plus fa-2x dta-btn add-col" title="Add a column after this one" v-on:click="add_col(index_col + 1)"></i>
             <i class="fas fa-times fa-2x dta-btn delete-col" title="Delete this column" v-on:click="delete_col(index_col)"></i>
             <br />
@@ -27,8 +27,8 @@
           <td v-for="(column, index_col) in columns" :key="column.id">
             <editable :content="rows[index_row][index_col].text" v-on:update="update_row($event, index_row, index_col)"></editable>
           <td>
-            <i class="fas fa-long-arrow-alt-up fa-2x dta-btn move-row-up" v-on:click="move_row_up(index_row)" title="Move row up"></i>
-            <i class="fas fa-long-arrow-alt-down fa-2x dta-btn move-row-down" v-on:click="move_row_down(index_row)" title="Move row down"></i>
+            <i class="fas fa-arrow-up fa-2x dta-btn move-row-up" v-on:click="move_row_up(index_row)" title="Move row up"></i>
+            <i class="fas fa-arrow-down fa-2x dta-btn move-row-down" v-on:click="move_row_down(index_row)" title="Move row down"></i>
             <i class="fas fa-plus fa-2x dta-btn add-row" title="Add a row under this one" v-on:click="add_row(index_row + 1)"></i>
             <i class="fas fa-times fa-2x dta-btn delete-row" title="Delete this row" v-on:click="delete_row(index_row)"></i>
           </td>
