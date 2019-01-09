@@ -24,7 +24,7 @@ Vue.component('table-preview', {
     <div class="table-preview-container">
       <button name="save-work" class='large-btn' v-on:click="save_work">Save</button>
       <button name="render-table" class='large-btn' v-on:click="render_table">Preview table</button>
-      <button name="cancel-work" class='large-btn' v-on:click="cancel_work">Cancel</button>
+      <button name="cancel-work" class='large-btn' title="The unsaved work will be lost." v-on:click="cancel_work">Cancel</button>
       <table class="table-render-preview"></table>
     </div>
   `,
