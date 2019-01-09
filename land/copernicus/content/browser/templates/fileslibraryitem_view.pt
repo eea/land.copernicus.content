@@ -22,32 +22,84 @@
   <metal:main_macro define-macro="content-core">
     <div id="parent-fieldname-text" tal:content="structure context/text/output"></div>
 
-    <!-- TODO Replace with rendered table based on json_data  -->
     <div id="initial-json-data" tal:content="context/json_data"></div>
-    <table class="files-library"><thead><tr><th>Click me to edit</th><th>Demo column 2</th><th>Demo column 3</th><th>URL</th></tr></thead><tbody><tr><td>Demo category</td><td>Sub-category 1</td><td>col3 data1</td><td><a href="https://www.google.com" target="_blank" title="https://www.google.com">Link<span style="display:none !important">https://www.google.com</span></a></td></tr><tr><td>Demo category</td><td>Sub-category 2</td><td>col3 data2</td><td><a href="https://www.yahoo.com" target="_blank" title="https://www.yahoo.com">Link<span style="display:none !important">https://www.yahoo.com</span></a></td></tr><tr><td>Demo category 2</td><td>Sub-category 3</td><td>col3 data3</td><td><a href="https://www.yahoo.com" target="_blank" title="https://www.yahoo.com">Link<span style="display:none !important">https://www.yahoo.com</span></a></td></tr></tbody></table>
-
-    <!-- TODO Replace with rendered search filters based on json_data  -->
-    <div class="filters-container">
-      <p><b>Search filters:</b></p>
-      <ul class="filters-list"><li class="search-filter">Demo category</li><li class="search-filter">Demo category 2</li><li class="search-filter">Sub-category 3</li></ul>
-    </div>
+    <table class="table-render"></table>
 
     <script>
     $(document).ready(function() {
-      if ($.fn.DataTable.isDataTable(".table-render-preview")) {
-        $('.table-render-preview').DataTable().clear().destroy();
+      function render_table() {
+        var table_placeholder = document.querySelector('.table-render');
+        var json_data = JSON.parse($("div#initial-json-data").text());
+        var columns = json_data.columns;
+        var rows = json_data.rows;
+        var filters = json_data.filters;
+
+        function make_filters_html(filters) {
+          var filters_html = "<div class='filters-container'><p><b>Search filters:</b></p><ul class='filters-list'>";
+          for(var i = 0; i < filters.length; i++) {
+            filters_html += "<li class='search-filter'>" + filters[i].text + "</li>";
+          }
+          filters_html += "</ul></div>"
+
+          return filters_html;
+        }
+
+        function make_table_html(columns, rows) {
+          function render_link(url) {
+            if(url !== undefined) {
+              return "<a href='" + url +"' target='_blank' title=" + url + ">Link<span style='display:none !important'>" + url + "</span></a>";
+            } else {
+              return "N/A";
+            }
+          }
+
+          var result = "<table border=1><thead><tr>";
+
+          for(var i = 0; i < columns.length; i++) {
+            result += "<th>" + columns[i].text + "</th>";
+          }
+
+          result += "</thead><tbody>"
+          for(var i = 0; i < rows.length; i++) {
+            result += "<tr>";
+            for(var j = 0; j < rows[i].length; j++) {
+              if(columns[j].text == "URL" || columns[j].text.trim() == "URL") {
+                result += "<td>" +  render_link(rows[i][j].text) + "</td>";
+              } else {
+                result += "<td>" + rows[i][j].text + "</td>";
+              }
+            }
+            result += "</tr>";
+          }
+          result += "</tbody></table>";
+
+          return result;
+        }
+
+        if ($.fn.DataTable.isDataTable(".table-render-preview")) {
+          $('.table-render-preview').DataTable().clear().destroy();
+        }
+
+        var new_el = document.createElement("table");
+        new_el.className = "table-render-preview";
+        new_el.innerHTML = make_table_html(columns, rows);
+        table_placeholder.parentNode.replaceChild(new_el, table_placeholder);
+
+        var the_table = $('.table-render-preview').dataTable({
+          "destroy": true,
+          aaSorting: []
+        });
+
+        $(".dataTables_wrapper").append(make_filters_html(filters));
+
+        $(".search-filter").on("click", function() {
+          the_table.fnFilter('"' + $(this).text() + '"');
+          $(".search-filter").removeClass("is-selected");
+          $(this).addClass("is-selected");
+        });
       }
 
-      var the_table = $('table.files-library').dataTable({
-        "destroy": true,
-        aaSorting: []
-      });
-
-      $(".search-filter").on("click", function() {
-        the_table.fnFilter('"' + $(this).text() + '"');
-        $(".search-filter").removeClass("is-selected");
-        $(this).addClass("is-selected");
-      });
+      render_table();
     });
     </script>
   </metal:main_macro>
