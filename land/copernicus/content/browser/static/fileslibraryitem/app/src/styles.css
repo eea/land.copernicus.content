@@ -55,7 +55,7 @@ body.template-admin_files_library div#datatables-admin table.table-render-previe
   margin: auto;
 }
 
-body.template-admin_files_library div#datatables-admin button.render-table {
+body.template-admin_files_library div#datatables-admin button.large-btn {
   margin-bottom: 40px;
   padding: 10px;
   border-radius: 6px;
@@ -65,7 +65,7 @@ body.template-admin_files_library div#datatables-admin button.render-table {
   font-size: 16px;
 }
 
-body.template-admin_files_library div#datatables-admin button.render-table:hover {
+body.template-admin_files_library div#datatables-admin button.large-btn:hover {
   background: #819110;
   cursor: pointer;
 }

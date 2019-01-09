@@ -22,8 +22,9 @@ Vue.component('editable', {
 Vue.component('table-preview', {
   template: `
     <div class="table-preview-container">
-      <button class='render-table' v-on:click="save_work">Save</button>
-      <button class='render-table' v-on:click="render_table">Preview table</button>
+      <button name="save-work" class='large-btn' v-on:click="save_work">Save</button>
+      <button name="render-table" class='large-btn' v-on:click="render_table">Preview table</button>
+      <button name="cancel-work" class='large-btn' v-on:click="cancel_work">Cancel</button>
       <table class="table-render-preview"></table>
     </div>
   `,
@@ -45,6 +46,10 @@ Vue.component('table-preview', {
     save_work() {
       this.export_json();
       $("form#save-work").submit();
+    },
+
+    cancel_work() {
+      console.log("Canceled");
     },
 
     render_table() {
