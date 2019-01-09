@@ -22,14 +22,20 @@
   <metal:main_macro define-macro="content-core">
     <div id="parent-fieldname-text" tal:content="structure context/text/output"></div>
 
-    <div id="initial-json-data" tal:content="context/json_data"></div>
+    <div style="display:none;" id="initial-json-data" tal:content="context/json_data"></div>
     <table class="table-render"></table>
 
     <script>
     $(document).ready(function() {
       function render_table() {
         var table_placeholder = document.querySelector('.table-render');
-        var json_data = JSON.parse($("div#initial-json-data").text());
+        try {
+          var json_data = JSON.parse($("div#initial-json-data").text());
+        } catch(e) {
+          console.log("Error: Invalid json.", e);
+          return;
+        }
+
         var columns = json_data.columns;
         var rows = json_data.rows;
         var filters = json_data.filters;
