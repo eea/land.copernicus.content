@@ -117,3 +117,7 @@ body.template-admin_files_library ul.filters-list li:hover {
   cursor: pointer;
   color: #819110;
 }
+
+body.template-admin_files_library .fa.fa-2x {
+  font-size: 25px;
+}
