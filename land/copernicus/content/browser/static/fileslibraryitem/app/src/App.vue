@@ -33,7 +33,10 @@
                       v-if="!is_file_col(columns[index_col].text)"></editable>
             <span class="not-editable"
                   v-if="is_file_col(columns[index_col].text)">{{rows[index_row][index_col].text}}</span>
-            <fileselect :content="rows[index_row][index_col].text" v-if="is_file_col(columns[index_col].text)"></fileselect>
+            <fileselect :content="rows[index_row][index_col].text"
+                        :index_row="index_row"
+                        :index_col="index_col"
+                        v-if="is_file_col(columns[index_col].text)"></fileselect>
           <td>
             <i class="fa fa-arrow-up fa-2x dta-btn move-row-up" v-on:click="move_row_up(index_row)" title="Move row up"></i>
             <i class="fa fa-arrow-down fa-2x dta-btn move-row-down" v-on:click="move_row_down(index_row)" title="Move row down"></i>
