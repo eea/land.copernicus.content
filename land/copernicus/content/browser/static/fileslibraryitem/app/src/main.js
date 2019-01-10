@@ -40,6 +40,7 @@ Vue.component('table-preview', {
     <div class="table-preview-container">
       <button name="save-work" class='large-btn' v-on:click="save_work">Save</button>
       <button name="render-table" class='large-btn' v-on:click="render_table">Preview table</button>
+      <button name="upload-files" class='large-btn' v-on:click="upload_files">Upload files</button>
       <button name="cancel-work" class='large-btn' title="The unsaved work will be lost." v-on:click="cancel_work">Cancel</button>
       <table class="table-render-preview"></table>
     </div>
@@ -66,6 +67,11 @@ Vue.component('table-preview', {
 
     cancel_work() {
       window.location.href = "./";
+    },
+
+    upload_files() {
+      // TODO when new files are uploaded, the new filesnames will be available to be selected
+      this.$parent.files.push("newuploadedfile1", "newuploadedfile2", "newuploadedfile3");
     },
 
     render_table() {
