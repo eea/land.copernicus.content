@@ -12,7 +12,10 @@
             <i class="fa fa-plus fa-2x dta-btn add-col" title="Add a column after this one" v-on:click="add_col(index_col + 1)"></i>
             <i class="fa fa-times fa-2x dta-btn delete-col" title="Delete this column" v-on:click="delete_col(index_col)"></i>
             <br />
-            <editable :content="columns[index_col].text" v-on:update="update_col($event, index_col)"></editable>
+            <editable :content="columns[index_col].text" v-on:update="update_col($event, index_col)"
+                      v-if="is_editable_col(columns[index_col].text)"></editable>
+            <span class="not-editable"
+                  v-if="!is_editable_col(columns[index_col].text)">{{columns[index_col].text}}</span>
           </th>
           <th>
             <i class="fa fa-plus fa-2x dta-btn add-col" title="Add a column" v-on:click="add_col(0)"></i>
@@ -125,6 +128,10 @@ export default {
           {
             'id': '004',
             'text': 'URL'
+          },
+          {
+            'id': '005',
+            'text': 'File'
           }
         ];
       }
@@ -152,6 +159,10 @@ export default {
             {
               'id': '008',
               'text': 'https://www.google.com'
+            },
+            {
+              'id': '111',
+              'text': 'File title1'
             }
           ],
 
@@ -171,29 +182,18 @@ export default {
             {
               'id': '012',
               'text': 'https://www.yahoo.com'
-            }
-          ],
-
-          [
-            {
-              'id': '013',
-              'text': 'Demo category 2'
             },
             {
-              'id': '014',
-              'text': 'Sub-category 3'
-            },
-            {
-              'id': '015',
-              'text': 'col3 data3'
-            },
-            {
-              'id': '016',
-              'text': 'https://www.yahoo.com'
+              'id': '111',
+              'text': 'File title2'
             }
           ]
         ];
       }
+    },
+
+    is_editable_col: function(col_name) {
+      return col_name !== "URL" && col_name !== 'File';
     },
 
     generate_id: function() {
