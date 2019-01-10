@@ -21,11 +21,18 @@ Vue.component('editable', {
 
 Vue.component('fileselect', {
   template: `
-    <select>
+    <select @change="onChange()">
+      <option></option>
       <option v-for="option in this.$parent.files">{{option}}</option>
     </select>
   `,
-  props: ['content']
+  props: ['content'],
+  methods: {
+    onChange(ev) {
+      var selected_filename = this.$el.value;
+      this.$el.parentElement.children[0].textContent = selected_filename;
+    }
+  }
 });
 
 Vue.component('table-preview', {
