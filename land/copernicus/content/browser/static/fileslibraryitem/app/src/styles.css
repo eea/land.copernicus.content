@@ -87,6 +87,14 @@ body.template-admin_files_library a:hover {
   color: #819110;
 }
 
+body.template-admin_files_library i.fa.fa-times {
+  color: #FDA42C !important;
+}
+
+body.template-admin_files_library i.fa.fa-times:hover {
+  color: #F48D02 !important;
+}
+
 body.template-admin_files_library div.filters-container {
   clear: both;
   text-align: center;
