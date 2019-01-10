@@ -19,6 +19,13 @@ Vue.component('editable', {
   }
 });
 
+Vue.component('fileselect', {
+  template: `
+    <p>TODO select an uploaded file</p>
+  `,
+  props: ['content']
+});
+
 Vue.component('table-preview', {
   template: `
     <div class="table-preview-container">

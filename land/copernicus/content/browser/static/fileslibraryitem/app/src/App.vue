@@ -30,7 +30,7 @@
         <tr v-for="(row, index_row) in rows" :key="index_row">
           <td v-for="(column, index_col) in columns" :key="column.id">
             <editable :content="rows[index_row][index_col].text" v-on:update="update_row($event, index_row, index_col)"></editable>
-            <p :data-uploader-id="index_col" v-if="is_file_col(columns[index_col].text)">file uploader placeholder</p>
+            <fileselect :content="rows[index_row][index_col].text" v-if="is_file_col(columns[index_col].text)"></fileselect>
           <td>
             <i class="fa fa-arrow-up fa-2x dta-btn move-row-up" v-on:click="move_row_up(index_row)" title="Move row up"></i>
             <i class="fa fa-arrow-down fa-2x dta-btn move-row-down" v-on:click="move_row_down(index_row)" title="Move row down"></i>
