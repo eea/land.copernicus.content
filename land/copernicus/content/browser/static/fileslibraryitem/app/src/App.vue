@@ -7,18 +7,18 @@
       <thead>
         <tr>
           <th v-for="(column, index_col) in columns" :key="column.id">
-            <i class="fas fa-arrow-left fa-2x dta-btn move-col-left" title="Move column to left" v-on:click="move_col_to_left(index_col)"></i>
-            <i class="fas fa-arrow-right fa-2x dta-btn move-col-right" title="Move column to right" v-on:click="move_col_to_right(index_col)"></i>
-            <i class="fas fa-plus fa-2x dta-btn add-col" title="Add a column after this one" v-on:click="add_col(index_col + 1)"></i>
-            <i class="fas fa-times fa-2x dta-btn delete-col" title="Delete this column" v-on:click="delete_col(index_col)"></i>
+            <i class="fa fa-arrow-left fa-2x dta-btn move-col-left" title="Move column to left" v-on:click="move_col_to_left(index_col)"></i>
+            <i class="fa fa-arrow-right fa-2x dta-btn move-col-right" title="Move column to right" v-on:click="move_col_to_right(index_col)"></i>
+            <i class="fa fa-plus fa-2x dta-btn add-col" title="Add a column after this one" v-on:click="add_col(index_col + 1)"></i>
+            <i class="fa fa-times fa-2x dta-btn delete-col" title="Delete this column" v-on:click="delete_col(index_col)"></i>
             <br />
             <editable :content="columns[index_col].text" v-on:update="update_col($event, index_col)"></editable>
           </th>
           <th>
-            <i class="fas fa-plus fa-2x dta-btn add-col" title="Add a column" v-on:click="add_col(0)"></i>
-            <i class="fas fa-plus fa-2x dta-btn add-row" title="Add a row" v-on:click="add_row(0)"></i>
-            <i class="fas fa-times fa-2x dta-btn delete-all-cols" title="Delete all columns" v-on:click="delete_all_cols"></i>
-            <i class="fas fa-times fa-2x dta-btn delete-all-rows" title="Delete all rows" v-on:click="delete_all_rows"></i>
+            <i class="fa fa-plus fa-2x dta-btn add-col" title="Add a column" v-on:click="add_col(0)"></i>
+            <i class="fa fa-plus fa-2x dta-btn add-row" title="Add a row" v-on:click="add_row(0)"></i>
+            <i class="fa fa-times fa-2x dta-btn delete-all-cols" title="Delete all columns" v-on:click="delete_all_cols"></i>
+            <i class="fa fa-times fa-2x dta-btn delete-all-rows" title="Delete all rows" v-on:click="delete_all_rows"></i>
           </th>
         </tr>
       </thead>
@@ -27,10 +27,10 @@
           <td v-for="(column, index_col) in columns" :key="column.id">
             <editable :content="rows[index_row][index_col].text" v-on:update="update_row($event, index_row, index_col)"></editable>
           <td>
-            <i class="fas fa-arrow-up fa-2x dta-btn move-row-up" v-on:click="move_row_up(index_row)" title="Move row up"></i>
-            <i class="fas fa-arrow-down fa-2x dta-btn move-row-down" v-on:click="move_row_down(index_row)" title="Move row down"></i>
-            <i class="fas fa-plus fa-2x dta-btn add-row" title="Add a row under this one" v-on:click="add_row(index_row + 1)"></i>
-            <i class="fas fa-times fa-2x dta-btn delete-row" title="Delete this row" v-on:click="delete_row(index_row)"></i>
+            <i class="fa fa-arrow-up fa-2x dta-btn move-row-up" v-on:click="move_row_up(index_row)" title="Move row up"></i>
+            <i class="fa fa-arrow-down fa-2x dta-btn move-row-down" v-on:click="move_row_down(index_row)" title="Move row down"></i>
+            <i class="fa fa-plus fa-2x dta-btn add-row" title="Add a row under this one" v-on:click="add_row(index_row + 1)"></i>
+            <i class="fa fa-times fa-2x dta-btn delete-row" title="Delete this row" v-on:click="delete_row(index_row)"></i>
           </td>
         </tr>
       </tbody>
