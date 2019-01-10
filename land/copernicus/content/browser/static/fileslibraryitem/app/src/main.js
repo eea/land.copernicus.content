@@ -21,7 +21,9 @@ Vue.component('editable', {
 
 Vue.component('fileselect', {
   template: `
-    <p>TODO select an uploaded file</p>
+    <select>
+      <option v-for="option in this.$parent.files">{{option}}</option>
+    </select>
   `,
   props: ['content']
 });

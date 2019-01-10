@@ -71,6 +71,7 @@ export default {
       filters: this.get_filters(),
       columns: this.get_columns(),
       rows: this.get_rows(),
+      files: this.get_files(),
     }
   },
   methods: {
@@ -85,6 +86,13 @@ export default {
       } catch(e) {
         return {};
       }
+    },
+
+    get_files: function() {
+      // TODO
+      // On load init with existing files names in context.
+      // On upload add new filnames.
+      return ["filename1", "filename2", "filename3"];
     },
 
     get_filters: function() {
