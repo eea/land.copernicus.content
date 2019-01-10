@@ -133,3 +133,11 @@ body.template-admin_files_library .fa.fa-2x {
 body.template-admin_files_library span.not-editable {
   color: #BBBBBB;
 }
+
+body.template-admin_files_library div.col-lg-3[data-diazo="land-secondary-column"] {
+  display: none;
+}
+
+body.template-admin_files_library div.main-content > div.col-lg-9 {
+  width: 100%;
+}
