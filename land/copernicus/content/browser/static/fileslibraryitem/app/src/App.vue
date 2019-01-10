@@ -10,7 +10,8 @@
             <i class="fa fa-arrow-left fa-2x dta-btn move-col-left" title="Move column to left" v-on:click="move_col_to_left(index_col)"></i>
             <i class="fa fa-arrow-right fa-2x dta-btn move-col-right" title="Move column to right" v-on:click="move_col_to_right(index_col)"></i>
             <i class="fa fa-plus fa-2x dta-btn add-col" title="Add a column after this one" v-on:click="add_col(index_col + 1)"></i>
-            <i class="fa fa-times fa-2x dta-btn delete-col" title="Delete this column" v-on:click="delete_col(index_col)"></i>
+            <i class="fa fa-times fa-2x dta-btn delete-col" title="Delete this column" v-on:click="delete_col(index_col)"
+               v-if="is_editable_col(columns[index_col].text)"></i>
             <br />
             <editable :content="columns[index_col].text" v-on:update="update_col($event, index_col)"
                       v-if="is_editable_col(columns[index_col].text)"></editable>

@@ -129,3 +129,7 @@ body.template-admin_files_library ul.filters-list li:hover {
 body.template-admin_files_library .fa.fa-2x {
   font-size: 25px;
 }
+
+body.template-admin_files_library span.not-editable {
+  color: #BBBBBB;
+}
