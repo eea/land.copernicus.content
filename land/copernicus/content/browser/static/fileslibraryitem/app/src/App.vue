@@ -421,54 +421,52 @@ export default {
       background: white;
       padding: 20px;
       margin: 20px;
-    }
 
-    div#datatables-admin table#editor {
-      background: @land-gray-lighter;
-      border-spacing: 5px;
-      color: black;
-      margin: auto;
-    }
+      table#editor {
+        background: @land-gray-lighter;
+        border-spacing: 5px;
+        color: black;
+        margin: auto;
 
-    div#datatables-admin table#editor tr,
-    div#datatables-admin table#editor td,
-    div#datatables-admin table#editor th {
-      background: white;
-      padding: 5px;
-      margin: 5px;
-      text-align: center;
-    }
+        tr, td, th {
+          background: white;
+          padding: 5px;
+          margin: 5px;
+          text-align: center;
+        }
 
-    div#datatables-admin table#editor th {
-      user-select: none;
-      -moz-user-select: none;
-      -khtml-user-select: none;
-      -webkit-user-select: none;
-      -o-user-select: none;
-    }
+        th {
+          user-select: none;
+          -moz-user-select: none;
+          -khtml-user-select: none;
+          -webkit-user-select: none;
+          -o-user-select: none;
+        }
+      }
 
-    div#datatables-admin .dta-btn {
-      color: @land-green;
+      .dta-btn {
+        color: @land-green;
 
-      user-select: none;
-      -moz-user-select: none;
-      -khtml-user-select: none;
-      -webkit-user-select: none;
-      -o-user-select: none;
-    }
+        user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -o-user-select: none;
 
-    div#datatables-admin .dta-btn:hover {
-      color: @land-green-dark;
-      cursor: pointer;
-    }
+        &:hover {
+          color: @land-green-dark;
+          cursor: pointer;
+        }
+      }
 
-    div#datatables-admin div.table-preview-container {
-      text-align: center;
-      margin-top: 40px;
-    }
+      div.table-preview-container {
+        text-align: center;
+        margin-top: 40px;
+      }
 
-    div#datatables-admin table.table-render-preview {
-      margin: auto;
+      table.table-render-preview {
+        margin: auto;
+      }
     }
 
     a {
@@ -491,32 +489,32 @@ export default {
     div.filters-container {
       clear: both;
       text-align: center;
-    }
 
-    div.filters-container ul.filters-list {
-      display: inline-block;
-      margin: 0;
-      padding: 0;
-      /* For IE, the outcast */
-      zoom:1;
-      *display: inline;
-    }
+      ul.filters-list {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        /* For IE, the outcast */
+        zoom:1;
+        *display: inline;
 
-    ul.filters-list li {
-      float: left;
-      color: @land-green;
-      padding: 10px 20px;
-      margin-right: 20px;
-      list-style: none;
-    }
+        li {
+          float: left;
+          color: @land-green;
+          padding: 10px 20px;
+          margin-right: 20px;
+          list-style: none;
+        }
 
-    ul.filters-list li.is-selected {
-      border-bottom: 2px solid @land-green;
-    }
+        li.is-selected {
+          border-bottom: 2px solid @land-green;
+        }
 
-    ul.filters-list li:hover {
-      cursor: pointer;
-      color: @land-green-dark;
+        li:hover {
+          cursor: pointer;
+          color: @land-green-dark;
+        }
+      }
     }
 
     .fa.fa-2x {
@@ -524,7 +522,7 @@ export default {
     }
 
     span.not-editable {
-      color: #BBBBBB;
+      color: @land-gray-light2;
     }
 
     div.col-lg-3[data-diazo="land-secondary-column"] {
