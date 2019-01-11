@@ -68,11 +68,13 @@
 
 <script>
 import editable from './components/editable'
+import fileselect from './components/fileselect'
 
 export default {
   name: 'app',
   components: {
-    editable
+    editable,
+    fileselect
   },
   data() {
     return {

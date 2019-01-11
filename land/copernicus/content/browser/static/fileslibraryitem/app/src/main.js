@@ -5,22 +5,6 @@ import App from './App'
 
 Vue.config.productionTip = false
 
-Vue.component('fileselect', {
-  template: `
-    <select @change="onChange()">
-      <option></option>
-      <option v-for="option in this.$parent.files">{{option}}</option>
-    </select>
-  `,
-  props: ['content', 'index_row', 'index_col'],
-  methods: {
-    onChange(ev) {
-      var selected_filename = this.$el.value;
-      this.$parent.update_row(selected_filename, this.index_row, this.index_col);
-    }
-  }
-});
-
 Vue.component('table-preview', {
   template: `
     <div class="table-preview-container">
