@@ -62,19 +62,21 @@
       <textarea id="exported-json" name="exported-json">JSON PLACEHOLDER</textarea>
     </form>
 
-    <table-preview></table-preview>
+    <tablepreview />
   </div>
 </template>
 
 <script>
 import editable from './components/editable'
 import fileselect from './components/fileselect'
+import tablepreview from './components/tablepreview'
 
 export default {
   name: 'app',
   components: {
     editable,
-    fileselect
+    fileselect,
+    tablepreview
   },
   data() {
     return {
