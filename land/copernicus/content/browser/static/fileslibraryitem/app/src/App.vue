@@ -414,28 +414,26 @@ export default {
 </script>
 
 <style lang="less">
-  @zzz: red;
-  /* https://coolors.co/96adc8-d7ffab-fcff6c-d89d6a-6d454c
-     #FFFFFF #EEEEEE #757575 #000000 #bfd630 #A0B228 #819110
-  */
+  @import "./less/colors.less";
+
   body.template-admin_files_library {
     div#datatables-admin {
-      background: #FFFFFF;
+      background: white;
       padding: 20px;
       margin: 20px;
     }
 
     div#datatables-admin table#editor {
-      background: #EEEEEE;
+      background: @land-gray-lighter;
       border-spacing: 5px;
-      color: #000000;
+      color: black;
       margin: auto;
     }
 
     div#datatables-admin table#editor tr,
     div#datatables-admin table#editor td,
     div#datatables-admin table#editor th {
-      background: #FFFFFF;
+      background: white;
       padding: 5px;
       margin: 5px;
       text-align: center;
@@ -450,7 +448,7 @@ export default {
     }
 
     div#datatables-admin .dta-btn {
-      color: @zzz;
+      color: @land-green;
 
       user-select: none;
       -moz-user-select: none;
@@ -460,7 +458,7 @@ export default {
     }
 
     div#datatables-admin .dta-btn:hover {
-      color: #819110;
+      color: @land-green-dark;
       cursor: pointer;
     }
 
@@ -474,20 +472,20 @@ export default {
     }
 
     a {
-      color: #A0B228;
+      color: @land-green;
       text-decoration: none;
     }
 
     a:hover {
-      color: #819110;
+      color: @land-green-dark;
     }
 
     i.fa.fa-times {
-      color: #FDA42C !important;
+      color: @land-orange !important;
     }
 
     i.fa.fa-times:hover {
-      color: #F48D02 !important;
+      color: @land-orange-dark !important;
     }
 
     div.filters-container {
@@ -506,19 +504,19 @@ export default {
 
     ul.filters-list li {
       float: left;
-      color: #A0B228;
+      color: @land-green;
       padding: 10px 20px;
       margin-right: 20px;
       list-style: none;
     }
 
     ul.filters-list li.is-selected {
-      border-bottom: 2px solid #A0B228;
+      border-bottom: 2px solid @land-green;
     }
 
     ul.filters-list li:hover {
       cursor: pointer;
-      color: #819110;
+      color: @land-green-dark;
     }
 
     .fa.fa-2x {
