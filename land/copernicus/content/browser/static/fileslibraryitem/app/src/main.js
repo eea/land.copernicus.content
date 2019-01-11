@@ -5,20 +5,6 @@ import App from './App'
 
 Vue.config.productionTip = false
 
-Vue.component('editable', {
-  template: `
-    <div contenteditable="true" @blur="emitChange">
-      {{ content }}
-    </div>
-  `,
-  props: ['content'],
-  methods: {
-    emitChange(ev) {
-      this.$emit('update', ev.target.textContent)
-    }
-  }
-});
-
 Vue.component('fileselect', {
   template: `
     <select @change="onChange()">

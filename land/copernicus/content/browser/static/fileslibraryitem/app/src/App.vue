@@ -67,8 +67,13 @@
 </template>
 
 <script>
+import editable from './components/editable'
+
 export default {
   name: 'app',
+  components: {
+    editable
+  },
   data() {
     return {
       LOREM: "Click me to edit",
