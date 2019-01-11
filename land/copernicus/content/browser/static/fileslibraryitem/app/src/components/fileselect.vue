@@ -1,5 +1,5 @@
 <template>
-  <select @change="onChange()">
+  <select @change="update_selected_file()">
     <option></option>
     <option v-for="option in this.$parent.files">{{option}}</option>
   </select>
@@ -10,7 +10,7 @@ export default {
   name: 'fileselect',
   props: ['content', 'index_row', 'index_col'],
   methods: {
-    onChange(ev) {
+    update_selected_file(ev) {
       var selected_filename = this.$el.value;
       this.$parent.update_row(selected_filename, this.index_row, this.index_col);
     }
