@@ -127,3 +127,28 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  body.template-admin_files_library div#datatables-admin button.large-btn {
+    margin-bottom: 40px;
+    padding: 10px;
+    border-radius: 6px;
+    background: #A0B228;
+    color: #FFFFFF;
+    border: none;
+    font-size: 16px;
+  }
+
+  body.template-admin_files_library div#datatables-admin button.large-btn[name="cancel-work"] {
+    background: #FDA42C;
+  }
+
+  body.template-admin_files_library div#datatables-admin button.large-btn[name="cancel-work"]:hover {
+    background: #F48D02;
+  }
+
+  body.template-admin_files_library div#datatables-admin button.large-btn:hover {
+    background: #819110;
+    cursor: pointer;
+  }
+</style>
