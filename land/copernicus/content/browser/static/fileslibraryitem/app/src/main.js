@@ -99,6 +99,14 @@ Vue.component('table-preview', {
           }
         }
 
+        function render_file(file_id) {
+          if(file_id !== undefined) {
+            return "<a href='" + file_id +"' target='_blank' title=" + file_id + ">File<span style='display:none !important'>" + file_id + "</span></a>";
+          } else {
+            return "N/A";
+          }
+        }
+
         var result = "<table border=1><thead><tr>";
 
         for(var i = 0; i < columns.length; i++) {
@@ -112,7 +120,11 @@ Vue.component('table-preview', {
             if(columns[j].text == "URL" || columns[j].text.trim() == "URL") {
               result += "<td>" +  render_link(rows[i][j].text) + "</td>";
             } else {
-              result += "<td>" + rows[i][j].text + "</td>";
+              if(columns[j].text == "File" || columns[j].text.trim() == "File") {
+                result += "<td>" +  render_file(rows[i][j].text) + "</td>";
+              } else {
+                result += "<td>" + rows[i][j].text + "</td>";
+              }
             }
           }
           result += "</tr>";
