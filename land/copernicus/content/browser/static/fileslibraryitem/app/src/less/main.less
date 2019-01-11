@@ -1,0 +1,117 @@
+body.template-admin_files_library {
+  div#datatables-admin {
+    background: white;
+    padding: 20px;
+    margin: 20px;
+
+    table#editor {
+      background: @land-gray-lighter;
+      border-spacing: 5px;
+      color: black;
+      margin: auto;
+
+      tr, td, th {
+        background: white;
+        padding: 5px;
+        margin: 5px;
+        text-align: center;
+      }
+
+      th {
+        user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -o-user-select: none;
+      }
+    }
+
+    .dta-btn {
+      color: @land-green;
+
+      user-select: none;
+      -moz-user-select: none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      -o-user-select: none;
+
+      &:hover {
+        color: @land-green-dark;
+        cursor: pointer;
+      }
+    }
+
+    div.table-preview-container {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    table.table-render-preview {
+      margin: auto;
+    }
+  }
+
+  a {
+    color: @land-green;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: @land-green-dark;
+  }
+
+  i.fa.fa-times {
+    color: @land-orange !important;
+  }
+
+  i.fa.fa-times:hover {
+    color: @land-orange-dark !important;
+  }
+
+  div.filters-container {
+    clear: both;
+    text-align: center;
+
+    ul.filters-list {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      /* For IE, the outcast */
+      zoom:1;
+      *display: inline;
+
+      li {
+        float: left;
+        color: @land-green;
+        padding: 10px 20px;
+        margin-right: 20px;
+        list-style: none;
+
+        &.is-selected {
+          border-bottom: 2px solid @land-green;
+        }
+
+        &:hover {
+          cursor: pointer;
+          color: @land-green-dark;
+        }
+      }
+    }
+  }
+
+  .fa.fa-2x {
+    font-size: 25px;
+  }
+
+  span.not-editable {
+    color: @land-gray-light2;
+  }
+
+  div.col-lg-3[data-diazo="land-secondary-column"] {
+    display: none;
+  }
+
+  div.main-content > div.col-lg-9 {
+    width: 100%;
+  }
+}
