@@ -1,7 +1,7 @@
 {
   "name": "test-vuejs",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "Vue.js application used in files library administration panel",
   "author": "Ghiță Bizău <ghita_bizau@yahoo.com>",
   "private": true,
   "scripts": {
@@ -30,6 +30,8 @@
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^2.30.1",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
     "node-notifier": "^5.1.2",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "ora": "^1.2.0",
