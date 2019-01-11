@@ -413,7 +413,9 @@ export default {
 }
 </script>
 
-<style>
+<style land="less">
+  @import "./assets/base.less";
+
   /* https://coolors.co/96adc8-d7ffab-fcff6c-d89d6a-6d454c
      #FFFFFF #EEEEEE #757575 #000000 #bfd630 #A0B228 #819110
   */
@@ -448,7 +450,7 @@ export default {
   }
 
   body.template-admin_files_library div#datatables-admin .dta-btn {
-    color: #A0B228;
+    color: @test-color;
 
     user-select: none;
     -moz-user-select: none;

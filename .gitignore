@@ -14,3 +14,4 @@ dist/
 .testenv_downloads/
 land/copernicus/content/browser/static/fileslibraryitem/app/node_modules/
 !land/copernicus/content/browser/static/fileslibraryitem/app/dist
+!land/copernicus/content/browser/static/fileslibraryitem/app/build
