@@ -101,7 +101,9 @@ Vue.component('table-preview', {
 
         function render_file(file_id) {
           if(file_id !== undefined) {
-            return "<a href='" + file_id +"' target='_blank' title=" + file_id + ">File<span style='display:none !important'>" + file_id + "</span></a>";
+            var context_url = document.location.href;
+            var file_url = context_url.substring(0,context_url.lastIndexOf("/")) + "/" + file_id;
+            return "<a href='" + file_url +"' target='_blank' title=" + file_id + ">File<span style='display:none !important'>" + file_id + "</span></a>";
           } else {
             return "N/A";
           }
