@@ -193,4 +193,17 @@
       handler=".evolve35.run"
       />
   </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+    source="3.5"
+    destination="3.5.1"
+    profile="land.copernicus.content:default">
+
+    <genericsetup:upgradeDepends
+        title="Update typeinfo"
+        description="FilesLibraryItem: allow File to be added inside."
+        import_steps="typeinfo"
+        />
+  </genericsetup:upgradeSteps>
+
 </configure>
