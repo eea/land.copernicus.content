@@ -15,22 +15,6 @@ export default {
 </script>
 
 <style scoped lang="less">
-  div.editable-div {
-    background: #FFFFFF;
-    color: #000000;
-    padding: 6px;
-    border-bottom: 3px solid #FFFFFF;
-
-    &:hover {
-      background: #EEEEEE;
-      border-bottom: 3px solid #FFFFFF;
-    }
-
-    &:focus {
-      background: #EEEEEE;
-      outline: none;
-      border-bottom: 3px solid #CCCCCC;
-    }
-  }
-
+  @import "./../less/colors.less";
+  @import "./../less/editable.less";
 </style>
