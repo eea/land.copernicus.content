@@ -1,5 +1,6 @@
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+import json
 import transaction
 
 
@@ -22,6 +23,10 @@ class FilesLibraryItemAdminView(BrowserView):
 
     def render(self):
         return self.index()
+
+    @property
+    def existing_files_in_context(self):
+        return json.dumps(['existingfile1', 'existingfile2'])
 
     def __call__(self):
         if self.request.method == 'POST':

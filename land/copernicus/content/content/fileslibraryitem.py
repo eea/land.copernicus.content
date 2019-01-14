@@ -6,6 +6,3 @@ from land.copernicus.content.interfaces import IFilesLibraryItem
 @implementer(IFilesLibraryItem)
 class FilesLibraryItem(Container):
     """ FilesLibraryItem content type"""
-
-    def save_data(self):
-        print "Saved"

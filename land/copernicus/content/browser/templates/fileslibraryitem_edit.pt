@@ -33,6 +33,7 @@
     </p>
 
     <div style="display:none;" id="initial-json-data" tal:content="context/json_data"></div>
+    <div style="display:none;" id="initial-existing-files-in-context" tal:content="view/existing_files_in_context"></div>
     <div id=datatables-admin></div>
 
     <script src=https://code.jquery.com/jquery-3.3.1.min.js
