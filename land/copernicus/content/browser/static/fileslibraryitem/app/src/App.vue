@@ -33,7 +33,15 @@
             <editable :content="rows[index_row][index_col].text" v-on:update="update_row($event, index_row, index_col)"
                       v-if="!is_file_col(columns[index_col].text)"></editable>
             <span class="not-editable"
-                  v-if="is_file_col(columns[index_col].text)">{{rows[index_row][index_col].text}}</span>
+                  v-if="is_file_col(columns[index_col].text)">
+              {{rows[index_row][index_col].text}}
+
+              <span class="missing-file" v-if="!file_exists(rows[index_row][index_col].text)"
+                    title="This file seems missing in current folder.">
+                  (missing)
+              </span>
+            </span>
+
             <fileselect :content="rows[index_row][index_col].text"
                         :index_row="index_row"
                         :index_col="index_col"
@@ -111,6 +119,11 @@ export default {
       } catch(e) {
         return ["filename1", "filename2", "filename3"];
       }
+    },
+
+    file_exists: function(file_id) {
+      // Check if given file id is in list of files
+      return this.files.indexOf(file_id) > -1;
     },
 
     get_filters: function() {
