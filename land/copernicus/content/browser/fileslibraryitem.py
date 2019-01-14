@@ -20,7 +20,7 @@ class FilesLibraryItemView(BrowserView):
 class FilesLibraryItemAdminView(BrowserView):
     """ Administration view for Files Library Item
     """
-    index = ViewPageTemplateFile("templates/fileslibraryitem_edit.pt")
+    index = ViewPageTemplateFile("templates/fileslibraryitem_admin.pt")
 
     def render(self):
         return self.index()
