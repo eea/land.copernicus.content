@@ -1,5 +1,6 @@
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from plone import api
 import json
 import transaction
 
@@ -26,7 +27,10 @@ class FilesLibraryItemAdminView(BrowserView):
 
     @property
     def existing_files_in_context(self):
-        return json.dumps(['existingfile1', 'existingfile2'])
+        files_ids = [x.id for x in api.content.find(
+            context=self.context, depth=1, portal_type="File")]
+
+        return json.dumps(files_ids)
 
     def __call__(self):
         if self.request.method == 'POST':
