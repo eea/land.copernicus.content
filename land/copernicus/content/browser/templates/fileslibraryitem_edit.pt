@@ -11,16 +11,12 @@
 </metal:title>
 
 <metal:styleslot fill-slot="style_slot">
-  <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" -->
-  <!--       integrity="sha384&#45;mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" /> -->
   <link rel="stylesheet" type="text/css" href="${portal_url}/++resource++land.copernicus.content.static/lib/jquery.dataTables.min.css" />
-  <!-- <link rel="stylesheet" type="text/css" href="${portal_url}/++resource++land.copernicus.content.static/fileslibraryitem/fileslibraryitem.css" /> -->
   <link rel="stylesheet" type="text/css" href="${portal_url}/++resource++land.copernicus.content.static/fileslibraryitem/app/dist/static/css/app.css" />
 </metal:styleslot>
 
 <metal:javascriptslot fill-slot="javascript_head_slot">
-  <!-- TODO get rid of CDN -->
-  <script defer type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+  <script defer type="text/javascript" language="javascript" src="${portal_url}/++resource++land.copernicus.content.static/lib/jquery.dataTables.min.js" />
 </metal:javascriptslot>
 
 <metal:content-core fill-slot="content-core">
