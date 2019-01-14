@@ -72,6 +72,7 @@
     </form>
 
     <tablepreview />
+    <filesupload />
   </div>
 </template>
 
@@ -79,13 +80,15 @@
 import editable from './components/editable'
 import fileselect from './components/fileselect'
 import tablepreview from './components/tablepreview'
+import filesupload from './components/filesupload'
 
 export default {
   name: 'app',
   components: {
     editable,
     fileselect,
-    tablepreview
+    tablepreview,
+    filesupload
   },
   data() {
     return {
