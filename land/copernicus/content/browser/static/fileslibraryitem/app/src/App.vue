@@ -71,8 +71,8 @@
       <textarea id="exported-json" name="exported-json">JSON PLACEHOLDER</textarea>
     </form>
 
-    <tablepreview />
     <filesupload />
+    <tablepreview />
   </div>
 </template>
 
