@@ -52,7 +52,7 @@ class FilesLibraryItemAdminView(BrowserView):
             type="File",
             id=getvalue(uploaded_file.filename),
             title=getvalue(uploaded_file.filename),
-            safe_id=False,
+            safe_id=True,
             **kw)
 
         return item
