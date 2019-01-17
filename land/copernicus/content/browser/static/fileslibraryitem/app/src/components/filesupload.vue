@@ -34,8 +34,9 @@ export default {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
-      }).then(function(){
+      }).then(function(response){
         self.msg = "Success";
+        console.log(response.data);
       }).catch(function(){
         self.msg = "Failure";
       });
