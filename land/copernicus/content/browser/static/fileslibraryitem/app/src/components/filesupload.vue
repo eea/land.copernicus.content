@@ -25,19 +25,20 @@ export default {
       this.file = this.$refs.file.files[0];
     },
     submit_file() {
-      this.$refs.files_upload_form.submit();
-      // let form_data = new FormData();
-      // form_data.append('file', this.file);
-      //
-      // axios.post('./admin_files_library', form_data, {
-      //   headers: {
-      //     'Content-Type': 'multipart/form-data'
-      //   }
-      // }).then(function(){
-      //   console.log('SUCCESS!!');
-      // }).catch(function(){
-      //   console.log('FAILURE!!');
-      // });
+      // this.$refs.files_upload_form.submit();
+      let form_data = new FormData();
+      form_data.append('file', this.file);
+
+      axios.post('./admin_files_library', form_data, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function(){
+        debugger;
+        console.log('SUCCESS!!');
+      }).catch(function(){
+        console.log('FAILURE!!');
+      });
     }
   }
 }
