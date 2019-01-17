@@ -20,6 +20,10 @@ export default {
     }
   },
   methods: {
+    add_to_list_of_uploaded_files(file_id) {
+      this.$parent.files.push(file_id);
+    },
+
     handle_file_upload() {
       this.file = this.$refs.file.files[0];
     },
@@ -36,6 +40,8 @@ export default {
         }
       }).then(function(response){
         self.msg = "Success";
+        var file_id = response.data;
+        self.add_to_list_of_uploaded_files(file_id);
         console.log(response.data);
       }).catch(function(){
         self.msg = "Failure";
