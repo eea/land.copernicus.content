@@ -59,6 +59,6 @@ class FilesLibraryItemAdminView(BrowserView):
             uploaded_file = self.request.form.get("file", None)
             if uploaded_file:
                 result = self._create_file(uploaded_file)
-                print result.title
+                return result.title
 
         return self.render()
