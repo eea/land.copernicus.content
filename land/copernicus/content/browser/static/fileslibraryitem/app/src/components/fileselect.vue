@@ -1,5 +1,5 @@
 <template>
-  <select @change="update_selected_file()">
+  <select class="land-fileselect" @change="update_selected_file()">
     <option></option>
     <option v-for="option in this.$parent.files">{{option}}</option>
   </select>
@@ -17,3 +17,8 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="less">
+  @import "./../less/colors.less";
+  @import "./../less/fileselect.less";
+</style>
