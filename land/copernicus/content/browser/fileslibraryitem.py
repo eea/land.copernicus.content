@@ -60,5 +60,21 @@ class FilesLibraryItemAdminView(BrowserView):
             if uploaded_file:
                 result = self._create_file(uploaded_file)
                 return result.id
+                # TODO WIP send result status for multiple upload
+                # uploaded_files = [
+                #     {
+                #         "filename": "AAA",
+                #         "status": "Success"
+                #     },
+                #     {
+                #         "filename": "BBB",
+                #         "status": "Success"
+                #     },
+                #     {
+                #         "filename": "CCC",
+                #         "status": "Failure"
+                #     }
+                # ]
+                # return json.dumps(uploaded_files)
 
         return self.render()
