@@ -3,6 +3,7 @@
     <label>File</label>
     <input type="file" id="file" ref="file" name="file" v-on:change="handle_file_upload()"/>
     <button v-on:click="submit_file()">Upload</button>
+    {{msg}}
   </div>
 </template>
 
@@ -14,7 +15,8 @@ export default {
   name: 'filesupload',
   data(){
     return {
-      file: ''
+      file: '',
+      msg: 'Select files'
     }
   },
   methods: {
@@ -22,6 +24,9 @@ export default {
       this.file = this.$refs.file.files[0];
     },
     submit_file() {
+      let self = this;
+
+      self.msg = "Uploading....";
       let form_data = new FormData();
       form_data.append('file', this.file);
 
@@ -30,9 +35,9 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       }).then(function(){
-        console.log('SUCCESS!!');
+        self.msg = "Success";
       }).catch(function(){
-        console.log('FAILURE!!');
+        self.msg = "Failure";
       });
     }
   }
