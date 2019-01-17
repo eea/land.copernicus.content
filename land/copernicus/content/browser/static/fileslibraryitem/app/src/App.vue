@@ -33,8 +33,9 @@
             <editable :content="rows[index_row][index_col].text" v-on:update="update_row($event, index_row, index_col)"
                       v-if="!is_file_col(columns[index_col].text)"></editable>
             <span class="not-editable"
-                  v-if="is_file_col(columns[index_col].text)">
-              {{rows[index_row][index_col].text}}
+                  v-if="is_file_col(columns[index_col].text)"
+                  :title="rows[index_row][index_col].text">
+              {{rows[index_row][index_col].text | truncate(5)}}
 
               <span class="missing-file" v-if="!file_exists(rows[index_row][index_col].text)"
                     title="This file seems missing in current folder.">
@@ -100,6 +101,11 @@ export default {
       rows: this.get_rows(),
       files: this.get_files(),
     }
+  },
+  filters: {
+    truncate: function (text, length) {
+      return text.substring(0, length) + "...";
+    },
   },
   methods: {
     generate_random(min, max) {
