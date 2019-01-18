@@ -44,9 +44,8 @@ export default {
         }
       }).then(function(response){
         self.msg = "Success: ";
-        var files_status = JSON.parse(response.data);
+        var files_status = response.data;
         for(var i = 0; i < files_status.length; i++) {
-          console.log()
           if(files_status[i].status == "success") {
             self.add_to_list_of_uploaded_files(files_status[i].filename);
             self.msg += files_status[i].filename + " ";

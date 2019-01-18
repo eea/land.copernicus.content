@@ -67,14 +67,14 @@ class FilesLibraryItemAdminView(BrowserView):
                         if result is not None:
                             res.append(
                                 {
-                                    "file_id": result.id,
+                                    "filename": result.id,
                                     "status": "success"
                                 }
                             )
                         else:
                             res.append(
                                 {
-                                    "file_id": uploaded_file.filename,
+                                    "filename": uploaded_file.filename,
                                     "status": "failure"
                                 }
                             )
