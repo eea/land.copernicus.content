@@ -64,6 +64,12 @@ class IFilesLibraryItem(model.Schema):
         required=False,
     )
 
+    search_filters = schema.Text(
+        title=u"Search filters",
+        description=u"""One per line.""",
+        required=False,
+    )
+
     json_data = schema.URI(
         title=u"Data",
         required=False,
