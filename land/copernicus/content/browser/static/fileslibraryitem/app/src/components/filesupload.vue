@@ -1,8 +1,8 @@
 <template>
   <div class="form-container">
-    <label>File</label>
-    <input type="file" id="file" ref="file" name="file" v-on:change="handle_file_upload()"/>
-    <button v-on:click="submit_file()">Upload</button>
+    <label>Files</label>
+    <input type="file" id="files" ref="files" name="files" multiple v-on:change="handle_files_upload()"/>
+    <button v-on:click="submit_files()">Upload</button>
     {{msg}}
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {
   name: 'filesupload',
   data(){
     return {
-      file: '',
+      files: '',
       msg: 'Select files'
     }
   },
@@ -24,15 +24,19 @@ export default {
       this.$parent.files.push(file_id);
     },
 
-    handle_file_upload() {
-      this.file = this.$refs.file.files[0];
+    handle_files_upload() {
+      this.files = this.$refs.files.files;
     },
     submit_file() {
       let self = this;
 
       self.msg = "Uploading....";
       let form_data = new FormData();
-      form_data.append('file', this.file);
+      for(var i = 0; i < this.files.length; i++) {
+        let file = this.files[i];
+
+        formData.append('files[' + i + ']', file);
+      }
 
       axios.post('./admin_files_library', form_data, {
         headers: {
@@ -40,9 +44,9 @@ export default {
         }
       }).then(function(response){
         self.msg = "Success";
-        var file_id = response.data;
-        self.add_to_list_of_uploaded_files(file_id);
-        console.log(response.data);
+        var upload_status = response.data;
+        // self.add_to_list_of_uploaded_files(file_id);
+        console.log(upload_status);
       }).catch(function(){
         self.msg = "Failure";
       });
