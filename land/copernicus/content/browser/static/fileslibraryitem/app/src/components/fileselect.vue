@@ -1,7 +1,7 @@
 <template>
   <select class="land-fileselect" @change="update_selected_file()">
     <option></option>
-    <option v-for="option in this.$parent.files">{{option}}</option>
+    <option v-for="option in this.$parent.files.slice().reverse()">{{option}}</option>
   </select>
 </template>
 
