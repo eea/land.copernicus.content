@@ -17,6 +17,7 @@
 
 <metal:javascriptslot fill-slot="javascript_head_slot">
   <script defer type="text/javascript" language="javascript" src="${portal_url}/++resource++land.copernicus.content.static/lib/jquery.dataTables.min.js" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"></script>
 </metal:javascriptslot>
 
 <metal:content-core fill-slot="content-core">
