@@ -27,7 +27,7 @@ export default {
     handle_files_upload() {
       this.files = this.$refs.files.files;
     },
-    submit_file() {
+    submit_files() {
       let self = this;
 
       self.msg = "Uploading....";
@@ -35,7 +35,7 @@ export default {
       for(var i = 0; i < this.files.length; i++) {
         let file = this.files[i];
 
-        formData.append('files[' + i + ']', file);
+        form_data.append('files[' + i + ']', file);
       }
 
       axios.post('./admin_files_library', form_data, {

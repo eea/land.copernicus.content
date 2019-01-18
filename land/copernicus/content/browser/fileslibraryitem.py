@@ -56,25 +56,20 @@ class FilesLibraryItemAdminView(BrowserView):
                 self.context.json_data = data
                 transaction.commit()
 
-            uploaded_file = self.request.form.get("file", None)
-            if uploaded_file:
-                result = self._create_file(uploaded_file)
-                return result.id
-                # TODO WIP send result status for multiple upload
-                # uploaded_files = [
-                #     {
-                #         "filename": "AAA",
-                #         "status": "Success"
-                #     },
-                #     {
-                #         "filename": "BBB",
-                #         "status": "Success"
-                #     },
-                #     {
-                #         "filename": "CCC",
-                #         "status": "Failure"
-                #     }
-                # ]
-                # return json.dumps(uploaded_files)
+            file_keys = [x for x in self.request.form.keys() if 'files' in x]
+            if len(file_keys) > 0:
+                uploaded_files = [self.request.form[x] for x in file_keys]
+
+                res = []
+                if len(uploaded_files) > 0:
+                    for uploaded_file in uploaded_files:
+                        result = self._create_file(uploaded_file)
+                        res.append(
+                            {
+                                "file_id": result.id,
+                                "status": "success"
+                            }
+                        )
+                    return json.dumps(res)
 
         return self.render()
