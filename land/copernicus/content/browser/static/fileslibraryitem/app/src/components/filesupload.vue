@@ -1,5 +1,5 @@
 <template>
-  <div class="form-container">
+  <div class="files-upload-container">
     <label>Files</label>
     <input type="file" id="files" ref="files" name="files" multiple v-on:change="handle_files_upload()"/>
     <button v-on:click="submit_files()">Upload</button>
@@ -58,3 +58,8 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="less">
+  @import "./../less/colors.less";
+  @import "./../less/filesupload.less";
+</style>
