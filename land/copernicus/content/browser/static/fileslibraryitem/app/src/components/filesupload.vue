@@ -43,10 +43,15 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       }).then(function(response){
-        self.msg = "Success";
-        var upload_status = response.data;
-        // self.add_to_list_of_uploaded_files(file_id);
-        console.log(upload_status);
+        self.msg = "Success: ";
+        var files_status = JSON.parse(response.data);
+        for(var i = 0; i < files_status.length; i++) {
+          console.log()
+          if(files_status[i].status == "success") {
+            self.add_to_list_of_uploaded_files(files_status[i].filename);
+            self.msg += files_status[i].filename + " ";
+          }
+        }
       }).catch(function(){
         self.msg = "Failure";
       });

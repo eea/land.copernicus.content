@@ -64,12 +64,20 @@ class FilesLibraryItemAdminView(BrowserView):
                 if len(uploaded_files) > 0:
                     for uploaded_file in uploaded_files:
                         result = self._create_file(uploaded_file)
-                        res.append(
-                            {
-                                "file_id": result.id,
-                                "status": "success"
-                            }
-                        )
+                        if result is not None:
+                            res.append(
+                                {
+                                    "file_id": result.id,
+                                    "status": "success"
+                                }
+                            )
+                        else:
+                            res.append(
+                                {
+                                    "file_id": uploaded_file.filename,
+                                    "status": "failure"
+                                }
+                            )
                     return json.dumps(res)
 
         return self.render()
