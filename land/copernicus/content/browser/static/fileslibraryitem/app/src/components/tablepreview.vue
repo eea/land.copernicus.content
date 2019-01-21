@@ -43,7 +43,7 @@ export default {
       function make_filters_html(filters) {
         var filters_html = "<div class='filters-container'><p><b>Search filters:</b></p><ul class='filters-list'>";
         for(var i = 0; i < filters.length; i++) {
-          filters_html += "<li class='search-filter'>" + filters[i].text + "</li>";
+          filters_html += "<li class='search-filter'>" + filters[i] + "</li>";
         }
         filters_html += "</ul></div>"
 

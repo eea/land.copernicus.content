@@ -33,6 +33,9 @@ class FilesLibraryItemAdminView(BrowserView):
     def render(self):
         return self.index()
 
+    def get_search_filters(self):
+        return json.dumps(self.context.search_filters.split("\r\n"))
+
     @property
     def existing_files_in_context(self):
         files_ids = [x.id for x in api.content.find(
