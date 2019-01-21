@@ -39,7 +39,12 @@ class FilesLibraryItemAdminView(BrowserView):
         return self.index()
 
     def get_search_filters(self):
-        return json.dumps(self.context.search_filters.split("\r\n"))
+        filters = self.context.search_filters
+        if filters is not None:
+            res = filters.split("\r\n")
+        else:
+            res = []
+        return json.dumps(res)
 
     @property
     def existing_files_in_context(self):
