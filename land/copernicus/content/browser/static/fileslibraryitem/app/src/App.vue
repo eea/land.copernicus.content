@@ -36,7 +36,7 @@
             <span class="not-editable"
                   v-if="is_file_col(columns[index_col].text)"
                   :title="rows[index_row][index_col].text">
-              {{rows[index_row][index_col].text | truncate(5)}}
+              {{rows[index_row][index_col].text | truncate(15)}}
 
               <span class="missing-file" v-if="!file_exists(rows[index_row][index_col].text) && !is_empty_field(rows[index_row][index_col].text)"
                     title="This file seems missing in current folder.">
@@ -105,7 +105,14 @@ export default {
   },
   filters: {
     truncate: function (text, length) {
-      return text.substring(0, length) + "...";
+      if(text == "") {
+        return "";
+      }
+      var res = text.substring(0, length);
+      if(text.length > length) {
+        res += "..."
+      }
+      return res;
     },
   },
   methods: {
