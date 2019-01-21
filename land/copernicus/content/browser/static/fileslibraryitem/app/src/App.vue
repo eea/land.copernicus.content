@@ -38,7 +38,7 @@
                   :title="rows[index_row][index_col].text">
               {{rows[index_row][index_col].text | truncate(5)}}
 
-              <span class="missing-file" v-if="!file_exists(rows[index_row][index_col].text)"
+              <span class="missing-file" v-if="!file_exists(rows[index_row][index_col].text) && !is_empty_field(rows[index_row][index_col].text)"
                     title="This file seems missing in current folder.">
                   (missing)
               </span>
@@ -134,6 +134,10 @@ export default {
     file_exists: function(file_id) {
       // Check if given file id is in list of files
       return this.files.indexOf(file_id) > -1;
+    },
+
+    is_empty_field: function(text) {
+      return text == "";
     },
 
     get_filters: function() {
