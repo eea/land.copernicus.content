@@ -52,6 +52,10 @@ export default {
 
       function make_table_html(columns, rows) {
         function render_link(url) {
+          if(url == "") {
+            return "";
+          }
+
           if(url !== undefined) {
             return "<a href='" + url +"' target='_blank' title=" + url + ">Link<span style='display:none !important'>" + url + "</span></a>";
           } else {
