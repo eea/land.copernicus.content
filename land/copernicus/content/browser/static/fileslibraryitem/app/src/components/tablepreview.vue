@@ -60,6 +60,10 @@ export default {
         }
 
         function render_file(file_id) {
+          if(file_id == "") {
+            return "";
+          }
+
           if(file_id !== undefined) {
             var context_url = document.location.href;
             var file_url = context_url.substring(0,context_url.lastIndexOf("/")) + "/" + file_id;
