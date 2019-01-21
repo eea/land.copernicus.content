@@ -23,7 +23,7 @@
     <div id="parent-fieldname-text" tal:content="structure context/text/output"></div>
 
     <div style="display:none;" id="initial-json-data" tal:content="context/json_data"></div>
-    <div style="display:block;" id="initial-search-filters" tal:content="python:view.get_search_filters()"></div>
+    <div style="display:none;" id="initial-search-filters" tal:content="python:view.get_search_filters()"></div>
     <table class="table-render"></table>
 
     <script>
@@ -32,6 +32,7 @@
         var table_placeholder = document.querySelector('.table-render');
         try {
           var json_data = JSON.parse($("div#initial-json-data").text());
+          var search_filters = JSON.parse($("div#initial-search-filters").text());
         } catch(e) {
           console.log("Error: Invalid json.", e);
           return;
@@ -39,12 +40,12 @@
 
         var columns = json_data.columns;
         var rows = json_data.rows;
-        var filters = json_data.filters;
+        var filters = search_filters;
 
         function make_filters_html(filters) {
           var filters_html = "<div class='filters-container'><p><b>Search filters:</b></p><ul class='filters-list'>";
           for(var i = 0; i < filters.length; i++) {
-            filters_html += "<li class='search-filter'>" + filters[i].text + "</li>";
+            filters_html += "<li class='search-filter'>" + filters[i] + "</li>";
           }
           filters_html += "</ul></div>"
 
