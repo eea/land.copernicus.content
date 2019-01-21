@@ -72,7 +72,13 @@ export default {
         var result = "<table border=1><thead><tr>";
 
         for(var i = 0; i < columns.length; i++) {
-          result += "<th>" + columns[i].text + "</th>";
+          if(columns[i].text == "URL" || columns[i].text.trim() == "URL") {
+            result += "<th>URL or File</th>";
+          } else {
+            if(columns[i].text !== "File" && columns[i].text.trim() !== "File") {
+              result += "<th>" + columns[i].text + "</th>";
+            }
+          }
         }
 
         result += "</thead><tbody>"
@@ -80,11 +86,15 @@ export default {
           result += "<tr>";
           for(var j = 0; j < rows[i].length; j++) {
             if(columns[j].text == "URL" || columns[j].text.trim() == "URL") {
-              result += "<td>" +  render_link(rows[i][j].text) + "</td>";
+              result += "<td>" +  render_link(rows[i][j].text) + " ";
+              for(var k = 0; k < rows[i].length; k++) {
+                if(columns[k].text == "File" || columns[k].text.trim() == "File") {
+                  result += render_file(rows[i][k].text);
+                }
+              }
+              result += "</td>";
             } else {
-              if(columns[j].text == "File" || columns[j].text.trim() == "File") {
-                result += "<td>" +  render_file(rows[i][j].text) + "</td>";
-              } else {
+              if(columns[j].text !== "File" || columns[j].text.trim() !== "File") {
                 result += "<td>" + rows[i][j].text + "</td>";
               }
             }
