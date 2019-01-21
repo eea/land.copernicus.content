@@ -15,6 +15,9 @@ class FilesLibraryItemView(BrowserView):
     """
     index = ViewPageTemplateFile("templates/fileslibraryitem_view.pt")
 
+    def get_search_filters(self):
+        return json.dumps(self.context.search_filters.split("\r\n"))
+
     def render(self):
         return self.index()
 

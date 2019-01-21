@@ -23,6 +23,7 @@
     <div id="parent-fieldname-text" tal:content="structure context/text/output"></div>
 
     <div style="display:none;" id="initial-json-data" tal:content="context/json_data"></div>
+    <div style="display:block;" id="initial-search-filters" tal:content="python:view.get_search_filters()"></div>
     <table class="table-render"></table>
 
     <script>
