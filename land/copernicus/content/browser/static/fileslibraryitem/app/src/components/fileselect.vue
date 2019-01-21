@@ -1,6 +1,7 @@
 <template>
   <select class="land-fileselect" @change="update_selected_file()">
     <option></option>
+    <option>-- no file --</option>
     <option v-for="option in this.$parent.files.slice().reverse()">{{option}}</option>
   </select>
 </template>
@@ -12,6 +13,9 @@ export default {
   methods: {
     update_selected_file(ev) {
       var selected_filename = this.$el.value;
+      if(selected_filename == "-- no file --") {
+        selected_filename = "";
+      }
       this.$parent.update_row(selected_filename, this.index_row, this.index_col);
     }
   }
