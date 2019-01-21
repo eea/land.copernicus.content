@@ -70,7 +70,7 @@ class IFilesLibraryItem(model.Schema):
         required=False,
     )
 
-    json_data = schema.URI(
+    json_data = schema.Text(
         title=u"Data",
         required=False,
         description=u"Ignore it. It's automatically filled in edit mode."
