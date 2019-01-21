@@ -14,8 +14,7 @@
 </metal:styleslot>
 
 <metal:javascriptslot fill-slot="javascript_head_slot">
-  <!-- TODO get rid of CDN -->
-  <script defer type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+  <script defer type="text/javascript" language="javascript" src="${portal_url}/++resource++land.copernicus.content.static/lib/jquery.dataTables.min.js" />
 </metal:javascriptslot>
 
 <metal:content-core fill-slot="content-core">
