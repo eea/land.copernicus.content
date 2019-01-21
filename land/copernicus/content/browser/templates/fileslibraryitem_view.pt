@@ -133,9 +133,14 @@
         $(".dataTables_wrapper").append(make_filters_html(filters));
 
         $(".search-filter").on("click", function() {
-          the_table.fnFilter('"' + $(this).text() + '"');
-          $(".search-filter").removeClass("is-selected");
-          $(this).addClass("is-selected");
+          if($(this).hasClass("is-selected")) {
+            $(this).removeClass("is-selected");
+            the_table.fnFilter('');
+          } else {
+            the_table.fnFilter('"' + $(this).text() + '"');
+            $(".search-filter").removeClass("is-selected");
+            $(this).addClass("is-selected");
+          }
         });
       }
 
