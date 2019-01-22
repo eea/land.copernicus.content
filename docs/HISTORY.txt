@@ -3,6 +3,10 @@ Changelog
 
 6.4.dev0 - (unreleased)
 -----------------------
+* Feature: Files library item view - simple implementation useing dataTables.
+  [GhitaB #99878]
+* Feature: files uploader for files library item administration.
+  [GhitaB #99877]
 * Improve: Add action link 'Files library administration'.
   [GhitaB #99875]
 * Feature: Implement administration panel for files library item.
