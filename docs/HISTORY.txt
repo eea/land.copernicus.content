@@ -3,6 +3,8 @@ Changelog
 
 6.4.dev0 - (unreleased)
 -----------------------
+* Improve: Add action link 'Files library administration'.
+  [GhitaB #99875]
 * Feature: Implement administration panel for files library item.
   [GhitaB #99876]
 * Improve: Clear unused GA code, update names to matomo.
