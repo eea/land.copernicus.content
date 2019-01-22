@@ -45,4 +45,9 @@
     url_expr="string:${object_url}/edit" visible="True">
   <permission value="Modify portal content"/>
  </action>
+ <action title="Files library administration" action_id="admin_files_library" category="object"
+    url_expr="string:${object_url}/admin_files_library" visible="True"
+    i18n:attributes="title">
+  <permission value="Modify portal content"/>
+ </action>
 </object>
