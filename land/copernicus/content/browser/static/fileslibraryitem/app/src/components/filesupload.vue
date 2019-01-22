@@ -1,9 +1,14 @@
 <template>
   <div class="files-upload-container">
-    <label>Files</label>
-    <input type="file" id="files" ref="files" name="files" multiple v-on:change="handle_files_upload()"/>
-    <button v-on:click="submit_files()">Upload</button>
-    {{msg}}
+    <div class="controls">
+      <label>Files</label>
+      <input type="file" id="files" ref="files" name="files" multiple v-on:change="handle_files_upload()"/>
+      <button v-on:click="submit_files()">Upload</button>
+    </div>
+    <div class="status">
+      <label>Status:</label>
+      {{msg}}
+    </div>
   </div>
 </template>
 
