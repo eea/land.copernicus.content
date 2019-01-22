@@ -1,6 +1,9 @@
 Changelog
 =========
 
+6.5.dev0 - (unreleased)
+-----------------------
+
 6.4 - (2019-01-22)
 ------------------
 * Feature: Files library item view - simple implementation useing dataTables.
