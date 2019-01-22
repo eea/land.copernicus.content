@@ -34,9 +34,6 @@
     <div id="initial-search-filters" style="display:none;" tal:content="python:view.get_search_filters()"></div>
     <div id=datatables-admin></div>
 
-    <script src=https://code.jquery.com/jquery-3.3.1.min.js
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin=anonymous></script>
     <script defer type="text/javascript" language="javascript" src="${portal_url}/++resource++land.copernicus.content.static/lib/jquery.dataTables.min.js" />
 
     <script type="text/javascript" src="${portal_url}/++resource++land.copernicus.content.static/fileslibraryitem/app/dist/static/js/manifest.js"></script>
