@@ -1,7 +1,7 @@
 <template>
   <div class="files-upload-container">
     <div class="controls">
-      <label>Files</label>
+      <label>Files:</label>
       <input type="file" id="files" ref="files" name="files" multiple v-on:change="handle_files_upload()"/>
       <button v-on:click="submit_files()">Upload</button>
     </div>
@@ -21,7 +21,7 @@ export default {
   data(){
     return {
       files: '',
-      msg: 'Select files'
+      msg: 'Select files, then press Upload.'
     }
   },
   methods: {
@@ -35,7 +35,7 @@ export default {
     submit_files() {
       let self = this;
 
-      self.msg = "Uploading....";
+      self.msg = "Uploading... Please wait.";
       let form_data = new FormData();
       for(var i = 0; i < this.files.length; i++) {
         let file = this.files[i];
@@ -57,7 +57,7 @@ export default {
           }
         }
       }).catch(function(){
-        self.msg = "Failure";
+        self.msg = "Error on trying to upload.";
       });
     }
   }
