@@ -3,6 +3,8 @@ Changelog
 
 6.5.dev0 - (unreleased)
 -----------------------
+* Improve: meeting register form validation - accept '+' char in phone numbers.
+  [GhitaB #97529]
 
 6.4 - (2019-01-22)
 ------------------
