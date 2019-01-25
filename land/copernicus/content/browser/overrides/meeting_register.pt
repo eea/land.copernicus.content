@@ -433,6 +433,12 @@
           </metal:body>
         </metal:field>
 
+        <h2 class="land-title" tal:condition="context/need_e_pass">This event requires E-pass data:</h2>
+        <p tal:condition="context/need_e_pass">
+          E-pass data will be automatically deleted no later than 72 hours after the end of the event
+        </p>
+
+        <div class="e-pass-related" tal:condition="context/need_e_pass">
         <metal:field use-macro="template/macros/field" tal:condition="context/need_e_pass">
           <metal:label fill-slot="label">
             <label for="f_date_of_birth">DATE OF BIRTH<span class="required"></span></label>
@@ -539,6 +545,7 @@
               tal:attributes="value python:fields.get('car_id', '')" />
           </metal:body>
         </metal:field>
+        </div><!--End e-pass related-->
 
         <metal:field use-macro="template/macros/field">
           <metal:label fill-slot="label">

@@ -142,3 +142,8 @@ div.back-to-meeting {
   width: 100%;
   text-align: center;
 }
+
+div.e-pass-related {
+  border: 2px solid #EEEEEE;
+  margin-bottom: 2em;
+}
