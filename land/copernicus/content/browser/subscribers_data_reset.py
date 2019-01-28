@@ -23,6 +23,11 @@ def clean_old_subscribers_data(site):
                 hours=EXPIRE_AFTER_HOURS):
             logger.info('Reseting data for %s', meeting.absolute_url())
             for subscriber in meeting.subscribers.get_subscribers():
+                import pdb; pdb.set_trace()
+                # Check request_data_deletion field
+                # if yes: delete all subscribers created by this account
+                # and delete the account
+
                 logger.info('Reseting data for %s', subscriber.absolute_url())
                 subscriber.date_of_birth = None
                 subscriber.nationality = None
