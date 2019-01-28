@@ -575,6 +575,24 @@
           <metal:body fill-slot="body">
             <input type="checkbox" name="request_data_deletion"
               tal:attributes="value python:fields.get('request_data_deletion', '')" />
+            <script>
+              $(document).ready(function() {
+                function getUrlVars() {
+                  var vars = {};
+                  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+                  function(m,key,value) {
+                    vars[key] = value;
+                  });
+                  return vars;
+                }
+
+                var is_new_account = (getUrlVars()["created"] == 'true');
+                if(!is_new_account) {
+                  // We hide this field for EIONET and old local accounts.
+                  $("label[for='f_request_data_deletion']").parent().parent().hide();
+                }
+              });
+            </script>
           </metal:body>
         </metal:field>
 
