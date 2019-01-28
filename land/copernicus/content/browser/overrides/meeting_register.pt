@@ -434,7 +434,7 @@
         </metal:field>
 
         <h3 tal:condition="context/need_e_pass">This event requires E-pass data:</h3>
-        <p tal:condition="context/need_e_pass">
+        <p tal:condition="context/need_e_pass" class="text-smaller">
           E-pass data will be automatically deleted no later than 72 hours after the end of the event.
         </p>
 
@@ -565,7 +565,7 @@
           <metal:label fill-slot="label">
             <label for="f_request_data_deletion">
               Please delete my account on the website after the event has ended, latest after 4 weeks.
-              <p>
+              <p class="text-smaller">
                 Please note that you will not be able to login to the website anymore
                 required to download data or access information related to this and
                 other events, to which you might have registered too.

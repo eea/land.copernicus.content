@@ -28,7 +28,7 @@ form input.other {
   vertical-align: middle;
 }
 
-.field-label p {
+p.text-smaller {
   font-weight: normal;
   font-size: 12px;
 }
