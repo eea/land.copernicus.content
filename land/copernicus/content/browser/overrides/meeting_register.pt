@@ -565,6 +565,11 @@
           <metal:label fill-slot="label">
             <label for="f_request_data_deletion">
               Please delete my account on the website after the event has ended, latest after 4 weeks.
+              <p>
+                Please note that you will not be able to login to the website anymore
+                required to download data or access information related to this and
+                other events, to which you might have registered too.
+              </p>
             </label>
           </metal:label>
           <metal:body fill-slot="body">

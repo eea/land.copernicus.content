@@ -28,6 +28,10 @@ form input.other {
   vertical-align: middle;
 }
 
+.field-label p {
+  font-weight: normal;
+}
+
 .field-body {
   display: inline-block;
   text-align: left;
