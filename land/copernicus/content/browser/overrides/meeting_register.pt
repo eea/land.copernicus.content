@@ -497,7 +497,7 @@
 
           <metal:field use-macro="template/macros/field" tal:condition="context/need_e_pass">
             <metal:label fill-slot="label">
-              <label for="f_parking">PARKING<span class="required"></span></label>
+              <label for="f_parking">PARKING REQUIRED<span class="required"></span></label>
             </metal:label>
             <metal:body fill-slot="body">
               <select id="f_parking" name="parking" required>
