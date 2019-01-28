@@ -3,7 +3,8 @@ Changelog
 
 6.5.dev0 - (unreleased)
 -----------------------
-* Improve section of E-pass related fields in meeting registration form.
+* Improve section of E-pass related fields, rename Parking field in meeting
+  registration form.
   [GhitaB #101958]
 * Improve: meeting register form validation - accept '+' char in phone numbers.
   [GhitaB #97529]
