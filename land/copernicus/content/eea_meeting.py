@@ -206,6 +206,6 @@ class ISubscriber(Interface):
 
     request_data_deletion = schema.Bool(
         title=_(u"Request data deletion"),
-        description=_(u"Please delete my personal information after the event "
-                      "has ended, at latest 4 weeks after.")
+        description=_(u"Please delete my account on the website after the "
+                      "event has ended, latest after 4 weeks.")
     )
