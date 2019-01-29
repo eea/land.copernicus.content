@@ -42,8 +42,8 @@ def delete_subscribers_for_account_with_id(user_id, site):
 def delete_local_account(user_id, site):
     """ Delete the local website account for given user id
     """
-    import pdb; pdb.set_trace()
-    print "Deleted account"
+    api.user.delete(username=user_id)
+    print "Deleted account" + user_id
 
 
 def remove_account_and_data(user_id, site):
