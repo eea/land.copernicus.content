@@ -62,12 +62,19 @@ class SetEmailNotificationsView(BrowserView):
     def render(self):
         return self.index()
 
-    def set_email_notifications(self):
-
+    def set_email_notifications(self, user_id, key):
         print "Set notifications preferences."
-        return True
+        encoded = encode(SECRET_KEY_DEMO, user_id)
+        if encoded == key:
+            msg = "GOOD"
+        else:
+            msg = "NOOOO"
+        return msg
 
     def __call__(self):
-        self.set_email_notifications()
+        user_id = self.request.get('user_id', None)
+        key = self.request.get('key', None)
 
+        msg = self.set_email_notifications(user_id, key)
+        print "ZZZZZ " + msg
         return self.render()
