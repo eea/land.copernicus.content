@@ -13,17 +13,31 @@ logger = logging.getLogger('land.copernicus.content')
 EXPIRE_AFTER_HOURS = 72
 
 
+def get_all_subscribers(site):
+    all_subscribers = []
+    catalog = api.portal.get_tool(name='portal_catalog')
+    meetings = [b.getObject() for b in catalog(portal_type='eea.meeting')]
+
+    for meeting in meetings:
+        for subscriber in meeting.subscribers.get_subscribers():
+            if subscriber not in all_subscribers:
+                all_subscribers.append(subscriber)
+    return all_subscribers
+
+
 def clean_old_subscribers_data(site):
     logger.info('Subscribers data reseting... START.')
     catalog = api.portal.get_tool(name='portal_catalog')
     meetings = [b.getObject() for b in catalog(portal_type='eea.meeting')]
+
+    aa = get_all_subscribers(site)
+    import pdb; pdb.set_trace()
 
     for meeting in meetings:
         if datetime.now(pytz.UTC) > meeting.end + timedelta(
                 hours=EXPIRE_AFTER_HOURS):
             logger.info('Reseting data for %s', meeting.absolute_url())
             for subscriber in meeting.subscribers.get_subscribers():
-                import pdb; pdb.set_trace()
                 # Check request_data_deletion field
                 # if yes: delete all subscribers created by this account
                 # and delete the account
