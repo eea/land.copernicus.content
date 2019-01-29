@@ -59,25 +59,24 @@ def clean_old_subscribers_data(site):
     catalog = api.portal.get_tool(name='portal_catalog')
     meetings = [b.getObject() for b in catalog(portal_type='eea.meeting')]
 
-    remove_account_and_data("Test2019012902", site)
-
     for meeting in meetings:
         if datetime.now(pytz.UTC) > meeting.end + timedelta(
                 hours=EXPIRE_AFTER_HOURS):
             logger.info('Reseting data for %s', meeting.absolute_url())
             for subscriber in meeting.subscribers.get_subscribers():
-                # Check request_data_deletion field
-                # if yes: delete all subscribers created by this account
-                # and delete the account
+                if subscriber.request_data_deletion is True:
+                    remove_account_and_data(subscriber.userid, site)
 
-                logger.info('Reseting data for %s', subscriber.absolute_url())
-                subscriber.date_of_birth = None
-                subscriber.nationality = None
-                subscriber.id_card_nbr = None
-                subscriber.id_valid_date = None
-                subscriber.parking = None
-                subscriber.car_id = None
-                transaction.commit()
+                else:
+                    logger.info(
+                            'Reseting data for %s', subscriber.absolute_url())
+                    subscriber.date_of_birth = None
+                    subscriber.nationality = None
+                    subscriber.id_card_nbr = None
+                    subscriber.id_valid_date = None
+                    subscriber.parking = None
+                    subscriber.car_id = None
+                    transaction.commit()
     logger.info('Subscribers data reseting... DONE.')
     return True
 
