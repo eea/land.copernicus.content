@@ -30,26 +30,26 @@ def get_all_subscribers(site):
 def delete_subscribers_for_account_with_id(user_id, site):
     """ Delete all subscribers items created using given account
     """
-    print "Searching for user_id " + user_id
+    logger.info('Searching subscribers items for %s', user_id)
     all_subscribers = get_all_subscribers(site)
     for subscriber in all_subscribers:
         if subscriber.userid == user_id:
             subscriber.aq_parent.manage_delObjects([subscriber.getId()])
             transaction.commit()
-            print "Deleting subscriber " + user_id
+            logger.info('Deleted subscriber %s', user_id)
 
 
 def delete_local_account(user_id, site):
     """ Delete the local website account for given user id
     """
     api.user.delete(username=user_id)
-    print "Deleted account" + user_id
+    logger.info('Deleted local account %s', user_id)
 
 
 def remove_account_and_data(user_id, site):
     """ Remove data for given account
     """
-    print "Removing account and data for " + user_id
+    logger.info('Removing account and data for %s', user_id)
     delete_subscribers_for_account_with_id(user_id, site)
     delete_local_account(user_id, site)
 
