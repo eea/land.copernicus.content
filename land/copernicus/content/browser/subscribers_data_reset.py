@@ -30,6 +30,8 @@ def delete_subscribers_for_account_with_id(user_id, site):
     all_subscribers = get_all_subscribers(site)
     for subscriber in all_subscribers:
         if subscriber.userid == user_id:
+            subscriber.aq_parent.manage_delObjects([subscriber.getId()])
+            transaction.commit()
             print "Deleting subscriber " + user_id
 
 
