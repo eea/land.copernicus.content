@@ -123,6 +123,13 @@
     />
 
   <browser:page
+    name="set_email_notifications"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    class=".users_email_notifications.SetEmailNotificationsView"
+    permission="zope2.View"
+    />
+
+  <browser:page
     name="admin_land_files"
     for="land.copernicus.content.content.landitem.LandItem"
     class=".views.AdminLandFilesView"

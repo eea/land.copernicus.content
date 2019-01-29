@@ -35,6 +35,9 @@ def send_email_notifications(site):
     logger.info('Encoded: %s', encoded)
     decoded = decode(SECRET_KEY_DEMO, encoded)
     logger.info('Decoded: %s', decoded)
+    link = """{0}/set_email_notifications?user_id={1}&key={2}""".format(
+        site.absolute_url(), test_clear, encoded)
+    logger.info('Link: %s', link)
     logger.info('Sending emails... STOP.')
     return True
 
@@ -49,5 +52,22 @@ class UsersEmailNotificationsView(BrowserView):
         site = self.context.portal_url.getPortalObject()
 
         send_email_notifications(site)
+
+        return self.render()
+
+
+class SetEmailNotificationsView(BrowserView):
+    index = ViewPageTemplateFile("templates/set_email_notifications.pt")
+
+    def render(self):
+        return self.index()
+
+    def set_email_notifications(self):
+
+        print "Set notifications preferences."
+        return True
+
+    def __call__(self):
+        self.set_email_notifications()
 
         return self.render()
