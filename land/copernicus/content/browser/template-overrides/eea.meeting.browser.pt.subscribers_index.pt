@@ -53,7 +53,7 @@
                 <th tal:condition="meeting/need_e_pass">ID VALID DATE</th>
                 <th tal:condition="meeting/need_e_pass">PARKING</th>
                 <th tal:condition="meeting/need_e_pass">CAR ID</th>
-                <th>Request data deletion</th>
+                <th>Request account deletion</th>
               </tr>
             <thead>
             <tbody tal:define="subscribers python:context.get_subscribers()">
