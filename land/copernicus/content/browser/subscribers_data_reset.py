@@ -25,13 +25,20 @@ def get_all_subscribers(site):
     return all_subscribers
 
 
+def delete_subscribers_for_account_with_id(user_id, site):
+    print "Searching for user_id " + user_id
+    all_subscribers = get_all_subscribers(site)
+    for subscriber in all_subscribers:
+        if subscriber.userid == user_id:
+            print "Deleting subscriber " + user_id
+
+
 def clean_old_subscribers_data(site):
     logger.info('Subscribers data reseting... START.')
     catalog = api.portal.get_tool(name='portal_catalog')
     meetings = [b.getObject() for b in catalog(portal_type='eea.meeting')]
 
-    aa = get_all_subscribers(site)
-    import pdb; pdb.set_trace()
+    delete_subscribers_for_account_with_id("Test2019012902", site)
 
     for meeting in meetings:
         if datetime.now(pytz.UTC) > meeting.end + timedelta(
