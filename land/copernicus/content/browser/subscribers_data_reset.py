@@ -14,6 +14,8 @@ EXPIRE_AFTER_HOURS = 72
 
 
 def get_all_subscribers(site):
+    """ Return the list of all meetings subscribers
+    """
     all_subscribers = []
     catalog = api.portal.get_tool(name='portal_catalog')
     meetings = [b.getObject() for b in catalog(portal_type='eea.meeting')]
@@ -26,6 +28,8 @@ def get_all_subscribers(site):
 
 
 def delete_subscribers_for_account_with_id(user_id, site):
+    """ Delete all subscribers items created using given account
+    """
     print "Searching for user_id " + user_id
     all_subscribers = get_all_subscribers(site)
     for subscriber in all_subscribers:
@@ -35,12 +39,27 @@ def delete_subscribers_for_account_with_id(user_id, site):
             print "Deleting subscriber " + user_id
 
 
+def delete_local_account(user_id, site):
+    """ Delete the local website account for given user id
+    """
+    import pdb; pdb.set_trace()
+    print "Deleted account"
+
+
+def remove_account_and_data(user_id, site):
+    """ Remove data for given account
+    """
+    print "Removing account and data for " + user_id
+    delete_subscribers_for_account_with_id(user_id, site)
+    delete_local_account(user_id, site)
+
+
 def clean_old_subscribers_data(site):
     logger.info('Subscribers data reseting... START.')
     catalog = api.portal.get_tool(name='portal_catalog')
     meetings = [b.getObject() for b in catalog(portal_type='eea.meeting')]
 
-    delete_subscribers_for_account_with_id("Test2019012902", site)
+    remove_account_and_data("Test2019012902", site)
 
     for meeting in meetings:
         if datetime.now(pytz.UTC) > meeting.end + timedelta(
