@@ -3,7 +3,10 @@ Changelog
 
 6.5.dev0 - (unreleased)
 -----------------------
-* Improve section of E-pass related fields, rename Parking field, improve texts
+* Improve: script for deleting subscribers data to delete accounts if marked.
+  Improve: Subscribers view - update text for account deletion.
+  [GhitaB #102026]
+* Improve: section of E-pass related fields, rename Parking field, improve texts
   and behaviour for deleting account field in meeting registration form.
   [GhitaB #101958]
 * Improve: meeting register form validation - accept '+' char in phone numbers.
