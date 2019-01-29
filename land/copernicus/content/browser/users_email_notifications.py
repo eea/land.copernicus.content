@@ -1,7 +1,8 @@
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-import logging
+from plone import api
 import base64
+import logging
 
 logger = logging.getLogger('land.copernicus.content')
 
@@ -66,9 +67,15 @@ class SetEmailNotificationsView(BrowserView):
         print "Set notifications preferences."
         encoded = encode(SECRET_KEY_DEMO, user_id)
         if encoded == key:
-            msg = "GOOD"
+            user = api.user.get(user_id)
+            if user is not None:
+                print "CURRENT STATE: "
+                print user.disclaimer_permission
+                msg = "GOOD"
+            else:
+                msg = "User not found."
         else:
-            msg = "NOOOO"
+            msg = "Invalid URL. User ID and key don't match."
         return msg
 
     def __call__(self):
