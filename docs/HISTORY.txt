@@ -1,6 +1,9 @@
 Changelog
 =========
 
+6.6.dev0 - (unreleased)
+-----------------------
+
 6.5 - (2019-01-29)
 ------------------
 * Improve: script for deleting subscribers data to delete accounts if marked.
