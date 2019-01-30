@@ -3,6 +3,8 @@ Changelog
 
 6.6.dev0 - (unreleased)
 -----------------------
+* Improve: In meeting register, improve disclaimers fields styles.
+  [GhitaB #101958]
 * Feature: WIP script for contacting users by email to update email
   notifications preferences - profiles of old accounts.
   [GhitaB #101742]
