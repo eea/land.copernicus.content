@@ -31,7 +31,7 @@ def decode(key, enc):
 
 def send_email_notifications(site):
     logger.info('Sending emails... START.')
-    test_clear = "ghitab"
+    test_clear = "ghitabzope"
     encoded = encode(SECRET_KEY_DEMO, test_clear)
     logger.info('Encoded: %s', encoded)
     decoded = decode(SECRET_KEY_DEMO, encoded)
@@ -70,6 +70,7 @@ class SetEmailNotificationsView(BrowserView):
             user = api.user.get(user_id)
             if user is not None:
                 print "CURRENT STATE: "
+                user.setMemberProperties({'disclaimer_permission': True})
                 print user.disclaimer_permission
                 msg = "GOOD"
             else:
