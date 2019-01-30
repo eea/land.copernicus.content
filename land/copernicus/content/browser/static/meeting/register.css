@@ -40,6 +40,16 @@ p.text-smaller {
   vertical-align: middle;
 }
 
+@media all and (min-width: 700px) {
+  div.disclaimers-container .field-label {
+    width: 32em;
+  }
+
+  div.disclaimers-container .field-body {
+    width: 3em;
+  }
+}
+
 .field-body > * {
   vertical-align: middle !important;
 }
