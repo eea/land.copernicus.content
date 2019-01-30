@@ -1,6 +1,9 @@
 Changelog
 =========
 
+6.7.dev0 - (unreleased)
+-----------------------
+
 6.6 - (2019-01-30)
 ------------------
 * Improve: In meeting register, improve disclaimers fields styles.
