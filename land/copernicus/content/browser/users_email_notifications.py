@@ -1,3 +1,4 @@
+from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
@@ -29,7 +30,30 @@ def decode(key, enc):
     return "".join(dec)
 
 
+def get_users(site):
+    md = getToolByName(site, 'portal_memberdata')
+
+    _members = md._members
+    _properties = site['acl_users']['mutable_properties']._storage
+
+    for idx, user_id in enumerate(_members.iterkeys()):
+        user_properties = _properties.get(user_id, dict())
+        user_member_data = _members.get(user_id)
+
+        if user_member_data is not None:
+            active_last = user_properties.get('last_login_time')
+            active_from = user_member_data.bobobase_modification_time()
+
+        print "{0}: {1} - active from: {2} to: {3}".format(
+                idx, user_id, active_from, active_last)
+
+    return True
+
+
 def send_email_notifications(site):
+    # TODO WIP
+    aa = get_users(site)
+    aa = aa
     logger.info('Sending emails... START.')
     test_clear = "ghitabzope"
     encoded = encode(SECRET_KEY_DEMO, test_clear)
