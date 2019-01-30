@@ -3,6 +3,9 @@ Changelog
 
 6.7.dev0 - (unreleased)
 -----------------------
+* Feature: script for contacting users by email to update email
+  notifications preferences - profiles of old accounts.
+  [GhitaB #101742]
 
 6.6 - (2019-01-30)
 ------------------
