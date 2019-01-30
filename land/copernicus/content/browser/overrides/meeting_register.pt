@@ -547,54 +547,56 @@
           </metal:field>
         </div><!--End e-pass related-->
 
-        <metal:field use-macro="template/macros/field">
-          <metal:label fill-slot="label">
-            <label for="f_disclaimer">
-              I consent on the processing of my personal data according to the
-              <a href="/terms-of-use" target="_blank">privacy statement</a>
-              <span class="required advanced"></span>
-            </label>
-          </metal:label>
-          <metal:body fill-slot="body">
-            <input type="checkbox" name="disclaimer" required
-              tal:attributes="value python:fields.get('disclaimer', '')" />
-          </metal:body>
-        </metal:field>
+        <div class="disclaimers-container">
+          <metal:field use-macro="template/macros/field">
+            <metal:label fill-slot="label">
+              <label for="f_disclaimer">
+                I consent on the processing of my personal data according to the
+                <a href="/terms-of-use" target="_blank">privacy statement</a>
+                <span class="required advanced"></span>
+              </label>
+            </metal:label>
+            <metal:body fill-slot="body">
+              <input type="checkbox" name="disclaimer" required
+                tal:attributes="value python:fields.get('disclaimer', '')" />
+            </metal:body>
+          </metal:field>
 
-        <metal:field use-macro="template/macros/field">
-          <metal:label fill-slot="label">
-            <label for="f_request_data_deletion">
-              Please delete my account on the website after the event has ended, latest after 4 weeks.
-              <p class="text-smaller">
-                Please note that you will not be able to login to the website anymore
-                required to download data or access information related to this and
-                other events, to which you might have registered too.
-              </p>
-            </label>
-          </metal:label>
-          <metal:body fill-slot="body">
-            <input type="checkbox" name="request_data_deletion"
-              tal:attributes="value python:fields.get('request_data_deletion', '')" />
-            <script>
-              $(document).ready(function() {
-                function getUrlVars() {
-                  var vars = {};
-                  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
-                  function(m,key,value) {
-                    vars[key] = value;
-                  });
-                  return vars;
-                }
+          <metal:field use-macro="template/macros/field">
+            <metal:label fill-slot="label">
+              <label for="f_request_data_deletion">
+                Please delete my account on the website after the event has ended, latest after 4 weeks.
+                <p class="text-smaller">
+                  Please note that you will not be able to login to the website anymore
+                  required to download data or access information related to this and
+                  other events, to which you might have registered too.
+                </p>
+              </label>
+            </metal:label>
+            <metal:body fill-slot="body">
+              <input type="checkbox" name="request_data_deletion"
+                tal:attributes="value python:fields.get('request_data_deletion', '')" />
+              <script>
+                $(document).ready(function() {
+                  function getUrlVars() {
+                    var vars = {};
+                    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+                    function(m,key,value) {
+                      vars[key] = value;
+                    });
+                    return vars;
+                  }
 
-                var is_new_account = (getUrlVars()["created"] == 'true');
-                if(!is_new_account) {
-                  // We hide this field for EIONET and old local accounts.
-                  $("label[for='f_request_data_deletion']").parent().parent().hide();
-                }
-              });
-            </script>
-          </metal:body>
-        </metal:field>
+                  var is_new_account = (getUrlVars()["created"] == 'true');
+                  if(!is_new_account) {
+                    // We hide this field for EIONET and old local accounts.
+                    $("label[for='f_request_data_deletion']").parent().parent().hide();
+                  }
+                });
+              </script>
+            </metal:body>
+          </metal:field>
+        </div>
 
         <div class="buttons">
           <p>
