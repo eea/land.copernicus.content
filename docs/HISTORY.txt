@@ -1,8 +1,8 @@
 Changelog
 =========
 
-6.6.dev0 - (unreleased)
------------------------
+6.6 - (2019-01-30)
+------------------
 * Improve: In meeting register, improve disclaimers fields styles.
   [GhitaB #101958]
 * Feature: WIP script for contacting users by email to update email
