@@ -3,6 +3,8 @@ Changelog
 
 6.7.dev0 - (unreleased)
 -----------------------
+* Feature: invisible columns, editable by admin but unpublished for users.
+  [GhitaB #99878]
 * Improve: rename column Document access in admin panel.
   Improve: use Link text for files, too, in admin panel.
   Improve: move filters before table.
