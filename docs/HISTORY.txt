@@ -5,6 +5,7 @@ Changelog
 -----------------------
 * Improve: rename column Document access in admin panel.
   Improve: use Link text for files, too, in admin panel.
+  Improve: the same changes for view mode.
   [GhitaB #99878]
 * Feature: script for contacting users by email to update email
   notifications preferences - profiles of old accounts.
