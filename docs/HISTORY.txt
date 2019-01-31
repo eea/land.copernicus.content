@@ -3,6 +3,8 @@ Changelog
 
 6.7.dev0 - (unreleased)
 -----------------------
+* Improve: rename column Document access in admin panel.
+  [GhitaB #99878]
 * Feature: script for contacting users by email to update email
   notifications preferences - profiles of old accounts.
   [GhitaB #101742]
