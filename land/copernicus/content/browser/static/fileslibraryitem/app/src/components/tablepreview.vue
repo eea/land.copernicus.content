@@ -81,7 +81,7 @@ export default {
 
         for(var i = 0; i < columns.length; i++) {
           if(columns[i].text == "URL" || columns[i].text.trim() == "URL") {
-            result += "<th>URL or File</th>";
+            result += "<th>Document access</th>";
           } else {
             if(columns[i].text !== "File" && columns[i].text.trim() !== "File") {
               result += "<th>" + columns[i].text + "</th>";
