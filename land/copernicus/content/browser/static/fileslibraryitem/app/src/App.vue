@@ -5,6 +5,7 @@
     <div id="initial-existing-files-in-context" style="display:none;">["existingfile1", "existingfile2"]</div>
     <div id="initial-search-filters" style="display:none;">["category", "subcategory"]</div>
 
+    <p><b>Hint:</b> Columns starting with '-' will be hidden in preview table and view. Example: -Publication date</p>
     <table id="editor">
       <thead>
         <tr>

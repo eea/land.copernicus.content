@@ -84,7 +84,9 @@ export default {
             result += "<th>Document access</th>";
           } else {
             if(columns[i].text !== "File" && columns[i].text.trim() !== "File") {
-              result += "<th>" + columns[i].text + "</th>";
+              if(columns[i].text.charAt(0) !== "-" && columns[i].text.trim().charAt(0) !== "-") {
+                result += "<th>" + columns[i].text + "</th>";
+              }
             }
           }
         }
@@ -102,8 +104,10 @@ export default {
               }
               result += "</td>";
             } else {
-              if(columns[j].text !== "File" || columns[j].text.trim() !== "File") {
-                result += "<td>" + rows[i][j].text + "</td>";
+              if(columns[j].text !== "File" && columns[j].text.trim() !== "File") {
+                if(columns[j].text.charAt(0) !== "-" && columns[j].text.trim().charAt(0) !== "-") {
+                  result += "<td>" + rows[i][j].text + "</td>";
+                }
               }
             }
           }

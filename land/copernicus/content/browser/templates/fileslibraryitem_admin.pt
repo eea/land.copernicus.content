@@ -25,7 +25,7 @@
     <div id="parent-fieldname-text" tal:content="structure context/text/output"></div>
 
     <p>
-      <a href="./edit">Edit summary and body text.</a>
+      <a href="./edit">Edit summary, body text and filters.</a>
       (You will be redirected on click, make sure your work is saved.)
     </p>
 
