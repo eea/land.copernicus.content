@@ -41,7 +41,7 @@ export default {
       var table_placeholder = document.querySelector('.table-render-preview');
 
       function make_filters_html(filters) {
-        var filters_html = "<div class='filters-container'><p><b>Search filters:</b></p><ul class='filters-list'>";
+        var filters_html = "<div class='filters-container'><p><b>Filter by:</b></p><ul class='filters-list'>";
         for(var i = 0; i < filters.length; i++) {
           filters_html += "<li class='search-filter'>" + filters[i] + "</li>";
         }
@@ -128,7 +128,7 @@ export default {
         aaSorting: []
       });
 
-      $(".dataTables_wrapper").append(make_filters_html(filters));
+      $(".dataTables_wrapper").prepend(make_filters_html(filters));
 
       $(".search-filter").on("click", function() {
         if($(this).hasClass("is-selected")) {
