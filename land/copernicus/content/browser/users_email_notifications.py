@@ -43,9 +43,9 @@ def get_users(site):
         if user_member_data is not None:
             active_last = user_properties.get('last_login_time')
             active_from = user_member_data.bobobase_modification_time()
-
-        print "{0}: {1} - active from: {2} to: {3}".format(
-                idx, user_id, active_from, active_last)
+            email = user_properties.get('email', None)
+        print "{0}: {1} - active from: {2} to: {3} - email: {4}".format(
+                idx, user_id, active_from, active_last, email)
 
     return True
 
