@@ -62,8 +62,11 @@ def decode(key, enc):
     return "".join(dec)
 
 
-def send_email(user_id, email):
-    print "TODO Send email..." + email
+def send_email(site, user_id, email):
+    encoded = encode(SECRET_KEY_DEMO, user_id)
+    link = """{0}/set_email_notifications?user_id={1}&key={2}""".format(
+        site.absolute_url(), user_id, encoded)
+    print "TODO send email " + user_id + " :: " + link
 
 
 def notify_next_users(site, x):
@@ -87,7 +90,7 @@ def notify_next_users(site, x):
                 print "{0}: {1} - [{2} - {3}] - email: {4}".format(
                     idx, user_id, active_from, active_last, email)
 
-                send_email(user_id, email)
+                send_email(site, user_id, email)
                 users.append(user_id)
                 notified += 1
 
@@ -95,27 +98,12 @@ def notify_next_users(site, x):
                 break
 
     add_to_emails_log(users)
-    return True
 
 
 def send_email_notifications(site):
-    # TODO WIP
-    delete_emails_log()
-    bb = get_emails_log()
-    add_to_emails_log(['zzzuser1', 'zzzuser2'])
-    bb = get_emails_log()
-    aa = notify_next_users(site, 2)
-    aa = aa
-    bb = bb
     logger.info('Sending emails... START.')
-    test_clear = "ghitabzope"
-    encoded = encode(SECRET_KEY_DEMO, test_clear)
-    logger.info('Encoded: %s', encoded)
-    decoded = decode(SECRET_KEY_DEMO, encoded)
-    logger.info('Decoded: %s', decoded)
-    link = """{0}/set_email_notifications?user_id={1}&key={2}""".format(
-        site.absolute_url(), test_clear, encoded)
-    logger.info('Link: %s', link)
+    delete_emails_log()
+    notify_next_users(site, 2)
     logger.info('Sending emails... STOP.')
     return True
 
