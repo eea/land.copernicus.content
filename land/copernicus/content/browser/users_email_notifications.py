@@ -57,6 +57,10 @@ def decode(key, enc):
     return "".join(dec)
 
 
+def send_email(user_id, email):
+    print "TODO Send email..." + email
+
+
 def notify_next_users(site, x):
     md = getToolByName(site, 'portal_memberdata')
 
@@ -64,6 +68,7 @@ def notify_next_users(site, x):
     _properties = site['acl_users']['mutable_properties']._storage
 
     notified = 0
+    users = []
     for idx, user_id in enumerate(_members.iterkeys()):
         user_properties = _properties.get(user_id, dict())
         user_member_data = _members.get(user_id)
@@ -76,10 +81,15 @@ def notify_next_users(site, x):
             if user_already_notified(user_id) is False:
                 print "{0}: {1} - [{2} - {3}] - email: {4}".format(
                     idx, user_id, active_from, active_last, email)
+
+                send_email(user_id, email)
+                users.append(user_id)
                 notified += 1
 
             if notified == x:
                 break
+
+    add_to_emails_log(users)
     return True
 
 
@@ -88,7 +98,7 @@ def send_email_notifications(site):
     bb = get_emails_log()
     add_to_emails_log(['zzzuser1', 'zzzuser2'])
     bb = get_emails_log()
-    aa = notify_next_users(site, 5)
+    aa = notify_next_users(site, 2)
     aa = aa
     bb = bb
     logger.info('Sending emails... START.')
