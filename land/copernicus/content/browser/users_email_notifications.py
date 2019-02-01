@@ -5,9 +5,9 @@ from persistent.dict import PersistentDict
 from plone import api
 from zope.annotation import IAnnotations
 import base64
+import datetime
 import logging
 import transaction
-
 
 logger = logging.getLogger('land.copernicus.content')
 
@@ -28,10 +28,10 @@ def delete_emails_log():
     del annotations[ANNOT_EMAILS_KEY]
 
 
-def add_to_emails_log(user_ids=[]):
+def add_to_emails_log(user_ids=[], timestamp=None):
     emails_log = get_emails_log()
     for user_id in user_ids:
-        emails_log[user_id] = "AAA"
+        emails_log[user_id] = timestamp
     transaction.commit()
 
 
@@ -97,14 +97,16 @@ def notify_next_users(site, x):
             if notified == x:
                 break
 
-    add_to_emails_log(users)
+    timestamp = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
+    add_to_emails_log(users, timestamp)
 
 
 def send_email_notifications(site):
     logger.info('Sending emails... START.')
-    delete_emails_log()
-    notify_next_users(site, 2)
+    # delete_emails_log()
+    notify_next_users(site, 5000)
     logger.info('Sending emails... STOP.')
+    print get_emails_log()
     return True
 
 
@@ -116,7 +118,6 @@ class UsersEmailNotificationsView(BrowserView):
 
     def __call__(self):
         site = self.context.portal_url.getPortalObject()
-
         send_email_notifications(site)
 
         return self.render()
