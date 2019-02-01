@@ -4,6 +4,8 @@ $(document).ready(function() {
     var elem_register = document.getElementById('form-register');
 
     var show_registration = function(preserve_history) {
+      $("p.info-on-create-account").show();
+      $("p.info-login-or-create").hide();
       $(elem_register).fadeIn();
       $(elem_choice).hide();
       var new_url = document.location.search ?
@@ -19,6 +21,8 @@ $(document).ready(function() {
     }
 
     var show_choice = function(preserve_history) {
+      $("p.info-login-or-create").show();
+      $("p.info-on-create-account").hide();
       $(elem_register).hide();
       $(elem_choice).fadeIn();
       var new_url = document.location.search ?
