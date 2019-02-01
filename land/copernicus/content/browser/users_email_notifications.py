@@ -123,6 +123,20 @@ class UsersEmailNotificationsView(BrowserView):
         return self.render()
 
 
+class UsersEmailNotificationsLogView(BrowserView):
+    index = ViewPageTemplateFile("templates/users_email_notifications_log.pt")
+
+    def render(self):
+        return self.index()
+
+    def get_logs_data(self):
+        return get_emails_log()
+
+    def __call__(self):
+
+        return self.render()
+
+
 class SetEmailNotificationsView(BrowserView):
     index = ViewPageTemplateFile("templates/set_email_notifications.pt")
 
