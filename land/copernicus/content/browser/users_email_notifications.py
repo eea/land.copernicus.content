@@ -15,6 +15,7 @@ SECRET_KEY_DEMO = "aaabbbccc"  # TODO Set a key as env var
 ANNOT_EMAILS_KEY = "land.copernicus.content.users_emails_notifications"
 # TODO
 # select only users in given timeperiod
+# select only users that have not the disclaimer already accepted
 # add email template
 # send emails
 # what happens if an email fails?
