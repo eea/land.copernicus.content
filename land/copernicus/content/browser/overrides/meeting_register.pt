@@ -409,33 +409,50 @@
             </script>
           </metal:body>
         </metal:field>
-        <metal:field use-macro="template/macros/field">
-          <metal:label fill-slot="label">
-            <label for="f_role">I would like to attend the event in the capacity of<span class="required"></span></label>
-          </metal:label>
-          <metal:body fill-slot="body">
-            <select id="f_role" name="role" required>
-              <option></option>
-              <tal:role repeat="option view/role_options">
-                <option tal:attributes="
-                  value python:option[0];
-                  selected python:'selected' if option[0] == fields.get('role') else ''"
-                  tal:content="python:option[1]"></option>
-              </tal:role>
-            </select>
-            <input class="other" type="text" id="f_role_other"
-                   name="role_other"
-                   tal:attributes="value python:fields.get('role_other', '')"
-                   placeholder="please specify"
-                   />
-            <span>&nbsp;</span>
-            <script>
-              $(document).on("ready", function() {
-                meeting.widget_other('#f_role', '#f_role_other')
-              });
-            </script>
-          </metal:body>
-        </metal:field>
+
+        <div tal:condition="python:context.is_webinar() is not True">
+          <metal:field use-macro="template/macros/field">
+            <metal:label fill-slot="label">
+              <label for="f_role">I would like to attend the event in the capacity of<span class="required"></span></label>
+            </metal:label>
+            <metal:body fill-slot="body">
+              <select id="f_role" name="role" required>
+                <option></option>
+                <tal:role repeat="option view/role_options">
+                  <option tal:attributes="
+                    value python:option[0];
+                    selected python:'selected' if option[0] == fields.get('role') else ''"
+                    tal:content="python:option[1]"></option>
+                </tal:role>
+              </select>
+              <input class="other" type="text" id="f_role_other"
+                     name="role_other"
+                     tal:attributes="value python:fields.get('role_other', '')"
+                     placeholder="please specify"
+                     />
+              <span>&nbsp;</span>
+              <script>
+                $(document).on("ready", function() {
+                  meeting.widget_other('#f_role', '#f_role_other')
+                });
+              </script>
+            </metal:body>
+          </metal:field>
+        </div>
+
+        <!-- In webinar case just init with default: Participant, and hide this field -->
+        <div tal:condition="python:context.is_webinar() is True" style="display:none">
+          <metal:field use-macro="template/macros/field">
+            <metal:label fill-slot="label">
+              <label for="f_role">I would like to attend the event in the capacity of<span class="required"></span></label>
+            </metal:label>
+            <metal:body fill-slot="body">
+              <select id="f_role" name="role" required>
+                <option value="Participant">Participant</option>
+              </select>
+            </metal:body>
+          </metal:field>
+        </div>
 
         <h3 tal:condition="context/need_e_pass">This event requires E-pass data:</h3>
         <p tal:condition="context/need_e_pass" class="text-smaller">
