@@ -46,7 +46,7 @@
                 <th>City</th>
                 <th>Email</th>
                 <th>Phone no</th>
-                <th>Role</th>
+                <th tal:condition="python:meeting.is_webinar() is not True">Role</th>
                 <th tal:condition="meeting/need_e_pass">DATE OF BIRTH</th>
                 <th tal:condition="meeting/need_e_pass">NATIONALITY</th>
                 <th tal:condition="meeting/need_e_pass">ID CARD NBR</th>
@@ -83,7 +83,8 @@
                   <td tal:content="python:subscriber_details.get('from_city', '')">From city</td>
                   <td tal:content="subscriber/email|string:" />
                   <td tal:content="python:subscriber_details.get('phone_numbers', '')">Telephone</td>
-                  <td tal:content="python:subscriber.role_other if subscriber.role == 'other' else subscriber.role" />
+                  <td tal:content="python:subscriber.role_other if subscriber.role == 'other' else subscriber.role"
+                      tal:condition="python:meeting.is_webinar() is not True" />
                   <td tal:content="python:subscriber.date_of_birth" tal:condition="meeting/need_e_pass">DATE OF BIRTH</td>
                   <td tal:content="python:subscriber.nationality" tal:condition="meeting/need_e_pass">NATIONALITY</td>
                   <td tal:content="python:subscriber.id_card_nbr" tal:condition="meeting/need_e_pass">ID CARD NBR</td>
