@@ -13,6 +13,14 @@ logger = logging.getLogger('land.copernicus.content')
 
 SECRET_KEY_DEMO = "aaabbbccc"  # TODO Set a key as env var
 ANNOT_EMAILS_KEY = "land.copernicus.content.users_emails_notifications"
+# TODO
+# select only users in given timeperiod
+# add email template
+# send emails
+# what happens if an email fails?
+# env vars
+# enable / disable solution
+# tests
 
 
 def get_emails_log():
