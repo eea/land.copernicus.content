@@ -1,14 +1,26 @@
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from persistent.dict import PersistentDict
 from plone import api
+from zope.annotation import IAnnotations
 import base64
 import logging
+import transaction
+
 
 logger = logging.getLogger('land.copernicus.content')
 
-
 SECRET_KEY_DEMO = "aaabbbccc"  # TODO Set a key as env var
+ANNOT_EMAILS_KEY = "land.copernicus.content.users_emails_notifications"
+
+
+def get_emails_log():
+    emails_annot = IAnnotations(api.portal.get()).setdefault(
+        ANNOT_EMAILS_KEY, PersistentDict({}))
+    transaction.commit()
+
+    return emails_annot
 
 
 def encode(key, clear):
@@ -52,6 +64,8 @@ def get_users(site):
 
 def send_email_notifications(site):
     # TODO WIP
+    bb = get_emails_log()
+    import pdb; pdb.set_trace()
     aa = get_users(site)
     aa = aa
     logger.info('Sending emails... START.')
