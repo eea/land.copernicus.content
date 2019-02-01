@@ -23,6 +23,11 @@ def get_emails_log():
     return emails_annot
 
 
+def delete_emails_log():
+    annotations = IAnnotations(api.portal.get())
+    del annotations[ANNOT_EMAILS_KEY]
+
+
 def add_to_emails_log(user_ids=[]):
     emails_log = get_emails_log()
     for user_id in user_ids:
@@ -95,6 +100,7 @@ def notify_next_users(site, x):
 
 def send_email_notifications(site):
     # TODO WIP
+    delete_emails_log()
     bb = get_emails_log()
     add_to_emails_log(['zzzuser1', 'zzzuser2'])
     bb = get_emails_log()
