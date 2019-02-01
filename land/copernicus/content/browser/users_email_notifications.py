@@ -23,7 +23,22 @@ def get_emails_log():
     return emails_annot
 
 
+def add_to_emails_log(user_ids=[]):
+    emails_log = get_emails_log()
+    for user_id in user_ids:
+        emails_log[user_id] = "AAA"
+    transaction.commit()
+
+
+def user_already_notified(user_id):
+    emails_log = get_emails_log()
+    if emails_log.get(user_id, None) is not None:
+        return True
+    return False
+
+
 def encode(key, clear):
+
     enc = []
     for i in range(len(clear)):
         key_c = key[i % len(key)]
@@ -42,12 +57,13 @@ def decode(key, enc):
     return "".join(dec)
 
 
-def get_users(site):
+def notify_next_users(site, x):
     md = getToolByName(site, 'portal_memberdata')
 
     _members = md._members
     _properties = site['acl_users']['mutable_properties']._storage
 
+    notified = 0
     for idx, user_id in enumerate(_members.iterkeys()):
         user_properties = _properties.get(user_id, dict())
         user_member_data = _members.get(user_id)
@@ -56,18 +72,25 @@ def get_users(site):
             active_last = user_properties.get('last_login_time')
             active_from = user_member_data.bobobase_modification_time()
             email = user_properties.get('email', None)
-        print "{0}: {1} - active from: {2} to: {3} - email: {4}".format(
-                idx, user_id, active_from, active_last, email)
 
+            if user_already_notified(user_id) is False:
+                print "{0}: {1} - [{2} - {3}] - email: {4}".format(
+                    idx, user_id, active_from, active_last, email)
+                notified += 1
+
+            if notified == x:
+                break
     return True
 
 
 def send_email_notifications(site):
     # TODO WIP
     bb = get_emails_log()
-    import pdb; pdb.set_trace()
-    aa = get_users(site)
+    add_to_emails_log(['zzzuser1', 'zzzuser2'])
+    bb = get_emails_log()
+    aa = notify_next_users(site, 5)
     aa = aa
+    bb = bb
     logger.info('Sending emails... START.')
     test_clear = "ghitabzope"
     encoded = encode(SECRET_KEY_DEMO, test_clear)
