@@ -1,14 +1,15 @@
+from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from persistent.dict import PersistentDict
 from plone import api
+from smtplib import SMTPRecipientsRefused
 from zope.annotation import IAnnotations
 import base64
 import datetime
 import logging
 import transaction
-from DateTime import DateTime
 
 
 logger = logging.getLogger('land.copernicus.content')
@@ -79,6 +80,28 @@ def send_email(site, user_id, email):
     link = """{0}/set_email_notifications?user_id={1}&key={2}""".format(
         site.absolute_url(), user_id, encoded)
     print "TODO send email " + user_id + " :: " + link
+
+    email_from_name = site.getProperty(
+        'email_from_name', 'Copernicus Land Monitoring Service at the \
+        European Environment Agency')
+    email_from_address = site.getProperty(
+        'email_from_address', 'copernicus@eea.europa.eu')
+    mfrom = "{0} <{1}>".format(email_from_name, email_from_address)
+    subject = u"Subject here"
+    mail_text = u"""
+Hello
+{0}
+Message here
+Kind regards
+Copernicus Land Monitoring Helpdesk Team""".format(user_id)
+
+    try:
+        mail_host = api.portal.get_tool(name='MailHost')
+        return mail_host.simple_send(
+            mto=email, mfrom=mfrom, subject=subject,
+            body=mail_text, immediate=True)
+    except SMTPRecipientsRefused:
+        raise SMTPRecipientsRefused('Recipient rejected by server')
 
 
 def notify_next_users(site, x):
