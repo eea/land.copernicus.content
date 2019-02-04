@@ -8,13 +8,17 @@ import base64
 import datetime
 import logging
 import transaction
+from DateTime import DateTime
+
 
 logger = logging.getLogger('land.copernicus.content')
 
 SECRET_KEY_DEMO = "aaabbbccc"  # TODO Set a key as env var
 ANNOT_EMAILS_KEY = "land.copernicus.content.users_emails_notifications"
+DATE_UNTIL = DateTime(2018, 5, 1)  # Notify accounts created after this date
+USERS_UNIT = 50  # To be notified at a time
+
 # TODO
-# select only users in given timeperiod
 # select only users that have not the disclaimer already accepted
 # add email template
 # send emails
@@ -95,7 +99,9 @@ def notify_next_users(site, x):
             active_from = user_member_data.bobobase_modification_time()
             email = user_properties.get('email', None)
 
-            if user_already_notified(user_id) is False:
+            if (
+                    active_from < DATE_UNTIL) and (
+                    user_already_notified(user_id) is False):
                 print "{0}: {1} - [{2} - {3}] - email: {4}".format(
                     idx, user_id, active_from, active_last, email)
 
@@ -113,7 +119,7 @@ def notify_next_users(site, x):
 def send_email_notifications(site):
     logger.info('Sending emails... START.')
     # delete_emails_log()
-    notify_next_users(site, 5000)
+    notify_next_users(site, USERS_UNIT)
     logger.info('Sending emails... STOP.')
     print get_emails_log()
     return True
