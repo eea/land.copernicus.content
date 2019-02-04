@@ -17,10 +17,9 @@ logger = logging.getLogger('land.copernicus.content')
 SECRET_KEY_DEMO = "aaabbbccc"  # TODO Set a key as env var
 ANNOT_EMAILS_KEY = "land.copernicus.content.users_emails_notifications"
 DATE_UNTIL = DateTime(2018, 5, 1)  # Notify accounts created after this date
-USERS_UNIT = 50  # To be notified at a time
+USERS_UNIT = 10  # To be notified at a time
 
 # TODO
-# add email template
 # send emails
 # what happens if an email fails?
 # env vars
@@ -87,13 +86,29 @@ def send_email(site, user_id, email):
     email_from_address = site.getProperty(
         'email_from_address', 'copernicus@eea.europa.eu')
     mfrom = "{0} <{1}>".format(email_from_name, email_from_address)
-    subject = u"Subject here"
+    subject = u"Would you like to be informed about new products of the \
+Copernicus Land Monitoring Service, events and training opportunities?"
     mail_text = u"""
-Hello
+Hello,
+
+We are writing to you because you are a registered user on the
+https://land.copernicus.eu, the website of the Copernicus Land Monitoring
+Service.
+
+We would like to inform you that we have revised our privacy policy and terms
+of use (https://land.copernicus.eu/terms-of-use).
+
+If you wish to be informed by e-mail about new and updated products of the
+Copernicus Land Monitoring Service, events and training opportunities please
+confirm this in the provided link:
+
 {0}
-Message here
-Kind regards
-Copernicus Land Monitoring Helpdesk Team""".format(user_id)
+
+If you have any questions please contact us at copernicus@eea.europa.eu.
+
+Kind regards,
+
+Copernicus Land Monitoring Team""".format(link)
 
     try:
         mail_host = api.portal.get_tool(name='MailHost')
