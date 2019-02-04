@@ -8,8 +8,10 @@
 
   <metal:content-core fill-slot="content-core">
     <metal:main_macro define-macro="content-core">
-      <h2 i18n:translate="">Set email notifications.</h2>
-      <p>Done!</p>
+      <h2 i18n:translate="">Thank you!</h2>
+      <p>Your settings have been updated.</p>
+
+      <p>For future changes you can log in anytime and set your prefereces under Settings menu.</p>
     </metal:main_macro>
   </metal:content-core>
 </body>
