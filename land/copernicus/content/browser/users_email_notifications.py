@@ -20,11 +20,12 @@ DATE_UNTIL = DateTime(2018, 5, 1)  # Notify accounts created after this date
 USERS_UNIT = 10  # To be notified at a time
 
 # TODO
-# send emails
 # what happens if an email fails?
 # env vars
 # enable / disable solution
 # tests
+# set as a script
+# cron container
 
 
 def get_emails_log():
@@ -78,7 +79,6 @@ def send_email(site, user_id, email):
     encoded = encode(SECRET_KEY_DEMO, user_id)
     link = """{0}/set_email_notifications?user_id={1}&key={2}""".format(
         site.absolute_url(), user_id, encoded)
-    print "TODO send email " + user_id + " :: " + link
 
     email_from_name = site.getProperty(
         'email_from_name', 'Copernicus Land Monitoring Service at the \
@@ -140,8 +140,8 @@ def notify_next_users(site, x):
                     active_from < DATE_UNTIL) and (
                     user_already_notified(user_id) is False) and (
                     user_properties.get('disclaimer_permission') is False):
-                print "{0}: {1} - [{2} - {3}] - email: {4}".format(
-                    idx, user_id, active_from, active_last, email)
+                logger.info("Found {0}: {1} - [{2} - {3}] - email: {4}".format(
+                    idx, user_id, active_from, active_last, email))
                 send_email(site, user_id, email)
                 users.append(user_id)
                 notified += 1
@@ -158,7 +158,6 @@ def send_email_notifications(site):
     # delete_emails_log()
     notify_next_users(site, USERS_UNIT)
     logger.info('Sending emails... STOP.')
-    print get_emails_log()
     return True
 
 
@@ -196,7 +195,6 @@ class SetEmailNotificationsView(BrowserView):
         return self.index()
 
     def set_email_notifications(self, user_id, key):
-        print "Set notifications preferences."
         encoded = encode(SECRET_KEY_DEMO, user_id)
         if encoded == key:
             user = api.user.get(user_id)
@@ -216,5 +214,5 @@ class SetEmailNotificationsView(BrowserView):
         key = self.request.get('key', None)
 
         msg = self.set_email_notifications(user_id, key)
-        print "ZZZZZ " + msg
+        msg = msg
         return self.render()
