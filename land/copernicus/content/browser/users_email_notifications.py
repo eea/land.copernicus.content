@@ -195,29 +195,15 @@ class SetEmailNotificationsView(BrowserView):
         return self.index()
 
     def set_email_notifications(self, user_id, key):
-        encoded = encode(SECRET_KEY_DEMO, user_id)
-        if encoded == key:
-            site = api.portal.get()
-            _properties = site['acl_users']['mutable_properties']._storage
+        if encode(SECRET_KEY_DEMO, user_id) == key:
             user = api.user.get(userid=user_id)
             if user is not None:
-                user_properties = _properties.get(user_id, dict())
-                print user_properties.get("disclaimer_permission")
                 user.setMemberProperties(
                     mapping={'disclaimer_permission': True})
-                user = api.user.get(userid=user_id)
-                print user_properties.get("disclaimer_permission")
-                msg = "GOOD"
-            else:
-                msg = "User not found."
-        else:
-            msg = "Invalid URL. User ID and key don't match."
-        return msg
 
     def __call__(self):
         user_id = self.request.get('user_id', None)
         key = self.request.get('key', None)
+        self.set_email_notifications(user_id, key)
 
-        msg = self.set_email_notifications(user_id, key)
-        msg = msg
         return self.render()
