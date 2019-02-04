@@ -19,7 +19,6 @@ DATE_UNTIL = DateTime(2018, 5, 1)  # Notify accounts created after this date
 USERS_UNIT = 50  # To be notified at a time
 
 # TODO
-# select only users that have not the disclaimer already accepted
 # add email template
 # send emails
 # what happens if an email fails?
@@ -101,10 +100,10 @@ def notify_next_users(site, x):
 
             if (
                     active_from < DATE_UNTIL) and (
-                    user_already_notified(user_id) is False):
+                    user_already_notified(user_id) is False) and (
+                    user_properties.get('disclaimer_permission') is False):
                 print "{0}: {1} - [{2} - {3}] - email: {4}".format(
                     idx, user_id, active_from, active_last, email)
-
                 send_email(site, user_id, email)
                 users.append(user_id)
                 notified += 1
