@@ -189,6 +189,9 @@ class UsersEmailNotificationsLogView(BrowserView):
     def get_logs_data(self):
         return get_emails_log()
 
+    def number_of_sent_emails(self):
+        return len(get_emails_log().keys())
+
     def __call__(self):
 
         return self.render()
