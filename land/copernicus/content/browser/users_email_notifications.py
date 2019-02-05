@@ -2,6 +2,8 @@ from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from land.copernicus.content.config import ENV_SEND_EMAILS_SECRET_KEY
+from land.copernicus.content.config import ENV_SEND_EMAILS_USERS_UNIT
 from persistent.dict import PersistentDict
 from plone import api
 from smtplib import SMTPRecipientsRefused
@@ -14,18 +16,10 @@ import transaction
 
 logger = logging.getLogger('land.copernicus.content')
 
-SECRET_KEY_DEMO = "aaabbbccc"  # TODO Set a key as env var
-ANNOT_EMAILS_KEY = "land.copernicus.content.users_emails_notifications"
+SECRET_KEY_DEMO = ENV_SEND_EMAILS_SECRET_KEY
+USERS_UNIT = ENV_SEND_EMAILS_USERS_UNIT
 DATE_UNTIL = DateTime(2018, 5, 1)  # Notify accounts created after this date
-USERS_UNIT = 10  # To be notified at a time
-
-# TODO
-# what happens if an email fails?
-# env vars
-# enable / disable solution
-# tests
-# set as a script
-# cron container
+ANNOT_EMAILS_KEY = "land.copernicus.content.users_emails_notifications"
 
 
 def get_emails_log():
