@@ -3,7 +3,7 @@ from land.copernicus.content.browser.users_statistics import \
 from land.copernicus.content.browser.subscribers_data_reset import \
         clean_old_subscribers_data
 from land.copernicus.content.config import ENV_HOST_USERS_STATS
-from land.copernicus.browser.users_email_notifications import \
+from land.copernicus.content.browser.users_email_notifications import \
         send_email_notifications
 
 HOST = ENV_HOST_USERS_STATS
