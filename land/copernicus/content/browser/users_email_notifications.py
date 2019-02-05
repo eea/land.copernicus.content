@@ -9,6 +9,7 @@ from zope.annotation import IAnnotations
 import base64
 import datetime
 import logging
+import time
 import transaction
 
 
@@ -140,6 +141,7 @@ def notify_next_users(site, x):
                 send_email(site, user_id, email)
                 users.append(user_id)
                 notified += 1
+                time.sleep(1)
 
             if notified == x:
                 break
