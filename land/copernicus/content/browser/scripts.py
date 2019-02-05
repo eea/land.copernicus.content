@@ -3,6 +3,8 @@ from land.copernicus.content.browser.users_statistics import \
 from land.copernicus.content.browser.subscribers_data_reset import \
         clean_old_subscribers_data
 from land.copernicus.content.config import ENV_HOST_USERS_STATS
+from land.copernicus.browser.users_email_notifications import \
+        send_email_notifications
 
 HOST = ENV_HOST_USERS_STATS
 
@@ -56,3 +58,12 @@ def subscrib_reset():
     """
     site = get_plone_site()
     clean_old_subscribers_data(site)
+
+
+def send_emails():
+    """ A cron callable script to send user emails notifications
+
+        bin/zeo_client run bin/send_emails
+    """
+    site = get_plone_site()
+    send_email_notifications(site)
