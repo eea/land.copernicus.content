@@ -52,5 +52,3 @@ ENV_DL_STATIC_PATH = ENVPATH('LAND_DOWNLOADS_STATIC_PATH', '/land-files/')
 ENV_HOST_USERS_STATS = ENVPATH('LAND_HOST_USERS_STATS', 'land.copernicus.eu')
 # Possible values: 'land.copernicus.eu', 'demo-copernicus.eea.europa.eu' or
 # 'localhost:8090'
-ENV_SEND_EMAILS_USERS_UNIT = ENVPATH('LAND_SEND_EMAILS_USERS_UNIT', 100)
-ENV_SEND_EMAILS_SECRET_KEY = ENVPATH('LAND_SEND_EMAILS_SECRET_KEY', 'missing')

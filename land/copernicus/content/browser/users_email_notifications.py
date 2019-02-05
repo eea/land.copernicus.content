@@ -2,8 +2,6 @@ from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from land.copernicus.content.config import ENV_SEND_EMAILS_SECRET_KEY
-from land.copernicus.content.config import ENV_SEND_EMAILS_USERS_UNIT
 from persistent.dict import PersistentDict
 from plone import api
 from smtplib import SMTPRecipientsRefused
@@ -16,8 +14,6 @@ import transaction
 
 logger = logging.getLogger('land.copernicus.content')
 
-SECRET_KEY_DEMO = ENV_SEND_EMAILS_SECRET_KEY
-USERS_UNIT = ENV_SEND_EMAILS_USERS_UNIT
 DATE_UNTIL = DateTime(2018, 5, 1)  # Notify accounts created after this date
 ANNOT_EMAILS_KEY = "land.copernicus.content.users_emails_notifications"
 
@@ -69,8 +65,12 @@ def decode(key, enc):
     return "".join(dec)
 
 
+def get_secret_key(site):
+    return getattr(site, 'users_email_notifications_secret_key', 'missing')
+
+
 def send_email(site, user_id, email):
-    encoded = encode(SECRET_KEY_DEMO, user_id)
+    encoded = encode(get_secret_key(site), user_id)
     link = """{0}/set_email_notifications?user_id={1}&key={2}""".format(
         site.absolute_url(), user_id, encoded)
 
@@ -110,7 +110,8 @@ Copernicus Land Monitoring Team""".format(link)
             mto=email, mfrom=mfrom, subject=subject,
             body=mail_text, immediate=True)
     except SMTPRecipientsRefused:
-        raise SMTPRecipientsRefused('Recipient rejected by server')
+        pass
+        # raise SMTPRecipientsRefused('Recipient rejected by server')
 
 
 def notify_next_users(site, x):
@@ -148,10 +149,19 @@ def notify_next_users(site, x):
 
 
 def send_email_notifications(site):
-    logger.info('Sending emails... START.')
-    # delete_emails_log()
-    notify_next_users(site, USERS_UNIT)
-    logger.info('Sending emails... STOP.')
+    """ In: /manage_propertiesForm set
+        users_email_notifications_enabled Boolean checked
+        users_email_notifications_secret_key String value_here
+        users_email_notifications_secret_users_unit Int value_here
+    """
+    is_enabled = getattr(site, 'users_email_notifications_enabled', False)
+    users_unit = getattr(site, 'users_email_notifications_users_unit', 100)
+
+    if is_enabled is True:
+        logger.info('Sending emails... START.')
+        # delete_emails_log()
+        notify_next_users(site, users_unit)
+        logger.info('Sending emails... STOP.')
     return True
 
 
@@ -189,7 +199,8 @@ class SetEmailNotificationsView(BrowserView):
         return self.index()
 
     def set_email_notifications(self, user_id, key):
-        if encode(SECRET_KEY_DEMO, user_id) == key:
+        site = api.portal.get()
+        if encode(get_secret_key(site), user_id) == key:
             user = api.user.get(userid=user_id)
             if user is not None:
                 user.setMemberProperties(
