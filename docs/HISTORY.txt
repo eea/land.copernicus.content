@@ -6,6 +6,7 @@ Changelog
 * Improve: 'Registration declined' instead of rejected in meeting view.
 * Improve: rename column Time of application in Subscribers view table.
 * Improve: space in meeting register, after Hello.
+* Improve: replace 'event organisers' with 'the event organiser'.
   [GhitaB #97529]
 
 6.7 - (2019-02-05)

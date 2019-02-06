@@ -640,7 +640,7 @@
     </tal:message-signup>
     <p>
       Hello, <span tal:replace="python:user.getProperty('fullname')"></span>,<br /><br />
-      Your registration request has been sent to event organisers. As soon as
+      Your registration request has been sent to the event organiser. As soon as
       your registration is confirmed you will receive a notification e-mail.
     </p>
 
