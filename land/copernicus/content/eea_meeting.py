@@ -41,7 +41,7 @@ class IMeeting(Interface):
     )
 
     allow_register = schema.Bool(
-        title=_(u"Allow users to register to the meeting"),
+        title=_(u"Allow users to register for the meeting"),
         required=True,
     )
 

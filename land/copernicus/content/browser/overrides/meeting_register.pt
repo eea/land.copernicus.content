@@ -57,7 +57,7 @@
 
 <tal:anon condition="view/is_anon">
 <p class="info-login-or-create" style="display:none;">
-  You have to log in to register to this event.
+  You have to log in to register for this event.
   If you have EIONET account or account on this website please
   type your username and password in the form on the left.
   Otherwise, please use the button on the right to create a new account on
@@ -65,7 +65,7 @@
 </p>
 
 <p class="info-on-create-account" style="display:none;">
-  Please complete the form to register to the event.
+  Please complete the form to register for the event.
 </p>
 
 <div id="choice" tal:attributes="style python:'display: none' if show_register_form else ''">
@@ -305,7 +305,7 @@
   <tal:signup condition="not:is_registered" tal:define="fields python:options.get('fields', {});">
     <p>
       Hello, <span tal:replace="python:user.getProperty('fullname')"></span>,<br /><br />
-      Please complete the form to register to the event.
+      Please complete the form to register for the event.
     </p>
 
     <tal:message-signup define="message python:options.get('signup_message', None)">
