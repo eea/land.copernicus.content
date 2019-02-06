@@ -89,7 +89,7 @@
                         Request for registration sent
                       </tal:pending>
                       <tal:rejected tal:condition="python:context.subscriber_status() == 'rejected'">
-                        Registration rejected
+                        Registration declined
                       </tal:rejected>
                     </tal:registered>
                   </td>
