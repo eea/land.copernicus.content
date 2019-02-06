@@ -3,6 +3,8 @@ Changelog
 
 6.8.dev0 - (unreleased)
 -----------------------
+* Improve: 'Registration declined' instead of rejected in meeting view.
+  [GhitaB #97529]
 
 6.7 - (2019-02-05)
 ------------------
