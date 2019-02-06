@@ -4,6 +4,7 @@ Changelog
 6.8.dev0 - (unreleased)
 -----------------------
 * Improve: 'Registration declined' instead of rejected in meeting view.
+* Improve: rename column Time of application in Subscribers view table.
   [GhitaB #97529]
 
 6.7 - (2019-02-05)
