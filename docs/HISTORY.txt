@@ -3,6 +3,8 @@ Changelog
 
 6.8.dev0 - (unreleased)
 -----------------------
+* Improve: Disable sorting for Document access column in files library view.
+  [GhitaB #96683]
 * Improve: 'Registration declined' instead of rejected in meeting view.
 * Improve: rename column Time of application in Subscribers view table.
 * Improve: space in meeting register, after Hello.
