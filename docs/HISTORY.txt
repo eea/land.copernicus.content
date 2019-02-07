@@ -3,8 +3,8 @@ Changelog
 
 6.8.dev0 - (unreleased)
 -----------------------
-* Improve: Disable sorting for Document access column in files library view.
-* Improve: Disable searching content in Document access column.
+* Improve: Disable sorting and searching for column Document access in files
+  library view and admin panel.
 * Improve: Add link and more info on search items in files library view.
   [GhitaB #96683]
 * Improve: 'Registration declined' instead of rejected in meeting view.
