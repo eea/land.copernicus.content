@@ -25,6 +25,12 @@
     <div style="display:none;" id="initial-search-filters" tal:content="python:view.get_search_filters()"></div>
     <table class="table-render"></table>
 
+    <p></p><p class="info-more-search">
+      Search also in the
+      <a href="https://land.copernicus.eu/global/documents/products">Technical Library</a>
+      maintained by the JRC.
+    </p>
+
     <script>
     $(document).ready(function() {
       function render_table() {
