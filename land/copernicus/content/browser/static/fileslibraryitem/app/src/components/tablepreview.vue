@@ -127,9 +127,25 @@ export default {
       new_el.innerHTML = make_table_html(columns, rows);
       table_placeholder.parentNode.replaceChild(new_el, table_placeholder);
 
+      var document_access_col = 100;
+      var visible_columns = 0;
+      for(var col = 0; col < columns.length; col++) {
+        if(columns[col].text.charAt(0) !== "-" && columns[col].text.trim().charAt(0) !== "-") {
+          if(columns[col].text == "URL") {
+            break;
+          }
+          visible_columns++;
+        }
+      }
+      document_access_col = visible_columns; // the index of URL column (without counting invisible columns)
+
       var the_table = $('.table-render-preview').dataTable({
         "destroy": true,
-        aaSorting: []
+        aaSorting: [],
+        "columnDefs": [
+          { "orderable": false, "targets": document_access_col },
+          { "searchable": false, "targets": document_access_col }
+        ]
       });
 
       $(".dataTables_wrapper").prepend(make_filters_html(filters));
