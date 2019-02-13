@@ -34,4 +34,7 @@
     for="* land.copernicus.content.content.interfaces.ILandItem *"
     factory=".marshaller.LandItemDescription" />
 
+  <subscriber factory=".marshaller.IssuedFieldModifier"
+    provides="eea.rdfmarshaller.interfaces.ISurfResourceModifier" />
+
 </configure>

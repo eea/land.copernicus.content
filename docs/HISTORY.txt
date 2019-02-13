@@ -3,6 +3,9 @@ Changelog
 
 6.8.dev0 - (unreleased)
 -----------------------
+* Improve: Use creation date for files at rdf export + upgrade step
+  to trigger pingcr mass ping for objects that are files
+  [iulianpetchesi #99788]
 * Improve: Disable sorting and searching for column Document access in files
   library view and admin panel.
 * Improve: Add link and more info on search items in files library view.
@@ -552,4 +555,3 @@ Changelog
 1.0  - (initial release)
 ------------------------
 * Initial release
-
