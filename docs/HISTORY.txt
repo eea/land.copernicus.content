@@ -1,8 +1,8 @@
 Changelog
 =========
 
-6.8.dev0 - (unreleased)
------------------------
+6.8 - (2019-02-13)
+------------------
 * Improve: Use creation date for files at rdf export + upgrade step
   to trigger pingcr mass ping for objects that are files
   [iulianpetchesi #99788]
@@ -555,3 +555,4 @@ Changelog
 1.0  - (initial release)
 ------------------------
 * Initial release
+
