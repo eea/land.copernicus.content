@@ -45,6 +45,7 @@ export default {
         for(var i = 0; i < filters.length; i++) {
           filters_html += "<li class='search-filter'>" + filters[i] + "</li>";
         }
+        filters_html += "<li class='search-filter'>Show all</li>"
         filters_html += "</ul></div>"
 
         return filters_html;
@@ -155,7 +156,12 @@ export default {
           $(this).removeClass("is-selected");
           the_table.fnFilter('');
         } else {
-          the_table.fnFilter('"' + $(this).text() + '"');
+          var search_text = $(this).text();
+          if(search_text == "Show all") {
+            the_table.fnFilter('');
+          } else {
+            the_table.fnFilter('"' + search_text + '"');
+          }
           $(".search-filter").removeClass("is-selected");
           $(this).addClass("is-selected");
         }
