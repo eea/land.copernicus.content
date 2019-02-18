@@ -28,3 +28,7 @@ body.portaltype-fileslibraryitem.template-view ul.filters-list li:hover {
   cursor: pointer;
   color: #819110;
 }
+
+body.portaltype-fileslibraryitem.template-view p.info-more-search {
+  margin-top: 2em;
+}
