@@ -19,6 +19,7 @@ body.portaltype-fileslibraryitem.template-view ul.filters-list li {
   padding: 10px 20px;
   margin-right: 20px;
   list-style: none;
+  border-bottom: 2px solid white;
 }
 
 body.portaltype-fileslibraryitem.template-view ul.filters-list li.is-selected {
