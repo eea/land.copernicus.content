@@ -3,6 +3,8 @@ Changelog
 
 6.9.dev0 - (unreleased)
 -----------------------
+* Improve: add more space under the table in files library item view.
+  [GhitaB #96683]
 
 6.8 - (2019-02-13)
 ------------------
