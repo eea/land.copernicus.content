@@ -10,6 +10,7 @@ body.portaltype-fileslibraryitem.template-view div.filters-container ul.filters-
   /* For IE, the outcast */
   zoom:1;
   *display: inline;
+  margin-bottom: 2em;
 }
 
 body.portaltype-fileslibraryitem.template-view ul.filters-list li {
