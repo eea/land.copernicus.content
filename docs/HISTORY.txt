@@ -1,6 +1,9 @@
 Changelog
 =========
 
+7.0.dev0 - (unreleased)
+-----------------------
+
 6.9 - (2019-02-18)
 ------------------
 * Improve: add more space under the table in files library item view.
