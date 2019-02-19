@@ -4,14 +4,15 @@ Changelog
 7.0.dev0 - (unreleased)
 -----------------------
 * Improve: update text for account deletion option in meeting register form.
+* Fix: remove comma after Hello in meeting register.
   [GhitaB #97529]
 
 6.9 - (2019-02-18)
 ------------------
 * Improve: add more space under the table in files library item view.
-  Improve: add Show all option to disable search filters (admin and view).
-  Improve: space between filters and table.
-  Fix: floating problem when filters are on two lines.
+* Improve: add Show all option to disable search filters (admin and view).
+* Improve: space between filters and table.
+* Fix: floating problem when filters are on two lines.
   [GhitaB #96683]
 
 6.8 - (2019-02-13)

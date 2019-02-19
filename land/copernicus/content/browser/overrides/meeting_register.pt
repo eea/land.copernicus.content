@@ -304,7 +304,7 @@
   </tal:message-login>
   <tal:signup condition="not:is_registered" tal:define="fields python:options.get('fields', {});">
     <p>
-      Hello, <span tal:replace="python:user.getProperty('fullname')"></span>,<br /><br />
+      Hello <span tal:replace="python:user.getProperty('fullname')"></span>,<br /><br />
       Please complete the form to register for the event.
     </p>
 
@@ -648,7 +648,7 @@
       <metal:message use-macro="template/macros/message" />
     </tal:message-signup>
     <p>
-      Hello, <span tal:replace="python:user.getProperty('fullname')"></span>,<br /><br />
+      Hello <span tal:replace="python:user.getProperty('fullname')"></span>,<br /><br />
       Your registration request has been sent to the event organiser. As soon as
       your registration is confirmed you will receive a notification e-mail.
     </p>
