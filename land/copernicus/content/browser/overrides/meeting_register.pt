@@ -588,9 +588,18 @@
               <label for="f_request_data_deletion">
                 Please delete my account on the website after the event has ended, latest after 4 weeks.
                 <p class="text-smaller">
-                  Please note that you will not be able to login to the website anymore
-                  required to download data or access information related to this and
-                  other events, to which you might have registered too.
+                  If you believe you will not require access to this
+                  event (it’s data, the event documents, access information etc.),
+                  then you have the opportunity to request that your account,
+                  which you have just set up to attend this event, is deleted.
+                  If you request this, your request will be actioned within 4
+                  weeks after the event date.
+                </p>
+
+                <p class="text-smaller">
+                  However, please consider carefully before requesting this as
+                  it will also disable any registrations, you may have for
+                  other events on our website.
                 </p>
               </label>
             </metal:label>
