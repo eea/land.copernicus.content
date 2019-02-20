@@ -49,12 +49,16 @@ class IMeeting(Interface):
         title=_(u"From"),
         description=_(u"Allow registration starting with this datetime."),
         required=False,
+        min=datetime.datetime(2018, 1, 1),
+        max=datetime.datetime(datetime.datetime.now().year + 10, 12, 31)
     )
 
     allow_register_end = schema.Datetime(
         title=_(u"To"),
         description=_(u"Allow registration until this datetime."),
         required=False,
+        min=datetime.datetime(2018, 1, 1),
+        max=datetime.datetime(datetime.datetime.now().year + 10, 12, 31)
     )
 
     need_e_pass = schema.Bool(
