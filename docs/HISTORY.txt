@@ -1,8 +1,8 @@
 Changelog
 =========
 
-7.0.dev0 - (unreleased)
------------------------
+7.0 - (2019-02-21)
+------------------
 * Improve: Add min and max values for From and To fields in meeting edit form.
 * Improve: update text for account deletion option in meeting register form.
 * Fix: remove comma after Hello in meeting register.
