@@ -3,6 +3,8 @@ Changelog
 
 7.1.dev0 - (unreleased)
 -----------------------
+* Feature: WIP homepage / coming events - to include eea.meetings objects
+  [GhitaB #103043]
 
 7.0 - (2019-02-21)
 ------------------
