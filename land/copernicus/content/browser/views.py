@@ -569,6 +569,9 @@ class GetUpcomingEventsView(BrowserView):
     def __call__(self):
         now = DateTime()
 
+        # import pdb; pdb.set_trace()
+        # return ["test"]
+
         events = [
             b.getObject() for b in self.context.portal_catalog.searchResults(
                 portal_type=['Event', 'Folderish Event', 'eea.meeting'],
