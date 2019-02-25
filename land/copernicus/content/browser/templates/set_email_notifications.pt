@@ -22,10 +22,8 @@
         </label>
       </div>
 
-      <h2 i18n:translate="">Thank you!</h2>
-      <p>Your settings have been updated.</p>
-
-      <p>For future changes you can log in anytime and set your prefereces under Settings menu.</p>
+      <button class="btn btn-default">Save</button>
+      <button class="btn btn-default">Cancel</button>
     </metal:main_macro>
   </metal:content-core>
 </body>
