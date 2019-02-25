@@ -81,8 +81,8 @@ def send_email(site, user_id, email):
     email_from_address = site.getProperty(
         'email_from_address', 'copernicus@eea.europa.eu')
     mfrom = "{0} <{1}>".format(email_from_name, email_from_address)
-    subject = u"Would you like to be informed about new products of the \
-Copernicus Land Monitoring Service, events and training opportunities?"
+    subject = u"Receive updates and information from the Copernicus \
+Land Monitoring Service"
     mail_text = u"""
 Hello,
 
