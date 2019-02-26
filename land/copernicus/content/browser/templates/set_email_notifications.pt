@@ -9,7 +9,7 @@
   <metal:content-core fill-slot="content-core">
     <metal:main_macro define-macro="content-core">
 
-      <form method="post">
+      <form id="set-notifications" method="post">
         <div class="radio">
           <label><input type="radio" name="wantnotifications" value="yes" checked>
             Yes, I would like to be informed by e-mail about the new and updated
@@ -25,7 +25,19 @@
 
         <button class="btn btn-default" name="save">Save</button>
         <button class="btn btn-warning" name="cancel">Cancel</button>
+
       </form>
+
+      <p class="info" style="display:none;">Thank you! You will be redirected.</p>
+
+      <script>
+        $("document").ready(function() {
+          $("form#set-notifications button").on("click", function() {
+            $("form#set-notifications").hide();
+            $("p.info").show().delay(2000);
+          });
+        });
+      </script>
     </metal:main_macro>
   </metal:content-core>
 </body>

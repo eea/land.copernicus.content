@@ -220,7 +220,6 @@ class SetEmailNotificationsView(BrowserView):
         want_notifications = self.request.form.get('wantnotifications', None)
         if want_notifications is not None:
             if 'cancel' in self.request.form:
-                print "No action - canceled."
                 self.redirect_to_homepage()
             else:
                 user_id = self.request.get('user_id', None)
@@ -228,11 +227,9 @@ class SetEmailNotificationsView(BrowserView):
 
                 if want_notifications == 'yes':
                     self.set_email_notifications(user_id, key, True)
-                    print "Yes - saved."
                     self.redirect_to_homepage()
                 elif want_notifications == 'no':
                     self.set_email_notifications(user_id, key, False)
-                    print "No - saved."
                     self.redirect_to_homepage()
 
         return self.render()
