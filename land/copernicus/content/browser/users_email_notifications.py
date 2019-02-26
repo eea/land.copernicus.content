@@ -203,20 +203,28 @@ class SetEmailNotificationsView(BrowserView):
     def render(self):
         return self.index()
 
-    def set_email_notifications(self, user_id, key):
+    def set_email_notifications(self, user_id, key, want):
         site = api.portal.get()
         if encode(get_secret_key(site), user_id) == key:
             user = api.user.get(userid=user_id)
             if user is not None:
                 user.setMemberProperties(
-                    mapping={'disclaimer_permission': True})
+                    mapping={'disclaimer_permission': want})
 
     def __call__(self):
         want_notifications = self.request.form.get('wantnotifications', None)
         if want_notifications is not None:
-            print want_notifications
-        user_id = self.request.get('user_id', None)
-        key = self.request.get('key', None)
-        self.set_email_notifications(user_id, key)
+            if 'cancel' in self.request.form:
+                print "No action - canceled."
+            else:
+                user_id = self.request.get('user_id', None)
+                key = self.request.get('key', None)
+
+                if want_notifications == 'yes':
+                    self.set_email_notifications(user_id, key, True)
+                    print "Yes - saved."
+                elif want_notifications == 'no':
+                    self.set_email_notifications(user_id, key, False)
+                    print "No - saved."
 
         return self.render()

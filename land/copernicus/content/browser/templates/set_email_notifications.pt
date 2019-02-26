@@ -23,8 +23,8 @@
           </label>
         </div>
 
-        <button class="btn btn-default">Save</button>
-        <button class="btn btn-warning">Cancel</button>
+        <button class="btn btn-default" name="save">Save</button>
+        <button class="btn btn-warning" name="cancel">Cancel</button>
       </form>
     </metal:main_macro>
   </metal:content-core>
