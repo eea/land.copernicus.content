@@ -212,6 +212,9 @@ class SetEmailNotificationsView(BrowserView):
                     mapping={'disclaimer_permission': True})
 
     def __call__(self):
+        want_notifications = self.request.form.get('wantnotifications', None)
+        if want_notifications is not None:
+            print want_notifications
         user_id = self.request.get('user_id', None)
         key = self.request.get('key', None)
         self.set_email_notifications(user_id, key)

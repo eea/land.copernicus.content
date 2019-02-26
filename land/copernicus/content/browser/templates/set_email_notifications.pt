@@ -9,21 +9,23 @@
   <metal:content-core fill-slot="content-core">
     <metal:main_macro define-macro="content-core">
 
-      <div class="radio">
-        <label><input type="radio" name="optradio" checked>
-          Yes, I would like to be informed by e-mail about the new and updated
-          products of the Copernicus Land Monitoring Service, events and training
-          opportunities.
-        </label>
-      </div>
-      <div class="radio">
-        <label><input type="radio" name="optradio">
-          No, I don't want to be contacted.
-        </label>
-      </div>
+      <form method="post">
+        <div class="radio">
+          <label><input type="radio" name="wantnotifications" value="yes" checked>
+            Yes, I would like to be informed by e-mail about the new and updated
+            products of the Copernicus Land Monitoring Service, events and training
+            opportunities.
+          </label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" value="no" name="wantnotifications">
+            No, I don't want to be contacted.
+          </label>
+        </div>
 
-      <button class="btn btn-default">Save</button>
-      <button class="btn btn-warning">Cancel</button>
+        <button class="btn btn-default">Save</button>
+        <button class="btn btn-warning">Cancel</button>
+      </form>
     </metal:main_macro>
   </metal:content-core>
 </body>
