@@ -1,8 +1,8 @@
 Changelog
 =========
 
-7.2.dev0 - (unreleased)
------------------------
+7.2 - (2019-02-26)
+------------------
 * Improve: shorter subject in email notifications.
 * Improve: use a form for setting user preferences related to notifications.
   [GhitaB #101742]
