@@ -55,10 +55,14 @@ def find_pages():
 
 def replace_texts(site, old, old_not, new):
     pages = find_pages()
-    import pdb; pdb.set_trace()
+    logger.info("Pages: {0}".format(len(pages)))
+    logger.info("START > pages > REPLACE: {0} WITH {1}".format(old, new))
 
-    logger.info("Replaced {0} WITH {1} if NOT found: {2}".format(
-        old, new, " OR ".join(old_not)))
+    for page in pages:
+        body_text = page.EditableBody()
+        url = page.absolute_url()
+        if old in body_text:
+            logger.info("Found text ({0}) in: {1}".format(old, url))
 
 
 class TextUpdateView(BrowserView):
