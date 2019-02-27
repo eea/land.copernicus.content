@@ -3,6 +3,8 @@ Changelog
 
 7.4.dev0 - (unreleased)
 -----------------------
+* Feature: WIP text_update view to be used for updating country names etc.
+  [GhitaB #102884]
 
 7.3 - (2019-02-27)
 ------------------
