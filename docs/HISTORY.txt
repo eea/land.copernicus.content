@@ -1,8 +1,8 @@
 Changelog
 =========
 
-7.3.dev0 - (unreleased)
------------------------
+7.3 - (2019-02-27)
+------------------
 * Fix: bug on selecting accounts to be notified (disclaimer_permission == None
   means False, too).
   [GhitaB #101742]
