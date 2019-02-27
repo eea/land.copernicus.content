@@ -133,9 +133,15 @@ def notify_next_users(site, x):
             email = user_properties.get('email', None)
 
             if (
-                    active_from < DATE_UNTIL) and (
-                    user_already_notified(user_id) is False) and (
-                    user_properties.get('disclaimer_permission') is False):
+                    active_from < DATE_UNTIL
+                    ) and (
+                    user_already_notified(user_id) is False
+                    ) and (
+                    user_properties.get('disclaimer_permission', False)
+                    is False
+                    ) and (
+                    email is not None
+                    ):
                 logger.info("Found {0}: {1} - [{2} - {3}] - email: {4}".format(
                     idx, user_id, active_from, active_last, email))
                 send_email(site, user_id, email)
