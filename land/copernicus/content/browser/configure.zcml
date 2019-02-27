@@ -194,6 +194,13 @@
     />
 
   <browser:page
+    name="text_update"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    class=".text_update.TextUpdateView"
+    permission="cmf.ManagePortal"
+    />
+
+  <browser:page
     name="external-template-head"
     for="*"
     template="templates/external-template-head.pt"
