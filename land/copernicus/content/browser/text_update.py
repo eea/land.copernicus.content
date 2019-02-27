@@ -1,5 +1,6 @@
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from plone import api
 import logging
 
 
@@ -45,7 +46,17 @@ TEXTS = [
 ]
 
 
+def find_pages():
+    catalog = api.portal.get_tool(name='portal_catalog')
+    pages = [b.getObject() for b in catalog(portal_type='Document')]
+
+    return pages
+
+
 def replace_texts(site, old, old_not, new):
+    pages = find_pages()
+    import pdb; pdb.set_trace()
+
     logger.info("Replaced {0} WITH {1} if NOT found: {2}".format(
         old, new, " OR ".join(old_not)))
 
