@@ -55,8 +55,14 @@ def find_pages():
 
 def replace_texts(site, old, old_not, new):
     pages = find_pages()
+    html_logs = ""
+
     logger.info("Pages: {0}".format(len(pages)))
+    html_logs += "<h2>Pages: {0}</h2>".format(len(pages))
+
     logger.info("START > pages > REPLACE: {0} WITH {1}".format(old, new))
+    html_logs += "<p>START > pages > REPLACE: {0} WITH {1}</p>".format(
+            old, new)
 
     for page in pages:
         body_text = page.EditableBody()
@@ -73,6 +79,8 @@ def replace_texts(site, old, old_not, new):
                 prefix = "[????]"
             logger.info("{0} [Body text] Found text ({1}) in: {2}".format(
                 prefix, old, url))
+            html_logs += """<p>{0} [Body text] Found text ({1}) in:
+            <a href='{2}'>{2}</a></p>""".format(prefix, old, url)
 
         summary = page.Description()
         if old in summary:
@@ -87,6 +95,8 @@ def replace_texts(site, old, old_not, new):
                 prefix = "[????]"
             logger.info("{0} [Summary] Found text ({1}) in: {2}".format(
                 prefix, old, url))
+            html_logs += """<p> {0} [Summary] Found text ({1}) in:
+            <a href='{2}'>{2}</a></p>""".format(prefix, old, url)
 
         page_title = page.Title()
         if old in page_title:
@@ -101,6 +111,10 @@ def replace_texts(site, old, old_not, new):
                 prefix = "[????]"
             logger.info("{0} [Title] Found text ({1}) in: {2}".format(
                 prefix, old, url))
+            html_logs += """<p>{0} [Title] Found text ({1}) in:
+            <a href='{2}'>{2}</a></p>""".format(prefix, old, url)
+
+    return html_logs
 
 
 class TextUpdateView(BrowserView):
@@ -109,10 +123,16 @@ class TextUpdateView(BrowserView):
     def render(self):
         return self.index()
 
-    def __call__(self):
+    def do_operations(self):
         site = self.context.portal_url.getPortalObject()
+        logs = ""
+
         for change in TEXTS:
-            replace_texts(
+            logs += replace_texts(
                 site, change['old'], change['old_not'], change['new'])
+
+        return logs
+
+    def __call__(self):
 
         return self.render()
