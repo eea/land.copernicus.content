@@ -62,7 +62,17 @@ def replace_texts(site, old, old_not, new):
         body_text = page.EditableBody()
         url = page.absolute_url()
         if old in body_text:
-            logger.info("Found text ({0}) in: {1}".format(old, url))
+            ok_replace = True
+            for text in old_not:
+                if text in body_text:
+                    ok_replace = False
+
+            if(ok_replace is True):
+                prefix = "[Safe]"
+            else:
+                prefix = "[????]"
+            logger.info("{0} Found text ({1}) in: {2}".format(
+                prefix, old, url))
 
 
 class TextUpdateView(BrowserView):
