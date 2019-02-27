@@ -71,7 +71,35 @@ def replace_texts(site, old, old_not, new):
                 prefix = "[Safe]"
             else:
                 prefix = "[????]"
-            logger.info("{0} Found text ({1}) in: {2}".format(
+            logger.info("{0} [Body text] Found text ({1}) in: {2}".format(
+                prefix, old, url))
+
+        summary = page.Description()
+        if old in summary:
+            ok_replace = True
+            for text in old_not:
+                if text in summary:
+                    ok_replace = False
+
+            if(ok_replace is True):
+                prefix = "[Safe]"
+            else:
+                prefix = "[????]"
+            logger.info("{0} [Summary] Found text ({1}) in: {2}".format(
+                prefix, old, url))
+
+        page_title = page.Title()
+        if old in page_title:
+            ok_replace = True
+            for text in old_not:
+                if text in page_title:
+                    ok_replace = False
+
+            if(ok_replace is True):
+                prefix = "[Safe]"
+            else:
+                prefix = "[????]"
+            logger.info("{0} [Title] Found text ({1}) in: {2}".format(
                 prefix, old, url))
 
 
