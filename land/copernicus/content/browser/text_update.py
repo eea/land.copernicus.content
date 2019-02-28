@@ -330,6 +330,7 @@ class TextUpdateView(BrowserView):
         logs = ""
 
         for change in TEXTS:
+            logs += "<h2>" + change['old'] + "</h2>"
             logs += replace_texts(
                 site, change['old'], change['old_not'], change['new'])
 
