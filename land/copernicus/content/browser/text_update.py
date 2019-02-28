@@ -133,6 +133,15 @@ class TextUpdateView(BrowserView):
 
         return logs
 
-    def __call__(self):
+    @property
+    def ajax_url(self):
+        return api.portal.get(
+                ).absolute_url() + '/text_update?do_operations=true'
 
+    def __call__(self):
+        """ /text_update?do_operations=true - AJAX usage """
+        if 'do_operations' in self.request.form:
+            return self.do_operations()
+
+        """ /text_update - the template that includes the AJAX call """
         return self.render()

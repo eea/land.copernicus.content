@@ -8,7 +8,22 @@
 
   <metal:content-core fill-slot="content-core">
     <metal:main_macro define-macro="content-core">
-      <p tal:content="structure python:view.do_operations()"></p>
+
+      <p id="logs-result"
+         tal:attributes="data-ajax-url python:view.ajax_url">
+        Operations in progress... Please wait. You will see the logs soon.
+      </p>
+
+      <script>
+        $("document").ready(function() {
+          var ajax_url = $("#logs-result").attr("data-ajax-url");
+
+          $.get(ajax_url, function(data) {
+            $("p#logs-result").html(data);
+          });
+        });
+      </script>
+
     </metal:main_macro>
   </metal:content-core>
 </body>
