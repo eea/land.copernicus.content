@@ -273,8 +273,49 @@ def replace_texts(site, old, old_not, new):
             html_logs += """<p>{0} [Title] Found text ({1}) in:
             <a href='{2}'>{2}</a></p>""".format(prefix, old, url)
 
-    # TODO
     # --- IMAGES --------------------------------------------------------------
+    items = [b.getObject() for b in catalog(portal_type='Image')]
+
+    logger.info("Images: {0}".format(len(items)))
+    html_logs += "<h2>Images: {0}</h2>".format(len(items))
+
+    logger.info("START > images > REPLACE: {0} WITH {1}".format(old, new))
+    html_logs += "<p>START > images > REPLACE: {0} WITH {1}</p>".format(
+            old, new)
+
+    for item in items:
+        summary = item.Description()
+        if old in summary:
+            ok_replace = True
+            for text in old_not:
+                if text in summary:
+                    ok_replace = False
+
+            if(ok_replace is True):
+                prefix = "[Safe]"
+            else:
+                prefix = "[????]"
+            logger.info("{0} [Summary] Found text ({1}) in: {2}".format(
+                prefix, old, url))
+            html_logs += """<p> {0} [Summary] Found text ({1}) in:
+            <a href='{2}'>{2}</a></p>""".format(prefix, old, url)
+
+        item_title = item.getField('title').getAccessor(item)()
+        if old in item_title:
+            ok_replace = True
+            for text in old_not:
+                if text in item_title:
+                    ok_replace = False
+
+            if(ok_replace is True):
+                prefix = "[Safe]"
+            else:
+                prefix = "[????]"
+            logger.info("{0} [Title] Found text ({1}) in: {2}".format(
+                prefix, old, url))
+            html_logs += """<p>{0} [Title] Found text ({1}) in:
+            <a href='{2}'>{2}</a></p>""".format(prefix, old, url)
+
     return html_logs
 
 
