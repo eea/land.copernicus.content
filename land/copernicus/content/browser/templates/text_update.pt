@@ -61,10 +61,6 @@
           }).fail(function() {
             alert("Error on processing data.")
           });
-
-          // $.get(ajax_url, function(data) {
-          //   $("p#logs-result").html(data);
-          // });
         });
       </script>
 
