@@ -4,6 +4,12 @@
       i18n:domain="plone">
 
 <body>
+  <metal:title fill-slot="content-title">
+    <h1 id="parent-fieldname-title" class="documentFirstHeading">
+      Receive updates and information from the Copernicus Land Monitoring Service
+    </h1>
+  </metal:title>
+
   <metal:description fill-slot="content-description" />
 
   <metal:content-core fill-slot="content-core">
@@ -32,6 +38,8 @@
 
       <script>
         $("document").ready(function() {
+          $("a.printButton").hide();  // the title is long, the button unuseful here
+
           $("form#set-notifications button").on("click", function() {
             $("form#set-notifications").hide();
             $("p.info").show().delay(2000);
