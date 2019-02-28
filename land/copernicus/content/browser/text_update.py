@@ -153,8 +153,67 @@ def replace_texts(site, old, old_not, new):
             html_logs += """<p>{0} [Title] Found text ({1}) in:
             <a href='{2}'>{2}</a></p>""".format(prefix, old, url)
 
+    # --- NEWS ITEMS ----------------------------------------------------------
+    items = [b.getObject() for b in catalog(portal_type='News Item')]
+
+    logger.info("News Items: {0}".format(len(items)))
+    html_logs += "<h2>News Items: {0}</h2>".format(len(items))
+
+    logger.info("START > news > REPLACE: {0} WITH {1}".format(old, new))
+    html_logs += "<p>START > news > REPLACE: {0} WITH {1}</p>".format(
+            old, new)
+
+    for item in items:
+        body_text = item.EditableBody()
+        url = item.absolute_url()
+        if old in body_text:
+            ok_replace = True
+            for text in old_not:
+                if text in body_text:
+                    ok_replace = False
+
+            if(ok_replace is True):
+                prefix = "[Safe]"
+            else:
+                prefix = "[????]"
+            logger.info("{0} [Body text] Found text ({1}) in: {2}".format(
+                prefix, old, url))
+            html_logs += """<p>{0} [Body text] Found text ({1}) in:
+            <a href='{2}'>{2}</a></p>""".format(prefix, old, url)
+
+        summary = item.Description()
+        if old in summary:
+            ok_replace = True
+            for text in old_not:
+                if text in summary:
+                    ok_replace = False
+
+            if(ok_replace is True):
+                prefix = "[Safe]"
+            else:
+                prefix = "[????]"
+            logger.info("{0} [Summary] Found text ({1}) in: {2}".format(
+                prefix, old, url))
+            html_logs += """<p> {0} [Summary] Found text ({1}) in:
+            <a href='{2}'>{2}</a></p>""".format(prefix, old, url)
+
+        item_title = item.Title()
+        if old in item_title:
+            ok_replace = True
+            for text in old_not:
+                if text in item_title:
+                    ok_replace = False
+
+            if(ok_replace is True):
+                prefix = "[Safe]"
+            else:
+                prefix = "[????]"
+            logger.info("{0} [Title] Found text ({1}) in: {2}".format(
+                prefix, old, url))
+            html_logs += """<p>{0} [Title] Found text ({1}) in:
+            <a href='{2}'>{2}</a></p>""".format(prefix, old, url)
+
     # TODO
-    # --- NEWS ITEMS-----------------------------------------------------------
     # --- EVENTS --------------------------------------------------------------
     # --- IMAGES --------------------------------------------------------------
     return html_logs
