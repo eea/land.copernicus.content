@@ -46,27 +46,23 @@ TEXTS = [
 ]
 
 
-def find_pages():
-    catalog = api.portal.get_tool(name='portal_catalog')
-    pages = [b.getObject() for b in catalog(portal_type='Document')]
-
-    return pages
-
-
 def replace_texts(site, old, old_not, new):
-    pages = find_pages()
     html_logs = ""
+    catalog = api.portal.get_tool(name='portal_catalog')
 
-    logger.info("Pages: {0}".format(len(pages)))
-    html_logs += "<h2>Pages: {0}</h2>".format(len(pages))
+    # --- PAGES ---------------------------------------------------------------
+    items = [b.getObject() for b in catalog(portal_type='Document')]
+
+    logger.info("Pages: {0}".format(len(items)))
+    html_logs += "<h2>Pages: {0}</h2>".format(len(items))
 
     logger.info("START > pages > REPLACE: {0} WITH {1}".format(old, new))
     html_logs += "<p>START > pages > REPLACE: {0} WITH {1}</p>".format(
             old, new)
 
-    for page in pages:
-        body_text = page.EditableBody()
-        url = page.absolute_url()
+    for item in items:
+        body_text = item.EditableBody()
+        url = item.absolute_url()
         if old in body_text:
             ok_replace = True
             for text in old_not:
@@ -82,7 +78,7 @@ def replace_texts(site, old, old_not, new):
             html_logs += """<p>{0} [Body text] Found text ({1}) in:
             <a href='{2}'>{2}</a></p>""".format(prefix, old, url)
 
-        summary = page.Description()
+        summary = item.Description()
         if old in summary:
             ok_replace = True
             for text in old_not:
@@ -98,11 +94,11 @@ def replace_texts(site, old, old_not, new):
             html_logs += """<p> {0} [Summary] Found text ({1}) in:
             <a href='{2}'>{2}</a></p>""".format(prefix, old, url)
 
-        page_title = page.Title()
-        if old in page_title:
+        item_title = item.Title()
+        if old in item_title:
             ok_replace = True
             for text in old_not:
-                if text in page_title:
+                if text in item_title:
                     ok_replace = False
 
             if(ok_replace is True):
@@ -114,6 +110,53 @@ def replace_texts(site, old, old_not, new):
             html_logs += """<p>{0} [Title] Found text ({1}) in:
             <a href='{2}'>{2}</a></p>""".format(prefix, old, url)
 
+    # --- FOLDERS -------------------------------------------------------------
+    items = [b.getObject() for b in catalog(portal_type='Folder')]
+
+    logger.info("Folders: {0}".format(len(items)))
+    html_logs += "<h2>Folders: {0}</h2>".format(len(items))
+
+    logger.info("START > folders > REPLACE: {0} WITH {1}".format(old, new))
+    html_logs += "<p>START > folders > REPLACE: {0} WITH {1}</p>".format(
+            old, new)
+
+    for item in items:
+        summary = item.Description()
+        if old in summary:
+            ok_replace = True
+            for text in old_not:
+                if text in summary:
+                    ok_replace = False
+
+            if(ok_replace is True):
+                prefix = "[Safe]"
+            else:
+                prefix = "[????]"
+            logger.info("{0} [Summary] Found text ({1}) in: {2}".format(
+                prefix, old, url))
+            html_logs += """<p> {0} [Summary] Found text ({1}) in:
+            <a href='{2}'>{2}</a></p>""".format(prefix, old, url)
+
+        item_title = item.Title()
+        if old in item_title:
+            ok_replace = True
+            for text in old_not:
+                if text in item_title:
+                    ok_replace = False
+
+            if(ok_replace is True):
+                prefix = "[Safe]"
+            else:
+                prefix = "[????]"
+            logger.info("{0} [Title] Found text ({1}) in: {2}".format(
+                prefix, old, url))
+            html_logs += """<p>{0} [Title] Found text ({1}) in:
+            <a href='{2}'>{2}</a></p>""".format(prefix, old, url)
+
+    # TODO
+    # --- NEWS ITEMS-----------------------------------------------------------
+    # --- EVENTS --------------------------------------------------------------
+    # --- IMAGES --------------------------------------------------------------
     return html_logs
 
 
