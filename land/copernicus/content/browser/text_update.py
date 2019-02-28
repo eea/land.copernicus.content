@@ -54,7 +54,7 @@ def replace_texts(site, old, old_not, new):
     items = [b.getObject() for b in catalog(portal_type='Document')]
 
     logger.info("Pages: {0}".format(len(items)))
-    html_logs += "<h2>Pages: {0}</h2>".format(len(items))
+    html_logs += "<h3>Pages: {0}</h3>".format(len(items))
 
     logger.info("START > pages > REPLACE: {0} WITH {1}".format(old, new))
     html_logs += "<p>START > pages > REPLACE: {0} WITH {1}</p>".format(
@@ -114,7 +114,7 @@ def replace_texts(site, old, old_not, new):
     items = [b.getObject() for b in catalog(portal_type='Folder')]
 
     logger.info("Folders: {0}".format(len(items)))
-    html_logs += "<h2>Folders: {0}</h2>".format(len(items))
+    html_logs += "<h3>Folders: {0}</h3>".format(len(items))
 
     logger.info("START > folders > REPLACE: {0} WITH {1}".format(old, new))
     html_logs += "<p>START > folders > REPLACE: {0} WITH {1}</p>".format(
@@ -157,7 +157,7 @@ def replace_texts(site, old, old_not, new):
     items = [b.getObject() for b in catalog(portal_type='News Item')]
 
     logger.info("News Items: {0}".format(len(items)))
-    html_logs += "<h2>News Items: {0}</h2>".format(len(items))
+    html_logs += "<h3>News Items: {0}</h3>".format(len(items))
 
     logger.info("START > news > REPLACE: {0} WITH {1}".format(old, new))
     html_logs += "<p>START > news > REPLACE: {0} WITH {1}</p>".format(
@@ -217,7 +217,7 @@ def replace_texts(site, old, old_not, new):
     items = [b.getObject() for b in catalog(portal_type='Event')]
 
     logger.info("Events: {0}".format(len(items)))
-    html_logs += "<h2>Events: {0}</h2>".format(len(items))
+    html_logs += "<h3>Events: {0}</h3>".format(len(items))
 
     logger.info("START > events > REPLACE: {0} WITH {1}".format(old, new))
     html_logs += "<p>START > events > REPLACE: {0} WITH {1}</p>".format(
@@ -277,7 +277,7 @@ def replace_texts(site, old, old_not, new):
     items = [b.getObject() for b in catalog(portal_type='Image')]
 
     logger.info("Images: {0}".format(len(items)))
-    html_logs += "<h2>Images: {0}</h2>".format(len(items))
+    html_logs += "<h3>Images: {0}</h3>".format(len(items))
 
     logger.info("START > images > REPLACE: {0} WITH {1}".format(old, new))
     html_logs += "<p>START > images > REPLACE: {0} WITH {1}</p>".format(
