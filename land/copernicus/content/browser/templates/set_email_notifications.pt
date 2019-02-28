@@ -15,6 +15,8 @@
   <metal:content-core fill-slot="content-core">
     <metal:main_macro define-macro="content-core">
 
+      <p class="add-space"><br /></p>
+
       <form id="set-notifications" method="post">
         <div class="radio">
           <label><input type="radio" name="wantnotifications" value="yes" checked>
@@ -28,6 +30,8 @@
             No, I don't want to be contacted.
           </label>
         </div>
+
+        <p class="add-space"><br /></p>
 
         <button class="btn btn-default" name="save">Save</button>
         <button class="btn btn-warning" name="cancel">Cancel</button>
