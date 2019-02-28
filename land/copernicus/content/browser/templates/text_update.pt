@@ -16,11 +16,55 @@
 
       <script>
         $("document").ready(function() {
-          var ajax_url = $("#logs-result").attr("data-ajax-url");
 
-          $.get(ajax_url, function(data) {
-            $("p#logs-result").html(data);
+          var TEXTS = [
+            {
+              'old': "Czech Republic",
+              'old_not': [],
+              'new': "Czechia"
+            },
+            {
+              'old': "the former Yugoslavian Republic of Macedonia",
+              'old_not': [],
+              'new': "North Macedonia"
+            },
+            {
+              'old': "Macedonia",
+              'old_not': [
+                  'North Macedonia',
+                  'Republic of Macedonia',
+                  'Macedonia the former'
+                  ],
+              'new': "North Macedonia"
+            },
+            {
+              'old': "FYROM",
+              'old_not': [],
+              'new': "North Macedonia"
+            },
+            {
+              'old': "Macedonia the former Yugoslavian Republic of",
+              'old_not': [],
+              'new': "North Macedonia"
+            },
+          ];
+
+          var ajax_url = $("#logs-result").attr("data-ajax-url");
+          $.ajax({
+            type: "POST",
+            url: ajax_url,
+            data: {'TEXTS': JSON.stringify(TEXTS)},
+            dataType: 'html',
+            success: function(data){
+              $("p#logs-result").html(data);
+            }
+          }).fail(function() {
+            alert("Error on processing data.")
           });
+
+          // $.get(ajax_url, function(data) {
+          //   $("p#logs-result").html(data);
+          // });
         });
       </script>
 

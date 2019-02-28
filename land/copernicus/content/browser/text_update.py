@@ -1,6 +1,7 @@
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
+import json
 import logging
 
 
@@ -11,7 +12,9 @@ logger = logging.getLogger('land.copernicus.content')
     'old': "the text to be replaced",
     'old_not': ["don't update if this is found", "or this"],
     'new': "the new text"
-},"""
+},
+
+Example:
 
 TEXTS = [
     {
@@ -44,6 +47,7 @@ TEXTS = [
         'new': "North Macedonia"
     },
 ]
+"""
 
 
 def replace_texts(site, old, old_not, new):
@@ -66,7 +70,7 @@ def replace_texts(site, old, old_not, new):
         if old in body_text:
             ok_replace = True
             for text in old_not:
-                if text in body_text:
+                if str(text) in body_text:
                     ok_replace = False
 
             if(ok_replace is True):
@@ -82,7 +86,7 @@ def replace_texts(site, old, old_not, new):
         if old in summary:
             ok_replace = True
             for text in old_not:
-                if text in summary:
+                if str(text) in summary:
                     ok_replace = False
 
             if(ok_replace is True):
@@ -98,7 +102,7 @@ def replace_texts(site, old, old_not, new):
         if old in item_title:
             ok_replace = True
             for text in old_not:
-                if text in item_title:
+                if str(text) in item_title:
                     ok_replace = False
 
             if(ok_replace is True):
@@ -125,7 +129,7 @@ def replace_texts(site, old, old_not, new):
         if old in summary:
             ok_replace = True
             for text in old_not:
-                if text in summary:
+                if str(text) in summary:
                     ok_replace = False
 
             if(ok_replace is True):
@@ -141,7 +145,7 @@ def replace_texts(site, old, old_not, new):
         if old in item_title:
             ok_replace = True
             for text in old_not:
-                if text in item_title:
+                if str(text) in item_title:
                     ok_replace = False
 
             if(ok_replace is True):
@@ -169,7 +173,7 @@ def replace_texts(site, old, old_not, new):
         if old in body_text:
             ok_replace = True
             for text in old_not:
-                if text in body_text:
+                if str(text) in body_text:
                     ok_replace = False
 
             if(ok_replace is True):
@@ -185,7 +189,7 @@ def replace_texts(site, old, old_not, new):
         if old in summary:
             ok_replace = True
             for text in old_not:
-                if text in summary:
+                if str(text) in summary:
                     ok_replace = False
 
             if(ok_replace is True):
@@ -201,7 +205,7 @@ def replace_texts(site, old, old_not, new):
         if old in item_title:
             ok_replace = True
             for text in old_not:
-                if text in item_title:
+                if str(text) in item_title:
                     ok_replace = False
 
             if(ok_replace is True):
@@ -229,7 +233,7 @@ def replace_texts(site, old, old_not, new):
         if old in body_text:
             ok_replace = True
             for text in old_not:
-                if text in body_text:
+                if str(text) in body_text:
                     ok_replace = False
 
             if(ok_replace is True):
@@ -245,7 +249,7 @@ def replace_texts(site, old, old_not, new):
         if old in summary:
             ok_replace = True
             for text in old_not:
-                if text in summary:
+                if str(text) in summary:
                     ok_replace = False
 
             if(ok_replace is True):
@@ -261,7 +265,7 @@ def replace_texts(site, old, old_not, new):
         if old in item_title:
             ok_replace = True
             for text in old_not:
-                if text in item_title:
+                if str(text) in item_title:
                     ok_replace = False
 
             if(ok_replace is True):
@@ -288,7 +292,7 @@ def replace_texts(site, old, old_not, new):
         if old in summary:
             ok_replace = True
             for text in old_not:
-                if text in summary:
+                if str(text) in summary:
                     ok_replace = False
 
             if(ok_replace is True):
@@ -304,7 +308,7 @@ def replace_texts(site, old, old_not, new):
         if old in item_title:
             ok_replace = True
             for text in old_not:
-                if text in item_title:
+                if str(text) in item_title:
                     ok_replace = False
 
             if(ok_replace is True):
@@ -316,6 +320,10 @@ def replace_texts(site, old, old_not, new):
             html_logs += """<p>{0} [Title] Found text ({1}) in:
             <a href='{2}'>{2}</a></p>""".format(prefix, old, url)
 
+    # TODO
+    # --- FILES --------------------------------------------------------------
+    # Other content types?
+
     return html_logs
 
 
@@ -325,14 +333,14 @@ class TextUpdateView(BrowserView):
     def render(self):
         return self.index()
 
-    def do_operations(self):
+    def do_operations(self, TEXTS):
         site = self.context.portal_url.getPortalObject()
         logs = ""
 
         for change in TEXTS:
             logs += "<h2>" + change['old'] + "</h2>"
             logs += replace_texts(
-                site, change['old'], change['old_not'], change['new'])
+                site, str(change['old']), change['old_not'], change['new'])
 
         return logs
 
@@ -342,9 +350,13 @@ class TextUpdateView(BrowserView):
                 ).absolute_url() + '/text_update?do_operations=true'
 
     def __call__(self):
-        """ /text_update?do_operations=true - AJAX usage """
+        """ /text_update?do_operations=true - AJAX usage
+
+            TODO: (nice to have) unicode support, get rid of str(text)
+        """
         if 'do_operations' in self.request.form:
-            return self.do_operations()
+            TEXTS = json.loads(self.request.get('TEXTS', []))
+            return self.do_operations(TEXTS)
 
         """ /text_update - the template that includes the AJAX call """
         return self.render()
