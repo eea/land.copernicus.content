@@ -3,7 +3,7 @@ Changelog
 
 7.4.dev0 - (unreleased)
 -----------------------
-* Improve: customize page title in set notifications view.
+* Improve: customize page title in set notifications view and improve spacing.
   [GhitaB #101742]
 * Feature: WIP text_update view to be used for updating country names etc.
   [GhitaB #102884]
