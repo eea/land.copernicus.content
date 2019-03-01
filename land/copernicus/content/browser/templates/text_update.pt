@@ -16,7 +16,6 @@
     <metal:main_macro define-macro="content-core">
 
       <p>This tool requires some skills. Make sure you don't submit wrong configuration. No validation is done.</p>
-
       <p>Use it to find the items you will manually update then. It will give you the links and useful details.</p>
 
       <textarea id="config" rows="10">TEXTS configuration placeholder</textarea>
@@ -27,10 +26,8 @@
 
       <p class="add-space"><br /></p>
 
-      <p id="logs-result"
-         tal:attributes="data-ajax-url python:view.ajax_url">
-        Operations in progress... Please wait. You will see the logs soon.
-      </p>
+      <p id="status">Update configuration and Submit.</p>
+      <p id="logs-result" tal:attributes="data-ajax-url python:view.ajax_url"></p>
 
       <script>
         $("document").ready(function() {
@@ -70,6 +67,7 @@
           $("textarea#config").val(JSON.stringify(TEXTS));
 
           $("button#submit-config").on("click", function() {
+            $("p#status").text("Loading... Please wait.");
             var ajax_url = $("#logs-result").attr("data-ajax-url");
             $.ajax({
               type: "POST",
@@ -78,9 +76,10 @@
               dataType: 'html',
               success: function(data){
                 $("p#logs-result").html(data);
+                $("p#status").text("Done. Search results:");
               }
             }).fail(function() {
-              alert("Error on processing data.")
+                $("p#status").text("Unknown error. Please verify the configuration and re-submit.");
             });
           });
         });
