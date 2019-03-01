@@ -4,12 +4,20 @@
       i18n:domain="plone">
 
 <body>
+  <metal:title fill-slot="content-title">
+    <h1 id="parent-fieldname-title" class="documentFirstHeading">
+      Text update tool
+    </h1>
+  </metal:title>
+
   <metal:description fill-slot="content-description" />
 
   <metal:content-core fill-slot="content-core">
     <metal:main_macro define-macro="content-core">
 
       <p>This tool requires some skills. Make sure you don't submit wrong configuration. No validation is done.</p>
+
+      <p>Use it to find the items you will manually update then. It will give you the links and useful details.</p>
 
       <textarea id="config" rows="10">TEXTS configuration placeholder</textarea>
 
