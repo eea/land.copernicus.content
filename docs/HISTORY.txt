@@ -3,6 +3,9 @@ Changelog
 
 7.4.dev0 - (unreleased)
 -----------------------
+* Fix: update allowed types for Files Library item in order to make old content
+  cut / paste possible.
+  [GhitaB #96683]
 * Improve: customize page title in set notifications view and improve spacing.
   [GhitaB #101742]
 * Feature: text_update tool - helper for updating country names etc.

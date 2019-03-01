@@ -229,4 +229,16 @@
       handler=".evolve36.run"
       />
   </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+    source="3.6"
+    destination="3.6.1"
+    profile="land.copernicus.content:default">
+
+    <genericsetup:upgradeDepends
+        title="Update typeinfo"
+        description="FilesLibraryItem: allow Image, Link, Folder and Document, too."
+        import_steps="typeinfo"
+        />
+  </genericsetup:upgradeSteps>
 </configure>
