@@ -5,7 +5,7 @@ Changelog
 -----------------------
 * Improve: customize page title in set notifications view and improve spacing.
   [GhitaB #101742]
-* Feature: WIP text_update view to be used for updating country names etc.
+* Feature: text_update tool - helper for updating country names etc.
   [GhitaB #102884]
 
 7.3 - (2019-02-27)
