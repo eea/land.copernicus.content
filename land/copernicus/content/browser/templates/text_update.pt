@@ -9,6 +9,9 @@
   <metal:content-core fill-slot="content-core">
     <metal:main_macro define-macro="content-core">
 
+      <p>This tool requires some skills. Make sure you don't submit wrong configuration. No validation is done.</p>
+      <textarea id="config" rows="10">TEXTS configuration placeholder</textarea>
+
       <p id="logs-result"
          tal:attributes="data-ajax-url python:view.ajax_url">
         Operations in progress... Please wait. You will see the logs soon.
@@ -48,6 +51,8 @@
               'new': "North Macedonia"
             },
           ];
+
+          $("textarea#config").val(JSON.stringify(TEXTS));
 
           var ajax_url = $("#logs-result").attr("data-ajax-url");
           $.ajax({
