@@ -1,6 +1,9 @@
 Changelog
 =========
 
+7.5.dev0 - (unreleased)
+-----------------------
+
 7.4 - (2019-03-04)
 ------------------
 * Fix: update allowed types for Files Library item in order to make old content
