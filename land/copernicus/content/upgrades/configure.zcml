@@ -241,4 +241,16 @@
         import_steps="typeinfo"
         />
   </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+    source="3.6.1"
+    destination="3.7"
+    profile="land.copernicus.content:default">
+
+    <genericsetup:upgradeStep
+      title="Initiate a pingcr on all objects that are Files/Images"
+      description="[refs #99788] Ping objects"
+      handler=".evolve37.run"
+      />
+  </genericsetup:upgradeSteps>
 </configure>

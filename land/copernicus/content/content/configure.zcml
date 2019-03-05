@@ -37,4 +37,7 @@
   <subscriber factory=".marshaller.IssuedFieldModifier"
     provides="eea.rdfmarshaller.interfaces.ISurfResourceModifier" />
 
+  <subscriber factory=".marshaller.HelpFolderFieldModifier"
+    provides="eea.rdfmarshaller.interfaces.ISurfResourceModifier" />
+
 </configure>
