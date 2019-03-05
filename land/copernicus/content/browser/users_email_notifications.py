@@ -160,7 +160,7 @@ def send_email_notifications(site):
     """ In: /manage_propertiesForm set
         users_email_notifications_enabled Boolean checked
         users_email_notifications_secret_key String value_here
-        users_email_notifications_secret_users_unit Int value_here
+        users_email_notifications_users_unit Int value_here
     """
     is_enabled = getattr(site, 'users_email_notifications_enabled', False)
     users_unit = getattr(site, 'users_email_notifications_users_unit', 100)
