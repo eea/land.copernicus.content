@@ -289,6 +289,7 @@ def replace_texts(site, old, old_not, new):
 
     for item in items:
         summary = item.Description()
+        url = item.absolute_url()
         if old in summary:
             ok_replace = True
             for text in old_not:
@@ -332,6 +333,7 @@ def replace_texts(site, old, old_not, new):
 
     for item in items:
         summary = item.Description()
+        url = item.absolute_url()
         if old in summary:
             ok_replace = True
             for text in old_not:
@@ -361,6 +363,38 @@ def replace_texts(site, old, old_not, new):
             logger.info("{0} [Title] Found text ({1}) in: {2}".format(
                 prefix, old, url))
             html_logs += """<p>{0} [Title] Found text ({1}) in:
+            <a href='{2}'>{2}</a></p>""".format(prefix, old, url)
+
+    # --- LANDITEMS -----------------------------------------------------------
+    items = [b.getObject() for b in catalog(portal_type='LandItem')]
+
+    logger.info("Landitems: {0}".format(len(items)))
+    html_logs += "<h3>Landitems: {0}</h3>".format(len(items))
+
+    logger.info("START > landitems > REPLACE: {0} WITH {1}".format(old, new))
+    html_logs += "<p>START > landitems > REPLACE: {0} WITH {1}</p>".format(
+            old, new)
+
+    for item in items:
+        url = item.absolute_url()
+        l_gc = item.getField('geographicCoverage').getAccessor(item)()
+        l_ga = item.getField('geographicAccuracy').getAccessor(item)()
+        l_r = item.getField('rights').getAccessor(item)()
+        l_crs = item.getField('coordinateReferenceSystem').getAccessor(item)()
+        l_ds = item.getField('dataSources').getAccessor(item)()
+        l_dc = item.getField('dataCustodians').getAccessor(item)()
+        l_aauc = item.getField('accessAndUseConstraints').getAccessor(item)()
+        l_gcgt = item.getField('geographicCoverageGT').getAccessor(item)()
+        l_ql = item.getField('qualityLineage').getAccessor(item)()
+
+        if (old in l_gc) or (old in l_ga) or (old in l_r) or (old in l_crs) \
+                or (old in l_ds) or (old in l_dc) or (old in l_aauc) or \
+                (old in l_gcgt) or (old in l_ql):
+
+            prefix = "[????]"
+            logger.info("{0} [Field] Found text ({1}) in: {2}".format(
+                prefix, old, url))
+            html_logs += """<p> {0} [Field] Found text ({1}) in:
             <a href='{2}'>{2}</a></p>""".format(prefix, old, url)
 
     return html_logs
