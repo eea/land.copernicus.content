@@ -3,6 +3,9 @@ Changelog
 
 7.5.dev0 - (unreleased)
 -----------------------
+* Feature: /users_clean - a tool to get details about accounts (by emails)
+  and delete inactive user accounts.
+  [GhitaB #101742]
 * Improve: Added old search page override to redirect to new search
 * Improve: Use creation date for objects tagged by IATBlob interface at rdf
   export + upgrade step to trigger pingcr mass ping for objects
