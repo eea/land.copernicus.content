@@ -3,6 +3,8 @@ Changelog
 
 7.5.dev0 - (unreleased)
 -----------------------
+* Fix: Don't allow duplicate file names (in landfiles download).
+  [david-batranu #103428]
 * Improve: Text update - add case of landfiles.
   [GhitaB #102884]
 * Feature: /users_clean - a tool to get details about accounts (by emails)
