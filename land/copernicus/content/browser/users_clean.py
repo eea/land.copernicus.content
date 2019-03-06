@@ -66,9 +66,10 @@ def users_get_details(site, emails):
         logger.info("{0}".format(user_id))
         html_logs += """
             <p>
-                <b>{0}</b> - {1} - {2} (Active last: {3}, Active from: {3})
+                <b>{0}</b> - {1} - {2} (Created: {3}, Last login: {4})
             </p>""".format(
-                user_id, user_email, status, "last", "from")
+                user_id, user_email, status, active_from.strftime("%Y/%m/%d"),
+                active_last.strftime("%Y/%m/%d"))
 
     return html_logs
 
