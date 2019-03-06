@@ -10,6 +10,11 @@ logger = logging.getLogger('land.copernicus.content')
 
 
 def get_users_for_email(site, email):
+    if email is None:
+        return []
+    elif len(email) < 2:
+        return []
+
     md = getToolByName(site, 'portal_memberdata')
 
     _members = md._members
@@ -26,7 +31,7 @@ def get_users_for_email(site, email):
     return result
 
 
-def users_get_details(site, emails):
+def users_get_or_delete(site, emails, delete=False):
     html_logs = ""
 
     md = getToolByName(site, 'portal_memberdata')
@@ -57,29 +62,33 @@ def users_get_details(site, emails):
                 # A lot of accounts have 2000/01/01 as last login.
                 # This means the account was created but never used.
                 was_active = False
+            active_last_str = active_last.strftime("%Y/%m/%d")
+            active_from_str = active_from.strftime("%Y/%m/%d")
+
+        else:
+            if active_last is None:
+                active_last_str = "N/A"
+
+            if active_from is None:
+                active_from_str = "N/A"
 
         if was_active is True:
             status = "ACTIVE"
         else:
             status = "NEVER USED"
 
+        if delete is True:
+            sufix = "DELETED"  # [TODO] WIP
+        else:
+            sufix = "NO CHANGES"
+
         logger.info("{0}".format(user_id))
         html_logs += """
             <p>
-                <b>{0}</b> - {1} - {2} (Created: {3}, Last login: {4})
+                <b>{0}</b> - {1} - {2} (Created: {3}, Last login: {4}) - {5}
             </p>""".format(
-                user_id, user_email, status, active_from.strftime("%Y/%m/%d"),
-                active_last.strftime("%Y/%m/%d"))
-
-    return html_logs
-
-
-def users_clean(site, emails):
-    html_logs = ""
-
-    for email in emails:
-        logger.info("{0}".format(emails))
-        html_logs += "<p>{0}</p>".format(email)
+                user_id, user_email, status, active_from_str,
+                active_last_str, sufix)
 
     return html_logs
 
@@ -90,14 +99,10 @@ class UsersCleanView(BrowserView):
     def render(self):
         return self.index()
 
-    def do_operations(self, emails, get=False):
+    def do_operations(self, emails, delete=False):
         site = self.context.portal_url.getPortalObject()
 
-        if get is True:
-            logs = users_get_details(site, emails)
-            return logs
-
-        logs = users_clean(site, emails)
+        logs = users_get_or_delete(site, emails, delete=delete)
         return logs
 
     @property
@@ -115,13 +120,13 @@ class UsersCleanView(BrowserView):
         """
         if 'get_accounts' in self.request.form:
             emails = self.request.get('emails', "").split("\n")
-            return self.do_operations(emails, get=True)
+            return self.do_operations(emails, delete=False)
 
         """ /users_clean?do_operations=true - AJAX usage
         """
         if 'do_operations' in self.request.form:
             emails = self.request.get('emails', "").split("\n")
-            return self.do_operations(emails)
+            return self.do_operations(emails, delete=True)
 
         """ /users_clean - the template that includes the AJAX call """
         return self.render()
