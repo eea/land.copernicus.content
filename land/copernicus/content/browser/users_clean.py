@@ -31,6 +31,13 @@ def get_users_for_email(site, email):
     return result
 
 
+def delete_local_account(user_id, site):
+    """ Delete the local website account for given user id
+    """
+    api.user.delete(username=user_id)
+    logger.info('Deleted local account %s', user_id)
+
+
 def users_get_or_delete(site, emails, delete=False):
     html_logs = ""
 
@@ -78,7 +85,12 @@ def users_get_or_delete(site, emails, delete=False):
             status = "NEVER USED"
 
         if delete is True:
-            sufix = "DELETED"  # [TODO] WIP
+            if was_active is True:
+                sufix = "NOT DELETED use Site Setup / Users to delete active \
+                        accounts"
+            else:
+                delete_local_account(user_id, site)
+                sufix = "DELETED"
         else:
             sufix = "NO CHANGES"
 
