@@ -465,7 +465,7 @@ class DownloadAsyncView(BrowserView):
                 return
 
         # fetch items
-        selected = selected or self.request.get('selected', [])
+        selected = tuple(set(selected or self.request.get('selected', [])))
         lfa = LandFileApi(self.context.landfiles)
         items = tuple(map(lfa.get_by_shortname, selected))
 
