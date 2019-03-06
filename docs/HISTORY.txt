@@ -1,6 +1,9 @@
 Changelog
 =========
 
+7.6.dev0 - (unreleased)
+-----------------------
+
 7.5 - (2019-03-06)
 ------------------
 * Fix: Don't allow duplicate file names (in landfiles download).
