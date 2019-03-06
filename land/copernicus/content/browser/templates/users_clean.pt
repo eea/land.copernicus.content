@@ -1,0 +1,58 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+  <metal:title fill-slot="content-title">
+    <h1 id="parent-fieldname-title" class="documentFirstHeading">
+      Users - remove a given list of accounts (emails)
+    </h1>
+  </metal:title>
+
+  <metal:description fill-slot="content-description" />
+
+  <metal:content-core fill-slot="content-core">
+    <metal:main_macro define-macro="content-core">
+
+      <textarea id="config" rows="10">Emails configuration placeholder</textarea>
+
+      <p class="add-space"><br /></p>
+
+      <button id="submit-config" class="btn btn-default">Start</button>
+
+      <p class="add-space"><br /></p>
+
+      <p id="status">Provide the list of emails: one per line. Then press Start.</p>
+      <p id="logs-result" tal:attributes="data-ajax-url python:view.ajax_url"></p>
+
+      <script>
+        $("document").ready(function() {
+
+          var emails = "ghita_bizau@yahoo.com";
+
+          $("textarea#config").val(emails);
+
+          $("button#submit-config").on("click", function() {
+            $("p#status").text("Please wait...");
+            var ajax_url = $("#logs-result").attr("data-ajax-url");
+            $.ajax({
+              type: "POST",
+              url: ajax_url,
+              data: {'emails': $("textarea#config").val()},
+              dataType: 'html',
+              success: function(data){
+                $("p#logs-result").html(data);
+                $("p#status").text("Done.");
+              }
+            }).fail(function() {
+                $("p#status").text("Unknown error. Please verify the configuration and re-submit.");
+            });
+          });
+        });
+      </script>
+
+    </metal:main_macro>
+  </metal:content-core>
+</body>
+</html>

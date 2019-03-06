@@ -201,6 +201,13 @@
     />
 
   <browser:page
+    name="users_clean"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    class=".users_clean.UsersCleanView"
+    permission="cmf.ManagePortal"
+    />
+
+  <browser:page
     name="external-template-head"
     for="*"
     template="templates/external-template-head.pt"
