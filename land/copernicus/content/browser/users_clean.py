@@ -37,7 +37,7 @@ def users_get_details(site, emails):
 
     users = []
     for email in emails:
-        users += get_users_for_email(email)
+        users += get_users_for_email(site, email)
 
         # user_id = "ghitab"
         # user_properties = _properties.get(user_id, dict())
