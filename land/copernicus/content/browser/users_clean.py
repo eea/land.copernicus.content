@@ -1,4 +1,4 @@
-# from DateTime import DateTime
+from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -21,7 +21,7 @@ def get_users_for_email(site, email):
         user_email = user_properties.get('email', '')
 
         if user_email == email:
-            result.append(user_id)
+            result.append((user_id, email))
 
     return result
 
@@ -29,37 +29,46 @@ def get_users_for_email(site, email):
 def users_get_details(site, emails):
     html_logs = ""
 
-    # md = getToolByName(site, 'portal_memberdata')
+    md = getToolByName(site, 'portal_memberdata')
 
-    # _members = md._members
-    # _properties = site['acl_users']['mutable_properties']._storage
-    # _never_active = DateTime("2010/01/01")
+    _members = md._members
+    _properties = site['acl_users']['mutable_properties']._storage
+    _never_active = DateTime("2010/01/01")
 
     users = []
     for email in emails:
         users += get_users_for_email(site, email)
 
-        # user_id = "ghitab"
-        # user_properties = _properties.get(user_id, dict())
-        # user_member_data = _members.get(user_id)
+    for user in users:
+        user_id = user[0]
+        user_email = user[1]
 
-        # import pdb; pdb.set_trace()
-        #
-        # if user_member_data is not None:
-        #     active_last = user_properties.get('last_login_time')
-        #     active_from = user_member_data.bobobase_modification_time()
-        #
-        # was_active = True
-        # if active_last is not None and active_from is not None:
-        #     if active_last < _never_active:
-        #         # NEVER USED
-        #         # A lot of accounts have 2000/01/01 as last login.
-        #         # This means the account was created but never used.
-        #         was_active = False
+        user_properties = _properties.get(user_id, dict())
+        user_member_data = _members.get(user_id)
 
-    for user_id in users:
+        if user_member_data is not None:
+            active_last = user_properties.get('last_login_time')
+            active_from = user_member_data.bobobase_modification_time()
+
+        was_active = True
+        if active_last is not None and active_from is not None:
+            if active_last < _never_active:
+                # NEVER USED
+                # A lot of accounts have 2000/01/01 as last login.
+                # This means the account was created but never used.
+                was_active = False
+
+        if was_active is True:
+            status = "ACTIVE"
+        else:
+            status = "NEVER USED"
+
         logger.info("{0}".format(user_id))
-        html_logs += "<p>Details for {0}</p>".format(user_id)
+        html_logs += """
+            <p>
+                <b>{0}</b> - {1} - {2} (Active last: {3}, Active from: {3})
+            </p>""".format(
+                user_id, user_email, status, "last", "from")
 
     return html_logs
 
