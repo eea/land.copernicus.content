@@ -6,7 +6,7 @@
 <body>
   <metal:title fill-slot="content-title">
     <h1 id="parent-fieldname-title" class="documentFirstHeading">
-      Users - remove a given list of accounts (emails)
+      Users - check account details or remove them
     </h1>
   </metal:title>
 
@@ -20,7 +20,8 @@
       <p class="add-space"><br /></p>
 
       <button id="submit-config-get" class="btn btn-default">Get accounts details</button>
-      <button id="submit-config" class="btn btn-default">Start</button>
+      <button id="submit-config" class="btn btn-default"
+              onclick="return confirm('Are you sure?');">Delete users</button>
 
       <p class="add-space"><br /></p>
 
