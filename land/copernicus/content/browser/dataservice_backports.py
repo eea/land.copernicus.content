@@ -48,6 +48,13 @@ def _getCountryName(country_code, countries=None):
         countries = util.getCountries()
     res = countries.get(country_code.lower(), {})
     res = res.get('name', country_code)
+
+    if (res == "Czech Republic") or ("Czech R" in res):
+        res = u"Czechia"
+    if (res == "Macedonia the former Yugoslavian Republic of") or \
+            ("Macedonia" in res) or ("FYROM" in res):
+        res = u"North Macedonia"
+
     return res
 
 
