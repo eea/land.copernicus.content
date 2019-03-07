@@ -3,6 +3,7 @@ Changelog
 
 7.6.dev0 - (unreleased)
 -----------------------
+* Fix: Coverage widget to use Czechia and North Macedonia.
 * Fix: update geotags registry to update changed country names.
   [GhitaB #102884]
 
