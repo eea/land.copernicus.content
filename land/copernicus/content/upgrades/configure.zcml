@@ -253,4 +253,15 @@
       handler=".evolve37.run"
       />
   </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+    source="3.7"
+    destination="3.7.1"
+    profile="land.copernicus.content:default">
+
+    <genericsetup:upgradeDepends
+      title="Upgrade step for land.copernicus.content: import registry for eea.geotags."
+      import_steps="plone.app.registry"
+      />
+  </genericsetup:upgradeSteps>
 </configure>

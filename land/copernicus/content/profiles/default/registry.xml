@@ -114,13 +114,11 @@
       <value_type type="plone.registry.field.TextLine"/>
     </field>
     <value purge="True">
-      <element key="Macedonia (FYR)">North Macedonia</element>
       <element key="Kosovo">Kosovo (UNSCR 1244/99)</element>
       <element key="Czechia">Czechia</element>
       <element key="Macedonia">North Macedonia</element>
       <element key="Kosova (Kosovo)">Kosovo (UNSCR 1244/99)</element>
-      <element key="Macedonia (ARYM)">North Macedonia</element>
-      <element key="Macedonia (FYROM)">North Macedonia</element>
+      <element key="North Macedonia">North Macedonia</element>
     </value>
   </record>
   <record name="eea.geotags.controlpanel.interfaces.IGeoVocabularies.geotags" interface="eea.geotags.controlpanel.interfaces.IGeoVocabularies" field="geotags">
