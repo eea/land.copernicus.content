@@ -93,10 +93,21 @@ class ProductInlineView(BrowserView):
         """
         tool = api.portal.get_tool('portal_languages')
         countries = dict(tool.listAvailableCountries())
-        return u', '.join([
+        res = [
             countries.get(t, t)
-            for t in self.context.getGeographicCoverage()
-        ])
+            for t in self.context.getGeographicCoverage()]
+
+        result = []
+        for x in res:
+            t = x
+            if (t == "Czech Republic") or ("Czech R" in t):
+                t = u"Czechia"
+            if (t == "Macedonia the former Yugoslavian Republic of") or \
+                    ("Macedonia" in t) or ("FYROM" in t):
+                t = u"North Macedonia"
+            result.append(t)
+
+        return u', '.join(result)
 
     def get_geotags(self):
         """ Return geotags
