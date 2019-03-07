@@ -114,13 +114,13 @@
       <value_type type="plone.registry.field.TextLine"/>
     </field>
     <value purge="True">
-      <element key="Macedonia (FYR)">Former Yugoslav Republic of Macedonia, the</element>
+      <element key="Macedonia (FYR)">North Macedonia</element>
       <element key="Kosovo">Kosovo (UNSCR 1244/99)</element>
-      <element key="Czechia">Czech Republic</element>
-      <element key="Macedonia">Former Yugoslav Republic of Macedonia, the</element>
+      <element key="Czechia">Czechia</element>
+      <element key="Macedonia">North Macedonia</element>
       <element key="Kosova (Kosovo)">Kosovo (UNSCR 1244/99)</element>
-      <element key="Macedonia (ARYM)">Former Yugoslav Republic of Macedonia, the</element>
-      <element key="Macedonia (FYROM)">Former Yugoslav Republic of Macedonia, the</element>
+      <element key="Macedonia (ARYM)">North Macedonia</element>
+      <element key="Macedonia (FYROM)">North Macedonia</element>
     </value>
   </record>
   <record name="eea.geotags.controlpanel.interfaces.IGeoVocabularies.geotags" interface="eea.geotags.controlpanel.interfaces.IGeoVocabularies" field="geotags">
@@ -161,7 +161,7 @@
         <element key="geo-2510769">Spain</element>
         <element key="geo-597427">Lithuania</element>
         <element key="geo-2264397">Portugal</element>
-        <element key="geo-3077311">Czech Republic</element>
+        <element key="geo-3077311">Czechia</element>
       </element>
       <element key="eu15">
         <element key="geo-2782113">Austria</element>
@@ -207,7 +207,7 @@
         <element key="geo-2510769">Spain</element>
         <element key="geo-597427">Lithuania</element>
         <element key="geo-2264397">Portugal</element>
-        <element key="geo-3077311">Czech Republic</element>
+        <element key="geo-3077311">Czechia</element>
       </element>
       <element key="eea39">
         <element key="geo-146669">Cyprus</element>
@@ -245,9 +245,9 @@
         <element key="geo-2921044">Germany</element>
         <element key="geo-2802361">Belgium</element>
         <element key="geo-597427">Lithuania</element>
-        <element key="geo-718075">The former Yugoslav Republic of Macedonia</element>
+        <element key="geo-718075">North Macedonia</element>
         <element key="geo-2264397">Portugal</element>
-        <element key="geo-3077311">Czech Republic</element>
+        <element key="geo-3077311">Czechia</element>
         <element key="geo-2629691">Iceland</element>
         <element key="geo-2658434">Switzerland</element>
       </element>
