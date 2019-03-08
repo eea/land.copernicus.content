@@ -3,6 +3,8 @@ Changelog
 
 7.6.dev0 - (unreleased)
 -----------------------
+* Fix: Override template, force plone.app.changeownership to work for our case.
+  [GhitaB #103611]
 * Fix: Coverage widget to use Czechia and North Macedonia.
 * Fix: update geotags registry to update changed country names.
   [GhitaB #102884]
