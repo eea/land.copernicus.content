@@ -4,6 +4,10 @@ Changelog
 7.6.dev0 - (unreleased)
 -----------------------
 * Fix: Override template, force plone.app.changeownership to work for our case.
+  Related to: https://github.com/collective/plone.app.changeownership/issues/4
+  For future usage, a newer (fixed) version of plone.app.changeownership will
+  be used + delete our custom template, or just edit our custom template to
+  solve a particular case at a time.
   [GhitaB #103611]
 * Fix: Coverage widget to use Czechia and North Macedonia.
 * Fix: update geotags registry to update changed country names.
