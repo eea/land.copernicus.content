@@ -3,6 +3,9 @@ Changelog
 
 7.7.dev0 - (unreleased)
 -----------------------
+* Fix: force show North Macedonia instead of Macedonia (used by open street
+  map), in Metadata tab of landitems.
+  [GhitaB #102884]
 
 7.6 - (2019-03-08)
 ------------------
