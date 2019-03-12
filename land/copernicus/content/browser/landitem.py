@@ -114,4 +114,17 @@ class ProductInlineView(BrowserView):
         """
         field = self.context.getField('geographicCoverageGT')
         value = field.getAccessor(self.context)()
-        return u", ".join(x.decode('utf-8') for x in value)
+        res = [x.decode('utf-8') for x in value]
+
+        tags = []
+        # It seems open street map prefers "Macedonia". We force to show
+        # "North Macedonia" in our Metadata tab.
+        # https://www.openstreetmap.org/search?query=North%20Macedonia#map=
+        # 9/41.6185/21.7461
+        for x in res:
+            if (x == "Macedonia the former Yugoslavian Republic of") or \
+                    ("Macedonia" in x) or ("FYROM" in x):
+                        x = u"North Macedonia"
+            tags.append(x)
+
+        return u", ".join(tags)
