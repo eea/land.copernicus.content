@@ -13,13 +13,25 @@ def do_migration(landitem):
 
         for landfile in landfiles:
             country = dict(landfile.fileCategories).get("Country", "")
-            if "Macedonia" in country:
+            if ("the former Yugoslavian Republic of Macedonia" in country) or (
+                "Macedonia" in country) or ("FYROM" in country) or (
+                    "Macedonia the former Yugoslavian Republic of" in country):
                 logger.info(
                     "Migrated: {0} [{1}]: {2} -> {3}".format(
                         landitem.absolute_url(1),
                         landfile.title,
                         country,
                         "North Macedonia"
+                    )
+                )
+
+            if "Czech Republic" in country:
+                logger.info(
+                    "Migrated: {0} [{1}]: {2} -> {3}".format(
+                        landitem.absolute_url(1),
+                        landfile.title,
+                        country,
+                        "Czechia"
                     )
                 )
 
