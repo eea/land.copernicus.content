@@ -264,4 +264,16 @@
       import_steps="plone.app.registry"
       />
   </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+    source="3.7.1"
+    destination="3.8"
+    profile="land.copernicus.content:default">
+
+    <genericsetup:upgradeStep
+      title="Land files: migrate country names."
+      description="[refs #102884] Update country names in case of Czechia and North Macedonia in land files."
+      handler=".evolve38.run"
+      />
+  </genericsetup:upgradeSteps>
 </configure>
