@@ -8,7 +8,20 @@ logger = logging.getLogger('land.copernicus.content')
 
 
 def do_migration(landitem):
-    logger.info('Migrated: %s', landitem.absolute_url(1))
+    if "Country" in landitem.fileCategories:
+        landfiles = [x for x in landitem.landfiles.get_all()]
+
+        for landfile in landfiles:
+            country = dict(landfile.fileCategories).get("Country", "")
+            if "Macedonia" in country:
+                logger.info(
+                    "Migrated: {0} [{1}]: {2} -> {3}".format(
+                        landitem.absolute_url(1),
+                        landfile.title,
+                        country,
+                        "North Macedonia"
+                    )
+                )
 
 
 def run(_):
@@ -16,6 +29,3 @@ def run(_):
     landitems = [b.getObject() for b in catalog(portal_type='LandItem')]
     for landitem in landitems:
         do_migration(landitem)
-        # tree = landitem.landfiles
-
-        # if not isinstance(tree, LandFileStore):
