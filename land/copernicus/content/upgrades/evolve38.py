@@ -1,7 +1,6 @@
 import logging
 from plone import api
 from land.copernicus.content.content.api import LandFileApi
-from land.copernicus.content.content.landfile import LandFileStore
 
 
 logger = logging.getLogger('land.copernicus.content')
@@ -37,12 +36,12 @@ def do_migration(landitem):
 
             if to_be_updated is True:
                 res = [replace(x, y, new_country) for x, y in categories]
-                # lfa.edit(
-                #     landfile.title, title=landfile.title,
-                #     description=landfile.description,
-                #     remoteUrl=landfile.remoteUrl,
-                #     fileCategories=tuple(res)
-                # )
+                lfa.edit(
+                    landfile.title, title=landfile.title,
+                    description=landfile.description,
+                    remoteUrl=landfile.remoteUrl,
+                    fileCategories=tuple(res)
+                )
 
                 new_c = dict(lfa.get(landfile.title).fileCategories).get(
                         "Country", "")
