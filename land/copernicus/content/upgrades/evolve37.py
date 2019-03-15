@@ -14,7 +14,7 @@ def do_ping():
     query = {
         'portal_type': ['File', 'Image', 'HelpCenterFAQFolder']
     }
-    results=cat.searchResults(query)
+    results = cat.searchResults(query)
     logger.info("Found %s objects " % len(results))
     count = 0
     options = {}
