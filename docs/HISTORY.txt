@@ -3,6 +3,7 @@ Changelog
 
 7.7.dev0 - (unreleased)
 -----------------------
+* Fix: update country names in landitem - fileCategories - Country.
 * Fix: force show North Macedonia instead of Macedonia (used by open street
   map), in Metadata tab of landitems.
   [GhitaB #102884]
