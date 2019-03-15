@@ -1,6 +1,9 @@
 Changelog
 =========
 
+7.8.dev0 - (unreleased)
+-----------------------
+
 7.7 - (2019-03-15)
 ------------------
 * Fix: update country names in landitem - fileCategories - Country.
