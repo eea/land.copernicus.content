@@ -3,6 +3,8 @@ Changelog
 
 7.8.dev0 - (unreleased)
 -----------------------
+* Fix: encoding problem in upgrade step logs.
+  [GhitaB #102884]
 
 7.7 - (2019-03-15)
 ------------------
