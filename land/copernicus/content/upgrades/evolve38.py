@@ -58,7 +58,7 @@ def do_migration(landitem):
                     logger.info(
                         "[OK] Migrated: {0} [{1}]: {2} -> {3}".format(
                             landitem.absolute_url(1),
-                            landfile.title,
+                            landfile.title.encode("utf-8"),
                             country,
                             new_c
                         )
@@ -67,7 +67,7 @@ def do_migration(landitem):
                     logger.info(
                         "[??] Migrated: {0} [{1}]: {2} -> {3}".format(
                             landitem.absolute_url(1),
-                            landfile.title,
+                            landfile.title.encode("utf-8"),
                             country,
                             new_c
                         )
