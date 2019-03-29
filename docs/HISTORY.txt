@@ -3,6 +3,8 @@ Changelog
 
 7.9.dev0 - (unreleased)
 -----------------------
+* Fix: Re-add Products.CMFPlone.skins.plone_deprecated.search.pt override.
+  [GhitaB #99788]
 
 7.8 - (2019-03-18)
 ------------------
