@@ -276,4 +276,16 @@
       handler=".evolve38.run"
       />
   </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+    source="3.8"
+    destination="3.9"
+    profile="land.copernicus.content:default">
+
+    <genericsetup:upgradeStep
+      title="Delete unused accounts."
+      description="[refs #103555] Delete unused accounts created before 01.01.2019."
+      handler=".evolve39.run"
+      />
+  </genericsetup:upgradeSteps>
 </configure>
