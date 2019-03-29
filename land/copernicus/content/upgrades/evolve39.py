@@ -19,7 +19,11 @@ def delete_unused_accounts():
     _never_active = DateTime("2010/01/01")
     _new_accounts = DateTime("2019/01/01")
 
+    found = 0
     deleted = 0
+    errors = 0
+    to_be_deleted = []
+
     for idx, user_id in enumerate(_members.iterkeys()):
         user_properties = _properties.get(user_id, dict())
         user_member_data = _members.get(user_id)
@@ -41,11 +45,24 @@ def delete_unused_accounts():
                 is_new_account = False
 
             if was_active is False and is_new_account is False:
-                deleted += 1
-                logger.info("WIP Delete {0}: {1} - [{2} - {3}]".format(
-                    idx, user_id, active_from, active_last))
+                found += 1
+                to_be_deleted.append(user_id)
+                logger.info("To be deleted {0}: {1} - [{2} - {3}]".format(
+                        found, user_id, active_from, active_last))
 
-    logger.info("Done. {0} deleted accounts.".format(deleted))
+    for user_id in to_be_deleted:
+        try:
+            api.user.delete(username=user_id)
+            deleted += 1
+            logger.info("Delete {0}: {1} - [{2} - {3}]".format(
+                deleted, user_id, active_from, active_last))
+        except Exception:
+            errors += 1
+            logger.info("ERROR Delete {0}: {1} - [{2} - {3}]".format(
+                errors, user_id, active_from, active_last))
+
+    logger.info("Done. Found: {0} Deleted: {1} Errors: {2}.".format(
+        found, deleted, errors))
 
 
 def run(_):
