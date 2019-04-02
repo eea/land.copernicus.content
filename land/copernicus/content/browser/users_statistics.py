@@ -396,7 +396,7 @@ class UsersListView(BrowserView):
         _properties = site['acl_users']['mutable_properties']._storage
 
         found = 0
-        result = ""
+        result = "user_id,first_name,last_name,email\n"
         for idx, user_id in enumerate(_members.iterkeys()):
             user_properties = _properties.get(user_id, dict())
             user_member_data = _members.get(user_id)
