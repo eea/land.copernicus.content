@@ -396,6 +396,7 @@ class UsersListView(BrowserView):
         _properties = site['acl_users']['mutable_properties']._storage
 
         found = 0
+        result = ""
         for idx, user_id in enumerate(_members.iterkeys()):
             user_properties = _properties.get(user_id, dict())
             user_member_data = _members.get(user_id)
@@ -409,10 +410,17 @@ class UsersListView(BrowserView):
 
                 if user_properties.get('disclaimer_permission', False) is True:
                     found += 1
-                    try:
-                        print "{0}: {1} [{2} - {3}] email: {4} {5} {6}".format(
+
+                    result += "{0}: {1} [{2} - {3}] email: {4} {5} {6}".format(
                             found, user_id, active_from, active_last, email,
-                            first_name.encode("utf-8"), last_name.encode("utf-8"))
-                    except:
-                        import pdb; pdb.set_trace()
-        return "fullname,email WIP"
+                            first_name.encode("utf-8"),
+                            last_name.encode("utf-8")
+                        )
+
+                    if found == 20:
+                        break  # TODO remove
+
+        self.request.RESPONSE.setHeader('content-type', 'text/plain')
+        self.request.RESPONSE.setHeader(
+                'Content-Disposition', 'attachment;filename=export.csv')
+        return result
