@@ -402,8 +402,8 @@ class UsersListView(BrowserView):
             user_member_data = _members.get(user_id)
 
             if user_member_data is not None:
-                active_last = user_properties.get('last_login_time')
-                active_from = user_member_data.bobobase_modification_time()
+                # active_last = user_properties.get('last_login_time')
+                # active_from = user_member_data.bobobase_modification_time()
                 email = user_properties.get('email', None)
                 first_name = user_properties.get('first_name', None)
                 last_name = user_properties.get('last_name', None)
@@ -411,10 +411,11 @@ class UsersListView(BrowserView):
                 if user_properties.get('disclaimer_permission', False) is True:
                     found += 1
 
-                    result += "{0}: {1} [{2} - {3}] email: {4} {5} {6}".format(
-                            found, user_id, active_from, active_last, email,
+                    result += "{0},{1},{2},{3}\n".format(
+                            user_id,
                             first_name.encode("utf-8"),
-                            last_name.encode("utf-8")
+                            last_name.encode("utf-8"),
+                            email
                         )
 
                     if found == 20:
