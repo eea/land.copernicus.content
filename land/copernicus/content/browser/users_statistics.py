@@ -382,3 +382,11 @@ class UsersStatisticsView(BrowserView):
             remove_all_reports(site)
             self.request.form = {}
         return self.render()
+
+
+class UsersListView(BrowserView):
+    """ Option to download users list as csv (fullname,email)
+    """
+
+    def __call__(self):
+        return "fullname,email WIP"
