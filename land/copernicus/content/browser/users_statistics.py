@@ -389,4 +389,30 @@ class UsersListView(BrowserView):
     """
 
     def __call__(self):
+        site = api.portal.get()
+        md = getToolByName(site, 'portal_memberdata')
+
+        _members = md._members
+        _properties = site['acl_users']['mutable_properties']._storage
+
+        found = 0
+        for idx, user_id in enumerate(_members.iterkeys()):
+            user_properties = _properties.get(user_id, dict())
+            user_member_data = _members.get(user_id)
+
+            if user_member_data is not None:
+                active_last = user_properties.get('last_login_time')
+                active_from = user_member_data.bobobase_modification_time()
+                email = user_properties.get('email', None)
+                first_name = user_properties.get('first_name', None)
+                last_name = user_properties.get('last_name', None)
+
+                if user_properties.get('disclaimer_permission', False) is True:
+                    found += 1
+                    try:
+                        print "{0}: {1} [{2} - {3}] email: {4} {5} {6}".format(
+                            found, user_id, active_from, active_last, email,
+                            first_name.encode("utf-8"), last_name.encode("utf-8"))
+                    except:
+                        import pdb; pdb.set_trace()
         return "fullname,email WIP"
