@@ -7,12 +7,14 @@ from calendar import monthrange
 from datetime import datetime
 from persistent.dict import PersistentDict
 from zope.annotation import IAnnotations
+import logging
 import plone.api as api
 import transaction
 import xlwt
 
 USERS_STATISTICS_KEY = "land.copernicus.content.users_statistics"
 
+logger = logging.getLogger('land.copernicus.content')
 
 # Settings for xls file columns
 SHEET_TITLE = 'Users data'
@@ -423,8 +425,7 @@ class UsersListView(BrowserView):
                             email
                         )
 
-                    if found == 2000:
-                        break  # TODO remove
+            logger.info("{0}/{1} - {2}".format(found, idx, user_id))
 
         self.request.RESPONSE.setHeader('content-type', 'text/plain')
         self.request.RESPONSE.setHeader(
