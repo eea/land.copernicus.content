@@ -361,6 +361,11 @@ class UsersStatisticsView(BrowserView):
         site = self.context.portal_url.getPortalObject()
         return get_users_statistics_reports(site)
 
+    @property
+    def ajax_url(self):
+        return api.portal.get(
+                ).absolute_url() + '/download_users_list'
+
     def __call__(self):
         site = self.context.portal_url.getPortalObject()
 
@@ -418,7 +423,7 @@ class UsersListView(BrowserView):
                             email
                         )
 
-                    if found == 20:
+                    if found == 200:
                         break  # TODO remove
 
         self.request.RESPONSE.setHeader('content-type', 'text/plain')

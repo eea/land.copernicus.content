@@ -18,6 +18,38 @@
     <metal:main_macro define-macro="content-core">
       <div class="users-statistics-container"
            tal:define="reports python:view.reports">
+
+        <h2 i18n:translate="">Download users list</h2>
+        <button id="download-users-list" class="btn btn-default"
+                tal:attributes="data-ajax-url python:view.ajax_url">
+          Download users list
+        </button>
+
+        <p class="add-space"><br /></p>
+
+        <p id="status">Update configuration and Submit.</p>
+        <p id="logs-result">Update configuration and Submit.</p>
+
+        <script>
+          $("document").ready(function() {
+            $("button#download-users-list").on("click", function() {
+              $("p#status").text("Loading... Please wait.");
+              var ajax_url = $("button#download-users-list").attr("data-ajax-url");
+              $.ajax({
+                type: "POST",
+                url: ajax_url,
+                dataType: 'html',
+                success: function(data){
+                  $("p#logs-result").html(data);
+                  $("p#status").text("");
+                }
+              }).fail(function() {
+                  $("p#status").text("Unknown error. Please verify the configuration and re-submit.");
+              });
+            });
+          });
+        </script>
+
         <h2 i18n:translate="">Users Statistics</h2>
         <p>
           Check the existing reports first.
