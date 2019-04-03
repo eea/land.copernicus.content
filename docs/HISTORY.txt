@@ -1,6 +1,9 @@
 Changelog
 =========
 
+8.0.dev0 - (unreleased)
+-----------------------
+
 7.9 - (2019-04-03)
 ------------------
 * Feature: Users statistics - add option to export users list (who gave consent
