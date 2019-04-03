@@ -26,26 +26,21 @@
         </button>
 
         <p class="add-space"><br /></p>
-
-        <p id="status">Update configuration and Submit.</p>
-        <p id="logs-result">Update configuration and Submit.</p>
+        <p id="status"></p>
 
         <script>
           $("document").ready(function() {
             $("button#download-users-list").on("click", function() {
-              $("p#status").text("Loading... Please wait.");
+
+              $("p#status").text("Loading...");
+
               var ajax_url = $("button#download-users-list").attr("data-ajax-url");
-              $.ajax({
-                type: "POST",
-                url: ajax_url,
-                dataType: 'html',
-                success: function(data){
-                  $("p#logs-result").html(data);
-                  $("p#status").text("");
-                }
-              }).fail(function() {
-                  $("p#status").text("Unknown error. Please verify the configuration and re-submit.");
+
+              $.get(ajax_url, function() {
+                document.location.href = ajax_url;
+                $("p#status").text("");
               });
+
             });
           });
         </script>

@@ -423,7 +423,7 @@ class UsersListView(BrowserView):
                             email
                         )
 
-                    if found == 200:
+                    if found == 2000:
                         break  # TODO remove
 
         self.request.RESPONSE.setHeader('content-type', 'text/plain')
