@@ -1,8 +1,8 @@
 Changelog
 =========
 
-7.9.dev0 - (unreleased)
------------------------
+7.9 - (2019-04-03)
+------------------
 * Feature: Users statistics - add option to export users list (who gave consent
   for email notifications).
   [GhitaB #104065]
