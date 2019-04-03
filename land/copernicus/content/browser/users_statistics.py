@@ -409,21 +409,37 @@ class UsersListView(BrowserView):
             user_member_data = _members.get(user_id)
 
             if user_member_data is not None:
-                # active_last = user_properties.get('last_login_time')
-                # active_from = user_member_data.bobobase_modification_time()
                 email = user_properties.get('email', None)
                 first_name = user_properties.get('first_name', None)
                 last_name = user_properties.get('last_name', None)
 
                 if user_properties.get('disclaimer_permission', False) is True:
-                    found += 1
 
-                    result += "{0},{1},{2},{3}\n".format(
-                            user_id,
-                            first_name.encode("utf-8"),
-                            last_name.encode("utf-8"),
-                            email
-                        )
+                    if email is None:
+                        # EIONET accounts case
+                        try:
+                            user = api.user.get(user_id).getUser()
+                            email = user.getProperty('email', None)
+                            if first_name is None:
+                                first_name = user.getProperty(
+                                        'first_name', None)
+                                last_name = user.getProperty(
+                                        'last_name', None)
+                                if first_name is None:
+                                    first_name = user.getProperty(
+                                            'fullname', None)
+                        except Exception:
+                            logger.info("{0}/{1} - {2} EIONET".format(
+                                found, idx, user_id))
+
+                    if email is not None:
+                        found += 1
+                        result += "{0},{1},{2},{3}\n".format(
+                                user_id,
+                                first_name.encode("utf-8"),
+                                last_name.encode("utf-8"),
+                                email
+                            )
 
             logger.info("{0}/{1} - {2}".format(found, idx, user_id))
 
