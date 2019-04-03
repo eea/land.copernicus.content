@@ -3,6 +3,9 @@ Changelog
 
 7.9.dev0 - (unreleased)
 -----------------------
+* Feature: Users statistics - add option to export users list (who gave consent
+  for email notifications).
+  [GhitaB #104065]
 * Fix: Re-add Products.CMFPlone.skins.plone_deprecated.search.pt override.
   [GhitaB #99788]
 
