@@ -20,6 +20,10 @@
            tal:define="reports python:view.reports">
 
         <h2 i18n:translate="">Download users list</h2>
+        <p>
+          Export the list of <i>users who gave consent</i> - in csv format (user_id, first_name, last_name, email).
+          It will take a few minutes.
+        </p>
         <button id="download-users-list" class="btn btn-default"
                 tal:attributes="data-ajax-url python:view.ajax_url">
           Download users list
