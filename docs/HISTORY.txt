@@ -1,6 +1,9 @@
 Changelog
 =========
 
+8.1.dev0 - (unreleased)
+-----------------------
+
 8.0 - (2019-04-04)
 ------------------
 * Improve: Users statistics - update text.
