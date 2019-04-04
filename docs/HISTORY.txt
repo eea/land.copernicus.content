@@ -3,6 +3,8 @@ Changelog
 
 8.0.dev0 - (unreleased)
 -----------------------
+* Improve: Users statistics - update text.
+  [GhitaB #104065]
 
 7.9 - (2019-04-03)
 ------------------
