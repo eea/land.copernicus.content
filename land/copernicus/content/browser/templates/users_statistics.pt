@@ -21,7 +21,8 @@
 
         <h2 i18n:translate="">Download users list</h2>
         <p>
-          Export the list of <i>users who gave consent</i> - in csv format (user_id, first_name, last_name, email).
+          Export the list of registered users <i>who gave consent to be contacted by e-mail</i> - in csv format (user_id, first_name, last_name, email).
+          <br />
           It will take a few minutes.
         </p>
         <button id="download-users-list" class="btn btn-default"
