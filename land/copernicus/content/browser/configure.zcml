@@ -116,6 +116,13 @@
     />
 
   <browser:page
+    class=".admin.ForcePingCRView"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    name="force-pingcr"
+    permission="cmf.ManagePortal"
+    />
+
+  <browser:page
     name="subscribers_data_reset"
     for="plone.app.layout.navigation.interfaces.INavigationRoot"
     class=".subscribers_data_reset.SubscribersDataResetView"
