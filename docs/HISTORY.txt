@@ -3,6 +3,8 @@ Changelog
 
 8.1.dev0 - (unreleased)
 -----------------------
+* Feature: Add ForcePingCRView.
+  [GhitaB #99788]
 
 8.0 - (2019-04-04)
 ------------------
