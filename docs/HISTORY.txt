@@ -1,8 +1,8 @@
 Changelog
 =========
 
-8.2.dev0 - (unreleased)
------------------------
+8.2 - (2019-04-10)
+------------------
 * Fix: Remove template override related to new search feature, in order to make
   production deploy possible keeping old search.
   [GhitaB #99788]
