@@ -54,12 +54,10 @@ def delete_unused_accounts():
         try:
             api.user.delete(username=user_id)
             deleted += 1
-            logger.info("Delete {0}: {1} - [{2} - {3}]".format(
-                deleted, user_id, active_from, active_last))
+            logger.info("Delete {0}: {1}".format(deleted, user_id))
         except Exception:
             errors += 1
-            logger.info("ERROR Delete {0}: {1} - [{2} - {3}]".format(
-                errors, user_id, active_from, active_last))
+            logger.info("ERROR Delete {0}: {1}".format(errors, user_id))
 
     logger.info("Done. Found: {0} Deleted: {1} Errors: {2}.".format(
         found, deleted, errors))
