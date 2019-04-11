@@ -2,6 +2,7 @@ from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from plone import api
 import logging
+import transaction
 
 
 logger = logging.getLogger('land.copernicus.content')
@@ -53,6 +54,7 @@ def delete_unused_accounts():
     for user_id in to_be_deleted:
         try:
             api.user.delete(username=user_id)
+            transaction.commit()
             deleted += 1
             logger.info("Delete {0}: {1}".format(deleted, user_id))
         except Exception:
