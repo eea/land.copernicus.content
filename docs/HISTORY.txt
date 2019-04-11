@@ -3,7 +3,8 @@ Changelog
 
 8.3.dev0 - (unreleased)
 -----------------------
-* Temporarily disable email notifications on account deletion.
+* Fix: Improve script for deleting unused accounts.
+* Fix: Temporarily disable email notifications on account deletion.
   [GhitaB #103555]
 
 8.2 - (2019-04-10)
