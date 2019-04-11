@@ -1,8 +1,8 @@
 Changelog
 =========
 
-8.3.dev0 - (unreleased)
------------------------
+8.3 - (2019-04-11)
+------------------
 * Fix: Improve script for deleting unused accounts.
 * Fix: Temporarily disable email notifications on account deletion.
   [GhitaB #103555]
