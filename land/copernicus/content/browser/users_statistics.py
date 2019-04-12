@@ -415,7 +415,7 @@ class UsersListView(BrowserView):
 
                 if user_properties.get('disclaimer_permission', False) is True:
 
-                    if email is None:
+                    if email is None or len(email) < 1:
                         # EIONET accounts case
                         try:
                             user = api.user.get(user_id).getUser()
@@ -432,7 +432,7 @@ class UsersListView(BrowserView):
                             logger.info("{0}/{1} - {2} EIONET".format(
                                 found, idx, user_id))
 
-                    if email is not None:
+                    if email is not None or len(email) < 1:
                         found += 1
                         result += "{0},{1},{2},{3}\n".format(
                                 user_id,
