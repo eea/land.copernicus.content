@@ -413,6 +413,9 @@ class UsersListView(BrowserView):
                 first_name = user_properties.get('first_name', None)
                 last_name = user_properties.get('last_name', None)
 
+                if first_name is None or len(first_name) < 1:
+                    first_name = user_properties.get('fullname', None)
+
                 if user_properties.get('disclaimer_permission', False) is True:
 
                     if email is None or len(email) < 1:
@@ -420,12 +423,12 @@ class UsersListView(BrowserView):
                         try:
                             user = api.user.get(user_id).getUser()
                             email = user.getProperty('email', None)
-                            if first_name is None:
+                            if first_name is None or len(first_name) < 1:
                                 first_name = user.getProperty(
                                         'first_name', None)
                                 last_name = user.getProperty(
                                         'last_name', None)
-                                if first_name is None:
+                                if first_name is None or len(first_name) < 1:
                                     first_name = user.getProperty(
                                             'fullname', None)
                         except Exception:
