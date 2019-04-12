@@ -3,6 +3,8 @@ Changelog
 
 8.4.dev0 - (unreleased)
 -----------------------
+* Fix: solve missing email in csv export for EIONET accounts.
+  [GhitaB #104065]
 * Fix: Re-enable email notifications on account deletion.
   [GhitaB #103555]
 
