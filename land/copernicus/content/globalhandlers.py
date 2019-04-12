@@ -22,37 +22,36 @@ def handleEventFail(func):
 @handleEventFail
 def userBeforeDeleted(user_id, event):
     """ Notify deleted user about this action. """
-    pass  # temporarily disabled [refs #103555] TODO re-enable later
 
-#     site = api.portal.get()
-#     membership_tool = getToolByName(site, 'portal_membership')
-#     user = membership_tool.getMemberById(user_id)
-#     email = user.getProperty('email')
-#     email_from_name = site.getProperty(
-#         'email_from_name', 'Copernicus Land Monitoring Service at the \
-#         European Environment Agency')
-#     email_from_address = site.getProperty(
-#         'email_from_address', 'copernicus@eea.europa.eu')
-#     mfrom = "{0} <{1}>".format(email_from_name, email_from_address)
-#     subject = u"Your user account has been deleted"
-#     mail_text = u"""
-# Hello
-#
-# We have received a request to delete your account ({0}) on the website of the
-# Copernicus Land Monitoring Service. This has now been actioned.
-#
-# If you have any questions please contact us at copernicus@eea.europa.eu.
-#
-# Kind regards
-# Copernicus Land Monitoring Helpdesk Team""".format(user_id)
-#
-#     try:
-#         mail_host = api.portal.get_tool(name='MailHost')
-#         return mail_host.simple_send(
-#             mto=email, mfrom=mfrom, subject=subject,
-#             body=mail_text, immediate=True)
-#     except SMTPRecipientsRefused:
-#         raise SMTPRecipientsRefused('Recipient rejected by server')
+    site = api.portal.get()
+    membership_tool = getToolByName(site, 'portal_membership')
+    user = membership_tool.getMemberById(user_id)
+    email = user.getProperty('email')
+    email_from_name = site.getProperty(
+        'email_from_name', 'Copernicus Land Monitoring Service at the \
+        European Environment Agency')
+    email_from_address = site.getProperty(
+        'email_from_address', 'copernicus@eea.europa.eu')
+    mfrom = "{0} <{1}>".format(email_from_name, email_from_address)
+    subject = u"Your user account has been deleted"
+    mail_text = u"""
+Hello
+
+We have received a request to delete your account ({0}) on the website of the
+Copernicus Land Monitoring Service. This has now been actioned.
+
+If you have any questions please contact us at copernicus@eea.europa.eu.
+
+Kind regards
+Copernicus Land Monitoring Helpdesk Team""".format(user_id)
+
+    try:
+        mail_host = api.portal.get_tool(name='MailHost')
+        return mail_host.simple_send(
+            mto=email, mfrom=mfrom, subject=subject,
+            body=mail_text, immediate=True)
+    except SMTPRecipientsRefused:
+        raise SMTPRecipientsRefused('Recipient rejected by server')
 
 
 def autofillFullname(principal, event):
