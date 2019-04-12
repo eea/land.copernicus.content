@@ -3,6 +3,8 @@ Changelog
 
 8.4.dev0 - (unreleased)
 -----------------------
+* Fix: Re-enable email notifications on account deletion.
+  [GhitaB #103555]
 
 8.3 - (2019-04-11)
 ------------------
