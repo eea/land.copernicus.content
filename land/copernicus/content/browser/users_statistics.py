@@ -437,12 +437,24 @@ class UsersListView(BrowserView):
 
                     if email is not None or len(email) < 1:
                         found += 1
-                        result += "{0},{1},{2},{3}\n".format(
-                                user_id,
-                                first_name.encode("utf-8"),
-                                last_name.encode("utf-8"),
-                                email
-                            )
+                        try:
+                            result += "{0},{1},{2},{3}\n".format(
+                                    user_id,
+                                    first_name.encode("utf-8"),
+                                    last_name.encode("utf-8"),
+                                    email
+                                )
+                        except Exception:
+                            try:
+                                result += "{0},{1},{2},{3}\n".format(
+                                        user_id,
+                                        first_name,
+                                        last_name,
+                                        email
+                                    )
+                            except Exception:
+                                logger.info("{0}/{1} - {2} ERROR".format(
+                                    found, idx, user_id))
 
             logger.info("{0}/{1} - {2}".format(found, idx, user_id))
 
