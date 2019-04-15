@@ -3,6 +3,8 @@ Changelog
 
 8.5.dev0 - (unreleased)
 -----------------------
+* Fix: Force empty metadata file.
+  [david-batranu #104987]
 * Fix: UnicodeDecodeError WIP solution.
   [GhitaB #104065]
 
