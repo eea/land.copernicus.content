@@ -2,9 +2,7 @@
                      sentry_release view/get_sentry_release;
                      sentry_url view/get_sentry_url;
                      sentry_environment view/get_sentry_environment"
-
-                     >
-    <!-- tal:condition="dsn" -->
+      tal:condition="dsn">
 
   <script src="https://cdn.ravenjs.com/3.22.1/raven.min.js"
           crossorigin="anonymous"></script>
