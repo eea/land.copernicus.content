@@ -15,11 +15,11 @@
         url: '${sentry_url}',
         environment: '${sentry_environment}',
         ignoreErrors: [
-            'jQuery is not defined',
-             '$ is not defined',
-             'Can\'t find variable: jQuery',
-             'Socialite is not defined',
-             'Persistent storage maximum size reached'
+          'jQuery is not defined',
+          '$ is not defined',
+          'Can\'t find variable: jQuery',
+          'Socialite is not defined',
+          'Persistent storage maximum size reached'
         ]
       }).install();
     })
