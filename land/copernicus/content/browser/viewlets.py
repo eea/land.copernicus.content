@@ -26,8 +26,9 @@ class SentryViewlet(ViewletBase):
             passwd = re.search(r'.*(:.*?)@.*', dsn).group(1)
             return dsn.replace(passwd, '')
 
+    # @cache(lambda *args: "version", lifetime=86400)
     def get_sentry_release(self):
-        return "1.1.1.1.1WIP"
+        return os.environ.get("EEA_KGS_VERSION", "")
 
     def get_sentry_environment(self):
         environment = os.environ.get(
@@ -41,12 +42,6 @@ class SentryViewlet(ViewletBase):
                 logger.exception(err)
                 environment = 'devel'
         return environment
-
-    # @cache(lambda *args: "version", lifetime=86400)
-    def version(self):
-        """ KGS version
-        """
-        return os.environ.get("EEA_KGS_VERSION", "")
 
     def get_sentry_url(self):
         try:
