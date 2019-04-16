@@ -1,6 +1,17 @@
+from contextlib import closing
+from eea.cache import cache
+from eventlet.green import urllib2
+from plone import api
+from plone.app.layout.viewlets import ViewletBase
+import logging
 import os
 import re
-from plone.app.layout.viewlets import ViewletBase
+
+
+logger = logging.getLogger("land.copernicus.content")
+
+RANCHER_METADATA = 'http://rancher-metadata/latest'
+TIMEOUT = 15
 
 
 class SentryViewlet(ViewletBase):
@@ -19,7 +30,26 @@ class SentryViewlet(ViewletBase):
         return "1.1.1.1.1WIP"
 
     def get_sentry_environment(self):
-        return "COPERNICUS AWS WIP"
+        environment = os.environ.get(
+            'ENVIRONMENT', os.environ.get('SENTRY_ENVIRONMENT', ''))
+        if not environment:
+            url = RANCHER_METADATA + '/self/stack/environment_name'
+            try:
+                with closing(urllib2.urlopen(url, timeout=TIMEOUT)) as con:
+                    environment = con.read()
+            except Exception as err:
+                logger.exception(err)
+                environment = 'devel'
+        return environment
+
+    # @cache(lambda *args: "version", lifetime=86400)
+    def version(self):
+        """ KGS version
+        """
+        return os.environ.get("EEA_KGS_VERSION", "")
 
     def get_sentry_url(self):
-        return "google.com WIP"
+        try:
+            return self.context.absolute_url()
+        except Exception:
+            return api.portal.get().absolute_url()
