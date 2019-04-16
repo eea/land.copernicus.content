@@ -14,3 +14,12 @@ class SentryViewlet(ViewletBase):
         if dsn:
             passwd = re.search(r'.*(:.*?)@.*', dsn).group(1)
             return dsn.replace(passwd, '')
+
+    def get_sentry_release(self):
+        return "1.1.1.1.1WIP"
+
+    def get_sentry_environment(self):
+        return "COPERNICUS AWS WIP"
+
+    def get_sentry_url(self):
+        return "google.com WIP"

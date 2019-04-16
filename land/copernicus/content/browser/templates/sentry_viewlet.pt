@@ -1,13 +1,29 @@
-<tal:scripts define="dsn view/get_dsn"
-             condition="dsn">
-    <script src="https://cdn.ravenjs.com/3.22.1/raven.min.js"
-        crossorigin="anonymous"></script>
-    <script type="text/javascript">
-        // because all scripts are defered
-        window.addEventListener('load', function(){
-          if(Raven) Raven.config('${dsn}').install();
-        })
-    </script>
+<tal:scripts define="dsn view/get_dsn;
+                     sentry_release view/get_sentry_release;
+                     sentry_url view/get_sentry_url;
+                     sentry_environment view/get_sentry_environment"
+
+                     >
+    <!-- tal:condition="dsn" -->
+
+  <script src="https://cdn.ravenjs.com/3.22.1/raven.min.js"
+          crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    // because all scripts are defered
+    window.addEventListener('load', function(){
+      if(Raven) Raven.config('${dsn}', {
+        logger: 'javascript',
+        release: '${sentry_release}',
+        url: '${sentry_url}',
+        environment: '${sentry_environment}',
+        ignoreErrors: [
+            'jQuery is not defined',
+             '$ is not defined',
+             'Can\'t find variable: jQuery',
+             'Socialite is not defined',
+             'Persistent storage maximum size reached'
+        ]
+      }).install();
+    })
+  </script>
 </tal:scripts>
-
-
