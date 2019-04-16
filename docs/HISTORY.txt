@@ -1,6 +1,9 @@
 Changelog
 =========
 
+8.7.dev0 - (unreleased)
+-----------------------
+
 8.6 - (2019-04-16)
 ------------------
 * Improve: sentry configuration by adding new tags.
