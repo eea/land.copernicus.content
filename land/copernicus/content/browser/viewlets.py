@@ -28,7 +28,9 @@ class SentryViewlet(ViewletBase):
 
     @cache(lambda *args: "version", lifetime=86400)
     def get_sentry_release(self):
-        return os.environ.get("EEA_KGS_VERSION", "")
+        return os.environ.get(
+            'EEA_APP_VERSION',
+            os.environ.get('EEA_KGS_VERSION', ''))
 
     @cache(lambda *args: "version", lifetime=86400)
     def get_sentry_environment(self):
