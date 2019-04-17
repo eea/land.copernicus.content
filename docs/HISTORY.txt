@@ -3,6 +3,8 @@ Changelog
 
 8.7.dev0 - (unreleased)
 -----------------------
+* Improve: Get rid of CDN usage for raven script. Improve script.
+  [GhitaB #103818]
 
 8.6 - (2019-04-16)
 ------------------
