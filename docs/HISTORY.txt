@@ -4,6 +4,7 @@ Changelog
 8.8.dev0 - (unreleased)
 -----------------------
 * Improve: Use app version instead of KGS if set.
+* Improve: Add server_name tag for sentry logs.
   [GhitaB #103818]
 
 8.7 - (2019-04-17)
