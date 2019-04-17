@@ -1,6 +1,9 @@
 Changelog
 =========
 
+8.9.dev0 - (unreleased)
+-----------------------
+
 8.8 - (2019-04-17)
 ------------------
 * Improve: Use app version instead of KGS if set.
