@@ -1,6 +1,7 @@
 <tal:scripts define="dsn view/get_dsn;
                      sentry_release view/get_sentry_release;
                      sentry_url view/get_sentry_url;
+                     sentry_server_name view/get_sentry_server_name;
                      sentry_environment view/get_sentry_environment"
       tal:condition="dsn">
 
@@ -13,6 +14,7 @@
         if(Raven) Raven.config('${dsn}', {
           logger: 'javascript',
           release: '${sentry_release}',
+          server_name: '${sentry_server_name}',
           url: '${sentry_url}',
           environment: '${sentry_environment}',
           ignoreErrors: [
