@@ -1,8 +1,8 @@
 Changelog
 =========
 
-8.9.dev0 - (unreleased)
------------------------
+8.9 - (2019-04-19)
+------------------
 * Fix: raven configuration. Add user in sentry logs.
   [GhitaB #103818]
 
