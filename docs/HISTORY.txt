@@ -3,6 +3,8 @@ Changelog
 
 8.9.dev0 - (unreleased)
 -----------------------
+* Fix: raven configuration.
+  [GhitaB #103818]
 
 8.8 - (2019-04-17)
 ------------------
