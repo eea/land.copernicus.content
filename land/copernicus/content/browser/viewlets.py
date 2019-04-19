@@ -26,6 +26,9 @@ class SentryViewlet(ViewletBase):
             passwd = re.search(r'.*(:.*?)@.*', dsn).group(1)
             return dsn.replace(passwd, '')
 
+    def get_sentry_user(self):
+        return api.user.get_current().getUserName()
+
     @cache(lambda *args: "version", lifetime=86400)
     def get_sentry_release(self):
         return os.environ.get(
