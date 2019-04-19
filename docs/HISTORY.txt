@@ -3,7 +3,7 @@ Changelog
 
 8.9.dev0 - (unreleased)
 -----------------------
-* Fix: raven configuration.
+* Fix: raven configuration. Add user in sentry logs.
   [GhitaB #103818]
 
 8.8 - (2019-04-17)
