@@ -44,10 +44,14 @@ class SentryViewlet(ViewletBase):
         environment = os.environ.get(
             'ENVIRONMENT', os.environ.get('SENTRY_ENVIRONMENT', ''))
         if not environment:
-            url = RANCHER_METADATA + '/self/stack/environment_name'
+            url1 = RANCHER_METADATA + '/self/stack/environment_name'
+            url2 = RANCHER_METADATA + '/self/stack/name'
             try:
-                with closing(urllib2.urlopen(url, timeout=TIMEOUT)) as con:
-                    environment = con.read()
+                with closing(urllib2.urlopen(url1, timeout=TIMEOUT)) as con:
+                    environment_a = con.read()
+                with closing(urllib2.urlopen(url2, timeout=TIMEOUT)) as con:
+                    environment_b = con.read()
+                environment = "{0} - {1}".format(environment_a, environment_b)
             except Exception as err:
                 logger.exception(err)
                 environment = 'devel'
