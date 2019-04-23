@@ -1,8 +1,11 @@
 Changelog
 =========
 
-9.0.dev0 - (unreleased)
+9.1.dev0 - (unreleased)
 -----------------------
+
+9.0 - (2019-04-22)
+------------------
 * Improve: environment definition to use rancher stack name and environment
   name.
   [GhitaB #103818]
