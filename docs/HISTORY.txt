@@ -3,6 +3,8 @@ Changelog
 
 9.1.dev0 - (unreleased)
 -----------------------
+* Fix server name value.
+  [GhitaB #103818]
 
 9.0 - (2019-04-22)
 ------------------
