@@ -6,6 +6,7 @@ from plone.app.layout.viewlets import ViewletBase
 import logging
 import os
 import re
+import socket
 
 
 logger = logging.getLogger("land.copernicus.content")
@@ -37,7 +38,11 @@ class SentryViewlet(ViewletBase):
 
     @cache(lambda *args: "version", lifetime=86400)
     def get_sentry_server_name(self):
-        return os.environ.get('SERVER_NAME', '')
+        try:
+            return socket.gethostname()
+        except Exception as err:
+            logger.exception(err)
+            return ""
 
     @cache(lambda *args: "version", lifetime=86400)
     def get_sentry_environment(self):
