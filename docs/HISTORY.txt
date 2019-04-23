@@ -1,6 +1,9 @@
 Changelog
 =========
 
+9.2.dev0 - (unreleased)
+-----------------------
+
 9.1 - (2019-04-23)
 ------------------
 * Fix: server name value definition in sentry viewlet.
