@@ -3,7 +3,8 @@
                      sentry_url view/get_sentry_url;
                      sentry_user view/get_sentry_user;
                      sentry_server_name view/get_sentry_server_name;
-                     sentry_environment view/get_sentry_environment">
+                     sentry_environment view/get_sentry_environment"
+      tal:condition="dsn">
 
   <script type="text/javascript"
     tal:attributes="src string:${context/portal_url}/++resource++land.copernicus.content.static/lib/raven.min.js"></script>
