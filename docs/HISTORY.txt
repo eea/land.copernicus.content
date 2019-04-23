@@ -3,7 +3,7 @@ Changelog
 
 9.1.dev0 - (unreleased)
 -----------------------
-* Fix server name value.
+* Fix: server name value definition in sentry viewlet.
   [GhitaB #103818]
 
 9.0 - (2019-04-22)
