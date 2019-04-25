@@ -37,6 +37,10 @@ class SentryViewlet(ViewletBase):
             os.environ.get('EEA_KGS_VERSION', ''))
 
     @cache(lambda *args: "version", lifetime=86400)
+    def get_sentry_site(self):
+        return os.environ.get('SERVER_NAME', '')
+
+    @cache(lambda *args: "version", lifetime=86400)
     def get_sentry_server_name(self):
         try:
             return socket.gethostname()
