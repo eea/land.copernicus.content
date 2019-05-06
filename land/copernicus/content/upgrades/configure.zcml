@@ -288,4 +288,16 @@
       handler=".evolve39.run"
       />
   </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+    source="3.9"
+    destination="4.0"
+    profile="land.copernicus.content:default">
+
+    <genericsetup:upgradeDepends
+      title="Import workflows."
+      description="Import workflows to add new state: archived."
+      import_steps="workflow"
+      />
+  </genericsetup:upgradeSteps>
 </configure>
