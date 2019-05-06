@@ -3,6 +3,8 @@ Changelog
 
 9.3.dev0 - (unreleased)
 -----------------------
+* Feature: Add new state archived in workflow.
+  [GhitaB #99788]
 
 9.2 - (2019-04-25)
 ------------------
