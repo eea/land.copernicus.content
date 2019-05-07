@@ -1,8 +1,8 @@
 Changelog
 =========
 
-9.3.dev0 - (unreleased)
------------------------
+9.3 - (2019-05-07)
+------------------
 * Feature: Add new state archived in workflow.
 * Fix: Get rid of unused state restricted in workflow.
   [GhitaB #99788]
