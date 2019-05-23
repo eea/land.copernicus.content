@@ -320,18 +320,30 @@ def _size_of(paths):
     return sum(map(os.path.getsize, paths))
 
 
-def _should_build(paths, existing):
+def _is_zip_outdated(path_dst, paths_src):
+    time_dst = os.path.getmtime(path_dst)
+    times_src = map(os.path.getmtime, paths_src)
+    return bool(filter(lambda x: x > time_dst, times_src))
+
+
+def _should_build(paths, existing, src_paths):
     decision = False
+
+    has_zip = paths.has_zip()
 
     if not existing:
         logger.info('All requested files are missing!')
         decision = False
 
-    elif not paths.has_zip():
+    elif not has_zip:
         logger.info('No .zip for hash: %s', paths.hash)
         decision = True
 
-    elif paths.has_zip() and paths.has_done():
+    elif has_zip and _is_zip_outdated(paths.zip, src_paths):
+        logger.info('Outdated .zip for hash: %s', paths.hash)
+        decision = True
+
+    elif has_zip and paths.has_done():
         src_size = float(_size_of(existing))
         dst_size = float(os.path.getsize(paths.zip))
 
@@ -346,7 +358,7 @@ def _should_build(paths, existing):
         if ratio < 0.9:
             decision = True
 
-    elif paths.has_zip():
+    elif has_zip:
         wait = 3
         t0_size = os.path.getsize(paths.zip)
         time.sleep(wait)
@@ -385,7 +397,7 @@ def _download_executor(context, job):
     src_paths = tuple(map(_joiner, job.meta.filepaths))
     existing_paths = tuple(filter(os.path.isfile, src_paths))
 
-    if _should_build(paths, existing_paths):
+    if _should_build(paths, existing_paths, src_paths):
         _make_zip(paths.zip, existing_paths)
 
         # mark zip as complete
