@@ -522,7 +522,16 @@ class DownloadAsyncView(BrowserView):
         _joiner = partial(os.path.join, SRC_PATH)
         src_paths = filter(os.path.isfile, map(_joiner, metadata.filepaths))
         target = sum(map(os.path.getsize, src_paths))
-        size = os.path.getsize(paths.zip) if os.path.isfile(paths.zip) else 0
+
+        # Check if the file is outdated, report 0 in that case.
+        # The worker will redo this check and rebuild the zip.
+        # This avoids us serving an outdated zip, before the job has
+        # a chance to rebuild it.
+        size = 0
+
+        if paths.has_zip():
+            outdated = _is_zip_outdated(paths.zip, src_paths)
+            size = 0 if outdated else os.path.getsize(paths.zip)
 
         result = dict(
             target=target,
