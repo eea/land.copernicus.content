@@ -3,6 +3,8 @@ Changelog
 
 9.4.dev0 - (unreleased)
 -----------------------
+* Fix: issue of out-dated download archives.
+  [david-batranu #105690]
 
 9.3 - (2019-05-07)
 ------------------
