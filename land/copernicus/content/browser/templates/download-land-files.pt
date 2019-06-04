@@ -18,8 +18,6 @@
         </div>
       </div>
 
-      <p>Please note that archives may take a long time (hours or possibly days) to create.</p>
-
       <br />
 
       <a href="${here/absolute_url}?tab=download">&#8592;Return to download page</a>
