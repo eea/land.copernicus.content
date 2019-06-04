@@ -150,7 +150,7 @@
 
         var the_table = $('.table-render-preview').dataTable({
           "destroy": true,
-          aaSorting: [],
+          "order": [[ 2, "asc" ]],  // this overrides the custom order of items
           "columnDefs": [
             { "orderable": false, "targets": document_access_col },
             { "searchable": false, "targets": document_access_col }

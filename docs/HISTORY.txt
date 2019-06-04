@@ -3,6 +3,8 @@ Changelog
 
 9.5.dev0 - (unreleased)
 -----------------------
+* Improve: update text, remove Please note... in download land files template.
+  [GhitaB #106474]
 
 9.4 - (2019-05-24)
 ------------------
