@@ -3,7 +3,7 @@ Changelog
 
 9.5.dev0 - (unreleased)
 -----------------------
-* Improve: Sort items by Product title in Technical library view.
+* Improve: Sort items by Product family in Technical library view.
   [GhitaB #106490]
 * Improve: update text, remove Please note... in download land files template.
   [GhitaB #106474]
