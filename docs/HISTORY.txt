@@ -1,8 +1,11 @@
 Changelog
 =========
 
-9.5.dev0 - (unreleased)
+9.6.dev0 - (unreleased)
 -----------------------
+
+9.5 - (2019-06-05)
+------------------
 * Improve: Sort items by Product family in Technical library view.
   [GhitaB #106490]
 * Improve: update text, remove Please note... in download land files template.
