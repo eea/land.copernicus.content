@@ -3,6 +3,8 @@ Changelog
 
 9.6.dev0 - (unreleased)
 -----------------------
+* Fix: external templates, to solve js errors.
+  [GhitaB #99788]
 
 9.5 - (2019-06-05)
 ------------------
