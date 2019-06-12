@@ -86,7 +86,7 @@
               function enter_fullscreen(iframe, btn) {
                 // Map View - maximize map iframe
                 $(iframe).addClass("fullscreen-iframe");
-                $("#header-section nav").hide();
+                $("#header-section div.navbar").hide();
                 $(btn).html(icon_retract);
                 $(btn).addClass("on");
               }
@@ -94,7 +94,7 @@
               function exit_fullscreen(iframe, btn) {
                 // Map View - minimize map iframe
                 $(iframe).removeClass("fullscreen-iframe");
-                $("#header-section nav").show();
+                $("#header-section div.navbar").show();
                 $(btn).html(icon_expand);
                 $(btn).removeClass("on");
               }
