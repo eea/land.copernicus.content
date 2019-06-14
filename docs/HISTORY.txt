@@ -1,6 +1,9 @@
 Changelog
 =========
 
+9.8.dev0 - (unreleased)
+-----------------------
+
 9.7 - (2019-06-14)
 ------------------
 * Fix: hide navbar on map fullscreen mode - landitem view.
