@@ -300,4 +300,15 @@
       import_steps="workflow"
       />
   </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+      source="4.0"
+      destination="4.0.1"
+      profile="land.copernicus.content:default">
+
+    <genericsetup:upgradeDepends
+      title="Sentry configuration viewlet - remove sentry"
+      import_steps="viewlets"
+      />
+  </genericsetup:upgradeSteps>
 </configure>

@@ -2,6 +2,6 @@
 <object>
     <order manager="plone.app.layout.viewlets.interfaces.IHtmlHead"
            skinname="Copernicus Theme">
-        <viewlet name="sentry.script"/>
+        <viewlet name="sentry.script" remove="True" />
     </order>
 </object>
