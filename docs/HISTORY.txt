@@ -1,6 +1,9 @@
 Changelog
 =========
 
+9.9.dev0 - (unreleased)
+-----------------------
+
 9.8 - (2019-06-18)
 ------------------
 * Improve: get rid of old solution for sentry logs.
