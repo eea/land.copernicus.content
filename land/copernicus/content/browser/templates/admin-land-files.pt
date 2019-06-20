@@ -9,7 +9,7 @@
   <metal:content-core fill-slot="content-core">
     <metal:main_macro define-macro="content-core">
       <h2 i18n:translate="">Land files administration</h2>
-      <p>Use options below to get, publish, edit or delete landfiles in this
+      <p i18n:translate="">Use options below to get, publish, edit or delete landfiles in this
       context. Select the action, upload the txt file (make sure it has the
       correct structure), then submit. Please wait until the operations are
       done. Do not reload the page in this time.</p>
@@ -21,72 +21,72 @@
 
       <form enctype="multipart/form-data" method="post">
         <div class="form-group">
-          <label for="radioButtons">Select action:</label>
+          <label for="radioButtons" i18n:translate="">Select action:</label>
           <label class="radio-inline">
             <input type="radio" name="inlineRadioOptions" id="radioGet"
-                   value="get"> GET
+                   value="get"> <tal:input i18n:translate="">GET</tal:input>
           </label>
           <label class="radio-inline">
             <input type="radio" name="inlineRadioOptions" id="radioPost"
-                   value="post"> POST
+                   value="post" i18n:translate=""> <tal:input i18n:translate="">POST</tal:input>
           </label>
           <label class="radio-inline">
             <input type="radio" name="inlineRadioOptions" id="radioPut"
-                   value="put"> PUT
+                   value="put" i18n:translate=""> <tal:input i18n:translate="">PUT</tal:input>
           </label>
           <label class="radio-inline">
             <input type="radio" name="inlineRadioOptions" id="radioDelete"
-                   value="delete"> DELETE
+                   value="delete" i18n:translate=""> <tal:input i18n:translate="">DELETE</tal:input>
           </label>
 
-          <p class="help-block">
+          <p class="help-block" i18n:translate="">
             GET: Retrieve information of all or specified land files
           </p>
-          <p class="help-block">
+          <p class="help-block" i18n:translate="">
             POST: Upload new land files specified in text files
           </p>
-          <p class="help-block">
+          <p class="help-block" i18n:translate="">
             PUT: Update existing land files specified in text files
           </p>
-          <p class="help-block">
+          <p class="help-block" i18n:translate="">
             DELETE: Retrieve information of all or specified land files<Paste>
           </p>
         </div>
 
         <div class="form-group">
-          <label for="txtFile">File input</label>
+          <label for="txtFile" i18n:translate="">File input</label>
           <input type="file" id="txtFile" name="file">
-          <p class="help-block">Upload the .txt file.</p>
+          <p class="help-block" i18n:translate="">Upload the .txt file.</p>
         </div>
 
-        <button name="submit" type="submit" class="btn btn-default">
+        <button name="submit" type="submit" class="btn btn-default" i18n:translate="">
           Submit
         </button>
       </form>
 
-      <h2>Output JSON:</h2>
-      <p>The result of submitted operations in json format.</p>
+      <h2 i18n:translate="">Output JSON:</h2>
+      <p i18n:translate="">The result of submitted operations in json format.</p>
       <textarea class="form-control" rows="5" id="output-json"
         tal:content="python:view.values.get('output_json', 'No JSON.')">
       </textarea>
 
-      <h2>Examples:</h2>
-      <h3>GET or DELETE</h3>
-      <p>Land_File_Title 1</p>
-      <p>Land_File_Title 2</p>
+      <h2 i18n:translate="">Examples:</h2>
+      <h3 i18n:translate="">GET or DELETE</h3>
+      <p i18n:translate="">Land_File_Title 1</p>
+      <p i18n:translate="">Land_File_Title 2</p>
 
-      <p><b>or</b></p>
-      <p>All</p>
+      <p><b i18n:translate="">or</b></p>
+      <p i18n:translate="">All</p>
 
-      <h3>POST or PUT</h3>
-      <p>Land_File_Title 1</p>
-      <p>Land_File_Description</p>
-      <p>Download_URL</p>
-      <p>(tag name, tag value),(tag name, tag value)</p>
-      <p>Land_File_Title 2</p>
-      <p>Land_File_Description</p>
-      <p>Download_URL</p>
-      <p>(tag name, tag value),(tag name, tag value)</p>
+      <h3 i18n:translate="">POST or PUT</h3>
+      <p i18n:translate="">Land_File_Title 1</p>
+      <p i18n:translate="">Land_File_Description</p>
+      <p i18n:translate="">Download_URL</p>
+      <p i18n:translate="">(tag name, tag value),(tag name, tag value)</p>
+      <p i18n:translate="">Land_File_Title 2</p>
+      <p i18n:translate="">Land_File_Description</p>
+      <p i18n:translate="">Download_URL</p>
+      <p i18n:translate="">(tag name, tag value),(tag name, tag value)</p>
 
       <script>
 $(document).on("ready", function() {

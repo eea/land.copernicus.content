@@ -1,6 +1,6 @@
 <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
 
-<title>Copernicus</title>
+<title i18n:translate="">Copernicus</title>
 <meta name="description" content="Land Copernicus">
 <meta name="author" content="Land Copernicus">
 

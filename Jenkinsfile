@@ -7,6 +7,7 @@ pipeline {
         FTEST_DIR = "land/copernicus/content/ftests"
         JSLINT_CUSTOM_FIND = "! -path */static/lib/* ! -path */static/fileslibraryitem/*"
         PYFLAKES_CUSTOM_FIND = "-name docs -prune -o"
+        I18N_EXCLUDE = "password_template notify_template"
     }
 
   stages {
@@ -91,7 +92,7 @@ pipeline {
 
           "i18n": {
             node(label: 'docker') {
-              sh '''docker run -i --rm --name=$BUILD_TAG-i18n -e GIT_SRC="https://github.com/eea/$GIT_NAME.git" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/i18ndude'''
+              sh '''docker run -i --rm --name=$BUILD_TAG-i18n -e EXCLUDE="$I18N_EXCLUDE" -e GIT_SRC="https://github.com/eea/$GIT_NAME.git" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/i18ndude'''
             }
           }
         )

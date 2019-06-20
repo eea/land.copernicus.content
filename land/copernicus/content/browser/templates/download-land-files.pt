@@ -12,15 +12,15 @@
 
       <div class="panel panel-default">
         <div class="panel-body">
-          <h2>We're preparing your archive.</h2>
-          <p>It may take some time to complete your archive. You can close this window, we'll email you at <a href="mailto:${options/email}">${options/email}</a> when it's ready.</p>
+          <h2 i18n:translate="">We're preparing your archive.</h2>
+          <p i18n:translate="">It may take some time to complete your archive. You can close this window, we'll email you at <a href="mailto:${options/email}" i18n:name="email">${options/email}</a> when it's ready.</p>
           <p><tal:num replace="options/num_files" />, <tal:size replace="options/size" /></p>
         </div>
       </div>
 
       <br />
 
-      <a href="${here/absolute_url}?tab=download">&#8592;Return to download page</a>
+      <a href="${here/absolute_url}?tab=download" i18n:translate="">&#8592;Return to download page</a>
 
     </div>
     <input type="hidden" id="update-url" value="${context/absolute_url}/download-land-files-estimate?hash=${options/file_hash}" />

@@ -25,7 +25,9 @@
 <metal:fill fill-slot="column_two_slot"></metal:fill>
 
 <metal:title fill-slot="content-title">
-  <h1 class="documentFirstHeading text-center land-title"><span tal:replace="context/title_or_id"></span> - registration</h1>
+  <h1 class="documentFirstHeading text-center land-title">
+    <span tal:replace="context/title_or_id" /><tal:header i18n:translate=""> - registration</tal:header>
+  </h1>
 </metal:title>
 
 <metal:content-core fill-slot="content-core"
@@ -34,7 +36,7 @@
 
 <div class="meeting-info-container">
   <p class="text-center">
-    <b>When:</b>
+    <b i18n:translate="">When:</b>
     <span tal:define="start_tzname context/timezone;
           start_utcdelta python:context.start.tzinfo.utcoffset(context.start);
           start_utcoffset python:(start_utcdelta.days*86400+start_utcdelta.seconds)*100/60/60;">
@@ -45,18 +47,18 @@
   <p class="text-center"
      tal:define="location context/location"
      tal:condition="python:context.location and (context.is_webinar() is not True)">
-    <b>Where:</b>
+    <b i18n:translate="">Where:</b>
     <span class="location">
       <a tal:content="location"
          tal:attributes="href string:http://maps.google.com?q=$location"
-         title="View on map" itemprop="location" >Location</a>
+         title="View on map" itemprop="location" i18n:attributes="title">Location</a>
     </span>
   </p>
 
 </div>
 
 <tal:anon condition="view/is_anon">
-<p class="info-login-or-create" style="display:none;">
+<p class="info-login-or-create" style="display:none;" i18n:translate="">
   You have to log in to register for this event.
   If you have EIONET account or account on this website please
   type your username and password in the form on the left.
@@ -64,7 +66,7 @@
   this website.
 </p>
 
-<p class="info-on-create-account" style="display:none;">
+<p class="info-on-create-account" style="display:none;" i18n:translate="">
   Please complete the form to register for the event.
 </p>
 
@@ -84,7 +86,7 @@
           <div class="field">
             <div class="field-label">
               <metal:field-label define-slot="label">
-                <label for="f_username">User Name</label>
+                <label for="f_username" i18n:translate="">User Name</label>
               </metal:field-label>
             </div>
             <div class="field-body">
@@ -96,7 +98,7 @@
         </metal:field>
         <metal:field use-macro="template/macros/field">
           <metal:label fill-slot="label">
-            <label>Password</label>
+            <label i18n:translate="">Password</label>
           </metal:label>
           <metal:body fill-slot="body">
             <input type="password" name="__ac_password" required />
@@ -104,10 +106,10 @@
         </metal:field>
         <div class="buttons">
           <p>
-            <button type="submit" name="submit.login" class="btn btn-default">LOGIN</button>
+            <button type="submit" name="submit.login" class="btn btn-default" i18n:translate="">LOGIN</button>
           </p>
           <p class="forgot-password">
-            <a href="./mail_password_form?userid=">Forgot password?</a>
+            <a href="./mail_password_form?userid=" i18n:translate="">Forgot password?</a>
           </p>
         </div>
       </div>
@@ -115,10 +117,10 @@
   </div>
   <div class="register">
     <a href="./register?form=register" class="choice-button"
-      onclick="meeting.show_registration();return false">CREATE NEW</a>
+      onclick="meeting.show_registration();return false" i18n:translate="">CREATE NEW</a>
   </div>
   <div class="back-to-meeting">
-    <a href="./">Cancel and return to the event page</a>
+    <a href="./" i18n:translate="">Cancel and return to the event page</a>
   </div>
 </div>
 
@@ -127,13 +129,13 @@
   action="./register?form=register" name="register" method="POST" class="register-form"
   tal:define="message python:options.get('register_message', None); fields python:options.get('fields', {});">
 
-  <h2 class="land-title">Personal information</h2>
+  <h2 class="land-title" i18n:translate="">Personal information</h2>
 
   <metal:message use-macro="template/macros/message" />
   <div class="register-form-fields">
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
-        <label>Name<span class="required"></span></label>
+        <label i18n:translate="">Name<span class="required" i18n:name="required"></span></label>
       </metal:label>
       <metal:body fill-slot="body">
         <input type="text" name="first_name" required
@@ -143,7 +145,7 @@
 
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
-        <label>Family name<span class="required"></span></label>
+        <label i18n:translate="">Family name<span class="required" i18n:name="required"></span></label>
       </metal:label>
       <metal:body fill-slot="body">
         <input type="text" name="last_name" required
@@ -153,7 +155,7 @@
 
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
-        <label>Organisation<span class="required"></span></label>
+        <label i18n:translate="">Organisation<span class="required" i18n:name="required"></span></label>
       </metal:label>
       <metal:body fill-slot="body">
         <input type="text" name="organisation" required
@@ -163,7 +165,7 @@
 
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
-        <label>Position<span class="required"></span></label>
+        <label i18n:translate="">Position<span class="required" i18n:name="required"></span></label>
       </metal:label>
       <metal:body fill-slot="body">
         <input type="text" name="position" required
@@ -173,7 +175,7 @@
 
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
-        <label>Country<span class="required"></span></label>
+        <label i18n:translate="">Country<span class="required" i18n:name="required"></span></label>
       </metal:label>
       <metal:body fill-slot="body">
         <input type="text" name="country" required
@@ -183,7 +185,7 @@
 
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
-        <label>City<span class="required"></span></label>
+        <label i18n:translate="">City<span class="required" i18n:name="required"></span></label>
       </metal:label>
       <metal:body fill-slot="body">
         <input type="text" name="city" required
@@ -193,7 +195,7 @@
 
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
-        <label>E-mail<span class="required"></span></label>
+        <label i18n:translate="">E-mail<span class="required" i18n:name="required"></span></label>
       </metal:label>
       <metal:body fill-slot="body">
         <input type="email" name="email" required
@@ -203,8 +205,8 @@
 
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
-        <label>Phone no</label>
-        <p class="formHelp phone-numbers-validation" style="display:none;">
+        <label i18n:translate="">Phone no</label>
+        <p class="formHelp phone-numbers-validation" style="display:none;" i18n:translate="">
           Enter only numbers. For multiple phone numbers write them one per line.
         </p>
       </metal:label>
@@ -227,12 +229,12 @@
     </metal:field>
   </div>
 
-  <h2 class="land-title">Login details</h2>
+  <h2 class="land-title" i18n:translate="">Login details</h2>
 
   <div class="register-form-fields">
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
-        <label>User Name<span class="required"></span></label>
+        <label i18n:translate="">User Name<span class="required" i18n:name="required"></span></label>
       </metal:label>
       <metal:body fill-slot="body">
         <input type="text" name="username" required
@@ -242,7 +244,7 @@
 
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
-        <label>Password<span class="required"></span></label>
+        <label i18n:translate="">Password<span class="required" i18n:name="required"></span></label>
       </metal:label>
       <metal:body fill-slot="body">
         <input type="password" name="pw1" required />
@@ -251,7 +253,7 @@
 
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
-        <label>Password confirmation<span class="required"></span></label>
+        <label i18n:translate="">Password confirmation<span class="required" i18n:name="required"></span></label>
       </metal:label>
       <metal:body fill-slot="body">
         <input type="password" name="pw2" required />
@@ -260,7 +262,7 @@
 
     <metal:field use-macro="template/macros/field">
       <metal:label fill-slot="label">
-        <label>Verification<span class="required"></span></label>
+        <label i18n:translate="">Verification<span class="required" i18n:name="required"></span></label>
       </metal:label>
       <metal:body fill-slot="body">
 
@@ -273,12 +275,12 @@
     </metal:field>
 
     <p>
-      <button type="submit" name="submit.register" class="btn btn-default">
+      <button type="submit" name="submit.register" class="btn btn-default" i18n:translate="">
         Register new account
       </button>
     </p>
     <p>
-      <a href="./register" onclick="meeting.show_choice();return false">
+      <a href="./register" onclick="meeting.show_choice();return false" i18n:translate="">
         Cancel and return to the event page
       </a>
     </p>
@@ -303,8 +305,8 @@
     <metal:message use-macro="template/macros/message" />
   </tal:message-login>
   <tal:signup condition="not:is_registered" tal:define="fields python:options.get('fields', {});">
-    <p>
-      Hello <span tal:replace="python:user.getProperty('fullname')"></span>,<br /><br />
+    <p i18n:translate="">
+      Hello <span tal:replace="python:user.getProperty('fullname')" i18n:name="fullname"></span>,<br /><br />
       Please complete the form to register for the event.
     </p>
 
@@ -317,7 +319,7 @@
 
         <metal:field use-macro="template/macros/field">
           <metal:label fill-slot="label">
-            <label>Name<span class="required"></span></label>
+            <label i18n:translate="">Name<span class="required" i18n:name="required"></span></label>
           </metal:label>
           <metal:body fill-slot="body">
             <input type="text" name="first_name" required
@@ -327,7 +329,7 @@
 
         <metal:field use-macro="template/macros/field">
           <metal:label fill-slot="label">
-            <label>Family name<span class="required"></span></label>
+            <label i18n:translate="">Family name<span class="required" i18n:name="required"></span></label>
           </metal:label>
           <metal:body fill-slot="body">
             <input type="text" name="last_name" required
@@ -337,7 +339,7 @@
 
         <metal:field use-macro="template/macros/field">
           <metal:label fill-slot="label">
-            <label>Organisation<span class="required"></span></label>
+            <label i18n:translate="">Organisation<span class="required" i18n:name="required"></span></label>
           </metal:label>
           <metal:body fill-slot="body">
             <input type="text" name="organisation" required
@@ -347,7 +349,7 @@
 
         <metal:field use-macro="template/macros/field">
           <metal:label fill-slot="label">
-            <label>Position<span class="required"></span></label>
+            <label i18n:translate="">Position<span class="required" i18n:name="required"></span></label>
           </metal:label>
           <metal:body fill-slot="body">
             <input type="text" name="position" required
@@ -357,7 +359,7 @@
 
         <metal:field use-macro="template/macros/field">
           <metal:label fill-slot="label">
-            <label>Country<span class="required"></span></label>
+            <label i18n:translate="">Country<span class="required" i18n:name="required"></span></label>
           </metal:label>
           <metal:body fill-slot="body">
             <input type="text" name="country" required
@@ -367,7 +369,7 @@
 
         <metal:field use-macro="template/macros/field">
           <metal:label fill-slot="label">
-            <label>City<span class="required"></span></label>
+            <label i18n:translate="">City<span class="required" i18n:name="required"></span></label>
           </metal:label>
           <metal:body fill-slot="body">
             <input type="text" name="city" required
@@ -377,7 +379,7 @@
 
         <metal:field use-macro="template/macros/field">
           <metal:label fill-slot="label">
-            <label>E-mail<span class="required"></span></label>
+            <label i18n:translate="">E-mail<span class="required" i18n:name="required"></span></label>
           </metal:label>
           <metal:body fill-slot="body">
             <input type="email" name="email" required
@@ -387,8 +389,8 @@
 
         <metal:field use-macro="template/macros/field">
           <metal:label fill-slot="label">
-            <label>Phone no</label>
-            <p class="formHelp phone-numbers-validation" style="display:none;">
+            <label i18n:translate="">Phone no</label>
+            <p class="formHelp phone-numbers-validation" style="display:none;" i18n:translate="">
               Enter only numbers. For multiple phone numbers write them one per line.
             </p>
           </metal:label>
@@ -413,7 +415,7 @@
         <div tal:condition="python:context.is_webinar() is not True">
           <metal:field use-macro="template/macros/field">
             <metal:label fill-slot="label">
-              <label for="f_role">I would like to attend the event in the capacity of<span class="required"></span></label>
+              <label for="f_role" i18n:translate="">I would like to attend the event in the capacity of<span class="required" i18n:name="required"></span></label>
             </metal:label>
             <metal:body fill-slot="body">
               <select id="f_role" name="role" required>
@@ -428,7 +430,7 @@
               <input class="other" type="text" id="f_role_other"
                      name="role_other"
                      tal:attributes="value python:fields.get('role_other', '')"
-                     placeholder="please specify"
+                     placeholder="please specify" i18n:attributes="placeholder"
                      />
               <span>&nbsp;</span>
               <script>
@@ -444,25 +446,25 @@
         <div tal:condition="python:context.is_webinar() is True" style="display:none">
           <metal:field use-macro="template/macros/field">
             <metal:label fill-slot="label">
-              <label for="f_role">I would like to attend the event in the capacity of<span class="required"></span></label>
+              <label for="f_role" i18n:translate="">I would like to attend the event in the capacity of<span class="required" i18n:name="required"></span></label>
             </metal:label>
             <metal:body fill-slot="body">
               <select id="f_role" name="role" required>
-                <option value="Participant">Participant</option>
+                <option value="Participant" i18n:translate="">Participant</option>
               </select>
             </metal:body>
           </metal:field>
         </div>
 
-        <h3 tal:condition="context/need_e_pass">This event requires E-pass data:</h3>
-        <p tal:condition="context/need_e_pass" class="text-smaller">
+        <h3 tal:condition="context/need_e_pass" i18n:translate="">This event requires E-pass data:</h3>
+        <p tal:condition="context/need_e_pass" class="text-smaller" i18n:translate="">
           E-pass data will be automatically deleted no later than 72 hours after the end of the event.
         </p>
 
         <div class="e-pass-related" tal:condition="context/need_e_pass">
           <metal:field use-macro="template/macros/field" tal:condition="context/need_e_pass">
             <metal:label fill-slot="label">
-              <label for="f_date_of_birth">DATE OF BIRTH<span class="required"></span></label>
+              <label for="f_date_of_birth" i18n:translate="">DATE OF BIRTH<span class="required" i18n:name="required"></span></label>
             </metal:label>
             <metal:body fill-slot="body">
               <input type="text" name="date_of_birth" autocomplete="off" required
@@ -480,7 +482,7 @@
 
           <metal:field use-macro="template/macros/field" tal:condition="context/need_e_pass">
             <metal:label fill-slot="label">
-              <label for="f_nationality">NATIONALITY<span class="required"></span></label>
+              <label for="f_nationality" i18n:translate="">NATIONALITY<span class="required" i18n:name="required"></span></label>
             </metal:label>
             <metal:body fill-slot="body">
               <input type="text" name="nationality" required
@@ -490,7 +492,7 @@
 
           <metal:field use-macro="template/macros/field" tal:condition="context/need_e_pass">
             <metal:label fill-slot="label">
-              <label for="f_id_card_nbr">ID CARD NBR<span class="required"></span></label>
+              <label for="f_id_card_nbr" i18n:translate="">ID CARD NBR<span class="required" i18n:name="required"></span></label>
             </metal:label>
             <metal:body fill-slot="body">
               <input type="text" name="id_card_nbr" required
@@ -500,7 +502,7 @@
 
           <metal:field use-macro="template/macros/field" tal:condition="context/need_e_pass">
             <metal:label fill-slot="label">
-              <label for="f_id_valid_date">ID VALID DATE</label>
+              <label for="f_id_valid_date" i18n:translate="">ID VALID DATE</label>
             </metal:label>
             <metal:body fill-slot="body">
               <input type="text" name="id_valid_date" autocomplete="off" required
@@ -518,13 +520,13 @@
 
           <metal:field use-macro="template/macros/field" tal:condition="context/need_e_pass">
             <metal:label fill-slot="label">
-              <label for="f_parking">PARKING REQUIRED<span class="required"></span></label>
+              <label for="f_parking" i18n:translate="">PARKING REQUIRED<span class="required" i18n:name="required"></span></label>
             </metal:label>
             <metal:body fill-slot="body">
               <select id="f_parking" name="parking" required>
                 <option></option>
-                <option>Yes</option>
-                <option>No</option>
+                <option i18n:translate="">Yes</option>
+                <option i18n:translate="">No</option>
               </select>
 
               <script type="text/javascript">
@@ -559,7 +561,7 @@
 
           <metal:field use-macro="template/macros/field" tal:condition="context/need_e_pass">
             <metal:label fill-slot="label">
-              <label for="f_car_id">CAR ID<span class="required"></span></label>
+              <label for="f_car_id" i18n:translate="">CAR ID<span class="required" i18n:name="required"></span></label>
             </metal:label>
             <metal:body fill-slot="body">
               <input type="text" name="car_id" required
@@ -571,10 +573,10 @@
         <div class="disclaimers-container">
           <metal:field use-macro="template/macros/field">
             <metal:label fill-slot="label">
-              <label for="f_disclaimer">
+              <label for="f_disclaimer" i18n:translate="">
                 I consent on the processing of my personal data according to the
-                <a href="/terms-of-use" target="_blank">privacy statement</a>
-                <span class="required advanced"></span>
+                <a href="/terms-of-use" target="_blank" i18n:name="privacy">privacy statement</a>
+                <span class="required advanced" i18n:name="required"></span>
               </label>
             </metal:label>
             <metal:body fill-slot="body">
@@ -586,8 +588,10 @@
           <metal:field use-macro="template/macros/field">
             <metal:label fill-slot="label">
               <label for="f_request_data_deletion">
-                Please delete my account on the website after the event has ended, latest after 4 weeks.
-                <p class="text-smaller">
+                <tal:p i18n:translate="">
+                  Please delete my account on the website after the event has ended, latest after 4 weeks.
+                </tal:p>
+                <p class="text-smaller" i18n:translate="">
                   If you believe you will not require access to this
                   event (it’s data, the event documents, access information etc.),
                   then you have the opportunity to request that your account,
@@ -596,7 +600,7 @@
                   weeks after the event date.
                 </p>
 
-                <p class="text-smaller">
+                <p class="text-smaller" i18n:translate="">
                   However, please consider carefully before requesting this as
                   it will also disable any registrations, you may have for
                   other events on our website.
@@ -630,12 +634,12 @@
 
         <div class="buttons">
           <p>
-            <button type="submit" name="submit.signup" class="btn btn-default">
+            <button type="submit" name="submit.signup" class="btn btn-default" i18n:translate="">
               Register to this event
             </button>
           </p>
           <p>
-            <a href="./">
+            <a href="./" i18n:translate="">
               Cancel and return to the event page
             </a>
           </p>
@@ -647,13 +651,13 @@
     <tal:message-signup define="message python:options.get('signup_message', None)">
       <metal:message use-macro="template/macros/message" />
     </tal:message-signup>
-    <p>
-      Hello <span tal:replace="python:user.getProperty('fullname')"></span>,<br /><br />
+    <p i18n:translate="">
+      Hello <span tal:replace="python:user.getProperty('fullname')" i18n:name="name"></span>,<br /><br />
       Your registration request has been sent to the event organiser. As soon as
       your registration is confirmed you will receive a notification e-mail.
     </p>
 
-    <a tal:attributes="href context/absolute_url">Return to the event page</a>
+    <a tal:attributes="href context/absolute_url" i18n:translate="">Return to the event page</a>
   </tal:registered>
 
 </tal:member>

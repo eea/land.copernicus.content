@@ -13,7 +13,7 @@
   <dl class="portalMessage"
       tal:condition="view/status">
     <tal:repeat repeat="msg view/status">
-      <dt>Info</dt>
+      <dt i18n:translate="">Info</dt>
       <dd tal:content="msg">Message</dd>
     </tal:repeat>
   </dl>
@@ -26,9 +26,9 @@
   </div>
 
   <p style="color: red !important">
-    <b>IMPORTANT:</b>
-    This form was overrided in land.copernicus.content to skip infinite loading page because of large number of users.
-    You will edit it there when you want to do changes.
+    <b i18n:translate="">IMPORTANT:</b>
+    <tal:msg i18n:translate="">This form was overrided in land.copernicus.content to skip infinite loading page because of large number of users.
+    You will edit it there when you want to do changes.</tal:msg>
   </p>
 
   <form action="./change-owner" method="post">

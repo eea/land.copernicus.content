@@ -34,17 +34,17 @@
     <ul class="formTabs">
       <li class="formTab firstFormTab ${python:view.extra_class('mapview')}">
         <a id="fieldsetlegend-mapview" href="${context/absolute_url}?tab=mapview" class="${python:'selected' if tab == 'mapview' else ''}">
-          <span>Map View</span>
+          <span i18n:translate="">Map View</span>
         </a>
       </li>
       <li class="formTab ${python:view.extra_class('metadata')}">
         <a id="fieldsetlegend-metadata" href="${context/absolute_url}?tab=metadata" class="${python:'selected' if tab == 'metadata' else ''}">
-          <span>Metadata</span>
+          <span i18n:translate="">Metadata</span>
         </a>
       </li>
       <li class="formTab lastFormTab ${python:view.extra_class('download')}">
         <a id="fieldsetlegend-download" href="${context/absolute_url}?tab=download" class="${python:'selected' if tab == 'download' else ''}">
-          <span>Download</span>
+          <span i18n:translate="">Download</span>
         </a>
       </li>
     </ul>
@@ -75,7 +75,7 @@
               <div id="squaresWaveG_8" class="squaresWaveG">
               </div>
             </div>
-            <center>Please wait, loading map...</center>
+            <center i18n:translate="">Please wait, loading map...</center>
           </div>
           <tal:service replace="structure html" />
           <script>
@@ -179,7 +179,7 @@
           <tal:no-profile condition="python:member and not member_profile">
             <br />
             <p class="text-center">
-              <strong>Please <a tal:attributes="href string:${portal_url}/@@personal-information">complete your profile</a> in order to download data.</strong>
+              <strong i18n:translate="">Please <a tal:attributes="href string:${portal_url}/@@personal-information" i18n:name="info">complete your profile</a> in order to download data.</strong>
             </p>
             <br />
           </tal:no-profile>
@@ -187,13 +187,13 @@
           <tal:anon condition="python:not member">
             <br />
             <p class="text-center">
-              <a href="./login" class="btn btn-default btn-login">
-                <i class="fa fa-user-circle"></i>
+              <a href="./login" class="btn btn-default btn-login" i18n:translate="">
+                <i class="fa fa-user-circle" i18n:name="icon"></i>
                 Log in to download the data
               </a>
             </p>
             <p class="text-center info-text">
-            <i>New user? <a href="/@@register">Follow this link to register.</a></i>
+            <i><tal:i i18n:translate="">New user?</tal:i><a href="/@@register" i18n:translate="">Follow this link to register.</a></i>
             </p>
             <br />
           </tal:anon>
@@ -208,13 +208,13 @@
                       <input class="checkbox-select-all" type="checkbox" value="select-item" />
                     </th>
                   </tal:download>
-                  <th class="border-bottom-only special-chars-sort">Name</th>
+                  <th class="border-bottom-only special-chars-sort" i18n:translate="">Name</th>
                   <th class="border-bottom-only" tal:repeat="cat catfields">
                     <span tal:replace="cat">Type</span>
                   </th>
-                  <th class="border-bottom-only file-size-column">Size</th>
-                  <th class="border-bottom-only search-tags-hidden-column">Search tags</th>
-                  <th class="border-bottom-only search-id-hidden-column">Search id</th>
+                  <th class="border-bottom-only file-size-column" i18n:translate="">Size</th>
+                  <th class="border-bottom-only search-tags-hidden-column" i18n:translate="">Search tags</th>
+                  <th class="border-bottom-only search-id-hidden-column" i18n:translate="">Search id</th>
                 </tr>
               </thead>
 
@@ -257,7 +257,7 @@
                   <tal:condition condition="python:isValidateDataset is not True">
                     <div id="text-accept-non-validated">
                       <input id="checkbox-accept-non-validated" type="checkbox" name="accept-non-validated" value="yes" required />
-                      <label for="checkbox-accept-non-validated">
+                      <label for="checkbox-accept-non-validated" i18n:translate="">
                         I am aware that I am downloading non-validated data and I accept to not distribute the
                         information contained in these files or the files themselves any further.
                       </label>
@@ -265,10 +265,10 @@
                     <hr />
                   </tal:condition>
                   <button id="button-download-selected" class="btn btn-default btn-land-download" disabled="disabled">
-                    <div class="btn-title">Download</div>
+                    <div class="btn-title" i18n:translate="">Download</div>
                     <small class="btn-desc">
-                      <span data-role="number-checked">0</span> files selected
-                      <span data-role="size-display" style="display: none">(<span data-role="file-size"></span> size)</span>
+                      <span data-role="number-checked">0</span><tal:files  i18n:translate="">files selected</tal:files>
+                      <span data-role="size-display" style="display: none" i18n:translate="">(<span data-role="file-size" i18n:name="size"></span> size)</span>
                     </small>
                   </button>
                 </div>

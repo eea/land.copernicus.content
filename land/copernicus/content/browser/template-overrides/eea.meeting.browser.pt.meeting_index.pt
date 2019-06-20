@@ -53,7 +53,7 @@
                     <a
                       tal:content="location"
                       tal:attributes="href string:http://maps.google.com?q=$location"
-                      title="View on map" itemprop="location" >Location</a>
+                      title="View on map" itemprop="location" i18n:attributes="title">Location</a>
                   </td>
                 </tr>
                 <tr tal:define="event_type context/meeting_type;"
@@ -74,21 +74,21 @@
                   <td tal:define="registered context/is_registered">
                     <tal:notregister tal:condition="not:registered">
                       <tal:canregister tal:condition="context/can_register">
-                          <a tal:attributes="href string:${context/absolute_url}/register" class="btn event-register">
+                          <a tal:attributes="href string:${context/absolute_url}/register" class="btn event-register" i18n:translate="">
                             Register to the event
                           </a>
                       </tal:canregister>
-                      <span tal:condition="not:context/can_register">Closed</span>
+                      <span tal:condition="not:context/can_register" i18n:translate="">Closed</span>
                     </tal:notregister>
 
                     <tal:registered tal:condition="registered">
-                      <tal:approved tal:condition="python:context.subscriber_status() == 'approved'">
+                      <tal:approved tal:condition="python:context.subscriber_status() == 'approved'" i18n:translate="">
                         Registered
                       </tal:approved>
-                      <tal:pending tal:condition="python:context.subscriber_status() == 'new'">
+                      <tal:pending tal:condition="python:context.subscriber_status() == 'new'" i18n:translate="">
                         Request for registration sent
                       </tal:pending>
-                      <tal:rejected tal:condition="python:context.subscriber_status() == 'rejected'">
+                      <tal:rejected tal:condition="python:context.subscriber_status() == 'rejected'" i18n:translate="">
                         Registration declined
                       </tal:rejected>
                     </tal:registered>
@@ -113,13 +113,13 @@
                     tal:condition="python:context.registrations_open() and not context.is_registered()">
                   <a href="./register">
                     <img src="++resource++eea.meeting/img/register.png" />
-                    <span>Register</span>
+                    <span i18n:translate="">Register</span>
                   </a>
                 </div>
                 <div class="event-menu-item">
                   <a href="./ics_view">
                     <img src="++resource++eea.meeting/img/ical.png" />
-                    <span>ICal</span>
+                    <span i18n:translate="">ICal</span>
                   </a>
                 </div>
                 <div class="event-menu-item" id="agenda"
@@ -127,20 +127,20 @@
                      tal:condition="nocall:agenda_file">
                   <a tal:attributes="href string:${context/absolute_url}/@@download/agenda/${context/agenda/filename}">
                     <img src="++resource++eea.meeting/img/register.png" />
-                    <span>Agenda</span>
+                    <span i18n:translate="">Agenda</span>
                     <!-- TODO replace image -->
                   </a>
                 </div>
                 <div class="event-menu-item" tal:condition="python:view.has_subscribers() and checkPermission('EEA Meting: View subscribers', context)">
                   <a href="./subscribers">
                     <img src="++resource++eea.meeting/img/participants.png" />
-                    <span>Subscribers</span>
+                    <span i18n:translate="">Subscribers</span>
                   </a>
                 </div>
                 <div class="event-menu-item" tal:condition="python:view.has_sent_emails() and checkPermission('EEA Meting: View Emails', context)">
                   <a href="./emails">
                     <img src="++resource++eea.meeting/img/mail-archive.png" />
-                    <span>Mailing list</span>
+                    <span i18n:translate="">Mailing list</span>
                   </a>
                 </div>
               </div>

@@ -9,7 +9,7 @@
   <metal:content-core fill-slot="content-core">
     <metal:main_macro define-macro="content-core">
       <h2 i18n:translate="">Reset subscribers old data...</h2>
-      <p>Done!</p>
+      <p i18n:translate="">Done!</p>
     </metal:main_macro>
   </metal:content-core>
 </body>

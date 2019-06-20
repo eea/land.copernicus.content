@@ -17,7 +17,7 @@
         <div class="subscriber-details">
 
           <div class="field" id="formfield-form-widgets-userid">
-            <label for="form-widgets-userid" class="horizontal">
+            <label for="form-widgets-userid" class="horizontal" i18n:translate="">
               User id:
             </label>
 
@@ -28,7 +28,7 @@
           </div>
 
           <div class="field" id="formfield-form-widgets-first_name">
-            <label for="form-widgets-first_name" class="horizontal">
+            <label for="form-widgets-first_name" class="horizontal" i18n:translate="">
               Name:
             </label>
 
@@ -39,7 +39,7 @@
           </div>
 
           <div class="field" id="formfield-form-widgets-last_name">
-            <label for="form-widgets-first_name" class="horizontal">
+            <label for="form-widgets-first_name" class="horizontal" i18n:translate="">
               Family name:
             </label>
 
@@ -50,7 +50,7 @@
           </div>
 
           <div class="field" id="formfield-form-widgets-email">
-            <label for="form-widgets-email" class="horizontal">
+            <label for="form-widgets-email" class="horizontal" i18n:translate="">
               Email:
             </label>
 
@@ -61,7 +61,7 @@
           </div>
 
           <div class="field" id="formfield-form-widgets-institution">
-            <label for="form-widgets-institution" class="horizontal">
+            <label for="form-widgets-institution" class="horizontal" i18n:translate="">
               Organisation:
             </label>
 
@@ -72,7 +72,7 @@
           </div>
 
           <div class="field" id="formfield-form-widgets-position">
-            <label for="form-widgets-position" class="horizontal">
+            <label for="form-widgets-position" class="horizontal" i18n:translate="">
               Position:
             </label>
 
@@ -83,7 +83,7 @@
           </div>
 
           <div class="field" id="formfield-form-widgets-from_country">
-            <label for="form-widgets-from_country" class="horizontal">
+            <label for="form-widgets-from_country" class="horizontal" i18n:translate="">
               Country:
             </label>
 
@@ -94,7 +94,7 @@
           </div>
 
           <div class="field" id="formfield-form-widgets-from_city">
-            <label for="form-widgets-from_city" class="horizontal">
+            <label for="form-widgets-from_city" class="horizontal" i18n:translate="">
               City:
             </label>
 
@@ -105,7 +105,7 @@
           </div>
 
           <div class="field" id="formfield-form-widgets-phone_numbers">
-            <label for="form-widgets-plone_numbers" class="horizontal">
+            <label for="form-widgets-plone_numbers" class="horizontal" i18n:translate="">
               Phone numbers:
             </label>
 
@@ -116,7 +116,7 @@
           </div>
 
           <div class="field" id="formfield-form-widgets-role">
-            <label for="form-widgets-role" class="horizontal">
+            <label for="form-widgets-role" class="horizontal" i18n:translate="">
               Role:
             </label>
 
@@ -128,7 +128,7 @@
 
           <div class="field" id="formfield-form-widgets-date_of_birth"
                tal:condition="meeting/need_e_pass">
-            <label for="form-widgets-date_of_birth" class="horizontal">
+            <label for="form-widgets-date_of_birth" class="horizontal" i18n:translate="">
               DATE OF BIRTH:
             </label>
 
@@ -140,7 +140,7 @@
 
           <div class="field" id="formfield-form-widgets-nationality"
                tal:condition="meeting/need_e_pass">
-            <label for="form-widgets-nationality" class="horizontal">
+            <label for="form-widgets-nationality" class="horizontal" i18n:translate="">
               NATIONALITY:
             </label>
 
@@ -152,7 +152,7 @@
 
           <div class="field" id="formfield-form-widgets-id_card_nbr"
                tal:condition="meeting/need_e_pass">
-            <label for="form-widgets-id_card_nbr" class="horizontal">
+            <label for="form-widgets-id_card_nbr" class="horizontal" i18n:translate="">
               ID CARD NBR:
             </label>
 
@@ -164,7 +164,7 @@
 
           <div class="field" id="formfield-form-widgets-id_valid_date"
                tal:condition="meeting/need_e_pass">
-            <label for="form-widgets-id_valid_date" class="horizontal">
+            <label for="form-widgets-id_valid_date" class="horizontal" i18n:translate="">
               ID VALID DATE:
             </label>
 
@@ -176,7 +176,7 @@
 
           <div class="field" id="formfield-form-widgets-parking"
                tal:condition="meeting/need_e_pass">
-            <label for="form-widgets-parking" class="horizontal">
+            <label for="form-widgets-parking" class="horizontal" i18n:translate="">
               PARKING:
             </label>
 
@@ -188,7 +188,7 @@
 
           <div class="field" id="formfield-form-widgets-car_id"
                tal:condition="meeting/need_e_pass">
-            <label for="form-widgets-car_id" class="horizontal">
+            <label for="form-widgets-car_id" class="horizontal" i18n:translate="">
               CAR ID:
             </label>
 
@@ -199,7 +199,7 @@
           </div>
 
           <div class="field" id="formfield-form-widgets-request_data_deletion">
-            <label for="form-widgets-request_data_deletion" class="horizontal">
+            <label for="form-widgets-request_data_deletion" class="horizontal" i18n:translate="">
               Request data deletion:
             </label>
 

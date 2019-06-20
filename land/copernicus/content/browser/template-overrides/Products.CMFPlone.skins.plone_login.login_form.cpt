@@ -245,15 +245,15 @@
                 Forgot your password?
               </h2>
               <p class="discreet">
-                Do you have a Copernicus Land local account?
+                <tal:label i18n:translate="">Do you have a Copernicus Land local account?</tal:label>
                 <span><a tal:define="mail_password_url python:mail_password_url+test(mail_password_url.find('?')==-1, '?', '&amp;')+ztu.make_query(userid=login_name)"
-                         tal:attributes="href mail_password_url; target target;">
+                         tal:attributes="href mail_password_url; target target;" i18n:translate="">
                   Click here to reset your password</a></span>.
 
                 <br />
 
-                Do you have an EIONET account?
-                <span><a href="http://www.eionet.europa.eu/password-reset">
+                <tal:label i18n:translate="">Do you have an EIONET account?</tal:label>
+                <span><a href="http://www.eionet.europa.eu/password-reset" i18n:translate="">
                   Click here</a></span>.
               </p>
             </div>

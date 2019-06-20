@@ -8,8 +8,8 @@
 
   <metal:content-core fill-slot="content-core">
     <metal:main_macro define-macro="content-core">
-      <h2>
-        Logs - <span tal:replace="view/number_of_sent_emails">100</span> sent emails.
+      <h2 i18n:translate="">
+        Logs - <span tal:replace="view/number_of_sent_emails" i18n:name="number">100</span> sent emails.
       </h2>
       <p tal:content="view/get_logs_data">Details here</p>
     </metal:main_macro>

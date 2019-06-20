@@ -5,7 +5,7 @@
 
 <body>
   <metal:title fill-slot="content-title">
-    <h1 id="parent-fieldname-title" class="documentFirstHeading">
+    <h1 id="parent-fieldname-title" class="documentFirstHeading" i18n:translate="">
       Receive updates and information from the Copernicus Land Monitoring Service
     </h1>
   </metal:title>
@@ -19,26 +19,26 @@
 
       <form id="set-notifications" method="post">
         <div class="radio">
-          <label><input type="radio" name="wantnotifications" value="yes" checked>
+          <label><input type="radio" name="wantnotifications" value="yes" checked="checked"><tal:label  i18n:translate="">
             Yes, I would like to be informed by e-mail about the new and updated
             products of the Copernicus Land Monitoring Service, events and training
-            opportunities.
+            opportunities.</tal:label>
           </label>
         </div>
         <div class="radio">
-          <label><input type="radio" value="no" name="wantnotifications">
-            No, I don't want to be contacted.
+          <label><input type="radio" value="no" name="wantnotifications"><tal:label i18n:translate="">
+            No, I don't want to be contacted.</tal:label>
           </label>
         </div>
 
         <p class="add-space"><br /></p>
 
-        <button class="btn btn-default" name="save">Save</button>
-        <button class="btn btn-warning" name="cancel">Cancel</button>
+        <button class="btn btn-default" name="save" i18n:translate="">Save</button>
+        <button class="btn btn-warning" name="cancel" i18n:translate="">Cancel</button>
 
       </form>
 
-      <p class="info" style="display:none;">Thank you! You will be redirected.</p>
+      <p class="info" style="display:none;" i18n:translate="">Thank you! You will be redirected.</p>
 
       <script>
         $("document").ready(function() {

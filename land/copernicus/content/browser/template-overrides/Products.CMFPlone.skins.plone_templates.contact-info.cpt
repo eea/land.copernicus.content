@@ -5,8 +5,8 @@
     window.location.replace(page_url);
   </script>
 
-  <p>
+  <p i18n:translate="">
     If you are not redirected click here: 
-    <a tal:attributes="href contact_form_url" href="">Contact form</a>
+    <a tal:attributes="href contact_form_url" href="" i18n:name="link">Contact form</a>
   </p>
 </div>

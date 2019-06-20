@@ -9,17 +9,17 @@
   <metal:content-core fill-slot="content-core">
     <metal:main_macro define-macro="content-core">
       <h2 i18n:translate="">Land files listing</h2>
-      <p>Use the table below to manage individual land files.</p>
+      <p i18n:translate="">Use the table below to manage individual land files.</p>
       <p>
-        <a class="btn btn-default" style="color: white" href="${python:context.absolute_url()}/add-landfile">Add landfile</a>
+        <a class="btn btn-default" style="color: white" href="${python:context.absolute_url()}/add-landfile" i18n:translate="">Add landfile</a>
       </p>
       <table class="listing">
         <thead>
           <tr>
-            <th>Shortname</th>
-            <th>Title</th>
-            <th>Size</th>
-            <th>Actions</th>
+            <th i18n:translate="">Shortname</th>
+            <th i18n:translate="">Title</th>
+            <th i18n:translate="">Size</th>
+            <th i18n:translate="">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -29,16 +29,16 @@
               <td>${python:landfile.title}</td>
               <td>${python:landfile.fileSize}</td>
               <td>
-                <a href="${python:context.absolute_url()}/edit-landfile?form.widgets.shortname=${python:landfile.shortname}">edit</a>
-                <a href="${python:context.absolute_url()}/delete-landfile?form.widgets.shortname=${python:landfile.shortname}">delete</a>
+                <a href="${python:context.absolute_url()}/edit-landfile?form.widgets.shortname=${python:landfile.shortname}" i18n:translate="">edit</a>
+                <a href="${python:context.absolute_url()}/delete-landfile?form.widgets.shortname=${python:landfile.shortname}" i18n:translate="">delete</a>
               </td>
             </tr>
             <tr>
               <td colspan="2">
                 <dl>
-                  <dt>Description</dt>
+                  <dt i18n:translate="">Description</dt>
                   <dd>${python:landfile.description}</dd>
-                  <dt>URL</dt>
+                  <dt i18n:translate="">URL</dt>
                   <dd><a href="${python:landfile.remoteUrl}">${python:view.relative_url(landfile.remoteUrl)}</a></dd>
                 </dl>
               </td>

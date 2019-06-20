@@ -5,8 +5,8 @@
 
 <body>
 <metal:title fill-slot="content-title">
-  <h1 id="parent-fieldname-title" class="documentFirstHeading">
-    <span tal:replace="context/title">Files Library</span> - administration panel
+  <h1 id="parent-fieldname-title" class="documentFirstHeading" i18n:translate="">
+    <span tal:replace="context/title" i18n:name="title">Files Library</span> - administration panel
   </h1>
 </metal:title>
 
@@ -25,8 +25,8 @@
     <div id="parent-fieldname-text" tal:content="structure context/text/output"></div>
 
     <p>
-      <a href="./edit">Edit summary, body text and filters.</a>
-      (You will be redirected on click, make sure your work is saved.)
+      <a href="./edit" i18n:translate="">Edit summary, body text and filters.</a>
+      <tal:help i18n:translate="">(You will be redirected on click, make sure your work is saved.)</tal:help>
     </p>
 
     <div style="display:none;" id="initial-json-data" tal:content="context/json_data"></div>

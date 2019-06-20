@@ -5,7 +5,7 @@
 
 <body>
   <metal:title fill-slot="content-title">
-    <h1 id="parent-fieldname-title" class="documentFirstHeading">
+    <h1 id="parent-fieldname-title" class="documentFirstHeading" i18n:translate="">
       Text update tool
     </h1>
   </metal:title>
@@ -15,18 +15,18 @@
   <metal:content-core fill-slot="content-core">
     <metal:main_macro define-macro="content-core">
 
-      <p>This tool requires some skills. Make sure you don't submit wrong configuration. No validation is done.</p>
-      <p>Use it to find the items you will manually update then. It will give you the links and useful details.</p>
+      <p i18n:translate="">This tool requires some skills. Make sure you don't submit wrong configuration. No validation is done.</p>
+      <p i18n:translate="">Use it to find the items you will manually update then. It will give you the links and useful details.</p>
 
-      <textarea id="config" rows="10">TEXTS configuration placeholder</textarea>
-
-      <p class="add-space"><br /></p>
-
-      <button id="submit-config" class="btn btn-default">Search content matching configuration</button>
+      <textarea id="config" rows="10" i18n:translate="">TEXTS configuration placeholder</textarea>
 
       <p class="add-space"><br /></p>
 
-      <p id="status">Update configuration and Submit.</p>
+      <button id="submit-config" class="btn btn-default" i18n:translate="">Search content matching configuration</button>
+
+      <p class="add-space"><br /></p>
+
+      <p id="status" i18n:translate="">Update configuration and Submit.</p>
       <p id="logs-result" tal:attributes="data-ajax-url python:view.ajax_url"></p>
 
       <script>

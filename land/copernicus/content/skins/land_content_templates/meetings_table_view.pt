@@ -23,10 +23,10 @@
                i18n:attributes="summary summary_content_listing;">
           <thead>
             <tr>
-              <th>Year</th>
-              <th>Dates</th>
-              <th>Title</th>
-              <th>Location</th>
+              <th i18n:translate="">Year</th>
+              <th i18n:translate="">Dates</th>
+              <th i18n:translate="">Title</th>
+              <th i18n:translate="">Location</th>
             </tr>
           </thead>
 
@@ -68,7 +68,7 @@
 
         <div tal:on-error="nothing" tal:condition="python: not context.portal_membership.isAnonymousUser()">
           <form method="GET" action="" tal:attributes="action string:${context/absolute_url}/++add++eea.meeting">
-            <button type="submit" class="btn btn-default">Create a new Meeting</button>
+            <button type="submit" class="btn btn-default" i18n:translate="">Create a new Meeting</button>
           </form>
         </div>
       </metal:entries>

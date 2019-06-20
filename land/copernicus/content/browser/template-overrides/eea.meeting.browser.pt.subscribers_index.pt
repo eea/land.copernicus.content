@@ -25,8 +25,8 @@
     </metal:styleslot>
 
     <div metal:fill-slot="content-core" class="meeting-items" tal:define="can_edit python:view.can_edit()">
-       <p>Users registered to participate in this meeting</p>
-       <a class="back-button" tal:attributes="href python:context.aq_parent.absolute_url()">Back to event page</a>
+       <p i18n:translate="">Users registered to participate in this meeting</p>
+       <a class="back-button" tal:attributes="href python:context.aq_parent.absolute_url()" i18n:translate="">Back to event page</a>
        <div class="clearfix"></div>
        <form action="./api" method="POST"
              tal:define="meeting python:context.aq_parent">
@@ -35,30 +35,30 @@
             <thead>
               <tr>
                 <th tal:condition="can_edit"><input type="checkbox" data-role="select-all" /></th>
-                <th>Registration status</th>
-                <th>Time of application</th>
-                <th>User Name</th>
-                <th>Name</th>
-                <th>Family name</th>
-                <th>Organisation</th>
-                <th>Position</th>
-                <th>Country</th>
-                <th>City</th>
-                <th>Email</th>
-                <th>Phone no</th>
-                <th tal:condition="python:meeting.is_webinar() is not True">Role</th>
-                <th tal:condition="meeting/need_e_pass">DATE OF BIRTH</th>
-                <th tal:condition="meeting/need_e_pass">NATIONALITY</th>
-                <th tal:condition="meeting/need_e_pass">ID CARD NBR</th>
-                <th tal:condition="meeting/need_e_pass">ID VALID DATE</th>
-                <th tal:condition="meeting/need_e_pass">PARKING</th>
-                <th tal:condition="meeting/need_e_pass">CAR ID</th>
-                <th>Request account deletion</th>
+                <th i18n:translate="">Registration status</th>
+                <th i18n:translate="">Time of application</th>
+                <th i18n:translate="">User Name</th>
+                <th i18n:translate="">Name</th>
+                <th i18n:translate="">Family name</th>
+                <th i18n:translate="">Organisation</th>
+                <th i18n:translate="">Position</th>
+                <th i18n:translate="">Country</th>
+                <th i18n:translate="">City</th>
+                <th i18n:translate="">Email</th>
+                <th i18n:translate="">Phone no</th>
+                <th tal:condition="python:meeting.is_webinar() is not True" i18n:translate="">Role</th>
+                <th tal:condition="meeting/need_e_pass" i18n:translate="">DATE OF BIRTH</th>
+                <th tal:condition="meeting/need_e_pass" i18n:translate="">NATIONALITY</th>
+                <th tal:condition="meeting/need_e_pass" i18n:translate="">ID CARD NBR</th>
+                <th tal:condition="meeting/need_e_pass" i18n:translate="">ID VALID DATE</th>
+                <th tal:condition="meeting/need_e_pass" i18n:translate="">PARKING</th>
+                <th tal:condition="meeting/need_e_pass" i18n:translate="">CAR ID</th>
+                <th i18n:translate="">Request account deletion</th>
               </tr>
             <thead>
             <tbody tal:define="subscribers python:context.get_subscribers()">
               <tr tal:condition="not:subscribers">
-                <td colspan="20">No subscribers.</td>
+                <td colspan="20" i18n:translate="">No subscribers.</td>
               </tr>
               <tal:subscribers tal:repeat="subscriber subscribers">
                 <tr tal:define="subscriber_details python:subscriber.get_details();">
@@ -100,10 +100,10 @@
           </table>
         </div>
         <tal:can_edit condition="can_edit">
-          <button class="btn btn-default" name="button.delete" type="submit">Delete selected</button>
-          <button tal:condition="python:meeting.is_ended() is False" class="btn btn-default" name="button.approve" type="submit">Approve selected</button>
-          <button tal:condition="python:meeting.is_ended() is False" class="btn btn-default" name="button.reject" type="submit">Reject selected</button>
-          <a class="btn btn-default" href="#" onclick="saveFile('#subscribers', 'Meeting participants', {ignoreColumns: [0]});return false">Export to Excel</a>
+          <button class="btn btn-default" name="button.delete" type="submit" i18n:translate="">Delete selected</button>
+          <button tal:condition="python:meeting.is_ended() is False" class="btn btn-default" name="button.approve" type="submit" i18n:translate="">Approve selected</button>
+          <button tal:condition="python:meeting.is_ended() is False" class="btn btn-default" name="button.reject" type="submit" i18n:translate="">Reject selected</button>
+          <a class="btn btn-default" href="#" onclick="saveFile('#subscribers', 'Meeting participants', {ignoreColumns: [0]});return false" i18n:translate="">Export to Excel</a>
         </tal:can_edit>
         <script>subscribers.setup('#subscribers')</script>
       </form>

@@ -20,13 +20,13 @@
            tal:define="reports python:view.reports">
 
         <h2 i18n:translate="">Download users list</h2>
-        <p>
+        <p i18n:translate="">
           Export the list of registered users <i>who gave consent to be contacted by e-mail</i> - in csv format (user_id, first_name, last_name, email).
           <br />
           It will take a few minutes.
         </p>
         <button id="download-users-list" class="btn btn-default"
-                tal:attributes="data-ajax-url python:view.ajax_url">
+                tal:attributes="data-ajax-url python:view.ajax_url" i18n:translate="">
           Download users list
         </button>
 
@@ -51,7 +51,7 @@
         </script>
 
         <h2 i18n:translate="">Users Statistics</h2>
-        <p>
+        <p i18n:translate="">
           Check the existing reports first.
           You can use search to filter reports. Example: "2015" - will give all
           existing reports for 2015. You can sort the data in table by clicking
@@ -67,32 +67,32 @@
 
         <form method="post">
           <div class="form-group">
-            <label for="start-date">Start date</label>
+            <label for="start-date" i18n:translate="">Start date</label>
             <input type="date" name="start-date" min="2010-01-01" required />
-            <p class="help-block">Start date for your report</p>
+            <p class="help-block" i18n:translate="">Start date for your report</p>
           </div>
 
           <div class="form-group">
-            <label for="end-date">End date</label>
+            <label for="end-date" i18n:translate="">End date</label>
             <input type="date" name="end-date" min="2010-01-01" required />
-            <p class="help-block">End date for your report</p>
+            <p class="help-block" i18n:translate="">End date for your report</p>
           </div>
 
-          <button name="submit" type="submit" class="btn btn-default">
+          <button name="submit" type="submit" class="btn btn-default" i18n:translate="">
             Schedule report
           </button>
         </form>
 
-        <h2>Reports</h2>
-        <p>Check requested reports (content and status) here.</p>
+        <h2 i18n:translate="">Reports</h2>
+        <p i18n:translate="">Check requested reports (content and status) here.</p>
         <table class="table table-bordered user-stats-reports">
           <thead>
             <tr>
-              <th>Time period</th>
-              <th>Active</th>
-              <th>New</th>
-              <th>Total</th>
-              <th>Latest update</th>
+              <th i18n:translate="">Time period</th>
+              <th i18n:translate="">Active</th>
+              <th i18n:translate="">New</th>
+              <th i18n:translate="">Total</th>
+              <th i18n:translate="">Latest update</th>
             </tr>
           </thead>
           <tbody>
@@ -120,13 +120,13 @@
         </table>
 
         <form method="post" class="pull-left">
-          <button name="refresh" type="submit" class="btn btn-default">
+          <button name="refresh" type="submit" class="btn btn-default" i18n:translate="">
             Refresh table
           </button>
         </form>
 
         <form method="post" class="pull-right">
-          <button name="generate" type="submit" class="btn btn-danger">
+          <button name="generate" type="submit" class="btn btn-danger" i18n:translate="">
             Generate reports
           </button>
         </form>
@@ -140,7 +140,7 @@
              let's clear test data.
         -->
         <form method="post" class="pull-right" style="display:none">
-          <button name="remove" type="submit" class="btn btn-danger">
+          <button name="remove" type="submit" class="btn btn-danger" i18n:translate="">
             Remove reports
           </button>
         </form>

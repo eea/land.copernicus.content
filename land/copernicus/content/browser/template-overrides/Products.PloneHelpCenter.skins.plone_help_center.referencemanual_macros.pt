@@ -115,11 +115,11 @@
 
   <form method="get" action="#"
         tal:attributes="action context/absolute_url">
-    <label for="destination" class="hiddenStructure">Jump to: </label>
+    <label for="destination" class="hiddenStructure" i18n:translate="">Jump to: </label>
     <select name=":action"
             onchange="window.location.href=this.options[this.selectedIndex].value">
       <option value="referencemanual-all-pages"
-              title="Useful for printing, presentation mode etc.">
+              title="Useful for printing, presentation mode etc." i18n:attributes="title" i18n:translate="">
         All content on one page
       </option>
       <option tal:repeat="tocItem tocList"

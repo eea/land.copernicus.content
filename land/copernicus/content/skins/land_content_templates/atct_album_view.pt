@@ -43,7 +43,7 @@
               <img tal:condition="python:is_external_section is False"
                    src="" alt="" tal:replace="structure python:image.tag(scale='thumb', title=image.Description(), alt='')" />
               <img tal:condition="python:is_external_section is True"
-                   src="/portal_skins/custom/global-image-mosaics-thumb.png" alt="Global Image Mosaics" />
+                   src="/portal_skins/custom/global-image-mosaics-thumb.png" alt="Global Image Mosaics" i18n:attributes="alt" />
             </span>
             <span class="photoAlbumEntryTitle" tal:content="image/pretty_title_or_id">
               Title

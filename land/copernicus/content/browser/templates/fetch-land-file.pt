@@ -10,12 +10,12 @@
     <div class="text-center" tal:condition="pending">
       <div class="panel panel-default">
         <div class="panel-body">
-          <h2>Still processing</h2>
-          <p>The file you requested is still processing.</p>
-          <p>You will receive an email when it is ready.</p>
+          <h2 i18n:translate="">Still processing</h2>
+          <p i18n:translate="">The file you requested is still processing.</p>
+          <p i18n:translate="">You will receive an email when it is ready.</p>
           <div class="progress">
             <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
-              <span id="estimate">estimating...</span>
+              <span id="estimate" i18n:translate="">estimating...</span>
             </div>
           </div>
         </div>
@@ -115,10 +115,10 @@
     <div class="text-center" tal:condition="not:pending">
       <div class="panel panel-default">
         <div class="panel-body">
-          <h2>Download your archive</h2>
+          <h2 i18n:translate="">Download your archive</h2>
           <a id="land-package" target="_blank" href="${view/url}" data-track="${options/matomo_data}">${options/filename}</a>
           <p><tal:num replace="options/num_files" />, <tal:size replace="options/size" /></p>
-          <p>Available for ${options/hours}. Expires at ${options/expires}</p>
+          <p i18n:translate="">Available for ${options/hours}. Expires at ${options/expires}</p>
         </div>
       </div>
       <script>
@@ -200,17 +200,17 @@
        })()
       </script>
 
-      <tal:same_user condition="options/same_user">
-        We also sent a link to this download to <a tal:attributes="href string:mailto:${options/email}" tal:content="options/email">mail</a>
+      <tal:same_user condition="options/same_user" i18n:translate="">
+        We also sent a link to this download to <a tal:attributes="href string:mailto:${options/email}" tal:content="options/email" i18n:name="email">mail</a>
       </tal:same_user>
 
       <hr />
 
-      Download didn't start? <a tal:attributes="href string:${portal_url}/contact-form">Report this issue</a>.
+      <tal:info i18n:translate="">Download didn't start?</tal:info> <a tal:attributes="href string:${portal_url}/contact-form" i18n:translate="">Report this issue</a>.
 
       <br />
 
-      <a href="${here/absolute_url}?tab=download">&#8592;Return to download page</a>
+      <a href="${here/absolute_url}?tab=download" i18n:translate="">&#8592;Return to download page</a>
 
     </div>
   </metal:content-core>
