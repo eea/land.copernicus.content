@@ -33,7 +33,7 @@ jQuery.fn.dataTable.ext.type.order['file-size-pre'] = function (data) {
   } else if (units === ' gb') {
     multiplier = 1073741824;
   }
-  if (isNaN(parseFloat(data)) == true) {
+  if (isNaN(parseFloat(data)) === true) {
     return multiplier; // was "N/A", empty or some string.
   } else {
     return parseFloat(data) * multiplier;
@@ -55,14 +55,14 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
     kb: 1024,
     mb: Math.pow(1024, 2),
     gb: Math.pow(1024, 3)
-  }
+  };
 
   function _friendly_size(size) {
     var friendly = ['gb', 'mb', 'kb', 'b'].reduce(function(acc, unit){
       var value = parseInt(size / UNITS[unit], 10);
       return value > 0 && !acc ? {unit: unit.toUpperCase(), value: value} : acc;
-    }, null)
-    return friendly && friendly['value'] + ' ' + friendly['unit'] || null;
+    }, null);
+    return friendly && friendly.value + ' ' + friendly.unit || null;
   }
 
   function update_filesize(container, target, elems) {
@@ -173,12 +173,12 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
         accepted
       );
     }
-  }
+  };
 
   chk_select_all.on('change', function(evt){
     var has_search = TABLE.fnSettings().oPreviousSearch.sSearch !== '';
     var checkboxes = has_search ? TABLE.$('.checkbox-select-item', { filter: 'applied' }) : table_checkboxes;
-    checkboxes.prop('checked', $(evt.target).is(':checked'));;
+    checkboxes.prop('checked', $(evt.target).is(':checked'));
     _update_selection();
   });
 
@@ -195,7 +195,7 @@ jQuery.fn.dataTableExt.oSort['special-chars-sort-desc']  = function(a,b) {
       var chk = $('input[type="checkbox"]', elm);
       if (chk.length > 0) {
         chk.prop('checked', true);
-      };
+      }
       return elm.data('value');
     });
 

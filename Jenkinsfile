@@ -5,6 +5,7 @@ pipeline {
         GIT_NAME = "land.copernicus.content"
         SONARQUBE_TAGS = "land.copernicus.eu"
         FTEST_DIR = "land/copernicus/content/ftests"
+        CUSTOM_FIND = "! -path */static/lib/* ! -path */static/fileslibraryitem/*"
     }
 
   stages {
@@ -77,7 +78,7 @@ pipeline {
 
           "JS Lint": {
             node(label: 'docker') {
-              sh '''docker run -i --rm --name="$BUILD_TAG-jslint" -e GIT_SRC="https://github.com/eea/$GIT_NAME.git" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/jslint4java'''
+              sh '''docker run -i --rm --name="$BUILD_TAG-jslint" -e CUSTOM_FIND="$CUSTOM_FIND" -e GIT_SRC="https://github.com/eea/$GIT_NAME.git" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/jslint4java'''
             }
           },
 

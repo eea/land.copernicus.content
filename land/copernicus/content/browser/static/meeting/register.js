@@ -18,7 +18,7 @@ $(document).ready(function() {
           new_url
         );
       }
-    }
+    };
 
     var show_choice = function(preserve_history) {
       $("p.info-login-or-create").show();
@@ -35,11 +35,13 @@ $(document).ready(function() {
           new_url
         );
       }
-    }
+    };
 
     var setup_pages = function() {
       window.addEventListener('popstate', function(evt) {
-        evt.state ? ns[evt.state.action](true) : null;
+        if(evt.state) {
+          ns[evt.state.action](true);
+        }
       });
 
       if (document.location.search.indexOf('?form=register') !== -1) {
@@ -47,7 +49,7 @@ $(document).ready(function() {
       } else {
         show_choice();
       }
-    }
+    };
 
     var widget_other = function(selector_choice, selector_other){
       var role = document.querySelector(selector_choice);
@@ -64,17 +66,17 @@ $(document).ready(function() {
       }
       update_other();
       role.addEventListener('change', update_other);
-    }
+    };
 
     ns = {
       show_choice: show_choice,
       show_registration: show_registration,
       setup_pages: setup_pages,
-      widget_other: widget_other,
-    }
+      widget_other: widget_other
+    };
 
     window.meeting = ns;
-  })()
+  })();
   // Prevent multiple submitting of register form with multiple click on
   // button 'Register to this meeting' (submit.signup). Without this, duplicate
   // mail notification is sent to participant and contact person.
