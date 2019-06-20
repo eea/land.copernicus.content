@@ -1,7 +1,4 @@
 from datetime import datetime
-from operator import methodcaller
-from itertools import imap as map
-
 from plone.stringinterp.adapters import BaseSubstitution
 
 import plone.api as api

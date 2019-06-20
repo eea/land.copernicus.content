@@ -1,5 +1,4 @@
 import os
-from hashlib import sha256
 from urlparse import urlparse
 from urllib import unquote
 

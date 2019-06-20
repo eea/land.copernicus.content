@@ -5,9 +5,8 @@ from zope.component import adapts
 from zope.interface import implements
 
 from eea.rdfmarshaller.archetypes.fields import ShortenHTMLField2Surf
-from eea.rdfmarshaller.interfaces import ISurfResourceModifier, ISurfSession
+from eea.rdfmarshaller.interfaces import ISurfResourceModifier
 from plone.app.blob.interfaces import IATBlob
-from Products.ATContentTypes.interfaces.file import IATFile
 from Products.PloneHelpCenter.interfaces import IHelpCenterFolder
 
 import rdflib
