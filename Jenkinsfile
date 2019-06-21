@@ -107,7 +107,7 @@ pipeline {
             node(label: 'docker') {
               script {
                 try {
-                  sh '''docker run -i --name="$BUILD_TAG-www" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/plone-copernicus-land /debug.sh coverage'''
+                  sh '''docker run -i --name="$BUILD_TAG-www" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" -e LAND_DOWNLOADS_SRC_PATH="/tmp" -e LAND_DOWNLOADS_DST_PATH="/tmp" eeacms/plone-copernicus-land:devel /debug.sh coverage'''
                   sh '''mkdir -p xunit-reports; docker cp $BUILD_TAG-www:/plone/instance/parts/xmltestreport/testreports/. xunit-reports/'''
                   stash name: "xunit-reports", includes: "xunit-reports/*.xml"
                   sh '''docker cp $BUILD_TAG-www:/plone/instance/src/$GIT_NAME/coverage.xml coverage.xml'''
@@ -117,25 +117,6 @@ pipeline {
                 }
                 junit 'xunit-reports/*.xml'
               }
-            }
-          },
-
-
-          "KGS": {
-            node(label: 'docker') {
-              sh '''docker run -i --rm --name="$BUILD_TAG-kgs" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/kgs-devel /debug.sh bin/test --test-path /plone/instance/src/$GIT_NAME -v -vv -s $GIT_NAME'''
-            }
-          },
-
-          "Plone4": {
-            node(label: 'docker') {
-              sh '''docker run -i --rm --name="$BUILD_TAG-plone4" -e GIT_BRANCH="$BRANCH_NAME" -e ADDONS="$GIT_NAME" -e DEVELOP="src/$GIT_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/plone-test:4 -v -vv -s $GIT_NAME'''
-            }
-          },
-
-          "Plone5": {
-            node(label: 'docker') {
-              sh '''docker run -i --rm --name="$BUILD_TAG-plone5" -e GIT_BRANCH="$BRANCH_NAME" -e ADDONS="$GIT_NAME" -e DEVELOP="src/$GIT_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/plone-test:5 -v -vv -s $GIT_NAME'''
             }
           }
         )
@@ -151,7 +132,7 @@ pipeline {
                 try {
                   checkout scm
                   sh '''mkdir -p xunit-functional'''
-                  sh '''docker run -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" --name=$BUILD_TAG-ft-www eeacms/plone-copernicus-land /debug.sh bin/instance fg'''
+                  sh '''docker run -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" --name=$BUILD_TAG-ft-www eeacms/plone-copernicus-land:devel /debug.sh bin/instance fg'''
                   sh '''timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-www):8080/'''
                   sh '''casperjs test $FTEST_DIR/eea/*.js --url=$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-www):8080 --xunit=xunit-functional/ftestsreport.xml'''
                   stash name: "xunit-functional", includes: "xunit-functional/*.xml"
@@ -166,52 +147,7 @@ pipeline {
                 junit 'xunit-functional/ftestsreport.xml'
               }
             }
-          },
-
-          "KGS": {
-            node(label: 'docker') {
-              script {
-                try {
-                  checkout scm
-                  sh '''docker run -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" --name=$BUILD_TAG-ft-kgs eeacms/kgs-devel /debug.sh bin/instance fg'''
-                  sh '''timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-kgs):8080/'''
-                  sh '''casperjs test $FTEST_DIR/kgs/*.js --url=$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-kgs):8080 --xunit=ftestsreport.xml'''
-                } catch (err) {
-                sh '''docker logs --tail=100 $BUILD_TAG-ft-kgs'''
-                throw err
-                } finally {
-                  sh '''docker stop $BUILD_TAG-ft-kgs'''
-                  sh '''docker rm -v $BUILD_TAG-ft-kgs'''
-                }
-              archiveArtifacts '*.png'
-              junit 'ftestsreport.xml'
-            }
-            }
-          },
-
-          "Plone4": {
-            node(label: 'docker') {
-              script {
-                try {
-                  checkout scm
-                  sh '''docker run -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" --name=$BUILD_TAG-ft-plone4 eeacms/plone-test:4'''
-                  sh '''timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-plone4):8080/'''
-                  sh '''casperjs test $FTEST_DIR/plone4/*.js --url=$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-plone4):8080 --xunit=ftestsreport.xml'''
-                } catch (err) {
-                sh '''docker logs --tail=100 $BUILD_TAG-ft-plone4'''
-                throw err
-                } finally {
-                  sh '''docker stop $BUILD_TAG-ft-plone4'''
-                  sh '''docker rm -v $BUILD_TAG-ft-plone4'''
-                }
-              }
-              archiveArtifacts '*.png'
-              junit 'ftestsreport.xml'
-              }
-
-            }
-
-          )
+          }
        }
     }
 
