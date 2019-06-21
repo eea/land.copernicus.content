@@ -3,7 +3,7 @@ pipeline {
 
   environment {
         GIT_NAME = "land.copernicus.content"
-        SONARQUBE_TAGS = "land.copernicus.eu"
+        SONARQUBE_TAGS = "land.copernicus.eu,insitu.copernicus.eu"
         FTEST_DIR = "land/copernicus/content/ftests"
         JSLINT_CUSTOM_FIND = "! -path */static/lib/* ! -path */static/fileslibraryitem/*"
         PYFLAKES_CUSTOM_FIND = "-name docs -prune -o"
@@ -103,7 +103,7 @@ pipeline {
       steps {
         parallel(
 
-          "Copernicus": {
+          "Land": {
             node(label: 'docker') {
               script {
                 try {
@@ -118,7 +118,25 @@ pipeline {
                 junit 'xunit-reports/*.xml'
               }
             }
+          },
+
+          "In-situ": {
+            node(label: 'docker') {
+              script {
+                try {
+                  sh '''docker run -i --name="$BUILD_TAG-www" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" -e LAND_DOWNLOADS_SRC_PATH="/tmp" -e LAND_DOWNLOADS_DST_PATH="/tmp" eeacms/plone-copernicus-insitu:devel /debug.sh coverage'''
+                  sh '''mkdir -p xunit-reports; docker cp $BUILD_TAG-www:/plone/instance/parts/xmltestreport/testreports/. xunit-reports/'''
+                  stash name: "xunit-reports", includes: "xunit-reports/*.xml"
+                  sh '''docker cp $BUILD_TAG-www:/plone/instance/src/$GIT_NAME/coverage.xml coverage.xml'''
+                  stash name: "coverage.xml", includes: "coverage.xml"
+                } finally {
+                  sh '''docker rm -v $BUILD_TAG-www'''
+                }
+                junit 'xunit-reports/*.xml'
+              }
+            }
           }
+
         )
       }
     }
@@ -126,7 +144,8 @@ pipeline {
     stage('Functional tests') {
        steps {
          parallel(
-          "Copernicus": {
+
+          "Land": {
             node(label: 'docker') {
               script {
                 try {
@@ -147,7 +166,31 @@ pipeline {
                 junit 'xunit-functional/ftestsreport.xml'
               }
             }
+          },
+
+          "In-situ": {
+            node(label: 'docker') {
+              script {
+                try {
+                  checkout scm
+                  sh '''mkdir -p xunit-functional'''
+                  sh '''docker run -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" --name=$BUILD_TAG-ft-www eeacms/plone-copernicus-insitu:devel /debug.sh bin/instance fg'''
+                  sh '''timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-www):8080/'''
+                  sh '''casperjs test $FTEST_DIR/eea/*.js --url=$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-www):8080 --xunit=xunit-functional/ftestsreport.xml'''
+                  stash name: "xunit-functional", includes: "xunit-functional/*.xml"
+                } catch (err) {
+                  sh '''docker logs --tail=100 $BUILD_TAG-ft-www'''
+                  throw err
+                } finally {
+                  sh '''docker stop $BUILD_TAG-ft-www'''
+                  sh '''docker rm -v $BUILD_TAG-ft-www'''
+                }
+                archiveArtifacts '*.png'
+                junit 'xunit-functional/ftestsreport.xml'
+              }
+            }
           }
+
          )
        }
     }
