@@ -99,11 +99,15 @@ pipeline {
       }
     }
 
-    stage('Tests') {
+    stage('Land') {
+      when {
+        not {
+          branch 'insitu-redesign'
+        }
+      }
       steps {
         parallel(
-
-          "Land": {
+          "Integration tests": {
             node(label: 'docker') {
               script {
                 try {
@@ -120,32 +124,7 @@ pipeline {
             }
           },
 
-          "In-situ": {
-            node(label: 'docker') {
-              script {
-                try {
-                  sh '''docker run -i --name="$BUILD_TAG-www" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" -e LAND_DOWNLOADS_SRC_PATH="/tmp" -e LAND_DOWNLOADS_DST_PATH="/tmp" eeacms/plone-copernicus-insitu:devel /debug.sh coverage'''
-                  sh '''mkdir -p xunit-reports; docker cp $BUILD_TAG-www:/plone/instance/parts/xmltestreport/testreports/. xunit-reports/'''
-                  stash name: "xunit-reports", includes: "xunit-reports/*.xml"
-                  sh '''docker cp $BUILD_TAG-www:/plone/instance/src/$GIT_NAME/coverage.xml coverage.xml'''
-                  stash name: "coverage.xml", includes: "coverage.xml"
-                } finally {
-                  sh '''docker rm -v $BUILD_TAG-www'''
-                }
-                junit 'xunit-reports/*.xml'
-              }
-            }
-          }
-
-        )
-      }
-    }
-
-    stage('Functional tests') {
-       steps {
-         parallel(
-
-          "Land": {
+          "Functional tests": {
             node(label: 'docker') {
               script {
                 try {
@@ -166,9 +145,37 @@ pipeline {
                 junit 'xunit-functional/ftestsreport.xml'
               }
             }
+          }
+        )
+      }
+    }
+
+    stage('InSitu') {
+      when {
+        allOf {
+          branch 'insitu-redesign'
+        }
+      }
+      steps {
+        parallel(
+          "Integration tests": {
+            node(label: 'docker') {
+              script {
+                try {
+                  sh '''docker run -i --name="$BUILD_TAG-www" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" -e LAND_DOWNLOADS_SRC_PATH="/tmp" -e LAND_DOWNLOADS_DST_PATH="/tmp" eeacms/plone-copernicus-insitu:devel /debug.sh coverage'''
+                  sh '''mkdir -p xunit-reports; docker cp $BUILD_TAG-www:/plone/instance/parts/xmltestreport/testreports/. xunit-reports/'''
+                  stash name: "xunit-reports", includes: "xunit-reports/*.xml"
+                  sh '''docker cp $BUILD_TAG-www:/plone/instance/src/$GIT_NAME/coverage.xml coverage.xml'''
+                  stash name: "coverage.xml", includes: "coverage.xml"
+                } finally {
+                  sh '''docker rm -v $BUILD_TAG-www'''
+                }
+                junit 'xunit-reports/*.xml'
+              }
+            }
           },
 
-          "In-situ": {
+          "Functional tests": {
             node(label: 'docker') {
               script {
                 try {
@@ -190,9 +197,8 @@ pipeline {
               }
             }
           }
-
-         )
-       }
+        )
+      }
     }
 
     stage('Report to SonarQube') {
