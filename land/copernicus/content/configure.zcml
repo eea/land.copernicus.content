@@ -6,7 +6,6 @@
   <include package="z3c.jbot" file="meta.zcml" />
   <include package="plone.app.registry" />
 
-  <includeDependencies package="." />
   <include file="profiles.zcml" />
   <include file="permissions.zcml" />
   <include file="overrides.zcml" />
