@@ -88,10 +88,10 @@ Let's verify the other saved properties:
     '<p>Dummy download informations</p>'
 
 Let's test if our landitem has an iframe embedded:
-    >>> landitem.has_iframe()
+    >>> landitem.restrictedTraverse('landitem-view').has_iframe()
     True
 
 The embed_iframe() method will add class="widen" and a height property to our 
 embedded iframe:
-    >>> landitem.embed_iframe()
-    '<iframe src="http://land.copernicus.eu/" height="450" class="widen" onload="javascript:show_iframe();"></iframe>'
+    >>> landitem.restrictedTraverse('landitem-view').embed_iframe()
+    '<iframe src="" height="450" class="widen" data-role="iframe" data-src="http://land.copernicus.eu/"></iframe>'

@@ -9,6 +9,7 @@ from Products.PloneTestCase.layer import onsetup
 import os
 from ZPublisher.HTTPRequest import FileUpload
 
+ptc.installProduct('ATVocabularyManager')
 
 @onsetup
 def setup_copernicus_contenttypes():
