@@ -111,13 +111,13 @@ pipeline {
             node(label: 'docker') {
               script {
                 try {
-                  sh '''docker run -i --name="$BUILD_TAG-www" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" -e LAND_DOWNLOADS_SRC_PATH="/tmp" -e LAND_DOWNLOADS_DST_PATH="/tmp" eeacms/plone-copernicus-land:devel /debug.sh coverage'''
-                  sh '''mkdir -p xunit-reports; docker cp $BUILD_TAG-www:/plone/instance/parts/xmltestreport/testreports/. xunit-reports/'''
+                  sh '''docker run -i --name="$BUILD_TAG-land" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" -e LAND_DOWNLOADS_SRC_PATH="/tmp" -e LAND_DOWNLOADS_DST_PATH="/tmp" eeacms/plone-copernicus-land:devel /debug.sh coverage'''
+                  sh '''mkdir -p xunit-reports; docker cp $BUILD_TAG-land:/plone/instance/parts/xmltestreport/testreports/. xunit-reports/'''
                   stash name: "xunit-reports", includes: "xunit-reports/*.xml"
-                  sh '''docker cp $BUILD_TAG-www:/plone/instance/src/$GIT_NAME/coverage.xml coverage.xml'''
+                  sh '''docker cp $BUILD_TAG-land:/plone/instance/src/$GIT_NAME/coverage.xml coverage.xml'''
                   stash name: "coverage.xml", includes: "coverage.xml"
                 } finally {
-                  sh '''docker rm -v $BUILD_TAG-www'''
+                  sh '''docker rm -v $BUILD_TAG-land'''
                 }
                 junit 'xunit-reports/*.xml'
               }
@@ -130,16 +130,16 @@ pipeline {
                 try {
                   checkout scm
                   sh '''mkdir -p xunit-functional'''
-                  sh '''docker run -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" --name=$BUILD_TAG-ft-www eeacms/plone-copernicus-land:devel /debug.sh bin/instance fg'''
-                  sh '''timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-www):8080/'''
-                  sh '''casperjs test $FTEST_DIR/eea/*.js --url=$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-www):8080 --xunit=xunit-functional/ftestsreport.xml'''
+                  sh '''docker run -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" -e LAND_DOWNLOADS_SRC_PATH="/tmp" -e LAND_DOWNLOADS_DST_PATH="/tmp" --name=$BUILD_TAG-ft-land eeacms/plone-copernicus-land:devel /debug.sh bin/instance fg'''
+                  sh '''timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-land):8080/'''
+                  sh '''casperjs test $FTEST_DIR/land/*.js --url=$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-land):8080 --xunit=xunit-functional/ftestsreport.xml'''
                   stash name: "xunit-functional", includes: "xunit-functional/*.xml"
                 } catch (err) {
-                  sh '''docker logs --tail=100 $BUILD_TAG-ft-www'''
+                  sh '''docker logs --tail=100 $BUILD_TAG-ft-land'''
                   throw err
                 } finally {
-                  sh '''docker stop $BUILD_TAG-ft-www'''
-                  sh '''docker rm -v $BUILD_TAG-ft-www'''
+                  sh '''docker stop $BUILD_TAG-ft-land'''
+                  sh '''docker rm -v $BUILD_TAG-ft-land'''
                 }
                 archiveArtifacts '*.png'
                 junit 'xunit-functional/ftestsreport.xml'
@@ -162,13 +162,13 @@ pipeline {
             node(label: 'docker') {
               script {
                 try {
-                  sh '''docker run -i --name="$BUILD_TAG-www" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" -e LAND_DOWNLOADS_SRC_PATH="/tmp" -e LAND_DOWNLOADS_DST_PATH="/tmp" eeacms/plone-copernicus-insitu:devel /debug.sh coverage'''
-                  sh '''mkdir -p xunit-reports; docker cp $BUILD_TAG-www:/plone/instance/parts/xmltestreport/testreports/. xunit-reports/'''
+                  sh '''docker run -i --name="$BUILD_TAG-insitu" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" -e LAND_DOWNLOADS_SRC_PATH="/tmp" -e LAND_DOWNLOADS_DST_PATH="/tmp" eeacms/plone-copernicus-insitu:devel /debug.sh coverage'''
+                  sh '''mkdir -p xunit-reports; docker cp $BUILD_TAG-insitu:/plone/instance/parts/xmltestreport/testreports/. xunit-reports/'''
                   stash name: "xunit-reports", includes: "xunit-reports/*.xml"
-                  sh '''docker cp $BUILD_TAG-www:/plone/instance/src/$GIT_NAME/coverage.xml coverage.xml'''
+                  sh '''docker cp $BUILD_TAG-insitu:/plone/instance/src/$GIT_NAME/coverage.xml coverage.xml'''
                   stash name: "coverage.xml", includes: "coverage.xml"
                 } finally {
-                  sh '''docker rm -v $BUILD_TAG-www'''
+                  sh '''docker rm -v $BUILD_TAG-insitu'''
                 }
                 junit 'xunit-reports/*.xml'
               }
@@ -181,16 +181,16 @@ pipeline {
                 try {
                   checkout scm
                   sh '''mkdir -p xunit-functional'''
-                  sh '''docker run -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" --name=$BUILD_TAG-ft-www eeacms/plone-copernicus-insitu:devel /debug.sh bin/instance fg'''
-                  sh '''timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-www):8080/'''
-                  sh '''casperjs test $FTEST_DIR/eea/*.js --url=$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-www):8080 --xunit=xunit-functional/ftestsreport.xml'''
+                  sh '''docker run -d -e ADDONS=$GIT_NAME -e DEVELOP=src/$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" -e LAND_DOWNLOADS_SRC_PATH="/tmp" -e LAND_DOWNLOADS_DST_PATH="/tmp" --name=$BUILD_TAG-ft-insitu eeacms/plone-copernicus-insitu:devel /debug.sh bin/instance fg'''
+                  sh '''timeout 600  wget --retry-connrefused --tries=60 --waitretry=10 -q http://$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-insitu):8080/'''
+                  sh '''casperjs test $FTEST_DIR/insitu/*.js --url=$(docker inspect --format {{.NetworkSettings.IPAddress}} $BUILD_TAG-ft-insitu):8080 --xunit=xunit-functional/ftestsreport.xml'''
                   stash name: "xunit-functional", includes: "xunit-functional/*.xml"
                 } catch (err) {
-                  sh '''docker logs --tail=100 $BUILD_TAG-ft-www'''
+                  sh '''docker logs --tail=100 $BUILD_TAG-ft-insitu'''
                   throw err
                 } finally {
-                  sh '''docker stop $BUILD_TAG-ft-www'''
-                  sh '''docker rm -v $BUILD_TAG-ft-www'''
+                  sh '''docker stop $BUILD_TAG-ft-insitu'''
+                  sh '''docker rm -v $BUILD_TAG-ft-insitu'''
                 }
                 archiveArtifacts '*.png'
                 junit 'xunit-functional/ftestsreport.xml'
@@ -223,7 +223,7 @@ pipeline {
             withSonarQubeEnv('Sonarqube') {
                 sh '''sed -i "s|/plone/instance/src/$GIT_NAME|$(pwd)|g" coverage.xml'''
                 sh '''find xunit-functional -type f -exec mv {} xunit-reports/ ";"'''
-                sh "export PATH=$PATH:${scannerHome}/bin:${nodeJS}/bin; sonar-scanner -Dsonar.python.xunit.skipDetails=true -Dsonar.python.xunit.reportPath=xunit-reports/*.xml -Dsonar.python.coverage.reportPath=coverage.xml -Dsonar.sources=./eea -Dsonar.projectKey=$GIT_NAME-$BRANCH_NAME -Dsonar.projectVersion=$BRANCH_NAME-$BUILD_NUMBER"
+                sh "export PATH=$PATH:${scannerHome}/bin:${nodeJS}/bin; sonar-scanner -Dsonar.python.xunit.skipDetails=true -Dsonar.python.xunit.reportPath=xunit-reports/*.xml -Dsonar.python.coverage.reportPath=coverage.xml -Dsonar.sources=./land -Dsonar.projectKey=$GIT_NAME-$BRANCH_NAME -Dsonar.projectVersion=$BRANCH_NAME-$BUILD_NUMBER"
                 sh '''try=2; while [ \$try -gt 0 ]; do curl -s -XPOST -u "${SONAR_AUTH_TOKEN}:" "${SONAR_HOST_URL}api/project_tags/set?project=${GIT_NAME}-${BRANCH_NAME}&tags=${SONARQUBE_TAGS},${BRANCH_NAME}" > set_tags_result; if [ \$(grep -ic error set_tags_result ) -eq 0 ]; then try=0; else cat set_tags_result; echo "... Will retry"; sleep 60; try=\$(( \$try - 1 )); fi; done'''
             }
           }
