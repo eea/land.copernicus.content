@@ -119,7 +119,7 @@ angular.module('searchApp',
     app.get_selected_tags_as_url_params = function() {
       // Check url for existing selected tags
       var selected_tags = $location.search().selected_tags;
-      if(selected_tags == undefined) {
+      if(selected_tags === undefined) {
         return [];
       }
       var possible_tags = selected_tags.split("@");
@@ -233,7 +233,7 @@ angular.module('searchApp',
       // Set the page title
       var selected_tags = app.selected_tags;
 
-      if(selected_tags.length == 0) {
+      if(selected_tags.length === 0) {
         return "Search";
       }
 

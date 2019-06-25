@@ -33,7 +33,7 @@ jQuery.fn.dataTable.ext.type.order['file-size-pre'] = function (data) {
   } else if (units === ' gb') {
     multiplier = 1000000000;
   }
-  if (isNaN(parseFloat(data)) == true) {
+  if (isNaN(parseFloat(data)) === true) {
     return multiplier; // was "N/A", empty or some string.
   } else {
     return parseFloat(data) * multiplier;
@@ -209,8 +209,8 @@ $(document).ready(function() {
     var error_missing_file = "true-error-not-found-";
     if (download_tab_param.indexOf(error_missing_file) >= 0) {
       var land_file_title = download_tab_param.substring(error_missing_file.length, download_tab_param.length);
-      if (land_file_title.length == 0) {
-        land_file_title = "This land file"
+      if (land_file_title.length === 0) {
+        land_file_title = "This land file";
       }
 
       display_portal_message(decodeURI(land_file_title) + " cannot be downloaded. Link is broken.", "error");
@@ -218,7 +218,7 @@ $(document).ready(function() {
 
   // Example: ?fieldsetlegend-download=true-error-profile-not-complete
   // -> "You can't download files until you update your profile with missing thematic and institutional domain info."
-    var error_missing_file = "true-error-profile-not-complete";
+    error_missing_file = "true-error-profile-not-complete";
 
     if (download_tab_param.indexOf(error_missing_file) >= 0) {
       display_portal_message("You can't download files until you <a href=" + portal_url + "/@@personal-information" + "><b>update your profile</b></a> with missing thematic and institutional domain info.", "error");
@@ -251,7 +251,7 @@ $(document).ready(function() {
     }
 
     var download_tab_param = get_url_parameter('fieldsetlegend-download');
-    if (download_tab_param != undefined) {
+    if (download_tab_param !== undefined) {
       $("#fieldsetlegend-download").click();
       download_auto_selected(download_tab_param);
       display_errors_if_any(download_tab_param);
@@ -263,7 +263,7 @@ $(document).ready(function() {
     var number_of_items = $('.checkbox-select-item').length;
 
     if(number_of_items < 10) {
-      if(number_of_items == 0) {
+      if(number_of_items === 0) {
         $("#datatable-container").hide();
         $("#disclaimer-download-container").hide();
       } else {
