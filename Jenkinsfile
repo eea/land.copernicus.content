@@ -3,7 +3,7 @@ pipeline {
 
   environment {
         GIT_NAME = "land.copernicus.content"
-        SONARQUBE_TAGS = "land.copernicus.eu,insitu.copernicus.eu"
+        SONARQUBE_TAGS = "land.copernicus.eu"
         FTEST_DIR = "land/copernicus/content/ftests"
         JSLINT_CUSTOM_FIND = "! -path */static/lib/* ! -path */static/fileslibraryitem/*"
         PYFLAKES_CUSTOM_FIND = "-name docs -prune -o"
