@@ -80,7 +80,7 @@
               </div>
               <div class="pull-right pagination-items pagination-items-top">
                 <p>
-                  Items per page:
+                  <tal:i i18n:translate="">Items per page:</tal:i>
                   <button class="btn filter-btn btn-default {{app.is_active(8)}}"
                           ng-click="app.set_items_per_page(8)">8</button>
                   <button class="btn filter-btn btn-default {{app.is_active(25)}}"
@@ -129,7 +129,7 @@
               </div>
               <div class="pull-right pagination-items pagination-items-bottom">
                 <p>
-                  Items per page:
+                  <tal:i i18n:translate="">Items per page:</tal:i>
                   <button class="btn filter-btn btn-default {{app.is_active(8)}}"
                           ng-click="app.set_items_per_page(8)">8</button>
                   <button class="btn filter-btn btn-default {{app.is_active(25)}}"

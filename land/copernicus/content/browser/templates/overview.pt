@@ -80,9 +80,9 @@
                     i18n:translate="">No</td>
                 <td>
                   <tal:block tal:condition="python: landitem['legend']">
-                    <a tal:attributes="href string:${landitem/absolute_url}/legend">Yes</a>
+                    <a tal:attributes="href string:${landitem/absolute_url}/legend" i18n:translate="">Yes</a>
                   </tal:block>
-                  <tal:block tal:condition="not: python:landitem['legend']">No</tal:block>
+                  <tal:block tal:condition="not: python:landitem['legend']" i18n:translate="">No</tal:block>
                 </td>
                 <td tal:content="structure python:landitem['text'] or 'Not set'"/>
                 <td tal:content="structure python:landitem['webservices'] or 'Not set'"/>

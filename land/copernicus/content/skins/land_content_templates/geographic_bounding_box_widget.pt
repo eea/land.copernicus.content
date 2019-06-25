@@ -44,8 +44,8 @@ Section Titles style
 }
 </style>
 
-          <label for="geographic_bounding_box">Bounding Box</label>
-          <div class="formHelp" id="geographic_bounding_box_help">
+          <label for="geographic_bounding_box" i18n:translate="">Bounding Box</label>
+          <div class="formHelp" id="geographic_bounding_box_help" i18n:translate="">
             Coordinates of the four (West, East, North, South) foremost corners of the dataset
           </div>
 
@@ -54,7 +54,7 @@ Section Titles style
             Validation Error
           </div>
 
-          West:
+          <tal:g i18n:translate="">West:</tal:g>
           <input type="text"
                  name="geographic_bounding_box_west"
                  class="blurrable firstToFocus"
@@ -70,7 +70,7 @@ Section Titles style
                  />
           <br />
 
-          East:
+          <tal:g i18n:translate="">East:</tal:g>
           <input type="text"
                  name="geographic_bounding_box_east"
                  class="blurrable firstToFocus"
@@ -86,7 +86,7 @@ Section Titles style
                  />
           <br />
 
-          North:
+          <tal:g i18n:translate="">North:</tal:g>
           <input type="text"
                  name="geographic_bounding_box_north"
                  class="blurrable firstToFocus"
@@ -102,7 +102,7 @@ Section Titles style
                  />
           <br />
 
-          South:
+          <tal:g i18n:translate="">South:</tal:g>
           <input type="text"
                  name="geographic_bounding_box_south"
                  class="blurrable firstToFocus"

@@ -1,7 +1,7 @@
 <div tal:content="structure view/val" />
-<label>I accept the <a id="terms-of-use-link" href="">Terms of Use</a></label>
+<label i18n:translate="">I accept the <a id="terms-of-use-link" href="" i18n:name="terms">Terms of Use</a></label>
 
-<div style="display: none;" id="terms-of-use-modal" title="Terms of Use"
+<div style="display: none;" id="terms-of-use-modal" title="Terms of Use" i18n:attributes="title"
      tal:define="terms_of_use_doc python:view.context.context.portal_catalog.searchResults(Title='Terms of Use')">
   <div id='terms-container'>
     <tal:condition condition="python:terms_of_use_doc">
@@ -14,12 +14,12 @@
       <div id="terms-page2-container"></div>
 
       <div id="controls">
-        <a id='prev-page' href="">Previous page</a>
-        <a id='next-page' href="">Next page</a>
+        <a id='prev-page' href="" i18n:translate="">Previous page</a>
+        <a id='next-page' href="" i18n:translate="">Next page</a>
       </div>
 
     </tal:condition>
-    <span tal:condition="python:not terms_of_use_doc">
+    <span tal:condition="python:not terms_of_use_doc" i18n:translate="">
       Missing document with title "Terms of Use".
     </span>
   </div>

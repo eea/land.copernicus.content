@@ -7,7 +7,7 @@ pipeline {
         FTEST_DIR = "land/copernicus/content/ftests"
         JSLINT_CUSTOM_FIND = "! -path */static/lib/* ! -path */static/fileslibraryitem/*"
         PYFLAKES_CUSTOM_FIND = "-name docs -prune -o"
-        I18N_EXCLUDE = "password_template notify_template"
+        I18N_EXCLUDE = "template-overrides search-by-tags"
     }
 
   stages {
