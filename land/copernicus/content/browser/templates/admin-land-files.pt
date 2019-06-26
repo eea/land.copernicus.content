@@ -89,7 +89,7 @@
       <p i18n:translate="">(tag name, tag value),(tag name, tag value)</p>
 
       <script>
-$(document).on("ready", function() {
+$(document).ready(function () {
   function pretty_print() {
     var ugly = document.getElementById('output-json').value;
     var obj = JSON.parse(ugly);

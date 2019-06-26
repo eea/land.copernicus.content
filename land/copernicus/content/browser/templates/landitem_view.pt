@@ -79,7 +79,7 @@
           </div>
           <tal:service replace="structure html" />
           <script>
-            $(document).on("ready", function() {
+            $(document).ready(function () {
               var icon_expand = "<i class='fa fa-enlarge'></i>";
               var icon_retract = "<i class='fa fa-shrink'>";
 
