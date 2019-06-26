@@ -3,6 +3,9 @@ Changelog
 
 9.9.dev0 - (unreleased)
 -----------------------
+* Feature: Fix jslint issues, fix pyflakes issues, fix i18n issues, update
+  Jenkins testing pipelines, add in-situ testing, fix land tests, fix tags.
+  [avoinea #106584]
 
 9.8 - (2019-06-18)
 ------------------
