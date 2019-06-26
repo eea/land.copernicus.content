@@ -3,6 +3,8 @@ Changelog
 
 10.0.dev0 - (unreleased)
 ------------------------
+* Fix: Use document.ready instead of .on event
+  [iulianpetchesi #106508]
 
 9.9 - (2019-06-26)
 ------------------
@@ -759,4 +761,3 @@ Changelog
 1.0  - (initial release)
 ------------------------
 * Initial release
-
