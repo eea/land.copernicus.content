@@ -214,7 +214,7 @@
         <textarea rows="5" cols="30" name="phone_numbers:lines" class="numeric"
           tal:content="python:'\n'.join(fields.get('phone_numbers', []))"></textarea>
         <script>
-          $(document).on("ready", function() {
+          $(document).ready(function () {
             $(".numeric").on("keypress", function(e) {
               if(e.which != 13 && e.which != 43) {
                 $("p.formHelp.phone-numbers-validation").css("display", "inherit");
@@ -287,7 +287,7 @@
   </div>
 </form>
 <script>
-  $(document).on("ready", function(){
+  $(document).ready(function () {
     meeting.setup_pages()
   });
 </script>
@@ -398,7 +398,7 @@
             <textarea rows="5" cols="30" name="phone_numbers:lines" class="numeric"
               tal:content="python:'\n'.join(fields.get('phone_no', []))"></textarea>
             <script>
-              $(document).on("ready", function() {
+              $(document).ready(function () {
                 $(".numeric").on("keypress", function(e) {
                   if(e.which != 13 && e.which != 43) {
                     $("p.formHelp.phone-numbers-validation").css("display", "inherit");
@@ -434,7 +434,7 @@
                      />
               <span>&nbsp;</span>
               <script>
-                $(document).on("ready", function() {
+                $(document).ready(function () {
                   meeting.widget_other('#f_role', '#f_role_other')
                 });
               </script>
