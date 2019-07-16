@@ -200,6 +200,11 @@ def parse_tags(string_input):
     return re.findall(expression, string_input)
 
 
+def fix_tags_encoding(tags_list):
+    return [
+        (x[0].decode("utf-8"), x[1].decode("utf-8")) for x in tags_list]
+
+
 class AdminLandFilesView(BrowserView):
     """ Administration view for land files of a land item
     """
@@ -237,7 +242,7 @@ class AdminLandFilesView(BrowserView):
             id=landfile.shortname,
             description=landfile.description,
             download_url=landfile.remoteUrl,
-            categorization_tags=landfile.fileCategories,
+            categorization_tags=fix_tags_encoding(landfile.fileCategories),
             size=landfile.fileSize,
         )
 
