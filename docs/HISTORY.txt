@@ -3,6 +3,8 @@ Changelog
 
 10.2.dev0 - (unreleased)
 ------------------------
+* Fix: UnicodeDecodeError in get, admin land files.
+  [GhitaB #107786]
 
 10.1 - (2019-07-16)
 -------------------
