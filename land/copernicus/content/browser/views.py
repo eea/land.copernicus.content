@@ -201,8 +201,16 @@ def parse_tags(string_input):
 
 
 def fix_tags_encoding(tags_list):
-    return [
-        (x[0].decode("utf-8"), x[1].decode("utf-8")) for x in tags_list]
+    try:
+        return [
+            (x[0].decode("utf-8"), x[1].decode("utf-8")) for x in tags_list]
+    except UnicodeEncodeError:
+        try:
+            return [
+                (x[0].decode("latin1"), x[1].decode(
+                    "latin1")) for x in tags_list]
+        except Exception:
+            return safe_unicode(tags_list)
 
 
 class AdminLandFilesView(BrowserView):
