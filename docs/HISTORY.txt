@@ -1,8 +1,8 @@
 Changelog
 =========
 
-10.3.dev0 - (unreleased)
-------------------------
+10.3 - (2019-07-30)
+-------------------
 * Fix: Redirect to download after login from download tab.
 * Fix: Add space between question and link.
   [GhitaB #108067]
