@@ -187,13 +187,13 @@
           <tal:anon condition="python:not member">
             <br />
             <p class="text-center">
-              <a href="./login" class="btn btn-default btn-login" i18n:translate="">
+            <a href="./login/?came_from=${context/absolute_url}?tab=download" class="btn btn-default btn-login" i18n:translate="">
                 <i class="fa fa-user-circle" i18n:name="icon"></i>
                 Log in to download the data
               </a>
             </p>
             <p class="text-center info-text">
-            <i><tal:i i18n:translate="">New user?</tal:i><a href="/@@register" i18n:translate="">Follow this link to register.</a></i>
+            <i><tal:i i18n:translate="">New user?</tal:i> <a href="/@@register" i18n:translate="">Follow this link to register.</a></i>
             </p>
             <br />
           </tal:anon>
