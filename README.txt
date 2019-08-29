@@ -1,7 +1,7 @@
 =============================
 Land Copernicus Content-Types
 =============================
-Custom Content-Types for Land Copernicus
+insitu-redesign branch contains Custom Content-Types for insitu.copernicus.eu
 
 Copyright and license
 =====================
