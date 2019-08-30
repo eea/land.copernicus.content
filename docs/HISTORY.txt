@@ -3,6 +3,8 @@ Changelog
 
 10.4.dev0 - (unreleased)
 ------------------------
+* Improve: Remove unused return (detected by sonarqube) in get_event_location.
+  [GhitaB #106583]
 
 10.3 - (2019-07-30)
 -------------------
