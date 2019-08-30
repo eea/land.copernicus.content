@@ -609,5 +609,4 @@ class ExternalTemplateHeader(BrowserView):
     def theme_base(self):
         reg = getUtility(IRegistry)
         settings = reg.forInterface(IThemeSettings, False)
-        return 'xxx'
         return '/++theme++' + settings.currentTheme + '/'
