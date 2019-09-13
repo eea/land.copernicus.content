@@ -3,6 +3,8 @@ Changelog
 
 10.4.dev0 - (unreleased)
 ------------------------
+* Fix: clear metadata users in download landfiles.
+  [david-batranu, GhitaB #109257]
 * Improve: Remove unused return (detected by sonarqube) in get_event_location.
 * Fix: ExternalTemplateHeader - theme_base duplicate return (sonarqube).
   [GhitaB #106583]
