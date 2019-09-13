@@ -1,8 +1,8 @@
 Changelog
 =========
 
-10.4.dev0 - (unreleased)
-------------------------
+10.4 - (2019-09-13)
+-------------------
 * Fix: clear metadata users in download landfiles.
   [david-batranu, GhitaB #109257]
 * Improve: Remove unused return (detected by sonarqube) in get_event_location.
