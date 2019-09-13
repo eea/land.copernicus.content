@@ -52,6 +52,14 @@ MB = KB ** 2
 GB = KB ** 3
 
 
+REASON_NONE = 'not-given'
+REASON_ALL_MISSING = 'missing-files'
+REASON_NO_ZIP = 'no-zip'
+REASON_OUTDATED = 'outdated-zip'
+REASON_SIZE_DIFFERS = 'size-differs'
+REASON_INTERRUPTED = 'interrupted'
+
+
 def _nt_to_dict(nt):
     return {name: attrgetter(name)(nt) for name in nt._fields}
 
@@ -247,6 +255,14 @@ def _make_zip(path, paths):
         CONSUME(starmap(zip_file.write, zip_args))
 
 
+def _clear_metadata_users(path_metadata, keep=None):
+    metadata = _delayed_read_metadata(path_metadata)
+    updated = _nt_to_dict(metadata)
+    updated['userids'] = [keep] if keep else []
+    updated_metadata = Metadata(**updated)
+    _write_metadata(path_metadata, updated_metadata)
+
+
 def _send_notification(context, job, missing_files, userid):
     args = dict(
         userid=userid,
@@ -328,20 +344,24 @@ def _is_zip_outdated(path_dst, paths_src):
 
 def _should_build(paths, existing, src_paths):
     decision = False
+    reason = REASON_NONE
 
     has_zip = paths.has_zip()
 
     if not existing:
         logger.info('All requested files are missing!')
         decision = False
+        reason = REASON_ALL_MISSING
 
     elif not has_zip:
         logger.info('No .zip for hash: %s', paths.hash)
         decision = True
+        reason = REASON_NO_ZIP
 
     elif has_zip and _is_zip_outdated(paths.zip, src_paths):
         logger.info('Outdated .zip for hash: %s', paths.hash)
         decision = True
+        reason = REASON_OUTDATED
 
     elif has_zip and paths.has_done():
         src_size = float(_size_of(existing))
@@ -357,6 +377,7 @@ def _should_build(paths, existing, src_paths):
         )
         if ratio < 0.9:
             decision = True
+            reason = REASON_SIZE_DIFFERS
 
     elif has_zip:
         wait = 3
@@ -377,6 +398,7 @@ def _should_build(paths, existing, src_paths):
         # (assumes the file was in progress but the process died)
         if dt_size == 0 and not paths.has_done():
             decision = True
+            reason = REASON_INTERRUPTED
 
     if decision is True:
         paths.do_cleanup()
@@ -387,17 +409,24 @@ def _should_build(paths, existing, src_paths):
         paths.hash
     )
 
-    return decision
+    return decision, reason
 
 
-def _download_executor(context, job):
+def _download_executor(context, job, userid):
     paths = JobPaths(job.dst, job.meta.hash)
 
     _joiner = partial(os.path.join, job.src)
     src_paths = tuple(map(_joiner, job.meta.filepaths))
     existing_paths = tuple(filter(os.path.isfile, src_paths))
 
-    if _should_build(paths, existing_paths, src_paths):
+    should_build, build_reason = _should_build(
+        paths, existing_paths, src_paths)
+
+    if build_reason == REASON_OUTDATED:
+        # Clear userids. This ensures users don't get notified several times.
+        _clear_metadata_users(paths.metadata, keep=userid)
+
+    if should_build:
         _make_zip(paths.zip, existing_paths)
 
         # mark zip as complete
@@ -415,14 +444,15 @@ Job = namedtuple('Job', ('meta', 'dst', 'src', 'done_url'))
 Metadata = namedtuple('Metadata', ('hash', 'filepaths', 'exp_time', 'userids'))
 
 
-def _queue_download(context, metadata):
+def _queue_download(context, metadata, userid):
     done_url = URL_FETCH.format(context.absolute_url(), metadata.hash)
     job = Job(metadata, DST_PATH, SRC_PATH, done_url)
 
     worker = queryUtility(IAsyncService)
     queue = worker.getQueues()['']
 
-    worker.queueJobInQueue(queue, (Q_NAME,), _download_executor, context, job)
+    worker.queueJobInQueue(
+        queue, (Q_NAME,), _download_executor, context, job, userid)
 
 
 def _time_from_date(date):
@@ -498,7 +528,7 @@ class DownloadAsyncView(BrowserView):
         _create_update_metadata(DST_PATH, file_hash, metadata)
 
         # Start async job
-        _queue_download(self.context, metadata)
+        _queue_download(self.context, metadata, userid)
 
         # prepare view params
         size = sum(map(_translate_size, map(GET_FILE_SIZE, items)))
