@@ -1,8 +1,8 @@
 Changelog
 =========
 
-10.7.dev0 - (unreleased)
-------------------------
+10.7 - (2019-09-25)
+-------------------
 * Feature: add "Delegate type" field for subscribers (in meetings).
   [GhitaB #109778]
 
