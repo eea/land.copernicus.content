@@ -47,6 +47,7 @@
                 <th i18n:translate="">Email</th>
                 <th i18n:translate="">Phone no</th>
                 <th tal:condition="python:meeting.is_webinar() is not True" i18n:translate="">Role</th>
+                <th tal:condition="python:meeting.is_webinar() is not True" i18n:translate="">Delegate type</th>
                 <th tal:condition="meeting/need_e_pass" i18n:translate="">DATE OF BIRTH</th>
                 <th tal:condition="meeting/need_e_pass" i18n:translate="">NATIONALITY</th>
                 <th tal:condition="meeting/need_e_pass" i18n:translate="">ID CARD NBR</th>
@@ -58,7 +59,7 @@
             <thead>
             <tbody tal:define="subscribers python:context.get_subscribers()">
               <tr tal:condition="not:subscribers">
-                <td colspan="20" i18n:translate="">No subscribers.</td>
+                <td colspan="21" i18n:translate="">No subscribers.</td>
               </tr>
               <tal:subscribers tal:repeat="subscriber subscribers">
                 <tr tal:define="subscriber_details python:subscriber.get_details();">
@@ -84,6 +85,8 @@
                   <td tal:content="subscriber/email|string:" />
                   <td tal:content="python:subscriber_details.get('phone_numbers', '')">Telephone</td>
                   <td tal:content="python:subscriber.role_other if subscriber.role == 'other' else subscriber.role"
+                      tal:condition="python:meeting.is_webinar() is not True" />
+                  <td tal:content="python:subscriber.delegate_type"
                       tal:condition="python:meeting.is_webinar() is not True" />
                   <td tal:content="python:subscriber.date_of_birth" tal:condition="meeting/need_e_pass">DATE OF BIRTH</td>
                   <td tal:content="python:subscriber.nationality" tal:condition="meeting/need_e_pass">NATIONALITY</td>

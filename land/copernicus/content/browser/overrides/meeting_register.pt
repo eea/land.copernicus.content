@@ -442,6 +442,25 @@
           </metal:field>
         </div>
 
+        <div tal:condition="python:context.is_webinar() is not True">
+          <metal:field use-macro="template/macros/field">
+            <metal:label fill-slot="label">
+              <label for="f_delegate_type" i18n:translate="">Delegate type<span class="required" i18n:name="required"></span></label>
+            </metal:label>
+            <metal:body fill-slot="body">
+              <select id="f_delegate_type" name="delegate_type" required>
+                <option></option>
+                <tal:delegatetype repeat="option view/delegate_type_options">
+                  <option tal:attributes="
+                    value python:option[0];
+                    selected python:'selected' if option[0] == fields.get('delegate_type') else ''"
+                    tal:content="python:option[1]"></option>
+                </tal:delegatetype>
+              </select>
+            </metal:body>
+          </metal:field>
+        </div>
+
         <!-- In webinar case just init with default: Participant, and hide this field -->
         <div tal:condition="python:context.is_webinar() is True" style="display:none">
           <metal:field use-macro="template/macros/field">
@@ -451,6 +470,25 @@
             <metal:body fill-slot="body">
               <select id="f_role" name="role" required>
                 <option value="Participant" i18n:translate="">Participant</option>
+              </select>
+            </metal:body>
+          </metal:field>
+        </div>
+
+        <!-- In webinar case just init with default and hide -->
+        <div tal:condition="python:context.is_webinar() is True" style="display:none">
+          <metal:field use-macro="template/macros/field">
+            <metal:label fill-slot="label">
+              <label for="f_delegate_type" i18n:translate="">Delegate type<span class="required" i18n:name="required"></span></label>
+            </metal:label>
+            <metal:body fill-slot="body">
+              <select id="f_delegate_type" name="delegate_type" required>
+                <tal:delegatetype repeat="option view/delegate_type_options">
+                  <option tal:attributes="
+                    value python:option[0];
+                    selected python:'selected' if option[0] == fields.get('delegate_type') else ''"
+                    tal:content="python:option[1]"></option>
+                </tal:delegatetype>
               </select>
             </metal:body>
           </metal:field>

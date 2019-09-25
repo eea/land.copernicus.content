@@ -41,6 +41,7 @@ FIELDS_REQUIRED = (
 
 FIELDS_SIGNUP = (
     ('role', 'role'),
+    ('delegate_type', 'delegate_type'),
     ('date_of_birth', 'date_of_birth'),
     ('nationality', 'nationality'),
     ('id_card_nbr', 'id_card_nbr'),
@@ -53,6 +54,7 @@ FIELDS_SIGNUP = (
 
 FIELDS_SIGNUP_REQUIRED = (
     ('role', 'Role'),
+    ('delegate_type', 'Delegate type'),
 )
 
 
@@ -302,6 +304,7 @@ class Register(views.Register):
                 email=user.getProperty('email', ''),
                 role=self.request.get('role'),
                 role_other=self.request.get('role_other', ''),
+                delegate_type=self.request.get('delegate_type'),
                 phone_numbers=self.request.get('phone_numbers', []),
                 date_of_birth=date_from_string(
                     self.request.get('date_of_birth', '')
@@ -332,6 +335,13 @@ class Register(views.Register):
         vocab = getUtility(
             IVocabularyFactory,
             name='subscriber_roles'
+        )(self.context)
+        return tuple((term.token, term.title) for term in vocab)
+
+    def delegate_type_options(self):
+        vocab = getUtility(
+            IVocabularyFactory,
+            name='subscriber_delegate_types'
         )(self.context)
         return tuple((term.token, term.title) for term in vocab)
 

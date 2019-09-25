@@ -141,6 +141,21 @@ def subscriber_roles_vocabulary(context):
     return SimpleVocabulary(terms)
 
 
+@provider(IVocabularyFactory)
+def subscriber_delegate_types_vocabulary(context):
+    items = [
+        ('Not applicable', u'Not applicable'),
+        ('Eionet member', u'Eionet member'),
+        ('Climate Change Committee', u'Climate Change Committee')
+    ]
+
+    terms = [
+        SimpleTerm(value=pair[0], token=pair[0], title=pair[1])
+        for pair in items
+    ]
+    return SimpleVocabulary(terms)
+
+
 class ISubscriber(Interface):
     """ Meeting subscriber """
 
@@ -171,6 +186,12 @@ class ISubscriber(Interface):
     role_other = schema.TextLine(
         title=_(u"Role (other)"),
         required=False,
+    )
+
+    delegate_type = schema.Choice(
+        title=_(u"Delegate type"),
+        vocabulary="subscriber_delegate_types",
+        required=True,
     )
 
     date_of_birth = schema.Date(

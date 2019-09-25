@@ -22,6 +22,9 @@
   <utility name="subscriber_roles"
            component=".eea_meeting.subscriber_roles_vocabulary" />
 
+  <utility name="subscriber_delegate_types"
+           component=".eea_meeting.subscriber_delegate_types_vocabulary" />
+
   <browser:page
     name="register"
     for="Products.CMFPlone.Portal.PloneSite"

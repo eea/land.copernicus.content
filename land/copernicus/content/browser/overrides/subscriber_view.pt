@@ -126,6 +126,17 @@
             </span>
           </div>
 
+          <div class="field" id="formfield-form-widgets-delegatetype">
+            <label for="form-widgets-delegatetype" class="horizontal" i18n:translate="">
+              Delegate type:
+            </label>
+
+            <span id="form-widgets-delegatetype" class="text-widget textline-field"
+                  tal:content="python:subscriber.delegate_type">
+              Delegate type
+            </span>
+          </div>
+
           <div class="field" id="formfield-form-widgets-date_of_birth"
                tal:condition="meeting/need_e_pass">
             <label for="form-widgets-date_of_birth" class="horizontal" i18n:translate="">
