@@ -144,9 +144,10 @@ def subscriber_roles_vocabulary(context):
 @provider(IVocabularyFactory)
 def subscriber_delegate_types_vocabulary(context):
     items = [
-        ('Not applicable', u'Not applicable'),
-        ('Eionet member', u'Eionet member'),
-        ('Climate Change Committee', u'Climate Change Committee')
+        ('Climate Change Committee', u'Climate Change Committee'),
+        ('EIONET/NRC', u'EIONET/NRC'),
+        ('EEA staff/EC staff', u'EEA staff/EC staff'),
+        ('Other', u'Other')
     ]
 
     terms = [
