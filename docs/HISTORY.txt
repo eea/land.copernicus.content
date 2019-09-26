@@ -1,8 +1,8 @@
 Changelog
 =========
 
-10.8.dev0 - (unreleased)
-------------------------
+10.8 - (2019-09-26)
+-------------------
 * Improve: Update options for Delegate type field.
   [GhitaB #109826]
 
