@@ -18,6 +18,8 @@
       tal:attributes="src string:${portal_url}/++resource++land.copernicus.content.static/lib/datepicker.min.js"></script>
     <script type="text/javascript"
       tal:attributes="src string:${portal_url}/++resource++land.copernicus.content.static/meeting/register.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   </metal:javascriptslot>
 </head>
 <body>
@@ -509,6 +511,15 @@
                 tal:attributes="value python:fields.get('date_of_birth', '')" />
 
               <script type="text/javascript">
+                $(document).ready(function () {
+                  $("button[name='submit.signup']").on("click", function(event) {
+                    if(!moment($('input[name="date_of_birth"]').val(), 'DD-MM-YYYY',true).isValid()) {
+                      alert("Invalid birth date");
+                      event.preventDefault();
+                    }
+                  })
+                });
+
                 $(function() {
                   $('input[name="date_of_birth"]').datepicker({
                     format: 'dd-mm-yyyy'
