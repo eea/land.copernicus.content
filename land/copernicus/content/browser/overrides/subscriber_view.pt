@@ -185,30 +185,6 @@
             </span>
           </div>
 
-          <div class="field" id="formfield-form-widgets-parking"
-               tal:condition="meeting/need_e_pass">
-            <label for="form-widgets-parking" class="horizontal" i18n:translate="">
-              PARKING:
-            </label>
-
-            <span id="form-widgets-parking" class="text-widget textline-field"
-                  tal:content="python:subscriber.parking">
-              Yes
-            </span>
-          </div>
-
-          <div class="field" id="formfield-form-widgets-car_id"
-               tal:condition="meeting/need_e_pass">
-            <label for="form-widgets-car_id" class="horizontal" i18n:translate="">
-              CAR ID:
-            </label>
-
-            <span id="form-widgets-car_id" class="text-widget textline-field"
-                  tal:content="python:subscriber.car_id">
-              BH 27 ABC
-            </span>
-          </div>
-
           <div class="field" id="formfield-form-widgets-request_data_deletion">
             <label for="form-widgets-request_data_deletion" class="horizontal" i18n:translate="">
               Request data deletion:
