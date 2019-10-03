@@ -509,13 +509,20 @@
             <metal:body fill-slot="body">
               <input type="text" name="date_of_birth" autocomplete="off" required
                 tal:attributes="value python:fields.get('date_of_birth', '')" />
+              <p id="error-msg" style="display:none;">Invalid date. Use DD-MM-YYYY format.</p>
 
               <script type="text/javascript">
                 $(document).ready(function () {
+                  $('input[name="date_of_birth"]').on("keypress", function(e) {
+                    $("p#error-msg").hide();
+                  });
+
                   $("button[name='submit.signup']").on("click", function(event) {
                     if(!moment($('input[name="date_of_birth"]').val(), 'DD-MM-YYYY',true).isValid()) {
-                      alert("Invalid birth date");
+                      $("p#error-msg").show();
                       event.preventDefault();
+                    } else {
+                      $("p#error-msg").hide();
                     }
                   })
                 });

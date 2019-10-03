@@ -197,16 +197,11 @@ class CustomizedUserDataPanel(UserDataPanel):
             usage - when the user edits his Personal settings - remains the
             same.
         """
-        referer = self.request.get('HTTP_REFERER', None)
-        if referer:
-            if "came_from" in referer:
-                try:
-                    came_from = referer.split("came_from=")[-1]
-                except Exception:
-                    came_from = None
+        next_url = self.request.SESSION.get("go_next", None)
 
-                if came_from:
-                    self.request.response.redirect(came_from)
+        if next_url:
+            self.request.response.redirect(next_url)
+            self.request.SESSION.set("go_next", None)
 
 
 class UserDataSchemaProvider(object):

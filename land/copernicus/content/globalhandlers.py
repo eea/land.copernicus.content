@@ -93,14 +93,10 @@ def forceUpdateProfile(principal, event):
                 request.form['came_from'] = ''
                 request.form['next'] = ''
 
-                url = "{0}{1}{2}".format(
-                    site.portal_url(),
-                    '/@@personal-information?came_from=',
-                    came_from)
+                # our one, the best: used on save in personal information
+                request.SESSION.set("go_next", came_from)
 
-            else:
-                url = "{0}{1}".format(site.portal_url(),
-                                      '/@@personal-information')
+            url = "{0}{1}".format(site.portal_url(), '/@@personal-information')
 
             request.RESPONSE.redirect(url)
 
