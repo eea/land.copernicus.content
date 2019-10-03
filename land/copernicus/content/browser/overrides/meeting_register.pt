@@ -543,7 +543,7 @@
               <label for="f_id_valid_date" i18n:translate="">ID VALID DATE</label>
             </metal:label>
             <metal:body fill-slot="body">
-              <input type="text" name="id_valid_date" autocomplete="off" required
+              <input type="text" name="id_valid_date" autocomplete="off"
                 tal:attributes="value python:fields.get('id_valid_date', '')" />
 
               <script type="text/javascript">
