@@ -52,8 +52,6 @@
                 <th tal:condition="meeting/need_e_pass" i18n:translate="">NATIONALITY</th>
                 <th tal:condition="meeting/need_e_pass" i18n:translate="">ID CARD NBR</th>
                 <th tal:condition="meeting/need_e_pass" i18n:translate="">ID VALID DATE</th>
-                <th tal:condition="meeting/need_e_pass" i18n:translate="">PARKING</th>
-                <th tal:condition="meeting/need_e_pass" i18n:translate="">CAR ID</th>
                 <th i18n:translate="">Request account deletion</th>
               </tr>
             <thead>
@@ -92,8 +90,6 @@
                   <td tal:content="python:subscriber.nationality" tal:condition="meeting/need_e_pass">NATIONALITY</td>
                   <td tal:content="python:subscriber.id_card_nbr" tal:condition="meeting/need_e_pass">ID CARD NBR</td>
                   <td tal:content="python:subscriber.id_valid_date" tal:condition="meeting/need_e_pass">ID VALID DATE</td>
-                  <td tal:content="python:subscriber.parking" tal:condition="meeting/need_e_pass">PARKING</td>
-                  <td tal:content="python:subscriber.car_id" tal:condition="meeting/need_e_pass">CAR ID</td>
                   <td tal:content="python:'Yes' if subscriber.request_data_deletion else 'No'">Request data deletion</td>
                 </tr>
               </tal:subscribers>

@@ -49,6 +49,4 @@ date_of_birth         DATE OF BIRTH                   NO     YES  *     NO      
 nationality           NATIONALITY                     NO     YES  *     NO             NO
 id_card_nbr           ID CARD NBR                     NO     YES  *     NO             NO
 id_valid_date         ID VALID DATE                   NO     YES  *     NO             NO
-parking               PARKING                         NO     YES  *     NO             NO
-car_id                CAR ID                          NO     YES  *  ** NO             NO      ** = only if Parking
 -------------------------------------------------------------------------------------------------------------------

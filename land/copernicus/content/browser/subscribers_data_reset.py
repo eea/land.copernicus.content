@@ -74,8 +74,6 @@ def clean_old_subscribers_data(site):
                     subscriber.nationality = None
                     subscriber.id_card_nbr = None
                     subscriber.id_valid_date = None
-                    subscriber.parking = None
-                    subscriber.car_id = None
                     transaction.commit()
     logger.info('Subscribers data reseting... DONE.')
     return True

@@ -220,16 +220,6 @@ class ISubscriber(Interface):
         max=datetime.date(2050, 1, 1),
     )
 
-    parking = schema.TextLine(
-        title=_(u"PARKING"),
-        required=False,
-    )
-
-    car_id = schema.TextLine(
-        title=_(u"CAR ID"),
-        required=False,
-    )
-
     request_data_deletion = schema.Bool(
         title=_(u"Request account deletion"),
         description=_(u"Please delete my account on the website after the "

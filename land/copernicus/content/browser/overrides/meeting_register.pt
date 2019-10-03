@@ -555,57 +555,6 @@
               </script>
             </metal:body>
           </metal:field>
-
-          <metal:field use-macro="template/macros/field" tal:condition="context/need_e_pass">
-            <metal:label fill-slot="label">
-              <label for="f_parking" i18n:translate="">PARKING REQUIRED<span class="required" i18n:name="required"></span></label>
-            </metal:label>
-            <metal:body fill-slot="body">
-              <select id="f_parking" name="parking" required>
-                <option></option>
-                <option i18n:translate="">Yes</option>
-                <option i18n:translate="">No</option>
-              </select>
-
-              <script type="text/javascript">
-                $(function() {
-                  function car_id_make_required() {
-                    var $car_id_field = $("input[name='car_id']");
-                    var $car_id_container = $car_id_field.parent().parent();
-                    $car_id_field.attr('required');
-                    $car_id_container.show();
-                  }
-
-                  function car_id_make_not_required() {
-                    var $car_id_field = $("input[name='car_id']");
-                    var $car_id_container = $car_id_field.parent().parent();
-                    $car_id_field.removeAttr('required');
-                    $car_id_container.hide();
-                  }
-
-                  $('#f_parking').bind('change', function () {
-                    var option = $(this).find(":selected").text();
-                    if(option == "Yes") {
-                      car_id_make_required();
-                    } else {
-                      car_id_make_not_required();
-                    }
-                  });
-                  $('#f_parking').trigger('change');
-                });
-              </script>
-            </metal:body>
-          </metal:field>
-
-          <metal:field use-macro="template/macros/field" tal:condition="context/need_e_pass">
-            <metal:label fill-slot="label">
-              <label for="f_car_id" i18n:translate="">CAR ID<span class="required" i18n:name="required"></span></label>
-            </metal:label>
-            <metal:body fill-slot="body">
-              <input type="text" name="car_id" required
-                tal:attributes="value python:fields.get('car_id', '')" />
-            </metal:body>
-          </metal:field>
         </div><!--End e-pass related-->
 
         <div class="disclaimers-container">
