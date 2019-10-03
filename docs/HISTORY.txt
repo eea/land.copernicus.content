@@ -4,6 +4,7 @@ Changelog
 10.9.dev0 - (unreleased)
 ------------------------
 * Improve: Get rid of Parking and Car ID fields for meeting subscriber.
+* Fix: ID valid date is not mandatory now, in meeting register.
   [GhitaB #109799]
 
 10.8 - (2019-09-26)
