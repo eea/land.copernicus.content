@@ -1,8 +1,8 @@
 Changelog
 =========
 
-11.0.dev0 - (unreleased)
-------------------------
+11.0 - (2019-10-08)
+-------------------
 * Implement custom came_from as session parameter to solve redirect to
   meeting in /@@personal-information.
   [GhitaB #110147]
