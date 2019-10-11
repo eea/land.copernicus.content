@@ -1,3 +1,4 @@
+/* jslint:disable */
 function syncCountries() {
   var detect = false;
   var res = [];

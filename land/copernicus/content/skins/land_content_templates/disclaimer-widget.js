@@ -1,3 +1,4 @@
+/* jslint:disable */
 $(function() {
   function show_first_page() {
     $("#terms-page1-container").show();

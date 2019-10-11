@@ -509,7 +509,7 @@
             <metal:body fill-slot="body">
               <input type="text" name="date_of_birth" autocomplete="off" required
                 tal:attributes="value python:fields.get('date_of_birth', '')" />
-              <p id="error-msg" style="display:none;">Invalid date. Use DD-MM-YYYY format.</p>
+              <p id="error-msg" style="display:none;" i18n:translate="">Invalid date. Use DD-MM-YYYY format.</p>
 
               <script type="text/javascript">
                 $(document).ready(function () {

@@ -1,3 +1,4 @@
+/* jslint:disable */
 $(document).ready(function() {
   (function(){
     var elem_choice = document.getElementById('choice');

@@ -1,3 +1,4 @@
+/* jslint:disable */
 /**
  * IMPORTANT: Don't use version on CDN for this plugin.
  * This code used here was FIXED to work for NaN values like "N/A".
