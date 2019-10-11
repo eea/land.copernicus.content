@@ -1,3 +1,4 @@
+/* jslint:disable */
 /* This JS integrates the jQuery Tools Tooltips with the EEA site. */
 jQuery(document).ready(function($) {
   if ($.fn.tooltip !== undefined) {
