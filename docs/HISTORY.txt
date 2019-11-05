@@ -3,6 +3,8 @@ Changelog
 
 11.1.dev0 - (unreleased)
 ------------------------
+- Feature: Add is_unlisted option for meeting.
+  [GhitaB #110772]
 
 11.0 - (2019-10-08)
 -------------------
