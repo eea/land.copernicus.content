@@ -66,6 +66,11 @@ class IMeeting(Interface):
         required=True,
     )
 
+    is_unlisted = schema.Bool(
+        title=_(u"Make this event unlisted"),
+        required=True,
+    )
+
     restrict_content_access = schema.Bool(
         title=_(u"Hide the content of Additional materials table for not "
                 "registered users"),
