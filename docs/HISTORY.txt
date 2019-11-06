@@ -5,6 +5,7 @@ Changelog
 ------------------------
 - Feature: Add option to allow register when maximum number of participants is
   reached, for meetings.
+- Feature: Notify contact point when maximum number of participants is reached.
 - Feature: Add is_unlisted option for meeting.
   [GhitaB #110772]
 
