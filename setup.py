@@ -43,6 +43,7 @@ setup(
         'eea.rdfmarshaller>=10.5',
         'eea.meeting',
         'eea.sentry',
+        'pycountry',
         'plone.namedfile [blobs]'
     ],
     setup_requires=['pytest-runner'],
