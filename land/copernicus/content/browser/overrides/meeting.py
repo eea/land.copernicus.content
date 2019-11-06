@@ -1,4 +1,3 @@
-from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from eea.meeting.browser import views
 from eea.meeting.events.rules import SendNewSubscriberEmailEvent
@@ -61,21 +60,19 @@ FIELDS_SIGNUP_REQUIRED = (
 def notify_max_participants_reached(meeting):
     """ Notify contact point about max participants limit reached """
 
-    import pdb; pdb.set_trace()
     site = api.portal.get()
-    # email = user.getProperty('email')
-    email = "asdasd"
+    email = meeting.contact_email
     email_from_name = site.getProperty(
         'email_from_name', 'Copernicus Land Monitoring Service at the \
         European Environment Agency')
     email_from_address = site.getProperty(
         'email_from_address', 'copernicus@eea.europa.eu')
     mfrom = "{0} <{1}>".format(email_from_name, email_from_address)
-    subject = u"Your user account has been deleted"
+    subject = u"Maximum number of participants was reached"
     mail_text = u"""
 Hello
 Please note the maximum number of participants was reached for
-this event: ({0})
+this event: {0}
 Kind regards
 Copernicus Land Monitoring Helpdesk Team""".format(meeting.absolute_url())
 
