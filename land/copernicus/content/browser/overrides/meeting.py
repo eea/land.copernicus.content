@@ -1,7 +1,9 @@
+from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from eea.meeting.browser import views
 from eea.meeting.events.rules import SendNewSubscriberEmailEvent
 from functools import partial
+from smtplib import SMTPRecipientsRefused
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.contentprovider.interfaces import IContentProvider
@@ -54,6 +56,36 @@ FIELDS_SIGNUP_REQUIRED = (
     ('role', 'Role'),
     ('delegate_type', 'Delegate type'),
 )
+
+
+def notify_max_participants_reached(meeting):
+    """ Notify contact point about max participants limit reached """
+
+    import pdb; pdb.set_trace()
+    site = api.portal.get()
+    # email = user.getProperty('email')
+    email = "asdasd"
+    email_from_name = site.getProperty(
+        'email_from_name', 'Copernicus Land Monitoring Service at the \
+        European Environment Agency')
+    email_from_address = site.getProperty(
+        'email_from_address', 'copernicus@eea.europa.eu')
+    mfrom = "{0} <{1}>".format(email_from_name, email_from_address)
+    subject = u"Your user account has been deleted"
+    mail_text = u"""
+Hello
+Please note the maximum number of participants was reached for
+this event: ({0})
+Kind regards
+Copernicus Land Monitoring Helpdesk Team""".format(meeting.absolute_url())
+
+    try:
+        mail_host = api.portal.get_tool(name='MailHost')
+        return mail_host.simple_send(
+            mto=email, mfrom=mfrom, subject=subject,
+            body=mail_text, immediate=True)
+    except SMTPRecipientsRefused:
+        raise SMTPRecipientsRefused('Recipient rejected by server')
 
 
 def create_user(request):
@@ -317,6 +349,12 @@ class Register(views.Register):
             )
             views.add_subscriber(subscribers, **props)
             notify(SendNewSubscriberEmailEvent(self.context))
+
+            # A custom feature for Land:
+            approved_participants = self.context.subscribers.approved_count()
+            max_participants = self.context.max_participants
+            if approved_participants > max_participants:
+                notify_max_participants_reached(self.context)
         except socket.gaierror:
             # Make sure the transaction gets aborted.
             transaction.get().abort()
