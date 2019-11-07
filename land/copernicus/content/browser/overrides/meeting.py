@@ -10,6 +10,7 @@ from zope.event import notify
 from zope.schema.interfaces import IVocabularyFactory
 import datetime
 import plone.api as api
+import pycountry
 import socket
 import transaction
 
@@ -181,6 +182,11 @@ def signup_error(request, template, msg):
 
 class Register(views.Register):
     index = ViewPageTemplateFile('meeting_register.pt')
+
+    def countries_list(self):
+        """ Return the list of country codes used in register form
+        """
+        return [(x.alpha_3, x.name) for x in pycountry.countries]
 
     def formatted_date(self, occ):
         provider = getMultiAdapter(

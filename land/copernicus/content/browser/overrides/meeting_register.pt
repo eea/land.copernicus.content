@@ -364,6 +364,7 @@
             <label i18n:translate="">Country<span class="required" i18n:name="required"></span></label>
           </metal:label>
           <metal:body fill-slot="body">
+            <span tal:content="python:view.countries_list()"></span>
             <input type="text" name="country" required
               tal:attributes="value python:fields.get('country', '')" />
           </metal:body>
