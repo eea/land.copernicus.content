@@ -1,8 +1,8 @@
 Changelog
 =========
 
-11.1.dev0 - (unreleased)
-------------------------
+11.1 - (2019-11-07)
+-------------------
 - Improve: Country codes in meeting register.
 - Feature: Add option to allow register when maximum number of participants is
   reached, for meetings.
