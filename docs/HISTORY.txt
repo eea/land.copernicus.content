@@ -1,13 +1,17 @@
 Changelog
 =========
 
+11.2.dev0 - (unrelease)
+-----------------------
+* Retry release.
+
 11.1 - (2019-11-07)
 -------------------
-- Improve: Country codes in meeting register.
-- Feature: Add option to allow register when maximum number of participants is
+* Improve: Country codes in meeting register.
+* Feature: Add option to allow register when maximum number of participants is
   reached, for meetings.
-- Feature: Notify contact point when maximum number of participants is reached.
-- Feature: Add is_unlisted option for meeting.
+* Feature: Notify contact point when maximum number of participants is reached.
+* Feature: Add is_unlisted option for meeting.
   [GhitaB #110772]
 
 11.0 - (2019-10-08)
