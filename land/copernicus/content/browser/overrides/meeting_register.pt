@@ -180,8 +180,18 @@
         <label i18n:translate="">Country<span class="required" i18n:name="required"></span></label>
       </metal:label>
       <metal:body fill-slot="body">
-        <input type="text" name="country" required
-          tal:attributes="value python:fields.get('country', '')" />
+        <select name="country" required>
+          <option tal:attributes="value python:fields.get('country', '')">
+            <span i18n:translate="" tal:content="python:fields.get('country', '')">
+              Country code
+            </span>
+          </option>
+          <tal:codes tal:repeat="country_code python:view.countries_list()">
+            <option tal:attributes="value python:country_code[0]">
+              <span i18n:translate="" tal:content="python:country_code[0]">Country code</span>
+            </option>
+          </tal:codes>
+        </select>
       </metal:body>
     </metal:field>
 
@@ -364,9 +374,20 @@
             <label i18n:translate="">Country<span class="required" i18n:name="required"></span></label>
           </metal:label>
           <metal:body fill-slot="body">
-            <span tal:content="python:view.countries_list()"></span>
-            <input type="text" name="country" required
-              tal:attributes="value python:fields.get('country', '')" />
+
+            <select name="country" required>
+              <option tal:attributes="value python:fields.get('country', '')">
+                <span i18n:translate="" tal:content="python:fields.get('country', '')">
+                  Country code
+                </span>
+              </option>
+              <tal:codes tal:repeat="country_code python:view.countries_list()">
+                <option tal:attributes="value python:country_code[0]">
+                  <span i18n:translate="" tal:content="python:country_code[0]">Country code</span>
+                </option>
+              </tal:codes>
+            </select>
+
           </metal:body>
         </metal:field>
 
