@@ -1,8 +1,8 @@
 Changelog
 =========
 
-11.3.dev0 - (unreleased)
-------------------------
+11.3 - (2019-11-07)
+-------------------
 * Feature: nationality select in meeting register (code + country names).
 * Improve: country select in meeting register (code + country names).
   [GhitaB #110772]
