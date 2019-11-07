@@ -3,6 +3,7 @@ Changelog
 
 11.1.dev0 - (unreleased)
 ------------------------
+- Improve: Country codes in meeting register.
 - Feature: Add option to allow register when maximum number of participants is
   reached, for meetings.
 - Feature: Notify contact point when maximum number of participants is reached.
