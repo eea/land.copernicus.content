@@ -3,6 +3,8 @@ Changelog
 
 11.3.dev0 - (unreleased)
 ------------------------
+* Improve: country select in meeting register (code + country names).
+  [GhitaB #110772]
 
 11.2 - (2019-11-07)
 -------------------
