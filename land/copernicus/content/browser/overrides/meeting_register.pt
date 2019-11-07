@@ -185,15 +185,15 @@
                             selected_countries python:[x for x in view.countries_list() if x[0] == selected_val];
                             selected_country python:selected_countries[0][1] if len(selected_countries) > 0 else '';">
           <option tal:attributes="value selected_val">
-            <span i18n:translate="" tal:content="python:selected_val">Country code</span> -
+            <span tal:condition="python:len(selected_country) > 1"
+                  i18n:translate="" tal:content="python:selected_val">Country code</span>
+            <span tal:condition="python:len(selected_country) > 1"> - </span>
             <span i18n:translate="" tal:content="python:selected_country">Country name</span>
           </option>
-          <tal:codes tal:repeat="country_code python:view.countries_list()">
-            <option tal:attributes="value python:country_code[0]">
-              <span tal:condition="python:len(selected_country) > 1"
-                    i18n:translate="" tal:content="python:country_code[0]">Country code</span>
-              <span tal:condition="python:len(selected_country) > 1"> - </span>
-              <span i18n:translate="" tal:content="python:country_code[1]">Country name</span>
+          <tal:codes tal:repeat="country python:view.countries_list()">
+            <option tal:attributes="value python:country[0]">
+              <span i18n:translate="" tal:content="python:country[0]">Country code</span> -
+              <span i18n:translate="" tal:content="python:country[1]">Country name</span>
             </option>
           </tal:codes>
         </select>
@@ -379,25 +379,23 @@
             <label i18n:translate="">Country<span class="required" i18n:name="required"></span></label>
           </metal:label>
           <metal:body fill-slot="body">
-
-          <select name="country" required
-                  tal:define="selected_val python:fields.get('country', '');
-                              selected_countries python:[x for x in view.countries_list() if x[0] == selected_val];
-                              selected_country python:selected_countries[0][1] if len(selected_countries) > 0 else '';">
-            <option tal:attributes="value selected_val">
-              <span i18n:translate="" tal:content="python:selected_val">Country code</span> -
-              <span i18n:translate="" tal:content="python:selected_country">Country name</span>
-            </option>
-            <tal:codes tal:repeat="country_code python:view.countries_list()">
-              <option tal:attributes="value python:country_code[0]">
+            <select name="country" required
+                    tal:define="selected_val python:fields.get('country', '');
+                                selected_countries python:[x for x in view.countries_list() if x[0] == selected_val];
+                                selected_country python:selected_countries[0][1] if len(selected_countries) > 0 else '';">
+              <option tal:attributes="value selected_val">
                 <span tal:condition="python:len(selected_country) > 1"
-                      i18n:translate="" tal:content="python:country_code[0]">Country code</span>
+                      i18n:translate="" tal:content="python:selected_val">Country code</span>
                 <span tal:condition="python:len(selected_country) > 1"> - </span>
-                <span i18n:translate="" tal:content="python:country_code[1]">Country name</span>
+                <span i18n:translate="" tal:content="python:selected_country">Country name</span>
               </option>
-            </tal:codes>
-          </select>
-
+              <tal:codes tal:repeat="country python:view.countries_list()">
+                <option tal:attributes="value python:country[0]">
+                  <span i18n:translate="" tal:content="python:country[0]">Country code</span> -
+                  <span i18n:translate="" tal:content="python:country[1]">Country name</span>
+                </option>
+              </tal:codes>
+            </select>
           </metal:body>
         </metal:field>
 
@@ -573,23 +571,23 @@
               <label for="f_nationality" i18n:translate="">NATIONALITY<span class="required" i18n:name="required"></span></label>
             </metal:label>
             <metal:body fill-slot="body">
-                <select name="nationality" required
-                        tal:define="selected_val python:fields.get('nationality', '');
-                                    selected_countries python:[x for x in view.countries_list() if x[0] == selected_val];
-                                    selected_country python:selected_countries[0][1] if len(selected_countries) > 0 else '';">
-                  <option tal:attributes="value selected_val">
-                    <span tal:condition="python:len(selected_country) > 1"
-                          i18n:translate="" tal:content="python:selected_val">Country code</span>
-                    <span tal:condition="python:len(selected_country) > 1"> - </span>
-                    <span i18n:translate="" tal:content="python:selected_country">Country name</span>
+              <select name="nationality" required
+                      tal:define="selected_val python:fields.get('nationality', '');
+                                  selected_countries python:[x for x in view.countries_list() if x[0] == selected_val];
+                                  selected_country python:selected_countries[0][1] if len(selected_countries) > 0 else '';">
+                <option tal:attributes="value selected_val">
+                  <span tal:condition="python:len(selected_country) > 1"
+                        i18n:translate="" tal:content="python:selected_val">Country code</span>
+                  <span tal:condition="python:len(selected_country) > 1"> - </span>
+                  <span i18n:translate="" tal:content="python:selected_country">Country name</span>
+                </option>
+                <tal:codes tal:repeat="country python:view.countries_list()">
+                  <option tal:attributes="value python:country[0]">
+                    <span i18n:translate="" tal:content="python:country[0]">Country code</span> -
+                    <span i18n:translate="" tal:content="python:country[1]">Country name</span>
                   </option>
-                  <tal:codes tal:repeat="country python:view.countries_list()">
-                    <option tal:attributes="value python:country[0]">
-                      <span i18n:translate="" tal:content="python:country[0]">Country code</span> -
-                      <span i18n:translate="" tal:content="python:country[1]">Country name</span>
-                    </option>
-                  </tal:codes>
-                </select>
+                </tal:codes>
+              </select>
             </metal:body>
           </metal:field>
 
