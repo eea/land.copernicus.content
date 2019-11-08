@@ -3,6 +3,7 @@ Changelog
 
 11.4.dev0 - (unreleased)
 ------------------------
+* Feature: Add revision date field in metadata of land item.
 * Improve: Add download info message in Download tab for land items.
   [GhitaB #110927]
 
