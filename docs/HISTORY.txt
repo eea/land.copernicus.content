@@ -3,6 +3,8 @@ Changelog
 
 11.4.dev0 - (unreleased)
 ------------------------
+* Improve: Add download info message in Download tab for land items.
+  [GhitaB #110927]
 
 11.3 - (2019-11-07)
 -------------------
