@@ -172,6 +172,14 @@
 
         <tal:download condition="show_download" define="download_info python: context.getField('download').getAccessor(context)()">
 
+          <div class="download-info-msg">
+            <p i18n:translate="">
+              Please note that you can only download the latest version of our
+              products from this website. If you are looking for older versions
+              of the products please contact copernicus@eea.europa.eu.
+            </p>
+          </div>
+
           <div tal:condition="python:download_info" id="download-info">
             <span tal:replace="structure download_info"></span>
           </div>
