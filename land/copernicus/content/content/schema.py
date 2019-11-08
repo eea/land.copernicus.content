@@ -434,6 +434,20 @@ PRODUCT_SCHEMA = Schema((
             i18n_domain='eea',
         ),
     ),
+    DateTimeField(
+        name='revisionDate',
+        languageIndependent=True,
+        required=False,
+        schemata="metadata",
+        widget=CalendarWidget(
+            show_hm=False,
+            label="Revision date",
+            description=("The date of revision"),
+            label_msgid='dataservice_label_revision_date',
+            description_msgid='dataservice_help_revision_date',
+            i18n_domain='eea',
+        ),
+    ),
     StringField(
         name='sectionTitleQuality',  # ========================================
         schemata='metadata',
@@ -704,6 +718,7 @@ PRODUCT_SCHEMA = Schema((
 # TEMPORAL REFERENCE                              sectionTitleTemporal
 #   Temporal extent                               temporalCoverage
 #   Date of publication                           lastUpload
+#   Revision date                                 revisionDate
 
 # QUALITY AND VALIDITY                            sectionTitleQuality
 #   Lineage                                       qualityLineage
@@ -757,6 +772,7 @@ def finalize_product_schema(schema):
         'sectionTitleTemporal',
         'temporalCoverage',
         'lastUpload',
+        'revisionDate',
 
         'sectionTitleQuality',
         'qualityLineage',
