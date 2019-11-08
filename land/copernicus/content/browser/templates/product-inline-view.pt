@@ -208,6 +208,18 @@
         </dt>
         <dd tal:content="python: context.toLocalizedTime(value, long_format=0)">Date of publication:</dd>
       </tal:block>
+
+      <!-- Revision date -->
+      <tal:block
+        define="field python:context.getField('revisionDate');
+        value python:field.getAccessor(context)()"
+        condition="value">
+        <dt style="clear: left">
+          <metal:basic use-macro="here/interface_elements_macros/macros/tooltip" />
+          <span i18n:translate="">Revision date:</span>
+        </dt>
+        <dd tal:content="python: context.toLocalizedTime(value, long_format=0)">Revision date:</dd>
+      </tal:block>
     </dl>
 
     <h4 class="section-title" i18n:translate="">Quality and validity</h4>
