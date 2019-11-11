@@ -1,6 +1,10 @@
 Changelog
 =========
 
+11.6.dev0 - (unreleased)
+------------------------
+* Retry release
+
 11.5 - (2019-11-11)
 -------------------
 * Improve: Move download info msg in landitem view.
