@@ -3,6 +3,8 @@ Changelog
 
 11.5.dev0 - (unreleased)
 ------------------------
+* Improve: Move download info msg in landitem view.
+  [GhitaB #110927]
 
 11.4 - (2019-11-08)
 -------------------
