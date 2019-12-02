@@ -158,6 +158,14 @@
     />
 
   <browser:page
+    name="list_all_landitems_2nd"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    class=".views.ListAllLanditemsView"
+    template="templates/list_all_landitems.pt"
+    permission="cmf.ManagePortal"
+    />
+
+  <browser:page
     name="landfiles_content"
     for="land.copernicus.content.content.landitem.LandItem"
     class=".views.LandFilesContentView"
