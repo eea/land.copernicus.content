@@ -30,7 +30,6 @@ class TestUrlsView(BrowserView):
                     response.append(url + itemUrl)
         return response
 
-
     def get_inputs(self):
         return self.process_urls(self.get_input_urls())
 
@@ -38,18 +37,21 @@ class TestUrlsView(BrowserView):
         response = {}
         for url in urls:
             try:
-                res  = urllib.urlopen(url)
+                res = urllib.urlopen(url)
             except IOError:
-                import pdb; pdb.set_trace()
+                pass
+                # import pdb; pdb.set_trace()
 
             content = res.read()
             response_code = res.getcode()
             if 'This page does not seem to exist' in content:
                 response_code = 404
             res_headers = res.info()
-            response.update({url:
-                {'code':response_code
-                ,'type':res_headers.type
-                ,'length':len(content)}
+            response.update({
+                    url: {
+                        'code': response_code,
+                        'type': res_headers.type,
+                        'length': len(content)
+                    }
                 })
         return response
