@@ -158,12 +158,21 @@
     />
 
   <browser:page
-    name="list_all_landitems_2nd"
+    name="list_all_landitems"
     for="plone.app.layout.navigation.interfaces.INavigationRoot"
     class=".views.ListAllLanditemsView"
     template="templates/list_all_landitems.pt"
     permission="cmf.ManagePortal"
     />
+
+  <browser:page
+    name="validate_url"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    class=".validate_test.TestUrlsView"
+    template="templates/validate_urls.pt"
+    permission="cmf.ManagePortal"
+    />
+
 
   <browser:page
     name="landfiles_content"

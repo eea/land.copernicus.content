@@ -1,0 +1,43 @@
+<html xmlns="http://www.w4.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+  <metal:content-core fill-slot="content-core">
+    <h2>ValidateUrl</h2>
+    <form method=post>
+      <b>HOST:</b>
+      <input name="host"
+        value="${python:view.get_host()}"
+        style="width:100%">
+      <br>URLS:<br>
+      <textarea name="urls"
+        tal:content="view/get_textarea_urls"
+        style="height:100px;">
+      </textarea>
+      <input type="submit" value="Process">
+    </form>
+    <hr>
+    <table
+      tal:define="items python:view.get_inputs()"
+      class="table"
+      tal:condition="python:len(items) >= 1"
+    >
+      <tr>
+        <th width="75%">URL</th>
+        <th>CODE</th>
+        <th>TYPE</th>
+        <th>LENGTH</th>
+      </tr>
+      <tr tal:repeat="item python:items">
+        <td>${python:item}</td>
+        <td>${python:items[item]['code']}</td>
+        <td>${python:items[item]['type']}</td>
+        <td>${python:items[item]['length']}</td>
+      </tr>
+    </table>
+
+  </metal:content-core>
+</body>
+</html>
