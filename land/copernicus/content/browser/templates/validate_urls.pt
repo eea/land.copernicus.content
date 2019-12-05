@@ -5,18 +5,18 @@
 
 <body>
   <metal:content-core fill-slot="content-core">
-    <h2>ValidateUrl</h2>
+    <h2 i18n:translate="">ValidateUrl</h2>
     <form method=post>
-      <b>HOST:</b>
-      <input name="host"
+      <b i18n:translate="">HOST:</b>
+      <input name="host" type="text"
         value="${python:view.get_host()}"
         style="width:100%">
-      <br>URLS:<br>
+      <h4 i18n:translate="">URLS:</h4>
       <textarea name="urls"
         tal:content="view/get_textarea_urls"
         style="height:100px;">
       </textarea>
-      <input type="submit" value="Process">
+      <input type="submit" value="Process" i18n:attributes="value">
     </form>
     <hr>
     <table
