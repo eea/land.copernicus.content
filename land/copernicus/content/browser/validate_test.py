@@ -1,6 +1,6 @@
 from Products.Five.browser import BrowserView
-import plone.api as api
 import urllib
+
 
 class TestUrlsView(BrowserView):
     """ Administration view for test internal urls
@@ -38,20 +38,25 @@ class TestUrlsView(BrowserView):
         for url in urls:
             try:
                 res = urllib.urlopen(url)
-            except IOError:
-                pass
-                # import pdb; pdb.set_trace()
+                content = res.read()
+                response_code = res.getcode()
+                if 'This page does not seem to exist' in content:
+                    response_code = 404
+                res_headers = res.info()
+                response.update({
+                        url: {
+                            'code': response_code,
+                            'type': res_headers.type,
+                            'length': len(content)
+                        }
+                    })
+            except BaseException:
+                response.update({
+                        url: {
+                            'code': 'NA',
+                            'type': 'NA',
+                            'length': 'NA'
+                        }
+                    })
 
-            content = res.read()
-            response_code = res.getcode()
-            if 'This page does not seem to exist' in content:
-                response_code = 404
-            res_headers = res.info()
-            response.update({
-                    url: {
-                        'code': response_code,
-                        'type': res_headers.type,
-                        'length': len(content)
-                    }
-                })
         return response

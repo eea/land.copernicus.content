@@ -25,10 +25,10 @@
       tal:condition="python:len(items) >= 1"
     >
       <tr>
-        <th width="75%">URL</th>
-        <th>CODE</th>
-        <th>TYPE</th>
-        <th>LENGTH</th>
+        <th i18n:translate="" width="75%">URL</th>
+        <th i18n:translate="">CODE</th>
+        <th i18n:translate="">TYPE</th>
+        <th i18n:translate="">LENGTH</th>
       </tr>
       <tr tal:repeat="item python:items">
         <td>${python:item}</td>
