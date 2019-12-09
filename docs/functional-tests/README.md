@@ -12,10 +12,12 @@ Download from repository the tests configuration file: https://github.com/eea/la
 
 Open Selenium IDE (click on the icon on your toolbar
 ![](https://github.com/eea/land.copernicus.content/raw/master/docs/functional-tests/images/001-open-selenium.png)
+
 Select open an existing project
 ![](https://github.com/eea/land.copernicus.content/raw/master/docs/functional-tests/images/002-open-project.png)
-Edit the file and change the values for REAL_USER_NAME and REAL_USER_PASSWORD to a valid account
-![](https://github.com/eea/land.copernicus.content/raw/master/docs/functional-tests/images/003-change-real-username.png)
+
+Change the values for REAL_USER_NAME and REAL_USER_PASSWORD to a valid account
+![](https://github.com/eea/land.copernicus.content/raw/master/docs/functional-tests/images/004-change-real-username.png)
 
 ### Running all tests
 
