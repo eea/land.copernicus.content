@@ -1,0 +1,270 @@
+{
+  "id": "386c5243-8e96-4846-9932-e3f650be99f3",
+  "version": "2.0",
+  "name": "EEA",
+  "url": "https://land.copernicus.eu",
+  "tests": [{
+    "id": "68cd9a90-b787-4aeb-ac69-fc1cabb0f695",
+    "name": "Login Fail",
+    "commands": [{
+      "id": "e8d7d963-55ce-4588-a998-017c998dd866",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b9ec8759-e049-4d56-bebe-be62c57605a6",
+      "comment": "",
+      "command": "verifyText",
+      "target": "linkText=Log in",
+      "targets": [
+        ["linkText=Log out", "linkText"],
+        ["css=.land-list-separated > li:nth-child(5) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Log out')]", "xpath:link"],
+        ["xpath=//div[@id='land-brand-utils']/div/div/div[2]/div/div/div/ul/li[5]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'https://land.copernicus.eu/logout?next=https://land.copernicus.eu')]", "xpath:href"],
+        ["xpath=//li[5]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Log out')]", "xpath:innerText"]
+      ],
+      "value": "Log in"
+    }, {
+      "id": "49c849a6-7268-4701-977d-c08bd99b11a7",
+      "comment": "",
+      "command": "click",
+      "target": "id=personaltools-login",
+      "targets": [
+        ["id=personaltools-login", "id"],
+        ["linkText=Log in", "linkText"],
+        ["css=#personaltools-login", "css:finder"],
+        ["xpath=//a[contains(text(),'Log in')]", "xpath:link"],
+        ["xpath=//a[@id='personaltools-login']", "xpath:attributes"],
+        ["xpath=//div[@id='land-brand-utils']/div/div/div[2]/div/div/div/ul/li[4]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'https://land.copernicus.eu/login?came_from=https://land.copernicus.eu')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Log in')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "47cb0ced-291f-48f1-aa16-37580aca1b4c",
+      "comment": "",
+      "command": "type",
+      "target": "id=__ac_name",
+      "targets": [
+        ["id=__ac_name", "id"],
+        ["name=__ac_name", "name"],
+        ["css=#\\__ac_name", "css:finder"],
+        ["xpath=//input[@id='__ac_name']", "xpath:attributes"],
+        ["xpath=//div[@id='login-form']/div/input", "xpath:idRelative"],
+        ["xpath=//div/div/input", "xpath:position"]
+      ],
+      "value": "FAKE_USER_NAME"
+    }, {
+      "id": "2a81bcc4-f37b-4da6-a44c-9a75036e6e2c",
+      "comment": "",
+      "command": "type",
+      "target": "id=__ac_password",
+      "targets": [
+        ["id=__ac_password", "id"],
+        ["name=__ac_password", "name"],
+        ["css=#\\__ac_password", "css:finder"],
+        ["xpath=//input[@id='__ac_password']", "xpath:attributes"],
+        ["xpath=//div[@id='login-form']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "FAKE_USER_PASSWORD"
+    }, {
+      "id": "51df5b54-1422-4ea5-84d3-beadaa093c98",
+      "comment": "",
+      "command": "click",
+      "target": "name=submit",
+      "targets": [
+        ["name=submit", "name"],
+        ["css=.context", "css:finder"],
+        ["xpath=//input[@name='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='login-form']/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b449574b-ac90-4048-953a-2c3be6dfd616",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=.portalMessage:nth-child(2) > dd",
+      "targets": [
+        ["css=.portalMessage:nth-child(2) > dd", "css:finder"],
+        ["xpath=//section[@id='content-section']/div[2]/div/div/article/div[2]/dl[2]/dd", "xpath:idRelative"],
+        ["xpath=//dl[2]/dd", "xpath:position"],
+        ["xpath=//dd[contains(.,'Login failed. Both login name and password are case sensitive, check that caps lock is not enabled.')]", "xpath:innerText"]
+      ],
+      "value": "Login failed. Both login name and password are case sensitive, check that caps lock is not enabled."
+    }]
+  }, {
+    "id": "0894bf17-08ce-473d-bcc7-ee06337776af",
+    "name": "Login Success",
+    "commands": [{
+      "id": "2b36182c-77b4-4b62-9000-e0d2e258fa7b",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fe1a4dbb-aca4-4e4b-aa19-fa1e3f32214b",
+      "comment": "",
+      "command": "verifyText",
+      "target": "linkText=Log in",
+      "targets": [
+        ["linkText=Log out", "linkText"],
+        ["css=.land-list-separated > li:nth-child(5) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Log out')]", "xpath:link"],
+        ["xpath=//div[@id='land-brand-utils']/div/div/div[2]/div/div/div/ul/li[5]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'https://land.copernicus.eu/logout?next=https://land.copernicus.eu')]", "xpath:href"],
+        ["xpath=//li[5]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Log out')]", "xpath:innerText"]
+      ],
+      "value": "Log in"
+    }, {
+      "id": "cd305e8b-4840-498f-9055-307d092733b2",
+      "comment": "",
+      "command": "click",
+      "target": "id=personaltools-login",
+      "targets": [
+        ["id=personaltools-login", "id"],
+        ["linkText=Log in", "linkText"],
+        ["css=#personaltools-login", "css:finder"],
+        ["xpath=//a[contains(text(),'Log in')]", "xpath:link"],
+        ["xpath=//a[@id='personaltools-login']", "xpath:attributes"],
+        ["xpath=//div[@id='land-brand-utils']/div/div/div[2]/div/div/div/ul/li[4]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'https://land.copernicus.eu/login?came_from=https://land.copernicus.eu')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Log in')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "136d063a-dd19-4083-9902-91e48cdc4487",
+      "comment": "",
+      "command": "type",
+      "target": "id=__ac_name",
+      "targets": [
+        ["id=__ac_name", "id"],
+        ["name=__ac_name", "name"],
+        ["css=#\\__ac_name", "css:finder"],
+        ["xpath=//input[@id='__ac_name']", "xpath:attributes"],
+        ["xpath=//div[@id='login-form']/div/input", "xpath:idRelative"],
+        ["xpath=//div/div/input", "xpath:position"]
+      ],
+      "value": "REAL_USER_NAME"
+    }, {
+      "id": "4b1bde67-19f5-4388-a2d2-e2c4ed9e1d71",
+      "comment": "",
+      "command": "type",
+      "target": "id=__ac_password",
+      "targets": [
+        ["id=__ac_password", "id"],
+        ["name=__ac_password", "name"],
+        ["css=#\\__ac_password", "css:finder"],
+        ["xpath=//input[@id='__ac_password']", "xpath:attributes"],
+        ["xpath=//div[@id='login-form']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "REAL_USER_PASSWORD"
+    }, {
+      "id": "2fec0ca1-d8c4-404c-921b-b473b680d684",
+      "comment": "",
+      "command": "click",
+      "target": "name=submit",
+      "targets": [
+        ["name=submit", "name"],
+        ["css=.context", "css:finder"],
+        ["xpath=//input[@name='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='login-form']/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f885e5ac-45d5-4abe-9755-00e8fca3a50a",
+      "comment": "",
+      "command": "verifyText",
+      "target": "linkText=Log out",
+      "targets": [
+        ["linkText=Log out", "linkText"],
+        ["css=.land-list-separated > li:nth-child(5) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Log out')]", "xpath:link"],
+        ["xpath=//div[@id='land-brand-utils']/div/div/div[2]/div/div/div/ul/li[5]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'https://land.copernicus.eu/logout?next=https://land.copernicus.eu')]", "xpath:href"],
+        ["xpath=//li[5]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Log out')]", "xpath:innerText"]
+      ],
+      "value": "Log out"
+    }]
+  }, {
+    "id": "2690914c-cd4e-4722-8076-729846059988",
+    "name": "Logout",
+    "commands": [{
+      "id": "f3dc866c-f1a3-4fff-a20d-6b0232262716",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d738ab1a-c92c-43d8-b05d-62fc37d4a0f1",
+      "comment": "",
+      "command": "verifyText",
+      "target": "linkText=Log out",
+      "targets": [
+        ["linkText=Log out", "linkText"],
+        ["css=.land-list-separated > li:nth-child(5) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Log out')]", "xpath:link"],
+        ["xpath=//div[@id='land-brand-utils']/div/div/div[2]/div/div/div/ul/li[5]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'https://land.copernicus.eu/logout?next=https://land.copernicus.eu')]", "xpath:href"],
+        ["xpath=//li[5]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Log out')]", "xpath:innerText"]
+      ],
+      "value": "Log out"
+    }, {
+      "id": "fac02e38-4b97-4c84-86ad-c54cc7fbcf67",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Log out",
+      "targets": [
+        ["linkText=Log out", "linkText"],
+        ["css=.land-list-separated > li:nth-child(5) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Log out')]", "xpath:link"],
+        ["xpath=//div[@id='land-brand-utils']/div/div/div[2]/div/div/div/ul/li[5]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'https://land.copernicus.eu/logout?next=https://land.copernicus.eu')]", "xpath:href"],
+        ["xpath=//li[5]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Log out')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c6e32716-ca74-4cde-bd4a-f4f57e3473b4",
+      "comment": "",
+      "command": "verifyText",
+      "target": "id=personaltools-login",
+      "targets": [
+        ["id=personaltools-login", "id"],
+        ["linkText=Log in", "linkText"],
+        ["css=#personaltools-login", "css:finder"],
+        ["xpath=//a[contains(text(),'Log in')]", "xpath:link"],
+        ["xpath=//a[@id='personaltools-login']", "xpath:attributes"],
+        ["xpath=//div[@id='land-brand-utils']/div/div/div[2]/div/div/div/ul/li[4]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'https://land.copernicus.eu/login?came_from=https://land.copernicus.eu')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Log in')]", "xpath:innerText"]
+      ],
+      "value": "Log in"
+    }]
+  }],
+  "suites": [{
+    "id": "ce7e2626-8964-411f-b812-d91802f7a6a5",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["https://land.copernicus.eu/"],
+  "plugins": []
+}
