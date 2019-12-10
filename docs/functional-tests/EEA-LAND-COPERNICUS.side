@@ -5,7 +5,7 @@
   "url": "https://land.copernicus.eu",
   "tests": [{
     "id": "68cd9a90-b787-4aeb-ac69-fc1cabb0f695",
-    "name": "Login Fail",
+    "name": "001 - Login Fail",
     "commands": [{
       "id": "e8d7d963-55ce-4588-a998-017c998dd866",
       "comment": "",
@@ -101,7 +101,7 @@
     }]
   }, {
     "id": "0894bf17-08ce-473d-bcc7-ee06337776af",
-    "name": "Login Success",
+    "name": "002 - Login Success",
     "commands": [{
       "id": "2b36182c-77b4-4b62-9000-e0d2e258fa7b",
       "comment": "",
@@ -200,7 +200,7 @@
     }]
   }, {
     "id": "2690914c-cd4e-4722-8076-729846059988",
-    "name": "Logout",
+    "name": "999 - Logout",
     "commands": [{
       "id": "f3dc866c-f1a3-4fff-a20d-6b0232262716",
       "comment": "",
@@ -255,6 +255,170 @@
         ["xpath=//a[contains(.,'Log in')]", "xpath:innerText"]
       ],
       "value": "Log in"
+    }]
+  }, {
+    "id": "300d8b48-f51a-48b2-89b9-33d7bf1088c5",
+    "name": "004 - Search",
+    "commands": [{
+      "id": "5dd60d8f-8363-421e-82ce-40718de0b559",
+      "comment": "",
+      "command": "open",
+      "target": "/@@search",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "cfe2c8f9-f97a-479e-a402-75703538cfdc",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "css=div#facetview_results_wrapper[style=\"display: none;\"]",
+      "targets": [
+        ["css=.eea-tile:nth-child(3)", "css:finder"],
+        ["xpath=//div[@id='facetview_results_wrapper']/div/div[3]", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1165f886-2f40-4d74-a798-fa2a8b5be1ca",
+      "comment": "",
+      "command": "click",
+      "target": "css=.jstree-anchor:nth-child(2)",
+      "targets": [
+        ["css=.facetview_filter:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='facetview_trees']/div[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div[2]/div/div/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "68444c6a-c1db-43ef-832c-05e9b09979c7",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "css=div#facetview_results_wrapper[style=\"display: block;\"]",
+      "targets": [
+        ["css=.eea-tile:nth-child(3)", "css:finder"],
+        ["xpath=//div[@id='facetview_results_wrapper']/div/div[3]", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div[3]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "c5cd7b68-0a48-440d-b733-4febb2c03a34",
+    "name": "005 - Download",
+    "commands": [{
+      "id": "27891a5a-3d22-4da9-a2c2-7fb54d4ed96c",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d669b31a-a9e2-44e5-8adf-293ff5903995",
+      "comment": "",
+      "command": "verifyText",
+      "target": "linkText=Log out",
+      "targets": [
+        ["linkText=Log out", "linkText"],
+        ["css=.land-list-separated > li:nth-child(5) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Log out')]", "xpath:link"],
+        ["xpath=//div[@id='land-brand-utils']/div/div/div[2]/div/div/div/ul/li[5]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'https://land.copernicus.eu/logout?next=https://land.copernicus.eu')]", "xpath:href"],
+        ["xpath=//li[5]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Log out')]", "xpath:innerText"]
+      ],
+      "value": "Log out"
+    }, {
+      "id": "91ccf411-6dc0-4091-846b-b8c05a9837c5",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Local",
+      "targets": [
+        ["linkText=Local", "linkText"],
+        ["css=#portaltab-local > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Local')]", "xpath:link"],
+        ["xpath=//li[@id='portaltab-local']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/local')]", "xpath:href"],
+        ["xpath=//li[6]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Local')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d685af8e-eb4f-43b2-be69-5fb17d0967a5",
+      "comment": "",
+      "command": "click",
+      "target": "css=.photoAlbumEntry:nth-child(1) img",
+      "targets": [
+        ["css=.photoAlbumEntry:nth-child(1) img", "css:finder"],
+        ["xpath=//img[@title='The Urban Atlas is a joint initiative of the European Commission Directorate-General for Regional and Urban Policy and the Directorate-General for Enterprise and Industry with the support of the European Space Agency and the European Environment Agency. ']", "xpath:img"],
+        ["xpath=//div[@id='content-core']/div/a/span/img", "xpath:idRelative"],
+        ["xpath=//span/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "280a1fc9-dcdf-4200-858c-cc8e899f53db",
+      "comment": "",
+      "command": "click",
+      "target": "css=.photoAlbumEntry:nth-child(1) img",
+      "targets": [
+        ["css=.photoAlbumEntry:nth-child(1) img", "css:finder"],
+        ["xpath=//img[contains(@src,'https://land.copernicus.eu/local/urban-atlas/urban-atlas-2006/image_thumb')]", "xpath:img"],
+        ["xpath=//div[@id='content-core']/div/a/span/img", "xpath:idRelative"],
+        ["xpath=//span/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a8e7b339-6cd8-47fa-b525-fdc5b49c6870",
+      "comment": "",
+      "command": "click",
+      "target": "css=#fieldsetlegend-download > span",
+      "targets": [
+        ["css=#fieldsetlegend-download > span", "css:finder"],
+        ["xpath=//a[@id='fieldsetlegend-download']/span", "xpath:idRelative"],
+        ["xpath=//li[3]/a/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Download')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "82c75b35-1c6e-4c43-9cd6-627f514cbd12",
+      "comment": "",
+      "command": "click",
+      "target": "css=.file-size-column",
+      "targets": [
+        ["css=.file-size-column", "css:finder"],
+        ["xpath=//table[@id='data-table-download']/thead/tr/th[5]", "xpath:idRelative"],
+        ["xpath=//th[5]", "xpath:position"],
+        ["xpath=//th[contains(.,'Size')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "57fdf43f-a967-41a1-ae0b-7df67c9b6cf3",
+      "comment": "",
+      "command": "click",
+      "target": "name=selected:list",
+      "targets": [
+        ["name=selected:list", "name"],
+        ["css=.odd:nth-child(1) .checkbox-select-item", "css:finder"],
+        ["xpath=//input[@name='selected:list']", "xpath:attributes"],
+        ["xpath=//table[@id='data-table-download']/tbody/tr/td/input", "xpath:idRelative"],
+        ["xpath=//td/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3b1a7290-2dd2-44d1-8572-6e5f49a24217",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-desc",
+      "targets": [
+        ["css=.btn-desc", "css:finder"],
+        ["xpath=//button[@id='button-download-selected']/small", "xpath:idRelative"],
+        ["xpath=//small", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "56d30396-96f6-4c99-8a22-158b8dd14da9",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "css=.panel-body > h2",
+      "targets": [],
+      "value": "Download your archive"
     }]
   }],
   "suites": [{

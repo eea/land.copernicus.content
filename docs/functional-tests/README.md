@@ -36,6 +36,10 @@ You should not be logged in for this test. The credential should be set for REAL
 ##### Logout
 We need a user to be logged in for a valid test.
 
+##### Search
+Will open search browser and assume that we have at least one category and a click on it will aspect search results to be visible
 
+##### Download file
+For this test we need a logged user. First we check the local menu, and click on first items and then Download. We order the results ascending by file size to ensure that the test will download a small one
 
 [git-repo-url]: <https://github.com/eea/land.copernicus.content>
