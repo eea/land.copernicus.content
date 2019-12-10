@@ -1,6 +1,6 @@
 # EEA Land Copernicus test scenarios
 
-### Add browser extenstion
+### Add browser extension
 The tests were run on chrome browser. For testing the functionality use according to your preffered browser:
 - [selenium chrome extension](https://chrome.google.com/webstore/detail/selenium-ide/mooikfkahbdckldjjndioackbalphokd?hl=en)
 - [selenium firefox add-on](https://addons.mozilla.org/en-US/firefox/addon/selenium-ide/)
