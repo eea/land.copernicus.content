@@ -26,8 +26,19 @@ Before running all tests, ensure that you are not logged in the browser
 ### Individual tests
 You can run the tests for partial testing. Review the test you wish to run to check if their are requirments
 
+##### Lost Password
+Check that you are not logged in. Will test with a fake and real username
+
 ##### Login failed
-Testing this case you need to be sure that you are not logged in the browser. Also we populated with dummy data:  FAKE_USER_NAME and FAKE_USER_PASSWORD. In case you want to test for ex a expired/not validated or any case a user credential are not valid change the values
+Testing this case you need to be sure that you are not logged in the browser. Will test also:
+- Login With Empty Password Should Fail
+- Login With Empty Username Should Fail
+- Login With Empty Username And Password Should Fail
+- Login With Invalid Username Should Fail
+- Login With Invalid Password Should Fail
+- Login With Invalid Username And Invalid Password Should Fail
+
+By default it is populated with dummy data:  FAKE_USER_NAME and FAKE_USER_PASSWORD. In case you want to test for ex a expired/not validated or any case a user credential are not valid change the values
 ![](https://github.com/eea/land.copernicus.content/raw/master/docs/functional-tests/images/003-change-fake-username.png)
 
 ##### Login success
@@ -42,4 +53,12 @@ Will open search browser and assume that we have at least one category and a cli
 ##### Download file
 For this test we need a logged user. First we check the local menu, and click on first items and then Download. We order the results ascending by file size to ensure that the test will download a small one
 
+##### Technical library
+Will open technical library link and perform a search by default for "g"(we notice document title with "guide"). Using this search we should have results, but using "dummy_search_text" we should receive no results.
+
+##### Map is loading
+We repeat steps from download section, but we will not click Download button. If map is loading we check for a text inside of iframe
+
+##### Global menu
+This is a external website. Clicking on the global menu will load external file.
 [git-repo-url]: <https://github.com/eea/land.copernicus.content>
