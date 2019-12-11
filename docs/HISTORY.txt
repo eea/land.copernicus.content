@@ -3,6 +3,8 @@ Changelog
 
 11.7.dev0 - (unreleased)
 ------------------------
+* Feature: WIP functional tests for testing restored website.
+  [Eugen Tripon #110552]
 
 11.6 - (2019-11-11)
 -------------------
