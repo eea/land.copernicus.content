@@ -1,8 +1,13 @@
 Changelog
 =========
 
-11.7.dev0 - (unreleased)
+11.8.dev0 - (unreleased)
 ------------------------
+
+11.7 - (2019-12-11)
+-------------------
+* Feature: WIP functional tests for testing restored website.
+  [Eugen Tripon #110552]
 
 11.6 - (2019-11-11)
 -------------------
