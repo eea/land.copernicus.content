@@ -1,8 +1,8 @@
 Changelog
 =========
 
-11.9.dev0 - (unreleased)
-------------------------
+11.9 - (2020-01-13)
+-------------------
 * Feature: add functional tests for testing restored website.
   [Eugen Tripon #110552]
 
