@@ -166,6 +166,14 @@
     />
 
   <browser:page
+    name="test_all_landfiles"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    class=".views.TestAllLandFilesView"
+    template="templates/test_all_landfiles.pt"
+    permission="cmf.ManagePortal"
+    />
+
+  <browser:page
     name="validate_url"
     for="plone.app.layout.navigation.interfaces.INavigationRoot"
     class=".validate_test.TestUrlsView"
