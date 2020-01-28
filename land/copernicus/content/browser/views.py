@@ -630,10 +630,11 @@ class TestAllLandFilesView(BrowserView):
 
         errors = []
 
-        for landitem in landitems:
-            landfiles = [x for x in landitem.getObject().landfiles.get_all()]
+        for item in landitems:
+            landitem = item.getObject()
+            landfiles = [x for x in landitem.landfiles.get_all()]
             for landfile in landfiles:
-                lfa = LandFileApi(landitem.getObject().landfiles)
+                lfa = LandFileApi(landitem.landfiles)
                 orig = lfa.get_by_shortname(landfile.shortname)
 
                 props = dict(
@@ -645,10 +646,11 @@ class TestAllLandFilesView(BrowserView):
 
                 try:
                     landfile = lfa.edit_with_filesize(orig.title, **props)
-                except (KeyError, OSError):
+                except (KeyError, OSError) as err:
                     errors.append([
-                        landitem.getObject().absolute_url(),
-                        landfile.shortname
+                        landitem.absolute_url(),
+                        landfile.shortname,
+                        err
                         ])
 
         return errors
