@@ -6,8 +6,10 @@
 <body>
   <metal:content-core fill-slot="content-core">
 
-    Found errors for:
-    <p tal:repeat="error python:view.items()" tal:content="python:error" />
+    <h4 i18n:translate="">Broken landfiles:</h4>
+    <tal:errorslist tal:repeat="error python:view.items()">
+      <p tal:content="python:error"></p>
+    </tal:errorslist>
   </metal:content-core>
 </body>
 </html>
