@@ -6,13 +6,8 @@
 <body>
   <metal:content-core fill-slot="content-core">
 
-    <table tal:define="items python:view.items()">
-      <tr tal:repeat="item python:items">
-        <td>${python:item.Title}</td>
-        <td><a href="${python:item.getURL()}">${python:item.getURL()}</a></td>
-      </tr>
-    </table>
-
+zzz
+    <span tal:content="python:view.items()" />
   </metal:content-core>
 </body>
 </html>
