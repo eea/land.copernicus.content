@@ -6,18 +6,21 @@ from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
 from land.copernicus.content.content.api import LandFileApi
+from pkg_resources import resource_filename
 from plone.app.theming.interfaces import IThemeSettings
 from plone.registry.interfaces import IRegistry
-from pkg_resources import resource_filename
 from urlparse import urlparse
 from zope.component import getMultiAdapter, getUtility
 from zope.component.hooks import getSite
 import datetime
 import json
+import logging
 import os
 import plone.api as api
 import re
 import subprocess
+
+logger = logging.getLogger('land.copernicus.content')
 
 
 def is_EIONET_member(member):
@@ -628,7 +631,7 @@ class TestAllLandFilesView(BrowserView):
     def items(self):
         landitems = api.content.find(portal_type='LandItem')
 
-        errors = []
+        msgs = []
 
         for item in landitems:
             landitem = item.getObject()
@@ -646,11 +649,22 @@ class TestAllLandFilesView(BrowserView):
 
                 try:
                     landfile = lfa.edit_with_filesize(orig.title, **props)
+
+                    msgs.append([
+                        landitem.absolute_url(),
+                        landfile.shortname,
+                        u'OK'
+                        ])
                 except (KeyError, OSError) as err:
-                    errors.append([
+                    msgs.append([
                         landitem.absolute_url(),
                         landfile.shortname,
                         err
                         ])
+                    logger.info(
+                        "ERROR landfile: {0}: {1} - {2}".format(
+                            landitem.absolute_url(),
+                            landfile.shortname,
+                            err))
 
-        return errors
+        return msgs
