@@ -8,7 +8,12 @@
 
     <h4 i18n:translate="">Broken landfiles:</h4>
     <tal:errorslist tal:repeat="error python:view.items()">
-      <p tal:content="python:error"></p>
+      <p>
+        <a tal:attributes="href python:error[0]"
+           i18n:translate="">Landitem</a> -
+        <span tal:content="python:error[1]"></span> -
+        <span tal:content="python:error[2]"></span>
+      </p>
     </tal:errorslist>
   </metal:content-core>
 </body>
