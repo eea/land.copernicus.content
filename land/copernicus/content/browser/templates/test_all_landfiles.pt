@@ -6,8 +6,8 @@
 <body>
   <metal:content-core fill-slot="content-core">
 
-zzz
-    <span tal:content="python:view.items()" />
+    Found errors for:
+    <p tal:repeat="error python:view.items()" tal:content="python:error" />
   </metal:content-core>
 </body>
 </html>

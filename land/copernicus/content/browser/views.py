@@ -628,15 +628,27 @@ class TestAllLandFilesView(BrowserView):
     def items(self):
         landitems = api.content.find(portal_type='LandItem')
 
+        errors = []
+
         for landitem in landitems:
             landfiles = [x for x in landitem.getObject().landfiles.get_all()]
             for landfile in landfiles:
                 lfa = LandFileApi(landitem.getObject().landfiles)
                 orig = lfa.get_by_shortname(landfile.shortname)
-                # import pdb; pdb.set_trace()
-                # try:
-                #     landfile = lfa.edit_with_filesize(orig.title, **props)
-                # except (KeyError, OSError) as err:
-                #     raise ActionExecutionError(Invalid(err.message))
 
-        return landitems
+                props = dict(
+                    title=orig.title,
+                    description=orig.description,
+                    remoteUrl=orig.remoteUrl,
+                    fileCategories=orig.fileCategories
+                )
+
+                try:
+                    landfile = lfa.edit_with_filesize(orig.title, **props)
+                except (KeyError, OSError):
+                    errors.append([
+                        landitem.getObject().absolute_url(),
+                        landfile.shortname
+                        ])
+
+        return errors
