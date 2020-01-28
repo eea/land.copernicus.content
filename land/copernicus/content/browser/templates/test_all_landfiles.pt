@@ -7,14 +7,14 @@
   <metal:content-core fill-slot="content-core">
 
     <h4 i18n:translate="">Broken landfiles:</h4>
-    <tal:errorslist tal:repeat="error python:view.items()">
+    <tal:msgslist tal:repeat="msg python:view.items()">
       <p>
-        <a tal:attributes="href python:error[0]"
+        <a tal:attributes="href python:msg[0]"
            i18n:translate="">Landitem</a> -
-        <span tal:content="python:error[1]"></span> -
-        <span tal:content="python:error[2]"></span>
+        <span tal:content="python:msg[1]"></span> -
+        <span tal:content="python:msg[2]"></span>
       </p>
-    </tal:errorslist>
+    </tal:msgslist>
   </metal:content-core>
 </body>
 </html>
