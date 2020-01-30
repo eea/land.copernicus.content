@@ -86,14 +86,6 @@
     permission="cmf.ModifyPortalContent"
     />
 
-
-  <!-- <browser:page -->
-  <!--   name="tpdb" -->
-  <!--   class=".views.GoPDB" -->
-  <!--   permission="cmf.ManagePortal" -->
-  <!--   for="*" -->
-  <!--   /> -->
-
   <browser:page
     name="export_users_xls"
     for="plone.app.layout.navigation.interfaces.INavigationRoot"

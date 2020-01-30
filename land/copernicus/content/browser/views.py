@@ -45,14 +45,6 @@ class LandItemsOverview(BrowserView):
         return batch
 
 
-class GoPDB(BrowserView):
-    def __call__(self):
-
-        import pdb
-        pdb.set_trace()
-        return "done"
-
-
 def remoteUrl_exists(location):
     try:
         res = subprocess.check_call(['/usr/bin/curl', '-I', '-f', location])
