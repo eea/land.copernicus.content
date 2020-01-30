@@ -160,7 +160,7 @@
   <browser:page
     name="test_all_landfiles"
     for="plone.app.layout.navigation.interfaces.INavigationRoot"
-    class=".views.TestAllLandFilesView"
+    class=".test_landfiles.TestAllLandFilesView"
     template="templates/test_all_landfiles.pt"
     permission="cmf.ManagePortal"
     />
