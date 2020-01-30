@@ -302,7 +302,7 @@ def _delayed_read_metadata(path):
 
 def _write_metadata(path, metadata):
     with open(path, 'w') as metadata_file:
-        metadata_file.truncate() # [refs #104987] ensure file is empty
+        metadata_file.truncate()  # [refs #104987] ensure file is empty
         metadata_file.write(_endln(_nt_to_json(metadata)))
 
 

@@ -3,6 +3,8 @@ Changelog
 
 12.1.dev0 - (unreleased)
 ------------------------
+* Improve: views code structure.
+  [GhitaB #113682]
 * Improve: docs - add info about testing landfiles.
   [GhitaB #110552]
 
