@@ -207,7 +207,7 @@
   <browser:page
     name="my_settings"
     for="plone.app.layout.navigation.interfaces.INavigationRoot"
-    class=".views.MySettingsView"
+    class=".user_settings.MySettingsView"
     permission="zope2.View"
     />
 

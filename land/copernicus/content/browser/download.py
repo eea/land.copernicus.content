@@ -29,7 +29,7 @@ from land.copernicus.content.config import ENV_DL_STATIC_PATH as ST_PATH
 from land.copernicus.content.config import logger
 
 from land.copernicus.content.browser.views import remoteUrl_exists
-from land.copernicus.content.browser.views import is_EIONET_member
+from land.copernicus.content.browser.user_settings import is_EIONET_member
 
 from land.copernicus.content.async import IAsyncService
 from land.copernicus.content.async.subscribers import NAME as Q_NAME
