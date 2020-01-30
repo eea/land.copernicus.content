@@ -152,7 +152,7 @@
   <browser:page
     name="list_all_landitems"
     for="plone.app.layout.navigation.interfaces.INavigationRoot"
-    class=".views.ListAllLanditemsView"
+    class=".landitem.ListAllLanditemsView"
     template="templates/list_all_landitems.pt"
     permission="cmf.ManagePortal"
     />

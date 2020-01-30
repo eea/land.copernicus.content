@@ -128,3 +128,12 @@ class ProductInlineView(BrowserView):
             tags.append(x)
 
         return u", ".join(tags)
+
+
+class ListAllLanditemsView(BrowserView):
+    """ Administration view for listing all land items
+    """
+
+    def items(self):
+        land_items = api.content.find(portal_type='LandItem')
+        return land_items

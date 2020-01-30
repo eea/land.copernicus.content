@@ -572,12 +572,3 @@ class ExternalTemplateHeader(BrowserView):
         reg = getUtility(IRegistry)
         settings = reg.forInterface(IThemeSettings, False)
         return '/++theme++' + settings.currentTheme + '/'
-
-
-class ListAllLanditemsView(BrowserView):
-    """ Administration view for list all land items
-    """
-
-    def items(self):
-        land_items = api.content.find(portal_type='LandItem')
-        return land_items
