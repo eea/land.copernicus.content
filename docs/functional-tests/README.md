@@ -1,5 +1,10 @@
 # EEA Land Copernicus test scenarios
 
+### Test landfiles
+Run as admin /test_all_landfiles
+
+Status: "OK" or "Provided URL does not resolve to a file!"
+
 ### Add browser extension
 The tests were run on chrome browser. For testing the functionality use according to your preffered browser:
 - [selenium chrome extension](https://chrome.google.com/webstore/detail/selenium-ide/mooikfkahbdckldjjndioackbalphokd?hl=en)
