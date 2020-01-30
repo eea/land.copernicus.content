@@ -3,6 +3,8 @@ Changelog
 
 12.1.dev0 - (unreleased)
 ------------------------
+* Improve: docs - add info about testing landfiles.
+  [GhitaB #110552]
 
 12.0 - (2020-01-28)
 -------------------
