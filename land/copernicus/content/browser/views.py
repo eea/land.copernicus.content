@@ -5,14 +5,11 @@ from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
 from land.copernicus.content.content.api import LandFileApi
-from pkg_resources import resource_filename
 from urlparse import urlparse
 from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
-import datetime
 import json
 import logging
-import os
 import re
 import subprocess
 
@@ -462,18 +459,3 @@ class LandFilesContentView(BrowserView):
     @staticmethod
     def relative_url(url):
         return urlparse(url).path
-
-
-class ResetPasswordExpirationView(BrowserView):
-    """ Return the expiration time as date and hours
-
-        used in mail_password_template to replace:
-            valid for x hours
-        with:
-            valid until <date and time>.
-    """
-    def __call__(self):
-        hours = self.context.unrestrictedTraverse(
-            "portal_password_reset").getExpirationTimeout()
-        expiration = datetime.datetime.now() + datetime.timedelta(hours=hours)
-        return expiration
