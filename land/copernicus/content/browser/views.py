@@ -7,10 +7,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
 from land.copernicus.content.content.api import LandFileApi
 from pkg_resources import resource_filename
-from plone.app.theming.interfaces import IThemeSettings
-from plone.registry.interfaces import IRegistry
 from urlparse import urlparse
-from zope.component import getMultiAdapter, getUtility
 from zope.component.hooks import getSite
 import datetime
 import json
