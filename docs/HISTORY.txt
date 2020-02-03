@@ -1,8 +1,8 @@
 Changelog
 =========
 
-12.1.dev0 - (unreleased)
-------------------------
+12.1 - (2020-02-03)
+-------------------
 * Improve: views code structure.
   [GhitaB #113682]
 * Improve: docs - add info about testing landfiles.
