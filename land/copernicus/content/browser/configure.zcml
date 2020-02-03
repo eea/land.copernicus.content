@@ -145,7 +145,7 @@
   <browser:page
     name="admin_land_files"
     for="land.copernicus.content.content.landitem.LandItem"
-    class=".views.AdminLandFilesView"
+    class=".landfiles.AdminLandFilesView"
     permission="cmf.ManagePortal"
     />
 
@@ -177,7 +177,7 @@
   <browser:page
     name="landfiles_content"
     for="land.copernicus.content.content.landitem.LandItem"
-    class=".views.LandFilesContentView"
+    class=".landfiles.LandFilesContentView"
     template="templates/landfiles_content.pt"
     permission="cmf.ManagePortal"
     />
