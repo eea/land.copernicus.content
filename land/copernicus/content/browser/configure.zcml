@@ -28,7 +28,7 @@
 
   <browser:page
     name="overview"
-    class=".views.LandItemsOverview"
+    class=".landitem.LandItemsOverview"
     permission="cmf.ManagePortal"
     for="Products.CMFCore.interfaces.ISiteRoot"
     template="templates/overview.pt"
