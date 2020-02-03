@@ -185,7 +185,7 @@
   <browser:page
     name="resource_rhf"
     for="plone.app.layout.navigation.interfaces.INavigationRoot"
-    class=".views.ResourceResponseHeadersFixerView"
+    class=".fonts.ResourceResponseHeadersFixerView"
     permission="zope2.View"
     />
 
