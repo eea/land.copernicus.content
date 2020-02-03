@@ -250,7 +250,7 @@
     for="*"
     template="templates/external-template-header.pt"
     permission="zope2.View"
-    class=".views.ExternalTemplateHeader"
+    class=".search.ExternalTemplateHeader"
     />
 
   <browser:page

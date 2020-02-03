@@ -556,19 +556,3 @@ class GetUpcomingEventsView(BrowserView):
         return events
 
 
-class ExternalTemplateHeader(BrowserView):
-    """ View used for EEA Search header
-    """
-
-    def theme_base_url(self):
-        reg = getUtility(IRegistry)
-        settings = reg.forInterface(IThemeSettings, False)
-        portal = api.portal.get()
-        base_url = portal.absolute_url()
-
-        return base_url + '/++theme++' + settings.currentTheme + '/'
-
-    def theme_base(self):
-        reg = getUtility(IRegistry)
-        settings = reg.forInterface(IThemeSettings, False)
-        return '/++theme++' + settings.currentTheme + '/'
