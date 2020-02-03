@@ -8,6 +8,7 @@ from Products.statusmessages.interfaces import IStatusMessage
 from land.copernicus.content.content.api import LandFileApi
 from pkg_resources import resource_filename
 from urlparse import urlparse
+from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
 import datetime
 import json
@@ -533,23 +534,3 @@ class ResourceResponseHeadersFixerView(BrowserView):
                 RESPONSE.write(data)
 
         return
-
-
-class GetUpcomingEventsView(BrowserView):
-    """ Next future Event and eea.meetings items list
-    """
-    def __call__(self):
-        now = DateTime()
-
-        events = [
-            b.getObject() for b in api.portal.get(
-                ).portal_catalog.searchResults(
-                portal_type=['Event', 'Folderish Event', 'eea.meeting'],
-                review_state='published',
-                sort_on='start')
-            if b.start > now
-        ]
-
-        return events
-
-

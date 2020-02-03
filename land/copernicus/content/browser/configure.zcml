@@ -207,7 +207,7 @@
     name="get_upcoming_events"
     for="*"
     permission="zope2.View"
-    class=".views.GetUpcomingEventsView"
+    class=".events.GetUpcomingEventsView"
     />
 
   <browser:page
