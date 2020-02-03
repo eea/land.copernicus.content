@@ -22,13 +22,13 @@ from zope.event import notify
 
 from Products.Five.browser import BrowserView
 import plone.api as api
+import subprocess
 
 from land.copernicus.content.config import ENV_DL_SRC_PATH as SRC_PATH
 from land.copernicus.content.config import ENV_DL_DST_PATH as DST_PATH
 from land.copernicus.content.config import ENV_DL_STATIC_PATH as ST_PATH
 from land.copernicus.content.config import logger
 
-from land.copernicus.content.browser.views import remoteUrl_exists
 from land.copernicus.content.browser.user_settings import is_EIONET_member
 
 from land.copernicus.content.async import IAsyncService
@@ -58,6 +58,15 @@ REASON_NO_ZIP = 'no-zip'
 REASON_OUTDATED = 'outdated-zip'
 REASON_SIZE_DIFFERS = 'size-differs'
 REASON_INTERRUPTED = 'interrupted'
+
+
+def remoteUrl_exists(location):
+    try:
+        res = subprocess.check_call(['/usr/bin/curl', '-I', '-f', location])
+        res = res
+        return True
+    except subprocess.CalledProcessError:
+        return False
 
 
 def _nt_to_dict(nt):
