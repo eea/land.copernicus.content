@@ -3,6 +3,8 @@ Changelog
 
 12.2.dev0 - (unreleased)
 ------------------------
+* Feature: add eea.sentry. Manual step: activate add-on.
+  [GhitaB #114020]
 
 12.1 - (2020-02-03)
 -------------------
