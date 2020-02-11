@@ -1,9 +1,14 @@
 # EEA Land Copernicus test scenarios
 
 ### Test landfiles
+To test if all landfiles are available for download:
 Run as admin /test_all_landfiles
 
-Status: "OK" or "Provided URL does not resolve to a file!"
+The page will display the list of landfiles and their status:
+- "OK" - the file exists
+- "Provided URL does not resolve to a file!" - the file has problems
+
+You can check the logs in rancher (plone container), too. Only errors are listed here.
 
 ### Add browser extension
 The tests were run on chrome browser. For testing the functionality use according to your preffered browser:
