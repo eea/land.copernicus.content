@@ -1,11 +1,13 @@
+from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.PloneBatch import Batch
 from Products.Five.browser import BrowserView
-
+from land.copernicus.content.browser.download import _translate_size
+from land.copernicus.content.config import IFRAME_HEIGHT
+from lxml.html import fragments_fromstring, tostring
+import logging
 import plone.api as api
 
-from lxml.html import fragments_fromstring, tostring
-
-from land.copernicus.content.config import IFRAME_HEIGHT
-from land.copernicus.content.browser.download import _translate_size
+logger = logging.getLogger('land.copernicus.content')
 
 
 class LandItemView(BrowserView):
@@ -128,3 +130,34 @@ class ProductInlineView(BrowserView):
             tags.append(x)
 
         return u", ".join(tags)
+
+
+class ListAllLanditemsView(BrowserView):
+    """ Administration view for listing all land items
+    """
+
+    def items(self):
+        land_items = api.content.find(portal_type='LandItem')
+        return land_items
+
+
+class LandItemsOverview(BrowserView):
+    """ Overview page for LandItems
+    """
+    def __call__(self):
+        """ Render the content item listing.
+        """
+        self.limit = self.request.get('limit', '10')
+        start = self.request.get("b_start", '0')
+        self.contents = self.find_landitems(start)
+
+        return self.index()
+
+    def find_landitems(self, start):
+        context = self.context
+        catalog = getToolByName(context, 'portal_catalog')
+        results = catalog.searchResults({'portal_type': 'LandItem'})
+        results = [result.getObject() for result in results]
+        batch = Batch(results, int(self.limit), int(start), orphan=0)
+
+        return batch

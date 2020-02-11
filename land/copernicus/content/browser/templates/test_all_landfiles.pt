@@ -1,0 +1,20 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+  <metal:content-core fill-slot="content-core">
+
+    <h4 i18n:translate="">Broken landfiles:</h4>
+    <tal:msgslist tal:repeat="msg python:view.items()">
+      <p>
+        <a tal:attributes="href python:msg[0]"
+           i18n:translate="">Landitem</a> -
+        <span tal:content="python:msg[1]"></span> -
+        <span tal:content="python:msg[2]"></span>
+      </p>
+    </tal:msgslist>
+  </metal:content-core>
+</body>
+</html>

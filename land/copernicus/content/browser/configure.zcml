@@ -28,7 +28,7 @@
 
   <browser:page
     name="overview"
-    class=".views.LandItemsOverview"
+    class=".landitem.LandItemsOverview"
     permission="cmf.ManagePortal"
     for="Products.CMFCore.interfaces.ISiteRoot"
     template="templates/overview.pt"
@@ -85,14 +85,6 @@
     class=".forms.DeleteLandfileFormView"
     permission="cmf.ModifyPortalContent"
     />
-
-
-  <!-- <browser:page -->
-  <!--   name="tpdb" -->
-  <!--   class=".views.GoPDB" -->
-  <!--   permission="cmf.ManagePortal" -->
-  <!--   for="*" -->
-  <!--   /> -->
 
   <browser:page
     name="export_users_xls"
@@ -153,15 +145,23 @@
   <browser:page
     name="admin_land_files"
     for="land.copernicus.content.content.landitem.LandItem"
-    class=".views.AdminLandFilesView"
+    class=".landfiles.AdminLandFilesView"
     permission="cmf.ManagePortal"
     />
 
   <browser:page
     name="list_all_landitems"
     for="plone.app.layout.navigation.interfaces.INavigationRoot"
-    class=".views.ListAllLanditemsView"
+    class=".landitem.ListAllLanditemsView"
     template="templates/list_all_landitems.pt"
+    permission="cmf.ManagePortal"
+    />
+
+  <browser:page
+    name="test_all_landfiles"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    class=".test_landfiles.TestAllLandFilesView"
+    template="templates/test_all_landfiles.pt"
     permission="cmf.ManagePortal"
     />
 
@@ -177,7 +177,7 @@
   <browser:page
     name="landfiles_content"
     for="land.copernicus.content.content.landitem.LandItem"
-    class=".views.LandFilesContentView"
+    class=".landfiles.LandFilesContentView"
     template="templates/landfiles_content.pt"
     permission="cmf.ManagePortal"
     />
@@ -185,21 +185,21 @@
   <browser:page
     name="resource_rhf"
     for="plone.app.layout.navigation.interfaces.INavigationRoot"
-    class=".views.ResourceResponseHeadersFixerView"
+    class=".fonts.ResourceResponseHeadersFixerView"
     permission="zope2.View"
     />
 
   <browser:page
     name="get_reset_password_expiration"
     for="*"
-    class=".views.ResetPasswordExpirationView"
+    class=".password_reset.ResetPasswordExpirationView"
     permission="zope2.View"
     />
 
   <browser:page
     name="my_settings"
     for="plone.app.layout.navigation.interfaces.INavigationRoot"
-    class=".views.MySettingsView"
+    class=".user_settings.MySettingsView"
     permission="zope2.View"
     />
 
@@ -207,7 +207,7 @@
     name="get_upcoming_events"
     for="*"
     permission="zope2.View"
-    class=".views.GetUpcomingEventsView"
+    class=".events.GetUpcomingEventsView"
     />
 
   <browser:page
@@ -250,7 +250,7 @@
     for="*"
     template="templates/external-template-header.pt"
     permission="zope2.View"
-    class=".views.ExternalTemplateHeader"
+    class=".search.ExternalTemplateHeader"
     />
 
   <browser:page

@@ -1,8 +1,31 @@
 Changelog
 =========
 
-11.8.dev0 - (unreleased)
+12.2.dev0 - (unreleased)
 ------------------------
+* Feature: add eea.sentry. Manual step: activate add-on.
+  [GhitaB #114020]
+
+12.1 - (2020-02-03)
+-------------------
+* Improve: views code structure.
+  [GhitaB #113682]
+* Improve: docs - add info about testing landfiles.
+  [GhitaB #110552]
+
+12.0 - (2020-01-28)
+-------------------
+* Feature: View for testing landfiles.
+  [GhitaB #110552]
+
+11.9 - (2020-01-13)
+-------------------
+* Feature: add functional tests for testing restored website.
+  [Eugen Tripon #110552]
+
+11.8 - (2020-01-13)
+-------------------
+* Broken version
 
 11.7 - (2019-12-11)
 -------------------
