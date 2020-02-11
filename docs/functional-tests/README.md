@@ -19,6 +19,14 @@ Select open an existing project
 Change the values for REAL_USER_NAME and REAL_USER_PASSWORD to a valid account
 ![](https://github.com/eea/land.copernicus.content/raw/master/docs/functional-tests/images/004-change-real-username.png)
 
+### Before running tests
+1) Clear user password saved by default for the browser used in testing.
+2) Set the correct domain name.
+3) Make sure you changed to set the REAL_USER_NAME and REAL_USER_PASSWORD case:
+- 000_2 Lost password valid username
+- 002 Login success
+4) User used in test should have the personal settings completed in order to run the 'Download' functionality
+
 ### Running all tests
 
 Before running all tests, ensure that you are not logged in the browser
