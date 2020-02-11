@@ -26,6 +26,10 @@ Change the values for REAL_USER_NAME and REAL_USER_PASSWORD to a valid account
 
 ### Before running tests
 1) Clear user password saved by default for the browser used in testing.
+ - Chrome (https://support.google.com/chrome/answer/95606)
+ - FireFox (https://support.mozilla.org/en-US/kb/password-manager-remember-delete-edit-logins)
+ - Edge (https://support.microsoft.com/en-us/help/4028534/microsoft-edge-save-or-forget-passwords)
+ - Safari (https://support.apple.com/guide/safari/passwords-sfri40599/mac)
 2) Set the correct domain name.
 3) Make sure you changed to set the REAL_USER_NAME and REAL_USER_PASSWORD case:
 - 000_2 Lost password valid username
