@@ -4,7 +4,7 @@ Changelog
 12.2.dev0 - (unreleased)
 ------------------------
 * Improve: docs for functional tests.
-  [GhitaB #110042]
+  [Eugen Tripon #110042]
 * Feature: add eea.sentry. Manual step: activate add-on.
   [GhitaB #114020]
 
