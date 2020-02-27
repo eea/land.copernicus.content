@@ -1,8 +1,8 @@
 Changelog
 =========
 
-12.2.dev0 - (unreleased)
-------------------------
+12.2 - (2020-02-27)
+-------------------
 * Improve: docs for functional tests.
   [Eugen Tripon #110042]
 * Feature: add eea.sentry. Manual step: activate add-on.
