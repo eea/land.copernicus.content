@@ -1,5 +1,5 @@
 <div tal:content="structure view/val" />
-<label class="disclaimer-permission" i18n:translate="">
+<label class="disclaimer-permission" for="form.disclaimer_permission" i18n:translate="">
   I give permission to the Copernicus Land Monitoring Service to contact
   me by e-mail with the information about the new products or product updates
   and other important events in the service or for my feedback about the

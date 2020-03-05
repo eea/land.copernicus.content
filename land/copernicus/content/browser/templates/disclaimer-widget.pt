@@ -1,5 +1,5 @@
 <div tal:content="structure view/val" />
-<label>
+<label for="form.disclaimer">
   <tal:a i18n:translate="">I accept</tal:a>
   <a id="terms-of-use-link" href="" i18n:translate="">privacy policy and terms of use of this website</a></label>
 

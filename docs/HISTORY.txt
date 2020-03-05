@@ -3,6 +3,8 @@ Changelog
 
 12.4.dev0 - (unreleased)
 ------------------------
+* Improve: accesibility audit
+  [Eugen Tripon #114026]
 
 12.3 - (2020-02-27)
 -------------------
@@ -889,4 +891,3 @@ Changelog
 1.0  - (initial release)
 ------------------------
 * Initial release
-

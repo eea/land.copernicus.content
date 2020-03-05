@@ -284,7 +284,7 @@
       <metal:body fill-slot="body">
 
         <div class="captchaImage">
-          <img tal:attributes="src python:context.absolute_url() + '/@@captcha/image'" />
+          <img tal:attributes="src python:context.absolute_url() + '/@@captcha/image';alt python:'Captcha image'" />
         </div>
 
         <input id="form-widgets-captcha" type="text" value="" name="captcha" class="text-widget textline-field" required />
