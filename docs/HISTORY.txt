@@ -6,7 +6,7 @@ Changelog
 
 12.4 - (2020-03-06)
 -------------------
-* Improve: accesibility audit
+* Improve: accesibility audit.
   [Eugen Tripon #114026]
 
 12.3 - (2020-02-27)
