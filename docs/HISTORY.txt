@@ -3,6 +3,8 @@ Changelog
 
 12.5.dev0 - (unreleased)
 ------------------------
+* Feature: Coronavirus, COVID-19 news listing as json.
+  [GhitaB #116247]
 
 12.4 - (2020-03-06)
 -------------------
