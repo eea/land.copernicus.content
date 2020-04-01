@@ -1,5 +1,6 @@
 from Products.CMFPlone.utils import isExpired
 from Products.Five.browser import BrowserView
+import json
 
 
 class ExportNews(BrowserView):
@@ -33,4 +34,20 @@ class ExportNews(BrowserView):
             x for x in result if 'Coronavirus' in x.Subject or
             'Covid-19' in x.Subject]
 
-        return covid_news
+        res = []
+        for item in covid_news:
+            res.append(
+                {
+                    "id": item.id,
+                    'title': item.Title,
+                    'link': item.getURL(),
+                    'image': item.getURL() + '/@@images/image/preview',
+                    'abstract': item.Description,
+                    'tags': [x for x in item.Subject],
+                    'created': item.created.strftime(
+                        "%Y-%m-%dT%H:%M:%S+03:00"),
+                    'updated': item.modified.strftime(
+                        "%Y-%m-%dT%H:%M:%S+03:00")
+                }
+            )
+        return json.dumps(res)
