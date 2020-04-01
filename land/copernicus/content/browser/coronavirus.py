@@ -50,4 +50,5 @@ class ExportNews(BrowserView):
                         "%Y-%m-%dT%H:%M:%S+03:00")
                 }
             )
+        self.request.response.setHeader('Content-Type', 'application/json')
         return json.dumps(res)
