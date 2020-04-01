@@ -94,6 +94,13 @@
     />
 
   <browser:page
+    name="api_content_coronavirus"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    class=".coronavirus.ExportNews"
+    permission="zope2.View"
+    />
+
+  <browser:page
     name="users_statistics"
     for="plone.app.layout.navigation.interfaces.INavigationRoot"
     class=".users_statistics.UsersStatisticsView"
