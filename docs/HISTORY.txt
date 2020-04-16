@@ -3,6 +3,8 @@ Changelog
 
 12.6.dev0 - (unreleased)
 ------------------------
+* Improve: Make require user name for recover password
+  [Eugen Tripon #116803]
 
 12.5 - (2020-04-01)
 -------------------
@@ -899,4 +901,3 @@ Changelog
 1.0  - (initial release)
 ------------------------
 * Initial release
-
