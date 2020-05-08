@@ -1,8 +1,8 @@
 Changelog
 =========
 
-12.8.dev0 - (unreleased)
-------------------------
+12.8 - (2020-05-08)
+-------------------
 * Improve: Make require user name for recover password
   [Eugen Tripon #116803]
 
