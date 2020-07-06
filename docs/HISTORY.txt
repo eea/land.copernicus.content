@@ -3,6 +3,9 @@ Changelog
 
 12.9.dev0 - (unreleased)
 ------------------------
+* Improve: Customize atct_album_view.pt for particular case of external links
+  to be opened in a new tab.
+  [GhitaB #119502]
 
 12.8 - (2020-05-08)
 -------------------
