@@ -35,7 +35,7 @@
       <tal:images tal:condition="batch" tal:repeat="image batch">
         <div tal:define="field python:image.getField('frozen') if getattr(image, 'getField', None) else None;
                          frozen python:field.getAccessor(image)() if field else False;
-                         is_external_link python:'/webbased-access-and-download-of-hr-s-i-products' in image.absolute_url() or '/wms-hr-s-i-visualisation-service' in image.absolute_url();"
+                         is_external_link python:'/high-resolution-snow-and-ice-monitoring/finder' in image.absolute_url() or '/high-resolution-snow-and-ice-monitoring/viewer' in image.absolute_url();"
              tal:attributes="class python: 'photoAlbumEntry frozenEntry' if frozen else 'photoAlbumEntry'">
           <a tal:define="id python:int(b_start)+int(repeat['image'].number()-1)"
              tal:attributes="href string:${image/absolute_url}; title image/Description; target python:'_blank' if is_external_link is True else '_self';">
