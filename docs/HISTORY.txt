@@ -3,6 +3,8 @@ Changelog
 
 12.9.dev0 - (unreleased)
 ------------------------
+* Fix: 'error while rendering eea.relations.status'.
+  [GhitaB #119569]
 * Improve: Customize atct_album_view.pt for particular case of external links
   to be opened in a new tab.
   [GhitaB #119502]
