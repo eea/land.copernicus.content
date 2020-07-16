@@ -1,8 +1,8 @@
 Changelog
 =========
 
-13.1.dev0 - (unreleased)
-------------------------
+13.1 - (2020-07-16)
+-------------------
 * Fix: export to Excel in subscribers view.
   [GhitaB #119908]
 
