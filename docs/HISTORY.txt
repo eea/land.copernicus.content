@@ -3,6 +3,8 @@ Changelog
 
 13.2.dev0 - (unreleased)
 ------------------------
+* Improve: Set Coastal Zones as external link (opened in a new tab).
+  [GhitaB #119348]
 
 13.1 - (2020-07-16)
 -------------------
