@@ -6,7 +6,7 @@
                  is_current      node/currentItem;
                  item_class      string:state-${node/normalized_review_state} contenttype-${node/normalized_portal_type};
                  item_class      python:is_current and item_class + ' navTreeCurrentItem' or item_class;
-                 unwanted_types  python:['eea.meeting.subscriber', 'eea.meeting.email']">
+                 unwanted_types  python:['eea.meeting.subscriber', 'eea.meeting.email', 'eea.meeting.subscribers', 'eea.meeting.emails', 'eea.meeting.workspace']">
 
   <a tal:condition="python:node['item'].portal_type not in unwanted_types"
      tal:attributes="href python:use_remote_url and item_remote_url or item_url;
