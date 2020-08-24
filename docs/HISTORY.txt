@@ -3,6 +3,8 @@ Changelog
 
 13.3.dev0 - (unreleased)
 ------------------------
+* Fix: Exclude eea.meeting and its contents in Sitemap.
+  [GhitaB #121001]
 
 13.2 - (2020-08-03)
 -------------------
