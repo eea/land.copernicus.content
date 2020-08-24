@@ -6,15 +6,15 @@
                  is_current      node/currentItem;
                  item_class      string:state-${node/normalized_review_state} contenttype-${node/normalized_portal_type};
                  item_class      python:is_current and item_class + ' navTreeCurrentItem' or item_class;
-                 unwanted_types  python:['eea.meeting.subscriber', 'eea.meeting.email', 'eea.meeting.subscribers', 'eea.meeting.emails', 'eea.meeting.workspace']">
+                 unwanted_types  python:['eea.meeting.subscriber', 'eea.meeting.email', 'eea.meeting.subscribers', 'eea.meeting.emails', 'eea.meeting.workspace', 'eea.meeting']"
 
-  <a tal:condition="python:node['item'].portal_type not in unwanted_types"
-     tal:attributes="href python:use_remote_url and item_remote_url or item_url;
+     tal:condition="python:(node['item'].portal_type not in unwanted_types) and (node['item'].getObject().aq_parent.portal_type not in unwanted_types)">
+
+  <a tal:attributes="href python:use_remote_url and item_remote_url or item_url;
                      title node/Description;
                      class string:$item_class">
     <img tal:replace="structure item_icon/html_tag" />
     <span tal:content="node/Title">Selected Item Title</span>
-    <span tal:content="python:node['item'].portal_type"></span>
   </a>
 
 </div>
