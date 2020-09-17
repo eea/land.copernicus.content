@@ -283,6 +283,7 @@ def _send_notification(context, job, missing_files, userid):
     ctx_wrapper = IContextWrapper(context)(**args)
     evt = DownloadReady(ctx_wrapper)
     notify(evt)
+    logger.info("Debug: Notify DownloadReady")
     # Make sure to close the event, otherwise subsequent
     # notifications will not trigger the content rule.
     # This is normally done automatically on IEndRequestEvent
@@ -295,6 +296,7 @@ def _notify_ready(context, job, missing_files, paths):
     """ Notify each user in metadata, at time of completion """
     metadata = _delayed_read_metadata(paths.metadata)
     notifier = partial(_send_notification, context, job, missing_files)
+    logger.info("Debug: _notify_ready")
     CONSUME(map(notifier, metadata.userids))
 
 
@@ -422,6 +424,7 @@ def _should_build(paths, existing, src_paths):
 
 
 def _download_executor(context, job, userid):
+    logger.info("Debug: _download_executor")
     paths = JobPaths(job.dst, job.meta.hash)
 
     _joiner = partial(os.path.join, job.src)
@@ -436,16 +439,21 @@ def _download_executor(context, job, userid):
         _clear_metadata_users(paths.metadata, keep=userid)
 
     if should_build:
+        logger.info("Debug: before _make_zip")
         _make_zip(paths.zip, existing_paths)
+        logger.info("Debug: after _make_zip")
 
         # mark zip as complete
         open(paths.done, 'a').close()
+        logger.info("Debug: mark zip as complete")
 
         # extract missing files, for email
         missing_paths = set(src_paths).difference(existing_paths)
         missing_files = tuple(map(_filename_from_path, missing_paths))
+        logger.info("Debug: before _notify_ready")
         _notify_ready(context, job, missing_files, paths)
 
+    logger.info("Debug: _download_executor - done")
     return paths.zip
 
 
@@ -454,6 +462,7 @@ Metadata = namedtuple('Metadata', ('hash', 'filepaths', 'exp_time', 'userids'))
 
 
 def _queue_download(context, metadata, userid):
+    logger.info('Debug: _queue_download: %s', userid)
     done_url = URL_FETCH.format(context.absolute_url(), metadata.hash)
     job = Job(metadata, DST_PATH, SRC_PATH, done_url)
 
