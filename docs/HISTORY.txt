@@ -3,6 +3,8 @@ Changelog
 
 13.4.dev0 - (unreleased)
 ------------------------
+* Improve: add debug logs in download.
+  [GhitaB #121389]
 
 13.3 - (2020-08-24)
 -------------------
