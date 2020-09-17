@@ -1,8 +1,8 @@
 Changelog
 =========
 
-13.4.dev0 - (unreleased)
-------------------------
+13.4 - (2020-09-17)
+-------------------
 * Improve: add debug logs in download.
   [GhitaB #121389]
 
