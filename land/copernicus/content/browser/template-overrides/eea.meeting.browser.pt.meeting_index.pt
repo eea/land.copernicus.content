@@ -42,6 +42,11 @@
                       start_utcdelta python:context.start.tzinfo.utcoffset(context.start);
                       start_utcoffset python:(start_utcdelta.days*86400+start_utcdelta.seconds)*100/60/60;">
                       <span tal:replace="structure python:view.formatted_date(context)" ></span>
+                      <p i18n:translate="" class="event-timezone"
+                         tal:condition="python:context.event_timezone"
+                         tal:content="python:context.event_timezone">
+                        Europe/Bucharest
+                      </p>
                     </div>
                   </td>
                 </tr>
