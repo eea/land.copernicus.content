@@ -3,6 +3,8 @@ Changelog
 
 13.5.dev0 - (unreleased)
 ------------------------
+* Improve: Add event timezone info for eea.meeting items.
+  [GhitaB #121632]
 
 13.4 - (2020-09-17)
 -------------------
