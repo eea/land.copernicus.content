@@ -129,6 +129,13 @@ class IMeeting(Interface):
         required=False,
     )
 
+    event_timezone = schema.TextLine(
+        title=_(u"Event timezone info"),
+        description=_(u"Human readable info about timezone for this event."),
+        required=False,
+        default=None,
+    )
+
     @invariant
     def validate_location_required(data):
         if data.meeting_type != 'webinar' and data.location is None:
