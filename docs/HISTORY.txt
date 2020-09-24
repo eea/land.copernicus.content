@@ -3,6 +3,8 @@ Changelog
 
 13.6.dev0 - (unreleased)
 ------------------------
+* Improve: Add default value for timezone info.
+  [GhitaB #121632]
 
 13.5 - (2020-09-24)
 -------------------
