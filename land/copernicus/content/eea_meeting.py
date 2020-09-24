@@ -133,7 +133,7 @@ class IMeeting(Interface):
         title=_(u"Event timezone info"),
         description=_(u"Human readable info about timezone for this event."),
         required=False,
-        default=None,
+        default=_(u"Time zone: Copenhagen, Denmark"),
     )
 
     @invariant
