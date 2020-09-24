@@ -45,6 +45,11 @@
       <span tal:replace="structure python:view.formatted_date(context)" ></span>
     </span>
   </p>
+  <p i18n:translate="" class="event-timezone text-center"
+     tal:condition="python:context.event_timezone"
+     tal:content="python:context.event_timezone">
+    Europe/Bucharest
+  </p>
 
   <p class="text-center"
      tal:define="location context/location"
