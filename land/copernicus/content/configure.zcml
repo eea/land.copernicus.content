@@ -67,4 +67,5 @@
          Products.Archetypes.interfaces.IObjectEditedEvent"
     handler="land.copernicus.content.globalhandlers.saveAutoExtractedFileSize" />
 
+  <adapter factory=".content.subtypes.EventExtender" />
 </configure>

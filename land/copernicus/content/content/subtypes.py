@@ -1,6 +1,8 @@
 """ Schema extender
 """
+from zope.component import adapts
 from zope.interface import implements
+from Products.ATContentTypes.interfaces import IATEvent
 from Products.Archetypes import atapi
 from archetypes.schemaextender.field import ExtensionField
 from archetypes.schemaextender.interfaces import ISchemaExtender
@@ -159,3 +161,23 @@ class ATBlobModifier(object):
 
     def __init__(self, context):
         self.context = context
+
+
+class EventExtender(object):
+    adapts(IATEvent)
+    implements(ISchemaExtender)
+
+    fields = [
+        StringField("timezone_info",
+                    schemata="default",
+                    widget=atapi.StringWidget(
+                        label=_("Human readable Timezone"),
+                        description=_("Example: "))
+                    ),
+        ]
+
+    def __init__(self, context):
+        self.context = context
+
+    def getFields(self):
+        return self.fields
