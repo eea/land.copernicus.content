@@ -170,6 +170,7 @@ class EventExtender(object):
     fields = [
         StringField("timezone_info",
                     schemata="default",
+                    default=_(u"Time zone: Copenhagen, Denmark"),
                     widget=atapi.StringWidget(
                         label=_("Human readable Timezone"),
                         description=_("Example: "))
