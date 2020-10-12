@@ -57,6 +57,7 @@
                                      <span tal:replace="python:toLocalizedTime(context.end(), time_only=1)">End Time</span>
                                   </span>
                                 </abbr>
+
                             </tal:differentday>
 
                             <tal:sametime tal:condition="python:same_day and same_time"
@@ -97,6 +98,11 @@
                                 </abbr>
 
                             </tal:sameday>
+
+                            <p class="event-timezone"
+                               tal:content="context/event_timezone"
+                               tal:on-error="nothing">
+                            </p>
                         </td>
                     </tr>
                     <tr tal:condition="context/location">
