@@ -1,8 +1,8 @@
 Changelog
 =========
 
-13.7.dev0 - (unreleased)
-------------------------
+13.7 - (2020-10-13)
+-------------------
 * Improve: Add timezone info for Event items.
   [GhitaB #121632]
 
