@@ -219,6 +219,13 @@
 
   <browser:page
     name="view"
+    for="land.copernicus.content.content.interfaces.IDashboardItem"
+    class=".dashboarditem.DashboardItemView"
+    permission="zope2.View"
+    />
+
+  <browser:page
+    name="view"
     for="land.copernicus.content.content.interfaces.IFilesLibraryItem"
     class=".fileslibraryitem.FilesLibraryItemView"
     permission="zope2.View"

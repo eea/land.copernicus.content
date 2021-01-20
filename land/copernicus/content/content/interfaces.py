@@ -75,3 +75,13 @@ class IFilesLibraryItem(model.Schema):
         required=False,
         description=u"Ignore it. It's automatically filled in edit mode."
     )
+
+
+class IDashboardItem(model.Schema):
+    """ Dashboard Item
+    """
+    external_link = schema.URI(
+        title=u"External link",
+        required=True,
+        description=u"External link test"
+    )

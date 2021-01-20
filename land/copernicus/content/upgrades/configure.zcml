@@ -311,4 +311,16 @@
       import_steps="viewlets"
       />
   </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+    source="4.0.1"
+    destination="4.0.2"
+    profile="land.copernicus.content:default">
+
+    <genericsetup:upgradeDepends
+        title="Update typeinfo"
+        description="Add DashboardItem dexterity content type."
+        import_steps="typeinfo"
+        />
+  </genericsetup:upgradeSteps>
 </configure>
