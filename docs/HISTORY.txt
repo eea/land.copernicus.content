@@ -3,6 +3,8 @@ Changelog
 
 14.1.dev0 - (unreleased)
 ------------------------
+* Feature: DashboardItem content type.
+  [GhitaB #126691]
 
 14.0 - (2021-01-07)
 -------------------
