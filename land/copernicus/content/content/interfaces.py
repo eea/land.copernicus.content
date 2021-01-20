@@ -80,8 +80,13 @@ class IFilesLibraryItem(model.Schema):
 class IDashboardItem(model.Schema):
     """ Dashboard Item
     """
-    external_link = schema.URI(
-        title=u"External link",
-        required=True,
-        description=u"External link test"
+    text = RichText(
+        title=u"Body text",
+        required=False,
+    )
+
+    iframe_data = schema.Text(
+        title=u"Iframe Data",
+        required=False,
+        description=u"The embed code for dashboard iframe."
     )
