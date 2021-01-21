@@ -1,6 +1,7 @@
 """ Content interfaces
 """
 from plone.app.textfield import RichText
+from plone.namedfile import field as namedfile
 from plone.supermodel import model
 from zope import schema
 from zope.interface import Interface
@@ -89,4 +90,9 @@ class IDashboardItem(model.Schema):
         title=u"Iframe Data",
         required=False,
         description=u"The embed code for dashboard iframe."
+    )
+
+    logo = namedfile.NamedBlobImage(
+        title=u'Logo',
+        required=True,
     )
