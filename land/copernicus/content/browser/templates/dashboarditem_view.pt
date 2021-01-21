@@ -12,6 +12,9 @@
   <div class="body-text-container">
     <div tal:replace="structure python:context.text.output">Body text</div>
   </div>
+  <div class="iframe-container">
+    <div tal:replace="structure python:context.iframe_data">Iframe data</div>
+  </div>
 </metal:content-core>
 </body>
 </html>
