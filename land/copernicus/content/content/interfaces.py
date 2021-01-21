@@ -96,3 +96,9 @@ class IDashboardItem(model.Schema):
         title=u'Logo',
         required=True,
     )
+
+    short_description = RichText(
+        title=u"Short description",
+        description=u"Visible in homepage listing. Example: 'Based on ...'",
+        required=False,
+    )
