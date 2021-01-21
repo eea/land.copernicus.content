@@ -9,7 +9,9 @@
 </metal:title>
 
 <metal:content-core fill-slot="content-core">
-  AAA
+  <div class="body-text-container">
+    <div tal:replace="structure python:context.text.output">Body text</div>
+  </div>
 </metal:content-core>
 </body>
 </html>
