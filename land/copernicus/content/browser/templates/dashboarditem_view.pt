@@ -9,10 +9,10 @@
 </metal:title>
 
 <metal:content-core fill-slot="content-core">
-  <div class="body-text-container">
+  <div class="body-text-container" tal:condition="python:context.text">
     <div tal:replace="structure python:context.text.output">Body text</div>
   </div>
-  <div class="iframe-container">
+  <div class="iframe-container" tal:condition="python:context.iframe_data">
     <div tal:replace="structure python:context.iframe_data">Iframe data</div>
   </div>
 </metal:content-core>
