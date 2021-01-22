@@ -3,7 +3,7 @@ Changelog
 
 14.1.dev0 - (unreleased)
 ------------------------
-* Feature: DashboardItem content type.
+* Feature: DashboardItem content type, dashboard items listing in homepage.
   [GhitaB #126691]
 
 14.0 - (2021-01-07)
