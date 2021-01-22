@@ -3,6 +3,8 @@ Changelog
 
 14.2.dev0 - (unreleased)
 ------------------------
+* Fix: error in dashboard view for empty fields.
+  [GhitaB #126691]
 
 14.1 - (2021-01-22)
 -------------------
