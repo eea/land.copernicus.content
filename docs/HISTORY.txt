@@ -1,8 +1,11 @@
 Changelog
 =========
 
-14.3.dev0 - (unreleased)
+14.4.dev0 - (unreleased)
 ------------------------
+
+14.3 - (2021-02-19)
+-------------------
 * Improve: Album view - don't list images added to LandSection.
   [GhitaB #128757]
 
