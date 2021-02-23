@@ -25,7 +25,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'setuptools == 26.1.1',
+        'setuptools',
         'archetypes.schemaextender',
         'lxml',
         'plone.app.registry',
