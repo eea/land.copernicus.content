@@ -1,8 +1,8 @@
 Changelog
 =========
 
-14.5.dev0 - (unreleased)
-------------------------
+14.5 - (2021-02-23)
+-------------------
 * Fix: setuptools get rid of pin version.
   [GhitaB #128791]
 
