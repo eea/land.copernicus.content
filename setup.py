@@ -47,7 +47,7 @@ setup(
         'pycountry',
         'plone.namedfile [blobs]'
     ],
-    setup_requires=['pytest-runner'],
+    setup_requires=['pytest-runner==5.2'],
     tests_require=['pytest'],
     entry_points="""
     # -*- Entry points: -*-
