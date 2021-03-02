@@ -4,6 +4,7 @@ Changelog
 14.6.dev0 - (unreleased)
 ------------------------
 * Fix: Add plone.app.dexterity to install_requires.
+  Fix: versions, to solve buildout error.
   [GhitaB #128791]
 
 14.5 - (2021-02-23)
