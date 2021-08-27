@@ -3,6 +3,8 @@ Changelog
 
 14.7.dev0 - (unreleased)
 ------------------------
+* Improve: Update actc album view template with changes from production.
+  [GhitaB #137865 #137897]
 
 14.6 - (2021-03-02)
 -------------------
