@@ -3,6 +3,8 @@ Changelog
 
 14.8.dev0 - (unreleased)
 ------------------------
+* Improve: Remove unused content.
+  [GhitaB #141256]
 
 14.7 - (2021-08-27)
 -------------------
