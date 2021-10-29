@@ -35,7 +35,7 @@
       <tal:images tal:condition="batch" tal:repeat="image batch">
         <div tal:define="field python:image.getField('frozen') if getattr(image, 'getField', None) else None;
                          frozen python:field.getAccessor(image)() if field else False;
-                         is_external_link python:'/high-resolution-snow-and-ice-monitoring/data-access/browser-temporary' in image.absolute_url() or '/high-resolution-snow-and-ice-monitoring/data-access/wekeo-portal' in image.absolute_url() or '/high-resolution-snow-and-ice-monitoring/finder' in image.absolute_url() or '/high-resolution-snow-and-ice-monitoring/viewer' in image.absolute_url() or '/local/coastal-zones/mappingprogress' in image.absolute_url();"
+                         is_external_link python:'/high-resolution-snow-and-ice-monitoring/data-access/browser-temporary' in image.absolute_url() or '/high-resolution-snow-and-ice-monitoring/data-access/wekeo-portal' in image.absolute_url() or '/high-resolution-snow-and-ice-monitoring/finder' in image.absolute_url() or '/high-resolution-snow-and-ice-monitoring/viewer' in image.absolute_url() or '/local/coastal-zones/mappingprogress' in image.absolute_url() or '/high-resolution-snow-and-ice-monitoring/data-access/finder-temporary' in image.absolute_url();"
              tal:condition="python:(image.portal_type == 'Image' and image.aq_parent.portal_type == 'LandSection') is not True"
              tal:attributes="class python: 'photoAlbumEntry frozenEntry' if frozen else 'photoAlbumEntry'">
           <a tal:define="id python:int(b_start)+int(repeat['image'].number()-1)"
