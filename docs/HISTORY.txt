@@ -3,6 +3,8 @@ Changelog
 
 14.9.dev0 - (unreleased)
 ------------------------
+* Improve: Accept File in Land Section but don't list it in album view.
+  [GhitaB #143046]
 
 14.8 - (2021-11-25)
 -------------------
